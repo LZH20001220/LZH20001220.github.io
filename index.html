@@ -248,6 +248,408 @@
 
 
   
+    <article id="post-二叉树" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+        
+        <a href="/2022/02/04/%E4%BA%8C%E5%8F%89%E6%A0%91/" class="archive-article-date">
+  	<time datetime="2022-02-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p>
+  
+    <h1 itemprop="name">
+      <a class="article-title_code_ant" href="/2022/02/04/%E4%BA%8C%E5%8F%89%E6%A0%91/">Leetcode - 二叉树</a>
+    </h1>
+  
+</p></center>
+      
+        <p><strong>基础篇</strong></p>
+<ul>
+<li><p>满二叉树:如果一棵二叉树只有度为0的结点和度为2的结点，并且度为0的结点在同一层上，则这棵二叉树为满二叉树。也可以说深度为k，有2^k-1个节点的二叉树。</p>
+</li>
+<li><p>完全二叉树的定义如下：在完全二叉树中，除了最底层节点可能没填满外，其余每层节点数都达到最大值，并且最下面一层的节点都集中在该层最左边的若干位置。若最底层为第 h 层，则该层包含 1~ 2^(h -1)  个节点。之前学过的优先级队列其实是一个堆，堆就是一棵完全二叉树，同时保证父子节点的顺序关系。</p>
+</li>
+<li><p>二叉搜索树:二叉搜索树是一个有序树, 若它的左子树不空，则左子树上所有结点的值均小于它的根结点的值; 若它的右子树不空，则右子树上所有结点的值均大于它的根结点的值; 它的左、右子树也分别为二叉排序树</p>
+</li>
+<li><p>平衡二叉搜索树: 又被称为AVL（Adelson-Velsky and Landis）树，且具有以下性质：它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。 C++中map、set、multimap，multiset的底层实现都是平衡二叉搜索树，所以map、set的增删操作时间时间复杂度是logn，注意我这里没有说unordered_map、unordered_set，unordered_map、unordered_map底层实现是哈希表。</p></li></ul>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/02/04/%E4%BA%8C%E5%8F%89%E6%A0%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-字符串" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+        
+        <a href="/2022/01/29/%E5%AD%97%E7%AC%A6%E4%B8%B2/" class="archive-article-date">
+  	<time datetime="2022-01-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p>
+  
+    <h1 itemprop="name">
+      <a class="article-title_code_ant" href="/2022/01/29/%E5%AD%97%E7%AC%A6%E4%B8%B2/">Leetcode - 字符串</a>
+    </h1>
+  
+</p></center>
+      
+        <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-string/"><strong>344.反转字符串</strong></a><br>编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 s 的形式给出。</p>
+<p>不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/01/29/%E5%AD%97%E7%AC%A6%E4%B8%B2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-栈与队列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+        
+        <a href="/2022/01/28/%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97/" class="archive-article-date">
+  	<time datetime="2022-01-27T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p>
+  
+    <h1 itemprop="name">
+      <a class="article-title_code_ant" href="/2022/01/28/%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97/">Leetcode - 栈与队列</a>
+    </h1>
+  
+</p></center>
+      
+        <p>栈先进后出, 队列先进先出</p>
+<p>我们也可以指定vector为栈的底层实现，初始化语句如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std::stack&lt;<span class="type">int</span>, std::vector&lt;<span class="type">int</span>&gt; &gt; third;  <span class="comment">// 使用vector为底层容器的栈</span></span><br></pre></td></tr></table></figure>
+
+<p>也可以指定list 为起底层实现，初始化queue的语句如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std::queue&lt;<span class="type">int</span>, std::list&lt;<span class="type">int</span>&gt;&gt; third; <span class="comment">// 定义以list为底层容器的队列</span></span><br></pre></td></tr></table></figure>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/01/28/%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-哈希表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+        
+        <a href="/2022/01/12/%E5%93%88%E5%B8%8C%E8%A1%A8/" class="archive-article-date">
+  	<time datetime="2022-01-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p>
+  
+    <h1 itemprop="name">
+      <a class="article-title_code_ant" href="/2022/01/12/%E5%93%88%E5%B8%8C%E8%A1%A8/">Leetcode - 哈希表</a>
+    </h1>
+  
+</p></center>
+      
+        <ol>
+<li>哈希表可以快速判断一个元素是否出现在集合中。 枚举的时间复杂度是O(n), 哈希表的时间复杂度是O(1)。 哈希函数即为: 将数据的值映射到哈希表上。</li>
+</ol>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/01/12/%E5%93%88%E5%B8%8C%E8%A1%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-链表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+        
+        <a href="/2022/01/10/%E9%93%BE%E8%A1%A8/" class="archive-article-date">
+  	<time datetime="2022-01-09T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p>
+  
+    <h1 itemprop="name">
+      <a class="article-title_code_ant" href="/2022/01/10/%E9%93%BE%E8%A1%A8/">Leetcode - 链表</a>
+    </h1>
+  
+</p></center>
+      
+        <ol>
+<li>链表的定义：链表是一种通过<strong>指针</strong>串联在一起的线性结构，每一个节点由两部分组成，一个是<strong>数据域</strong>一个是<strong>指针域</strong>（存放指向下一个节点的指针），最后一个节点的指针域指向null（空指针）</li>
+<li>数组是在内存中是连续分布的，但是链表在内存中不是连续分布的</li>
+<li>C++中的链表定义方式：</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 单链表</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">ListNode</span> &#123;</span><br><span class="line">    <span class="type">int</span> val;  <span class="comment">// 节点上存储的元素</span></span><br><span class="line">    ListNode *next;  <span class="comment">// 指向下一个节点的指针</span></span><br><span class="line">    <span class="built_in">ListNode</span>(<span class="type">int</span> x) : <span class="built_in">val</span>(x), <span class="built_in">next</span>(<span class="literal">NULL</span>) &#123;&#125;  <span class="comment">// 节点的构造函数</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>构造函数可以自己定义，也可以不自己定义C++自己默认生成。</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/01/10/%E9%93%BE%E8%A1%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-周报1.3-1.9" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -295,6 +697,98 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-数组" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+        
+        <a href="/2022/01/04/%E6%95%B0%E7%BB%84/" class="archive-article-date">
+  	<time datetime="2022-01-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p>
+  
+    <h1 itemprop="name">
+      <a class="article-title_code_ant" href="/2022/01/04/%E6%95%B0%E7%BB%84/">Leetcode - 数组</a>
+    </h1>
+  
+</p></center>
+      
+        <p>需要两点注意的是:</p>
+<ul>
+<li><ol>
+<li>数组下标都是从0开始的。</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>数组内存空间的地址是连续的。</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>数组的元素是不能删的，只能覆盖。</li>
+</ol>
+</li>
+</ul>
+<p>正是因为数组的在内存空间的地址是连续的，所以我们在删除或者增添元素的时候，就难免要移动其他元素的地址。</p>
+<p>严格来讲vector是容器，不是数组。</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/01/04/%E6%95%B0%E7%BB%84/">展开全文 >></a>
         </p>
       
 
@@ -400,14 +894,14 @@
 
 
   
-    <article id="post-Libero" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-复杂度" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
         
-        <a href="/2021/11/29/Libero/" class="archive-article-date">
-  	<time datetime="2021-11-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-29</time>
+        <a href="/2022/01/02/%E5%A4%8D%E6%9D%82%E5%BA%A6/" class="archive-article-date">
+  	<time datetime="2022-01-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-02</time>
 </a>
         
       </header>
@@ -417,12 +911,13 @@
       <center><p>
   
     <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2021/11/29/Libero/">Microsemi Libero学习和使用笔记</a>
+      <a class="article-title_code_ant" href="/2022/01/02/%E5%A4%8D%E6%9D%82%E5%BA%A6/">Leetcode - 复杂度</a>
     </h1>
   
 </p></center>
       
-        <h3 id="一、下载和安装"><a href="#一、下载和安装" class="headerlink" title="一、下载和安装"></a>一、下载和安装</h3><p>下载和安装可以参考以下<a target="_blank" rel="noopener" href="https://blog.csdn.net/whik1194/article/details/90483763">教程</a>。其中申请license的步骤推荐使用<a target="_blank" rel="noopener" href="http://24mail.chacuo.net/">临时邮箱</a>,其他的信息可以随便填。</p>
+        <p>复杂度包括时间复杂度和空间复杂度</p>
+<h3 id="1-时间复杂度-描述算法的运行时间，O-表示算法最坏情况下运行时间的上界。"><a href="#1-时间复杂度-描述算法的运行时间，O-表示算法最坏情况下运行时间的上界。" class="headerlink" title="1. 时间复杂度:描述算法的运行时间，O()表示算法最坏情况下运行时间的上界。"></a>1. 时间复杂度:描述算法的运行时间，<code>O()</code>表示算法最坏情况下运行时间的上界。</h3>
         
       
 
@@ -436,11 +931,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">FPGA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">libero</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
         		</li>
       		
 		</ul>
@@ -450,7 +941,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/29/Libero/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/01/02/%E5%A4%8D%E6%9D%82%E5%BA%A6/">展开全文 >></a>
         </p>
       
 
@@ -480,6 +971,10 @@
 
 
   
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+    </nav>
   
 
 
@@ -587,6 +1082,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">libero</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
