@@ -6,21 +6,39 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>实习感受 | 博客杂记 - harder and better</title>
+  <title>实习总结 | 博客杂记 - harder and better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+    <style>
+    .pace .pace-progress {
+        background: #6d6d6d; /*进度条颜色*/
+        height: 2px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #6d6d6d; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #6d6d6d;    /*上边框颜色*/
+        border-left-color: #6d6d6d;    /*左边框颜色*/
+    }
+  </style>
   <meta name="description" content="2022.1.11-1.13日上午今天认识了UiBot Creator, Power BI Desktop, Finereport这几个软件。 其中第一个软件是用于自动化的处理数据。 比如自动打开网页，自动下载数据，自动填表等等。但是其有一个问题就是对浏览器的要求很高，如果出现广告弹窗或者执行的过程中找不到应该对应的页面, 软件就会报错。 第二个软件可以做可视化报表, 具体的功能还没有了解。 第三">
 <meta property="og:type" content="article">
-<meta property="og:title" content="实习感受">
-<meta property="og:url" content="http://example.com/2022/02/09/%E5%AE%9E%E4%B9%A0/index.html">
+<meta property="og:title" content="实习总结">
+<meta property="og:url" content="http://example.com/2022/02/10/%E5%AE%9E%E4%B9%A0%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="博客杂记 - harder and better">
 <meta property="og:description" content="2022.1.11-1.13日上午今天认识了UiBot Creator, Power BI Desktop, Finereport这几个软件。 其中第一个软件是用于自动化的处理数据。 比如自动打开网页，自动下载数据，自动填表等等。但是其有一个问题就是对浏览器的要求很高，如果出现广告弹窗或者执行的过程中找不到应该对应的页面, 软件就会报错。 第二个软件可以做可视化报表, 具体的功能还没有了解。 第三">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/res/1.png">
-<meta property="article:published_time" content="2022-02-09T08:06:00.112Z">
-<meta property="article:modified_time" content="2022-02-09T08:17:14.137Z">
+<meta property="og:image" content="http://example.com/%E5%AE%9E%E4%B9%A0%E6%80%BB%E7%BB%93/1.png">
+<meta property="og:image" content="http://example.com/%E5%AE%9E%E4%B9%A0%E6%80%BB%E7%BB%93/2.png">
+<meta property="og:image" content="http://example.com/%E5%AE%9E%E4%B9%A0%E6%80%BB%E7%BB%93/3.png">
+<meta property="og:image" content="http://example.com/%E5%AE%9E%E4%B9%A0%E6%80%BB%E7%BB%93/4.png">
+<meta property="article:published_time" content="2022-02-10T01:44:49.546Z">
+<meta property="article:modified_time" content="2022-02-10T01:58:41.817Z">
 <meta property="article:author" content="Li Zhenghan">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/res/1.png">
+<meta name="twitter:image" content="http://example.com/%E5%AE%9E%E4%B9%A0%E6%80%BB%E7%BB%93/1.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - harder and better" type="application/atom+xml">
   
@@ -156,20 +174,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-实习" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-实习总结" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      实习感受
+      实习总结
     </h1>
   
 
         
-        <a href="/2022/02/09/%E5%AE%9E%E4%B9%A0/" class="archive-article-date">
-  	<time datetime="2022-02-09T08:06:00.112Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-09</time>
+        <a href="/2022/02/10/%E5%AE%9E%E4%B9%A0%E6%80%BB%E7%BB%93/" class="archive-article-date">
+  	<time datetime="2022-02-10T01:44:49.546Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-10</time>
 </a>
         
       </header>
@@ -305,7 +323,8 @@
 <p>读写文件并显示文件</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> xlrd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> optimize</span><br><span class="line">book = xlrd.open_workbook(<span class="string">&#x27;./Desktop/1.xlsx&#x27;</span>)</span><br><span class="line">sheet1 = book.sheets()[<span class="number">0</span>]</span><br><span class="line">col3_values = sheet1.col_values(<span class="number">2</span>)</span><br><span class="line"><span class="comment">#print(&#x27;浏览量&#x27;,col3_values)</span></span><br><span class="line">col73_values = sheet1.col_values(<span class="number">72</span>)</span><br><span class="line"><span class="comment">#print(&#x27;字节订单&#x27;,col73_values)</span></span><br><span class="line">col80_values = sheet1.col_values(<span class="number">79</span>)</span><br><span class="line"><span class="comment">#print(&#x27;阿里订单&#x27;,col80_values)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f_1</span>(<span class="params">x, A, B</span>):</span><br><span class="line"> <span class="keyword">return</span> A * x + B</span><br><span class="line"></span><br><span class="line">A1, B1 = optimize.curve_fit(f_1, col3_values[<span class="number">1</span>:-<span class="number">1</span>], col73_values[<span class="number">1</span>:-<span class="number">1</span>])[<span class="number">0</span>]</span><br><span class="line">x1 = np.arange(<span class="number">44571</span>, <span class="number">226433</span>, <span class="number">1</span>)<span class="comment">#30和75要对应x0的两个端点，0.01为步长</span></span><br><span class="line">y1 = A1 * x1 + B1</span><br><span class="line"></span><br><span class="line">A2, B2 = optimize.curve_fit(f_1, col3_values[<span class="number">1</span>:-<span class="number">1</span>], col80_values[<span class="number">1</span>:-<span class="number">1</span>])[<span class="number">0</span>]</span><br><span class="line">x2 = np.arange(<span class="number">44571</span>, <span class="number">226433</span>, <span class="number">1</span>)<span class="comment">#30和75要对应x0的两个端点，0.01为步长</span></span><br><span class="line">y2 = A2 * x2 + B2</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">12</span>,<span class="number">8</span>))</span><br><span class="line">ax.scatter(col3_values[<span class="number">1</span>:-<span class="number">1</span>] , col73_values[<span class="number">1</span>:-<span class="number">1</span>], c=<span class="string">&#x27;b&#x27;</span>, marker=<span class="string">&#x27;o&#x27;</span>,label=<span class="string">&#x27;字节订单&#x27;</span>)</span><br><span class="line">plt.plot(x1, y1, <span class="string">&quot;b&quot;</span>,label = <span class="string">&#x27;字节订单拟合&#x27;</span>)</span><br><span class="line">ax.scatter(col3_values[<span class="number">1</span>:-<span class="number">1</span>] , col80_values[<span class="number">1</span>:-<span class="number">1</span>], c=<span class="string">&#x27;r&#x27;</span>, marker=<span class="string">&#x27;*&#x27;</span>,label=<span class="string">&#x27;阿里订单&#x27;</span>)</span><br><span class="line">plt.plot(x2, y2, <span class="string">&quot;r&quot;</span>,label = <span class="string">&#x27;阿里订单拟合&#x27;</span>)</span><br><span class="line">ax.legend()</span><br><span class="line">ax.set_xlabel(<span class="string">&#x27;浏览量&#x27;</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">&#x27;订单数&#x27;</span>)</span><br><span class="line">plt.rcParams[<span class="string">&#x27;font.sans-serif&#x27;</span>] = [<span class="string">u&#x27;SimHei&#x27;</span>] //解决文字不显示的问题</span><br><span class="line">plt.rcParams[<span class="string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="literal">False</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 <p>读取两组数据，并进行线性拟合</p>
-<p>结果:<br><img src="/./res/1.png"></p>
+<p>结果:</p>
+<p><img src="/%E5%AE%9E%E4%B9%A0%E6%80%BB%E7%BB%93/1.png"></p>
 <p>实习前半个月的总结</p>
 <ul>
 <li><p>通过Uibot Creator爬虫获取公司产品的销售数据, python进行数据的可视化输出及分析。</p>
@@ -325,6 +344,12 @@
 <p>然后注意net start mysql需要将正在运行的mysqld进程关闭,  然后才能运行此命令</p>
 <p>框架的model模块和controller模块感觉类似于model模块是写一个类, controller模块是对类进行实例化。</p>
 <p>MVC模式, M是model模型, V是视图view, C是控制器controller; </p>
+<h3 id="创建博客"><a href="#创建博客" class="headerlink" title="创建博客"></a>创建博客</h3><p>参考教程:</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wapchief/article/details/54602515">使用hexo+github免费搭建个人博客网站超详细教程_wapchief的博客-CSDN博客_hexo博客</a></p>
+<p>博文格式为markdown格式, 存在E:&#x2F;hexotext&#x2F;source&#x2F;_post中</p>
+<p><img src="/%E5%AE%9E%E4%B9%A0%E6%80%BB%E7%BB%93/2.png" alt="image-20220209161350308"></p>
+<p><img src="/%E5%AE%9E%E4%B9%A0%E6%80%BB%E7%BB%93/3.png"></p>
+<p><img src="/%E5%AE%9E%E4%B9%A0%E6%80%BB%E7%BB%93/4.png" alt="image-20220209164203080"></p>
 
       
 
@@ -404,7 +429,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/02/09/%E5%AE%9E%E4%B9%A0/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/02/10/%E5%AE%9E%E4%B9%A0%E6%80%BB%E7%BB%93/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -440,6 +465,19 @@
         </div>
         
         
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#2022-1-11-1-13%E6%97%A5%E4%B8%8A%E5%8D%88"><span class="toc-number">1.</span> <span class="toc-text">2022.1.11-1.13日上午</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%AC%E5%8F%B8%E7%9B%B8%E5%85%B3%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%83%85%E5%86%B5"><span class="toc-number">2.</span> <span class="toc-text">公司相关的基本情况:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2"><span class="toc-number"></span> <span class="toc-text">创建博客</span></a>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
     </div>
 </aside>
 
@@ -462,15 +500,24 @@
       <footer id="footer">
   <div class="outer">
     <div id="footer-info">
-    	<div class="footer-left">
-    		&copy; 2022 Li Zhenghan
-    	</div>
-      	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
-      	</div>
+      <div class="footer-left">
+        &copy; 2022 Li Zhenghan
+      </div>
+      <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      </div>
+    </div>
+    <div calss="count-span">
+      <span id="busuanzi_container_site_pv">
+          总访问量: <span id="busuanzi_value_site_pv"></span>
     </div>
   </div>
 </footer>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_uv"> 
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
     </div>
     <script>
 	var yiliaConfig = {
