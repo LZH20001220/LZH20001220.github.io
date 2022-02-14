@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>操作系统实验 | 博客杂记 - harder and better</title>
+  <title>操作系统实验 1,2 | 博客杂记 - harder and better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -25,7 +25,7 @@
   </style>
   <meta name="description" content="哈工大操作系统实验 预备知识:  Boches是一个x86模拟器,  在上面可以运行各种操作系统,  类似于VMvare，但是其比VMware更方便调试。 GCC是编译器, 可以编译C，C++等 GDB是调试器, 与GCC协同作用。 安装实验环境, 参考哈工大李治军操作系统课程实验环境搭建 如果安装时出现Certificate verification failed: The certificat">
 <meta property="og:type" content="article">
-<meta property="og:title" content="操作系统实验">
+<meta property="og:title" content="操作系统实验 1,2">
 <meta property="og:url" content="http://example.com/2022/02/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C/index.html">
 <meta property="og:site_name" content="博客杂记 - harder and better">
 <meta property="og:description" content="哈工大操作系统实验 预备知识:  Boches是一个x86模拟器,  在上面可以运行各种操作系统,  类似于VMvare，但是其比VMware更方便调试。 GCC是编译器, 可以编译C，C++等 GDB是调试器, 与GCC协同作用。 安装实验环境, 参考哈工大李治军操作系统课程实验环境搭建 如果安装时出现Certificate verification failed: The certificat">
@@ -34,7 +34,7 @@
 <meta property="og:image" content="http://example.com/2022/02/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C/2.png">
 <meta property="og:image" content="http://example.com/2022/02/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C/3.png">
 <meta property="article:published_time" content="2022-02-11T01:32:31.000Z">
-<meta property="article:modified_time" content="2022-02-11T17:36:03.297Z">
+<meta property="article:modified_time" content="2022-02-14T02:54:32.846Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
@@ -203,7 +203,7 @@ var _hmt = _hmt || [];
       <center><p>
   
     <h1 class="article-title_code_ant" itemprop="name">
-      操作系统实验
+      操作系统实验 1,2
     </h1>
   
 </p></center>
@@ -219,25 +219,43 @@ var _hmt = _hmt || [];
 <p><a target="_blank" rel="noopener" href="https://github.com/tuna/issues/issues/1342">ubuntu-ports focal 证书过期 · Issue #1342 · tuna&#x2F;issues · GitHub</a></p>
 <span id="more"></span>
 
+<h5 id="Ubuntu和Linux-0-11之间的文件交换"><a href="#Ubuntu和Linux-0-11之间的文件交换" class="headerlink" title="Ubuntu和Linux 0.11之间的文件交换"></a>Ubuntu和Linux 0.11之间的文件交换</h5><p>oslab下的hdc-0.11-new.img是0.11内核启动后的根文件系统镜像文件，相当于在bochs虚拟机里装载的硬盘。在Ubuntu上访问其内容的方法是：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./mount-hdc</span><br></pre></td></tr></table></figure>
+
+<p>之后，hdc目录下就是和0.11内核一模一样的文件系统了，可以读写任何文件（可能有些文件要用sudo才能访问）。读写完毕，不要忘了卸载这个文件系统：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo umount hdc</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意1</strong>：不要在0.11内核运行的时候mount镜像文件，否则可能会损坏文件系统。同理，也不要在已经mount的时候运行0.11内核。</p>
+<p><strong>注意2</strong>：在关闭Bochs之前，需要先在0.11的命令行运行“sync”，确保所有缓存数据都存盘后，再关闭Bochs。</p>
 <h4 id="实验一：操作系统的引导"><a href="#实验一：操作系统的引导" class="headerlink" title="实验一：操作系统的引导"></a>实验一：操作系统的引导</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/guaiguaihenguai/article/details/81160310">编译和链接的过程_半暖的博客-CSDN博客_编译链接</a></p>
 <p>程序要运行起来，必须要经过四个步骤：预处理、编译、汇编和链接。接下来通过几个简单的例子来详细讲解一下这些过程。</p>
 <p><img src="/2022/02/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C/1.png" alt="img"></p>
 <p>如有一个程序hello.c，通过gcc hello.c生成默认的a.out，然后.&#x2F;a.out即可输出程序执行的结果。</p>
 <p>hexdump -C bootsect 将bootsect输出标准的十六进制和ASCII码</p>
+<p>编译和链接汇编文件:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">as86 -0 -a -o bootsect.o bootsect.s</span><br><span class="line">ld86 -0 -s -o bootsect bootsect.o</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd bs=1 if=bootsect of=Image skip=32</span><br></pre></td></tr></table></figure>
 
 <p>以文件bootsect为输入，以每次1byte的速度读写到文件image, 并跳过开头的32byte才开始写入</p>
 <p>得到Image后, 将其复制到linux-0.11目录下, 然后再通过.&#x2F;run运行即可, 这样就能在bochs中看到自己想要的信息。</p>
 <p><strong>这里的Image联想到, 在VMware中装虚拟机也是通过下载需要的操作系统的镜像, 然后再运行Image镜像即可。</strong></p>
+<p><a target="_blank" rel="noopener" href="https://hoverwinter.gitbooks.io/hit-oslab-manual/content/sy1_boot.html">操作系统的引导 | HIT-OSLAB-MANUAL (gitbooks.io)</a></p>
 <h4 id="实验二：系统调用"><a href="#实验二：系统调用" class="headerlink" title="实验二：系统调用"></a>实验二：系统调用</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_30563917/article/details/98333058">系统调用 – 哈工大李治军操作系统实验2_weixin_30563917的博客-CSDN博客</a></p>
 <p>操作系统实现系统调用的基本过程是：</p>
 <ol>
-<li>应用程序调用库函数（API）；</li>
-<li>API将系统调用号存入EAX，然后通过中断调用使系统进入内核态；</li>
-<li>内核中的中断处理函数根据系统调用号，调用对应的内核函数（系统调用）；</li>
-<li>系统调用完成相应功能，将返回值存入EAX，返回到中断处理函数；</li>
-<li>中断处理函数返回到API中；</li>
-<li>API将EAX返回给应用程序。</li>
+<li><p>应用程序调用库函数（API）；</p>
+</li>
+<li><p>API将系统调用号存入EAX，把函数参数存入其它通用寄存器，然后通过（int 0x80）中断调用使系统进入内核态；</p>
+</li>
+<li><p>内核中的中断处理函数根据系统调用号，调用对应的内核函数（系统调用），通过宏来调用；</p>
+</li>
+<li><p>系统调用完成相应功能，将返回值存入EAX，返回到中断处理函数；</p>
+</li>
+<li><p>中断处理函数返回到API中；</p>
+</li>
+<li><p>API将EAX返回给应用程序。</p>
+</li>
 </ol>
 <p><img src="/2022/02/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C/2.png"></p>
 <p>main将eax寄存器置72（系统调用编号），触发int 0x80中断 （实际是在库函数中做的）</p>
@@ -333,6 +351,15 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
+    <a href="/2022/02/14/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84-%E7%BB%AA%E8%AE%BA/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          网络是怎样连接的_绪论
+        
+      </div>
+    </a>
+  
   
     <a href="/2022/02/04/%E4%BA%8C%E5%8F%89%E6%A0%91/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">Leetcode - 二叉树</div>
@@ -362,7 +389,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%88%E5%B7%A5%E5%A4%A7%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C"><span class="toc-number">1.</span> <span class="toc-text">哈工大操作系统实验</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E4%B8%80%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%BC%95%E5%AF%BC"><span class="toc-number">1.1.</span> <span class="toc-text">实验一：操作系统的引导</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E4%BA%8C%EF%BC%9A%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">1.2.</span> <span class="toc-text">实验二：系统调用</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%88%E5%B7%A5%E5%A4%A7%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C"><span class="toc-number">1.</span> <span class="toc-text">哈工大操作系统实验</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Ubuntu%E5%92%8CLinux-0-11%E4%B9%8B%E9%97%B4%E7%9A%84%E6%96%87%E4%BB%B6%E4%BA%A4%E6%8D%A2"><span class="toc-number">1.0.1.</span> <span class="toc-text">Ubuntu和Linux 0.11之间的文件交换</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E4%B8%80%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%BC%95%E5%AF%BC"><span class="toc-number">1.1.</span> <span class="toc-text">实验一：操作系统的引导</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E4%BA%8C%EF%BC%9A%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">1.2.</span> <span class="toc-text">实验二：系统调用</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -487,10 +514,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">周报</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
               </li>
              
@@ -499,11 +522,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">周报</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">实习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
             
             <div class="clearfix"></div>

@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Tag: FPGA | 博客杂记 - harder and better</title>
+  <title>网络是怎样连接的_绪论 | 博客杂记 - harder and better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -23,13 +23,17 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="博客杂记 - harder and better">
-<meta property="og:url" content="http://example.com/tags/FPGA/index.html">
+  <meta name="description" content="为什么DNS 不对，QQ 却可以正常上呢？ 因为QQ 是直接使用IP 地址来连接服务器的，所以即便DNS 失效，它依然可以“屹立不倒”，以至于现在有很多人把QQ 当成一个排查DNS 问题的“参照物”。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络是怎样连接的_绪论">
+<meta property="og:url" content="http://example.com/2022/02/14/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84-%E7%BB%AA%E8%AE%BA/index.html">
 <meta property="og:site_name" content="博客杂记 - harder and better">
+<meta property="og:description" content="为什么DNS 不对，QQ 却可以正常上呢？ 因为QQ 是直接使用IP 地址来连接服务器的，所以即便DNS 失效，它依然可以“屹立不倒”，以至于现在有很多人把QQ 当成一个排查DNS 问题的“参照物”。">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-14T01:23:47.000Z">
+<meta property="article:modified_time" content="2022-02-14T02:05:13.782Z">
 <meta property="article:author" content="ygtrece">
-<meta property="article:tag" content="学习, 日常">
+<meta property="article:tag" content="计算机网络">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - harder and better" type="application/atom+xml">
@@ -178,64 +182,198 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-网络是怎样连接的-绪论" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/11/29/Libero/" class="archive-article-date">
-  	<time datetime="2021-11-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-29</time>
+      <header class="article-header">
+        
+        
+        <a href="/2022/02/14/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84-%E7%BB%AA%E8%AE%BA/" class="archive-article-date">
+  	<time datetime="2022-02-14T01:23:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-14</time>
 </a>
-        </div>
-    	 
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/11/29/Libero/">Microsemi Libero学习和使用笔记</a>
+    <h1 class="article-title_code_ant" itemprop="name">
+      网络是怎样连接的_绪论
     </h1>
   
+</p></center>
+      
+        <ul>
+<li><p>为什么DNS 不对，QQ 却可以正常上呢？</p>
+<p>因为QQ 是直接使用IP 地址来连接服务器的，所以即便DNS 失效，它依然可以“屹立不倒”，以至于现在有很多人把QQ 当成一个排查DNS 问题的“参照物”。</p>
+<span id="more"></span>
+</li>
+<li><p>浏览器访问Web 服务器这一过程的全貌</p>
+<ol>
+<li>浏览器：“请给我网页的数据。”</li>
+<li>Web服务器：“好的，这就是你要的数据。”</li>
+</ol>
+</li>
+<li><p>Web搬运数字信息的机制</p>
+</li>
+</ul>
+<p>Web要实现应用程序之间的交互，我们需要一个能够在浏览器服务器之间传递请求和响应的机制。所以说，我们需要一种机制。由于请求和响应都是0和1组成的数字信息，所以可以说，我们需要的是一种能够将数字信息搬运到指定目的地的机制。</p>
+<ul>
+<li>网络的组成</li>
+</ul>
+<p>Web搬运数字信息的机制，再加上浏览器服务器这些网络应用程序，这两部分就组成了网络</p>
+<ul>
+<li><strong>从输入网址到返回信息的全过程:</strong></li>
+</ul>
+<ol>
+<li>输入URL链接, 浏览器就会按照一定的规则去分析这个网址的含义，然后根据其含义生成请求消息，然后委托操作系统中的网络控制软件将消息发送给服务器。(第一章：Web浏览器)</li>
+<li>网络控制软件(协议栈)将从浏览器收到的数据打包, 然后加上目的地址等控制信息。(类似于把信放在信封里, 然后写上邮编等信息)。接下来，协议栈会将包交给网卡（负责以太网或无线网络通信的硬件）。然后，网卡会将包转换为电信号并通过网线发送出去。这样一来，包就进入到网络之中了。(第二章：协议栈、网卡)</li>
+<li>网卡发送的包会经过<strong>交换机</strong>等设备，到达用来接入互联网的<strong>路由器</strong>。(第三章：集线器、交换机、路由器)</li>
+<li>接下来，数据从用来接入互联网的路由器出发，进入了互联网的内部。（第四章：接入网、网络运营商）</li>
+<li>Web通过骨干网之后，网络包最终到达服务器所在的局域网中。接着，它会遇到防火墙，防火墙会对进入的包进行检查。(第五章：防火墙、缓存服务器)</li>
+<li>Web当网络包到服务器后，数据会被解包并还原为原始的请求消Web息，然后交服务器程序。(第六章：Web服务器)</li>
+</ol>
+<ul>
+<li>名词概念:<ol>
+<li>Dynamic Host Configuration Protocol 动态主机配置协议是一个局域网的网络协议。指的是由服务器控制一段IP地址范围，客户机登录服务器时就可以自动获得服务器分配的IP地址和子网掩码。担任DHCP服务器的计算机需要安装TCP&#x2F;IP协议，并为其设置静态IP地址、子网掩码、默认网关等内容。</li>
+<li>PPP连接：Point to Point Protocol 点对点协议：为在点对点连接上传输多协议数据包提供了一个标准方法。</li>
+<li>非对称数字用户线路（ADSL，Asymmetric Digital Subscriber Line）是数字用户线路（<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/xDSL/10770830">xDSL</a>，Digital Subscriber Line）服务中最流行的一种。将区域网接入到互连网的链路。</li>
+</ol>
+</li>
+</ul>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">FPGA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">libero</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机网络</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/02/14/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84-%E7%BB%AA%E8%AE%BA/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2022/02/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">操作系统实验 1,2</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -267,9 +405,9 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
