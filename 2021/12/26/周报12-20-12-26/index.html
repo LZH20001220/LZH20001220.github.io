@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Leetcode - 二叉树 (1) | 博客杂记 - harder and better</title>
+  <title>周报12.20-12.26 | 博客杂记 - harder and better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -23,23 +23,34 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta name="description" content="基础篇 满二叉树:如果一棵二叉树只有度为 0 的结点和度为 2 的结点，并且度为 0 的结点在同一层上，则这棵二叉树为满二叉树。也可以说深度为 k ，有2k -1个节点的二叉树。  完全二叉树的定义如下：在完全二叉树中，除了最底层节点可能没填满外，其余每层节点数都达到最大值，并且最下面一层的节点都集中在该层最左边的若干位置。若最底层为第 h 层，则该层包含 1~ 2 (h -1) 个节点。之前学过">
+  <meta name="description" content="第一部分：文献阅读 文献1：OFDMA-Enabled Wi-Fi Backscatter | The 25th Annual International Conference on Mobile Computing and Networking (acm.org) 一、文献概述 这篇文章主要贡献：  设计了一套发射机和接收机，以及可以提升系统速率的增强型标签。  解决了OFDMA反向散射系统中的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode - 二叉树 (1)">
-<meta property="og:url" content="http://example.com/2022/02/16/%E4%BA%8C%E5%8F%89%E6%A0%91/index.html">
+<meta property="og:title" content="周报12.20-12.26">
+<meta property="og:url" content="http://example.com/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/index.html">
 <meta property="og:site_name" content="博客杂记 - harder and better">
-<meta property="og:description" content="基础篇 满二叉树:如果一棵二叉树只有度为 0 的结点和度为 2 的结点，并且度为 0 的结点在同一层上，则这棵二叉树为满二叉树。也可以说深度为 k ，有2k -1个节点的二叉树。  完全二叉树的定义如下：在完全二叉树中，除了最底层节点可能没填满外，其余每层节点数都达到最大值，并且最下面一层的节点都集中在该层最左边的若干位置。若最底层为第 h 层，则该层包含 1~ 2 (h -1) 个节点。之前学过">
+<meta property="og:description" content="第一部分：文献阅读 文献1：OFDMA-Enabled Wi-Fi Backscatter | The 25th Annual International Conference on Mobile Computing and Networking (acm.org) 一、文献概述 这篇文章主要贡献：  设计了一套发射机和接收机，以及可以提升系统速率的增强型标签。  解决了OFDMA反向散射系统中的">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2022/02/16/%E4%BA%8C%E5%8F%89%E6%A0%91/2.gif">
-<meta property="og:image" content="http://example.com/2022/02/16/%E4%BA%8C%E5%8F%89%E6%A0%91/1.gif">
-<meta property="og:image" content="http://example.com/2022/02/16/%E4%BA%8C%E5%8F%89%E6%A0%91/3.gif">
-<meta property="og:image" content="http://example.com/2022/02/16/%E4%BA%8C%E5%8F%89%E6%A0%91/4.gif">
-<meta property="article:published_time" content="2022-02-15T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-02-16T09:50:57.796Z">
+<meta property="og:image" content="http://example.com/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/1.png">
+<meta property="og:image" content="http://example.com/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/2.png">
+<meta property="og:image" content="http://example.com/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/3.png">
+<meta property="og:image" content="http://example.com/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/4.png">
+<meta property="og:image" content="file:///C:/WINDOWS/TEMP/ksohtml10652/wps35.png">
+<meta property="og:image" content="http://example.com/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/5.png">
+<meta property="og:image" content="http://example.com/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/6.png">
+<meta property="og:image" content="http://example.com/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/7.png">
+<meta property="og:image" content="http://example.com/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/8.png">
+<meta property="og:image" content="http://example.com/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/9.png">
+<meta property="og:image" content="http://example.com/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/10.png">
+<meta property="og:image" content="http://example.com/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/11.png">
+<meta property="og:image" content="http://example.com/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/12.png">
+<meta property="og:image" content="http://example.com/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/13.png">
+<meta property="og:image" content="http://example.com/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/14.png">
+<meta property="article:published_time" content="2021-12-26T09:08:48.000Z">
+<meta property="article:modified_time" content="2022-02-16T09:45:03.454Z">
 <meta property="article:author" content="ygtrece">
-<meta property="article:tag" content="算法">
+<meta property="article:tag" content="周报">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/02/16/%E4%BA%8C%E5%8F%89%E6%A0%91/2.gif">
+<meta name="twitter:image" content="http://example.com/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/1.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - harder and better" type="application/atom+xml">
   
@@ -187,15 +198,15 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-二叉树" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-周报12-20-12-26" class="article article-type-post " itemscope itemprop="blogPost">
   
 <div class="article-inner">
     
       <header class="article-header">
         
         
-        <a href="/2022/02/16/%E4%BA%8C%E5%8F%89%E6%A0%91/" class="archive-article-date">
-  	<time datetime="2022-02-15T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-16</time>
+        <a href="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/" class="archive-article-date">
+  	<time datetime="2021-12-26T09:08:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-26</time>
 </a>
 
 
@@ -213,7 +224,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">4.3k字</span>
+        <span class="post-count">5.3k字</span>
       </span>
     </span>
 
@@ -237,149 +248,245 @@ var _hmt = _hmt || [];
       <center><p>
   
     <h1 class="article-title_code_ant" itemprop="name">
-      Leetcode - 二叉树 (1)
+      周报12.20-12.26
     </h1>
   
 </p></center>
       
-        <h3 id="基础篇"><a href="#基础篇" class="headerlink" title="基础篇"></a><strong>基础篇</strong></h3><ul>
-<li><p>满二叉树:如果一棵二叉树只有度为 0 的结点和度为 2 的结点，并且度为 0 的结点在同一层上，则这棵二叉树为满二叉树。也可以说深度为 k ，有2<sup>k</sup> -1个节点的二叉树。</p>
-</li>
-<li><p>完全二叉树的定义如下：在完全二叉树中，除了最底层节点可能没填满外，其余每层节点数都达到最大值，并且最下面一层的节点都集中在该层最左边的若干位置。若最底层为第 h 层，则该层包含 1~ 2 <sup>(h -1)</sup> 个节点。之前学过的优先级队列其实是一个堆，堆就是一棵完全二叉树，同时保证父子节点的顺序关系。</p>
-</li>
-<li><p>二叉搜索树:二叉搜索树是一个有序树, 若它的左子树不空，则左子树上所有结点的值均小于它的根结点的值; 若它的右子树不空，则右子树上所有结点的值均大于它的根结点的值; 它的左、右子树也分别为二叉排序树</p>
-</li>
-<li><p>二叉平衡搜索树: 又被称为AVL（Adelson-Velsky and Landis）树，且具有以下性质：它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。 C++ 中map、set、multimap，multiset的底层实现都是平衡二叉搜索树，所以map、set的增删操作时间时间复杂度是logn，注意unordered_map、unordered_set，unordered_map、unordered_map底层实现是哈希表。</p>
-</li>
-<li><p>红黑树：红黑树是一种二叉平衡搜索树的变体，它的左右子树高差有可能大于 1，所以红黑树不是严格意义上的平衡二叉树，但是都是二叉搜索树。</p>
-<p>进阶：Morris遍历</p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/101321696">神级遍历——morris - 知乎 (zhihu.com)</a></p>
-<span id="more"></span></li>
-</ul>
-<p>二叉树既可以链式存储, 也可以顺序存储。</p>
-<p>顺序存储如果父节点的数组下标是i，那么它的左孩子就是<code>i * 2 + 1</code>,右孩子就是<code>i * 2 + 2</code> 。</p>
-<h4 id="二叉树的遍历方式"><a href="#二叉树的遍历方式" class="headerlink" title="二叉树的遍历方式"></a><strong>二叉树的遍历方式</strong></h4><p>二叉树主要有两种遍历方式：</p>
+        <p><strong>第一部分：文献阅读</strong></p>
+<p><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/10.1145/3300061.3300121">文献1：OFDMA-Enabled Wi-Fi Backscatter | The 25th Annual International Conference on Mobile Computing and Networking (acm.org)</a></p>
+<p><strong>一、文献概述</strong></p>
+<p>这篇文章主要贡献：</p>
 <ul>
-<li><p>深度优先遍历：先往深走，遇到叶子节点再往回走。</p>
+<li><p>设计了一套发射机和接收机，以及可以提升系统速率的增强型标签。</p>
 </li>
-<li><p>广度优先遍历：一层一层的去遍历。</p>
+<li><p>解决了OFDMA反向散射系统中的相偏问题。</p>
 </li>
-<li><p>深度优先遍历:前序遍历（递归法，迭代法）;中序遍历（递归法，迭代法）;后序遍历（递归法，迭代法）, 主要借助栈通过递归的方式实现。</p>
+<li><p>构建了硬件原型，以及一个用于估计功耗的b标签IC。(感兴趣)</p>
 </li>
-<li><p>广度优先遍历:层次遍历（迭代法）, 通过队列以非递归的方式实现。</p>
+<li><p>系统达到了良好的性能。</p>
 </li>
 </ul>
-<p>这里前中后，其实指的就是中间节点的遍历顺序, 前序遍历：中左右; 中序遍历：左中右; 后序遍历：左右中</p>
-<p>链式存储二叉树的存储方式:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">TreeNode</span> &#123;</span><br><span class="line">    <span class="type">int</span> val;</span><br><span class="line">    TreeNode *left;</span><br><span class="line">    TreeNode *right;</span><br><span class="line">    <span class="built_in">TreeNode</span>(<span class="type">int</span> x) : <span class="built_in">val</span>(x), <span class="built_in">left</span>(<span class="literal">NULL</span>), <span class="built_in">right</span>(<span class="literal">NULL</span>) &#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>存疑：tag通过不同的移频构成了OFDM符号，并行传输的话怎么如何保证每路信号对应每路载波而不会受其他的tag的影响呢。</p>
+ <span id="more"></span>
 
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/binary-tree-preorder-traversal/">144. 二叉树的前序遍历</a><br><strong>二叉树的前序, 中序, 和后序遍历</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span>         <span class="comment">//特别要注意树节点的写法</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">traversal</span> <span class="params">(TreeNode *cur, vector &lt;<span class="type">int</span>&gt; &amp;vec)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(cur == <span class="literal">NULL</span>) <span class="keyword">return</span>; <span class="comment">//只能用if, while会报超时</span></span><br><span class="line">        vec.<span class="built_in">push_back</span>(cur-&gt;val);</span><br><span class="line">        <span class="built_in">traversal</span>(cur-&gt;left, vec);</span><br><span class="line">        <span class="built_in">traversal</span>(cur-&gt;right, vec);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">preorderTraversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        vector &lt;<span class="type">int</span>&gt; result;</span><br><span class="line">        <span class="built_in">traversal</span>(root, result);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>中序和后续就是把traversal函数的顺序换了一下, 原理都是一样的, 这种方法是递归解法。</p>
-<p><strong>144. 二叉树的前序遍历</strong><br>迭代解法:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">preorderTraversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        stack &lt;TreeNode*&gt; st;  <span class="comment">//定义一个结点类型的栈</span></span><br><span class="line">        vector &lt;<span class="type">int</span>&gt; result;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">        st.<span class="built_in">push</span>(root);</span><br><span class="line">        <span class="keyword">while</span>(!st.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            TreeNode *Node = st.<span class="built_in">top</span>();</span><br><span class="line">            st.<span class="built_in">pop</span>();</span><br><span class="line">            result.<span class="built_in">push_back</span>(Node-&gt;val);</span><br><span class="line">            <span class="keyword">if</span>(Node-&gt;right != <span class="literal">NULL</span>) st.<span class="built_in">push</span>(Node-&gt;right);</span><br><span class="line">            <span class="keyword">if</span>(Node-&gt;left != <span class="literal">NULL</span>) st.<span class="built_in">push</span>(Node-&gt;left); <span class="comment">//遍历结点和输出到数组中可以同步进行</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><strong>思路：</strong>首先将根节点入栈然后弹出，将根节点输出到result数组作为结果。然后分别访问右子树和左子树，将栈顶元素（也就是这一层的左子树弹出，然后将这个结点的右子树和左子树入栈，依次类推…）</p>
-<p><img src="/2022/02/16/%E4%BA%8C%E5%8F%89%E6%A0%91/2.gif"></p>
-<p>考虑前序遍历是中左右, 后序遍历是左右中. 因此可以先将左右迭代的顺序颠倒变成中右左, 然后再通过翻转数组变成左右中。</p>
-<p>翻转可以用reverse函数:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">reverse</span>(result.<span class="built_in">begin</span>(), result.<span class="built_in">end</span>());</span><br></pre></td></tr></table></figure>
-
-
-
-<p>中序遍历与这两个的思路不一样, 中序遍历是左中右，先访问的是二叉树顶部的节点，然后一层一层向下访问，直到到达树左面的最底部，再开始处理节点（也就是在把节点的数值放进result数组中），这就造成了处理顺序（堆栈）和访问顺序（输出的result数组）是不一致的。</p>
-<p><img src="/2022/02/16/%E4%BA%8C%E5%8F%89%E6%A0%91/1.gif"></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">inorderTraversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        stack &lt;TreeNode*&gt; st;</span><br><span class="line">        vector &lt;<span class="type">int</span>&gt; result;</span><br><span class="line">        TreeNode *cur = root;</span><br><span class="line">        <span class="keyword">while</span>(cur != <span class="literal">NULL</span> || !st.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(cur != <span class="literal">NULL</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                st.<span class="built_in">push</span>(cur);</span><br><span class="line">                cur = cur-&gt;left; <span class="comment">//将左孩子都压入栈,直到为空</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="comment">//堆栈不为空</span></span><br><span class="line">            &#123;</span><br><span class="line">                cur = st.<span class="built_in">top</span>();<span class="comment">//按顺序依次是左,中，右</span></span><br><span class="line">                st.<span class="built_in">pop</span>();</span><br><span class="line">                result.<span class="built_in">push_back</span>(cur-&gt;val);</span><br><span class="line">                cur = cur-&gt;right;<span class="comment">//</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>思路:先通过指针访问到最左边的结点, 一直入栈直到左边没有元素了。然后返回栈的前一个结点, 判断其是否有右孩子, 没有的话且非空就继续pop, 如果有右孩子就将指针指向右孩子,由此实现了左中右的遍历。</p>
+<p>系统实现的挑战：校准时钟偏移，定制的激励源信号，校准相位偏移。</p>
 <ul>
-<li><strong>二叉树的统一迭代法:</strong></li>
+<li><p>校准时钟同步：发射器，标签和接收器之间的时钟偏移</p>
+</li>
+<li><p>定制的激励源信号：激励信号应该满足有效数据的强度大于preamble的强度，因为要保证反向散射符号的幅度与前导码的幅度相当，否则会由于噪声干扰而导致高误码率。</p>
+</li>
+<li><p>校准相位偏移：实际上也是难以做到完全同步导致的。</p>
+</li>
 </ul>
-<p>由于中序遍历无法同时解决访问节点（遍历节点）和处理节点（将元素放进结果集）不一致的情况，因此常规的迭代方法不统一。</p>
-<p>可以采用下面的方法实现统一迭代，即</p>
-<p><strong>那我们就将访问的节点放入栈中，把要处理的节点也放入栈中但是要做标记。具体方法就是要处理的节点放入栈之后，紧接着放入一个空指针作为标记，这种方法也可以叫做标记法。</strong></p>
-<p>中序统一迭代法：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">inorderTraversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; result;</span><br><span class="line">        stack&lt;TreeNode*&gt; st;</span><br><span class="line">        <span class="keyword">if</span> (root != <span class="literal">NULL</span>) st.<span class="built_in">push</span>(root);</span><br><span class="line">        <span class="keyword">while</span> (!st.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            TreeNode* node = st.<span class="built_in">top</span>(); <span class="comment">//把该层的左孩子弹出,避免重复操作</span></span><br><span class="line">            <span class="keyword">if</span> (node != <span class="literal">NULL</span>) &#123;</span><br><span class="line">                st.<span class="built_in">pop</span>(); <span class="comment">// 将该节点弹出，避免重复操作，下面再将右中左节点添加到栈中</span></span><br><span class="line">                <span class="keyword">if</span> (node-&gt;right) st.<span class="built_in">push</span>(node-&gt;right);  <span class="comment">// 添加右节点（空节点不入栈）</span></span><br><span class="line"></span><br><span class="line">                st.<span class="built_in">push</span>(node);                          <span class="comment">// 添加中节点</span></span><br><span class="line">                st.<span class="built_in">push</span>(<span class="literal">NULL</span>); <span class="comment">// 中节点访问过，但是还没有处理，加入空节点做为标记。</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (node-&gt;left) st.<span class="built_in">push</span>(node-&gt;left);    <span class="comment">// 添加左节点（空节点不入栈）</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123; <span class="comment">// 只有遇到空节点的时候，才将下一个节点放进结果集</span></span><br><span class="line">                st.<span class="built_in">pop</span>();           <span class="comment">// 将空节点弹出</span></span><br><span class="line">                node = st.<span class="built_in">top</span>();    <span class="comment">// 重新取出栈中元素</span></span><br><span class="line">                st.<span class="built_in">pop</span>();</span><br><span class="line">                result.<span class="built_in">push_back</span>(node-&gt;val); <span class="comment">// 加入到结果集</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>二、系统概述</strong></p>
+<p><img src="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/1.png" alt="img"> </p>
+<p>系统实现的流程：用多个tag并发传输数据，将数据调制到不同频率的载波上。这些载波正交构成OFDM符号。</p>
+<p><img src="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/2.png" alt="img"> </p>
+<p>产生OFDM的流程</p>
+<p>产生OFDM的流程：输入数据bit—&gt;按照调制方式对比特进行分组—&gt;星座映射—&gt;子载波映射—&gt;IFFT然后发出</p>
+<p>注：相邻正交子载波的间距是0.3125Mhz</p>
+<p><img src="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/3.png" alt="img"> </p>
+<p>系统模型及发送帧的流程：</p>
+<p>首先通过RTS-CTS机制保留Wifi信道，之后发射机传输特定的帧。帧主要包括三个部分。帧的第一部分包含用于发送端和接收端同步和 PHY Header的前导码；(PHY Header是干啥的) 第二部分是用 OOK 调制 CW 产生的，其中包含前导码，使tag和发送端同步，以及发往标签的控制信息；第三部分，连续波被标签广播和反向散射，导频子载波用于接收机与发射机校准相位和残余频偏。来自标签的反向散射符号与来自激励信号发射器的burst preamble和 PHY Header连接，在接收器形成一个完整的OFDM burst</p>
+<p><strong>三、系统实现的细节</strong></p>
+<ul>
+<li><p>发送机：产生连续波和OOK信号，分别用于rx-tx同步和rx-tag同步，用2进制控制，全1就是发CW波，有0有1就是发OOK信号。可以用空的子载波来发CW波。然后讨论了以下发送的幅值是多少时系统的性能最好，以及说明了IFFT会产生双边频谱，这样造成频谱浪费，可以用带通滤波器解决这个问题。然后还说明了双边带对反向散射的性能没有本质的影响。</p>
+</li>
+<li><p>标签：与Hitchhike相同的设计，也是先判断信号什么时候来，再通过产生方波进行移频做反向散射。但是增加了tx-to-tag 帧来进行tx和tag的同步。(就是OOK调制的那一部分)然后单边带的实现也和hitchhike一样，通过将信号分成两路，一路进行延时(频域上对应pi&#x2F;2的移频，两路信号再进行叠加即可，这样可以实现主瓣上一个边带被抑制，旁瓣上可能没有抵消，但是可以不考虑)。</p>
+</li>
+</ul>
+<p>然后还设计了一个增强型标签来提升吞吐量。(没看懂，下面是原文翻译)</p>
+<p>通过组合多个 SSB 模块来生成增强型 OFDMA 标签来提高数据速率。增强型 OFDMA 反向散射标签设计可以与模拟 OFDM 类似的方式实现，它将集中时钟分离到子模块。连续波是首先拆分为8条路径，每条路径为一组进行SSB调制，如图9所示。这样，增强标签可以分配4个子载波，理论上与常规标签比提供4倍的数据速率，在实践中可以应用于对带宽要求更高的设备。</p>
+<p><img src="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/4.png" alt="img"> </p>
+<p>增强型标签技术还有助于解决频率选择性衰落问题，通过多个子载波传递信息；(OFDM信号的子载波间距小，可以认为信号带宽小于相干带宽)理论上，可以增强标签，使其具有反射多个子载波的能力，但这会导致高功耗和大尺寸标签。</p>
+<p>相干带宽约等于多径时延时间的倒数,<img src="file:///C:\WINDOWS\TEMP\ksohtml10652\wps35.png" alt="img">。</p>
+<p>接收机：发射机发送的前导码和标签的反向散射符号依次到达接收机，形成一个完整的 OFDM 脉冲串。 合成的burst然后由接收机处理，如图 10 所示。 来自 ADC 的 I&#x2F;Q 流由常规模块依次处理，包括数据包检测、LTS 相关、同步、频率相关、CP 去除、FFT 和解映射，之后得到一个复数序列。反向散射引起的相位偏移由phase estimation解决。接收器中的另一个精简是绕过bitstream processing模块，如图 10 的右侧部分所示。该模块包括解交织、维特比解码和解扰的功能。</p>
+<p>需要注意的是，发送端的的输入是用于产生激励信号的比特流；然而，接收端的输入是从标签反向散射数据。这种不一致使得维特比解码模块认为接收到的比特流已损坏，因此会对流进行校正，从而污染有效载荷数据并导致通信失败。因此，我们需要在接收器上绕过这个模块。(那怎么算误码率啊？？)</p>
+<p><img src="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/5.png" alt="img"> </p>
+<p>对于问题3，也就是相位偏移校准的问题，此文献提出了三种分析方案：静态的偏移，连续的动态偏移和离散的动态偏移。</p>
+<p><img src="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/6.png" alt="img"> </p>
+<p><img src="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/7.png" alt="img"></p>
+<p>相位偏移的原因：延时的存在</p>
+<p>静态的偏移主要是由于延时引起的。标签电路的延时，FFT加窗的延时传播延时等等，产生的影响就是星座图与正常的BPSK相比有一个旋转。</p>
+<p>连续的动态偏移主要通过每次改变一点波形的相位产生的，最后的效果就是点沿单位圆连续移动。</p>
+<p>离散的动态偏移是由标签产生的。通过改变tag产生方波的相位产生离散的动态频偏，影响效果就是点沿单位圆移动，但是有一定的步长。</p>
+<p>这一部分的写作风格也值得学习。先摆出图，首先描述图里的现象是什么，然后描述不同的偏移具体代表什么，以及它是怎么实现的，这样行文逻辑很清晰。</p>
+<p>功耗估计考虑到了移频的功耗，单边带电路部分的功耗。用到了time-to-digital converter，(时间数字转换器)differential ring oscillator (差分环形振荡器)等</p>
+<p><strong>四、测试</strong></p>
+<p>再之后就是测试部分，这篇文章测试了preamble和标签真正开始反射数据之间的时间差不同的误码率，吞吐量。子载波不同频偏的误码率，吞吐量。不同调制方式对应的误码率，吞吐量。视距，非视距的误码率，吞吐量，增强型标签的性能，以及和wifi backsactter做了个比较。</p>
+<p><strong>五、收获</strong></p>
+<p>通过读这篇文献，感觉通过OOK实现rx和tag之间的严格同步的思想值得学习，测试的内容值得参考，增强标签的部分不是很理解。</p>
+<p> <a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/8642363">文献2：Noncoherent Backscatter Communications Over Ambient OFDM Signals| IEEE Journals &amp; Magazine | IEEE Xplore</a></p>
+<p><strong>摘要——</strong></p>
+<p>在环境反向散射通信系统中，超低功率设备能够通过反向散射由 Wi-Fi 和蜂窝网络等传统通信系统生成的环境射频信号来传输信息。本文关注传统正交频分复用 (OFDM) 信号上的环境反向散射通信。我们提出了一种反向散射调制方案，它允许反向散射设备利用周围 OFDM 符号的频谱结构来传输信息。</p>
+<p>所提出的调制方案允许使用非相干能量检测进行二进制和更高阶调制。我们研究了检测器设计并分析了所提出方案的错误性能。我们为二元情况提供了错误概率的精确表达式，而为 M 元情况导出了错误概率的准确近似表达式。 我们使用蒙特卡罗模拟证实了我们的分析，并研究了改变 OFDM 符号大小、最大信道延迟扩展和接收天线数量对错误性能的影响。我们的数值结果表明，所提出的技术优于本文中可用的其他技术，用于在不同场景下通过环境 OFDM 信号进行反向散射通信。</p>
+<p><em><strong>*本文的贡献*</strong></em></p>
+<p>• 我们提出了一种调制方案，用于利用带内空子载波的环境OFDM 载波上的反向散射通信。我们为二进制情况和检测器设计了标签调制波形，以避免直接链路干扰。</p>
+<p>• 我们分析了所提出方案的错误性能，并根据二元Meijer G 函数获得平均错误概率的精确表达式。我们不使用高斯近似，我们的分析考虑了反向散射信道的级联衰落特性以及 OFDM 波形和宽带无线信道中固有的相关性。</p>
+<p>• 为了提高错误性能，我们建议使用多个接收天线。特别是，我们建议使用非相干检测后等增益组合，在不了解信道实现或周围 OFDM 符号的情况下获得用于能量检测的复合测试统计数据。我们将错误分析扩展到多个接收天线的情况，并获得错误概率的精确表达式。</p>
+<p>• 为了提高通信速率，基于将能量转移到空子载波的相同基本思想，我们提出了一种 M-ary 调制方案，允许每个 OFDM 符号传输多个比特，同时保留非相干检测的能力，仅依赖于能量检测。</p>
+<p>• 最后，我们提供仿真结果来证实我们的分析并研究多个系统参数，即最大信道延迟扩展、OFDM 符号大小和接收天线数量对所提出的调制方案的错误性能的影响。</p>
+<p>看了一下感觉看不懂，放弃了。</p>
+<p><strong>第二部分：一些grc模块的学习</strong></p>
+<p><strong>一、学习了一些grc的模块的功能</strong></p>
+<p>Stream Mux模块</p>
+<p>从第一个vector中获取3个元素，从第二个vector中获取两个元素，然后重复。下面这个例子就是1，2，3，4，5，6，7，8，9.</p>
+<p><img src="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/8.png" alt="img"></p>
+<p><strong>二、Gnuradio新建模块的初始代码分析</strong></p>
+<ol>
+<li>新建一个模块的.h文件: add_const_f_impl.h</li>
+</ol>
+<p><img src="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/9.png" alt="img"> </p>
+<p>代码分析：</p>
+<p><strong>(1)</strong> <em><strong>*初始分析*</strong></em></p>
+<p>gr是gnuradio的标准库，howto是自己建的工程名字，新建的模块名(GUI界面的框图名)为add_const_f。</p>
+<p><strong>(2)</strong> <em><strong>*namespace的作用*</strong></em></p>
+<p>在C++中，名称（name）可以是符号常量、变量、函数、结构、枚举、类和对象等等。工程越大，名称互相冲突性的可能性越大。另外使用多个厂商的类库时，也可能导致名称冲突。为了避免标识符的命名发生冲突，标准C++引入关键字namespace（命名空间&#x2F;名字空间&#x2F;名称空间），可以更好地控制标识符的作用域。</p>
+<p>命名空间只能全局定义，不能定义局部定义，比如在某个函数中定义，命名空间可以嵌套。</p>
+<p>用法为：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> A &#123;</span><br><span class="line"><span class="type">int</span> a = <span class="number">1000</span>;</span><br><span class="line"><span class="keyword">namespace</span> B &#123;</span><br><span class="line"><span class="type">int</span> a = <span class="number">2000</span>;</span><br><span class="line">&#125;&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test03</span><span class="params">()</span></span>&#123;</span><br><span class="line">cout&lt;&lt;<span class="string">&quot;A中的a = &quot;</span>&lt;&lt;A::a&lt;&lt;endl; <span class="comment">//1000  </span></span><br><span class="line">cout&lt;&lt;<span class="string">&quot;B中的a = &quot;</span>&lt;&lt;A::B::a&lt;&lt;endl; <span class="comment">//2000&#125;</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">//其他函数调用可以采用using namespace A；或者using A::a；</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="/2022/02/16/%E4%BA%8C%E5%8F%89%E6%A0%91/3.gif"></p>
-<p>先序遍历和后序遍历也是相同的道理，只是需要改变一下入栈的顺序。</p>
-<h4 id="二叉树的层序遍历："><a href="#二叉树的层序遍历：" class="headerlink" title="二叉树的层序遍历："></a><strong>二叉树的层序遍历：</strong></h4><p>需要借用一个辅助数据结构即队列来实现，<strong>队列先进先出，符合一层一层遍历的逻辑，而是用栈先进后出适合模拟深度优先遍历也就是递归的逻辑。</strong></p>
-<p><img src="/2022/02/16/%E4%BA%8C%E5%8F%89%E6%A0%91/4.gif"></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/binary-tree-level-order-traversal/">102. 二叉树的层序遍历</a></p>
-<p>给你二叉树的根节点 <code>root</code> ，返回其节点值的 <strong>层序遍历</strong> 。 （即逐层地，从左到右访问所有节点）。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">levelOrder</span>(TreeNode* root) &#123;</span><br><span class="line">        vector &lt;vector &lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">        queue &lt;TreeNode*&gt; que;</span><br><span class="line">        <span class="keyword">if</span>(root != <span class="literal">NULL</span>)</span><br><span class="line">        que.<span class="built_in">push</span>(root);</span><br><span class="line">        <span class="keyword">while</span>(!que.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            vector &lt;<span class="type">int</span>&gt; vec;</span><br><span class="line">            <span class="type">int</span> size = que.<span class="built_in">size</span>();</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                TreeNode * node = que.<span class="built_in">front</span>();</span><br><span class="line">                que.<span class="built_in">pop</span>();</span><br><span class="line">                vec.<span class="built_in">push_back</span>(node-&gt;val);</span><br><span class="line">                <span class="keyword">if</span>(node-&gt;left) que.<span class="built_in">push</span>(node-&gt;left);</span><br><span class="line">                <span class="keyword">if</span>(node-&gt;right) que.<span class="built_in">push</span>(node-&gt;right);</span><br><span class="line">            &#125;</span><br><span class="line">            result.<span class="built_in">push_back</span>(vec);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>(3)</strong> <em><strong>*基类和派生类*</strong></em></p>
+<p>class add_const_f_impl : public add_const_f</p>
+<p>add_const_f是基类，add_const_f_impl是派生类。add_const_f是自动生成的，在include目录中。</p>
+<p>private中需要我们自己定义模块需要的变量，public首先定义了构造函数和析构函数，然后work函数主要用作信号处理。</p>
+<ol start="2">
+<li>include文件夹下的add_const_f.h文件</li>
+</ol>
+<p><img src="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/10.png" alt="img"> </p>
+<p><strong>(1)</strong> <em><strong>*#ifndef和#endif*</strong></em></p>
+<p>#ifndef（if not defined）如果没有定义这个函数，接下来就定义。</p>
+<p>#endif 如果定义了这个.h文件，这个文件就不用定义了。</p>
+<p><strong>(2)</strong> <em><strong>*头文件*</strong></em></p>
+<p>引入了api和sync输入输出类型的两个头文件</p>
+<p><strong>(3)</strong> <em><strong>*typedef*</strong></em></p>
+<p>typedef给数据类型起别名，相当于给boost::shared_ptr<add_const_f>起一个别名sptr</add_const_f></p>
+<p>typedef好处就是可以更好的理解变量的含义，比如说：</p>
+<p>typedef int age;给定int一个别名age</p>
+<p>那么在定义时就能直接用age a &#x3D; 13；代表13岁，这样更加直观，好区分。</p>
+<p><strong>(4)</strong> <em><strong>*智能指针*</strong></em></p>
+<p>boost::shared_ptr是智能指针，编译器可以判断什么时候释放内存，new完对象后不用delete。详细介绍如下：</p>
+<p>(<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gadfly/archive/2010/09/27/1836992.html">https://www.cnblogs.com/gadfly/archive/2010/09/27/1836992.html</a>)</p>
+<ol start="3">
+<li>新建一个模块的.cc文件: add_const_f_impl.cc</li>
+</ol>
+<p><img src="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/11.png" alt="img"> </p>
+<p><img src="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/12.png" alt="img">) </p>
+<p><strong>(1)</strong> <em><strong>*#ifdef和#endif:*</strong></em></p>
+<p> 一般情况下，源程序中所有的行都参加编译。但是有时希望对其中一部分内容只在满足一定条件才进行编译，也就是对一部分内容指定编译的条件，这就是“条件编译”。有时，希望当满足某条件时对一组语句进行编译，而当条件不满足时则编译另一组语句。</p>
+<p><strong>(2)</strong> <em><strong>*构造函数*</strong></em></p>
+<p>构造函数调用了gnuradio的io_signature模块，包括模块的最小输入个数，最大输入个数，输入数据的数据类型，更多io_signature相关的资料可以参考下面的网址。</p>
+<p>（<a target="_blank" rel="noopener" href="https://blog.csdn.net/wh1312142954/article/details/80475627%EF%BC%89">https://blog.csdn.net/wh1312142954/article/details/80475627）</a></p>
+<p><strong>(3)</strong> <em><strong>*Work函数*</strong></em></p>
+<p>Work函数用作数据处理，有3个形参，其中noutput_items表示模块最大能处理的采样点数，后面两个表示两组数组。下面两行代码表示用const指针定义了两个变量并赋给其首地址，用作信号处理。</p>
+<p><strong>(4)</strong> <em><strong>*.h文件和.cc文件的关系*</strong></em></p>
+<p>.h文件和.cpp&#x2F;.cc文件点的关系就是.h文件先声明一些变量，构造函数，析构函数，功能函数等，.cc文件包含.h文件，之后再展开说明每个函数都是干嘛用的。</p>
+<p><strong>(5)</strong> <em><strong>*unit8_t数据类型*</strong></em></p>
+<p>unit8_t：无符号一个字节的整型</p>
+<p><strong>三、</strong><em><strong>*Wifi系统的学习和分析*</strong></em></p>
+<p>\1. 现有的系统和其效果</p>
+<p><strong>(1)</strong> <em><strong>*Wifi系统的流图：*</strong></em></p>
+<p><img src="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/13.png" alt="img"> </p>
+<p><strong>(2)</strong> <em><strong>*收到的数据：*</strong></em></p>
+<p><img src="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/14.png" alt="img"> </p>
+<ol start="2">
+<li>系统流图各个模块的分析</li>
+</ol>
+<p>注意：Wifi流图中Wifi phy hier的时间间隔和接收端一致。</p>
+<p><strong>(1)</strong> <em><strong>*grc中实线和虚线的区别*</strong></em></p>
+<p>Gnuradio中数据流传输用实线表示，信息流传输用虚线表示。在block层面的代码中，流数据在work函数中处理，消息在消息处理函数中处理。（标签流和数据流并行处理）</p>
+<p>首先，stream 在 GR 中作为需要处理的数据，在数字信号中就是一个个采样点的信息，GR 对 stream 数据的处理无法区分数据的性质，例如在一个滤波器模块中，会将真实数据和噪音一视同仁当作有效数据进行滤波操作，这时就无法辨别协议数据单元（PDU）与信号数据，所以就需要 message 数据进行其他信息的传输。</p>
+<p>标签与数据流同步传输，消息流和数据流异步传输，传输协议数据单元。</p>
+<p>（<a target="_blank" rel="noopener" href="https://blog.csdn.net/Flag_ing/article/details/118019362%EF%BC%89">https://blog.csdn.net/Flag_ing/article/details/118019362）</a></p>
+<p>（<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/358657568%EF%BC%89">https://zhuanlan.zhihu.com/p/358657568）</a></p>
+<p><strong>(2)</strong> <em><strong>*消息传输机制与PMT数据类型*</strong></em></p>
+<p>实现消息机制主要依赖于PMT，也就是多态类型，pmt可以定义不同的数据类型，比如dict型，vector型等。感觉它的效果就类似与模板，定义一个pmt类型可以代表不同的数据类型，(int,char等等) </p>
+<p>python中有pmt库，通过swig可以将这些变量传递给C++。 </p>
+<p>PMT类型的转换使用from_x，to_x机制</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pmt::<span class="type">pmt_t</span> P_int = pmt::<span class="built_in">from_long</span>(<span class="number">42</span>); <span class="comment">//long类型转换为pmt类</span></span><br><span class="line"><span class="type">int</span> i = pmt::<span class="built_in">to_long</span>(P_int); <span class="comment">//pmt类型转换为long类型</span></span><br><span class="line">pmt::<span class="type">pmt_t</span> P_double = pmt::<span class="built_in">from_double</span>(<span class="number">0.2</span>);</span><br><span class="line"><span class="type">double</span> d = pmt::<span class="built_in">to_double</span>(P_double);</span><br><span class="line">pmt::<span class="type">pmt_t</span> P_tuple = pmt::<span class="built_in">make_tuple</span>(pmt::<span class="built_in">from_long</span>(<span class="number">1</span>), pmt::<span class="built_in">from_long</span>(<span class="number">2</span>), pmt::<span class="built_in">from_long</span>(<span class="number">3</span>), pmt::<span class="built_in">string_to_symbol</span>(<span class="string">&quot;spam&quot;</span>), pmt::<span class="built_in">string_to_symbol</span>(<span class="string">&quot;eggs&quot;</span>))</span><br><span class="line"><span class="comment">//注：intern是string_to_symbol的别名，两者等价</span></span><br></pre></td></tr></table></figure>
 
 
 
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/binary-tree-level-order-traversal-ii/">107. 二叉树的层序遍历 II - 力扣（LeetCode） (leetcode-cn.com)</a></p>
-<p>给你二叉树的根节点 <code>root</code> ，返回其节点值 <strong>自底向上的层序遍历</strong> 。 （即按从叶子节点所在层到根节点所在的层，逐层从左向右遍历）</p>
-<p>跟前面的思路一样就是最后将result翻转</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">reverse</span>(result.<span class="built_in">begin</span>(), result.<span class="built_in">end</span>());</span><br></pre></td></tr></table></figure>
+<p>定义输入和输出接口以及其ID号</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">message_port_register_in</span><span class="params">(pmt::<span class="type">pmt_t</span> port_id)</span> <span class="comment">//pmt::pmt_t是数据，port_id是端口号</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">message_port_register_out</span><span class="params">(pmt::<span class="type">pmt_t</span> port_id)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>如果其他的block要与这个block通信，就要subscribe这个端口</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">message_port_pub</span><span class="params">(pmt::<span class="type">pmt_t</span> port_id,pmt::<span class="type">pmt_t</span> msg)</span></span>;<span class="comment">//感觉是公开端口的信息的意思</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">message_port_sub</span><span class="params">(pmt::<span class="type">pmt_t</span> port_id,pmt::<span class="type">pmt_t</span> target)</span></span>;<span class="comment">//订阅端口</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">message_port_unsub</span><span class="params">(pmt::<span class="type">pmt_t</span> port_id,pmt::<span class="type">pmt_t</span> target)</span></span>;<span class="comment">//解订阅端口</span></span><br></pre></td></tr></table></figure>
 
 
 
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/binary-tree-right-side-view/">199. 二叉树的右视图 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
-<p>给定一个二叉树的 <strong>根节点</strong> <code>root</code>，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">rightSideView</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        queue &lt;TreeNode*&gt; que;</span><br><span class="line">        <span class="keyword">if</span>(root != <span class="literal">nullptr</span>) que.<span class="built_in">push</span>(root);</span><br><span class="line">        vector &lt;<span class="type">int</span>&gt; result;</span><br><span class="line">        <span class="keyword">while</span>(!que.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> size = que.<span class="built_in">size</span>();</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                TreeNode *node = que.<span class="built_in">front</span>();</span><br><span class="line">                que.<span class="built_in">pop</span>();</span><br><span class="line">                <span class="keyword">if</span>(i == size - <span class="number">1</span>) result.<span class="built_in">push_back</span>(node-&gt;val);</span><br><span class="line">                <span class="keyword">if</span>(node-&gt;left) que.<span class="built_in">push</span>(node-&gt;left);</span><br><span class="line">                <span class="keyword">if</span>(node-&gt;right) que.<span class="built_in">push</span>(node-&gt;right);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>订阅完之后，需要一个函数来处理消息，把端口绑定到信息处理模块上，用boost库中的bind函数实现</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set_msg_handler</span>(pmt::<span class="type">pmt_t</span> port_id,</span><br><span class="line">boost::<span class="built_in">bind</span>(&amp;block_class::message_handler_function, <span class="keyword">this</span>, _1));</span><br><span class="line"><span class="comment">//this, _1用来绑定函数</span></span><br><span class="line"><span class="comment">//blob数据类型:面对vector&lt;uint_8&gt;的包装</span></span><br></pre></td></tr></table></figure>
 
 
 
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/average-of-levels-in-binary-tree/">637. 二叉树的层平均值 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
-<p>给定一个非空二叉树的根节点 <code>root</code> , 以数组的形式返回每一层节点的平均值。与实际答案相差 <code>10-5</code> 以内的答案可以被接受。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">double</span>&gt; <span class="title">averageOfLevels</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        queue &lt;TreeNode*&gt; que;</span><br><span class="line">        vector &lt;<span class="type">double</span>&gt; result;</span><br><span class="line">        <span class="keyword">if</span>(root != <span class="literal">nullptr</span>) que.<span class="built_in">push</span>(root);</span><br><span class="line">        <span class="keyword">while</span>(!que.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> size = que.<span class="built_in">size</span>();</span><br><span class="line">            <span class="type">double</span> sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                TreeNode* node = que.<span class="built_in">front</span>();</span><br><span class="line">                que.<span class="built_in">pop</span>();</span><br><span class="line">                sum = sum + node-&gt;val;</span><br><span class="line">                <span class="keyword">if</span>(node-&gt;left) que.<span class="built_in">push</span>(node-&gt;left);</span><br><span class="line">                <span class="keyword">if</span>(node-&gt;right) que.<span class="built_in">push</span>(node-&gt;right);</span><br><span class="line">            &#125;</span><br><span class="line">            result.<span class="built_in">push_back</span>(sum/size);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/">429. N 叉树的层序遍历 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
-<p>给定一个 N 叉树，返回其节点值的<em>层序遍历</em>。（即从左到右，逐层遍历）。</p>
-<p>树的序列化输入是用层序遍历，每组子节点都由 null 值分隔（参见示例）。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">// Definition for a Node.</span></span><br><span class="line"><span class="comment">class Node &#123;</span></span><br><span class="line"><span class="comment">public:</span></span><br><span class="line"><span class="comment">    int val;</span></span><br><span class="line"><span class="comment">    vector&lt;Node*&gt; children; //变成多节点, 也就是对应多子树</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    Node() &#123;&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    Node(int _val) &#123;</span></span><br><span class="line"><span class="comment">        val = _val;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    Node(int _val, vector&lt;Node*&gt; _children) &#123;</span></span><br><span class="line"><span class="comment">        val = _val;</span></span><br><span class="line"><span class="comment">        children = _children;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">&#125;;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">levelOrder</span>(Node* root) &#123;</span><br><span class="line">        vector &lt;vector &lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">        queue &lt;Node*&gt; que;</span><br><span class="line">        <span class="keyword">if</span>(root != <span class="literal">nullptr</span>) que.<span class="built_in">push</span>(root);</span><br><span class="line">        <span class="keyword">while</span>(!que.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> size = que.<span class="built_in">size</span>();</span><br><span class="line">            vector &lt;<span class="type">int</span>&gt; vec;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                Node* node = que.<span class="built_in">front</span>();</span><br><span class="line">                que.<span class="built_in">pop</span>();</span><br><span class="line">                vec.<span class="built_in">push_back</span>(node-&gt;val);</span><br><span class="line">                <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt; node-&gt;children.<span class="built_in">size</span>(); j++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span>(node-&gt;children[j]) que.<span class="built_in">push</span>(node-&gt;children[j]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            result.<span class="built_in">push_back</span>(vec);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>与二叉树的遍历原理都是一样的，就是两个子节点变成了多个子节点用vector存储。</p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-largest-value-in-each-tree-row/">515. 在每个树行中找最大值 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
-<p>给定一棵二叉树的根节点 <code>root</code> ，请找出该二叉树中每一层的最大值。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">largestValues</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        vector &lt;<span class="type">int</span>&gt; result;</span><br><span class="line">        queue &lt;TreeNode*&gt; que;</span><br><span class="line">        <span class="keyword">if</span>(root != <span class="literal">nullptr</span>) que.<span class="built_in">push</span>(root);</span><br><span class="line">        <span class="keyword">while</span>(!que.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> size = que.<span class="built_in">size</span>();</span><br><span class="line">            <span class="type">int</span> max = INT_MIN;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                TreeNode* node = que.<span class="built_in">front</span>();</span><br><span class="line">                que.<span class="built_in">pop</span>();</span><br><span class="line">                <span class="keyword">if</span>(node-&gt;val &gt; max) max = node-&gt;val;</span><br><span class="line">                <span class="keyword">if</span>(node-&gt;left != <span class="literal">NULL</span>) que.<span class="built_in">push</span>(node-&gt;left);</span><br><span class="line">                <span class="keyword">if</span>(node-&gt;right != <span class="literal">NULL</span>) que.<span class="built_in">push</span>(node-&gt;right);</span><br><span class="line">            &#125;</span><br><span class="line">            result.<span class="built_in">push_back</span>(max);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>注意INT_MIN是INT里的最小值，也就是-2<sup>31</sup>；</p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node/">116. 填充每个节点的下一个右侧节点指针 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
-<p>给定一个 <strong>完美二叉树</strong> ，其所有叶子节点都在同一层，每个父节点都有两个子节点。二叉树定义如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">  <span class="type">int</span> val;</span><br><span class="line">  Node *left;</span><br><span class="line">  Node *right;</span><br><span class="line">  Node *next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>填充它的每个 next 指针，让这个指针指向其下一个右侧节点。如果找不到下一个右侧节点，则将 next 指针设置为 NULL。</p>
-<p>初始状态下，所有 next 指针都被设置为 NULL。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">// Definition for a Node.</span></span><br><span class="line"><span class="comment">class Node &#123;</span></span><br><span class="line"><span class="comment">public:</span></span><br><span class="line"><span class="comment">    int val;</span></span><br><span class="line"><span class="comment">    Node* left;</span></span><br><span class="line"><span class="comment">    Node* right;</span></span><br><span class="line"><span class="comment">    Node* next;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    Node() : val(0), left(NULL), right(NULL), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    Node(int _val) : val(_val), left(NULL), right(NULL), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    Node(int _val, Node* _left, Node* _right, Node* _next)</span></span><br><span class="line"><span class="comment">        : val(_val), left(_left), right(_right), next(_next) &#123;&#125;</span></span><br><span class="line"><span class="comment">&#125;;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">Node* <span class="title">connect</span><span class="params">(Node* root)</span> </span>&#123;</span><br><span class="line">        queue &lt;Node*&gt; que;</span><br><span class="line">        <span class="keyword">if</span>(root != <span class="literal">NULL</span>) que.<span class="built_in">push</span>(root);</span><br><span class="line">        <span class="keyword">while</span>(!que.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> size = que.<span class="built_in">size</span>();</span><br><span class="line">            Node* node;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                node = que.<span class="built_in">front</span>();</span><br><span class="line">                que.<span class="built_in">pop</span>();</span><br><span class="line">                <span class="keyword">if</span>(que.<span class="built_in">front</span>() != <span class="literal">nullptr</span>)</span><br><span class="line">                node-&gt;next = que.<span class="built_in">front</span>();</span><br><span class="line">                <span class="keyword">if</span>(node-&gt;left != <span class="literal">nullptr</span>) que.<span class="built_in">push</span>(node-&gt;left);</span><br><span class="line">                <span class="keyword">if</span>(node-&gt;right != <span class="literal">nullptr</span>) que.<span class="built_in">push</span>(node-&gt;right);</span><br><span class="line">            &#125;</span><br><span class="line">            node-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node-ii/submissions/">117. 填充每个节点的下一个右侧节点指针 II - 力扣（LeetCode） (leetcode-cn.com)</a></p>
-<p>将上一题拓展到非完全二叉树, 没有变化。</p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/">104. 二叉树的最大深度 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
-<p>给定一个二叉树，找出其最大深度。</p>
-<p>二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。</p>
-<p><strong>说明:</strong> 叶子节点是指没有子节点的节点。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxDepth</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> depth = <span class="number">0</span>;</span><br><span class="line">        queue &lt;TreeNode*&gt; que;</span><br><span class="line">        <span class="keyword">if</span>(root != <span class="literal">NULL</span>) que.<span class="built_in">push</span>(root);</span><br><span class="line">        <span class="keyword">while</span>(!que.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            depth++;</span><br><span class="line">            <span class="type">int</span> size = que.<span class="built_in">size</span>();</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                TreeNode* node = que.<span class="built_in">front</span>();</span><br><span class="line">                que.<span class="built_in">pop</span>();</span><br><span class="line">                <span class="keyword">if</span>(node-&gt;left != <span class="literal">NULL</span>) que.<span class="built_in">push</span>(node-&gt;left);</span><br><span class="line">                <span class="keyword">if</span>(node-&gt;right != <span class="literal">NULL</span>) que.<span class="built_in">push</span>(node-&gt;right);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> depth;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>一个层序遍历就完事了, 很简单。 </p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/">111. 二叉树的最小深度 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
-<p>给定一个二叉树，找出其最小深度。</p>
-<p>最小深度是从根节点到最近叶子节点的最短路径上的节点数量。</p>
-<p><strong>说明：</strong>叶子节点是指没有子节点的节点。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">minDepth</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> depth = <span class="number">0</span>;</span><br><span class="line">        queue &lt;TreeNode*&gt; que;</span><br><span class="line">        <span class="keyword">if</span>(root != <span class="literal">NULL</span>) que.<span class="built_in">push</span>(root);</span><br><span class="line">        <span class="keyword">while</span>(!que.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            depth++;</span><br><span class="line">            <span class="type">int</span> size = que.<span class="built_in">size</span>();</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                TreeNode* node = que.<span class="built_in">front</span>();</span><br><span class="line">                que.<span class="built_in">pop</span>();</span><br><span class="line">                <span class="keyword">if</span>(node-&gt;left != <span class="literal">NULL</span>) que.<span class="built_in">push</span>(node-&gt;left);</span><br><span class="line">                <span class="keyword">if</span>(node-&gt;right != <span class="literal">NULL</span>) que.<span class="built_in">push</span>(node-&gt;right);</span><br><span class="line">                <span class="keyword">if</span>(node-&gt;left == <span class="literal">NULL</span> &amp;&amp; node-&gt;right == <span class="literal">NULL</span>)</span><br><span class="line">                <span class="keyword">return</span> depth; </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> depth;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p><strong>需要注意的是，只有当左右孩子都为空的时候，才说明遍历的最低点了。如果其中一个孩子为空则不是最低点</strong></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/invert-binary-tree/">226. 翻转二叉树 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
-<p>给你一棵二叉树的根节点 <code>root</code> ，翻转这棵二叉树，并返回其根节点。</p>
-<p>递归法，迭代法，层序遍历法都能实现（除中序），核心就是访问时将两个子树交换。</p>
-<p><strong>递归法：</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">invertTree</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span> root;</span><br><span class="line">        <span class="built_in">swap</span>(root-&gt;left, root-&gt;right);</span><br><span class="line">        <span class="built_in">invertTree</span>(root-&gt;left);</span><br><span class="line">        <span class="built_in">invertTree</span>(root-&gt;right);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>迭代法：</strong>先序遍历</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">invertTree</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) <span class="keyword">return</span> root;</span><br><span class="line">        stack&lt;TreeNode*&gt; st;</span><br><span class="line">        st.<span class="built_in">push</span>(root);</span><br><span class="line">        <span class="keyword">while</span>(!st.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            TreeNode* node = st.<span class="built_in">top</span>();              <span class="comment">// 中</span></span><br><span class="line">            st.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="built_in">swap</span>(node-&gt;left, node-&gt;right);</span><br><span class="line">            <span class="keyword">if</span>(node-&gt;right) st.<span class="built_in">push</span>(node-&gt;right);   <span class="comment">// 右</span></span><br><span class="line">            <span class="keyword">if</span>(node-&gt;left) st.<span class="built_in">push</span>(node-&gt;left);     <span class="comment">// 左</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><strong>层序遍历：（广度优先搜索）</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">invertTree</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        queue&lt;TreeNode*&gt; que;</span><br><span class="line">        <span class="keyword">if</span> (root != <span class="literal">NULL</span>) que.<span class="built_in">push</span>(root);</span><br><span class="line">        <span class="keyword">while</span> (!que.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            <span class="type">int</span> size = que.<span class="built_in">size</span>();</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">                TreeNode* node = que.<span class="built_in">front</span>();</span><br><span class="line">                que.<span class="built_in">pop</span>();</span><br><span class="line">                <span class="built_in">swap</span>(node-&gt;left, node-&gt;right); <span class="comment">// 节点处理</span></span><br><span class="line">                <span class="keyword">if</span> (node-&gt;left) que.<span class="built_in">push</span>(node-&gt;left);</span><br><span class="line">                <span class="keyword">if</span> (node-&gt;right) que.<span class="built_in">push</span>(node-&gt;right);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>(3)</strong> <em><strong>*Gnuradio的标签机制：*</strong></em></p>
+<p>流标签（Stream Tags）是为数据流中的特定 item（即数据项，数据项可以理解为一个数据单元，这个单元可以是一个向量、数组、一般的数据类型如 float、int、char 等类型的数据，一下简称数据）打上标签，用以标记我们认为的一些特殊的数据（比如幅值低于某个阈值的无效数据等），便于后续数据的处理。标签的形式是一个键值对（key:value pair），定义在块（block）的 work 函数中。其中键（key）指明了值（value）所代表的含义，值包含了这个标签里要传输的数据内容。键和值都是PMTs类型的数据，键是一个pmt symbol类型的数据，而值可以是任何数据类型的的pmt。另外，标签中还有一个额外的部分Src ID(源ID)，也是pmt symbol类型的数据，指明了创建这个标签的块，一般是块的别名。</p>
+<p>标签包含四个部分:偏置，键，值和源ID</p>
+<p><strong>(4)</strong> <em><strong>*Wifi框图中的一些变量及框图含义：*</strong></em></p>
+<p>变量：interval（发送包的时间间隔，单位为ms）；pdu_length（包长）；编码方式；信道估计方式</p>
+<p>框图的作用：</p>
+<ul>
+<li><p>Message Strobe:定义输入的数据和发送pdu的时间间隔。</p>
+</li>
+<li><p>Wifi MAC：定义源地址，目的地址和基本服务集地址？(BSS MAC是啥)</p>
+</li>
+<li><p>PDU to tagged stream：tag定义数据包的长度，按这个长度对数据进行分组。</p>
+</li>
+<li><p>QT GUI Constellation Sink: 画出信号的星座图。</p>
+</li>
+<li><p>Wifi Parse MAC：进行帧输出，linux命令行看到的输出全都是这个模块的。</p>
+</li>
+<li><p>Wifi PHY Hier模块：</p>
+</li>
+</ul>
+<p>​        消息从Wifi Mac模块传输到pad source模块，pad_source对应于mac_in接口，这部分是链路层。</p>
+<p>​        Wifi mapper对数据添加服务域和填充比特，然后进行加扰，编码，多信道捆绑接入(puncturing)，交织，下降到物理层。</p>
+<ul>
+<li>Packet Header Generator：没有.cc文件，只有.yml文件</li>
+</ul>
+<p>​        感觉是将原始的数据流中提出一部分做包头。</p>
+<ul>
+<li><p>Chunks to Symbols：输入是char数据类型，输出为gr_complex类型，此模块作用是对数据进行调制，包括bpsk，qpsk，16qam，64qam。</p>
+</li>
+<li><p>Tagged stream mux：两路带标签的流信号聚合。</p>
+</li>
+<li><p>OFDM Carrier Allocator：OFDM载波分配，包括fft长度，导频位置，数据位置，导频数据等等</p>
+</li>
+<li><p>OFDM Cyclic Prefixer：加循环前缀，16位。</p>
+</li>
+</ul>
+<p>​        Pad_sink连接samp_out端口再连接usrp_sink。</p>
+<p>（这个模块中有两个Chunks to Symbols经过Tagged stream mux聚合而成，一路有产生了包头，一路没有产生包头，这部分没太看懂）</p>
+<ul>
+<li><p>Delay:延迟的采样点数，具体对波形影响多少与采样频率关系很大。</p>
+</li>
+<li><p>Complex to Mag：复数求模值。</p>
+</li>
+<li><p>Complex to Mag^2：复数求模值再平方，输入是复数类型，输出是float类型。</p>
+</li>
+<li><p>Complex Conjugate：输出是输入的复共轭。</p>
+</li>
+<li><p>Moving average：求滑动平均，length是滑动窗口的大小，scale是缩放比例，max iter是最大迭代次数，输出的值和输入的值的关系是：</p>
+</li>
+</ul>
+<p>​            Output(i)(vector_index) &#x3D; scale * sum（Input(i-length：i)(vector_index)）</p>
+<ul>
+<li><p>Divide：输入0&#x2F;输入1</p>
+</li>
+<li><p>Wifi Sync Short：Wifi短同步</p>
+</li>
+<li><p>Wifi Sync Long：Wifi长同步</p>
+</li>
+<li><p>Stream to vector：从数据流到向量，串并转换</p>
+</li>
+<li><p>Wifi frame equalizer：得到FFT后的数据后进行子载波重排，信道估计和信道均衡。</p>
+</li>
+<li><p>Decode mac：解交织，viterbi译码，解扰。</p>
+</li>
+</ul>
+<p>只是粗略了看了一下每个模块的功能，一些实现的细节还没看。</p>
 
       
 
@@ -393,7 +500,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">周报</a>
         		</li>
       		
 		</ul>
@@ -449,7 +556,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/02/16/%E4%BA%8C%E5%8F%89%E6%A0%91/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -463,9 +570,18 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
+    <a href="/2022/01/02/%E5%A4%8D%E6%9D%82%E5%BA%A6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Leetcode - 复杂度
+        
+      </div>
+    </a>
   
-    <a href="/2022/02/14/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">MySQL必知必会</div>
+  
+    <a href="/2021/11/29/Libero/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Microsemi Libero学习和使用笔记</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -492,7 +608,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%AF%87"><span class="toc-number">1.</span> <span class="toc-text">基础篇</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E6%96%B9%E5%BC%8F"><span class="toc-number">1.1.</span> <span class="toc-text">二叉树的遍历方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">二叉树的层序遍历：</span></a></li></ol></li></ol>
+                    目录，不存在的…
                     </div>
                 </span>
             </div>
