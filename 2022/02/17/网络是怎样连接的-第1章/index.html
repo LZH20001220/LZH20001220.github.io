@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>周报:1.3-1.9 | 博客杂记 - harder and better</title>
+  <title>网络是怎样连接的 - 第1章 | 博客杂记 - harder and better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -23,28 +23,26 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta name="description" content="一、PSK系统进一步研究在上周实验的基础上继续分析框图，首先将信道影响全部去除，噪声(noise voltage)和频偏(frequency offset)都设为0。">
+  <meta name="description" content="第一章：浏览器生成消息主要包括四个部分： 1.生成HTTP请求消息； 2.向DNS 服务器查询Web 服务器的IP 地址； 3.世界各地的DNS服务器的接力； 4.浏览器就将消息委托给操作系统发送给Web服务器；">
 <meta property="og:type" content="article">
-<meta property="og:title" content="周报:1.3-1.9">
-<meta property="og:url" content="http://example.com/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/index.html">
+<meta property="og:title" content="网络是怎样连接的 - 第1章">
+<meta property="og:url" content="http://example.com/2022/02/17/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84-%E7%AC%AC1%E7%AB%A0/index.html">
 <meta property="og:site_name" content="博客杂记 - harder and better">
-<meta property="og:description" content="一、PSK系统进一步研究在上周实验的基础上继续分析框图，首先将信道影响全部去除，噪声(noise voltage)和频偏(frequency offset)都设为0。">
+<meta property="og:description" content="第一章：浏览器生成消息主要包括四个部分： 1.生成HTTP请求消息； 2.向DNS 服务器查询Web 服务器的IP 地址； 3.世界各地的DNS服务器的接力； 4.浏览器就将消息委托给操作系统发送给Web服务器；">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/1.png">
-<meta property="og:image" content="http://example.com/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/2.png">
-<meta property="og:image" content="http://example.com/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/3.png">
-<meta property="og:image" content="http://example.com/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/4.png">
-<meta property="og:image" content="http://example.com/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/ofdm_loop.png">
-<meta property="og:image" content="http://example.com/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/tx_OFDM.png">
-<meta property="og:image" content="http://example.com/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/tx_ofdm_data.png">
-<meta property="og:image" content="http://example.com/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/rx_OFDM.png">
-<meta property="og:image" content="http://example.com/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/rx_ofdm_data.png">
-<meta property="article:published_time" content="2022-01-08T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-02-10T07:43:25.831Z">
+<meta property="og:image" content="http://example.com/2022/02/17/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84-%E7%AC%AC1%E7%AB%A0/1.png">
+<meta property="og:image" content="http://example.com/2022/02/17/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84-%E7%AC%AC1%E7%AB%A0/2.png">
+<meta property="og:image" content="http://example.com/2022/02/17/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84-%E7%AC%AC1%E7%AB%A0/3.png">
+<meta property="og:image" content="http://example.com/2022/02/17/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84-%E7%AC%AC1%E7%AB%A0/4.png">
+<meta property="og:image" content="http://example.com/2022/02/17/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84-%E7%AC%AC1%E7%AB%A0/5.png">
+<meta property="og:image" content="http://example.com/2022/02/17/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84-%E7%AC%AC1%E7%AB%A0/6.png">
+<meta property="og:image" content="http://example.com/2022/02/17/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84-%E7%AC%AC1%E7%AB%A0/7.png">
+<meta property="article:published_time" content="2022-02-17T08:22:27.000Z">
+<meta property="article:modified_time" content="2022-02-17T14:48:22.189Z">
 <meta property="article:author" content="ygtrece">
-<meta property="article:tag" content="周报">
+<meta property="article:tag" content="计算机网络">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/1.png">
+<meta name="twitter:image" content="http://example.com/2022/02/17/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84-%E7%AC%AC1%E7%AB%A0/1.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - harder and better" type="application/atom+xml">
   
@@ -196,15 +194,15 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-周报1.3-1.9" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-网络是怎样连接的-第1章" class="article article-type-post " itemscope itemprop="blogPost">
   
 <div class="article-inner">
     
       <header class="article-header">
         
         
-        <a href="/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/" class="archive-article-date">
-  	<time datetime="2022-01-08T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-09</time>
+        <a href="/2022/02/17/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84-%E7%AC%AC1%E7%AB%A0/" class="archive-article-date">
+  	<time datetime="2022-02-17T08:22:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-17</time>
 </a>
 
 
@@ -222,7 +220,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">3.2k字</span>
+        <span class="post-count">863字</span>
       </span>
     </span>
 
@@ -231,7 +229,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">11分</span>
+        <span class="post-count">3分</span>
       </span>
     </span>
 </div>
@@ -246,104 +244,47 @@ var _hmt = _hmt || [];
       <center><p>
   
     <h1 class="article-title_code_ant" itemprop="name">
-      周报:1.3-1.9
+      网络是怎样连接的 - 第1章
     </h1>
   
 </p></center>
       
-        <h4 id="一、PSK系统进一步研究"><a href="#一、PSK系统进一步研究" class="headerlink" title="一、PSK系统进一步研究"></a>一、PSK系统进一步研究</h4><p>在上周实验的基础上继续分析框图，首先将信道影响全部去除，噪声(noise voltage)和频偏(frequency offset)都设为0。</p>
+        <h3 id="第一章：浏览器生成消息"><a href="#第一章：浏览器生成消息" class="headerlink" title="第一章：浏览器生成消息"></a>第一章：浏览器生成消息</h3><p>主要包括四个部分：</p>
+<p>1.生成HTTP请求消息；</p>
+<p>2.向DNS 服务器查询Web 服务器的IP 地址；</p>
+<p>3.世界各地的DNS服务器的接力；</p>
+<p>4.浏览器就将消息委托给操作系统发送给Web服务器；</p>
 <span id="more"></span>
 
-<p>用于模拟发送器和接收器采样时钟之间不同速率的采样定时偏移epsilon设为1.0。 epsilon为1.0表示没有区别。 </p>
-<p>taps表示模拟多径延迟分布的 FIR 滤波器的抽头。 默认值为 1+1j 意味着单击一次，因此没有多径。此系统多径和单径都能正常解码。 </p>
-<p>发现当去掉<code>Costas Loop</code>模块(用于恢复频偏和相偏的模块)之后系统仍然能够正常的运行，当去掉均衡模块:<code>CMA Equalizer</code>后系统不能正常运行。</p>
-<p>考虑到OFDM系统在物理层实际上就是psk加上一些子载波映射，IFFT等等，以后可以考虑在此系统的基础上进行改进。</p>
-<p>为了验证此系统能不能真正用，把系统中的信道换成真实信道，将信道换成USRP后解码出的星座图不是很清晰，存在误码，无法准确找到同步的延时时间。不知道与USRP的采样率有没有关系。当USRP的采样率到达1M时，GNU Radio一直显示U,程序卡死，加入了Throttle也是如此。事实证明产生此现象的原因是因为用到了一个0.2MHz带宽的滤波器，而USRP的采样率只有32k，这时候会有一个warning，将USRP的采样率改为500KHz,问题解决，得到的星座图还比较清晰，但是依然不能同步。</p>
-<p>( “U” &#x3D; underrun（PC 无法快速的提供数据 - PC not providing data quickly enough）)</p>
-<p><strong>想到的几种解决方法:</strong><br><strong>1. matlab程序选择比较的比特数缩短，比如收发只要连续20个一样就认为同步上了，然后再计算误码率。</strong></p>
-<p>**方法1的实验结果:**测试多次发现延时时间一直在变，范围在5000-6000之间，但是移位之后，误码率还是很高。可能的原因是USRP每次发送的时间间隔是不同的，因此每次同步需要的时间延时不一样。</p>
-<p><strong>2. 通过观察用USRP发送时接收端的星座图，然后调整仿真信道的参数，让其与USRP的星座图相接近。再从接收端调整<code>Polyphase Clock Sync</code>模块，<code>CMA Equalizer</code>模块，<code>Costas Loop</code>模块的参数，通过调整参数使星座图效果更好。</strong></p>
-<p>**方法2的实验结果:**当增大噪声至 0.5 时，系统基本不受影响，依旧能解调出数据。当增大时间偏移到  1.001 时，依旧没有误码。在此基础上，将频偏调至0.042左右，出现大量误码。将时间偏移移回0重新测试，依旧没有误码。可见此系统受频率搬移的影响更大，因为这时候星座图在发生旋转。由于使用USRP的系统的星座图与仿真中的星座图加入一定的噪声相近似，在仿真中加入噪声后依旧能同步，而在USRP上则不能实现同步…至此此系统暂时告一段落。</p>
-<h4 id="二、GNURADIO中的-grc文件和-py文件"><a href="#二、GNURADIO中的-grc文件和-py文件" class="headerlink" title="二、GNURADIO中的.grc文件和.py文件"></a>二、GNURADIO中的.grc文件和.py文件</h4><h5 id="首先是grc的gui界面和其代码的关系"><a href="#首先是grc的gui界面和其代码的关系" class="headerlink" title="首先是grc的gui界面和其代码的关系"></a>首先是grc的gui界面和其代码的关系</h5><p>**.grc文件主要包括options，blocks,connections,metadata.**其中:</p>
-<p>options定义整个框图的一些参数，全都是定义好的，只要改文件名。</p>
-<p>blocks定义</p>
-<p>其他的块都在blocks模块中，包括variable等等。</p>
-<p>block模块下又包括name，id，parameters，states。</p>
-<p>假如定义一个variable模块叫samp_rate, 这个block的name是samp_rate,ID是variable。</p>
-<p>connection用于将不同的模块对应的端口连接起来。</p>
-<p>metadata是gnuradio中的数据源，正常情况下都是file_format: 1。</p>
-<p><strong>.py文件</strong><br><a target="_blank" rel="noopener" href="https://wiki.gnuradio.org/index.php/Flowgraph_Python_Code">GNU Radio GRC流图生成的Python脚本</a></p>
-<p>当我们点击GRC中工具栏中的“Generate”代码生成按钮时，在“工作空间”会提示你，生成了一个文件名字为“xxx.py”的python脚本。</p>
-<p>在命令行输入python3 xxx.py的效果和在GRC中点击“Generate”代码作用一样。</p>
-<p>其构造函数主要也包括Variables，Blocks，Connections(这些是固定要有的)</p>
-<p><strong>总体结构</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3  //表示用python3来执行脚本</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> gnuradio <span class="keyword">import</span> gr //python调库</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3  //表示用python3来执行脚本</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">test</span>(gr.top_block, Qt.QWidget):</span><br><span class="line">该行定义了一个名称为与该Python脚本名称相同的类，这个类是继承于gr.top_block类。test类是本流图程序的主体</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">在test类中只有一个构造函数“init()”，调用了父类中的构造函数(gr.top_block.__init__(self))。</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span> </span><br><span class="line">name 是当前模块名，当模块被直接运行时模块名为 main 。这句话的意思就是，当模块被直接运行时，<span class="keyword">if</span> 以下代码块将被运行，当模块是被导入时，代码块不被运行。</span><br><span class="line">python中两个_代表私有类型，</span><br></pre></td></tr></table></figure>
 
-<p><strong>构造函数中的Variables，Blocks，Connections</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">self.samp_rate = samp_rate = <span class="number">32000</span></span><br><span class="line">定义variable</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">self.connect((self.analog_sig_source_x_0, <span class="number">0</span>), (self.audio_sink_0, <span class="number">0</span>))</span><br><span class="line">self.connect((self.analog_sig_source_x_1, <span class="number">0</span>), (self.audio_sink_0, <span class="number">1</span>))</span><br><span class="line">这种就是用于连接模块的函数，将不同的端口连接起来</span><br></pre></td></tr></table></figure>
 
-<h4 id="三、OFDM系统的搭建"><a href="#三、OFDM系统的搭建" class="headerlink" title="三、OFDM系统的搭建"></a>三、OFDM系统的搭建</h4><h5 id="1-尝试从wifi的grc提取出物理层的部分，但是由于WIFI-Frame-Equalizer将FFT之后的解调，解码，以及链路层的成帧等处理放在了一起，无法在不改代码的情况下提取出解码后的数据。"><a href="#1-尝试从wifi的grc提取出物理层的部分，但是由于WIFI-Frame-Equalizer将FFT之后的解调，解码，以及链路层的成帧等处理放在了一起，无法在不改代码的情况下提取出解码后的数据。" class="headerlink" title="1. 尝试从wifi的grc提取出物理层的部分，但是由于WIFI Frame Equalizer将FFT之后的解调，解码，以及链路层的成帧等处理放在了一起，无法在不改代码的情况下提取出解码后的数据。"></a>1. 尝试从wifi的grc提取出物理层的部分，但是由于<code>WIFI Frame Equalizer</code>将FFT之后的解调，解码，以及链路层的成帧等处理放在了一起，无法在不改代码的情况下提取出解码后的数据。</h5><p>Wifi Mapper输出中的tag: encoding(0), psdu_len(128), packet_len(2112).<br>tag遵循键值相对应的原则, encoding是key,0是value。</p>
-<p><code>tag object</code>模块，定义一个tag类型的变量。</p>
-<p><code>Wifi mapper</code>模块输出的数据0,1;</p>
-<p>经过加入<code>Tagged Stream Mux</code>模块和最后在<code>Wifi Frame Equalizer</code>模块输出的数据，都是实部为-1，1;虚部是0.</p>
-<p>直接用USRP产生方波对wifi系统进行移频，接收端接不到信息。</p>
-<h5 id="2-消息传递机制"><a href="#2-消息传递机制" class="headerlink" title="2. 消息传递机制"></a>2. 消息传递机制</h5><p><strong><code>Message Strobe</code>模块:两个参数Message PMT(PMT类型)和Period(ms)(long类型).</strong></p>
-<p>Message PMT作为PMT要发送的消息，如:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pmt.<span class="built_in">cons</span>(pmt.PMT_NIL, pmt.<span class="built_in">make_u8vector</span>(<span class="number">16</span>, <span class="number">0xFF</span>))</span><br></pre></td></tr></table></figure>
-
-<p>pmt.PMT_T和pmt.PMT_F是布尔类型的变量分别表示true和false。PMT_NIL就类似于NULL或者None类型的变量并且常用于默认参数和返回值，通常表示发生了某个错误。这里用PMT_NIL是因为PDU的元数据部分是空的。u8vector表示8位，也就是一个字节。这个语句输入就表示创建16字节的1。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pmt.<span class="built_in">intern</span>(<span class="string">&quot;TEST&quot;</span>) <span class="comment">//表示发送字符TEST</span></span><br></pre></td></tr></table></figure>
-
-<p>代码将这两个参数都声明为私有，然后通过set_msg和set_period函数为这两个参数赋值，这样起到了对数据的保护作用。通过start()和stop()两个函数实现定时。start()函数又调用了run()函数计时，run()函数用到了<code>boost::posix_time</code>函数进行系统计时。</p>
-<p>Options的选择包括QT GUI, No GUI, Hier Block, Hier Block(QT GUI)<br>QT GUI可以使用GUI界面，也就是一些星座图，数据的输出; No GUI不能用GUI的模块，否则极有可能卡死，其输出在terminal中.</p>
-<p><strong><code>PDU to Tagged Stream</code>模块:</strong></p>
-<p>将PMT数据类型转换为byte类型，数据流以数据包包长为tag进行标注</p>
-<p><strong><code>Message Debug</code>模块对数据进行输出</strong></p>
-<p>print端口输出message作为数据包的key, print_pdu端口输出message作为数据包的value.</p>
-<p><img src="/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/1.png"><br><img src="/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/2.png"></p>
-<h5 id="3-向Vector-Source中加标签"><a href="#3-向Vector-Source中加标签" class="headerlink" title="3. 向Vector Source中加标签"></a>3. 向Vector Source中加标签</h5><p>用到<code>Tag Object</code>模块，offset表示偏移，变量的数据类型都是pmt; Vector Source中定义tag要输入tag的ID号.</p>
-<p><img src="/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/3.png"><br><img src="/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/4.png"></p>
-<h5 id="4-OFDM例程"><a href="#4-OFDM例程" class="headerlink" title="4.OFDM例程"></a>4.OFDM例程</h5><p><img src="/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/ofdm_loop.png"><br><strong>OFDM_loopback模块</strong></p>
-<p>其grc类似于上周的PSK,也是仿真系统,多加了一个<a target="_blank" rel="noopener" href="https://wiki.gnuradio.org/index.php/OFDM_Transmitter">OFDM Transmitter</a>和<a target="_blank" rel="noopener" href="https://wiki.gnuradio.org/index.php/OFDM_Receiver">OFDM Receiver</a>,预计其结果也是仿真时加一个延时能同步,通过USRP不能同步,因此如何实现能通过同步头来同步数据很重要.</p>
-<p><code>Occupied Carriers</code>:数据子载波; <code>Pilot Carriers</code>:导频子载波</p>
-<p>数据头的调制方式:BPSK; 负载的调制方式:QPSK;</p>
-<p>不能同步只能仿真没啥意义，就没有接USRP测试。</p>
-<p><strong>tx_OFDM模块</strong>的grc:<br><img src="/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/tx_OFDM.png"><br><a target="_blank" rel="noopener" href="https://wiki.gnuradio.org/index.php/Stream_CRC32">Stream CRC32</a>模块: 产生CRC</p>
-<p><a target="_blank" rel="noopener" href="https://wiki.gnuradio.org/index.php/Protocol_Formatter">Protocol Formatter</a>模块: 从<code>Tagged Stream</code>中创建数据包头, 然后将数据包头打包为1bit&#x2F;byte, 以便后续进行BPSK。 将数据有效载荷打包为2bit&#x2F;byte, 以便后续进行QPSK。 </p>
-<p><a target="_blank" rel="noopener" href="https://wiki.gnuradio.org/index.php/Tag_Gate">Tag Gate</a>: 根据标签的Key判断是否允许标签通过。</p>
-<p><code>Sync Word 1</code>和<code>Sync Word 2</code>是两个用于同步的前导码, 第一个同步码用于频率偏移和时序估计,<br>第二个同步码用于粗略的频率偏移和信道估计.</p>
-<p>此框图通过<code>Tag Debug</code>产生的数据为:<br><img src="/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/tx_ofdm_data.png"></p>
-<p><strong>rx_OFDM模块</strong>的grc:<br><img src="/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/rx_OFDM.png"><br>这个模块加入了前导码做同步.</p>
-<p><a target="_blank" rel="noopener" href="https://wiki.gnuradio.org/index.php/Tag_Debug"><strong>Tag Debug模块</strong></a></p>
-<p> 此块收集发送到所有输入端口上的所有标记,并且显示在terminal中, 有点类似于<code>Message Debug</code>, Name标识<code>Tag Debug</code>的名称,终端中首先输出. <code>Key Filter</code>表示过滤器,可以选择自己想要的标签.<code>Display</code>表示要不要把数据显示在终端.</p>
-<p><a target="_blank" rel="noopener" href="https://wiki.gnuradio.org/index.php/Schmidl_%26_Cox_OFDM_synch."><strong>Schmidl &amp; Cox OFDM synch模块</strong></a>模块:进行频率同步</p>
-<p><a target="_blank" rel="noopener" href="https://wiki.gnuradio.org/index.php/Frequency_Mod"><strong>Frequency Mod</strong></a>做相位增加, 瞬时相位增加与灵敏度和输入幅度成正比。</p>
-<p><a target="_blank" rel="noopener" href="https://wiki.gnuradio.org/index.php/Header/Payload_Demux"><strong>Header&#x2F;Payload Demux</strong>模块:</a></p>
-<p>输入 0 (in端口)采用连续传输样本（项目）。<br>输入 1 (<code>Header/Payload Demux</code>端口)是触发信号的可选输入（标记数据包的开头），当这个端口的输入非0时,标识数据包的开头。当检测到触发信号后，将header_len项复制从out_hdr端口输出;该块然后停止，直到它在消息端口 <code>header_data</code> 上接收到消息, 消息是PMT类型的; (这个部分由Header Stream经过<a target="_blank" rel="noopener" href="https://wiki.gnuradio.org/index.php/FFT">FFT</a>，<a target="_blank" rel="noopener" href="https://wiki.gnuradio.org/index.php/OFDM_Channel_Estimation">信道估计(OFDM Channel Estimation)</a>，<a target="_blank" rel="noopener" href="https://wiki.gnuradio.org/index.php/OFDM_Frame_Equalizer">帧均衡(OFDM Frame Equalizer)</a>，<a target="_blank" rel="noopener" href="https://wiki.gnuradio.org/index.php/OFDM_Serializer">并串转换(OFDM Seriallizer)</a>,<a target="_blank" rel="noopener" href="https://wiki.gnuradio.org/index.php/Constellation_Decoder">星座映射</a>,<a target="_blank" rel="noopener" href="https://wiki.gnuradio.org/index.php/Packet_Header_Parser">包头解析器(Packet Header Parser)</a>后输出)然后首先将所有的键值对复制到payload。读取length_tag_key中指定的key对应的值，作为payload长度。 然后将有payload的值和作为标签的标头数据一起复制到输出口<code>out_payload</code>。</p>
-<p><strong>帧均衡(OFDM Frame Equalizer):</strong></p>
-<p>用到了digital中的ofdm_equalizer_simpledef()函数。</p>
-<p>这个函数中有一个<code>std::vector&lt;std::vector&lt;int&gt;&gt;</code>,定义一个动态二维数组。 </p>
-<p><strong>包头解析器(Packet Header Parser)的作用:</strong></p>
-<p>将标头元数据作为 PMT 发布。 从某种意义上说，这是 Packet Header Generator 的逆块。 不同的是，解析后的头部不是作为流输出，而是作为PMT字典输出到id为“header_data”的消息端口。</p>
-<p>symbol和item的区别的一个例子：具有 48 个子载波的 OFDM，使用长度为 64 的 IFFT调制，以及 16 个样本的循环前缀长度。 在这种情况下，itemsize 是 sizeof(gr_complex)，因为正在接收complex样本。 一个 OFDM 符号有 64 个样本，因此 items_per_symbol 设置为 64，guard_interval 设置为 16(guard_interval是每个symbol丢弃的长度)。 报头长度以 OFDM 符号的数量指定。 因为我们要处理完整的 OFDM 符号，所以我们将 output_symbols 设置为 true。</p>
-<p>对于单载波调制，比如PSK来说, items和sample等价，items_per_symbol实际上等价于sample_per_symbol.</p>
-<p>如果报头解调失败，报头必须发送一个值为 pmt::PMT_F 的 PMT。 状态被重置，标题被忽略。</p>
-<p><strong><code>Stream CRC32</code></strong></p>
-<p>生成数据的CRC或者检查数据的CRC, 在接收端就是检查数据的CRC。</p>
-<p>此框图通过<code>Tag Debug</code>产生的数据为:<br><img src="/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/rx_ofdm_data.png"></p>
-<p><strong>实验</strong></p>
-<p>利用tx_OFDM模块和rx_OFDM模块进行了实验,其中tx_OFDM使用台式机, rx_OFDM使用笔记本.USRP中心频率设为2.4GHz, 采样频率设为300KHz, tx增益为30, rx增益为50;发送终端一直输出U，输出端输出几个数据就变成O了, 有待进一步的调试。 </p>
-<p>当把tx_OFDM模块和rx_OFDM模块放在一个框图中不能正常进行传输, 接收端口的灯一直不亮, 原因是发送端口和接收端口的信息速率不匹配.终端一直输出U或者O.</p>
-<p>“U”表示PC无法快速的提供数据; “O”表示PC无法同步地去接收USRP上的数据.</p>
-<p>**注意:如果出现报错 <code>gr::log:INFO: packet_headerparser_b0 - Detected an invalid packet at item</code></p>
-<p>可以参考:**<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/Flag_ing/article/details/120100854">链接</a></p>
-<p>总结:这个例程产生数据时加入了数据头, 同步等操作, 是一套比较完整的OFDM通信系统框图, 没有加入MAC层的内容, 而且所有的模块都能在Wiki中查到。 但是现阶段此例程中通过tag实现的一些标注还没有完全理解, 有待进一步的研究。 此外，发送端口和接收端口的信息速率不匹配, 发送终端一直输出U，输出端输出几个数据就变成O了, 有待进一步的调试。</p>
+<h4 id="1-1-生成HTTP请求消息"><a href="#1-1-生成HTTP请求消息" class="headerlink" title="1.1 生成HTTP请求消息"></a>1.1 生成HTTP请求消息</h4><p>网址，准确来说应该叫URL(Uniform Resource Locator)，不同的URL用于判断浏览器访问什么Web服务器，比如访问Web 服务器时用“http:”，而访问FTP服务器时用“ftp:”。（File Transfer Protocol，文件传送协议）根据访问目标的不同，URL 的写法也会不同。</p>
+<p><img src="/2022/02/17/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84-%E7%AC%AC1%E7%AB%A0/1.png" alt="image-20220217164640265"></p>
+<p><img src="/2022/02/17/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84-%E7%AC%AC1%E7%AB%A0/2.png" alt="image-20220217164814220"></p>
+<p>尽管URL 有各种不同的写法，但它们有一个共同点，那就是URL 开头的文字，即“http:”“ftp:”“file:”“mailto:”这部分文字都表示浏览器应当使用的访问方法。比如当访问Web 服务器时应该使用HTTP协议（Hypertext Transfer Protocol，超文本传送协议），而访问FTP 服务器时则应该使用FTP 协议。</p>
+<ul>
+<li><p>浏览器解析 URL</p>
+<p><img src="/2022/02/17/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84-%E7%AC%AC1%E7%AB%A0/3.png" alt="image-20220217165843933"></p>
+</li>
+</ul>
+<p>如果URL以<code>/</code>结尾，比如<a target="_blank" rel="noopener" href="http://www.lab.glasscom.com/dir/%EF%BC%8C%E6%9C%80%E5%90%8E%60/%60%E6%8C%87%E7%9A%84%E6%98%AFdir%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84%E9%BB%98%E8%AE%A4%E6%96%87%E4%BB%B6%EF%BC%8C%E8%81%94%E6%83%B3%E5%88%B0%E4%B9%8B%E5%89%8D%E5%AD%A6php%E6%97%B6%E9%BB%98%E8%AE%A4%E7%9A%84%E6%96%87%E4%BB%B6%E5%B0%B1%E6%98%AFindex.html%EF%BC%8C%E7%9B%AE%E5%BD%95%E6%9C%89%E6%97%B6%E5%80%99%E4%B9%9F%E5%8F%AF%E4%BB%A5%E7%9C%81%E7%95%A5%EF%BC%8C%E5%89%8D%E9%9D%A2%E7%9A%84dir%E5%90%8E%E9%9D%A2%E4%B8%8D%E5%8A%A0%60/%60%E5%92%8C%E5%8A%A0%60/%60%E6%95%88%E6%9E%9C%E4%B8%80%E6%A0%B7%E3%80%82">http://www.lab.glasscom.com/dir/，最后`/`指的是dir目录下的默认文件，联想到之前学php时默认的文件就是index.html，目录有时候也可以省略，前面的dir后面不加`/`和加`/`效果一样。</a></p>
+<ul>
+<li><p>HTTP协议</p>
+<p><img src="/2022/02/17/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84-%E7%AC%AC1%E7%AB%A0/4.png" alt="image-20220217171339532"></p>
+</li>
+</ul>
+<p>请求消息就是要求服务器 ‘对什么’ 进行 ‘怎样的操作’。Uniform Resource Identifier，统一资源标识符相当于 ‘对什么’，进行怎样的操作相当于方法，主要包括get方法，post方法等等。最常用的就是get方法和post方法。</p>
+<p><img src="/2022/02/17/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84-%E7%AC%AC1%E7%AB%A0/5.png" alt="image-20220217172029114"></p>
+<p>收到请求消息之后，Web 服务器会对其中的内容进行解析，通过URI和方法来判断“对什么”“进行怎样的操作”，并根据这些要求来完成自己的工作，然后将结果存放在响应消息中。在响应消息的开头有一个状态码，它用来表示操作的执行结果是成功还是发生了错误（比如经常看到的404 Not Found实际上就是返回的错误的状态码）。</p>
+<p><strong>需要注意的是：</strong>实际上并不只是通过URL才能访问服务器，通过超链接，或者填表之后点击提交这些操作实际上都需要和服务器交互。</p>
+<p>在HTML 文档中写上<code>&lt;a href=&quot;……&quot;&gt; </code>标签，其中”……” 部分为URL，这就是一个超级链接。</p>
+<p>浏览器再经过了对URL的解析后，浏览器确定了Web 服务器和文件名，接下来就是根据这些信息来生成HTTP 请求消息了。</p>
+<p><img src="/2022/02/17/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84-%E7%AC%AC1%E7%AB%A0/6.png" alt="image-20220217221259672"></p>
+<p>在地址栏中输入网址并显示网页应该使用GET方法；</p>
+<p>点击超级链接的场景中也是使用GET 方法；</p>
+<p>如果是表单，在HTML源代码中会在表单的属性中指定使用哪种方法来发送请求，可能是GET 也可能是POST。(GET 方法能够发送的数据只有几百个字节，如果表单中的数据超过这一长度，则必须使用POST 方法来发送。)</p>
+<p>浏览器与Web 服务器之间交互消息的一个实例。在这个例子中，我们需要获取一张名为sample1.htm 的网页，网页中包含一张名为picture.jpg 的图片，下图中展示了这个过程中产生的消息：</p>
+<p><img src="/2022/02/17/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84-%E7%AC%AC1%E7%AB%A0/7.png" alt="image-20220217224619288"></p>
 
       
 
@@ -357,7 +298,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">周报</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机网络</a>
         		</li>
       		
 		</ul>
@@ -413,7 +354,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/02/17/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84-%E7%AC%AC1%E7%AB%A0/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -427,18 +368,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2022/01/10/%E9%93%BE%E8%A1%A8/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Leetcode - 链表
-        
-      </div>
-    </a>
   
-  
-    <a href="/2022/01/04/%E6%95%B0%E7%BB%84/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Leetcode - 数组</div>
+    <a href="/2022/02/17/%E4%BA%8C%E5%8F%89%E6%A0%91-2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Leetcode - 二叉树(2)</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -465,7 +397,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81PSK%E7%B3%BB%E7%BB%9F%E8%BF%9B%E4%B8%80%E6%AD%A5%E7%A0%94%E7%A9%B6"><span class="toc-number">1.</span> <span class="toc-text">一、PSK系统进一步研究</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81GNURADIO%E4%B8%AD%E7%9A%84-grc%E6%96%87%E4%BB%B6%E5%92%8C-py%E6%96%87%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">二、GNURADIO中的.grc文件和.py文件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%A6%96%E5%85%88%E6%98%AFgrc%E7%9A%84gui%E7%95%8C%E9%9D%A2%E5%92%8C%E5%85%B6%E4%BB%A3%E7%A0%81%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">2.1.</span> <span class="toc-text">首先是grc的gui界面和其代码的关系</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E3%80%81OFDM%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%90%AD%E5%BB%BA"><span class="toc-number">3.</span> <span class="toc-text">三、OFDM系统的搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%B0%9D%E8%AF%95%E4%BB%8Ewifi%E7%9A%84grc%E6%8F%90%E5%8F%96%E5%87%BA%E7%89%A9%E7%90%86%E5%B1%82%E7%9A%84%E9%83%A8%E5%88%86%EF%BC%8C%E4%BD%86%E6%98%AF%E7%94%B1%E4%BA%8EWIFI-Frame-Equalizer%E5%B0%86FFT%E4%B9%8B%E5%90%8E%E7%9A%84%E8%A7%A3%E8%B0%83%EF%BC%8C%E8%A7%A3%E7%A0%81%EF%BC%8C%E4%BB%A5%E5%8F%8A%E9%93%BE%E8%B7%AF%E5%B1%82%E7%9A%84%E6%88%90%E5%B8%A7%E7%AD%89%E5%A4%84%E7%90%86%E6%94%BE%E5%9C%A8%E4%BA%86%E4%B8%80%E8%B5%B7%EF%BC%8C%E6%97%A0%E6%B3%95%E5%9C%A8%E4%B8%8D%E6%94%B9%E4%BB%A3%E7%A0%81%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E6%8F%90%E5%8F%96%E5%87%BA%E8%A7%A3%E7%A0%81%E5%90%8E%E7%9A%84%E6%95%B0%E6%8D%AE%E3%80%82"><span class="toc-number">3.1.</span> <span class="toc-text">1. 尝试从wifi的grc提取出物理层的部分，但是由于WIFI Frame Equalizer将FFT之后的解调，解码，以及链路层的成帧等处理放在了一起，无法在不改代码的情况下提取出解码后的数据。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92%E6%9C%BA%E5%88%B6"><span class="toc-number">3.2.</span> <span class="toc-text">2. 消息传递机制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E5%90%91Vector-Source%E4%B8%AD%E5%8A%A0%E6%A0%87%E7%AD%BE"><span class="toc-number">3.3.</span> <span class="toc-text">3. 向Vector Source中加标签</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-OFDM%E4%BE%8B%E7%A8%8B"><span class="toc-number">3.4.</span> <span class="toc-text">4.OFDM例程</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E6%B5%8F%E8%A7%88%E5%99%A8%E7%94%9F%E6%88%90%E6%B6%88%E6%81%AF"><span class="toc-number">1.</span> <span class="toc-text">第一章：浏览器生成消息</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-%E7%94%9F%E6%88%90HTTP%E8%AF%B7%E6%B1%82%E6%B6%88%E6%81%AF"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 生成HTTP请求消息</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
