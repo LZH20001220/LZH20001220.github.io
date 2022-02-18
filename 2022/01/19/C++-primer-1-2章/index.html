@@ -23,15 +23,15 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta name="description" content="第一章一些背景：在C++ 11之前，C++存在最严重的缺陷就是缺少自动内存管理和对象级别的消息发送机制。 MFC：Microsoft Foundation Classes    微软基础类库 C++可以看作是由三部分组成的：低级语言，现代高级语言特征，标准库函数。 编译或者运行程序可以用IDE或者命令行来实现。 C++最常见的后缀包括.cc，.cxx，.cpp，.cp，.c">
+  <meta name="description" content="第一章    开始一些背景：在C++ 11之前，C++存在最严重的缺陷就是缺少自动内存管理和对象级别的消息发送机制。 MFC：Microsoft Foundation Classes    微软基础类库 C++可以看作是由三部分组成的：低级语言，现代高级语言特征，标准库函数。 编译或者运行程序可以用IDE或者命令行来实现。 C++最常见的后缀包括.cc，.cxx，.cpp，.cp，.c">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++ primer Chapter 1 ~ 2">
 <meta property="og:url" content="http://example.com/2022/01/19/C++-primer-1-2%E7%AB%A0/index.html">
 <meta property="og:site_name" content="博客杂记 - harder and better">
-<meta property="og:description" content="第一章一些背景：在C++ 11之前，C++存在最严重的缺陷就是缺少自动内存管理和对象级别的消息发送机制。 MFC：Microsoft Foundation Classes    微软基础类库 C++可以看作是由三部分组成的：低级语言，现代高级语言特征，标准库函数。 编译或者运行程序可以用IDE或者命令行来实现。 C++最常见的后缀包括.cc，.cxx，.cpp，.cp，.c">
+<meta property="og:description" content="第一章    开始一些背景：在C++ 11之前，C++存在最严重的缺陷就是缺少自动内存管理和对象级别的消息发送机制。 MFC：Microsoft Foundation Classes    微软基础类库 C++可以看作是由三部分组成的：低级语言，现代高级语言特征，标准库函数。 编译或者运行程序可以用IDE或者命令行来实现。 C++最常见的后缀包括.cc，.cxx，.cpp，.cp，.c">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-01-19T15:18:41.000Z">
-<meta property="article:modified_time" content="2022-02-18T08:13:40.651Z">
+<meta property="article:modified_time" content="2022-02-18T16:00:06.893Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
@@ -212,7 +212,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">201字</span>
+        <span class="post-count">982字</span>
       </span>
     </span>
 
@@ -221,7 +221,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
+        <span class="post-count">3分</span>
       </span>
     </span>
 </div>
@@ -241,7 +241,7 @@ var _hmt = _hmt || [];
   
 </p></center>
       
-        <h3 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h3><h4 id="一些背景："><a href="#一些背景：" class="headerlink" title="一些背景："></a>一些背景：</h4><p>在C++ 11之前，C++存在最严重的缺陷就是缺少自动内存管理和对象级别的消息发送机制。</p>
+        <h3 id="第一章-开始"><a href="#第一章-开始" class="headerlink" title="第一章    开始"></a>第一章    开始</h3><h4 id="一些背景："><a href="#一些背景：" class="headerlink" title="一些背景："></a>一些背景：</h4><p>在C++ 11之前，C++存在最严重的缺陷就是缺少自动内存管理和对象级别的消息发送机制。</p>
 <p>MFC：Microsoft Foundation Classes    微软基础类库</p>
 <p>C++可以看作是由三部分组成的：低级语言，现代高级语言特征，标准库函数。</p>
 <p>编译或者运行程序可以用IDE或者命令行来实现。</p>
@@ -261,6 +261,127 @@ var _hmt = _hmt || [];
 <ul>
 <li>windows: <code>echo %ERRORLEVEL%</code></li>
 <li>UNIX: <code>echo $?</code></li>
+</ul>
+<h4 id="IO"><a href="#IO" class="headerlink" title="IO"></a>IO</h4><ul>
+<li><p><code>#include &lt;iostream&gt;</code></p>
+</li>
+<li><p><code>std::cout &lt;&lt; &quot;hello&quot;</code></p>
+</li>
+<li><p><code>std::cin &gt;&gt; v1</code></p>
+</li>
+</ul>
+<p>记住<code>&gt;&gt;</code>和<code>&lt;&lt;</code>返回的结果都是左操作数，也就是输入流和输出流本身。</p>
+<p>标准库处理cin和cout还定义了两个ostream对象：cerr 和 clog。通常用cerr输出警告和错误消息，它也被称为标准错误，用clog输出程序运行时的一般性信息。</p>
+<p><strong>endl</strong>：这是一个被称为<strong>操纵符</strong>（manipulator）的特殊值，效果是结束当前行，并将设备关联的缓冲区（buffer）中的内容刷到设备中。</p>
+<p><strong>头文件</strong>：类的类型一般存储在头文件中，标准库的头文件使用<code>&lt;&gt;</code>，非标准库的头文件使用<code>&quot;&quot;</code>。申明写在<code>.h</code>文件，定义实现写在<code>.cpp</code>文件。</p>
+<p><strong>避免多次包含同一头文件</strong>：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> SALESITEM_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SALESITEM_H</span></span><br><span class="line"><span class="comment">// Definition of Sales_itemclass and related functions goes here</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<p><strong>成员函数（类方法）</strong>：使用<code>.</code>调用。</p>
+<p><strong>命名空间（namespace）</strong>：使用作用域运算符<code>::</code>调用。</p>
+<h4 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h4><ul>
+<li><p>单行注释： <code>//</code></p>
+</li>
+<li><p>多行注释： <code>/* */</code>。编译器将<code>/*</code>和<code>*/</code>之间的内容都作为注释内容忽略。注意不能嵌套。</p>
+<p>UNIX和Mac下键盘输入文件结束符：<code>ctrl+d</code>，Windows下：<code>ctrl+z</code></p>
+</li>
+</ul>
+<h4 id="while语句"><a href="#while语句" class="headerlink" title="while语句"></a>while语句</h4><p>循环执行，（直到条件（condition）为假。</p>
+<h4 id="for语句"><a href="#for语句" class="headerlink" title="for语句"></a>for语句</h4><p>循环头由三部分组成：</p>
+<ul>
+<li>一个初始化语句（init-statement）</li>
+<li>一个循环条件（condition）</li>
+<li>一个表达式（expression）</li>
+</ul>
+<p>一般情况下，循环次数已知就选择for，循环次数未知就选择while；</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (std::cin &gt;&gt; value) <span class="comment">//读取输入数量不定的数据</span></span><br><span class="line">    sum += val;</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用文件重定向："><a href="#使用文件重定向：" class="headerlink" title="使用文件重定向："></a>使用文件重定向：</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">addItems  &lt;infile&gt; outfile</span><br></pre></td></tr></table></figure>
+
+<p>意思就是有一个编译好的addItems.exe文件，上面的一条命令指的是从infile文件中读入销售记录，并将输出结果写入到outfile文件中。</p>
+<h3 id="第二章-变量和基本类型"><a href="#第二章-变量和基本类型" class="headerlink" title="第二章    变量和基本类型"></a>第二章    变量和基本类型</h3><h4 id="基本内置类型"><a href="#基本内置类型" class="headerlink" title="基本内置类型"></a>基本内置类型</h4><p><strong>基本算数类型</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>含义</th>
+<th>最小尺寸</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>bool</code></td>
+<td>布尔类型</td>
+<td>8bits</td>
+</tr>
+<tr>
+<td><code>char</code></td>
+<td>字符</td>
+<td>8bits</td>
+</tr>
+<tr>
+<td><code>wchar_t</code></td>
+<td>宽字符</td>
+<td>16bits</td>
+</tr>
+<tr>
+<td><code>char16_t</code></td>
+<td>Unicode字符</td>
+<td>16bits</td>
+</tr>
+<tr>
+<td><code>char32_t</code></td>
+<td>Unicode字符</td>
+<td>32bits</td>
+</tr>
+<tr>
+<td><code>short</code></td>
+<td>短整型</td>
+<td>16bits</td>
+</tr>
+<tr>
+<td><code>int</code></td>
+<td>整型</td>
+<td>16bits (在32位机器中是32bits)</td>
+</tr>
+<tr>
+<td><code>long</code></td>
+<td>长整型</td>
+<td>32bits</td>
+</tr>
+<tr>
+<td><code>long long</code></td>
+<td>长整型</td>
+<td>64bits （是在C++11中新定义的）</td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td>单精度浮点数</td>
+<td>6位有效数字</td>
+</tr>
+<tr>
+<td><code>double</code></td>
+<td>双精度浮点数</td>
+<td>10位有效数字</td>
+</tr>
+<tr>
+<td><code>long double</code></td>
+<td>扩展精度浮点数</td>
+<td>10位有效数字</td>
+</tr>
+</tbody></table>
+<h4 id="如何选择类型"><a href="#如何选择类型" class="headerlink" title="如何选择类型"></a>如何选择类型</h4><ul>
+<li><p>1.当明确知晓数值不可能是负数时，选用无符号类型；当由于无符号数和int类型数操作使得无符号类型被赋予负值时其实际值是2<sup>n </sup>+ 这个负值，n取决于机器的int类型占多少位。</p>
+</li>
+<li><p>2.使用<code>int</code>执行整数运算。一般<code>long</code>的大小和<code>int</code>一样，而<code>short</code>常常显得太小。除非超过了<code>int</code>的范围，选择<code>long long</code>。</p>
+</li>
+<li><p>3.算术表达式中不要使用<code>char</code>或<code>bool</code>。</p>
+</li>
+<li><p>4.浮点运算选用<code>double</code>。</p>
+</li>
+</ul>
+<h4 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h4><ul>
+<li>非布尔型赋给布尔型，初始值为0则结果为false，否则为true。</li>
+<li>布尔型赋给非布尔型，初始值为false结果为0，初始值为true结果为1。</li>
 </ul>
 
       
@@ -383,7 +504,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0"><span class="toc-number">1.</span> <span class="toc-text">第一章</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E8%83%8C%E6%99%AF%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">一些背景：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%86%9F%E6%82%89%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">熟悉编译器：</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%80%E5%A7%8B"><span class="toc-number">1.</span> <span class="toc-text">第一章    开始</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E8%83%8C%E6%99%AF%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">一些背景：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%86%9F%E6%82%89%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">熟悉编译器：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IO"><span class="toc-number">1.3.</span> <span class="toc-text">IO</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A"><span class="toc-number">1.4.</span> <span class="toc-text">注释</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#while%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.5.</span> <span class="toc-text">while语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#for%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.6.</span> <span class="toc-text">for语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%96%87%E4%BB%B6%E9%87%8D%E5%AE%9A%E5%90%91%EF%BC%9A"><span class="toc-number">1.7.</span> <span class="toc-text">使用文件重定向：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E5%8F%98%E9%87%8F%E5%92%8C%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">第二章    变量和基本类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.1.</span> <span class="toc-text">基本内置类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.2.</span> <span class="toc-text">如何选择类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-number">2.3.</span> <span class="toc-text">类型转换</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
