@@ -31,7 +31,7 @@
 <meta property="og:description" content="第一章    开始一些背景：在C++ 11之前，C++存在最严重的缺陷就是缺少自动内存管理和对象级别的消息发送机制。 MFC：Microsoft Foundation Classes    微软基础类库 C++可以看作是由三部分组成的：低级语言，现代高级语言特征，标准库函数。 编译或者运行程序可以用IDE或者命令行来实现。 C++最常见的后缀包括.cc，.cxx，.cpp，.cp，.c">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-01-19T15:18:41.000Z">
-<meta property="article:modified_time" content="2022-02-19T17:03:45.991Z">
+<meta property="article:modified_time" content="2022-02-20T16:36:40.954Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
@@ -212,7 +212,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.8k字</span>
+        <span class="post-count">3k字</span>
       </span>
     </span>
 
@@ -221,7 +221,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">6分</span>
+        <span class="post-count">11分</span>
       </span>
     </span>
 </div>
@@ -452,6 +452,100 @@ var _hmt = _hmt || [];
 <li><strong>左值</strong>（l-value）<strong>可以</strong>出现在赋值语句的左边或者右边，比如变量；</li>
 <li><strong>右值</strong>（r-value）<strong>只能</strong>出现在赋值语句的右边，比如常量。</li>
 </ul>
+<h4 id="复合类型"><a href="#复合类型" class="headerlink" title="复合类型"></a>复合类型</h4><h5 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h5><blockquote>
+<p>一般说的引用是指的左值引用</p>
+</blockquote>
+<ul>
+<li><strong>引用</strong>：引用是一个对象的别名，引用类型引用（refer to）另外一种类型。如<code>int &amp;refVal = ival;</code>&#x2F;&#x2F;refVal是ival的另一个名字。</li>
+<li>引用必须初始化。int &amp;refVal是不合法的，必须直接对其赋值。</li>
+<li>引用和它的初始值是<strong>绑定bind</strong>在一起的，而<strong>不是拷贝</strong>。一旦定义就不能更改绑定为其他的对象。</li>
+<li>引用并非对象，它只是已经存在的对象的另一个名字。</li>
+<li>引用必须绑定在对象上，不能绑定在一个字面值常量上。</li>
+</ul>
+<h5 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h5><blockquote>
+<p>int *p; &#x2F;&#x2F;<strong>指向int型对象</strong>的指针</p>
+</blockquote>
+<ul>
+<li><p>是一种 <code>&quot;指向（point to）&quot;</code>另外一种类型的复合类型。</p>
+</li>
+<li><p><strong>定义</strong>指针类型： <code>int *ip1;</code>，<strong>从右向左读有助于阅读</strong>，<code>ip1</code>是指向<code>int</code>类型的指针。</p>
+</li>
+<li><p>指针存放某个对象的<strong>地址</strong>。</p>
+</li>
+<li><p>获取对象的地址： <code>int i=42; int *p = &amp;i;</code>。 <code>&amp;</code>是<strong>取地址符</strong>，p存放int变量ival的地址，或者说p是指向ival的指针；如果是<code>int *p = i</code>，p是指向int类型的的指针。</p>
+</li>
+<li><p>指针的类型与所指向的对象类型必须一致（均为同一类型int、double等）</p>
+</li>
+<li><p>指针的值的四种状态：</p>
+<ul>
+<li><p>1.指向一个对象；</p>
+</li>
+<li><p>2.指向紧邻对象的下一个位置；</p>
+</li>
+<li><p>3.空指针，指针不指向任何对象；</p>
+</li>
+<li><p>4.无效指针，除1，2，3情况的其他值。</p>
+</li>
+<li><blockquote>
+<p><strong>对无效指针的操作均会引发错误，第二种和第三种虽为有效的，但理论上是不被允许的</strong></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>指针访问对象： <code>cout &lt;&lt; *p;</code>输出p指针所指对象的数据， <code>*</code>是<strong>解引用符</strong>。</p>
+</li>
+<li><p>空指针不指向任何对象。使用<code>int *p=nullptr(NULL);</code>来使用空指针。</p>
+</li>
+<li><p>指针和引用的区别：引用是另一个对象的别名，而指针本身就是一个对象。 引用必须初始化，并且一旦定义了引用就无法再绑定到其他对象。而指针无须在定义时赋初值，也可以重新赋值让其指向其他对象。</p>
+</li>
+<li><p>赋值语句永远改变的是<strong>左侧</strong>的对象。</p>
+<ul>
+<li><code>pi = &amp;ival</code>    &#x2F;&#x2F;pi的值被改变，现在指向了ival的地址</li>
+<li><code>*pi = 0</code>     &#x2F;&#x2F;pi的值没有改变，ival的值改变</li>
+</ul>
+</li>
+<li><p><code>void*</code>指针可以存放<strong>任意</strong>对象的地址。因无类型，仅操作内存空间，对所存对象无法访问，无法确定能对对象做哪些操作。</p>
+</li>
+<li><p>其他指针类型必须要与所指对象<strong>严格匹配</strong>。</p>
+</li>
+<li><p>两个指针相减的类型是<code>ptrdiff_t</code>。</p>
+</li>
+<li><p>建议：初始化所有指针。</p>
+</li>
+<li><p><code>int* p1, p2;//*是对p1的修饰，所以p2还是int型</code></p>
+</li>
+<li><p>存在对指针的引用，但不存在指向引用的指针。</p>
+</li>
+</ul>
+<h4 id="const限定符"><a href="#const限定符" class="headerlink" title="const限定符"></a>const限定符</h4><ul>
+<li>动机：希望定义一些不能被改变值的变量。</li>
+</ul>
+<h5 id="初始化和const："><a href="#初始化和const：" class="headerlink" title="初始化和const："></a>初始化和const：</h5><ul>
+<li>const对象<strong>必须初始化</strong>，且<strong>不能被改变</strong>。</li>
+<li>const变量默认不能被其他文件访问，非要访问，必须在指定const定义之前加extern。要想在多个文件中使用const变量共享，定义和声明都加const关键字即可。</li>
+</ul>
+<h5 id="const的引用："><a href="#const的引用：" class="headerlink" title="const的引用："></a>const的引用：</h5><ul>
+<li><p><strong>reference to const</strong>（对常量的引用）：指向const对象的引用，如 <code>const int ival=1; const int &amp;refVal = ival;</code>可以读取但不能修改<code>refVal</code>。</p>
+</li>
+<li><p><strong>临时量</strong>（temporary）对象：当编译器需要一个空间来暂存表达式的求值结果时，临时创建的一个未命名的对象。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> dval = <span class="number">3.14</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> &amp;ri = dval;</span><br><span class="line"><span class="comment">//编译器执行时会变成：</span></span><br><span class="line"><span class="type">double</span> dval = <span class="number">3.14</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> temp = dval;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> &amp;ri = temp;</span><br><span class="line"><span class="comment">//temp就是一个临时量变量</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对临时量的引用是非法行为。</p>
+</li>
+</ul>
+<h5 id="指针和const"><a href="#指针和const" class="headerlink" title="指针和const"></a>指针和const</h5><ul>
+<li><strong>pointer to const</strong>（指向常量的指针）：不能用于改变其所指对象的值, 如 <code>const double pi = 3.14; const double *cptr = π</code>。</li>
+<li><strong>const pointer</strong>：指针本身是常量，也就是说指针固定指向该对象，（存放在指针中的地址不变，地址所对应的那个对象值可以修改）如 <code>int i = 0; int *const ptr = &amp;i;</code></li>
+</ul>
+<p>普通指针可以赋给常量指针，但是反过来不行。</p>
+<h5 id="顶层const"><a href="#顶层const" class="headerlink" title="顶层const"></a>顶层const</h5><ul>
+<li><code>顶层const</code>：指针本身是个常量。</li>
+<li><code>底层const</code>：指针指向的对象是个常量。拷贝时严格要求相同的底层const资格。</li>
+</ul>
+<h5 id="constexpr和常量表达式"><a href="#constexpr和常量表达式" class="headerlink" title="constexpr和常量表达式"></a><code>constexpr</code>和常量表达式</h5><ul>
+<li>常量表达式：指值不会改变，且在编译过程中就能得到计算结果的表达式。</li>
+<li><code>C++11</code>新标准规定，允许将变量声明为<code>constexpr</code>类型以便由编译器来验证变量的值是否是一个常量的表达式。</li>
+</ul>
 
       
 
@@ -573,7 +667,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%80%E5%A7%8B"><span class="toc-number">1.</span> <span class="toc-text">第一章    开始</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E8%83%8C%E6%99%AF%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">一些背景：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%86%9F%E6%82%89%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">熟悉编译器：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IO"><span class="toc-number">1.3.</span> <span class="toc-text">IO</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A"><span class="toc-number">1.4.</span> <span class="toc-text">注释</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#while%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.5.</span> <span class="toc-text">while语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#for%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.6.</span> <span class="toc-text">for语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%96%87%E4%BB%B6%E9%87%8D%E5%AE%9A%E5%90%91%EF%BC%9A"><span class="toc-number">1.7.</span> <span class="toc-text">使用文件重定向：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E5%8F%98%E9%87%8F%E5%92%8C%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">第二章    变量和基本类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.1.</span> <span class="toc-text">基本内置类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.2.</span> <span class="toc-text">如何选择类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-number">2.3.</span> <span class="toc-text">类型转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E9%9D%A2%E5%80%BC%E5%B8%B8%E9%87%8F"><span class="toc-number">2.4.</span> <span class="toc-text">字面值常量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F"><span class="toc-number">3.</span> <span class="toc-text">变量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89"><span class="toc-number">3.1.</span> <span class="toc-text">变量定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E5%A3%B0%E6%98%8E%EF%BC%88declaration%EF%BC%89-vs-%E5%AE%9A%E4%B9%89%EF%BC%88define%EF%BC%89"><span class="toc-number">3.2.</span> <span class="toc-text">变量的声明（declaration） vs 定义（define）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83"><span class="toc-number">3.3.</span> <span class="toc-text">变量命名规范</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%A6%E5%80%BC%E5%92%8C%E5%8F%B3%E5%80%BC"><span class="toc-number">3.4.</span> <span class="toc-text">左值和右值</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%80%E5%A7%8B"><span class="toc-number">1.</span> <span class="toc-text">第一章    开始</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E8%83%8C%E6%99%AF%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">一些背景：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%86%9F%E6%82%89%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">熟悉编译器：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IO"><span class="toc-number">1.3.</span> <span class="toc-text">IO</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A"><span class="toc-number">1.4.</span> <span class="toc-text">注释</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#while%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.5.</span> <span class="toc-text">while语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#for%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.6.</span> <span class="toc-text">for语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%96%87%E4%BB%B6%E9%87%8D%E5%AE%9A%E5%90%91%EF%BC%9A"><span class="toc-number">1.7.</span> <span class="toc-text">使用文件重定向：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E5%8F%98%E9%87%8F%E5%92%8C%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">第二章    变量和基本类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.1.</span> <span class="toc-text">基本内置类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.2.</span> <span class="toc-text">如何选择类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-number">2.3.</span> <span class="toc-text">类型转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E9%9D%A2%E5%80%BC%E5%B8%B8%E9%87%8F"><span class="toc-number">2.4.</span> <span class="toc-text">字面值常量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F"><span class="toc-number">3.</span> <span class="toc-text">变量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89"><span class="toc-number">3.1.</span> <span class="toc-text">变量定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E5%A3%B0%E6%98%8E%EF%BC%88declaration%EF%BC%89-vs-%E5%AE%9A%E4%B9%89%EF%BC%88define%EF%BC%89"><span class="toc-number">3.2.</span> <span class="toc-text">变量的声明（declaration） vs 定义（define）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83"><span class="toc-number">3.3.</span> <span class="toc-text">变量命名规范</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%A6%E5%80%BC%E5%92%8C%E5%8F%B3%E5%80%BC"><span class="toc-number">3.4.</span> <span class="toc-text">左值和右值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.5.</span> <span class="toc-text">复合类型</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-number">3.5.1.</span> <span class="toc-text">引用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8C%87%E9%92%88"><span class="toc-number">3.5.2.</span> <span class="toc-text">指针</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#const%E9%99%90%E5%AE%9A%E7%AC%A6"><span class="toc-number">3.6.</span> <span class="toc-text">const限定符</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%92%8Cconst%EF%BC%9A"><span class="toc-number">3.6.1.</span> <span class="toc-text">初始化和const：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#const%E7%9A%84%E5%BC%95%E7%94%A8%EF%BC%9A"><span class="toc-number">3.6.2.</span> <span class="toc-text">const的引用：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8C%87%E9%92%88%E5%92%8Cconst"><span class="toc-number">3.6.3.</span> <span class="toc-text">指针和const</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%A1%B6%E5%B1%82const"><span class="toc-number">3.6.4.</span> <span class="toc-text">顶层const</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#constexpr%E5%92%8C%E5%B8%B8%E9%87%8F%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">3.6.5.</span> <span class="toc-text">constexpr和常量表达式</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
