@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Leetcode - 哈希表 | 博客杂记 - harder and better</title>
+  <title>C++-primer-第三章 | 博客杂记 - harder and better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -23,21 +23,16 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta name="description" content="哈希表可以快速判断一个元素是否出现在集合中。 枚举的时间复杂度是O(n), 哈希表的时间复杂度是O(1)。 哈希函数即为: 将数据的值映射到哈希表上。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode - 哈希表">
-<meta property="og:url" content="http://example.com/2022/01/12/%E5%93%88%E5%B8%8C%E8%A1%A8/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="C++-primer-第三章">
+<meta property="og:url" content="http://example.com/2022/02/22/C++-primer-3%E7%AB%A0/index.html">
 <meta property="og:site_name" content="博客杂记 - harder and better">
-<meta property="og:description" content="哈希表可以快速判断一个元素是否出现在集合中。 枚举的时间复杂度是O(n), 哈希表的时间复杂度是O(1)。 哈希函数即为: 将数据的值映射到哈希表上。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2022/01/12/%E5%93%88%E5%B8%8C%E8%A1%A8/1.png">
-<meta property="og:image" content="http://example.com/2022/01/12/%E5%93%88%E5%B8%8C%E8%A1%A8/2.png">
-<meta property="article:published_time" content="2022-01-11T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-02-18T15:01:12.812Z">
+<meta property="article:published_time" content="2022-02-22T15:06:11.000Z">
+<meta property="article:modified_time" content="2022-02-22T15:07:30.474Z">
 <meta property="article:author" content="ygtrece">
-<meta property="article:tag" content="算法">
+<meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/01/12/%E5%93%88%E5%B8%8C%E8%A1%A8/1.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - harder and better" type="application/atom+xml">
   
@@ -189,15 +184,15 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-哈希表" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-C++-primer-3章" class="article article-type-post " itemscope itemprop="blogPost">
   
 <div class="article-inner">
     
       <header class="article-header">
         
         
-        <a href="/2022/01/12/%E5%93%88%E5%B8%8C%E8%A1%A8/" class="archive-article-date">
-  	<time datetime="2022-01-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-12</time>
+        <a href="/2022/02/22/C++-primer-3%E7%AB%A0/" class="archive-article-date">
+  	<time datetime="2022-02-22T15:06:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-22</time>
 </a>
 
 
@@ -215,7 +210,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.6k字</span>
+        <span class="post-count">0字</span>
       </span>
     </span>
 
@@ -224,7 +219,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">11分</span>
+        <span class="post-count">1分</span>
       </span>
     </span>
 </div>
@@ -239,84 +234,12 @@ var _hmt = _hmt || [];
       <center><p>
   
     <h1 class="article-title_code_ant" itemprop="name">
-      Leetcode - 哈希表
+      C++-primer-第三章
     </h1>
   
 </p></center>
       
-        <ol>
-<li>哈希表可以快速判断一个元素是否出现在集合中。 枚举的时间复杂度是O(n), 哈希表的时间复杂度是O(1)。 哈希函数即为: 将数据的值映射到哈希表上。</li>
-</ol>
-<span id="more"></span>
-
-<p>数据的大小是datasize，对应的哈希表的大小是tablesize。</p>
-<p>哈希碰撞: 数据中两个值都映射到了哈希函数上。</p>
-<p>拉链法: tablesize可以小于datasize, 但是位于表中相同位置的元素需要排成一条链用链表串起来。</p>
-<p>线性探测法: 需要保证tablesize大于datasize</p>
-<p>哈希表的三种数据结构:<br>数组, 集合(set), 映射(map)</p>
-<p>在C++中，set 和 map 分别提供以下三种数据结构，其底层实现以及优劣如下表所示：<br><img src="/2022/01/12/%E5%93%88%E5%B8%8C%E8%A1%A8/1.png"></p>
-<p>std::unordered_set底层实现为哈希表，std::set 和std::multiset 的底层实现是红黑树，红黑树是一种平衡二叉搜索树，所以key值是有序的，但key不可以修改，改动key值会导致整棵树的错乱，所以只能删除和增加。</p>
-<p><img src="/2022/01/12/%E5%93%88%E5%B8%8C%E8%A1%A8/2.png"></p>
-<p>当我们遇到了要快速判断一个元素是否出现集合里的时候，就要考虑哈希法。</p>
-<p>但是哈希法也是牺牲了空间换取了时间.</p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-anagram/submissions/"><strong>242.有效的字母异位词</strong></a></p>
-<p>给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。</p>
-<p>注意：若 s 和 t 中每个字符出现的次数都相同，则称 s 和 t 互为字母异位词。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isAnagram</span><span class="params">(string s, string t)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> record[<span class="number">26</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            record[s[i] - <span class="string">&#x27;a&#x27;</span>]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; t.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            record[t[i] - <span class="string">&#x27;a&#x27;</span>]--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (record[i] != <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>用了哈希的思想</p>
-<p><strong>小结: 数组就是简单的哈希表，但是数组的大小可不是无限开辟的</strong></p>
-<p>对于索引长度未知，或者是数据对应的索引很稀疏的情况, 用数组就不是很合理了, 这时候可以考虑用set。</p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/intersection-of-two-arrays/"><strong>349.两个数组的交集</strong></a><br>给定两个数组，编写一个函数来计算它们的交集。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">intersection</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums1, vector&lt;<span class="type">int</span>&gt;&amp; nums2)</span> </span>&#123;</span><br><span class="line">        unordered_set &lt;<span class="type">int</span>&gt; result; <span class="comment">//unordered_set的底层实现是哈希表</span></span><br><span class="line">        unordered_set &lt;<span class="type">int</span>&gt; <span class="built_in">nums</span>(nums1.<span class="built_in">begin</span>(),nums1.<span class="built_in">end</span>()); <span class="comment">//将nums1中不重复的元素放到nums_set中</span></span><br><span class="line"><span class="comment">//        for(int num:nums2) //从nums2的int型数组中依次将值赋值给num，将num带入for语句代码块中执行。</span></span><br><span class="line"><span class="comment">//        &#123;</span></span><br><span class="line"><span class="comment">//            if(nums.find(num) != nums.end())</span></span><br><span class="line"><span class="comment">//            &#123;</span></span><br><span class="line"><span class="comment">//                result.insert(num);</span></span><br><span class="line"><span class="comment">//            &#125;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">          <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums2.<span class="built_in">size</span>(); i++) <span class="comment">//与上面注释掉的方法等效</span></span><br><span class="line">          &#123;</span><br><span class="line">              <span class="type">int</span> num = nums2[i];</span><br><span class="line">              <span class="keyword">if</span>(nums.<span class="built_in">find</span>(num) != nums.<span class="built_in">end</span>())<span class="comment">//find()函数如果找到相等的返回对应的迭代器，如果没找到返回末尾的迭代器,因此这句话的意思就是如果nums这个set中正好有num的话，就把他存在result里，说明两个数组都有这个元素.</span></span><br><span class="line">              &#123;</span><br><span class="line">                  result.<span class="built_in">insert</span>(num);</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">    <span class="keyword">return</span> vector &lt;<span class="type">int</span>&gt; (result.<span class="built_in">begin</span>(),result.<span class="built_in">end</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>此题使用unordered_set，底层实现是哈希表</p>
-<p>for(int num:nums2)<br>C++ 11的新特性，相当于 </p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums2.<span class="built_in">size</span>(); i++) <span class="comment">//与上面注释掉的方法等效</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> num = nums2[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>vector的开始和结束对应 num.begin() 和 num.end(); 插入元素用num.pushback(t) (添加一个值为t的元素); num.size()对应num的大小; num.empty()返回一个bool型数据。</p>
-<p>unordered_set开始和结束对应 num.begin() 和 num.end(); 插入元素用num.insert(); 寻找元素用num.find(); 如果找到元素就返回对应的迭代器，没有找到就返回num.end; </p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/happy-number/"><strong>202. 快乐数</strong></a><br>编写一个算法来判断一个数 n 是不是快乐数。</p>
-<p>「快乐数」定义为：</p>
-<p>对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和。<br>然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终变不到 1。<br>如果 可以变为  1，那么这个数就是快乐数。<br>如果 n 是快乐数就返回 true ；不是，则返回 false 。</p>
-<p>思路:首先定义一个求和函数用于每次求和，然后进行循环，如果数变成1，则是快乐数，如果不是1，继续循环，这些数都存在unordered_set离，如果后面出现重复的数，则说明有循环，不是快乐数。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">getSum</span><span class="params">(<span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span>(n)</span><br><span class="line">            &#123;</span><br><span class="line">                sum = sum + (n % <span class="number">10</span>) * (n % <span class="number">10</span>);</span><br><span class="line">                n = n / <span class="number">10</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> sum;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isHappy</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        unordered_set &lt;<span class="type">int</span>&gt; set;</span><br><span class="line">        <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> sum = <span class="built_in">getSum</span>(n);</span><br><span class="line">            <span class="keyword">if</span>(sum == <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(set.<span class="built_in">find</span>(sum) != set.<span class="built_in">end</span>())</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    set.<span class="built_in">insert</span>(sum);</span><br><span class="line">                    n = sum;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/two-sum/"><strong>1.两数之和</strong></a><br>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。<br>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。<br>你可以按任意顺序返回答案。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        unordered_map &lt;<span class="type">int</span>,<span class="type">int</span>&gt; map; <span class="comment">//定义关联数组</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">auto</span> iter = map.<span class="built_in">find</span>(target - nums[i]); <span class="comment">//自动推断数据类型, 可以简化代码</span></span><br><span class="line">            <span class="keyword">if</span>(iter != map.<span class="built_in">end</span>())</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> &#123;iter-&gt;second , i&#125;; <span class="comment">//返回i元素的下标和iter对应的数据下标</span></span><br><span class="line">            &#125;</span><br><span class="line">            map.<span class="built_in">insert</span>(pair &lt;<span class="type">int</span>, <span class="type">int</span>&gt; (nums[i], i)); <span class="comment">//第一次循环把第一个元素存入map,然后开始在数组里循环, 寻找有没有和map中的元素一样的, 然后返回两个值,前面的是map中的元素的数组下标, 后面的是</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>用到了unordered_map数据结构, 先把元素按键值对的关系存到map中, 然后在数组中找有没有和map中元素之和是target的。这种方法的效率非常高。</p>
-<p><strong>注意: map.find()是根据iter-&gt;first进行寻找的, 因此定义map.insert时nums[i]和i的值的顺序不能换。</strong></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/4sum-ii/">454.四数相加 II</a><br>给你四个整数数组 nums1、nums2、nums3 和 nums4 ，数组长度都是 n ，请你计算有多少个元组 (i, j, k, l) 能满足：</p>
-<p>0 &lt;&#x3D; i, j, k, l &lt; n<br>nums1[i] + nums2[j] + nums3[k] + nums4[l] &#x3D;&#x3D; 0</p>
-<p><strong>思路：</strong></p>
-<ol>
-<li>首先定义 一个unordered_map，key放a和b两数之和，value 放a和b两数之和出现的次数。</li>
-<li>遍历大A和大B数组，统计两个数组元素之和，和出现的次数，放到map中。</li>
-<li>定义int变量count，用来统计 a+b+c+d &#x3D; 0 出现的次数。</li>
-<li>在遍历大C和大D数组，找到如果 0-(c+d) 在map中出现过的话，就用count把map中key对应的value也就是出现次数统计出来。</li>
-<li>最后返回统计值 count 就可以了</li>
-</ol>
-<p>总体思路还是很清晰的</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">fourSumCount</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums1, vector&lt;<span class="type">int</span>&gt;&amp; nums2, vector&lt;<span class="type">int</span>&gt;&amp; nums3, vector&lt;<span class="type">int</span>&gt;&amp; nums4)</span> </span>&#123;</span><br><span class="line">        unordered_map &lt;<span class="type">int</span>,<span class="type">int</span>&gt; map; <span class="comment">//key是a + b; value是a + b出现的次数</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> a : nums1)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> b : nums2)</span><br><span class="line">            &#123;</span><br><span class="line">                map[a+b]++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> c : nums3)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> d : nums4)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(map.<span class="built_in">find</span>(<span class="number">0</span> - c - d) != map.<span class="built_in">end</span>())</span><br><span class="line">                &#123;</span><br><span class="line">                    count = count + map[<span class="number">0</span> - c - d];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>注意的几个点: for(int a : nums1)是C++ 11的新语法。</p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/ransom-note/"><strong>383.赎金信</strong></a><br>给你两个字符串：ransomNote 和 magazine ，判断 ransomNote 能不能由 magazine 里面的字符构成。</p>
-<p>如果可以，返回 true ；否则返回 false 。</p>
-<p>magazine 中的每个字符只能在 ransomNote 中使用一次。</p>
-<p>与前面的242题很像，也是用数组作为哈希表。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">canConstruct</span><span class="params">(string ransomNote, string magazine)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> record[<span class="number">26</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; magazine.<span class="built_in">length</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            record[magazine[i] - <span class="string">&#x27;a&#x27;</span>]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt; ransomNote.<span class="built_in">length</span>(); j++)</span><br><span class="line">        &#123;</span><br><span class="line">            record[ransomNote[j] - <span class="string">&#x27;a&#x27;</span>]--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> k = <span class="number">0</span>; k &lt; <span class="number">26</span>; k++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(record[k] &lt; <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>当需要去重时使用哈希表不合适，十分复杂，使用双指针很不错。</p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/3sum/"><strong>15.三数之和</strong></a></p>
-<p>给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c &#x3D; 0 ？请你找出所有和为 0 且不重复的三元组。</p>
-<p>注意：答案中不可以包含重复的三元组。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">threeSum</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        vector &lt;vector &lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(),nums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i] &gt; <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">            <span class="keyword">if</span>(i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i<span class="number">-1</span>])</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">            <span class="type">int</span> left = i + <span class="number">1</span>;</span><br><span class="line">            <span class="type">int</span> right = nums.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span>(left &lt; right)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(nums[i] + nums[left] + nums[right] &gt; <span class="number">0</span>)</span><br><span class="line">                right--;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(nums[i] + nums[left] + nums[right] &lt; <span class="number">0</span>)</span><br><span class="line">                left++;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                result.<span class="built_in">push_back</span>(vector &lt;<span class="type">int</span>&gt;&#123;nums[i], nums[left], nums[right]&#125;);</span><br><span class="line">                <span class="keyword">while</span>(right &gt; left &amp;&amp; nums[right] == nums[right - <span class="number">1</span>])</span><br><span class="line">                right--;</span><br><span class="line">                <span class="keyword">while</span>(right &gt; left &amp;&amp; nums[left] == nums[left + <span class="number">1</span>])</span><br><span class="line">                left++;</span><br><span class="line">                left++;</span><br><span class="line">                right--;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/4sum/"><strong>18.四数之和</strong></a><br>给你一个由 n 个整数组成的数组 nums ，和一个目标值 target 。请你找出并返回满足下述全部条件且不重复的四元组 [nums[a], nums[b], nums[c], nums[d]] （若两个四元组元素一一对应，则认为两个四元组重复）：</p>
-<p>0 &lt;&#x3D; a, b, c, d &lt; n<br>a、b、c 和 d 互不相同<br>nums[a] + nums[b] + nums[c] + nums[d] &#x3D;&#x3D; target<br>你可以按 任意顺序 返回答案 。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">fourSum</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target) &#123;</span><br><span class="line">        vector &lt;vector &lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(),nums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i - <span class="number">1</span>])</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = i + <span class="number">1</span>; j &lt; nums.<span class="built_in">size</span>(); j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(j &gt; i + <span class="number">1</span> &amp;&amp; nums[j] == nums[j - <span class="number">1</span>])</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="type">int</span> left = j + <span class="number">1</span>;</span><br><span class="line">                <span class="type">int</span> right = nums.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">while</span>(right &gt; left)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span>(nums[i] + nums[j] &gt; target - nums[left] - nums[right])</span><br><span class="line">                    right--;</span><br><span class="line">                    <span class="keyword">else</span> <span class="keyword">if</span> (nums[i] + nums[j] &lt; target - nums[left] - nums[right])</span><br><span class="line">                    left++;</span><br><span class="line">                    <span class="keyword">else</span></span><br><span class="line">                    &#123;</span><br><span class="line">                        result.<span class="built_in">push_back</span>(vector&lt;<span class="type">int</span>&gt; &#123;nums[i], nums[j], nums[left], nums[right]&#125;);</span><br><span class="line">                        <span class="keyword">while</span>(left &lt; right &amp;&amp; nums[right] == nums[right - <span class="number">1</span>])</span><br><span class="line">                        right--;</span><br><span class="line">                        <span class="keyword">while</span>(left &lt; right &amp;&amp; nums[left] == nums[left + <span class="number">1</span>])</span><br><span class="line">                        left++;</span><br><span class="line">                        left++;</span><br><span class="line">                        right--;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>与前面的三数之和类似，只是多了一层循环，然后将求和的值从0变成了target, 也是用双指针的方法。</p>
-
+        
       
 
       
@@ -329,7 +252,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
         		</li>
       		
 		</ul>
@@ -385,7 +308,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/01/12/%E5%93%88%E5%B8%8C%E8%A1%A8/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/02/22/C++-primer-3%E7%AB%A0/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -399,18 +322,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2022/01/19/C++-primer-1-2%E7%AB%A0/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          C++ primer Chapter 1 ~ 2
-        
-      </div>
-    </a>
   
-  
-    <a href="/2022/01/11/%E5%AE%9E%E4%B9%A0%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">实习总结</div>
+    <a href="/2022/02/22/%E4%BA%8C%E5%8F%89%E6%A0%91-3/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Leetcode - 二叉树(3)</div>
       <i class="icon-circle-right"></i>
     </a>
   
