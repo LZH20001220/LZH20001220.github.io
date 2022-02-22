@@ -23,13 +23,15 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta property="og:type" content="article">
+  <meta name="description" content="第三章 字符串、向量和数组using声明 使用某个命名空间：例如 using std::cin表示使用命名空间std中的名字cin。 头文件中不应该包含using声明。这样使用了该头文件的源码也会使用这个声明，会带来风险，因为头文件的内容会拷贝到所有用到它的文件中去，容易造成混乱。">
+<meta property="og:type" content="article">
 <meta property="og:title" content="C++-primer-第三章">
 <meta property="og:url" content="http://example.com/2022/02/22/C++-primer-3%E7%AB%A0/index.html">
 <meta property="og:site_name" content="博客杂记 - harder and better">
+<meta property="og:description" content="第三章 字符串、向量和数组using声明 使用某个命名空间：例如 using std::cin表示使用命名空间std中的名字cin。 头文件中不应该包含using声明。这样使用了该头文件的源码也会使用这个声明，会带来风险，因为头文件的内容会拷贝到所有用到它的文件中去，容易造成混乱。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-02-22T15:06:11.000Z">
-<meta property="article:modified_time" content="2022-02-22T15:07:30.474Z">
+<meta property="article:modified_time" content="2022-02-22T16:46:03.730Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
@@ -210,7 +212,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">0字</span>
+        <span class="post-count">1k字</span>
       </span>
     </span>
 
@@ -219,7 +221,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
+        <span class="post-count">4分</span>
       </span>
     </span>
 </div>
@@ -239,7 +241,194 @@ var _hmt = _hmt || [];
   
 </p></center>
       
-        
+        <h3 id="第三章-字符串、向量和数组"><a href="#第三章-字符串、向量和数组" class="headerlink" title="第三章 字符串、向量和数组"></a>第三章 字符串、向量和数组</h3><h4 id="using声明"><a href="#using声明" class="headerlink" title="using声明"></a>using声明</h4><ul>
+<li>使用某个命名空间：例如 <code>using std::cin</code>表示使用命名空间<code>std</code>中的名字<code>cin</code>。</li>
+<li>头文件中不应该包含<code>using</code>声明。这样使用了该头文件的源码也会使用这个声明，会带来风险，因为头文件的内容会拷贝到所有用到它的文件中去，容易造成混乱。</li>
+</ul>
+<span id="more"></span>
+
+<h4 id="string"><a href="#string" class="headerlink" title="string"></a>string</h4><ul>
+<li>标准库类型<code>string</code>表示可变长的字符序列。</li>
+<li><code>#include &lt;string&gt;</code>，然后 <code>using std::string;</code></li>
+<li><strong>string对象</strong>：注意，不同于字符串字面值。</li>
+</ul>
+<h4 id="定义和初始化string对象"><a href="#定义和初始化string对象" class="headerlink" title="定义和初始化string对象"></a>定义和初始化string对象</h4><p>初始化<code>string</code>对象的方式：</p>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>string s1</code></td>
+<td>默认初始化，<code>s1</code>是个空字符串</td>
+</tr>
+<tr>
+<td><code>string s2(s1)</code></td>
+<td><code>s2</code>是<code>s1</code>的副本</td>
+</tr>
+<tr>
+<td><code>string s2 = s1</code></td>
+<td>等价于<code>s2(s1)</code>，<code>s2</code>是<code>s1</code>的副本</td>
+</tr>
+<tr>
+<td><code>string s3(&quot;value&quot;)</code></td>
+<td><code>s3</code>是字面值“value”的副本，除了字面值最后的那个空字符外</td>
+</tr>
+<tr>
+<td><code>string s3 = &quot;value&quot;</code></td>
+<td>等价于<code>s3(&quot;value&quot;)</code>，<code>s3</code>是字面值”value”的副本</td>
+</tr>
+<tr>
+<td><code>string s4(n, &#39;c&#39;)</code></td>
+<td>把<code>s4</code>初始化为由连续<code>n</code>个字符<code>c</code>组成的串</td>
+</tr>
+</tbody></table>
+<ul>
+<li>拷贝初始化（copy initialization）：使用等号<code>=</code>将一个已有的对象拷贝到正在创建的对象。</li>
+<li>直接初始化（direct initialization）：通过括号给对象赋值。</li>
+</ul>
+<h4 id="string对象上的操作"><a href="#string对象上的操作" class="headerlink" title="string对象上的操作"></a>string对象上的操作</h4><p><code>string</code>的操作：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>os(cout) &lt;&lt; s</code></td>
+<td>将<code>s</code>写到输出流<code>os</code>当中，返回<code>os</code></td>
+</tr>
+<tr>
+<td><code>is(cin) &gt;&gt; s</code></td>
+<td>从<code>is</code>中读取字符串赋给<code>s</code>，字符串以空白(空格)分割，返回<code>is</code></td>
+</tr>
+<tr>
+<td><code>getline(is, s)</code></td>
+<td>从<code>is</code>中读取一行赋给<code>s</code>，返回<code>is</code></td>
+</tr>
+<tr>
+<td><code>s.empty()</code></td>
+<td><code>s</code>为空返回<code>true</code>，否则返回<code>false</code></td>
+</tr>
+<tr>
+<td><code>s.size()</code></td>
+<td>返回<code>s</code>中字符的个数</td>
+</tr>
+<tr>
+<td><code>s[n]</code></td>
+<td>返回<code>s</code>中第<code>n</code>个字符的引用，位置<code>n</code>从0计起</td>
+</tr>
+<tr>
+<td><code>s1+s2</code></td>
+<td>返回<code>s1</code>和<code>s2</code>连接后的结果</td>
+</tr>
+<tr>
+<td><code>s1=s2</code></td>
+<td>用<code>s2</code>的副本代替<code>s1</code>中原来的字符</td>
+</tr>
+<tr>
+<td><code>s1==s2</code></td>
+<td>如果<code>s1</code>和<code>s2</code>中所含的字符完全一样，则它们相等；<code>string</code>对象的相等性判断对字母的大小写敏感</td>
+</tr>
+<tr>
+<td><code>s1!=s2</code></td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code></td>
+<td>利用字符在字典中的顺序进行比较，且对字母的大小写敏感（对第一个不相同的位置进行比较）</td>
+</tr>
+</tbody></table>
+<ul>
+<li>string io：<ul>
+<li>执行读操作<code>&gt;&gt;</code>：忽略掉开头的空白（包括空格、换行符和制表符），直到遇到下一处空白为止。</li>
+<li><code>getline</code>：读取一整行，<strong>包括空白符</strong>，直到遇见<strong>换行符</strong>为止。</li>
+</ul>
+</li>
+<li><code>s.size()</code>返回的时<code>string::size_type</code>类型，记住是一个<strong>无符号</strong>类型的值(&gt;&#x3D;0)，不要和<code>int</code>混用</li>
+<li><code>s1+s2</code>使用时，保证至少一侧是string类型。<code>string s1 = &quot;hello&quot; + &quot;world&quot; // 错误，不能把两个字符串字面值直接相加</code></li>
+<li><strong>字符串字面值和string是不同的类型。</strong></li>
+</ul>
+<h4 id="处理string对象中的字符"><a href="#处理string对象中的字符" class="headerlink" title="处理string对象中的字符"></a>处理string对象中的字符</h4><ul>
+<li><p>ctype.h vs. cctype</p>
+<p>：C++修改了c的标准库，名称为去掉.h，前面加c。</p>
+<blockquote>
+<p>如c++版本为<code>cctype</code>，c版本为<code>ctype.h</code></p>
+</blockquote>
+<ul>
+<li><strong>尽量使用c++版本的头文件</strong>，即<code>cctype</code></li>
+</ul>
+</li>
+</ul>
+<p><code>cctype</code>头文件中定义了一组标准函数：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>isalnum(c)</code></td>
+<td>当<code>c</code>是字母或数字时为真</td>
+</tr>
+<tr>
+<td><code>isalpha(c)</code></td>
+<td>当<code>c</code>是字母时为真</td>
+</tr>
+<tr>
+<td><code>iscntrl(c)</code></td>
+<td>当<code>c</code>是控制字符时为真</td>
+</tr>
+<tr>
+<td><code>isdigit(c)</code></td>
+<td>当<code>c</code>是数字时为真</td>
+</tr>
+<tr>
+<td><code>isgraph(c)</code></td>
+<td>当<code>c</code>不是空格但可以打印时为真</td>
+</tr>
+<tr>
+<td><code>islower(c)</code></td>
+<td>当<code>c</code>是小写字母时为真</td>
+</tr>
+<tr>
+<td><code>isprint(c)</code></td>
+<td>当<code>c</code>是可打印字符时为真</td>
+</tr>
+<tr>
+<td><code>ispunct(c)</code></td>
+<td>当<code>c</code>是标点符号时为真</td>
+</tr>
+<tr>
+<td><code>isspace(c)</code></td>
+<td>当<code>c</code>是空白时为真（空格、横向制表符、纵向制表符、回车符、换行符、进纸符）</td>
+</tr>
+<tr>
+<td><code>isupper(c)</code></td>
+<td>当<code>c</code>是大写字母时为真</td>
+</tr>
+<tr>
+<td><code>isxdigit(c)</code></td>
+<td>当<code>c</code>是十六进制数字时为真</td>
+</tr>
+<tr>
+<td><code>tolower(c)</code></td>
+<td>当<code>c</code>是大写字母，输出对应的小写字母；否则原样输出<code>c</code></td>
+</tr>
+<tr>
+<td><code>toupper(c)</code></td>
+<td>当<code>c</code>是小写字母，输出对应的大写字母；否则原样输出<code>c</code></td>
+</tr>
+</tbody></table>
+<ul>
+<li>遍历字符串：使用<strong>范围for</strong>（range for）语句： <code>for (auto c: str)</code>，或者 <code>for (auto &amp;c: str)</code>使用引用直接改变字符串中的字符。 （C++11）</li>
+<li><code>str[x]</code>,[]输入参数为<code>string::size_type</code>类型，给出<code>int</code>整型也会自动转化为该类型</li>
+</ul>
+
       
 
       
@@ -351,7 +540,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%81%E5%90%91%E9%87%8F%E5%92%8C%E6%95%B0%E7%BB%84"><span class="toc-number">1.</span> <span class="toc-text">第三章 字符串、向量和数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#using%E5%A3%B0%E6%98%8E"><span class="toc-number">1.1.</span> <span class="toc-text">using声明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#string"><span class="toc-number">1.2.</span> <span class="toc-text">string</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96string%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.3.</span> <span class="toc-text">定义和初始化string对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#string%E5%AF%B9%E8%B1%A1%E4%B8%8A%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">1.4.</span> <span class="toc-text">string对象上的操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%84%E7%90%86string%E5%AF%B9%E8%B1%A1%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6"><span class="toc-number">1.5.</span> <span class="toc-text">处理string对象中的字符</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -487,7 +676,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color3">科研</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -495,11 +688,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">科研</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
               </li>
              
               <li class="article-tag-list-item">
