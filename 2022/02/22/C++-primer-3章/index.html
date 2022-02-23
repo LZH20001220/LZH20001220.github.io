@@ -31,7 +31,7 @@
 <meta property="og:description" content="第三章 字符串、向量和数组using声明 使用某个命名空间：例如 using std::cin表示使用命名空间std中的名字cin。 头文件中不应该包含using声明。这样使用了该头文件的源码也会使用这个声明，会带来风险，因为头文件的内容会拷贝到所有用到它的文件中去，容易造成混乱。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-02-22T15:06:11.000Z">
-<meta property="article:modified_time" content="2022-02-23T03:58:53.790Z">
+<meta property="article:modified_time" content="2022-02-23T04:07:58.103Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
@@ -212,7 +212,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">3.2k字</span>
+        <span class="post-count">3.3k字</span>
       </span>
     </span>
 
@@ -221,7 +221,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">12分</span>
+        <span class="post-count">13分</span>
       </span>
     </span>
 </div>
@@ -695,8 +695,25 @@ var _hmt = _hmt || [];
 </tr>
 </tbody></table>
 <p><strong>尽量使用vector和迭代器，少用数组</strong></p>
+<h4 id="指针vs引用"><a href="#指针vs引用" class="headerlink" title="指针vs引用"></a>指针vs引用</h4><ul>
+<li>引用总是指向某个对象，定义引用时没有初始化是错的。</li>
+<li>给引用赋值，修改的是该引用所关联的对象的值，而不是让引用和另一个对象相关联。</li>
+</ul>
+<h4 id="指向指针的指针"><a href="#指向指针的指针" class="headerlink" title="指向指针的指针"></a>指向指针的指针</h4><ul>
+<li>定义： <code>int **ppi = π</code></li>
+<li>解引用：<code>**ppi</code></li>
+</ul>
+<h4 id="动态数组"><a href="#动态数组" class="headerlink" title="动态数组"></a>动态数组</h4><ul>
+<li>使用 <code>new</code>和 <code>delete</code>表达和c中<code>malloc</code>和<code>free</code>类似的功能，即在堆（自由存储区）中分配存储空间。</li>
+<li>定义： <code>int *pia = new int[10];</code> 10可以被一个变量替代。</li>
+<li>释放： <code>delete [] pia;</code>，注意不要忘记<code>[]</code>。</li>
+</ul>
 <h4 id="多维数组"><a href="#多维数组" class="headerlink" title="多维数组"></a>多维数组</h4><ul>
-<li><strong>多维数组的初始化</strong>： &#96;int ia[3][4] &#x3D;</li>
+<li><p><strong>多维数组的初始化</strong>  </p>
+<p><code>int ia[3][4] = &#123;&#123;0,1,2,3&#125;,&#123;0,1,2,3&#125;,&#123;0,1,2,3&#125;&#125;</code>。</p>
+</li>
+<li><p>使用范围for语句时，除了最内层的循环外，其他所有循环的控制变量都应该是<strong>引用</strong>类型。</p>
+</li>
 </ul>
 
       
@@ -810,7 +827,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%81%E5%90%91%E9%87%8F%E5%92%8C%E6%95%B0%E7%BB%84"><span class="toc-number">1.</span> <span class="toc-text">第三章 字符串、向量和数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#using%E5%A3%B0%E6%98%8E"><span class="toc-number">2.</span> <span class="toc-text">using声明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#string"><span class="toc-number">3.</span> <span class="toc-text">string</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96string%E5%AF%B9%E8%B1%A1"><span class="toc-number">3.1.</span> <span class="toc-text">定义和初始化string对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#string%E5%AF%B9%E8%B1%A1%E4%B8%8A%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">3.2.</span> <span class="toc-text">string对象上的操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%84%E7%90%86string%E5%AF%B9%E8%B1%A1%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6"><span class="toc-number">3.3.</span> <span class="toc-text">处理string对象中的字符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vector"><span class="toc-number">4.</span> <span class="toc-text">vector</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96vector%E5%AF%B9%E8%B1%A1"><span class="toc-number">4.1.</span> <span class="toc-text">定义和初始化vector对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#vector%E6%93%8D%E4%BD%9C"><span class="toc-number">4.2.</span> <span class="toc-text">vector操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8iterator"><span class="toc-number">5.</span> <span class="toc-text">迭代器iterator</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="toc-number">5.1.</span> <span class="toc-text">使用迭代器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E8%BF%90%E7%AE%97"><span class="toc-number">5.2.</span> <span class="toc-text">迭代器运算</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84"><span class="toc-number">6.</span> <span class="toc-text">数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96%E5%86%85%E7%BD%AE%E6%95%B0%E7%BB%84"><span class="toc-number">6.1.</span> <span class="toc-text">定义和初始化内置数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0"><span class="toc-number">6.2.</span> <span class="toc-text">访问数组元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E5%92%8C%E6%8C%87%E9%92%88"><span class="toc-number">6.3.</span> <span class="toc-text">数组和指针</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#C%E9%A3%8E%E6%A0%BC%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">6.4.</span> <span class="toc-text">C风格字符串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="toc-number">6.5.</span> <span class="toc-text">多维数组</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%81%E5%90%91%E9%87%8F%E5%92%8C%E6%95%B0%E7%BB%84"><span class="toc-number">1.</span> <span class="toc-text">第三章 字符串、向量和数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#using%E5%A3%B0%E6%98%8E"><span class="toc-number">2.</span> <span class="toc-text">using声明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#string"><span class="toc-number">3.</span> <span class="toc-text">string</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96string%E5%AF%B9%E8%B1%A1"><span class="toc-number">3.1.</span> <span class="toc-text">定义和初始化string对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#string%E5%AF%B9%E8%B1%A1%E4%B8%8A%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">3.2.</span> <span class="toc-text">string对象上的操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%84%E7%90%86string%E5%AF%B9%E8%B1%A1%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6"><span class="toc-number">3.3.</span> <span class="toc-text">处理string对象中的字符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vector"><span class="toc-number">4.</span> <span class="toc-text">vector</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96vector%E5%AF%B9%E8%B1%A1"><span class="toc-number">4.1.</span> <span class="toc-text">定义和初始化vector对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#vector%E6%93%8D%E4%BD%9C"><span class="toc-number">4.2.</span> <span class="toc-text">vector操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8iterator"><span class="toc-number">5.</span> <span class="toc-text">迭代器iterator</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="toc-number">5.1.</span> <span class="toc-text">使用迭代器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E8%BF%90%E7%AE%97"><span class="toc-number">5.2.</span> <span class="toc-text">迭代器运算</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84"><span class="toc-number">6.</span> <span class="toc-text">数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96%E5%86%85%E7%BD%AE%E6%95%B0%E7%BB%84"><span class="toc-number">6.1.</span> <span class="toc-text">定义和初始化内置数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0"><span class="toc-number">6.2.</span> <span class="toc-text">访问数组元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E5%92%8C%E6%8C%87%E9%92%88"><span class="toc-number">6.3.</span> <span class="toc-text">数组和指针</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#C%E9%A3%8E%E6%A0%BC%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">6.4.</span> <span class="toc-text">C风格字符串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%87%E9%92%88vs%E5%BC%95%E7%94%A8"><span class="toc-number">6.5.</span> <span class="toc-text">指针vs引用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%87%E5%90%91%E6%8C%87%E9%92%88%E7%9A%84%E6%8C%87%E9%92%88"><span class="toc-number">6.6.</span> <span class="toc-text">指向指针的指针</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E6%95%B0%E7%BB%84"><span class="toc-number">6.7.</span> <span class="toc-text">动态数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="toc-number">6.8.</span> <span class="toc-text">多维数组</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
