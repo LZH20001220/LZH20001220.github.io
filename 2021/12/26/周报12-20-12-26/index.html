@@ -34,7 +34,7 @@
 <meta property="og:image" content="http://example.com/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/2.png">
 <meta property="og:image" content="http://example.com/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/3.png">
 <meta property="og:image" content="http://example.com/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/4.png">
-<meta property="og:image" content="file:///C:/WINDOWS/TEMP/ksohtml10652/wps35.png">
+<meta property="og:image" content="http://example.com/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/15.png">
 <meta property="og:image" content="http://example.com/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/5.png">
 <meta property="og:image" content="http://example.com/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/6.png">
 <meta property="og:image" content="http://example.com/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/7.png">
@@ -46,7 +46,7 @@
 <meta property="og:image" content="http://example.com/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/13.png">
 <meta property="og:image" content="http://example.com/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/14.png">
 <meta property="article:published_time" content="2021-12-26T09:08:48.000Z">
-<meta property="article:modified_time" content="2022-02-22T15:37:48.811Z">
+<meta property="article:modified_time" content="2022-02-24T03:19:05.608Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="科研">
 <meta property="article:tag" content="周报">
@@ -305,7 +305,7 @@ var _hmt = _hmt || [];
 <p>通过组合多个 SSB 模块来生成增强型 OFDMA 标签来提高数据速率。增强型 OFDMA 反向散射标签设计可以与模拟 OFDM 类似的方式实现，它将集中时钟分离到子模块。连续波是首先拆分为8条路径，每条路径为一组进行SSB调制，如图9所示。这样，增强标签可以分配4个子载波，理论上与常规标签比提供4倍的数据速率，在实践中可以应用于对带宽要求更高的设备。</p>
 <p><img src="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/4.png" alt="img"> </p>
 <p>增强型标签技术还有助于解决频率选择性衰落问题，通过多个子载波传递信息；(OFDM信号的子载波间距小，可以认为信号带宽小于相干带宽)理论上，可以增强标签，使其具有反射多个子载波的能力，但这会导致高功耗和大尺寸标签。</p>
-<p>相干带宽约等于多径时延时间的倒数,<img src="file:///C:\WINDOWS\TEMP\ksohtml10652\wps35.png" alt="img">。</p>
+<p>相干带宽约等于多径时延时间的倒数,<img src="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/15.png" alt="img">。</p>
 <p>接收机：发射机发送的前导码和标签的反向散射符号依次到达接收机，形成一个完整的 OFDM 脉冲串。 合成的burst然后由接收机处理，如图 10 所示。 来自 ADC 的 I&#x2F;Q 流由常规模块依次处理，包括数据包检测、LTS 相关、同步、频率相关、CP 去除、FFT 和解映射，之后得到一个复数序列。反向散射引起的相位偏移由phase estimation解决。接收器中的另一个精简是绕过bitstream processing模块，如图 10 的右侧部分所示。该模块包括解交织、维特比解码和解扰的功能。</p>
 <p>需要注意的是，发送端的的输入是用于产生激励信号的比特流；然而，接收端的输入是从标签反向散射数据。这种不一致使得维特比解码模块认为接收到的比特流已损坏，因此会对流进行校正，从而污染有效载荷数据并导致通信失败。因此，我们需要在接收器上绕过这个模块。(那怎么算误码率啊？？)</p>
 <p><img src="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/5.png" alt="img"> </p>
@@ -753,15 +753,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">科研</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -782,6 +782,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
