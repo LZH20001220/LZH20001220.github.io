@@ -35,7 +35,7 @@
 <meta property="og:image" content="http://example.com/2022/02/16/%E4%BA%8C%E5%8F%89%E6%A0%91/3.gif">
 <meta property="og:image" content="http://example.com/2022/02/16/%E4%BA%8C%E5%8F%89%E6%A0%91/4.gif">
 <meta property="article:published_time" content="2022-02-15T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-02-16T10:01:00.062Z">
+<meta property="article:modified_time" content="2022-02-25T12:35:05.082Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -386,6 +386,7 @@ var _hmt = _hmt || [];
 <p><strong>层序遍历：（广度优先搜索）</strong></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">invertTree</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        queue&lt;TreeNode*&gt; que;</span><br><span class="line">        <span class="keyword">if</span> (root != <span class="literal">NULL</span>) que.<span class="built_in">push</span>(root);</span><br><span class="line">        <span class="keyword">while</span> (!que.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            <span class="type">int</span> size = que.<span class="built_in">size</span>();</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">                TreeNode* node = que.<span class="built_in">front</span>();</span><br><span class="line">                que.<span class="built_in">pop</span>();</span><br><span class="line">                <span class="built_in">swap</span>(node-&gt;left, node-&gt;right); <span class="comment">// 节点处理</span></span><br><span class="line">                <span class="keyword">if</span> (node-&gt;left) que.<span class="built_in">push</span>(node-&gt;left);</span><br><span class="line">                <span class="keyword">if</span> (node-&gt;right) que.<span class="built_in">push</span>(node-&gt;right);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
+
       
 
       
@@ -674,11 +675,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
             
             <div class="clearfix"></div>

@@ -35,7 +35,7 @@
 <meta property="og:image" content="http://example.com/2021/11/29/Libero/3.png">
 <meta property="og:image" content="http://example.com/2021/11/29/Libero/4.jpg">
 <meta property="article:published_time" content="2021-11-28T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-02-25T06:08:18.934Z">
+<meta property="article:modified_time" content="2022-02-25T11:37:29.901Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="FPGA">
 <meta name="twitter:card" content="summary">
@@ -274,14 +274,14 @@ var _hmt = _hmt || [];
 <h4 id="（6）程序烧写"><a href="#（6）程序烧写" class="headerlink" title="（6）程序烧写"></a>（6）程序烧写</h4><p>运用<code>Flashpro</code>软件，连接FlashPro下载器和开发板的JTAG接口。Flashpro下载器有接口的一侧连接JTAG的1号管脚的那一侧，也就是开发板的外侧。</p>
 <p><strong>首先下载一些需要的软件和帮助文档</strong><br>1）请务必先注册百度网盘用户，安装网盘客户端软件。务必拷贝链接到浏览器，再拷贝密码（提取码），将资料保存到您的百度云中，最后在百度网盘客户端软件中下载。<br>使用浏览器下载，会导致解压失败。严禁使用浏览器下载！！<br>2）严禁直接点击链接或敲键盘输入密码！严禁使用其他下载软件（如迅雷）！！<br>Actel Flashpro5下载线使用说明书<br>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1MeJ57Va1W-wvxoBX6tulgw">https://pan.baidu.com/s/1MeJ57Va1W-wvxoBX6tulgw</a><br>提取码：hb3z</p>
 <hr>
-<p>如果是仅仅烧写，请请下载这个链接<br>烧写软件Flashpro_V11.5<br>(默认安装，无需破解，内含下载线驱动。)<br>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/10qXg24zlTPZVsXz5Y5x9Mw">https://pan.baidu.com/s/10qXg24zlTPZVsXz5Y5x9Mw</a><br>提取码：blg8</p>
+<p>如果是仅仅烧写，请请下载这个链接<br>烧写软件<code>Flashpro_V11.5</code><br>(默认安装，无需破解，内含下载线驱动。)<br>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/10qXg24zlTPZVsXz5Y5x9Mw">https://pan.baidu.com/s/10qXg24zlTPZVsXz5Y5x9Mw</a><br>提取码：blg8</p>
 <p>下载完配置好之后打开<code>Flashpro</code>软件，选择<code>New Project</code>新建工程，然后点击<code>Configure Device—&gt;Browse</code>找到刚刚创建的<code>xxx.pdb</code>,右边的模式可以选择<code>Program</code>,<code>Verify</code>或者<code>Erase</code>进行程序烧入Flash，核实程序或擦除程序。连接FlashPro下载器和开发板的JTAG接口,最后点击<code>Program</code>烧写程序。</p>
-<h4 id="（7）实验结果"><a href="#（7）实验结果" class="headerlink" title="（7）实验结果"></a>（7）实验结果</h4><p>由于tag的内部时钟为20MHz，程序是一个5的计数器，因此产生了一个4MHz的方波如图所示。烧写完程序后无需其他的控制，只需要Zedboard供电就可以产生方波了。</p>
+<h4 id="（7）实验结果"><a href="#（7）实验结果" class="headerlink" title="（7）实验结果"></a>（7）实验结果</h4><p>由于<code>tag</code>的内部时钟为<code>20MHz</code>，程序是一个5的计数器，因此产生了一个<code>4MHz</code>的方波如图所示。烧写完程序后无需其他的控制，只需要<code>Zedboard</code>供电就可以产生方波了。</p>
 <p><img src="/2021/11/29/Libero/4.jpg"></p>
 <p><strong>实验的经验总结：</strong></p>
 <ol>
-<li>tag的时钟对应原理图中的OSC，不是CLK;</li>
-<li>管脚分配与vivado不同在于只改<code>xxx.pdb</code>没有用，必须通过designer更改，然后保存才有用;</li>
+<li><code>tag</code>的时钟对应原理图中的<code>OSC</code>，不是<code>CLK</code>;</li>
+<li>管脚分配与<code>vivado</code>不同在于只改<code>xxx.pdb</code>没有用，必须通过<code>designer</code>更改，然后保存才有用;</li>
 <li>晶振的数据手册：<code>ASTX-H11</code>;</li>
 <li>晶振输出对应的管脚是U8的3号管脚。</li>
 </ol>
@@ -574,11 +574,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
             
             <div class="clearfix"></div>
