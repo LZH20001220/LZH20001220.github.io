@@ -35,7 +35,7 @@
 <meta property="og:image" content="http://example.com/2021/11/29/Libero/3.png">
 <meta property="og:image" content="http://example.com/2021/11/29/Libero/4.jpg">
 <meta property="article:published_time" content="2021-11-28T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-02-15T02:24:35.297Z">
+<meta property="article:modified_time" content="2022-02-25T06:08:18.934Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="FPGA">
 <meta name="twitter:card" content="summary">
@@ -271,7 +271,7 @@ var _hmt = _hmt || [];
 <p><img src="/2021/11/29/Libero/3.png"></p>
 <p>管脚具体分配参见数据手册或者原理图<br><strong>特别注意：分配完管脚之后一定要先按屏幕左上角File下面的<code>commit and check</code>,然后回到designer界面，选择Designer窗口下的<code>File-&gt;Export-&gt;Constraint File</code>，会导出一个<code>xxx.pdc</code>文件，保存在工程目录下的constraint文件夹,导出文件后一定要<code>File-&gt;save</code>保存，这样在主界面就可以找到配置好的<code>xxx.pdc</code>文件了</strong></p>
 <h4 id="（5）继续执行"><a href="#（5）继续执行" class="headerlink" title="（5）继续执行"></a>（5）继续执行</h4><p>直接点击<code>Generate Programming Data</code> ,如果没有报错会生成一个<code>xxx.pdb文件</code>,文件目录是<code>./designer/impl/xxx.pdb</code>。</p>
-<h4 id="（6）程序烧写"><a href="#（6）程序烧写" class="headerlink" title="（6）程序烧写"></a>（6）程序烧写</h4><p>运用<code>Flashpro</code>软件，连接FlashPro下载器和开发板的JTAG接口。</p>
+<h4 id="（6）程序烧写"><a href="#（6）程序烧写" class="headerlink" title="（6）程序烧写"></a>（6）程序烧写</h4><p>运用<code>Flashpro</code>软件，连接FlashPro下载器和开发板的JTAG接口。Flashpro下载器有接口的一侧连接JTAG的1号管脚的那一侧，也就是开发板的外侧。</p>
 <p><strong>首先下载一些需要的软件和帮助文档</strong><br>1）请务必先注册百度网盘用户，安装网盘客户端软件。务必拷贝链接到浏览器，再拷贝密码（提取码），将资料保存到您的百度云中，最后在百度网盘客户端软件中下载。<br>使用浏览器下载，会导致解压失败。严禁使用浏览器下载！！<br>2）严禁直接点击链接或敲键盘输入密码！严禁使用其他下载软件（如迅雷）！！<br>Actel Flashpro5下载线使用说明书<br>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1MeJ57Va1W-wvxoBX6tulgw">https://pan.baidu.com/s/1MeJ57Va1W-wvxoBX6tulgw</a><br>提取码：hb3z</p>
 <hr>
 <p>如果是仅仅烧写，请请下载这个链接<br>烧写软件Flashpro_V11.5<br>(默认安装，无需破解，内含下载线驱动。)<br>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/10qXg24zlTPZVsXz5Y5x9Mw">https://pan.baidu.com/s/10qXg24zlTPZVsXz5Y5x9Mw</a><br>提取码：blg8</p>
