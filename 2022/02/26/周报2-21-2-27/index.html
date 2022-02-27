@@ -23,16 +23,16 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta name="description" content="Wifi grc流图的搭建： 实验的整个流程：  将框图的输出端数据到fsk_RE1.wav,fsk_IM1.wav中,通过test.py处理生成a1_re.txt, a1_im.txt,然后通过matlab处理观察波形发现其从500点到2260点为第一个数据包，2761点向后相同长度为第二个数据包，依次类推。  用matlab在1200点到1600点生成-1的数据，其他点生成+1的数据模拟对数据">
+  <meta name="description" content="Wifi grc流图的搭建： 实验的整个流程：  将框图的输出端数据到fsk_RE1.wav,fsk_IM1.wav中,通过test.py处理生成a1_re.txt, a1_im.txt,然后通过matlab处理观察波形发现其从500点到2260点为第一个数据包，2761点向后相同长度为第二个数据包，依次类推。 用matlab在1200点到1600点生成-1的数据，其他点生成+1的数据模拟对数据进">
 <meta property="og:type" content="article">
 <meta property="og:title" content="周报2.21-2.27">
 <meta property="og:url" content="http://example.com/2022/02/26/%E5%91%A8%E6%8A%A52-21-2-27/index.html">
 <meta property="og:site_name" content="博客杂记 - harder and better">
-<meta property="og:description" content="Wifi grc流图的搭建： 实验的整个流程：  将框图的输出端数据到fsk_RE1.wav,fsk_IM1.wav中,通过test.py处理生成a1_re.txt, a1_im.txt,然后通过matlab处理观察波形发现其从500点到2260点为第一个数据包，2761点向后相同长度为第二个数据包，依次类推。  用matlab在1200点到1600点生成-1的数据，其他点生成+1的数据模拟对数据">
+<meta property="og:description" content="Wifi grc流图的搭建： 实验的整个流程：  将框图的输出端数据到fsk_RE1.wav,fsk_IM1.wav中,通过test.py处理生成a1_re.txt, a1_im.txt,然后通过matlab处理观察波形发现其从500点到2260点为第一个数据包，2761点向后相同长度为第二个数据包，依次类推。 用matlab在1200点到1600点生成-1的数据，其他点生成+1的数据模拟对数据进">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2022/02/26/%E5%91%A8%E6%8A%A52-21-2-27/1.png">
 <meta property="article:published_time" content="2022-02-26T07:38:25.000Z">
-<meta property="article:modified_time" content="2022-02-27T03:07:40.431Z">
+<meta property="article:modified_time" content="2022-02-27T03:13:34.810Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="科研">
 <meta name="twitter:card" content="summary">
@@ -246,16 +246,13 @@ var _hmt = _hmt || [];
         <p><code>Wifi grc</code>流图的搭建：</p>
 <p>实验的整个流程：</p>
 <ol>
-<li><p>将框图的输出端数据到<code>fsk_RE1.wav</code>,<code>fsk_IM1.wav</code>中,通过<code>test.py</code>处理生成<code>a1_re.txt</code>, <code>a1_im.txt</code>,然后通过<code>matlab</code>处理观察波形发现其从500点到2260点为第一个数据包，2761点向后相同长度为第二个数据包，依次类推。</p>
-</li>
-<li><p>用<code>matlab</code>在1200点到1600点生成-1的数据，其他点生成+1的数据模拟对数据进行相位调制；</p>
-</li>
-<li><p>将数据通过<code>file_matlab</code>模块传入，与原发送信号相乘得到经过相位调制后的数据。</p>
+<li>将框图的输出端数据到<code>fsk_RE1.wav</code>,<code>fsk_IM1.wav</code>中,通过<code>test.py</code>处理生成<code>a1_re.txt</code>, <code>a1_im.txt</code>,然后通过<code>matlab</code>处理观察波形发现其从500点到2260点为第一个数据包，2761点向后相同长度为第二个数据包，依次类推。</li>
+<li>用<code>matlab</code>在1200点到1600点生成-1的数据，其他点生成+1的数据模拟对数据进行相位调制；</li>
+<li>将数据通过<code>file_matlab</code>模块传入，与原发送信号相乘得到经过相位调制后的数据。</li>
+</ol>
 <span id="more"></span>
 
 <p><strong>需要注意的几点：</strong></p>
-</li>
-</ol>
 <ul>
 <li><p><code>gr-right</code>中新写了一个<code>file_matlab</code>模块可以用于将<code>matlab</code>中的数据传入<code>gnuradio</code>中，其读取文件的位置是<code>/home/l/Desktop/matlab/test.txt</code>,该模块的作用是将<code>txt</code>数据作为采样点传入<code>gnuradio</code>中，注意前面的一般数据是真实数据的实部，后面的一半为虚部；<code>file_matlab</code>模块需要传入一个参数<code>samp_rate</code>采样率，这样<code>gnuradio</code>就根据采样率和采样点数据模拟出真实的数据传输波形。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* -*- c++ -*- */</span></span><br><span class="line"><span class="comment">//file_matlab_impl.h</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> INCLUDED_RIGHT_FILE_MATLAB_IMPL_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INCLUDED_RIGHT_FILE_MATLAB_IMPL_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;right/file_matlab.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> gr &#123;</span><br><span class="line">  <span class="keyword">namespace</span> right &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">file_matlab_impl</span> : <span class="keyword">public</span> file_matlab</span><br><span class="line">    &#123;</span><br><span class="line">     <span class="keyword">private</span>:</span><br><span class="line">      <span class="comment">// Nothing to declare in this block.</span></span><br><span class="line">      <span class="type">int</span> flag;</span><br><span class="line">      <span class="type">int</span> send;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">public</span>:</span><br><span class="line">      <span class="built_in">file_matlab_impl</span>(<span class="type">int</span> samp_rate);</span><br><span class="line">      ~<span class="built_in">file_matlab_impl</span>();</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Where all the action really happens</span></span><br><span class="line">      <span class="function"><span class="type">int</span> <span class="title">work</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">              <span class="type">int</span> noutput_items,</span></span></span><br><span class="line"><span class="params"><span class="function">              gr_vector_const_void_star &amp;input_items,</span></span></span><br><span class="line"><span class="params"><span class="function">              gr_vector_void_star &amp;output_items</span></span></span><br><span class="line"><span class="params"><span class="function">      )</span></span>;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">  &#125; <span class="comment">// namespace right</span></span><br><span class="line">&#125; <span class="comment">// namespace gr</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">/* INCLUDED_RIGHT_FILE_MATLAB_IMPL_H */</span></span></span><br></pre></td></tr></table></figure>

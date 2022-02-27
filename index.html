@@ -237,11 +237,10 @@ var _hmt = _hmt || [];
         <p><code>Wifi grc</code>流图的搭建：</p>
 <p>实验的整个流程：</p>
 <ol>
-<li><p>将框图的输出端数据到<code>fsk_RE1.wav</code>,<code>fsk_IM1.wav</code>中,通过<code>test.py</code>处理生成<code>a1_re.txt</code>, <code>a1_im.txt</code>,然后通过<code>matlab</code>处理观察波形发现其从500点到2260点为第一个数据包，2761点向后相同长度为第二个数据包，依次类推。</p>
-</li>
-<li><p>用<code>matlab</code>在1200点到1600点生成-1的数据，其他点生成+1的数据模拟对数据进行相位调制；</p>
-</li>
-<li><p>将数据通过<code>file_matlab</code>模块传入，与原发送信号相乘得到经过相位调制后的数据。</p></li></ol>
+<li>将框图的输出端数据到<code>fsk_RE1.wav</code>,<code>fsk_IM1.wav</code>中,通过<code>test.py</code>处理生成<code>a1_re.txt</code>, <code>a1_im.txt</code>,然后通过<code>matlab</code>处理观察波形发现其从500点到2260点为第一个数据包，2761点向后相同长度为第二个数据包，依次类推。</li>
+<li>用<code>matlab</code>在1200点到1600点生成-1的数据，其他点生成+1的数据模拟对数据进行相位调制；</li>
+<li>将数据通过<code>file_matlab</code>模块传入，与原发送信号相乘得到经过相位调制后的数据。</li>
+</ol>
         
       
 
