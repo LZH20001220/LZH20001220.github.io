@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>博客杂记 - harder and better</title>
+  <title>周报2.21-2.27 | 博客杂记 - harder and better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -23,14 +23,20 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="博客杂记 - harder and better">
-<meta property="og:url" content="http://example.com/page/3/index.html">
+  <meta name="description" content="Wifi grc流图的搭建： 实验的整个流程：  将框图的输出端数据到fsk_RE1.wav,fsk_IM1.wav中,通过test.py处理生成a1_re.txt, a1_im.txt,然后通过matlab处理观察波形发现其从500点到2260点为第一个数据包，2761点向后相同长度为第二个数据包，依次类推。  用matlab在1200点到1600点生成-1的数据，其他点生成+1的数据模拟对数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="周报2.21-2.27">
+<meta property="og:url" content="http://example.com/2022/02/26/%E5%91%A8%E6%8A%A52-21-2-27/index.html">
 <meta property="og:site_name" content="博客杂记 - harder and better">
+<meta property="og:description" content="Wifi grc流图的搭建： 实验的整个流程：  将框图的输出端数据到fsk_RE1.wav,fsk_IM1.wav中,通过test.py处理生成a1_re.txt, a1_im.txt,然后通过matlab处理观察波形发现其从500点到2260点为第一个数据包，2761点向后相同长度为第二个数据包，依次类推。  用matlab在1200点到1600点生成-1的数据，其他点生成+1的数据模拟对数据">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/02/26/%E5%91%A8%E6%8A%A52-21-2-27/1.png">
+<meta property="article:published_time" content="2022-02-26T07:38:25.000Z">
+<meta property="article:modified_time" content="2022-02-27T03:07:40.431Z">
 <meta property="article:author" content="ygtrece">
-<meta property="article:tag" content="学习, 日常">
+<meta property="article:tag" content="科研">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/02/26/%E5%91%A8%E6%8A%A52-21-2-27/1.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - harder and better" type="application/atom+xml">
   
@@ -182,19 +188,22 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-链表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-周报2-21-2-27" class="article article-type-post " itemscope itemprop="blogPost">
   
 <div class="article-inner">
     
       <header class="article-header">
         
         
-        <a href="/2022/01/10/%E9%93%BE%E8%A1%A8/" class="archive-article-date">
-  	<time datetime="2022-01-09T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-10</time>
+        <a href="/2022/02/26/%E5%91%A8%E6%8A%A52-21-2-27/" class="archive-article-date">
+  	<time datetime="2022-02-26T07:38:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-26</time>
 </a>
 
+
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
 
 
         <!-- 需要添加的位置 -->
@@ -205,7 +214,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.3k字</span>
+        <span class="post-count">927字</span>
       </span>
     </span>
 
@@ -214,7 +223,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">10分</span>
+        <span class="post-count">4分</span>
       </span>
     </span>
 </div>
@@ -228,551 +237,40 @@ var _hmt = _hmt || [];
        
       <center><p>
   
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2022/01/10/%E9%93%BE%E8%A1%A8/">Leetcode - 链表</a>
+    <h1 class="article-title_code_ant" itemprop="name">
+      周报2.21-2.27
     </h1>
   
 </p></center>
       
-        <ol>
-<li>链表的定义：链表是一种通过<strong>指针</strong>串联在一起的线性结构，每一个节点由两部分组成，一个是<strong>数据域</strong>一个是<strong>指针域</strong>（存放指向下一个节点的指针），最后一个节点的指针域指向null（空指针）</li>
-<li>数组是在内存中是连续分布的，但是链表在内存中不是连续分布的</li>
-<li>C++中的链表定义方式：</li>
+        <p><code>Wifi grc</code>流图的搭建：</p>
+<p>实验的整个流程：</p>
+<ol>
+<li><p>将框图的输出端数据到<code>fsk_RE1.wav</code>,<code>fsk_IM1.wav</code>中,通过<code>test.py</code>处理生成<code>a1_re.txt</code>, <code>a1_im.txt</code>,然后通过<code>matlab</code>处理观察波形发现其从500点到2260点为第一个数据包，2761点向后相同长度为第二个数据包，依次类推。</p>
+</li>
+<li><p>用<code>matlab</code>在1200点到1600点生成-1的数据，其他点生成+1的数据模拟对数据进行相位调制；</p>
+</li>
+<li><p>将数据通过<code>file_matlab</code>模块传入，与原发送信号相乘得到经过相位调制后的数据。</p>
+<span id="more"></span>
+
+<p><strong>需要注意的几点：</strong></p>
+</li>
 </ol>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 单链表</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">ListNode</span> &#123;</span><br><span class="line">    <span class="type">int</span> val;  <span class="comment">// 节点上存储的元素</span></span><br><span class="line">    ListNode *next;  <span class="comment">// 指向下一个节点的指针</span></span><br><span class="line">    <span class="built_in">ListNode</span>(<span class="type">int</span> x) : <span class="built_in">val</span>(x), <span class="built_in">next</span>(<span class="literal">NULL</span>) &#123;&#125;  <span class="comment">// 节点的构造函数</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>构造函数可以自己定义，也可以不自己定义C++自己默认生成。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/01/10/%E9%93%BE%E8%A1%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-周报1.3-1.9" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-<div class="article-inner">
-    
-      <header class="article-header">
-        
-        
-        <a href="/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/" class="archive-article-date">
-  	<time datetime="2022-01-08T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-09</time>
-</a>
-
-
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">3.2k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">11分</span>
-      </span>
-    </span>
-</div>
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/">周报:1.3-1.9</a>
-    </h1>
-  
-</p></center>
-      
-        <h4 id="一、PSK系统进一步研究"><a href="#一、PSK系统进一步研究" class="headerlink" title="一、PSK系统进一步研究"></a>一、PSK系统进一步研究</h4><p>在上周实验的基础上继续分析框图，首先将信道影响全部去除，噪声(noise voltage)和频偏(frequency offset)都设为0。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">周报</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-数组" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-<div class="article-inner">
-    
-      <header class="article-header">
-        
-        
-        <a href="/2022/01/04/%E6%95%B0%E7%BB%84/" class="archive-article-date">
-  	<time datetime="2022-01-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-04</time>
-</a>
-
-
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">3.2k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">15分</span>
-      </span>
-    </span>
-</div>
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2022/01/04/%E6%95%B0%E7%BB%84/">Leetcode - 数组</a>
-    </h1>
-  
-</p></center>
-      
-        <p>需要两点注意的是:</p>
 <ul>
-<li><p>数组下标都是从0开始的。</p>
+<li><p><code>gr-right</code>中新写了一个<code>file_matlab</code>模块可以用于将<code>matlab</code>中的数据传入<code>gnuradio</code>中，其读取文件的位置是<code>/home/l/Desktop/matlab/test.txt</code>,该模块的作用是将<code>txt</code>数据作为采样点传入<code>gnuradio</code>中，注意前面的一般数据是真实数据的实部，后面的一半为虚部；<code>file_matlab</code>模块需要传入一个参数<code>samp_rate</code>采样率，这样<code>gnuradio</code>就根据采样率和采样点数据模拟出真实的数据传输波形。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* -*- c++ -*- */</span></span><br><span class="line"><span class="comment">//file_matlab_impl.h</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> INCLUDED_RIGHT_FILE_MATLAB_IMPL_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INCLUDED_RIGHT_FILE_MATLAB_IMPL_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;right/file_matlab.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> gr &#123;</span><br><span class="line">  <span class="keyword">namespace</span> right &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">file_matlab_impl</span> : <span class="keyword">public</span> file_matlab</span><br><span class="line">    &#123;</span><br><span class="line">     <span class="keyword">private</span>:</span><br><span class="line">      <span class="comment">// Nothing to declare in this block.</span></span><br><span class="line">      <span class="type">int</span> flag;</span><br><span class="line">      <span class="type">int</span> send;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">public</span>:</span><br><span class="line">      <span class="built_in">file_matlab_impl</span>(<span class="type">int</span> samp_rate);</span><br><span class="line">      ~<span class="built_in">file_matlab_impl</span>();</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Where all the action really happens</span></span><br><span class="line">      <span class="function"><span class="type">int</span> <span class="title">work</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">              <span class="type">int</span> noutput_items,</span></span></span><br><span class="line"><span class="params"><span class="function">              gr_vector_const_void_star &amp;input_items,</span></span></span><br><span class="line"><span class="params"><span class="function">              gr_vector_void_star &amp;output_items</span></span></span><br><span class="line"><span class="params"><span class="function">      )</span></span>;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">  &#125; <span class="comment">// namespace right</span></span><br><span class="line">&#125; <span class="comment">// namespace gr</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">/* INCLUDED_RIGHT_FILE_MATLAB_IMPL_H */</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* -*- c++ -*- */</span></span><br><span class="line"><span class="comment">//file_matlab_impl.cc</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> HAVE_CONFIG_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;config.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;gnuradio/io_signature.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;file_matlab_impl.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> gr &#123;</span><br><span class="line">  <span class="keyword">namespace</span> right &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function">file_matlab::sptr</span></span><br><span class="line"><span class="function">    <span class="title">file_matlab::make</span><span class="params">(<span class="type">int</span> samp_rate)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> gnuradio::<span class="built_in">get_initial_sptr</span></span><br><span class="line">        (<span class="keyword">new</span> <span class="built_in">file_matlab_impl</span>(samp_rate));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * The private constructor</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    file_matlab_impl::<span class="built_in">file_matlab_impl</span>(<span class="type">int</span> samp_rate)</span><br><span class="line">      : gr::<span class="built_in">sync_block</span>(<span class="string">&quot;file_matlab&quot;</span>,</span><br><span class="line">              gr::io_signature::<span class="built_in">make</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>),</span><br><span class="line">              gr::io_signature::<span class="built_in">make</span>(<span class="number">1</span>, <span class="number">1</span>, <span class="built_in">sizeof</span>(gr_complex))),</span><br><span class="line">              <span class="built_in">flag</span>(<span class="number">0</span>),</span><br><span class="line">              <span class="built_in">send</span>(<span class="number">0</span>)</span><br><span class="line">    &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * Our virtual destructor.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">     </span><br><span class="line">     <span class="function">gr_complex* <span class="title">read_file</span><span class="params">()</span></span>&#123;</span><br><span class="line">		vector &lt;<span class="type">float</span>&gt; file_data;</span><br><span class="line">		ifstream ifs;</span><br><span class="line">		string s;</span><br><span class="line">		ifs.<span class="built_in">open</span>(<span class="string">&quot;/home/l/Desktop/matlab/test.txt&quot;</span>,ios::in);</span><br><span class="line">		<span class="keyword">if</span>(!ifs.<span class="built_in">is_open</span>())&#123;</span><br><span class="line">			cout&lt;&lt;<span class="string">&quot;fail to open!!!&quot;</span>&lt;&lt;endl;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">while</span>(<span class="built_in">getline</span>(ifs,s))&#123;</span><br><span class="line">				<span class="type">float</span> aa = <span class="built_in">atof</span>(s.<span class="built_in">c_str</span>());</span><br><span class="line">				file_data.<span class="built_in">push_back</span>(aa);</span><br><span class="line">			&#125;</span><br><span class="line">			gr_complex *data = <span class="keyword">new</span> gr_complex[file_data.<span class="built_in">size</span>()/<span class="number">2</span>];</span><br><span class="line">			data[<span class="number">0</span>].<span class="built_in">real</span>(file_data.<span class="built_in">size</span>()/<span class="number">2</span>);</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; file_data.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">				<span class="keyword">if</span>(i&lt;file_data.<span class="built_in">size</span>()/<span class="number">2</span>) data[i+<span class="number">1</span>].<span class="built_in">real</span>(file_data[i]);</span><br><span class="line">				<span class="keyword">else</span> data[i-file_data.<span class="built_in">size</span>()/<span class="number">2</span>+<span class="number">1</span>].<span class="built_in">imag</span>(file_data[i]);</span><br><span class="line">			&#125;</span><br><span class="line">			ifs.<span class="built_in">close</span>();</span><br><span class="line">		<span class="comment">//	cout&lt;&lt;file_data.size()&lt;&lt;endl;</span></span><br><span class="line">			<span class="keyword">return</span> data;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">     gr_complex *data_send;</span><br><span class="line">    file_matlab_impl::~<span class="built_in">file_matlab_impl</span>()</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span></span></span><br><span class="line"><span class="function">    <span class="title">file_matlab_impl::work</span><span class="params">(<span class="type">int</span> noutput_items,</span></span></span><br><span class="line"><span class="params"><span class="function">        gr_vector_const_void_star &amp;input_items,</span></span></span><br><span class="line"><span class="params"><span class="function">        gr_vector_void_star &amp;output_items)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">      gr_complex *out = (gr_complex *) output_items[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Do &lt;+signal processing+&gt;</span></span><br><span class="line">		 <span class="keyword">for</span>(<span class="type">int</span> index = <span class="number">0</span>; index&lt;noutput_items;index++)&#123;</span><br><span class="line">		  <span class="keyword">if</span>(flag == <span class="number">0</span>) &#123;</span><br><span class="line">			  data_send = <span class="built_in">read_file</span>();</span><br><span class="line">			  flag= <span class="number">1</span>;</span><br><span class="line">		  &#125;</span><br><span class="line">		  <span class="keyword">else</span> &#123;</span><br><span class="line">			out[index] = data_send[send+<span class="number">1</span>];</span><br><span class="line">			<span class="comment">//cout&lt;&lt; data_send[send] &lt;&lt;endl;</span></span><br><span class="line">			<span class="comment">//cout&lt;&lt; send &lt;&lt;endl;</span></span><br><span class="line">			<span class="keyword">if</span>(send &lt; (<span class="type">int</span>)data_send[<span class="number">0</span>].<span class="built_in">real</span>()<span class="number">-1</span>) send = send+<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">else</span> send = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">      <span class="comment">// Tell runtime system how many output items we produced.</span></span><br><span class="line">      <span class="keyword">return</span> noutput_items;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125; <span class="comment">/* namespace right */</span></span><br><span class="line">&#125; <span class="comment">/* namespace gr */</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>数组内存空间的地址是连续的。</p>
+<li><p>生成波形并传入<code>test.txt</code>文件</p>
 </li>
-<li><p>数组的元素是不能删的，只能覆盖。</p></li></ul>
-        
-      
+</ul>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% SampleRate = 2e6;</span></span><br><span class="line"><span class="comment">% len_frame =128;</span></span><br><span class="line"><span class="comment">% %%</span></span><br><span class="line"><span class="comment">% sinewave = dsp.SineWave(1,31250*10); %1e4</span></span><br><span class="line"><span class="comment">% sinewave.SampleRate = SampleRate; </span></span><br><span class="line"><span class="comment">% sinewave.SamplesPerFrame = len_frame; </span></span><br><span class="line"><span class="comment">% sinewave.OutputDataType = &#x27;double&#x27;; </span></span><br><span class="line"><span class="comment">% sinewave.ComplexOutput = true;</span></span><br><span class="line"><span class="comment">% sinewave.PhaseOffset = 0;</span></span><br><span class="line"><span class="comment">% sin_10khz_1 = step(sinewave);</span></span><br><span class="line"><span class="comment">% sinewave = dsp.SineWave(1,31250*10); %1e4</span></span><br><span class="line"><span class="comment">% sinewave.SampleRate = SampleRate; </span></span><br><span class="line"><span class="comment">% sinewave.SamplesPerFrame = len_frame; </span></span><br><span class="line"><span class="comment">% sinewave.OutputDataType = &#x27;double&#x27;; </span></span><br><span class="line"><span class="comment">% sinewave.ComplexOutput = true;</span></span><br><span class="line"><span class="comment">% sinewave.PhaseOffset = 180;</span></span><br><span class="line"><span class="comment">% sin_10khz_0 = step(sinewave);</span></span><br><span class="line"><span class="comment">% %%</span></span><br><span class="line"><span class="comment">% range = (1:len_frame);</span></span><br><span class="line"><span class="comment">% amp = 0.01;</span></span><br><span class="line"><span class="comment">% sin_source = sin_10khz_1*amp;</span></span><br><span class="line"><span class="comment">% sin_source(len_frame+range) = sin_10khz_0*amp;</span></span><br><span class="line"><span class="comment">%  plot(real(sin_source))%上面是生成正弦波的程序</span></span><br><span class="line">square_source = <span class="built_in">zeros</span>(<span class="number">1</span>,<span class="number">100000</span>);</span><br><span class="line"><span class="keyword">for</span> k = <span class="number">1</span>:<span class="number">100000</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">mod</span>(k , <span class="number">2261</span>) &gt;=<span class="number">1200</span> &amp;&amp; <span class="built_in">mod</span>(k, <span class="number">2261</span>) &lt;= <span class="number">1600</span>)</span><br><span class="line">        square_source(k) = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        square_source(k) = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">square_source =square_source + <span class="number">0</span>*<span class="built_in">j</span>;	<span class="comment">%注意这里要加0j,否则数据按实部传入，但是file_matlab处理数据时一半按实部处理，一半按虚部处理</span></span><br><span class="line"><span class="comment">%%</span></span><br><span class="line">fid = fopen(<span class="string">&#x27;/home/l/Desktop/matlab/test.txt&#x27;</span>,<span class="string">&#x27;w&#x27;</span>);</span><br><span class="line"><span class="comment">%fprintf(fid,&#x27;%f %f\r\n&#x27;,real(data),imag(data));</span></span><br><span class="line">fprintf(fid,<span class="string">&#x27;%f\r\n%f\r\n&#x27;</span>,<span class="built_in">real</span>(square_source), <span class="built_in">imag</span>(square_source));</span><br><span class="line">fclose(fid);</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<p><strong>实验结果：</strong></p>
+<p><img src="/2022/02/26/%E5%91%A8%E6%8A%A52-21-2-27/1.png"></p>
+<p>可以看到数据每次改变的位置都是固定的，即第一个数据位，因为解码过程中有反卷积的操作，因此第一位字符解码出来的结果不同。</p>
 
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/01/04/%E6%95%B0%E7%BB%84/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-周报12.27-1.2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-<div class="article-inner">
-    
-      <header class="article-header">
-        
-        
-        <a href="/2022/01/02/%E5%91%A8%E6%8A%A512.27-1.2/" class="archive-article-date">
-  	<time datetime="2022-01-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-02</time>
-</a>
-
-
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.9k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">10分</span>
-      </span>
-    </span>
-</div>
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2022/01/02/%E5%91%A8%E6%8A%A512.27-1.2/">周报:12.27-1.2</a>
-    </h1>
-  
-</p></center>
-      
-        <h3 id="一、继续学习gnuradio中Wifi系统的框图"><a href="#一、继续学习gnuradio中Wifi系统的框图" class="headerlink" title="一、继续学习gnuradio中Wifi系统的框图"></a>一、继续学习gnuradio中Wifi系统的框图</h3><h4 id="（1）-xml文件和yaml文件"><a href="#（1）-xml文件和yaml文件" class="headerlink" title="（1） xml文件和yaml文件"></a>（1） xml文件和yaml文件</h4><h5 id="xml文件："><a href="#xml文件：" class="headerlink" title="xml文件："></a>xml文件：</h5><p>xml:可扩展标记语言，其可以在任何应用程序中读&#x2F;写数据，是html的演进,一个简单的程序如下:</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">周报</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/01/02/%E5%91%A8%E6%8A%A512.27-1.2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-复杂度" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-<div class="article-inner">
-    
-      <header class="article-header">
-        
-        
-        <a href="/2022/01/02/%E5%A4%8D%E6%9D%82%E5%BA%A6/" class="archive-article-date">
-  	<time datetime="2022-01-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-02</time>
-</a>
-
-
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">4分</span>
-      </span>
-    </span>
-</div>
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2022/01/02/%E5%A4%8D%E6%9D%82%E5%BA%A6/">Leetcode - 复杂度</a>
-    </h1>
-  
-</p></center>
-      
-        <p>复杂度包括时间复杂度和空间复杂度</p>
-<h3 id="1-时间复杂度-描述算法的运行时间，O-表示算法最坏情况下运行时间的上界。"><a href="#1-时间复杂度-描述算法的运行时间，O-表示算法最坏情况下运行时间的上界。" class="headerlink" title="1. 时间复杂度:描述算法的运行时间，O()表示算法最坏情况下运行时间的上界。"></a>1. 时间复杂度:描述算法的运行时间，<code>O()</code>表示算法最坏情况下运行时间的上界。</h3>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/01/02/%E5%A4%8D%E6%9D%82%E5%BA%A6/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-tag电路图" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-<div class="article-inner">
-    
-      <header class="article-header">
-        
-        
-        <a href="/2021/12/29/tag%E7%94%B5%E8%B7%AF%E5%9B%BE/" class="archive-article-date">
-  	<time datetime="2021-12-29T15:10:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-29</time>
-</a>
-
-
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">521字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
-      </span>
-    </span>
-</div>
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2021/12/29/tag%E7%94%B5%E8%B7%AF%E5%9B%BE/">tag电路图</a>
-    </h1>
-  
-</p></center>
-      
-        <h3 id="tag电路图："><a href="#tag电路图：" class="headerlink" title="tag电路图："></a>tag电路图：</h3><p><img src="/2021/12/29/tag%E7%94%B5%E8%B7%AF%E5%9B%BE/1.png" alt="img"></p>
-<p>U8的20MHz为FPGA的外部时钟输入</p>
-        
       
 
       
@@ -794,227 +292,75 @@ var _hmt = _hmt || [];
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/29/tag%E7%94%B5%E8%B7%AF%E5%9B%BE/">展开全文 >></a>
-        </p>
-      
 
       
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
         
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-周报12-20-12-26" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-<div class="article-inner">
-    
-      <header class="article-header">
-        
-        
-        <a href="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/" class="archive-article-date">
-  	<time datetime="2021-12-26T09:08:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-26</time>
-</a>
-
-
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">5.3k字</span>
-      </span>
+      </div>
     </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">19分</span>
-      </span>
-    </span>
+  </div>
 </div>
-          
-        <!-- 添加完成 -->
 
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/">周报12.20-12.26</a>
-    </h1>
-  
-</p></center>
-      
-        <p><strong>第一部分：文献阅读</strong></p>
-<p><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/10.1145/3300061.3300121">文献1：OFDMA-Enabled Wi-Fi Backscatter | The 25th Annual International Conference on Mobile Computing and Networking (acm.org)</a></p>
-        
-      
-
-      
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/02/26/%E5%91%A8%E6%8A%A52-21-2-27/" alt="微信分享二维码">
     </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">周报</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-Libero" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-<div class="article-inner">
-    
-      <header class="article-header">
-        
-        
-        <a href="/2021/11/29/Libero/" class="archive-article-date">
-  	<time datetime="2021-11-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-29</time>
-</a>
-
-
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.2k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">4分</span>
-      </span>
-    </span>
 </div>
-          
-        <!-- 添加完成 -->
 
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2021/11/29/Libero/">Microsemi Libero学习和使用笔记</a>
-    </h1>
-  
-</p></center>
-      
-        <h3 id="一、下载和安装"><a href="#一、下载和安装" class="headerlink" title="一、下载和安装"></a>一、下载和安装</h3><p>下载和安装可以参考以下<a target="_blank" rel="noopener" href="https://blog.csdn.net/whik1194/article/details/90483763">教程</a>。其中申请license的步骤推荐使用<a target="_blank" rel="noopener" href="http://24mail.chacuo.net/">临时邮箱</a>,其他的信息可以随便填。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">FPGA</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/29/Libero/">展开全文 >></a>
-        </p>
-      
-
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2022/02/25/%E4%BA%8C%E5%8F%89%E6%A0%91-4/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">二叉树-4</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -1029,109 +375,19 @@ var _hmt = _hmt || [];
         </div>
         
         
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-软件无线电基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-<div class="article-inner">
-    
-      <header class="article-header">
-        
-        
-        <a href="/2021/10/31/%E8%BD%AF%E4%BB%B6%E6%97%A0%E7%BA%BF%E7%94%B5%E5%9F%BA%E7%A1%80/" class="archive-article-date">
-  	<time datetime="2021-10-31T15:28:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-31</time>
-</a>
-
-
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">3分</span>
-      </span>
-    </span>
-</div>
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2021/10/31/%E8%BD%AF%E4%BB%B6%E6%97%A0%E7%BA%BF%E7%94%B5%E5%9F%BA%E7%A1%80/">软件无线电基础</a>
-    </h1>
-  
-</p></center>
-      
-        <p>Exploring GNU radio(GNU radio探密)是GNU radio创始人Eric Blossom所写的，为我们用GNU radio工具构建软件无线电系统做了简明扼要的介绍。读完之后有几点需要自己注意的地方：</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/31/%E8%BD%AF%E4%BB%B6%E6%97%A0%E7%BA%BF%E7%94%B5%E5%9F%BA%E7%A1%80/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
@@ -1139,11 +395,13 @@ var _hmt = _hmt || [];
 
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
-    </nav>
   
 
+  
+
+  
+
+  
 
           </div>
         </div>
@@ -1185,8 +443,8 @@ var _hmt = _hmt || [];
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
