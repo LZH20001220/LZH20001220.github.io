@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>C++ primer Chapter 1 ~ 2 | 博客杂记 - harder and better</title>
+  <title>C++ primer 1-2章 变量和基本类型 | 博客杂记 - Harder and Better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -25,18 +25,18 @@
   </style>
   <meta name="description" content="第一章    开始一些背景：在C++ 11之前，C++存在最严重的缺陷就是缺少自动内存管理和对象级别的消息发送机制。 MFC：Microsoft Foundation Classes    微软基础类库 C++可以看作是由三部分组成的：低级语言，现代高级语言特征，标准库函数。 编译或者运行程序可以用IDE或者命令行来实现。 C++最常见的后缀包括.cc，.cxx，.cpp，.cp，.c">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++ primer Chapter 1 ~ 2">
+<meta property="og:title" content="C++ primer 1-2章 变量和基本类型">
 <meta property="og:url" content="http://example.com/2022/01/19/C++-primer-1-2%E7%AB%A0/index.html">
-<meta property="og:site_name" content="博客杂记 - harder and better">
+<meta property="og:site_name" content="博客杂记 - Harder and Better">
 <meta property="og:description" content="第一章    开始一些背景：在C++ 11之前，C++存在最严重的缺陷就是缺少自动内存管理和对象级别的消息发送机制。 MFC：Microsoft Foundation Classes    微软基础类库 C++可以看作是由三部分组成的：低级语言，现代高级语言特征，标准库函数。 编译或者运行程序可以用IDE或者命令行来实现。 C++最常见的后缀包括.cc，.cxx，.cpp，.cp，.c">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-01-19T15:18:41.000Z">
-<meta property="article:modified_time" content="2022-02-24T13:25:29.286Z">
+<meta property="article:modified_time" content="2022-02-28T07:30:58.869Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternative" href="/atom.xml" title="博客杂记 - harder and better" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
   
     <link rel="icon" href="/img/bitbug_favicon.ico">
@@ -236,7 +236,7 @@ var _hmt = _hmt || [];
       <center><p>
   
     <h1 class="article-title_code_ant" itemprop="name">
-      C++ primer Chapter 1 ~ 2
+      C++ primer 1-2章 变量和基本类型
     </h1>
   
 </p></center>
@@ -541,8 +541,11 @@ var _hmt = _hmt || [];
 </ul>
 <p>普通指针可以赋给常量指针，但是反过来不行。</p>
 <h5 id="顶层const"><a href="#顶层const" class="headerlink" title="顶层const"></a>顶层const</h5><ul>
-<li><code>顶层const</code>：指针本身是个常量。*const</li>
-<li><code>底层const</code>：指针指向的对象是个常量。拷贝时严格要求相同的底层const资格。const*</li>
+<li><p><code>顶层const</code>：指针本身是个常量。*const</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> num_b = <span class="number">2</span>;</span><br><span class="line"><span class="type">int</span> *<span class="type">const</span> p_b = &amp;num_b; <span class="comment">//顶层const</span></span><br><span class="line"><span class="comment">//p_b = &amp;num_a;  //错误，常量指针不能改变存储的地址值</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>底层const</code>：指针指向的对象是个常量。拷贝时严格要求相同的底层const资格。const*</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> num_a = <span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> <span class="type">const</span>  *p_a = &amp;num_a; <span class="comment">//底层const</span></span><br><span class="line"><span class="comment">//*p_a = 2;  //错误，指向“常量”的指针不能改变所指的对象</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 <h5 id="constexpr和常量表达式"><a href="#constexpr和常量表达式" class="headerlink" title="constexpr和常量表达式"></a><code>constexpr</code>和常量表达式</h5><ul>
 <li>常量表达式：指值不会改变，且在编译过程中就能得到计算结果的表达式。</li>
