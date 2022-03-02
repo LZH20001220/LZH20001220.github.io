@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Tag: 操作系统 | 博客杂记 - Harder and Better</title>
+  <title>C++ primer 7章 类 | 博客杂记 - Harder and Better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -23,13 +23,17 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="博客杂记 - Harder and Better">
-<meta property="og:url" content="http://example.com/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.html">
+  <meta name="description" content="第七章 类 （Class）定义抽象数据类型 类背后的基本思想：数据抽象（data abstraction）和封装（encapsulation）。 数据抽象是一种依赖于接口（interface）和实现（implementation）分离的编程技术。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++ primer 7章 类">
+<meta property="og:url" content="http://example.com/2022/03/02/C++-primer-7%E7%AB%A0/index.html">
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
+<meta property="og:description" content="第七章 类 （Class）定义抽象数据类型 类背后的基本思想：数据抽象（data abstraction）和封装（encapsulation）。 数据抽象是一种依赖于接口（interface）和实现（implementation）分离的编程技术。">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-02T02:34:45.000Z">
+<meta property="article:modified_time" content="2022-03-02T06:54:08.726Z">
 <meta property="article:author" content="ygtrece">
-<meta property="article:tag" content="学习, 日常">
+<meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
@@ -182,103 +186,240 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-C++-primer-7章" class="article article-type-post " itemscope itemprop="blogPost">
   
-  
+<div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C/" class="archive-article-date">
-  	<time datetime="2022-02-11T01:32:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-11</time>
+      <header class="article-header">
+        
+        
+        <a href="/2022/03/02/C++-primer-7%E7%AB%A0/" class="archive-article-date">
+  	<time datetime="2022-03-02T02:34:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-02</time>
 </a>
 
 
-        </div>
-    	 
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">847字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">3分</span>
+      </span>
+    </span>
+</div>
+          
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C/">操作系统实验</a>
+    <h1 class="article-title_code_ant" itemprop="name">
+      C++ primer 7章 类
     </h1>
   
+</p></center>
+      
+        <h3 id="第七章-类-（Class）"><a href="#第七章-类-（Class）" class="headerlink" title="第七章 类 （Class）"></a>第七章 类 （Class）</h3><h4 id="定义抽象数据类型"><a href="#定义抽象数据类型" class="headerlink" title="定义抽象数据类型"></a>定义抽象数据类型</h4><ul>
+<li><strong>类背后的基本思想</strong>：<strong>数据抽象</strong>（data abstraction）和<strong>封装</strong>（encapsulation）。</li>
+<li>数据抽象是一种依赖于<strong>接口</strong>（interface）和<strong>实现</strong>（implementation）分离的编程技术。</li>
+</ul>
+<span id="more"></span>
 
-        <div class="article-info info-on-right">
-          
+<h4 id="类成员-（Member）"><a href="#类成员-（Member）" class="headerlink" title="类成员 （Member）"></a>类成员 （Member）</h4><ul>
+<li>必须在类的内部声明，不能在其他地方增加成员。</li>
+<li>成员可以是数据，函数，类型别名。</li>
+</ul>
+<h4 id="类的成员函数"><a href="#类的成员函数" class="headerlink" title="类的成员函数"></a>类的成员函数</h4><ul>
+<li>成员函数的<strong>声明</strong>必须在类的内部。</li>
+<li>成员函数的<strong>定义</strong>既可以在类的内部也可以在外部。</li>
+<li>使用点运算符 <code>.</code> 调用成员函数。</li>
+<li>必须对任何<code>const</code>或引用类型成员以及没有默认构造函数的类类型的任何成员使用初始化式。</li>
+<li><code>ConstRef::ConstRef(int ii): i(ii), ci(i), ri(ii) &#123; &#125;</code></li>
+<li>默认实参： <code>Sales_item(const std::string &amp;book): isbn(book), units_sold(0), revenue(0.0) &#123; &#125;</code></li>
+<li><code>*this：</code><ul>
+<li>每个成员函数都有一个额外的，隐含的形参<code>this</code>。</li>
+<li><code>this</code>总是指向当前对象，因此<code>this</code>是一个常量指针。</li>
+<li>形参表后面的<code>const</code>，改变了隐含的<code>this</code>形参的类型，如 <code>bool same_isbn(const Sales_item &amp;rhs) const</code>，这种函数称为“常量成员函数”（<code>this</code>指向的当前对象是常量）。</li>
+<li><code>return *this;</code>可以让成员函数连续调用。</li>
+<li>普通的非<code>const</code>成员函数：<code>this</code>是指向类类型的<code>const</code>指针（可以改变<code>this</code>所指向的值，不能改变<code>this</code>保存的地址）。</li>
+<li><code>const</code>成员函数：<code>this</code>是指向<code>const</code>类类型的<code>const</code>指针（既不能改变<code>this</code>所指向的值，也不能改变<code>this</code>保存的地址）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="非成员函数"><a href="#非成员函数" class="headerlink" title="非成员函数"></a>非成员函数</h4><ul>
+<li>和类相关的非成员函数，定义和声明都应该在类的外部。</li>
+</ul>
+<p><strong>练习7.6：定义<code>Sales_data</code>类的<code>add，read和print</code></strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Sales_data</span> &#123;</span><br><span class="line">    <span class="function">std::string <span class="type">const</span>&amp; <span class="title">isbn</span><span class="params">()</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> bookNo; &#125;; <span class="comment">//不需要改变的量前面加上引用比较合适，无需改变值，最好声明为常量引用</span></span><br><span class="line">    <span class="function">Sales_data&amp; <span class="title">combine</span><span class="params">(<span class="type">const</span> Sales_data&amp;)</span></span>;</span><br><span class="line"></span><br><span class="line">    std::string bookNo;</span><br><span class="line">    <span class="type">unsigned</span> units_sold = <span class="number">0</span>;</span><br><span class="line">    <span class="type">double</span> revenue = <span class="number">0.0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// member functions.</span></span><br><span class="line"><span class="function">Sales_data&amp; <span class="title">Sales_data::combine</span><span class="params">(<span class="type">const</span> Sales_data&amp; rhs)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    units_sold += rhs.units_sold;</span><br><span class="line">    revenue += rhs.revenue;</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// nonmember functions</span></span><br><span class="line"><span class="function">std::istream &amp;<span class="title">read</span><span class="params">(std::istream &amp;is, Sales_data &amp;item)</span><span class="comment">//read要改变值，所以声明为普通的引用</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">double</span> price = <span class="number">0</span>;</span><br><span class="line">    is &gt;&gt; item.bookNo &gt;&gt; item.units_sold &gt;&gt; price;</span><br><span class="line">    item.revenue = price * item.units_sold;</span><br><span class="line">    <span class="keyword">return</span> is;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">std::ostream &amp;<span class="title">print</span><span class="params">(std::ostream &amp;os, <span class="type">const</span> Sales_data &amp;item)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    os &lt;&lt; item.<span class="built_in">isbn</span>() &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; item.units_sold &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; item.revenue;</span><br><span class="line">    <span class="keyword">return</span> os;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Sales_data <span class="title">add</span><span class="params">(<span class="type">const</span> Sales_data &amp;lhs, <span class="type">const</span> Sales_data &amp;rhs)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Sales_data sum = lhs;</span><br><span class="line">    sum.<span class="built_in">combine</span>(rhs);</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="类的构造函数"><a href="#类的构造函数" class="headerlink" title="类的构造函数"></a>类的构造函数</h4><ul>
+<li>类通过一个或者几个特殊的成员函数来控制其对象的初始化过程，这些函数叫做<strong>构造函数</strong>。</li>
+<li>构造函数是特殊的成员函数。</li>
+<li>构造函数放在类的<code>public</code>部分。</li>
+<li>与类同名的成员函数。</li>
+<li><code>Sales_item(): units_sold(0), revenue(0.0) &#123; &#125;</code></li>
+<li><code>=default</code>要求编译器合成默认的构造函数。(<code>C++11</code>)</li>
+<li>初始化列表：冒号和花括号之间的代码： <code>Sales_item(): units_sold(0), revenue(0.0) &#123; &#125;</code></li>
+</ul>
+<p><strong>例子：定义树的结点的结构的构造函数</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">TreeNode</span> &#123;</span><br><span class="line">    <span class="type">int</span> val;</span><br><span class="line">    TreeNode *left;</span><br><span class="line">    TreeNode *right;</span><br><span class="line">    <span class="built_in">TreeNode</span>() : <span class="built_in">val</span>(<span class="number">0</span>), <span class="built_in">left</span>(<span class="literal">nullptr</span>), <span class="built_in">right</span>(<span class="literal">nullptr</span>) &#123;&#125;<span class="comment">//分别是实例化时传入的参数有几个，默认的参数值，&#123;&#125;代表未定义的函数体</span></span><br><span class="line">    <span class="built_in">TreeNode</span>(<span class="type">int</span> x) : <span class="built_in">val</span>(x), <span class="built_in">left</span>(<span class="literal">nullptr</span>), <span class="built_in">right</span>(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line">    <span class="built_in">TreeNode</span>(<span class="type">int</span> x, TreeNode *left, TreeNode *right) : <span class="built_in">val</span>(x), <span class="built_in">left</span>(left), <span class="built_in">right</span>(right) &#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/03/02/C++-primer-7%E7%AB%A0/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/02/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%A6%82%E8%BF%B0/" class="archive-article-date">
-  	<time datetime="2022-02-02T08:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-02</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2022/03/01/%E5%91%A8%E6%8A%A52-28-3-6/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">周报2.28-3.6</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
 
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/02/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%A6%82%E8%BF%B0/">操作系统 - 概述</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E7%B1%BB-%EF%BC%88Class%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">第七章 类 （Class）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">定义抽象数据类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E6%88%90%E5%91%98-%EF%BC%88Member%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">类成员 （Member）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.</span> <span class="toc-text">类的成员函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%9E%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="toc-number">1.4.</span> <span class="toc-text">非成员函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-number">1.5.</span> <span class="toc-text">类的构造函数</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
   
-    </div></section>
   
 
-    
+  
 
+  
+
+  
 
           </div>
         </div>
@@ -321,9 +462,9 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
