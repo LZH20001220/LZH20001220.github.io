@@ -31,7 +31,7 @@
 <meta property="og:description" content="第七章 类 （Class）定义抽象数据类型 类背后的基本思想：数据抽象（data abstraction）和封装（encapsulation）。 数据抽象是一种依赖于接口（interface）和实现（implementation）分离的编程技术。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-02T02:34:45.000Z">
-<meta property="article:modified_time" content="2022-03-02T16:11:57.781Z">
+<meta property="article:modified_time" content="2022-03-03T09:40:02.742Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
@@ -212,7 +212,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.2k字</span>
+        <span class="post-count">2.1k字</span>
       </span>
     </span>
 
@@ -221,7 +221,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">4分</span>
+        <span class="post-count">8分</span>
       </span>
     </span>
 </div>
@@ -306,10 +306,65 @@ var _hmt = _hmt || [];
 <li>如果一个类指定了友元类，则友元类的成员函数可以访问此类包括非公有成员在内的所有成员。</li>
 </ul>
 </li>
+<li>在类中声明友元之后只是影响访问权限，并非普通意义的声明。</li>
 </ul>
 <h4 id="封装的益处"><a href="#封装的益处" class="headerlink" title="封装的益处"></a>封装的益处</h4><ul>
 <li>确保用户的代码不会无意间破坏封装对象的状态。</li>
 <li>被封装的类的具体实现细节可以随时改变，而无需调整用户级别的代码。</li>
+</ul>
+<h3 id="类的其他特性"><a href="#类的其他特性" class="headerlink" title="类的其他特性"></a>类的其他特性</h3><ul>
+<li><p>成员函数作为内联函数<code>inline</code>：</p>
+<ul>
+<li>在类的内部，常有一些规模较小的函数适合于被声明成内联函数。</li>
+<li><strong>定义</strong>在类内部的函数是<strong>自动内联</strong>的。</li>
+<li>在类外部定义的成员函数，也可以在声明时显式地加上 <code>inline</code>。</li>
+<li>关键字inline必须与函数定义放在一起才能使函数成为内联函数，仅仅将inline放在函数声明前面不起任何作用，再调用函数时，声明为内联的函数在调用点展开。</li>
+<li>如果函数调用的时间大于函数内部运行的时间，声明为内联比较合适。</li>
+</ul>
+</li>
+<li><p>返回<code>*this</code>的成员函数：</p>
+<ul>
+<li>注意返回类型必须是<code>Screen&amp;</code>不能是<code>Screen</code></li>
+<li>如果某个类的某个函数为<code>const</code>类型，如果以引用的形式返回<code>*this</code>，那么它的返回类型是常量引用。</li>
+<li>通过<code>this</code>指针使用成员的做法虽然合法，但是有点多余。讨论显示使用指针访问成员的优缺点。</li>
+</ul>
+<p>优点：程序的意图更明确，函数的参数可以与成员同名，如：</p>
+  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">setAddr</span><span class="params">(<span class="type">const</span> std::string &amp;addr)</span> </span>&#123; <span class="keyword">this</span>-&gt;addr = addr; &#125;</span><br></pre></td></tr></table></figure>
+
+<pre><code> 缺点：有时候显得有点多余，如:
+</code></pre>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::string <span class="title">getAddr</span><span class="params">()</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> <span class="keyword">this</span>-&gt;addr; &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>可变数据成员（mutable data member）：<ul>
+<li><code>mutable size_t access_ctr;</code></li>
+<li>永远不会是<code>const</code>，即使它是<code>const</code>对象的成员。</li>
+</ul>
+</li>
+<li>类类型：<ul>
+<li>每个类定义了唯一的类型，即使两个类的成员函数完全一样。</li>
+<li>类也可以像函数一样将声明和定义分开。</li>
+<li>类必须定义后才能才能将数据成员声明为这种类类型，因为只有定义后编译器才知道类需要多少空间；然而类只需声明不需要定义之后就能声明对类的引用或指针。</li>
+</ul>
+</li>
+<li>友元再探：</li>
+</ul>
+<p><code>using</code>关键词的作用之一：为数据类型起别名，相当于<code>typedef</code></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39640298/article/details/84641726">c++中using的用法_YoungYangD的博客-CSDN博客_c++ using</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> std::vector&lt;<span class="type">int</span>&gt; intvec;</span><br><span class="line"><span class="keyword">using</span> intvec = std::vector&lt;<span class="type">int</span>&gt;;	<span class="comment">//这两个写法是等价的</span></span><br></pre></td></tr></table></figure>
+
+<p>我们定义的类的成员函数中，常常<strong>有一些成员函数不改变类的数据成员</strong>，也就是说，这些函数是**”只读”<strong>函数，而有一些函数要修改类数据成员的值。如果把</strong>不改变数据成员的函数前都加上const关键字进行标识，显然，可提高程序的可读性**。</p>
+<h4 id="类的作用域"><a href="#类的作用域" class="headerlink" title="类的作用域"></a>类的作用域</h4><ul>
+<li>每个类都会定义它自己的作用域。在类的作用域之外，普通的数据和函数成员只能由引用、对象、指针使用成员访问运算符来访问。</li>
+<li>函数的<strong>返回类型</strong>通常在函数名前面，因此当成员函数定义在类的外部时，返回类型中使用的名字都位于类的作用域之外。</li>
+<li>如果成员使用了外层作用域中的某个名字，而该名字代表一种<strong>类型</strong>(typedef)，则类不能在之后重新定义该名字。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> string Type;</span><br><span class="line"><span class="function">Type <span class="title">initVal</span><span class="params">()</span></span>; </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Exercise</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">typedef</span> <span class="type">double</span> Type; <span class="comment">//类内重新定义，错误！</span></span><br><span class="line">    <span class="function">Type <span class="title">setVal</span><span class="params">(Type)</span></span>;</span><br><span class="line">    <span class="function">Type <span class="title">initVal</span><span class="params">()</span></span>; </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> val;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function">Type <span class="title">Exercise::setVal</span><span class="params">(Type parm)</span> </span>&#123; </span><br><span class="line">    val = parm + <span class="built_in">initVal</span>();     </span><br><span class="line">    <span class="keyword">return</span> val;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>类中的<strong>类型名定义</strong>都要放在一开始,不能先使用在定义。</li>
 </ul>
 
       
@@ -423,7 +478,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E7%B1%BB-%EF%BC%88Class%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">第七章 类 （Class）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">定义抽象数据类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E6%88%90%E5%91%98-%EF%BC%88Member%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">类成员 （Member）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.</span> <span class="toc-text">类的成员函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%9E%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="toc-number">1.4.</span> <span class="toc-text">非成员函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-number">1.5.</span> <span class="toc-text">类的构造函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E5%B0%81%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">访问控制与封装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8B%E5%85%83"><span class="toc-number">2.1.</span> <span class="toc-text">友元</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%81%E8%A3%85%E7%9A%84%E7%9B%8A%E5%A4%84"><span class="toc-number">2.2.</span> <span class="toc-text">封装的益处</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E7%B1%BB-%EF%BC%88Class%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">第七章 类 （Class）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">定义抽象数据类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E6%88%90%E5%91%98-%EF%BC%88Member%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">类成员 （Member）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.</span> <span class="toc-text">类的成员函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%9E%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="toc-number">1.4.</span> <span class="toc-text">非成员函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-number">1.5.</span> <span class="toc-text">类的构造函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E5%B0%81%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">访问控制与封装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8B%E5%85%83"><span class="toc-number">2.1.</span> <span class="toc-text">友元</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%81%E8%A3%85%E7%9A%84%E7%9B%8A%E5%A4%84"><span class="toc-number">2.2.</span> <span class="toc-text">封装的益处</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E5%85%B6%E4%BB%96%E7%89%B9%E6%80%A7"><span class="toc-number">3.</span> <span class="toc-text">类的其他特性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">3.1.</span> <span class="toc-text">类的作用域</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
