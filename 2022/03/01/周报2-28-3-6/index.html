@@ -34,7 +34,7 @@
 <meta property="og:image" content="http://example.com/2022/03/01/%E5%91%A8%E6%8A%A52-28-3-6/1.png">
 <meta property="og:image" content="http://example.com/2022/03/01/%E5%91%A8%E6%8A%A52-28-3-6/2.png">
 <meta property="article:published_time" content="2022-03-01T06:56:02.000Z">
-<meta property="article:modified_time" content="2022-03-01T13:46:48.205Z">
+<meta property="article:modified_time" content="2022-03-04T07:30:34.363Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="科研">
 <meta property="article:tag" content="周报">
@@ -217,7 +217,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">586字</span>
+        <span class="post-count">650字</span>
       </span>
     </span>
 
@@ -259,11 +259,13 @@ var _hmt = _hmt || [];
 <p><img src="/2022/03/01/%E5%91%A8%E6%8A%A52-28-3-6/2.png"></p>
 <p>多次实验，发现都是第5到第7位改变。</p>
 <p>而如果先将信号与方波相乘再通过<code>USRP</code>传输，得到的反射信号不正常，猜测是因为乘了方波对同步造成了影响，因此考虑用<code>tag</code>继续测试。</p>
-<p>用<code>tag</code>进行实验与前面的用<code>USRP</code>做测试不同，为了防止原信号和反射信号相互干扰，<code>tag</code>必须对原有的信号进行移频处理。通过<code>tag</code>产生方波对原信号进行移频，而在某些位置通过将<code>tag</code>原有的方波与 ‘1’ 做异或，即可使方波与原来的方波相位相差180°，相当于仿真中的对原信号乘 <code>-1</code>，与 ‘0’ 做异或，相当于保持原有的方波不变。</p>
+<p>用<code>tag</code>进行实验与前面的用<code>USRP</code>做测试不同，为了防止原信号和反射信号相互干扰，<code>tag</code>必须对原有的信号进行移频处理。通过<code>tag</code>产生方波对原信号进行移频，而在某些位置通过将<code>tag</code>原有的方波与 <code>&#39;1&#39;</code> 做异或，即可使方波与原来的方波相位相差180°，相当于仿真中的对原信号乘 <code>-1</code>，与 <code>&#39;0&#39;</code> 做异或，相当于保持原有的方波不变。</p>
 <p>写下的<code>verilog</code>代码如下：</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><code>tag</code>的比较器好难调，心累…</p>
+<p>注意的问题：</p>
+<p><code>tag</code>烧完之后要记得<code>clear</code>程序，否则直接用<code>FPGA</code>连接<code>tag</code>后波形会很奇怪。</p>
+<p>实验时先用正弦波进行尝试，正弦波成功后再用<code>wifi</code>测试。<code>wifi</code>测试时注意比较器的灯，还有<code>USRP</code>的功率。</p>
 
       
 
@@ -549,10 +551,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">其他</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
               </li>
              
@@ -562,6 +560,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">其他</a>
               </li>
             
             <div class="clearfix"></div>
