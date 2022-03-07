@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>网络是怎样连接的 - 绪论 | 博客杂记 - Harder and Better</title>
+  <title>博客杂记 - Harder and Better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -23,17 +23,17 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta name="description" content="为什么DNS 不对，QQ 却可以正常上呢？ 因为QQ 是直接使用IP 地址来连接服务器的，所以即便DNS 失效，它依然可以“屹立不倒”，以至于现在有很多人把QQ 当成一个排查DNS 问题的“参照物”。">
+  <meta name="description" content="毕设框架：摘要 Abstract 第一章 绪论：  1.1：研究背景和意义 1.1.1 OFDM通信系统介绍 1.1.2 环境反向散射通信技术介绍 1.1.3 软件无线电介绍   1.2 国内外研究现状 1.3 挑战与解决方法 1.4 文章结构安排  第二章 OFDM通信系统基础知识：  2.1 OFDM通信系统理论基础 2.2 OFDM通信系统软件仿真 2.3 OFDM通信系统实物验证  第三章">
 <meta property="og:type" content="article">
-<meta property="og:title" content="网络是怎样连接的 - 绪论">
-<meta property="og:url" content="http://example.com/2022/02/14/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84-%E7%BB%AA%E8%AE%BA/index.html">
+<meta property="og:title" content="博客杂记 - Harder and Better">
+<meta property="og:url" content="http://example.com/2022/03/07/%E6%AF%95%E8%AE%BE%E6%A1%86%E6%9E%B6/index.html">
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
-<meta property="og:description" content="为什么DNS 不对，QQ 却可以正常上呢？ 因为QQ 是直接使用IP 地址来连接服务器的，所以即便DNS 失效，它依然可以“屹立不倒”，以至于现在有很多人把QQ 当成一个排查DNS 问题的“参照物”。">
+<meta property="og:description" content="毕设框架：摘要 Abstract 第一章 绪论：  1.1：研究背景和意义 1.1.1 OFDM通信系统介绍 1.1.2 环境反向散射通信技术介绍 1.1.3 软件无线电介绍   1.2 国内外研究现状 1.3 挑战与解决方法 1.4 文章结构安排  第二章 OFDM通信系统基础知识：  2.1 OFDM通信系统理论基础 2.2 OFDM通信系统软件仿真 2.3 OFDM通信系统实物验证  第三章">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-02-14T01:23:47.000Z">
-<meta property="article:modified_time" content="2022-02-17T08:21:35.278Z">
+<meta property="article:published_time" content="2022-03-07T08:06:42.056Z">
+<meta property="article:modified_time" content="2022-03-07T08:06:24.825Z">
 <meta property="article:author" content="ygtrece">
-<meta property="article:tag" content="计算机网络">
+<meta property="article:tag" content="学习, 日常">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
@@ -186,99 +186,53 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-网络是怎样连接的-绪论" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-毕设框架" class="article article-type-post " itemscope itemprop="blogPost">
   
 <div class="article-inner">
     
-      <header class="article-header">
-        
-        
-        <a href="/2022/02/14/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84-%E7%BB%AA%E8%AE%BA/" class="archive-article-date">
-  	<time datetime="2022-02-14T01:23:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-14</time>
-</a>
-
-
-        <!-- 不蒜子统计 -->
-        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
-        </span>
-
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">852字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">2分</span>
-      </span>
-    </span>
-</div>
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
     <div class="article-entry" itemprop="articleBody">
        
-      <center><p>
-  
-    <h1 class="article-title_code_ant" itemprop="name">
-      网络是怎样连接的 - 绪论
-    </h1>
-  
-</p></center>
+      <center><p></p></center>
       
-        <ul>
-<li><p>为什么DNS 不对，QQ 却可以正常上呢？</p>
-<p>因为QQ 是直接使用IP 地址来连接服务器的，所以即便DNS 失效，它依然可以“屹立不倒”，以至于现在有很多人把QQ 当成一个排查DNS 问题的“参照物”。</p>
-<span id="more"></span>
-</li>
-<li><p>浏览器访问Web 服务器这一过程的全貌</p>
-<ol>
-<li>浏览器：“请给我网页的数据。”</li>
-<li>Web服务器：“好的，这就是你要的数据。”</li>
-</ol>
-</li>
-<li><p>Web搬运数字信息的机制</p>
-</li>
-</ul>
-<p>Web要实现应用程序之间的交互，我们需要一个能够在浏览器服务器之间传递请求和响应的机制。所以说，我们需要一种机制。由于请求和响应都是0和1组成的数字信息，所以可以说，我们需要的是一种能够将数字信息搬运到指定目的地的机制。</p>
+        <h2 id="毕设框架："><a href="#毕设框架：" class="headerlink" title="毕设框架："></a>毕设框架：</h2><p><strong>摘要</strong></p>
+<p><strong>Abstract</strong></p>
+<p><strong>第一章 绪论：</strong></p>
 <ul>
-<li>网络的组成</li>
+<li>1.1：研究背景和意义<ul>
+<li>1.1.1 OFDM通信系统介绍</li>
+<li>1.1.2 环境反向散射通信技术介绍</li>
+<li>1.1.3 软件无线电介绍</li>
 </ul>
-<p>Web搬运数字信息的机制，再加上浏览器服务器这些网络应用程序，这两部分就组成了网络</p>
-<ul>
-<li><strong>从输入网址到返回信息的全过程:</strong></li>
+</li>
+<li>1.2 国内外研究现状</li>
+<li>1.3 挑战与解决方法</li>
+<li>1.4 文章结构安排</li>
 </ul>
-<ol>
-<li>输入URL链接, 浏览器就会按照一定的规则去分析这个网址的含义，然后根据其含义生成请求消息，然后委托操作系统中的网络控制软件将消息发送给服务器。(第一章：Web浏览器)</li>
-<li>网络控制软件(协议栈)将从浏览器收到的数据打包, 然后加上目的地址等控制信息。(类似于把信放在信封里, 然后写上邮编等信息)。接下来，协议栈会将包交给网卡（负责以太网或无线网络通信的硬件）。然后，网卡会将包转换为电信号并通过网线发送出去。这样一来，包就进入到网络之中了。(第二章：协议栈、网卡)</li>
-<li>网卡发送的包会经过<strong>交换机</strong>等设备，到达用来接入互联网的<strong>路由器</strong>。(第三章：集线器、交换机、路由器)</li>
-<li>接下来，数据从用来接入互联网的路由器出发，进入了互联网的内部。（第四章：接入网、网络运营商）</li>
-<li>Web通过骨干网之后，网络包最终到达服务器所在的局域网中。接着，它会遇到防火墙，防火墙会对进入的包进行检查。(第五章：防火墙、缓存服务器)</li>
-<li>Web当网络包到服务器后，数据会被解包并还原为原始的请求消Web息，然后交服务器程序。(第六章：Web服务器)</li>
-</ol>
+<p><strong>第二章 OFDM通信系统基础知识：</strong></p>
 <ul>
-<li>名词概念:<ol>
-<li>Dynamic Host Configuration Protocol 动态主机配置协议是一个局域网的网络协议。指的是由服务器控制一段IP地址范围，客户机登录服务器时就可以自动获得服务器分配的IP地址和子网掩码。担任DHCP服务器的计算机需要安装TCP&#x2F;IP协议，并为其设置静态IP地址、子网掩码、默认网关等内容。</li>
-<li>PPP连接：Point to Point Protocol 点对点协议：为在点对点连接上传输多协议数据包提供了一个标准方法。</li>
-<li>非对称数字用户线路（ADSL，Asymmetric Digital Subscriber Line）是数字用户线路（<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/xDSL/10770830">xDSL</a>，Digital Subscriber Line）服务中最流行的一种。将区域网接入到互连网的链路。</li>
-</ol>
+<li>2.1 OFDM通信系统理论基础</li>
+<li>2.2 OFDM通信系统软件仿真</li>
+<li>2.3 OFDM通信系统实物验证</li>
+</ul>
+<p><strong>第三章 OFDM环境反向散射系统设计与实现：</strong></p>
+<ul>
+<li>3.1 反向散射标签介绍</li>
+<li>3.2 OFDM 环境反向散射系统设计</li>
+<li>3.3 OFDM 环境反向散射系统实现与性能分析</li>
+</ul>
+<p><strong>第四章 WiFi环境反向散射系统设计与实现</strong></p>
+<ul>
+<li>4.1 WiFi 环境反向散射系统设计</li>
+<li>4.2 WiFi 环境反向散射系统实现与性能分析<ul>
+<li>4.2.1 基于软件无线电平台的 WiFi 环境反向散射系统实现与性能分析</li>
+<li>4.2.2 基于商用网卡的 WiFi 环境反向散射系统实现与性能分析</li>
+</ul>
 </li>
 </ul>
+<p><strong>总结与展望</strong></p>
+<p><strong>参考文献</strong></p>
+<p><strong>…</strong></p>
+<p><strong>致谢</strong></p>
 
       
 
@@ -287,17 +241,6 @@ var _hmt = _hmt || [];
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机网络</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
@@ -348,7 +291,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/02/14/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84-%E7%BB%AA%E8%AE%BA/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/03/07/%E6%AF%95%E8%AE%BE%E6%A1%86%E6%9E%B6/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -362,18 +305,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2022/02/14/MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          MySQL必知必会
-        
-      </div>
-    </a>
   
-  
-    <a href="/2022/02/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">操作系统实验</div>
+    <a href="/2022/03/02/C++-primer-7%E7%AB%A0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">C++ primer 7章 类</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -400,7 +334,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AF%95%E8%AE%BE%E6%A1%86%E6%9E%B6%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">毕设框架：</span></a></li></ol>
                     </div>
                 </span>
             </div>
