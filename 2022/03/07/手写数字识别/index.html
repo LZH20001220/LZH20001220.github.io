@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2022 | 博客杂记 - Harder and Better</title>
+  <title>手写数字识别 | 博客杂记 - Harder and Better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -23,14 +23,21 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="博客杂记 - Harder and Better">
-<meta property="og:url" content="http://example.com/archives/2022/page/4/index.html">
+  <meta name="description" content="手写数字识别(CS229 ex3)首先确定这个问题是一个分类问题。  数据(data)的结构： X的维度是5000*400，其中5000是数字的总个数，400是数据的像素点是20*20的；y的维度是5000*1, 存的是数据对应的真实值； sample_idx是从data中选取了100个数字，sample_images是这100个数字的像素值；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手写数字识别">
+<meta property="og:url" content="http://example.com/2022/03/07/%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/index.html">
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
+<meta property="og:description" content="手写数字识别(CS229 ex3)首先确定这个问题是一个分类问题。  数据(data)的结构： X的维度是5000*400，其中5000是数字的总个数，400是数据的像素点是20*20的；y的维度是5000*1, 存的是数据对应的真实值； sample_idx是从data中选取了100个数字，sample_images是这100个数字的像素值；">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/03/07/%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/1.png">
+<meta property="og:image" content="http://example.com/2022/03/07/%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/2.png">
+<meta property="article:published_time" content="2022-03-07T11:35:58.000Z">
+<meta property="article:modified_time" content="2022-03-08T11:44:59.133Z">
 <meta property="article:author" content="ygtrece">
-<meta property="article:tag" content="学习, 日常">
+<meta property="article:tag" content="机器学习">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/03/07/%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/1.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -182,111 +189,250 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-手写数字识别" class="article article-type-post " itemscope itemprop="blogPost">
   
-  
+<div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/01/02/%E5%91%A8%E6%8A%A512.27-1.2/" class="archive-article-date">
-  	<time datetime="2022-01-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-02</time>
+      <header class="article-header">
+        
+        
+        <a href="/2022/03/07/%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/" class="archive-article-date">
+  	<time datetime="2022-03-07T11:35:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-07</time>
 </a>
 
 
-        </div>
-    	 
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.2k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">5分</span>
+      </span>
+    </span>
+</div>
+          
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/01/02/%E5%91%A8%E6%8A%A512.27-1.2/">周报:12.27-1.2</a>
+    <h1 class="article-title_code_ant" itemprop="name">
+      手写数字识别
     </h1>
   
+</p></center>
+      
+        <h4 id="手写数字识别-CS229-ex3"><a href="#手写数字识别-CS229-ex3" class="headerlink" title="手写数字识别(CS229 ex3)"></a>手写数字识别(CS229 ex3)</h4><p><strong>首先确定这个问题是一个分类问题。</strong></p>
+<ul>
+<li>数据(data)的结构：<ul>
+<li><code>X</code>的维度是<code>5000*400</code>，其中<code>5000</code>是数字的总个数，<code>400</code>是数据的像素点是<code>20*20</code>的；y的维度是<code>5000*1</code>, 存的是数据对应的真实值；</li>
+<li><code>sample_idx</code>是从<code>data</code>中选取了<code>100</code>个数字，<code>sample_images</code>是这<code>100</code>个数字的像素值；</li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
 
-        <div class="article-info info-on-right">
-          
+<ul>
+<li><p><code>sigmoid</code>函数：可以将一个实数映射为一个（0，1）区间内的数；</p>
+<p><img src="/2022/03/07/%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/1.png" alt="image-20220307223032066"></p>
+</li>
+</ul>
+<p>优点：平滑、易于求导。</p>
+<p>缺点：激活函数计算量大，反向传播求误差梯度时，求导涉及除法；反向传播时，很容易就会出现梯度消失的情况，从而无法完成深层网络的训练。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#定义sigmoid函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">sigmoid</span>(<span class="params">z</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span> / (<span class="number">1</span> + np.exp(-z))</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><h4 id="代价函数"><a href="#代价函数" class="headerlink" title="代价函数"></a>代价函数</h4></li>
+</ul>
+<p>希望代价函数是一个凸函数，而不是具有多个局部最优解。</p>
+<p><img src="/2022/03/07/%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/2.png" alt="image-20220308153911452"><br>$$<br>选择的代价函数如上所示，这个代价函数的特点就是首先可以获得局部最优解，然后当y &#x3D; 1，h_\theta(x) &#x3D; 1时，代价函数为0<br>$$<br>根据此思想，可以定义代价函数如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">costReg</span>(<span class="params">theta, X, y, lamda</span>):</span><br><span class="line">    n = <span class="built_in">len</span>(theta)</span><br><span class="line">    m = <span class="built_in">len</span>(y)</span><br><span class="line">    first = -y * np.log(sigmoid(X @ theta.reshape(n,<span class="number">1</span>)))</span><br><span class="line">    second = -(<span class="number">1</span> - y) * np.log(<span class="number">1</span> - sigmoid(X @ theta.reshape(n,<span class="number">1</span>)))</span><br><span class="line">    reg = (lamda / (<span class="number">2</span> * m)) * np.<span class="built_in">sum</span>(np.power(theta.reshape(n,<span class="number">1</span>), <span class="number">2</span>)) <span class="comment">#lamda是学习率</span></span><br><span class="line">    <span class="keyword">return</span> (<span class="built_in">sum</span>(first + second) / m) + reg</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/bonelee/p/8579148.html">正则化方法：L1和L2 regularization、数据集扩增、dropout - bonelee - 博客园 (cnblogs.com)</a></p>
+<p><code>reg</code>表示正则化，在代价函数的后面加一个常数项，减小每个数据的权重，防止过拟合，注意正则化不包括theta0</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39882948/article/details/109884086">梯度下降算法_梯度下降算法中的偏导公式推导_weixin_39882948的博客-CSDN博客</a></p>
+<p>梯度函数的计算本质上就是对代价函数求偏导</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">gradientReg_noLoop</span>(<span class="params">theta, X, y, lamda</span>):</span><br><span class="line">    n = <span class="built_in">len</span>(theta)</span><br><span class="line">    m = <span class="built_in">len</span>(y)</span><br><span class="line">    error = sigmoid(X @ theta.reshape(n, <span class="number">1</span>)) - y</span><br><span class="line">    grad = (X.T @ error / m) + ((lamda / m) * theta.reshape(n, <span class="number">1</span>))</span><br><span class="line">    grad[<span class="number">0</span>][<span class="number">0</span>] = np.<span class="built_in">sum</span>(error * X[:, <span class="number">0</span>].reshape(m, <span class="number">1</span>)) / m</span><br><span class="line">    grad = np.reshape(grad, (n,))</span><br><span class="line">    <span class="keyword">return</span> grad</span><br></pre></td></tr></table></figure>
+
+
+
+<p>然后就是对数据进行分类，分类函数为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 分类函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">one_vs_all</span>(<span class="params">theta, X, y, lamda</span>):</span><br><span class="line">    m = <span class="built_in">len</span>(y)</span><br><span class="line">    n = <span class="built_in">len</span>(theta[<span class="number">0</span>])</span><br><span class="line">    <span class="comment"># 从 1 到 10 总共训练 10 个分类器，依次保存到 theta</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">11</span>):</span><br><span class="line">        <span class="comment"># label 为 i 置 1，不为 i 置 0</span></span><br><span class="line">        y_i = np.array([<span class="number">1</span> <span class="keyword">if</span> label == i <span class="keyword">else</span> <span class="number">0</span> <span class="keyword">for</span> label <span class="keyword">in</span> y])</span><br><span class="line">        y_i = np.reshape(y_i,(m, <span class="number">1</span>))</span><br><span class="line">        theta_i = theta[i,:]</span><br><span class="line">        theta_i = np.reshape(theta_i,(n, <span class="number">1</span>))</span><br><span class="line">        <span class="comment"># 使用 scipy 的库函数就算最优参数</span></span><br><span class="line">        result = opt.fmin_tnc(func=costReg, x0=theta_i, fprime=gradientReg_noLoop, args=(X, y_i, lamda))</span><br><span class="line">        <span class="comment">#print(result)</span></span><br><span class="line">        <span class="comment"># 保存第 i 个分类器,theta[i]对应数字为i训练对应的theta值</span></span><br><span class="line">        theta[i,:] = result[<span class="number">0</span>]</span><br><span class="line">        <span class="comment">#print(theta)</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>最后是对数据进行测试：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 测试函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">predict_all</span>(<span class="params">theta, X, y</span>):</span><br><span class="line">    m = <span class="built_in">len</span>(y)</span><br><span class="line">    y_pre = np.zeros((m, <span class="number">2</span>))</span><br><span class="line">    <span class="comment"># term 为 m * 10 的数组，每一行依次记录该样本为 1，2，……，9，0 的概率</span></span><br><span class="line">    term = sigmoid(X @ theta.T)</span><br><span class="line">    <span class="comment"># 选取最大概率对应的 label 作为预测结果</span></span><br><span class="line">    <span class="keyword">for</span> sample <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">11</span>):</span><br><span class="line">            <span class="keyword">if</span>(term[sample][i] &gt; y_pre[sample][<span class="number">1</span>]): <span class="comment">#找到可能概率最大的那个数字</span></span><br><span class="line">                y_pre[sample][<span class="number">0</span>] = i <span class="comment">#记录当前数字对应概率最大的分类</span></span><br><span class="line">                y_pre[sample][<span class="number">1</span>] = term[sample][i] <span class="comment">#记录当前数字对应的最大概率的值</span></span><br><span class="line">    rate = <span class="number">0.0</span></span><br><span class="line">    <span class="keyword">for</span> sample <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">        <span class="keyword">if</span>(y_pre[sample][<span class="number">0</span>] == y[sample]):<span class="comment">#如果预测值和真实值一样</span></span><br><span class="line">            rate += <span class="number">1</span></span><br><span class="line">    rate = (rate / m) * <span class="number">100</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;accuracy = &#123;0&#125;%&#x27;</span>.<span class="built_in">format</span>(rate))</span><br></pre></td></tr></table></figure>
+
+
+
+<p>主函数部分：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data = <span class="built_in">loadData</span>(<span class="string">&#x27;ex3data1.mat&#x27;</span>)</span><br><span class="line"><span class="meta">#fig = plot()</span></span><br><span class="line">X, y, theta = <span class="built_in">initData</span>(data)</span><br><span class="line"><span class="built_in">one_vs_all</span>(theta, X, data[<span class="string">&#x27;y&#x27;</span>], <span class="number">0</span>)</span><br><span class="line"><span class="built_in">predict_all</span>(theta, X, data[<span class="string">&#x27;y&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
+
+
+<p>学习率为 0 时训练结果：accuracy &#x3D; 97.26%</p>
+<p>学习率为 0.5 时训练结果：accuracy &#x3D; 95.1%</p>
+<p><strong>卷积神经网络：已经给了训练的<code>theta</code>，包括<code>theta1</code>和<code>theta2</code>；</strong></p>
+<p>根据神经网络的结构（一层输入层 400+1 ，一层隐藏层 25+1 ，一层输出层 10），计算结果： </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Created on Tue Mar  8 17:12:12 2022</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: 李政翰</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> scipy.io <span class="keyword">import</span> loadmat</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">loadData</span>(<span class="params">filename</span>):</span><br><span class="line">    <span class="keyword">return</span> loadmat(filename)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">initData</span>(<span class="params">data</span>):</span><br><span class="line">    X = data[<span class="string">&#x27;X&#x27;</span>]</span><br><span class="line">    <span class="comment"># X : 增加一列 bias（要增加到第一列）</span></span><br><span class="line">    X = np.insert(X, <span class="number">0</span>, values=np.ones(X.shape[<span class="number">0</span>]), axis=<span class="number">1</span>)</span><br><span class="line">    y = data[<span class="string">&#x27;y&#x27;</span>]</span><br><span class="line">    <span class="keyword">return</span> X, y</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">sigmoid</span>(<span class="params">z</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span> / (<span class="number">1</span> + np.exp(-z))</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">NN</span>(<span class="params">X, theta1, theta2</span>):</span><br><span class="line">    hidden_layer = sigmoid(X @ theta1.T)</span><br><span class="line">    hidden_layer = np.insert(hidden_layer, <span class="number">0</span>, values=np.ones(X.shape[<span class="number">0</span>]), axis=<span class="number">1</span>)</span><br><span class="line">    output = sigmoid(hidden_layer @ theta2.T)</span><br><span class="line">    <span class="keyword">return</span> output</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">predict</span>(<span class="params">output, y</span>):</span><br><span class="line">    m = <span class="built_in">len</span>(y)</span><br><span class="line">    rate = <span class="number">0.0</span></span><br><span class="line">    <span class="keyword">for</span> sample <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">        pre_res = -<span class="number">1</span></span><br><span class="line">        pre_pro = <span class="number">0.0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">            <span class="keyword">if</span>(output[sample][i] &gt; pre_pro):</span><br><span class="line">                pre_res = i + <span class="number">1</span></span><br><span class="line">                pre_pro = output[sample][i]</span><br><span class="line">        <span class="keyword">if</span>(pre_res == y[sample]):</span><br><span class="line">            rate += <span class="number">1</span></span><br><span class="line">        <span class="comment">#print(pre_res)</span></span><br><span class="line">    rate = (rate / m) * <span class="number">100</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;accuracy = &#123;0&#125;%&#x27;</span>.<span class="built_in">format</span>(rate))</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">visualizing</span>(<span class="params">layer</span>):</span><br><span class="line">    sample_idx = <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">5000</span>,<span class="number">50</span>)</span><br><span class="line">    sample_images = layer[sample_idx, :]</span><br><span class="line">    fig, ax_array = plt.subplots(nrows=<span class="number">10</span>, ncols=<span class="number">10</span>, sharey=<span class="literal">True</span>, sharex=<span class="literal">True</span>, figsize=(<span class="number">8</span>, <span class="number">8</span>))</span><br><span class="line">    <span class="keyword">for</span> r <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">            ax_array[r, c].matshow(sample_images[<span class="number">10</span> * r + c].reshape((<span class="number">5</span>, <span class="number">5</span>)).T,cmap=matplotlib.cm.binary)</span><br><span class="line">            plt.xticks(np.array([]))</span><br><span class="line">            plt.yticks(np.array([]))</span><br><span class="line">    plt.show()</span><br><span class="line">   </span><br><span class="line">data = loadData(<span class="string">&#x27;ex3data1.mat&#x27;</span>)</span><br><span class="line">X, y = initData(data)</span><br><span class="line">theta = loadData(<span class="string">&#x27;ex3weights.mat&#x27;</span>)</span><br><span class="line">theta1 = theta[<span class="string">&#x27;Theta1&#x27;</span>]</span><br><span class="line">theta2 = theta[<span class="string">&#x27;Theta2&#x27;</span>]</span><br><span class="line">output = NN(X, theta1, theta2)</span><br><span class="line">predict(output, y)</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">周报</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/03/07/%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/01/02/%E5%A4%8D%E6%9D%82%E5%BA%A6/" class="archive-article-date">
-  	<time datetime="2022-01-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-02</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2022/03/07/%E6%AF%95%E8%AE%BE%E6%A1%86%E6%9E%B6/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
 
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/01/02/%E5%A4%8D%E6%9D%82%E5%BA%A6/">复杂度</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB-CS229-ex3"><span class="toc-number">1.</span> <span class="toc-text">手写数字识别(CS229 ex3)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">代价函数</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2022/page/3/">上一页</a><a class="page-number" href="/archives/2022/">1</a><a class="page-number" href="/archives/2022/page/2/">2</a><a class="page-number" href="/archives/2022/page/3/">3</a><span class="page-number current">4</span>
-    </nav>
   
 
+  
+
+  
 
           </div>
         </div>
@@ -329,8 +475,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
