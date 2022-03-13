@@ -34,7 +34,7 @@
 <meta property="og:image" content="http://example.com/2022/02/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C/2.png">
 <meta property="og:image" content="http://example.com/2022/02/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C/3.png">
 <meta property="article:published_time" content="2022-02-11T01:32:31.000Z">
-<meta property="article:modified_time" content="2022-02-17T06:18:22.406Z">
+<meta property="article:modified_time" content="2022-03-13T14:03:59.419Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
@@ -216,7 +216,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">974字</span>
+        <span class="post-count">1.9k字</span>
       </span>
     </span>
 
@@ -225,7 +225,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">3分</span>
+        <span class="post-count">6分</span>
       </span>
     </span>
 </div>
@@ -295,6 +295,36 @@ var _hmt = _hmt || [];
 <ul>
 <li><p>实验结果:</p>
 <p><img src="/2022/02/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C/3.png" alt="image-20220212013251341"></p>
+</li>
+</ul>
+<h3 id="实验三：进程运行轨迹的跟踪与统计"><a href="#实验三：进程运行轨迹的跟踪与统计" class="headerlink" title="实验三：进程运行轨迹的跟踪与统计"></a>实验三：进程运行轨迹的跟踪与统计</h3><h4 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h4><ul>
+<li>掌握Linux下的多进程编程技术；</li>
+<li>通过对进程运行轨迹的跟踪来形象化进程的概念；</li>
+<li>在进程运行轨迹跟踪的基础上进行相应的数据统计，从而能对进程调度算法进行实际的量化评价，更进一步加深对调度和调度算法的理解，获得能在实际操作系统上对调度算法进行实验数据对比的直接经验。</li>
+</ul>
+<h4 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a>实验内容</h4><p>进程从创建（Linux下调用fork()）到结束的整个过程就是进程的生命期，进程在其生命期中的运行轨迹实际上就表现为进程状态的多次切换，如进程创建以后会成为就绪态；当该进程被调度以后会切换到运行态；在运行的过程中如果启动了一个文件读写操作，操作系统会将该进程切换到阻塞态（等待态）从而让出CPU；当文件读写完毕以后，操作系统会在将其切换成就绪态，等待进程调度算法来调度该进程执行……</p>
+<p>本次实验包括如下内容：</p>
+<ul>
+<li>基于模板“process.c”编写多进程的样本程序，实现如下功能：</li>
+</ul>
+<p>​    所有子进程都并行运行，每个子进程的实际运行时间一般不超过30秒；</p>
+<p>​    父进程向标准输出打印所有子进程的id，并在所有子进程都退出后才退出；</p>
+<ul>
+<li><p>在Linux 0.11上实现进程运行轨迹的跟踪。基本任务是在内核中维护一个日志文件&#x2F;var&#x2F;process.log，把从操作系统启动到系统关机过程中所有进程的运行轨迹都记录在这一log文件中。</p>
+</li>
+<li><p>在修改过的0.11上运行样本程序，通过分析log文件，统计该程序建立的所有进程的等待时间、完成时间（周转时间）和运行时间，然后计算平均等待时间，平均完成时间和吞吐量。可以自己编写统计程序，也可以使用python脚本程序—— stat_log.py ——进行统计。</p>
+</li>
+<li><p>修改0.11进程调度的时间片，然后再运行同样的样本程序，统计同样的时间数据，和原有的情况对比，体会不同时间片带来的差异。</p>
+</li>
+</ul>
+<h4 id="实验总结："><a href="#实验总结：" class="headerlink" title="实验总结："></a>实验总结：</h4><ul>
+<li><p>单进程编程所写的程序是顺序执行的，彼此之间有严格的执行逻辑；在没有其他程序的干扰下，数据是同步的，而多进程编程所写的程序是同时执行的，虽然共享文件等，但是由于多个进程之间执行顺序无法得知，故而要考虑进程之间的关系和影响，尤其是数据异步，程序员要做好进程之间同步，通信，互斥等。相比较而言，多进程编程比单进程编程复杂得多，但是用途广泛得多。</p>
+</li>
+<li><p>为了每个进程可以尽量公平的执行，引入了时间片的概念，即进程允许进行的时间。当到达时间片后，CPU去执行其他进程。</p>
+<ul>
+<li>时间片变小，进程因时间片到时产生的进程调度次数变多，该进程等待时间越长。</li>
+<li>然而随着时间片增大，进程因中断或者睡眠进入的进程调度次数也增多，等待时间随之变长。故而需要设置合理的时间片，既不能过大，也不能过小。</li>
+</ul>
 </li>
 </ul>
 
@@ -418,7 +448,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%88%E5%B7%A5%E5%A4%A7%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C"><span class="toc-number">1.</span> <span class="toc-text">哈工大操作系统实验</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Ubuntu%E5%92%8CLinux-0-11%E4%B9%8B%E9%97%B4%E7%9A%84%E6%96%87%E4%BB%B6%E4%BA%A4%E6%8D%A2"><span class="toc-number">1.0.1.</span> <span class="toc-text">Ubuntu和Linux 0.11之间的文件交换</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E4%B8%80%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%BC%95%E5%AF%BC"><span class="toc-number">1.1.</span> <span class="toc-text">实验一：操作系统的引导</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E4%BA%8C%EF%BC%9A%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">1.2.</span> <span class="toc-text">实验二：系统调用</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%88%E5%B7%A5%E5%A4%A7%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C"><span class="toc-number">1.</span> <span class="toc-text">哈工大操作系统实验</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Ubuntu%E5%92%8CLinux-0-11%E4%B9%8B%E9%97%B4%E7%9A%84%E6%96%87%E4%BB%B6%E4%BA%A4%E6%8D%A2"><span class="toc-number">1.0.1.</span> <span class="toc-text">Ubuntu和Linux 0.11之间的文件交换</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E4%B8%80%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%BC%95%E5%AF%BC"><span class="toc-number">1.1.</span> <span class="toc-text">实验一：操作系统的引导</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E4%BA%8C%EF%BC%9A%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">1.2.</span> <span class="toc-text">实验二：系统调用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E4%B8%89%EF%BC%9A%E8%BF%9B%E7%A8%8B%E8%BF%90%E8%A1%8C%E8%BD%A8%E8%BF%B9%E7%9A%84%E8%B7%9F%E8%B8%AA%E4%B8%8E%E7%BB%9F%E8%AE%A1"><span class="toc-number">2.</span> <span class="toc-text">实验三：进程运行轨迹的跟踪与统计</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84"><span class="toc-number">2.1.</span> <span class="toc-text">实验目的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9"><span class="toc-number">2.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-number">2.3.</span> <span class="toc-text">实验总结：</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -558,15 +588,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
