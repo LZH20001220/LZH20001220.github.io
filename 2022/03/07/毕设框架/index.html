@@ -31,7 +31,7 @@
 <meta property="og:description" content="摘要 Abstract 第一章 绪论：  1.1：研究背景和意义 1.1.1 OFDM通信系统介绍 1.1.2 环境反向散射通信技术介绍 1.1.3 软件无线电介绍">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-07T11:35:58.000Z">
-<meta property="article:modified_time" content="2022-03-11T08:33:58.028Z">
+<meta property="article:modified_time" content="2022-03-18T02:45:16.335Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="科研">
 <meta name="twitter:card" content="summary">
@@ -212,7 +212,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.2k字</span>
+        <span class="post-count">1.3k字</span>
       </span>
     </span>
 
@@ -262,23 +262,22 @@ var _hmt = _hmt || [];
 <p><strong>第二章 OFDM通信系统基础知识：</strong></p>
 <ul>
 <li>2.1 OFDM通信系统理论基础</li>
-<li>2.2 OFDM通信系统软件仿真</li>
-<li>2.3 OFDM通信系统实物验证</li>
+<li>2.2 OFDM通信系统系统设计</li>
+<li>2.3 OFDM通信系统系统实现与性能分析</li>
+<li>2.4 本章小结</li>
 </ul>
 <p><strong>第三章 OFDM环境反向散射系统设计与实现：</strong></p>
 <ul>
 <li>3.1 反向散射标签介绍</li>
 <li>3.2 OFDM 环境反向散射系统设计</li>
 <li>3.3 OFDM 环境反向散射系统实现与性能分析</li>
+<li>3.4 本章小结</li>
 </ul>
 <p><strong>第四章 WiFi环境反向散射系统设计与实现</strong></p>
 <ul>
-<li>4.1 WiFi 环境反向散射系统设计</li>
-<li>4.2 WiFi 环境反向散射系统实现与性能分析<ul>
-<li>4.2.1 基于软件无线电平台的 WiFi 环境反向散射系统实现与性能分析</li>
-<li>4.2.2 基于商用网卡的 WiFi 环境反向散射系统实现与性能分析</li>
-</ul>
-</li>
+<li>4.1 基于WiFi 环境反向散射系统设计</li>
+<li>4.2 基于商用网卡的 WiFi 环境反向散射系统实现与性能分析</li>
+<li>4.3 本章小结</li>
 </ul>
 <p><strong>总结与展望</strong></p>
 <p><strong>参考文献</strong></p>
@@ -288,13 +287,13 @@ var _hmt = _hmt || [];
 <p>代码字转换做了个异或，一个OFDM符号破坏代表传1，不破坏代表传0，解码</p>
 <p>需要补充的东西：</p>
 <ul>
-<li><p>用USRP测试OFDM通信系统的吞吐量和误码率；</p>
+<li><p>用USRP测试OFDM通信系统的吞吐量和误码率；√</p>
 </li>
-<li><p>用USRP测试OFDM反向散射系统的吞吐量和误码率，以及功耗。</p>
+<li><p>用USRP测试OFDM反向散射系统的吞吐量和误码率，以及功耗。√</p>
 </li>
-<li><p>仿真一个利用OFDM的循环前缀可以提高信息传输的效率的曲线</p>
+<li><p>仿真一个利用OFDM的循环前缀可以提高信息传输的效率的曲线。√</p>
 </li>
-<li><p>用USRP测试WiFi系统的吞吐量和误码率</p>
+<li><p>用商用网卡测试WiFi系统的吞吐量和误码率</p>
 </li>
 </ul>
 <p>测试OFDM系统时需要测试环境中信号的信噪比，注意需要抓取多个数据包然后取平均值，然后与仿真的结果进行对比，说明在测试环境的信噪比下，系统的吞吐量和误码率与仿真时相比如何如何…</p>
@@ -316,7 +315,8 @@ var _hmt = _hmt || [];
 </ul>
 <p>仿真的参数：每帧6个OFDM符号，每帧的前面加一个preamble，preamble为BPSK调制，OFDM符号的值为QPSK调制，每帧就是7个符号，每种信噪比下的仿真帧数为1000帧，仿真是反射整个OFDM符号，将每帧的第三个和第六个OFDM符号进行反射，然后在接收端通过异或判断反射的信息，进而计算系统的误码率和吞吐量。</p>
 <p>基于循环前缀的OFDM反向散射系统误码率略有提高，但是吞吐量大大增加！</p>
-<p>OFDM系统的吞吐量为4Mbps&#x2F;s，误码率为2.4*10^(-5)</p>
+<p>2M采样率的OFDM系统每个数据包的发送时间是0.44ms，采样率是2M，每个OFDM符号包括80个采样点，80个采样点就是0.04ms；发送每个数据包需要11个OFDM符号，其中数据采取QPSK调制，数据为96个字节，转换为每个符号2bit就对应384个符号，每个OFDM符号有48个子载波，因此传递48个符号，传输数据部分就需要8个OFDM符号；包头包括6个字节，转换为每个符号1bit就对应48个符号，因此传输数据包头部分需要1个OFDM符号。</p>
+<p>一个数据包96个字节，输出192个实部和192个虚部。bit per sample只是每个采样点的数据保留小数点后几位，采样率才是重点，200k就是每秒采200k个点，每个OFDM符号就是80个点。</p>
 
       
 
@@ -578,15 +578,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -602,11 +602,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">其他</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">其他</a>
+                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
               </li>
              
               <li class="article-tag-list-item">
