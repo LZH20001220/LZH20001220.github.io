@@ -35,8 +35,14 @@
 <meta property="og:image" content="http://example.com/2022/03/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/3.png">
 <meta property="og:image" content="http://example.com/2022/03/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/4.png">
 <meta property="og:image" content="http://example.com/2022/03/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/5.png">
+<meta property="og:image" content="http://example.com/2022/03/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/6.png">
+<meta property="og:image" content="http://example.com/2022/03/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/7.png">
+<meta property="og:image" content="http://example.com/2022/03/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/8.png">
+<meta property="og:image" content="http://example.com/2022/03/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/10.png">
+<meta property="og:image" content="http://example.com/2022/03/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/9.png">
+<meta property="og:image" content="http://example.com/2022/03/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/11.png">
 <meta property="article:published_time" content="2022-03-12T16:30:58.000Z">
-<meta property="article:modified_time" content="2022-03-13T07:33:30.222Z">
+<meta property="article:modified_time" content="2022-03-22T10:11:27.224Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
@@ -218,7 +224,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.3k字</span>
+        <span class="post-count">2.8k字</span>
       </span>
     </span>
 
@@ -227,7 +233,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">4分</span>
+        <span class="post-count">9分</span>
       </span>
     </span>
 </div>
@@ -304,6 +310,46 @@ var _hmt = _hmt || [];
 </ul>
 <p>解决这个问题的方法就是当生产者向管道中放数据的时候避免其他进程访问管道，形象点说就是上个锁，选择合理的进程推进顺序。</p>
 <p><img src="/2022/03/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/5.png" alt="image-20220313150819456"></p>
+<h3 id="L10-用户级线程"><a href="#L10-用户级线程" class="headerlink" title="L10 用户级线程"></a>L10 用户级线程</h3><p>可以参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Gaozihang777/article/details/116464393">【操作系统】用户级线程（协程）执行原理（程序计数器PC，寄存器EBP、ESP，线程控制块TCB的变化）_The Gao的博客-CSDN博客_线程esp</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1WZ4y1p7JT?from=search&seid=9558646165423044223">【Golang】函数调用栈（上）栈帧布局与函数跳转~_哔哩哔哩_bilibili</a></p>
+<p><strong>线程(thread)的特点：</strong>保留了并发的优点，同时避免了进程切换的代价。只需要指令进行切换，资源不需要变化(不需要切换映射表)，实际上就是映射表不变而PC指针变化。</p>
+<p><strong>线程的切换：</strong>把一段指令转移接到另外一段指令上，线程是操作系统能够进行运算调度的最小单位。它被包含在进程之中，是进程中的实际运作单位。线程的切换是进程的切换的重要的组成部分。</p>
+<p><strong>一个进程里面多个线程：</strong>(多个执行程序+一个地址空间)这种方式很实用，比如打开一个网页就是一个进程，网页中显示文字，图片，从服务器接收数据等等这些各自都是一个线程，他们不互相影响。再比如显示文字都是从服务器获取一段文字，然后切换线程将文字显示出来，然后再切换到服务器获取文字。</p>
+<p><strong>线程和进程不同的一点：</strong>线程不想进程那样需要进行地址的隔离，不同的线程共享一套地址。</p>
+<p><img src="/2022/03/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/6.png" alt="image-20220322150226097"></p>
+<p>比如上面就是一个打开浏览器的线程的程序框架。包括URL，缓存区，通过<strong>pthread_create()</strong> 创建一些线程，每个线程又包括一些参数或者函数，一步步向下走。<strong>yield</strong>方法可以暂停当前的线程并且去执行其他的线程，当前线程让出CPU。</p>
+<p>TCB：（Thread Control Block），叫做线程控制模块，控制着线程的运行和调度，存储着与该线程有关的信息，如寄存器ESP等的值。</p>
+<p>每个线程通过一个TCB来控制，线程之间的切换，两个线程需要两个TCB，两个栈，每个线程需要一个栈来进行存储。</p>
+<h4 id="多用户级线程程序执行原理："><a href="#多用户级线程程序执行原理：" class="headerlink" title="多用户级线程程序执行原理："></a>多用户级线程程序执行原理：</h4><p><img src="/2022/03/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/7.png"></p>
+<p>如图所示，包含左、右两个线程，先执行左线程。</p>
+<p>1.左线程在执行过程中，在执行Yield()函数之前的过程与第四章所述过程一致，即执行A函数，A函数调用了B函数，并将104压入左线程的栈帧。</p>
+<p>2.左线程调用Yield()函数，并将返回地址204压入左线程的栈帧中（特别注意：每个线程独享一个栈帧！【这里可以深入想一下两个线程如果使用同一个栈帧会发生什么情况】）。Yield()函数将左线程栈帧的ESP寄存器的值存入左线程的TCB，并将右线程栈帧ESP寄存器的值赋予ESP。这样就实现了线程的交替，切换到右线程。</p>
+<p>3.右线程的栈帧为空栈，因此从右线程的第一行指令开始执行，C函数调用D函数，并将304压入右线程的栈帧中。在D函数中调用Yield()函数，并将返回地址404压入右线程的栈帧中。此时切换线程，左线程栈帧弹出204返回地址，即PC&#x3D;204，从204地址开始执行指令。（【为什么只修改ESP寄存器的值而不修改PC？】因为PC已经压栈了，弹出即可）</p>
+<p>4.遇到B函数的右括号，即B函数执行完毕，弹出104，PC&#x3D;104，从104地址开始执行指令。</p>
+<p>5.遇到A函数的右括号，A函数执行完毕，整个进程结束。</p>
+<h4 id="扩展：函数调用的思想"><a href="#扩展：函数调用的思想" class="headerlink" title="扩展：函数调用的思想"></a><strong>扩展：函数调用的思想</strong></h4><p><img src="/2022/03/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/8.png"></p>
+<p>本质上就是利用堆栈的思想，当运行一个函数时，首先将函数置于栈中，然后当调用某个函数时，将这个函数按照一定顺序置于栈顶，然后执行这个函数，这时候转换为机器码就是一个call指令。当执行完这个函数之后，通过ret将这个函数弹出栈，再接着执行刚才的函数。</p>
+<h4 id="用户级线程存在的一个问题："><a href="#用户级线程存在的一个问题：" class="headerlink" title="用户级线程存在的一个问题："></a><strong>用户级线程存在的一个问题：</strong></h4><p>如果进程的某个线程进入内核并阻塞的话，会跳出当前的进程，跳转到其他的进程执行，这样用户级线程就体现不出其并发的优势了，操作系统不能为其分配硬件。</p>
+<p>而核心级线程是一个系统调用，会进入内核。不存在用户级线程的问题，并发性要更好。</p>
+<h3 id="L11-内核级线程"><a href="#L11-内核级线程" class="headerlink" title="L11 内核级线程"></a>L11 内核级线程</h3><ul>
+<li><p>进程必须在内核中，没有用户级进程这一说法，线程分为用户级线程和内核级线程。</p>
+</li>
+<li><p>MMU：内存管理单元，它是一种负责处理<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B8%AD%E5%A4%AE%E5%A4%84%E7%90%86%E5%99%A8">中央处理器</a>（CPU）的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%86%85%E5%AD%98">内存</a>访问请求的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6">计算机硬件</a>。</p>
+<p>多处理器指的是有多个CPU和MMU，多核指的是有多个CPU，但是只有一个MMU；</p>
+<p>多核就类似于线程，多个线程可以使用多个核。</p>
+</li>
+<li><p>并行和并发的区别：</p>
+<p>并发是共同出发，交替执行；并行是同时出发，同时执行(线程)。</p>
+</li>
+<li><p>用户级线程到核心级线程的转变：因为要进入操作系统内核，所以从一个栈变成一套栈。</p>
+</li>
+<li><p>用户栈和内核栈之间的关系：</p>
+</li>
+</ul>
+<p><img src="/2022/03/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/10.png"></p>
+<p><img src="/2022/03/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/9.png" alt="image-20220322174020254"></p>
+<p>所谓的内核级线程实际上也是用户创建的，只不过线程在运行的过程中需要执行内核中的函数，比如一些输入输出等等，进入内核的实现方式就是中断。通过中断进入内核之后，找到相应的TCB，就完成TCB的切换，也就是在内核栈的切换，然后再用IRET指令切换到用户栈。</p>
+<h5 id="内核线程switch-to的五段论："><a href="#内核线程switch-to的五段论：" class="headerlink" title="内核线程switch_to的五段论："></a>内核线程switch_to的五段论：</h5><p><img src="/2022/03/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/11.png" alt="image-20220322180105369"></p>
 
       
 
@@ -425,7 +471,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">操作系统-进程与线程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#L8-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86CPU"><span class="toc-number">1.0.1.</span> <span class="toc-text">L8 操作系统如何管理CPU</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E7%9A%84%E6%A6%82%E5%BF%B5%EF%BC%9A%E4%B8%80%E4%B8%AACPU%E4%BA%A4%E6%9B%BF%E7%9A%84%E6%89%A7%E8%A1%8C%E5%A4%9A%E4%B8%AA%E7%A8%8B%E5%BA%8F%E3%80%82%E5%B9%B6%E5%8F%91%E7%9A%84%E5%AE%9E%E7%8E%B0%E9%9C%80%E8%A6%81%E9%9D%A0%E4%B8%8D%E6%96%AD%E7%9A%84%E4%BF%AE%E6%94%B9PC%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">并发的概念：一个CPU交替的执行多个程序。并发的实现需要靠不断的修改PC寄存器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#L9-%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%9B%BE%E5%83%8F"><span class="toc-number">1.1.</span> <span class="toc-text">L9 多进程图像</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E9%97%AE%E9%A2%981%EF%BC%9A%E5%A4%9A%E8%BF%9B%E7%A8%8B%E4%B9%8B%E9%97%B4%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E4%BA%A4%E6%9B%BF%E7%9A%84"><span class="toc-number">1.1.1.</span> <span class="toc-text">关键问题1：多进程之间是如何进行交替的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E9%97%AE%E9%A2%982%EF%BC%9A%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E5%A4%9A%E8%BF%9B%E7%A8%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E7%9B%B8%E4%BA%92%E5%B9%B2%E6%89%B0"><span class="toc-number">1.1.2.</span> <span class="toc-text">关键问题2：如何防止多进程之间的相互干扰</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E9%97%AE%E9%A2%983%EF%BC%9A%E5%A4%9A%E8%BF%9B%E7%A8%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E7%9B%B8%E4%BA%92%E5%90%88%E4%BD%9C"><span class="toc-number">1.1.3.</span> <span class="toc-text">关键问题3：多进程之间的相互合作</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">操作系统-进程与线程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#L8-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86CPU"><span class="toc-number">1.0.1.</span> <span class="toc-text">L8 操作系统如何管理CPU</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E7%9A%84%E6%A6%82%E5%BF%B5%EF%BC%9A%E4%B8%80%E4%B8%AACPU%E4%BA%A4%E6%9B%BF%E7%9A%84%E6%89%A7%E8%A1%8C%E5%A4%9A%E4%B8%AA%E7%A8%8B%E5%BA%8F%E3%80%82%E5%B9%B6%E5%8F%91%E7%9A%84%E5%AE%9E%E7%8E%B0%E9%9C%80%E8%A6%81%E9%9D%A0%E4%B8%8D%E6%96%AD%E7%9A%84%E4%BF%AE%E6%94%B9PC%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">并发的概念：一个CPU交替的执行多个程序。并发的实现需要靠不断的修改PC寄存器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#L9-%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%9B%BE%E5%83%8F"><span class="toc-number">1.1.</span> <span class="toc-text">L9 多进程图像</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E9%97%AE%E9%A2%981%EF%BC%9A%E5%A4%9A%E8%BF%9B%E7%A8%8B%E4%B9%8B%E9%97%B4%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E4%BA%A4%E6%9B%BF%E7%9A%84"><span class="toc-number">1.1.1.</span> <span class="toc-text">关键问题1：多进程之间是如何进行交替的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E9%97%AE%E9%A2%982%EF%BC%9A%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E5%A4%9A%E8%BF%9B%E7%A8%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E7%9B%B8%E4%BA%92%E5%B9%B2%E6%89%B0"><span class="toc-number">1.1.2.</span> <span class="toc-text">关键问题2：如何防止多进程之间的相互干扰</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E9%97%AE%E9%A2%983%EF%BC%9A%E5%A4%9A%E8%BF%9B%E7%A8%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E7%9B%B8%E4%BA%92%E5%90%88%E4%BD%9C"><span class="toc-number">1.1.3.</span> <span class="toc-text">关键问题3：多进程之间的相互合作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#L10-%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B"><span class="toc-number">1.2.</span> <span class="toc-text">L10 用户级线程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86%EF%BC%9A"><span class="toc-number">1.2.1.</span> <span class="toc-text">多用户级线程程序执行原理：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%EF%BC%9A%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%9A%84%E6%80%9D%E6%83%B3"><span class="toc-number">1.2.2.</span> <span class="toc-text">扩展：函数调用的思想</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%E5%AD%98%E5%9C%A8%E7%9A%84%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="toc-number">1.2.3.</span> <span class="toc-text">用户级线程存在的一个问题：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#L11-%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B"><span class="toc-number">1.3.</span> <span class="toc-text">L11 内核级线程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%86%85%E6%A0%B8%E7%BA%BF%E7%A8%8Bswitch-to%E7%9A%84%E4%BA%94%E6%AE%B5%E8%AE%BA%EF%BC%9A"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">内核线程switch_to的五段论：</span></a></li></ol></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -561,11 +607,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -589,11 +635,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">其他</a>
+                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">其他</a>
               </li>
              
               <li class="article-tag-list-item">
