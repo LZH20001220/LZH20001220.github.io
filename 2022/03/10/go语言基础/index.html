@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Go语言学习笔记-第1章 | 博客杂记 - Harder and Better</title>
+  <title>Go基础 - 条件，循环，函数，指针 | 博客杂记 - Harder and Better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -25,13 +25,13 @@
   </style>
   <meta name="description" content="Go语言学习笔记:第一章：概述Go语言的特点：  与C99,C11相似之处颇多，它的主要目标是“兼具 Python 等动态语言的开发速度和 C&#x2F;C++ 等编译型语言的性能与安全性”。 是对类C语言的重大改进，它不但能访问底层操作系统，还提供了强大的网络编程和并发编程支持。Go语言的用途众多，可以进行网络编程、系统编程、并发编程、分布式编程。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Go语言学习笔记-第1章">
-<meta property="og:url" content="http://example.com/2022/03/10/go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E7%AC%AC1%E7%AB%A0/index.html">
+<meta property="og:title" content="Go基础 - 条件，循环，函数，指针">
+<meta property="og:url" content="http://example.com/2022/03/10/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
 <meta property="og:description" content="Go语言学习笔记:第一章：概述Go语言的特点：  与C99,C11相似之处颇多，它的主要目标是“兼具 Python 等动态语言的开发速度和 C&#x2F;C++ 等编译型语言的性能与安全性”。 是对类C语言的重大改进，它不但能访问底层操作系统，还提供了强大的网络编程和并发编程支持。Go语言的用途众多，可以进行网络编程、系统编程、并发编程、分布式编程。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-10T11:02:03.000Z">
-<meta property="article:modified_time" content="2022-03-23T07:54:39.929Z">
+<meta property="article:modified_time" content="2022-03-23T12:49:19.606Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="Go">
 <meta name="twitter:card" content="summary">
@@ -186,14 +186,14 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-go语言学习笔记-第1章" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-go语言基础" class="article article-type-post " itemscope itemprop="blogPost">
   
 <div class="article-inner">
     
       <header class="article-header">
         
         
-        <a href="/2022/03/10/go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E7%AC%AC1%E7%AB%A0/" class="archive-article-date">
+        <a href="/2022/03/10/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" class="archive-article-date">
   	<time datetime="2022-03-10T11:02:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-10</time>
 </a>
 
@@ -212,7 +212,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.7k字</span>
+        <span class="post-count">1.9k字</span>
       </span>
     </span>
 
@@ -221,7 +221,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">7分</span>
+        <span class="post-count">8分</span>
       </span>
     </span>
 </div>
@@ -236,7 +236,7 @@ var _hmt = _hmt || [];
       <center><p>
   
     <h1 class="article-title_code_ant" itemprop="name">
-      Go语言学习笔记-第1章
+      Go基础 - 条件，循环，函数，指针
     </h1>
   
 </p></center>
@@ -284,6 +284,17 @@ var _hmt = _hmt || [];
 
 <p>另外一个例子：另外一个例子，猜数字</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// guess challenges players to guess a random number.</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;bufio&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;log&quot;</span></span><br><span class="line">	<span class="string">&quot;math/rand&quot;</span></span><br><span class="line">	<span class="string">&quot;os&quot;</span></span><br><span class="line">	<span class="string">&quot;strconv&quot;</span></span><br><span class="line">	<span class="string">&quot;strings&quot;</span></span><br><span class="line">	<span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	seconds := time.Now().Unix()</span><br><span class="line">	rand.Seed(seconds) <span class="comment">//必须加上time.now()随机数才能更新</span></span><br><span class="line">	target := rand.Intn(<span class="number">100</span>) + <span class="number">1</span></span><br><span class="line">	fmt.Println(<span class="string">&quot;I&#x27;ve chosen a random number between 1 and 100.&quot;</span>)</span><br><span class="line">	fmt.Println(<span class="string">&quot;Can you guess it?&quot;</span>)</span><br><span class="line"></span><br><span class="line">	reader := bufio.NewReader(os.Stdin)</span><br><span class="line">	success := <span class="literal">false</span></span><br><span class="line">	<span class="keyword">for</span> guesses := <span class="number">0</span>; guesses &lt; <span class="number">10</span>; guesses++ &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;You have&quot;</span>, <span class="number">10</span>-guesses, <span class="string">&quot;guesses left.&quot;</span>) <span class="comment">//Println会自动换行，Print不会</span></span><br><span class="line">		fmt.Print(<span class="string">&quot;Make a guess: &quot;</span>)</span><br><span class="line">		input, err := reader.ReadString(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			log.Fatal(err)</span><br><span class="line">		&#125;</span><br><span class="line">		input = strings.TrimSpace(input)</span><br><span class="line">		guess, err := strconv.Atoi(input) <span class="comment">//字符串转换为整型</span></span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			log.Fatal(err)</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> guess &lt; target &#123;</span><br><span class="line">			fmt.Println(<span class="string">&quot;Oops. Your guess was LOW.&quot;</span>)</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> guess &gt; target &#123;</span><br><span class="line">			fmt.Println(<span class="string">&quot;Oops. Your guess was HIGH.&quot;</span>)</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			success = <span class="literal">true</span></span><br><span class="line">			fmt.Println(<span class="string">&quot;Good job! You guessed it!,you have guessed&quot;</span>, guesses+<span class="number">1</span>, <span class="string">&quot;times&quot;</span>)</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> !success &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;Sorry, you didn&#x27;t guess my number. It was:&quot;</span>, target)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>函数形参接收实参的副本：</strong></p>
+<p>Go语言是一种“值传递”语言，函数形参从函数调用中接收实参的副本，函数中改变的是副本的值，而不是原始的值。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	amount := <span class="number">6</span></span><br><span class="line">	double(amount) <span class="comment">//这时候输出为12</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">double</span><span class="params">(number <span class="type">int</span>)</span></span>&#123;</span><br><span class="line">	number = number * <span class="number">2</span></span><br><span class="line">	fmt.Println(number)</span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">func main()&#123;</span></span><br><span class="line"><span class="comment">	amount := 6</span></span><br><span class="line"><span class="comment">	double(amount) </span></span><br><span class="line"><span class="comment">	fmt.Println(amount) //输出的是6!因为函数只改变了副本number的值</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">func double(number int)&#123;</span></span><br><span class="line"><span class="comment">	number = number * 2</span></span><br><span class="line"><span class="comment">&#125; </span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>为了解决函数保存的值是副本的值这个问题，引入了指针的概念；</p>
+<p>Go语言使用<code>&amp;</code>来获取变量的内存地址。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ptr := &amp;v	<span class="comment">//假设v的类型为T</span></span><br><span class="line">v表示被取地址的变量，v的地址用ptr接收，ptr的类型为<span class="string">`*T`</span>,即T的指针类型</span><br><span class="line">val = *ptr <span class="comment">//对ptr进行取址操作</span></span><br></pre></td></tr></table></figure>
+
+<p>用指针可以对上面的例子进行修改：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	amount := <span class="number">6</span></span><br><span class="line">	double(&amp;amount) </span><br><span class="line">	fmt.Println(amount) <span class="comment">//输出的是6!因为函数只改变了副本number的值</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">double</span><span class="params">(number *<span class="type">int</span>)</span></span>&#123;</span><br><span class="line">	*number = *number * <span class="number">2</span></span><br><span class="line">&#125; </span><br><span class="line">这样就可以通过函数修改变量的值了。</span><br></pre></td></tr></table></figure>
 
 
       
@@ -354,7 +365,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/03/10/go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E7%AC%AC1%E7%AB%A0/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/03/10/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -550,11 +561,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Go</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
