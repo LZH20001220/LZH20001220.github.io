@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>毕设框架 | 博客杂记 - Harder and Better</title>
+  <title>Go基础 - 数组，切片，映射，构建存储&#39; | 博客杂记 - Harder and Better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -23,17 +23,17 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta name="description" content="摘要 Abstract 第一章 绪论：  1.1：研究背景和意义 1.1.1 OFDM通信系统介绍 1.1.2 环境反向散射通信技术介绍 1.1.3 软件无线电介绍">
+  <meta name="description" content="Go语言创建数组：  123456789101112131415var notes [7] string &#x2F;&#x2F;创建一个由7个字符串组成的数组，未定义的数组值为0notes[0] &#x3D; &quot;do&quot; &#x2F;&#x2F;数组的单个元素赋值notes &#x3D; [7]string&amp;#123;&quot;do&quot;, &quot;re&quot;, &quot;mi&quot;, &quot;fa&amp;qu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="毕设框架">
-<meta property="og:url" content="http://example.com/2022/03/07/%E6%AF%95%E8%AE%BE%E6%A1%86%E6%9E%B6/index.html">
+<meta property="og:title" content="Go基础 - 数组，切片，映射，构建存储&#39;">
+<meta property="og:url" content="http://example.com/2022/03/24/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-2/index.html">
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
-<meta property="og:description" content="摘要 Abstract 第一章 绪论：  1.1：研究背景和意义 1.1.1 OFDM通信系统介绍 1.1.2 环境反向散射通信技术介绍 1.1.3 软件无线电介绍">
+<meta property="og:description" content="Go语言创建数组：  123456789101112131415var notes [7] string &#x2F;&#x2F;创建一个由7个字符串组成的数组，未定义的数组值为0notes[0] &#x3D; &quot;do&quot; &#x2F;&#x2F;数组的单个元素赋值notes &#x3D; [7]string&amp;#123;&quot;do&quot;, &quot;re&quot;, &quot;mi&quot;, &quot;fa&amp;qu">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-03-07T11:35:58.000Z">
-<meta property="article:modified_time" content="2022-03-18T02:45:16.335Z">
+<meta property="article:published_time" content="2022-03-24T08:28:16.000Z">
+<meta property="article:modified_time" content="2022-03-24T09:09:08.454Z">
 <meta property="article:author" content="ygtrece">
-<meta property="article:tag" content="科研">
+<meta property="article:tag" content="Go">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
@@ -186,15 +186,15 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-毕设框架" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Go语言基础-2" class="article article-type-post " itemscope itemprop="blogPost">
   
 <div class="article-inner">
     
       <header class="article-header">
         
         
-        <a href="/2022/03/07/%E6%AF%95%E8%AE%BE%E6%A1%86%E6%9E%B6/" class="archive-article-date">
-  	<time datetime="2022-03-07T11:35:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-07</time>
+        <a href="/2022/03/24/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-2/" class="archive-article-date">
+  	<time datetime="2022-03-24T08:28:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-24</time>
 </a>
 
 
@@ -212,7 +212,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.3k字</span>
+        <span class="post-count">222字</span>
       </span>
     </span>
 
@@ -221,7 +221,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">4分</span>
+        <span class="post-count">1分</span>
       </span>
     </span>
 </div>
@@ -236,87 +236,16 @@ var _hmt = _hmt || [];
       <center><p>
   
     <h1 class="article-title_code_ant" itemprop="name">
-      毕设框架
+      Go基础 - 数组，切片，映射，构建存储&#39;
     </h1>
   
 </p></center>
       
-        <p><strong>摘要</strong></p>
-<p><strong>Abstract</strong></p>
-<p><strong>第一章 绪论：</strong></p>
-<ul>
-<li>1.1：研究背景和意义<ul>
-<li>1.1.1 OFDM通信系统介绍</li>
-<li>1.1.2 环境反向散射通信技术介绍</li>
-<li>1.1.3 软件无线电介绍</li>
+        <ul>
+<li>Go语言创建数组：</li>
 </ul>
-</li>
-</ul>
-<span id="more"></span>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> notes [<span class="number">7</span>] <span class="type">string</span> <span class="comment">//创建一个由7个字符串组成的数组，未定义的数组值为0</span></span><br><span class="line">notes[<span class="number">0</span>] = <span class="string">&quot;do&quot;</span> <span class="comment">//数组的单个元素赋值</span></span><br><span class="line">notes = [<span class="number">7</span>]<span class="type">string</span>&#123;<span class="string">&quot;do&quot;</span>, <span class="string">&quot;re&quot;</span>, <span class="string">&quot;mi&quot;</span>, <span class="string">&quot;fa&quot;</span>, <span class="string">&quot;so&quot;</span>, <span class="string">&quot;la&quot;</span>, <span class="string">&quot;ti&quot;</span>&#125;<span class="comment">//整体初始化数组</span></span><br><span class="line"><span class="comment">//使用len函数可以检查数组的长度</span></span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(notes); i++&#123;</span><br><span class="line">    fmt.Println(i, note[i])</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//使用for...range可以安全遍历数组，避免越界</span></span><br><span class="line"><span class="keyword">for</span> index, note := <span class="keyword">range</span> notes&#123; <span class="comment">//index保存索引的变量，note保存每个字符串的变量</span></span><br><span class="line">    fmt.Println(index, note) <span class="comment">//要注意Go要求使用声明的每个变量</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//如果不想使用index变量</span></span><br><span class="line"><span class="keyword">for</span> _, note := <span class="keyword">range</span> notes&#123; <span class="comment">//index保存索引的变量，note保存每个字符串的变量</span></span><br><span class="line">    fmt.Println(note) <span class="comment">//要注意Go要求使用声明的每个变量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>1.2 国内外研究现状</li>
-<li>1.3 挑战与解决方法</li>
-<li>1.4 文章结构安排</li>
-</ul>
-<p><strong>第二章 OFDM通信系统基础知识：</strong></p>
-<ul>
-<li>2.1 OFDM通信系统理论基础</li>
-<li>2.2 OFDM通信系统系统设计</li>
-<li>2.3 OFDM通信系统系统实现与性能分析</li>
-<li>2.4 本章小结</li>
-</ul>
-<p><strong>第三章 OFDM环境反向散射系统设计与实现：</strong></p>
-<ul>
-<li>3.1 反向散射标签介绍</li>
-<li>3.2 OFDM 环境反向散射系统设计</li>
-<li>3.3 OFDM 环境反向散射系统实现与性能分析</li>
-<li>3.4 本章小结</li>
-</ul>
-<p><strong>第四章 WiFi环境反向散射系统设计与实现</strong></p>
-<ul>
-<li>4.1 基于WiFi 环境反向散射系统设计</li>
-<li>4.2 基于商用网卡的 WiFi 环境反向散射系统实现与性能分析</li>
-<li>4.3 本章小结</li>
-</ul>
-<p><strong>总结与展望</strong></p>
-<p><strong>参考文献</strong></p>
-<p><strong>…</strong></p>
-<p><strong>致谢</strong></p>
-<p>FFT之后不做解码，直接解调，OFDM符号整个翻转，FFT之后，信道估计之前,提高吞吐量，提高到250K</p>
-<p>代码字转换做了个异或，一个OFDM符号破坏代表传1，不破坏代表传0，解码</p>
-<p>需要补充的东西：</p>
-<ul>
-<li><p>用USRP测试OFDM通信系统的吞吐量和误码率；√</p>
-</li>
-<li><p>用USRP测试OFDM反向散射系统的吞吐量和误码率，以及功耗。√</p>
-</li>
-<li><p>仿真一个利用OFDM的循环前缀可以提高信息传输的效率的曲线。√</p>
-</li>
-<li><p>用商用网卡测试WiFi系统的吞吐量和误码率</p>
-</li>
-</ul>
-<p>测试OFDM系统时需要测试环境中信号的信噪比，注意需要抓取多个数据包然后取平均值，然后与仿真的结果进行对比，说明在测试环境的信噪比下，系统的吞吐量和误码率与仿真时相比如何如何…</p>
-<p>毕设的创新点: 进行了利用OFDM的循环前缀进行仿真的实验，证明了如果利用OFDM的循环前缀进行信息的传输，理论上可以在相似的误码率条件下得到更高的吞吐量。</p>
-<p>如果能将其用于商用设备中，有如下的好处：</p>
-<ul>
-<li><p>首先，此方案可以大大提高系统的吞吐量。因为可以利用OFDM的循环前缀传输标签信息，而不是在一个OFDM符号上只能选取一位或者几位进行标签信息的传输。</p>
-</li>
-<li><p>其次，此方案可以实现单接收机解调，而此前的一些反向散射系统，如(Hitchhike)都是基于双接收机进行解调，与之相比此方案可以大大降低系统的复杂度。</p>
-</li>
-<li><p>另外，此方案不需要通过移频来防止自干扰，这大大降低了系统的功耗。</p>
-</li>
-</ul>
-<p>毕设的不足：</p>
-<ul>
-<li>测试时由于时间，环境等因素的限制，测试环节没有考虑USRP和tag之间的距离，USRP之间的测试距离等环境影响因素，因此应该在实验的基础上修改自变量，增加数据的说服力。</li>
-<li>利用OFDM的循环前缀进行仿真的方案虽然在理论上取得了优异的性能，但是由于OFDM子载波正交的特性，以及信号同步时难以做到完全精确的同步，因此此方法的可行性有待进一步的考证。</li>
-<li>实际上OFDM信号是当前无线系统中广泛使用的调制方案，例如 WiFi，DVB，LTE和5G；本次毕设只考虑了物理层较为简单的WiFi系统，因此未来如何在更复杂的通信机制下进行环境反向散射有待于进一步的探索。</li>
-</ul>
-<p>仿真的参数：每帧6个OFDM符号，每帧的前面加一个preamble，preamble为BPSK调制，OFDM符号的值为QPSK调制，每帧就是7个符号，每种信噪比下的仿真帧数为1000帧，仿真是反射整个OFDM符号，将每帧的第三个和第六个OFDM符号进行反射，然后在接收端通过异或判断反射的信息，进而计算系统的误码率和吞吐量。</p>
-<p>基于循环前缀的OFDM反向散射系统误码率略有提高，但是吞吐量大大增加！</p>
-<p>2M采样率的OFDM系统每个数据包的发送时间是0.44ms，采样率是2M，每个OFDM符号包括80个采样点，80个采样点就是0.04ms；发送每个数据包需要11个OFDM符号，其中数据采取QPSK调制，数据为96个字节，转换为每个符号2bit就对应384个符号，每个OFDM符号有48个子载波，因此传递48个符号，传输数据部分就需要8个OFDM符号；包头包括6个字节，转换为每个符号1bit就对应48个符号，因此传输数据包头部分需要1个OFDM符号。</p>
-<p>一个数据包96个字节，输出192个实部和192个虚部。bit per sample只是每个采样点的数据保留小数点后几位，采样率才是重点，200k就是每秒采200k个点，每个OFDM符号就是80个点。</p>
 
       
 
@@ -330,7 +259,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Go</a>
         		</li>
       		
 		</ul>
@@ -386,7 +315,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/03/07/%E6%AF%95%E8%AE%BE%E6%A1%86%E6%9E%B6/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/03/24/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-2/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -400,18 +329,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2022/03/07/%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          手写数字识别
-        
-      </div>
-    </a>
   
-  
-    <a href="/2022/03/02/C++-primer-7%E7%AB%A0/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">C++ primer 7章 类</div>
+    <a href="/2022/03/22/%E5%9B%9E%E6%BA%AF-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">回溯 (1)</div>
       <i class="icon-circle-right"></i>
     </a>
   

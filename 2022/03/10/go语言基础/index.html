@@ -26,12 +26,12 @@
   <meta name="description" content="Go语言学习笔记:第一章：概述Go语言的特点：  与C99,C11相似之处颇多，它的主要目标是“兼具 Python 等动态语言的开发速度和 C&#x2F;C++ 等编译型语言的性能与安全性”。 是对类C语言的重大改进，它不但能访问底层操作系统，还提供了强大的网络编程和并发编程支持。Go语言的用途众多，可以进行网络编程、系统编程、并发编程、分布式编程。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Go基础 - 条件，循环，函数，指针">
-<meta property="og:url" content="http://example.com/2022/03/10/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:url" content="http://example.com/2022/03/10/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
 <meta property="og:description" content="Go语言学习笔记:第一章：概述Go语言的特点：  与C99,C11相似之处颇多，它的主要目标是“兼具 Python 等动态语言的开发速度和 C&#x2F;C++ 等编译型语言的性能与安全性”。 是对类C语言的重大改进，它不但能访问底层操作系统，还提供了强大的网络编程和并发编程支持。Go语言的用途众多，可以进行网络编程、系统编程、并发编程、分布式编程。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-10T11:02:03.000Z">
-<meta property="article:modified_time" content="2022-03-23T12:49:19.606Z">
+<meta property="article:modified_time" content="2022-03-24T03:27:16.395Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="Go">
 <meta name="twitter:card" content="summary">
@@ -186,14 +186,14 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-go语言基础" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Go语言基础" class="article article-type-post " itemscope itemprop="blogPost">
   
 <div class="article-inner">
     
       <header class="article-header">
         
         
-        <a href="/2022/03/10/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" class="archive-article-date">
+        <a href="/2022/03/10/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" class="archive-article-date">
   	<time datetime="2022-03-10T11:02:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-10</time>
 </a>
 
@@ -212,7 +212,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.9k字</span>
+        <span class="post-count">2.5k字</span>
       </span>
     </span>
 
@@ -221,7 +221,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">8分</span>
+        <span class="post-count">10分</span>
       </span>
     </span>
 </div>
@@ -272,7 +272,8 @@ var _hmt = _hmt || [];
 <li>println()函数可以有任意多的参数，参数之间用<code>,</code>分开；如果import包含多个包需要()；</li>
 </ol>
 <p><strong>字符串</strong>：字符串字面量用 “”包围，字符字面量用 ‘’包围；可以使用小数点来区分小数和整数。</p>
-<p><strong>声明变量：</strong>var关键词 + 变量名 + 变量类型，如var quantity int；如果声明时没有赋值，默认为零值；</p>
+<p><strong>声明变量：</strong>var关键词 + 变量名 + 类型，如var quantity int；如果声明时没有赋值，默认为零值；</p>
+<p><strong>声明常量：</strong>const关键词 + 常量名 + 类型，常量的值必须保持不变；</p>
 <p>声明变量并声明的两种方式：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> quantity <span class="type">int</span> = <span class="number">4</span>；</span><br><span class="line">quantity := <span class="number">4</span>;</span><br><span class="line"><span class="comment">//错误的方式</span></span><br><span class="line"><span class="comment">//声明变量a</span></span><br><span class="line"><span class="keyword">var</span> a <span class="type">int</span></span><br><span class="line"><span class="comment">//声明变量a并给变量a赋值</span></span><br><span class="line">a := <span class="number">1</span></span><br><span class="line"><span class="comment">//错误提示</span></span><br><span class="line">no <span class="built_in">new</span> variables on left side of :=</span><br><span class="line"><span class="comment">//说明</span></span><br><span class="line">重复声明变量a</span><br><span class="line"><span class="comment">//Go也支持自动推断类型</span></span><br><span class="line"><span class="keyword">var</span> a=<span class="number">10</span> <span class="comment">//默认a为整型</span></span><br></pre></td></tr></table></figure>
 
@@ -285,6 +286,11 @@ var _hmt = _hmt || [];
 <p>另外一个例子：另外一个例子，猜数字</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// guess challenges players to guess a random number.</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;bufio&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;log&quot;</span></span><br><span class="line">	<span class="string">&quot;math/rand&quot;</span></span><br><span class="line">	<span class="string">&quot;os&quot;</span></span><br><span class="line">	<span class="string">&quot;strconv&quot;</span></span><br><span class="line">	<span class="string">&quot;strings&quot;</span></span><br><span class="line">	<span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	seconds := time.Now().Unix()</span><br><span class="line">	rand.Seed(seconds) <span class="comment">//必须加上time.now()随机数才能更新</span></span><br><span class="line">	target := rand.Intn(<span class="number">100</span>) + <span class="number">1</span></span><br><span class="line">	fmt.Println(<span class="string">&quot;I&#x27;ve chosen a random number between 1 and 100.&quot;</span>)</span><br><span class="line">	fmt.Println(<span class="string">&quot;Can you guess it?&quot;</span>)</span><br><span class="line"></span><br><span class="line">	reader := bufio.NewReader(os.Stdin)</span><br><span class="line">	success := <span class="literal">false</span></span><br><span class="line">	<span class="keyword">for</span> guesses := <span class="number">0</span>; guesses &lt; <span class="number">10</span>; guesses++ &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;You have&quot;</span>, <span class="number">10</span>-guesses, <span class="string">&quot;guesses left.&quot;</span>) <span class="comment">//Println会自动换行，Print不会</span></span><br><span class="line">		fmt.Print(<span class="string">&quot;Make a guess: &quot;</span>)</span><br><span class="line">		input, err := reader.ReadString(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			log.Fatal(err)</span><br><span class="line">		&#125;</span><br><span class="line">		input = strings.TrimSpace(input)</span><br><span class="line">		guess, err := strconv.Atoi(input) <span class="comment">//字符串转换为整型</span></span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			log.Fatal(err)</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> guess &lt; target &#123;</span><br><span class="line">			fmt.Println(<span class="string">&quot;Oops. Your guess was LOW.&quot;</span>)</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> guess &gt; target &#123;</span><br><span class="line">			fmt.Println(<span class="string">&quot;Oops. Your guess was HIGH.&quot;</span>)</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			success = <span class="literal">true</span></span><br><span class="line">			fmt.Println(<span class="string">&quot;Good job! You guessed it!,you have guessed&quot;</span>, guesses+<span class="number">1</span>, <span class="string">&quot;times&quot;</span>)</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> !success &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;Sorry, you didn&#x27;t guess my number. It was:&quot;</span>, target)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+<p>第三个例子：计算面积</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;log&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">paintNeeded</span><span class="params">(width <span class="type">float64</span>, height <span class="type">float64</span>)</span></span> (<span class="type">float64</span>, <span class="type">error</span>) &#123; <span class="comment">//后面括号中的float64指的是参数的返回值是float64， error是错误信息</span></span><br><span class="line">	<span class="keyword">if</span> width &lt; <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>, fmt.Errorf(<span class="string">&quot;a width of %0.2f is invalid&quot;</span>, width) <span class="comment">//如果需要格式化数字以便在错误信息中使用，可以用fmt.Errorf()函数</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> height &lt; <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>, fmt.Errorf(<span class="string">&quot;a height of %0.2f is invalid&quot;</span>, height)</span><br><span class="line">	&#125;</span><br><span class="line">	area := width * height</span><br><span class="line">	<span class="keyword">return</span> area / <span class="number">10.0</span>, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	amount, err := paintNeeded(<span class="number">5.2</span>, <span class="number">3.5</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(err)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;%.2f liters needed\n&quot;</span>, amount) <span class="comment">//%.2f和%0.2f一样</span></span><br><span class="line">	amount, err = paintNeeded(<span class="number">4.2</span>, <span class="number">-3.0</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(err)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;%.2f liters needed\n&quot;</span>, amount)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <p><strong>函数形参接收实参的副本：</strong></p>
 <p>Go语言是一种“值传递”语言，函数形参从函数调用中接收实参的副本，函数中改变的是副本的值，而不是原始的值。</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	amount := <span class="number">6</span></span><br><span class="line">	double(amount) <span class="comment">//这时候输出为12</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">double</span><span class="params">(number <span class="type">int</span>)</span></span>&#123;</span><br><span class="line">	number = number * <span class="number">2</span></span><br><span class="line">	fmt.Println(number)</span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">func main()&#123;</span></span><br><span class="line"><span class="comment">	amount := 6</span></span><br><span class="line"><span class="comment">	double(amount) </span></span><br><span class="line"><span class="comment">	fmt.Println(amount) //输出的是6!因为函数只改变了副本number的值</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">func double(number int)&#123;</span></span><br><span class="line"><span class="comment">	number = number * 2</span></span><br><span class="line"><span class="comment">&#125; </span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
@@ -294,7 +300,24 @@ var _hmt = _hmt || [];
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ptr := &amp;v	<span class="comment">//假设v的类型为T</span></span><br><span class="line">v表示被取地址的变量，v的地址用ptr接收，ptr的类型为<span class="string">`*T`</span>,即T的指针类型</span><br><span class="line">val = *ptr <span class="comment">//对ptr进行取址操作</span></span><br></pre></td></tr></table></figure>
 
 <p>用指针可以对上面的例子进行修改：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	amount := <span class="number">6</span></span><br><span class="line">	double(&amp;amount) </span><br><span class="line">	fmt.Println(amount) <span class="comment">//输出的是6!因为函数只改变了副本number的值</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">double</span><span class="params">(number *<span class="type">int</span>)</span></span>&#123;</span><br><span class="line">	*number = *number * <span class="number">2</span></span><br><span class="line">&#125; </span><br><span class="line">这样就可以通过函数修改变量的值了。</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	amount := <span class="number">6</span></span><br><span class="line">	double(&amp;amount) </span><br><span class="line">	fmt.Println(amount) <span class="comment">//输出的是6!因为函数只改变了副本number的值</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">double</span><span class="params">(number *<span class="type">int</span>)</span></span>&#123;</span><br><span class="line">	*number = *number * <span class="number">2</span></span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">//这样就可以通过函数修改变量的值了。</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="第四讲-代码集"><a href="#第四讲-代码集" class="headerlink" title="第四讲 代码集"></a>第四讲 代码集</h5><ul>
+<li><p>工作区目录包括三个子目录：bin，pkg，src；其中bin保存可执行文件，pkg保存已编译的包代码，src保存源代码，注意src中的每个文件夹最多只能包括一个main函数。</p>
+</li>
+<li><p>Go语言默认的安装包在C盘Program Files&#x2F;Go&#x2F;src文件夹中，定义了一些常用库及其函数。</p>
+</li>
+</ul>
+<p>​        这个安装包的路径可以通过cmd中go env命令查看，Goroot即为安装包的路径。   </p>
+<p>​        如果自己新建一个包，需要将这个包放在文件夹中然后放在Goroot的src目录下或者Gopath的src目录下。</p>
+<ul>
+<li>将函数名的第一个字母大写，函数就是可导出的，也就是其他的包也能用这个包里的函数。如果函数名的第一个字母小写，它只能在自己的包里使用，其他的包不能使用这个函数。</li>
+<li>Go语言命名规范：包名应该全部小写，并且尽量保持简洁。</li>
+<li>如果导入的数据包有重名的情况，应该注意import的时候将路径写全。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">go build test.go #go build 命令编译文件,生成一个可执行二进制.exe文件</span><br><span class="line">./test.exe #执行程序，输出结果</span><br><span class="line">go get //可以下载和安装包</span><br><span class="line">go doc //阅读包文档</span><br></pre></td></tr></table></figure>
 
 
       
@@ -365,7 +388,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/03/10/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/03/10/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -389,7 +412,7 @@ var _hmt = _hmt || [];
     </a>
   
   
-    <a href="/2022/03/10/go%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2022/03/10/Go%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">Go环境配置</div>
       <i class="icon-circle-right"></i>
     </a>
@@ -417,7 +440,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">Go语言学习笔记:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">第一章：概述</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">Go语言学习笔记:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">第一章：概述</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E8%AE%B2-%E4%BB%A3%E7%A0%81%E9%9B%86"><span class="toc-number">1.1.1.</span> <span class="toc-text">第四讲 代码集</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -553,19 +576,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
