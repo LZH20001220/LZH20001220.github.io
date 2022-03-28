@@ -31,7 +31,7 @@
 <meta property="og:description" content="Go语言创建数组：  123456789101112131415var notes [7] string &#x2F;&#x2F;创建一个由7个字符串组成的数组，未定义的数组值为0notes[0] &#x3D; &quot;do&quot; &#x2F;&#x2F;数组的单个元素赋值notes &#x3D; [7]string&amp;#123;&quot;do&quot;, &quot;re&quot;, &quot;mi&quot;, &quot;fa&amp;qu">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-24T08:28:16.000Z">
-<meta property="article:modified_time" content="2022-03-24T09:09:08.454Z">
+<meta property="article:modified_time" content="2022-03-28T11:10:58.288Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="Go">
 <meta name="twitter:card" content="summary">
@@ -212,7 +212,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">222字</span>
+        <span class="post-count">229字</span>
       </span>
     </span>
 
@@ -246,6 +246,11 @@ var _hmt = _hmt || [];
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> notes [<span class="number">7</span>] <span class="type">string</span> <span class="comment">//创建一个由7个字符串组成的数组，未定义的数组值为0</span></span><br><span class="line">notes[<span class="number">0</span>] = <span class="string">&quot;do&quot;</span> <span class="comment">//数组的单个元素赋值</span></span><br><span class="line">notes = [<span class="number">7</span>]<span class="type">string</span>&#123;<span class="string">&quot;do&quot;</span>, <span class="string">&quot;re&quot;</span>, <span class="string">&quot;mi&quot;</span>, <span class="string">&quot;fa&quot;</span>, <span class="string">&quot;so&quot;</span>, <span class="string">&quot;la&quot;</span>, <span class="string">&quot;ti&quot;</span>&#125;<span class="comment">//整体初始化数组</span></span><br><span class="line"><span class="comment">//使用len函数可以检查数组的长度</span></span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(notes); i++&#123;</span><br><span class="line">    fmt.Println(i, note[i])</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//使用for...range可以安全遍历数组，避免越界</span></span><br><span class="line"><span class="keyword">for</span> index, note := <span class="keyword">range</span> notes&#123; <span class="comment">//index保存索引的变量，note保存每个字符串的变量</span></span><br><span class="line">    fmt.Println(index, note) <span class="comment">//要注意Go要求使用声明的每个变量</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//如果不想使用index变量</span></span><br><span class="line"><span class="keyword">for</span> _, note := <span class="keyword">range</span> notes&#123; <span class="comment">//index保存索引的变量，note保存每个字符串的变量</span></span><br><span class="line">    fmt.Println(note) <span class="comment">//要注意Go要求使用声明的每个变量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<span id="more"></span>
+
+<ul>
+<li>Go语言切片机制</li>
+</ul>
 
       
 
@@ -511,11 +516,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
