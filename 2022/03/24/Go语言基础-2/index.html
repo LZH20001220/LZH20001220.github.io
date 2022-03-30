@@ -23,15 +23,15 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta name="description" content="Go语言创建数组：  123456789101112131415var notes [7] string &#x2F;&#x2F;创建一个由7个字符串组成的数组，未定义的数组值为0notes[0] &#x3D; &quot;do&quot; &#x2F;&#x2F;数组的单个元素赋值notes &#x3D; [7]string&amp;#123;&quot;do&quot;, &quot;re&quot;, &quot;mi&quot;, &quot;fa&amp;qu">
+  <meta name="description" content="Go语言创建数组：  1234567891011121314151617var notes [7] string &#x2F;&#x2F;创建一个由7个字符串组成的数组，未定义的数组值为0notes[0] &#x3D; &quot;do&quot; &#x2F;&#x2F;数组的单个元素赋值notes &#x3D; [7]string&amp;#123;&quot;do&quot;, &quot;re&quot;, &quot;mi&quot;, &quot;f">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Go基础 - 数组，切片，映射，构建存储&#39;">
 <meta property="og:url" content="http://example.com/2022/03/24/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-2/index.html">
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
-<meta property="og:description" content="Go语言创建数组：  123456789101112131415var notes [7] string &#x2F;&#x2F;创建一个由7个字符串组成的数组，未定义的数组值为0notes[0] &#x3D; &quot;do&quot; &#x2F;&#x2F;数组的单个元素赋值notes &#x3D; [7]string&amp;#123;&quot;do&quot;, &quot;re&quot;, &quot;mi&quot;, &quot;fa&amp;qu">
+<meta property="og:description" content="Go语言创建数组：  1234567891011121314151617var notes [7] string &#x2F;&#x2F;创建一个由7个字符串组成的数组，未定义的数组值为0notes[0] &#x3D; &quot;do&quot; &#x2F;&#x2F;数组的单个元素赋值notes &#x3D; [7]string&amp;#123;&quot;do&quot;, &quot;re&quot;, &quot;mi&quot;, &quot;f">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-24T08:28:16.000Z">
-<meta property="article:modified_time" content="2022-03-28T11:10:58.288Z">
+<meta property="article:modified_time" content="2022-03-29T14:09:05.360Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="Go">
 <meta name="twitter:card" content="summary">
@@ -212,7 +212,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">229字</span>
+        <span class="post-count">509字</span>
       </span>
     </span>
 
@@ -221,7 +221,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
+        <span class="post-count">2分</span>
       </span>
     </span>
 </div>
@@ -244,13 +244,26 @@ var _hmt = _hmt || [];
         <ul>
 <li>Go语言创建数组：</li>
 </ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> notes [<span class="number">7</span>] <span class="type">string</span> <span class="comment">//创建一个由7个字符串组成的数组，未定义的数组值为0</span></span><br><span class="line">notes[<span class="number">0</span>] = <span class="string">&quot;do&quot;</span> <span class="comment">//数组的单个元素赋值</span></span><br><span class="line">notes = [<span class="number">7</span>]<span class="type">string</span>&#123;<span class="string">&quot;do&quot;</span>, <span class="string">&quot;re&quot;</span>, <span class="string">&quot;mi&quot;</span>, <span class="string">&quot;fa&quot;</span>, <span class="string">&quot;so&quot;</span>, <span class="string">&quot;la&quot;</span>, <span class="string">&quot;ti&quot;</span>&#125;<span class="comment">//整体初始化数组</span></span><br><span class="line"><span class="comment">//使用len函数可以检查数组的长度</span></span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(notes); i++&#123;</span><br><span class="line">    fmt.Println(i, note[i])</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//使用for...range可以安全遍历数组，避免越界</span></span><br><span class="line"><span class="keyword">for</span> index, note := <span class="keyword">range</span> notes&#123; <span class="comment">//index保存索引的变量，note保存每个字符串的变量</span></span><br><span class="line">    fmt.Println(index, note) <span class="comment">//要注意Go要求使用声明的每个变量</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//如果不想使用index变量</span></span><br><span class="line"><span class="keyword">for</span> _, note := <span class="keyword">range</span> notes&#123; <span class="comment">//index保存索引的变量，note保存每个字符串的变量</span></span><br><span class="line">    fmt.Println(note) <span class="comment">//要注意Go要求使用声明的每个变量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> notes [<span class="number">7</span>] <span class="type">string</span> <span class="comment">//创建一个由7个字符串组成的数组，未定义的数组值为0</span></span><br><span class="line">notes[<span class="number">0</span>] = <span class="string">&quot;do&quot;</span> <span class="comment">//数组的单个元素赋值</span></span><br><span class="line">notes = [<span class="number">7</span>]<span class="type">string</span>&#123;<span class="string">&quot;do&quot;</span>, <span class="string">&quot;re&quot;</span>, <span class="string">&quot;mi&quot;</span>, <span class="string">&quot;fa&quot;</span>, <span class="string">&quot;so&quot;</span>, <span class="string">&quot;la&quot;</span>, <span class="string">&quot;ti&quot;</span>&#125;<span class="comment">//整体初始化数组</span></span><br><span class="line">slice := notes[<span class="number">0</span> : <span class="number">3</span>]	<span class="comment">//输出&quot;do&quot;,&quot;re&quot;,&quot;mi&quot;</span></span><br><span class="line">slice := notes[<span class="number">0</span> : ]	<span class="comment">//输出&quot;do&quot;, &quot;re&quot;, &quot;mi&quot;, &quot;fa&quot;, &quot;so&quot;, &quot;la&quot;, &quot;ti&quot;</span></span><br><span class="line"><span class="comment">//使用len函数可以检查数组的长度</span></span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(notes); i++&#123;</span><br><span class="line">    fmt.Println(i, note[i])</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//使用for...range可以安全遍历数组，避免越界</span></span><br><span class="line"><span class="keyword">for</span> index, note := <span class="keyword">range</span> notes&#123; <span class="comment">//index保存索引的变量，note保存每个字符串的变量</span></span><br><span class="line">    fmt.Println(index, note) <span class="comment">//要注意Go要求使用声明的每个变量</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//如果不想使用index变量</span></span><br><span class="line"><span class="keyword">for</span> _, note := <span class="keyword">range</span> notes&#123; <span class="comment">//index保存索引的变量，note保存每个字符串的变量</span></span><br><span class="line">    fmt.Println(note) <span class="comment">//要注意Go要求使用声明的每个变量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <span id="more"></span>
 
 <ul>
 <li>Go语言切片机制</li>
 </ul>
+<p>切片允许我们在结尾添加更多的元素</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> numbers []<span class="type">float64</span>	<span class="comment">//切片</span></span><br><span class="line"><span class="keyword">var</span> numbers [<span class="number">10</span>]<span class="type">float64</span>	<span class="comment">//数组</span></span><br></pre></td></tr></table></figure>
+
+<p>声明切片变量后并不能自动创建一个切片，为此可以使用make函数传递给make想要创建的切片的类型。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> numbers []<span class="type">float64</span>	<span class="comment">//切片</span></span><br><span class="line">numbers = <span class="built_in">make</span>([]<span class="type">float64</span>, <span class="number">7</span>)	<span class="comment">//创建一个7个浮点数的切片</span></span><br><span class="line">numbers := <span class="built_in">make</span>([]<span class="type">float64</span>, <span class="number">7</span>)	<span class="comment">//与前面等价</span></span><br></pre></td></tr></table></figure>
+
+<p>利用append可以在切片后面添加元素</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">slice := []<span class="type">string</span>&#123;<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>&#125;</span><br><span class="line">slice = <span class="built_in">append</span>(slice, <span class="string">&quot;c&quot;</span>)	<span class="comment">//在切片后面追加一个元素</span></span><br></pre></td></tr></table></figure>
+
+<p>与数组一样，如果访问到了切片中没有赋值的元素，将会得到那个元素的类型对应的零值。</p>
+<p>与数组不同的是，切片本身自己也有0值，nil。一个没有赋值的切片变量值为nil。</p>
+<p>函数中的<code>...</code>表示变长数组。</p>
+<p>os.Args可以对当前程序执行的命令行参数进行切片分割。</p>
 
       
 
@@ -520,11 +533,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color3">科研</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">科研</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">

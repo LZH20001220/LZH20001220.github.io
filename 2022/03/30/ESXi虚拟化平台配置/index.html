@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>C++ primer 5章 语句 | 博客杂记 - Harder and Better</title>
+  <title>VMware ESXi虚拟化平台配置 | 博客杂记 - Harder and Better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -23,18 +23,21 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta name="description" content="第五章：语句简单语句 表达式语句：一个表达式末尾加上分号，就变成了表达式语句。 空语句：只有一个单独的分号。 复合语句（块）：用花括号 &amp;#123;&amp;#125;包裹起来的语句和声明的序列。一个块就是一个作用域。">
+  <meta name="description" content="首先安装VMware Workstation，然后安装ESXi，本次选用的版本是  ESXi-6.7.0-8169922-standard Installer,下载参考： VMware ESXi 6.7安装过程介绍_张志翔 ̮的博客-CSDN博客 安装镜像参考： VMware6.7下载 VMware vSphere ESXi + vCenter全套软件虚拟机 v6.7 官方版(附详细安装教程)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++ primer 5章 语句">
-<meta property="og:url" content="http://example.com/2022/02/27/C++-primer-5%E7%AB%A0/index.html">
+<meta property="og:title" content="VMware ESXi虚拟化平台配置">
+<meta property="og:url" content="http://example.com/2022/03/30/ESXi%E8%99%9A%E6%8B%9F%E5%8C%96%E5%B9%B3%E5%8F%B0%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
-<meta property="og:description" content="第五章：语句简单语句 表达式语句：一个表达式末尾加上分号，就变成了表达式语句。 空语句：只有一个单独的分号。 复合语句（块）：用花括号 &amp;#123;&amp;#125;包裹起来的语句和声明的序列。一个块就是一个作用域。">
+<meta property="og:description" content="首先安装VMware Workstation，然后安装ESXi，本次选用的版本是  ESXi-6.7.0-8169922-standard Installer,下载参考： VMware ESXi 6.7安装过程介绍_张志翔 ̮的博客-CSDN博客 安装镜像参考： VMware6.7下载 VMware vSphere ESXi + vCenter全套软件虚拟机 v6.7 官方版(附详细安装教程)">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-02-27T12:20:58.000Z">
-<meta property="article:modified_time" content="2022-02-28T02:54:46.910Z">
+<meta property="og:image" content="http://example.com/2022/03/30/ESXi%E8%99%9A%E6%8B%9F%E5%8C%96%E5%B9%B3%E5%8F%B0%E9%85%8D%E7%BD%AE/1.png">
+<meta property="og:image" content="http://example.com/2022/03/30/ESXi%E8%99%9A%E6%8B%9F%E5%8C%96%E5%B9%B3%E5%8F%B0%E9%85%8D%E7%BD%AE/2.png">
+<meta property="article:published_time" content="2022-03-30T08:13:03.000Z">
+<meta property="article:modified_time" content="2022-03-30T08:38:14.613Z">
 <meta property="article:author" content="ygtrece">
-<meta property="article:tag" content="C++">
+<meta property="article:tag" content="环境配置">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/03/30/ESXi%E8%99%9A%E6%8B%9F%E5%8C%96%E5%B9%B3%E5%8F%B0%E9%85%8D%E7%BD%AE/1.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -186,15 +189,15 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-C++-primer-5章" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-ESXi虚拟化平台配置" class="article article-type-post " itemscope itemprop="blogPost">
   
 <div class="article-inner">
     
       <header class="article-header">
         
         
-        <a href="/2022/02/27/C++-primer-5%E7%AB%A0/" class="archive-article-date">
-  	<time datetime="2022-02-27T12:20:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-27</time>
+        <a href="/2022/03/30/ESXi%E8%99%9A%E6%8B%9F%E5%8C%96%E5%B9%B3%E5%8F%B0%E9%85%8D%E7%BD%AE/" class="archive-article-date">
+  	<time datetime="2022-03-30T08:13:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-30</time>
 </a>
 
 
@@ -212,7 +215,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">725字</span>
+        <span class="post-count">311字</span>
       </span>
     </span>
 
@@ -221,7 +224,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">3分</span>
+        <span class="post-count">1分</span>
       </span>
     </span>
 </div>
@@ -236,54 +239,31 @@ var _hmt = _hmt || [];
       <center><p>
   
     <h1 class="article-title_code_ant" itemprop="name">
-      C++ primer 5章 语句
+      VMware ESXi虚拟化平台配置
     </h1>
   
 </p></center>
       
-        <h3 id="第五章：语句"><a href="#第五章：语句" class="headerlink" title="第五章：语句"></a>第五章：语句</h3><h4 id="简单语句"><a href="#简单语句" class="headerlink" title="简单语句"></a>简单语句</h4><ul>
-<li><strong>表达式语句</strong>：一个表达式末尾加上分号，就变成了表达式语句。</li>
-<li><strong>空语句</strong>：只有一个单独的分号。</li>
-<li><strong>复合语句（块）</strong>：用花括号 <code>&#123;&#125;</code>包裹起来的语句和声明的序列。一个块就是一个作用域。</li>
+        <ul>
+<li>首先安装<code>VMware Workstation</code>，然后安装ESXi，本次选用的版本是</li>
 </ul>
+<p><code>ESXi-6.7.0-8169922-standard Installer</code>,下载参考：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_19734597/article/details/89703863">VMware ESXi 6.7安装过程介绍_张志翔 ̮的博客-CSDN博客</a></p>
+<p>安装镜像参考：</p>
+<p><a target="_blank" rel="noopener" href="https://www.jb51.net/softs/612972.html">VMware6.7下载 VMware vSphere ESXi + vCenter全套软件虚拟机 v6.7 官方版(附详细安装教程) 下载-脚本之家 (jb51.net)</a></p>
 <span id="more"></span>
 
-<h4 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h4><ul>
-<li><p><strong>悬垂else</strong>（dangling else）：用来描述在嵌套的<code>if else</code>语句中，如果<code>if</code>比<code>else</code>多时如何处理的问题。C++使用的方法是<code>else</code>匹配最近没有配对的<code>if</code>。</p>
-</li>
-<li><p><strong>switch</strong>：default标签，当没有任何一个case标签能匹配上switch表达式的值时，程序将执行default后面的语句。</p>
-<p>C++里的<code>\t</code>相当于按了<code>Tab</code>键；</p>
-<p>switch中的<code>case</code>标签必须是整型常量表达式。</p>
-<p>多个<code>case</code>的写法：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="number">1</span>: <span class="keyword">case</span> <span class="number">3</span>: <span class="keyword">case</span> <span class="number">5</span>: <span class="keyword">case</span> <span class="number">7</span>: <span class="keyword">case</span> <span class="number">9</span>:</span><br><span class="line">     oddcnt++;</span><br><span class="line">     <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="迭代语句"><a href="#迭代语句" class="headerlink" title="迭代语句"></a>迭代语句</h4><ul>
-<li><p><strong>while</strong>：当不确定到底要迭代多少次时，使用 <code>while</code>循环比较合适，比如读取输入的内容。</p>
-</li>
-<li><p><strong>for</strong>： <code>for</code>语句可以省略掉 <code>init-statement</code>， <code>condition</code>和 <code>expression</code>的任何一个；<strong>甚至全部</strong>。</p>
-</li>
-<li><p><strong>范围for</strong>： <code>for (declaration: expression) statement</code> C++ 11新引进</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">vector &lt;<span class="type">int</span>&gt; v = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>&#125;;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> &amp;r : v)</span><br><span class="line">r = r * <span class="number">2</span>;</span><br><span class="line"><span class="comment">/*等价于</span></span><br><span class="line"><span class="comment">for(auto beg = v.begin(); end = v.end(); beg != end; ++beg)</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">	auto &amp;r = *beg;</span></span><br><span class="line"><span class="comment">	r = r * 2;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>do while语句</strong>：<code>do &#123;statement&#125; while (condition);</code></p>
-</li>
-</ul>
-<h4 id="跳转语句"><a href="#跳转语句" class="headerlink" title="跳转语句"></a>跳转语句</h4><ul>
-<li><p><strong>break</strong>：<code>break</code>语句负责终止离它最近的<code>while</code>、<code>do while</code>、<code>for</code>或者<code>switch</code>语句，并从这些语句之后的第一条语句开始继续执行。</p>
-</li>
-<li><p><strong>continue</strong>：终止最近的循环中的当前迭代并立即开始下一次迭代。只能在<code>while</code>、<code>do while</code>、<code>for</code>循环的内部。</p>
-</li>
-<li><p><strong>goto：</strong>无条件的跳转到同一函数内的另一条语句。不要轻易的用goto！！！</p>
-</li>
-</ul>
-<h4 id="try语句块和异常处理"><a href="#try语句块和异常处理" class="headerlink" title="try语句块和异常处理"></a>try语句块和异常处理</h4><ul>
-<li><strong>throw表达式</strong>：异常检测部分使用 <code>throw</code>表达式来表示它遇到了无法处理的问题。我们说 <code>throw</code>引发 <code>raise</code>了异常。</li>
-<li><strong>try语句块</strong>：以 <code>try</code>关键词开始，以一个或多个 <code>catch</code>字句结束。 <code>try</code>语句块中的代码抛出的异常通常会被某个 <code>catch</code>捕获并处理。 <code>catch</code>子句也被称为<strong>异常处理代码</strong>。</li>
-<li><strong>异常类</strong>：用于在 <code>throw</code>表达式和相关的 <code>catch</code>子句之间传递异常的具体信息。</li>
-</ul>
-<p>一个当除数为0时抛出异常的程序：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdexcept&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> std::cin; <span class="keyword">using</span> std::cout; <span class="keyword">using</span> std::endl; <span class="keyword">using</span> std::runtime_error;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i, j; cout &lt;&lt; <span class="string">&quot;Input two integers:\n&quot;</span>, cin &gt;&gt; i &gt;&gt; j; )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">try</span> </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (j == <span class="number">0</span>) </span><br><span class="line">                <span class="keyword">throw</span> <span class="built_in">runtime_error</span>(<span class="string">&quot;divisor is 0&quot;</span>);<span class="comment">//一种异常的类型，只有当运行时才能检测出的异常</span></span><br><span class="line">            cout &lt;&lt; i / j &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">catch</span> (runtime_error err) </span><br><span class="line">        &#123;</span><br><span class="line">            cout &lt;&lt; err.<span class="built_in">what</span>() &lt;&lt; <span class="string">&quot;\nTry again? Enter y or n&quot;</span> &lt;&lt; endl;</span><br><span class="line">            <span class="type">char</span> c;</span><br><span class="line">            cin &gt;&gt; c;</span><br><span class="line">            <span class="keyword">if</span> (!cin || c == <span class="string">&#x27;n&#x27;</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p>注意ipv4地址不需要修改，虚拟机会根据现有的ip地址给虚拟机分配，用默认的就行了。</p>
+<p>安装完毕后并配置完成后如图：</p>
+<p><img src="/2022/03/30/ESXi%E8%99%9A%E6%8B%9F%E5%8C%96%E5%B9%B3%E5%8F%B0%E9%85%8D%E7%BD%AE/1.png" alt="a8afcde65b7163ecbe62f18cb58231d"></p>
+<p>然后通过Google浏览器访问<code>192.168.184.132/ui/#/host</code>就可以访问ESXi的控制界面了</p>
+<p>选择存储的数据存储浏览器可以实现本机数据和ESXi平台的交互。上传Ubuntu18.04.6的镜像。</p>
+<p>然后可以在ESXi里新建两个虚拟机，并为其分配内存。</p>
+<p>到此ESXi虚拟化平台的初步安装就基本完成了。</p>
+<p>然后我们根据上个安装教程在ESXi中安装了ndn-cxx，NFD，ndn-tools等工具，然后进行了一个小实验，参考了</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/322366263">NDN实践之路-NFD实践 - 知乎 (zhihu.com)</a></p>
+<p>得到了如下的实验结果，可以得知实现了正常的通信。</p>
+<p><img src="/2022/03/30/ESXi%E8%99%9A%E6%8B%9F%E5%8C%96%E5%B9%B3%E5%8F%B0%E9%85%8D%E7%BD%AE/2.png"></p>
 
       
 
@@ -297,7 +277,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">环境配置</a>
         		</li>
       		
 		</ul>
@@ -353,7 +333,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/02/27/C++-primer-5%E7%AB%A0/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/03/30/ESXi%E8%99%9A%E6%8B%9F%E5%8C%96%E5%B9%B3%E5%8F%B0%E9%85%8D%E7%BD%AE/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -367,18 +347,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2022/02/28/C++-primer-6%E7%AB%A0/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          C++ primer 6章 函数
-        
-      </div>
-    </a>
   
-  
-    <a href="/2022/02/26/%E5%91%A8%E6%8A%A52-21-2-27/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">周报2.21-2.27</div>
+    <a href="/2022/03/28/ndn-cxx%E5%92%8CNFD%E7%9A%84%E5%AE%89%E8%A3%85/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Ubuntu18.04环境中ndn-cxx,NFD,和ndn-tools的安装</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -405,7 +376,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0%EF%BC%9A%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.</span> <span class="toc-text">第五章：语句</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.1.</span> <span class="toc-text">简单语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.2.</span> <span class="toc-text">条件语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.3.</span> <span class="toc-text">迭代语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%B3%E8%BD%AC%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.4.</span> <span class="toc-text">跳转语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#try%E8%AF%AD%E5%8F%A5%E5%9D%97%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">1.5.</span> <span class="toc-text">try语句块和异常处理</span></a></li></ol></li></ol>
+                    目录，不存在的…
                     </div>
                 </span>
             </div>
