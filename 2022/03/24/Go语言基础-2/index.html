@@ -31,7 +31,7 @@
 <meta property="og:description" content="Go语言创建数组：  1234567891011121314151617var notes [7] string &#x2F;&#x2F;创建一个由7个字符串组成的数组，未定义的数组值为0notes[0] &#x3D; &quot;do&quot; &#x2F;&#x2F;数组的单个元素赋值notes &#x3D; [7]string&amp;#123;&quot;do&quot;, &quot;re&quot;, &quot;mi&quot;, &quot;f">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-24T08:28:16.000Z">
-<meta property="article:modified_time" content="2022-04-01T12:39:18.556Z">
+<meta property="article:modified_time" content="2022-04-04T08:54:48.923Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="Go">
 <meta name="twitter:card" content="summary">
@@ -212,7 +212,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">509字</span>
+        <span class="post-count">749字</span>
       </span>
     </span>
 
@@ -221,7 +221,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">2分</span>
+        <span class="post-count">3分</span>
       </span>
     </span>
 </div>
@@ -264,6 +264,23 @@ var _hmt = _hmt || [];
 <p>与数组不同的是，切片本身自己也有0值，nil。一个没有赋值的切片变量值为nil。</p>
 <p>函数中的<code>...</code>表示变长数组。</p>
 <p>os.Args可以对当前程序执行的命令行参数进行切片分割。</p>
+<ul>
+<li>Go语言映射</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myMap <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">float64</span>	<span class="comment">//定义一个映射类型，键的类型是string，值的类型是float64</span></span><br><span class="line"><span class="keyword">var</span> myMap <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">float64</span>&#123;<span class="string">&quot;a&quot;</span>:<span class="number">1.2</span>, <span class="string">&quot;b&quot;</span>:<span class="number">5.6</span>&#125; <span class="comment">//映射字面量的定义</span></span><br><span class="line">myMap[<span class="string">&quot;my key&quot;</span>] = <span class="number">12</span> <span class="comment">//为键赋值</span></span><br><span class="line">myMap = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>) <span class="comment">//创建一个新的映射，make函数传入需要创建映射的类型</span></span><br></pre></td></tr></table></figure>
+
+<p>映射变量的零值和未赋值均为nil</p>
+<p>为了区分一个键是被赋值为零值还是未赋值，访问键的时候可以获取第二个布尔类型的值</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value <span class="type">int</span></span><br><span class="line"><span class="keyword">var</span> ok <span class="type">bool</span></span><br><span class="line">value, ok = counters[<span class="string">&quot;a&quot;</span>]	<span class="comment">//如果访问一个已经赋值过的值，ok返回true，否则返回false</span></span><br></pre></td></tr></table></figure>
+
+<p>删除键值对使用delete函数</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">delete</span>(ranks, <span class="string">&quot;bronzes&quot;</span>)	<span class="comment">//删除ranks映射中所有和bronzes相关的键</span></span><br></pre></td></tr></table></figure>
+
+<p>对映射进行<code>for range</code>循环：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> key, value := <span class="keyword">range</span> myMap <span class="comment">//key保存对应的键，value保存对应的值，myMap表示需要处理的映射</span></span><br></pre></td></tr></table></figure>
+
+
+
 
       
 
@@ -521,11 +538,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Go</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -537,11 +554,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">科研</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">科研</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">

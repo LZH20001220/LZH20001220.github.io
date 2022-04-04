@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2021/12 | 博客杂记 - Harder and Better</title>
+  <title>C++ primer 8章 IO库 | 博客杂记 - Harder and Better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -23,13 +23,17 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="博客杂记 - Harder and Better">
-<meta property="og:url" content="http://example.com/archives/2021/12/index.html">
+  <meta name="description" content="第八章 IO库前面章节已经在用的IO库设施 istream：输入流类型，提供输入操作。 ostream：输出流类型，提供输出操作 cin：一个istream对象，从标准输入读取数据。 cout：一个ostream对象，向标准输出写入数据。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++ primer 8章 IO库">
+<meta property="og:url" content="http://example.com/2022/04/04/C++-primer-8%E7%AB%A0/index.html">
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
+<meta property="og:description" content="第八章 IO库前面章节已经在用的IO库设施 istream：输入流类型，提供输入操作。 ostream：输出流类型，提供输出操作 cin：一个istream对象，从标准输入读取数据。 cout：一个ostream对象，向标准输出写入数据。">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-04-04T09:12:26.000Z">
+<meta property="article:modified_time" content="2022-04-04T10:29:39.530Z">
 <meta property="article:author" content="ygtrece">
-<meta property="article:tag" content="学习, 日常">
+<meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
@@ -182,107 +186,398 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-C++-primer-8章" class="article article-type-post " itemscope itemprop="blogPost">
   
-  
+<div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/12/29/tag%E7%94%B5%E8%B7%AF%E5%9B%BE/" class="archive-article-date">
-  	<time datetime="2021-12-29T15:10:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-29</time>
+      <header class="article-header">
+        
+        
+        <a href="/2022/04/04/C++-primer-8%E7%AB%A0/" class="archive-article-date">
+  	<time datetime="2022-04-04T09:12:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-04</time>
 </a>
 
 
-        </div>
-    	 
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.2k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">4分</span>
+      </span>
+    </span>
+</div>
+          
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/12/29/tag%E7%94%B5%E8%B7%AF%E5%9B%BE/">tag电路图</a>
+    <h1 class="article-title_code_ant" itemprop="name">
+      C++ primer 8章 IO库
     </h1>
   
+</p></center>
+      
+        <h3 id="第八章-IO库"><a href="#第八章-IO库" class="headerlink" title="第八章 IO库"></a>第八章 IO库</h3><h4 id="前面章节已经在用的IO库设施"><a href="#前面章节已经在用的IO库设施" class="headerlink" title="前面章节已经在用的IO库设施"></a>前面章节已经在用的IO库设施</h4><ul>
+<li><strong>istream</strong>：输入流类型，提供输入操作。</li>
+<li><strong>ostream</strong>：输出流类型，提供输出操作</li>
+<li><strong>cin</strong>：一个<code>istream</code>对象，从标准输入读取数据。</li>
+<li><strong>cout</strong>：一个<code>ostream</code>对象，向标准输出写入数据。</li>
+</ul>
+<span id="more"></span>
 
-        <div class="article-info info-on-right">
-          
+<ul>
+<li><strong>cerr</strong>：一个<code>ostream</code>对象，向标准错误写入消息。</li>
+<li><strong>&gt;&gt;运算符</strong>：用来从一个<code>istream</code>对象中读取输入数据。</li>
+<li><strong>&lt;&lt;运算符</strong>：用来向一个<code>ostream</code>对象中写入输出数据。</li>
+<li><strong>getline函数</strong>：从一个给定的<code>istream</code>对象中读取一行数据，存入到一个给定的<code>string</code>对象中。</li>
+</ul>
+<h5 id="标准库定义的IO类型"><a href="#标准库定义的IO类型" class="headerlink" title="标准库定义的IO类型"></a>标准库定义的IO类型</h5><ul>
+<li><code>iostream</code>头文件：从标准流中读写数据，<code>istream</code>、<code>ostream</code>等。</li>
+<li><code>fstream</code>头文件：从文件中读写数据，<code>ifstream</code>、<code>ofstream</code>等。</li>
+<li><code>sstream</code>头文件：从字符串中读写数据，<code>istringstream</code>、<code>ostringstream</code></li>
+</ul>
+<h5 id="IO对象不可复制，初始化或赋值"><a href="#IO对象不可复制，初始化或赋值" class="headerlink" title="IO对象不可复制，初始化或赋值"></a>IO对象不可复制，初始化或赋值</h5><ul>
+<li>1.IO对象不能存在容器里.</li>
+<li>2.形参和返回类型也不能是流类型。</li>
+<li>3.形参和返回类型一般是流的<strong>引用</strong>。</li>
+<li>4.读写一个IO对象会改变其状态，因此传递和返回的引用不能是<code>const</code>的。</li>
+</ul>
+<h5 id="条件状态"><a href="#条件状态" class="headerlink" title="条件状态"></a>条件状态</h5><table>
+<thead>
+<tr>
+<th>状态</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>strm:iostate</code></td>
+<td>是一种机器无关的<strong>类型</strong>，提供了表达条件状态的完整功能</td>
+</tr>
+<tr>
+<td><code>strm:badbit</code></td>
+<td>用来指出流已经崩溃</td>
+</tr>
+<tr>
+<td><code>strm:failbit</code></td>
+<td>用来指出一个IO操作失败了</td>
+</tr>
+<tr>
+<td><code>strm:eofbit</code></td>
+<td>用来指出流到达了文件结束</td>
+</tr>
+<tr>
+<td><code>strm:goodbit</code></td>
+<td>用来指出流未处于错误状态，此值保证为零</td>
+</tr>
+<tr>
+<td><code>s.eof()</code></td>
+<td>若流<code>s</code>的<code>eofbit</code>置位，则返回<code>true</code></td>
+</tr>
+<tr>
+<td><code>s.fail()</code></td>
+<td>若流<code>s</code>的<code>failbit</code>置位，则返回<code>true</code></td>
+</tr>
+<tr>
+<td><code>s.bad()</code></td>
+<td>若流<code>s</code>的<code>badbit</code>置位，则返回<code>true</code></td>
+</tr>
+<tr>
+<td><code>s.good()</code></td>
+<td>若流<code>s</code>处于有效状态，则返回<code>true</code></td>
+</tr>
+<tr>
+<td><code>s.clear()</code></td>
+<td>将流<code>s</code>中所有条件状态位复位，将流的状态设置成有效，返回<code>void</code></td>
+</tr>
+<tr>
+<td><code>s.clear(flags)</code></td>
+<td>将流<code>s</code>中指定的条件状态位复位，返回<code>void</code></td>
+</tr>
+<tr>
+<td><code>s.setstate(flags)</code></td>
+<td>根据给定的标志位，将流<code>s</code>中对应的条件状态位置位，返回<code>void</code></td>
+</tr>
+<tr>
+<td><code>s.rdstate()</code></td>
+<td>返回流<code>s</code>的当前条件状态，返回值类型为<code>strm::iostate</code></td>
+</tr>
+</tbody></table>
+<p>上表中，<code>strm</code>是一种IO类型，（如<code>istream</code>）， <code>s</code>是一个流对象。</p>
+<h5 id="管理输出缓冲"><a href="#管理输出缓冲" class="headerlink" title="管理输出缓冲"></a>管理输出缓冲</h5><ul>
+<li>每个输出流都管理一个缓冲区，执行输出的代码，文本串可能立即打印出来，也可能被操作系统保存在缓冲区内，随后再打印。</li>
+<li>刷新缓冲区，可以使用如下IO操纵符：<ul>
+<li><code>endl</code>：输出一个换行符并刷新缓冲区。</li>
+<li><code>flush</code>：刷新流，单不添加任何字符。</li>
+<li><code>ends</code>：在缓冲区插入空字符<code>null</code>，然后刷新。</li>
+<li><code>unitbuf</code>：告诉流接下来每次操作之后都要进行一次<code>flush</code>操作。</li>
+<li><code>nounitbuf</code>：回到正常的缓冲方式。</li>
+</ul>
+</li>
+</ul>
+<h4 id="文件输入输出"><a href="#文件输入输出" class="headerlink" title="文件输入输出"></a>文件输入输出</h4><ul>
+<li>头文件<code>fstream</code>定义了三个类型来支持文件IO：<ul>
+<li><code>ifstream</code>从一个给定文件读取数据。</li>
+<li><code>ofstream</code>向一个给定文件写入数据。</li>
+<li><code>fstream</code>可以读写给定文件。</li>
+</ul>
+</li>
+<li><strong>文件流</strong>：需要读写文件时，必须定义自己的文件流对象，并绑定在需要的文件上。</li>
+</ul>
+<h5 id="fstream特有的操作"><a href="#fstream特有的操作" class="headerlink" title="fstream特有的操作"></a>fstream特有的操作</h5><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>fstream fstrm;</code></td>
+<td>创建一个未绑定的文件流。</td>
+</tr>
+<tr>
+<td><code>fstream fstrm(s);</code></td>
+<td>创建一个文件流，并打开名为<code>s</code>的文件，<code>s</code>可以是<code>string</code>也可以是<code>char</code>指针</td>
+</tr>
+<tr>
+<td><code>fstream fstrm(s, mode);</code></td>
+<td>与前一个构造函数类似，但按指定<code>mode</code>打开文件</td>
+</tr>
+<tr>
+<td><code>fstrm.open(s)</code></td>
+<td>打开名为<code>s</code>的文件，并和<code>fstrm</code>绑定</td>
+</tr>
+<tr>
+<td><code>fstrm.close()</code></td>
+<td>关闭和<code>fstrm</code>绑定的文件</td>
+</tr>
+<tr>
+<td><code>fstrm.is_open()</code></td>
+<td>返回一个<code>bool</code>值，指出与<code>fstrm</code>关联的文件是否成功打开且尚未关闭</td>
+</tr>
+</tbody></table>
+<p>上表中，<code>fstream</code>是头文件<code>fstream</code>中定义的一个类型，<code>fstrm</code>是一个文件流对象。</p>
+<h5 id="文件模式"><a href="#文件模式" class="headerlink" title="文件模式"></a>文件模式</h5><table>
+<thead>
+<tr>
+<th>文件模式</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>in</code></td>
+<td>以读的方式打开</td>
+</tr>
+<tr>
+<td><code>out</code></td>
+<td>以写的方式打开</td>
+</tr>
+<tr>
+<td><code>app</code></td>
+<td>每次写操作前均定位到文件末尾</td>
+</tr>
+<tr>
+<td><code>ate</code></td>
+<td>打开文件后立即定位到文件末尾</td>
+</tr>
+<tr>
+<td><code>trunc</code></td>
+<td>截断文件</td>
+</tr>
+<tr>
+<td><code>binary</code></td>
+<td>以二进制方式进行IO操作。</td>
+</tr>
+</tbody></table>
+<h3 id="string流"><a href="#string流" class="headerlink" title="string流"></a>string流</h3><ul>
+<li>头文件<code>sstream</code>定义了三个类型来支持内存IO，注意是类型不是对象：<ul>
+<li><code>istringstream</code>从<code>string</code>读取数据。</li>
+<li><code>ostringstream</code>向<code>string</code>写入数据。</li>
+<li><code>stringstream</code>可以读写给定<code>string</code>。</li>
+</ul>
+</li>
+</ul>
+<h5 id="stringstream特有的操作"><a href="#stringstream特有的操作" class="headerlink" title="stringstream特有的操作"></a>stringstream特有的操作</h5><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>sstream strm</code></td>
+<td>定义一个未绑定的<code>stringstream</code>对象</td>
+</tr>
+<tr>
+<td><code>sstream strm(s)</code></td>
+<td>用<code>s</code>初始化对象</td>
+</tr>
+<tr>
+<td><code>strm.str()</code></td>
+<td>返回<code>strm</code>所保存的<code>string</code>的拷贝</td>
+</tr>
+<tr>
+<td><code>strm.str(s)</code></td>
+<td>将<code>s</code>拷贝到<code>strm</code>中，返回<code>void</code></td>
+</tr>
+</tbody></table>
+<p>上表中<code>sstream</code>是头文件<code>sstream</code>中任意一个类型。<code>s</code>是一个<code>string</code>。</p>
+<p>类<code>fstring</code>和<code>stringstream</code>都是继承自类<code>iostream</code>的，因此可以在<code>istream</code>上执行的操作，也可以在<code>fstring</code>和<code>stringstream</code>上执行。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/04/04/C++-primer-8%E7%AB%A0/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/" class="archive-article-date">
-  	<time datetime="2021-12-26T09:08:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-26</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2022/04/01/%E5%9B%9E%E6%BA%AF-2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">回溯 (2)</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
 
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/">周报12.20-12.26</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">周报</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%85%AB%E7%AB%A0-IO%E5%BA%93"><span class="toc-number">1.</span> <span class="toc-text">第八章 IO库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%89%8D%E9%9D%A2%E7%AB%A0%E8%8A%82%E5%B7%B2%E7%BB%8F%E5%9C%A8%E7%94%A8%E7%9A%84IO%E5%BA%93%E8%AE%BE%E6%96%BD"><span class="toc-number">1.1.</span> <span class="toc-text">前面章节已经在用的IO库设施</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E5%BA%93%E5%AE%9A%E4%B9%89%E7%9A%84IO%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">标准库定义的IO类型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#IO%E5%AF%B9%E8%B1%A1%E4%B8%8D%E5%8F%AF%E5%A4%8D%E5%88%B6%EF%BC%8C%E5%88%9D%E5%A7%8B%E5%8C%96%E6%88%96%E8%B5%8B%E5%80%BC"><span class="toc-number">1.1.2.</span> <span class="toc-text">IO对象不可复制，初始化或赋值</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E7%8A%B6%E6%80%81"><span class="toc-number">1.1.3.</span> <span class="toc-text">条件状态</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AE%A1%E7%90%86%E8%BE%93%E5%87%BA%E7%BC%93%E5%86%B2"><span class="toc-number">1.1.4.</span> <span class="toc-text">管理输出缓冲</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="toc-number">1.2.</span> <span class="toc-text">文件输入输出</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#fstream%E7%89%B9%E6%9C%89%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">1.2.1.</span> <span class="toc-text">fstream特有的操作</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.2.2.</span> <span class="toc-text">文件模式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#string%E6%B5%81"><span class="toc-number">2.</span> <span class="toc-text">string流</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#stringstream%E7%89%B9%E6%9C%89%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">2.0.1.</span> <span class="toc-text">stringstream特有的操作</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
   
-    </div></section>
   
 
-    
+  
 
+  
+
+  
 
           </div>
         </div>
@@ -325,8 +620,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
