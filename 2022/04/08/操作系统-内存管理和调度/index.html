@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives | 博客杂记 - Harder and Better</title>
+  <title>内存管理和调度 | 博客杂记 - Harder and Better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -23,14 +23,21 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="博客杂记 - Harder and Better">
-<meta property="og:url" content="http://example.com/archives/index.html">
+  <meta name="description" content="L20 内存使用和分段计算机执行程序的本质就是取指—&gt;执行。 内存的使用：将程序放在内存中，PC指向开始地址。 call 40可以理解为将IP指针赋给40。也就是从物理地址40开始执行。但是这样有一个缺点，就是main()函数必须放在物理地址为40的位置。 实际上应该使用重定位，也就是将物理地址40修改为1040作为逻辑地址，实际上就是每个地址加上了个基址，即main()函数相对于整个程序是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内存管理和调度">
+<meta property="og:url" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/index.html">
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
+<meta property="og:description" content="L20 内存使用和分段计算机执行程序的本质就是取指—&gt;执行。 内存的使用：将程序放在内存中，PC指向开始地址。 call 40可以理解为将IP指针赋给40。也就是从物理地址40开始执行。但是这样有一个缺点，就是main()函数必须放在物理地址为40的位置。 实际上应该使用重定位，也就是将物理地址40修改为1040作为逻辑地址，实际上就是每个地址加上了个基址，即main()函数相对于整个程序是">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/1.png">
+<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/2.png">
+<meta property="article:published_time" content="2022-04-08T01:40:48.000Z">
+<meta property="article:modified_time" content="2022-04-08T03:17:59.472Z">
 <meta property="article:author" content="ygtrece">
-<meta property="article:tag" content="学习, 日常">
+<meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/1.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -182,38 +189,91 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-操作系统-内存管理和调度" class="article article-type-post " itemscope itemprop="blogPost">
   
-  
+<div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/" class="archive-article-date">
+      <header class="article-header">
+        
+        
+        <a href="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/" class="archive-article-date">
   	<time datetime="2022-04-08T01:40:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-08</time>
 </a>
 
 
-        </div>
-    	 
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">771字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">2分</span>
+      </span>
+    </span>
+</div>
+          
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/">内存管理和调度</a>
+    <h1 class="article-title_code_ant" itemprop="name">
+      内存管理和调度
     </h1>
   
+</p></center>
+      
+        <h3 id="L20-内存使用和分段"><a href="#L20-内存使用和分段" class="headerlink" title="L20 内存使用和分段"></a>L20 内存使用和分段</h3><p>计算机执行程序的本质就是取指—&gt;执行。</p>
+<p>内存的使用：将程序放在内存中，PC指向开始地址。</p>
+<p>call 40可以理解为将IP指针赋给40。也就是从物理地址40开始执行。但是这样有一个缺点，就是main()函数必须放在物理地址为40的位置。</p>
+<p>实际上应该使用<strong>重定位</strong>，也就是将物理地址40修改为1040作为逻辑地址，实际上就是每个地址加上了个基址，即main()函数相对于整个程序是在40这个位置上。</p>
+<span id="more"></span>
 
-        <div class="article-info info-on-right">
-          
+<p>完成重定位的时间：编译时  载入时 运行时</p>
+<ul>
+<li><p>可以在编译时加入基址实现重定位，但是这样有一个缺点：编译的时候就得知道哪一段内存是空闲的，在实际的系统中很难确定。</p>
+</li>
+<li><p>可以在载入时实现重定位。但是程序载入后可能还需要移动，如果地址已经确定也不好，这时候就需要用到<strong>交换机制</strong>。</p>
+</li>
+</ul>
+<p>如果进程1阻塞了，就将其从内存取出，放到磁盘中。然后将进程2的内存地址改变。因此载入后的程序也可能发生移动，这样载入时的地址和真正执行程序时的地址也不一样。</p>
+<h4 id="最好的方式：运行时重定位"><a href="#最好的方式：运行时重定位" class="headerlink" title="最好的方式：运行时重定位"></a><strong>最好的方式：运行时重定位</strong></h4><p>每执行一条指令时，都要根据逻辑地址算出物理地址，即<strong>地址翻译</strong>，这种方式无论程序放在内存中的哪一块都可以。程序执行起来时，就将基地址(base地址)放在PCB中。然后开始取址执行，执行程序时把指令放在CPU中，然后再根据程序中的偏移地址做判断。当进程发生切换时，PCB会跟着切换，这时候基地址也会跟着PCB一起切换。</p>
+<p>然而实际中的程序并不是整个放在内存的连续地址中的，程序往往分成若干个段，每个段都有各自的用途。比如代码段只读，代码段&#x2F;数据段不会动态增长。</p>
+<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/1.png" alt="image-20220408104549018"></p>
+<p>举个例子：主程序和变量集之间就需要分段。主程序一般是只读的，变量集应该是可写的。如果把他们放在一个段，程序就需要写入权限，这样主程序也有可能会被改变。</p>
+<p>将程序分段，可以让内存管理更高效。将程序中的各个段分别放在内存中。重定位时段的基址实际上就是各自段的基址，<strong>即PCB需要放每一个段的基址</strong>，也就是进程段表。</p>
+<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/2.png" alt="image-20220408110216844"></p>
+<p>GDT(Global Description Table)表实际上就是通过找操作系统的进程对应的段表就是GDT表。实际上每个进程都有对应的一套段表，也就是LDT。进程切换也对应的LDT表的切换，LDT表赋给PCB。</p>
+<p>操作系统启动进程0，shell启动进程1.</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -225,400 +285,119 @@ var _hmt = _hmt || [];
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/04/06/%E8%B4%AA%E5%BF%83-1/" class="archive-article-date">
-  	<time datetime="2022-04-06T12:47:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-06</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2022/04/06/%E8%B4%AA%E5%BF%83-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">贪心 (1)</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
 
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/04/06/%E8%B4%AA%E5%BF%83-1/">贪心 (1)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#L20-%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8%E5%92%8C%E5%88%86%E6%AE%B5"><span class="toc-number">1.</span> <span class="toc-text">L20 内存使用和分段</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E5%A5%BD%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%9A%E8%BF%90%E8%A1%8C%E6%97%B6%E9%87%8D%E5%AE%9A%E4%BD%8D"><span class="toc-number">1.1.</span> <span class="toc-text">最好的方式：运行时重定位</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/04/05/%E5%88%A9%E7%94%A8GoldenEyes%E5%AE%9E%E7%8E%B0DOS%E6%94%BB%E5%87%BB/" class="archive-article-date">
-  	<time datetime="2022-04-05T15:00:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-05</time>
-</a>
+        
+    </div>
+</aside>
 
 
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/04/05/%E5%88%A9%E7%94%A8GoldenEyes%E5%AE%9E%E7%8E%B0DOS%E6%94%BB%E5%87%BB/">利用GoldenEyes实现DOS攻击</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机网络</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/04/04/C++-primer-8%E7%AB%A0/" class="archive-article-date">
-  	<time datetime="2022-04-04T09:12:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-04</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/04/04/C++-primer-8%E7%AB%A0/">C++ primer 8章 IO库</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/04/01/%E5%9B%9E%E6%BA%AF-2/" class="archive-article-date">
-  	<time datetime="2022-04-01T11:44:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-01</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/04/01/%E5%9B%9E%E6%BA%AF-2/">回溯 (2)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/03/31/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%E5%8E%9F%E7%90%86%E5%8F%8AGo%E5%AE%9E%E7%8E%B0-2/" class="archive-article-date">
-  	<time datetime="2022-03-31T07:05:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-31</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/03/31/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%E5%8E%9F%E7%90%86%E5%8F%8AGo%E5%AE%9E%E7%8E%B0-2/">分布式缓存原理及Go实现 - 第二章</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Go</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">缓存</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/03/30/ESXi%E8%99%9A%E6%8B%9F%E5%8C%96%E5%B9%B3%E5%8F%B0%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-  	<time datetime="2022-03-30T08:13:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-30</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/03/30/ESXi%E8%99%9A%E6%8B%9F%E5%8C%96%E5%B9%B3%E5%8F%B0%E9%85%8D%E7%BD%AE/">VMware ESXi虚拟化平台配置</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">环境配置</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/03/28/ndn-cxx%E5%92%8CNFD%E7%9A%84%E5%AE%89%E8%A3%85/" class="archive-article-date">
-  	<time datetime="2022-03-28T14:21:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-28</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/03/28/ndn-cxx%E5%92%8CNFD%E7%9A%84%E5%AE%89%E8%A3%85/">Ubuntu18.04环境中ndn-cxx,NFD,和ndn-tools的安装</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">环境配置</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/03/25/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%E5%8E%9F%E7%90%86%E5%8F%8AGo%E5%AE%9E%E7%8E%B0/" class="archive-article-date">
-  	<time datetime="2022-03-25T01:24:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-25</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/03/25/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%E5%8E%9F%E7%90%86%E5%8F%8AGo%E5%AE%9E%E7%8E%B0/">分布式缓存原理及Go实现 - 第一章</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Go</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">缓存</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/03/24/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-2/" class="archive-article-date">
-  	<time datetime="2022-03-24T08:28:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-24</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/03/24/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-2/">Go基础 - 数组，切片，映射，构建存储</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Go</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/6/">6</a><a class="extend next" rel="next" href="/archives/page/2/">下一页;</a>
-    </nav>
   
 
+  
+
+  
 
           </div>
         </div>
@@ -661,8 +440,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
