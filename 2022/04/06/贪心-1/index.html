@@ -32,8 +32,9 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2022/04/06/%E8%B4%AA%E5%BF%83-1/1.png">
 <meta property="og:image" content="http://example.com/2022/04/06/%E8%B4%AA%E5%BF%83-1/1.gif">
+<meta property="og:image" content="http://example.com/2022/04/06/%E8%B4%AA%E5%BF%83-1/2.png">
 <meta property="article:published_time" content="2022-04-06T12:47:42.000Z">
-<meta property="article:modified_time" content="2022-04-08T03:41:38.729Z">
+<meta property="article:modified_time" content="2022-04-09T05:40:25.809Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -215,7 +216,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.6k字</span>
+        <span class="post-count">3.2k字</span>
       </span>
     </span>
 
@@ -224,7 +225,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">6分</span>
+        <span class="post-count">12分</span>
       </span>
     </span>
 </div>
@@ -313,6 +314,68 @@ var _hmt = _hmt || [];
 
 <p>贪心算法，只需要一次遍历，如果count值小于0，说明肯定不是最大的，这时候将count赋为0，相当于修改起始位置了。</p>
 <p><strong>这个程序在全是负数时候也正常，是因为把result初始值赋为了INT_MIN。</strong></p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/submissions/">122. 买卖股票的最佳时机 II - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<p>给定一个数组 prices ，其中 prices[i] 表示股票第 i 天的价格。</p>
+<p>在每一天，你可能会决定购买和&#x2F;或出售股票。你在任何时候 最多 只能持有 一股 股票。你也可以购买它，然后在 同一天 出售。<br>返回 你能获得的 最大 利润 。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: prices = [7,1,5,3,6,4]</span><br><span class="line">输出: 7</span><br><span class="line">解释: 在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。</span><br><span class="line">     随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6-3 = 3 。</span><br></pre></td></tr></table></figure>
+
+<p>贪心算法，只需要记录前后两天的价格差，如果大于0就存起来，小于0就不要就可以了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//贪心法</span></span><br><span class="line"><span class="comment">//时间复杂度：$O(n)$</span></span><br><span class="line"><span class="comment">//空间复杂度：$O(1)$</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxProfit</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; prices.<span class="built_in">size</span>() - <span class="number">1</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            result = result + <span class="built_in">max</span>(<span class="number">0</span>, prices[i + <span class="number">1</span>] - prices[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/jump-game/submissions/">55. 跳跃游戏 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<p>给定一个非负整数数组 <code>nums</code> ，你最初位于数组的 <strong>第一个下标</strong> 。</p>
+<p>数组中的每个元素代表你在该位置可以跳跃的最大长度。</p>
+<p>判断你是否能够到达最后一个下标。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [2,3,1,1,4]</span><br><span class="line">输出：true</span><br><span class="line">解释：可以先跳 1 步，从下标 0 到达下标 1, 然后再从下标 1 跳 3 步到达最后一个下标。</span><br></pre></td></tr></table></figure>
+
+<p>其实跳几步无所谓，关键在于可跳的覆盖范围！</p>
+<p>不一定非要明确一次究竟跳几步，每次取最大的跳跃步数，这个就是可以跳跃的覆盖范围。</p>
+<p>这个范围内，别管是怎么跳的，反正一定可以跳过来。</p>
+<p><strong>那么这个问题就转化为跳跃覆盖范围究竟可不可以覆盖到终点！</strong></p>
+<p>每次移动取最大跳跃步数（得到最大的覆盖范围），每移动一个单位，就更新最大覆盖范围。</p>
+<p><strong>贪心算法局部最优解：每次取最大跳跃步数（取最大覆盖范围），整体最优解：最后得到整体最大覆盖范围，看是否能到终点</strong>。</p>
+<p><img src="/2022/04/06/%E8%B4%AA%E5%BF%83-1/2.png"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">canJump</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> cover = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt;= cover; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            cover = <span class="built_in">max</span>(cover, i + nums[i]);</span><br><span class="line">            <span class="keyword">if</span>(cover &gt;= nums.<span class="built_in">size</span>() - <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/jump-game-ii/">45. 跳跃游戏 II - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<p>给你一个非负整数数组 <code>nums</code> ，你最初位于数组的第一个位置。</p>
+<p>数组中的每个元素代表你在该位置可以跳跃的最大长度。</p>
+<p>你的目标是使用最少的跳跃次数到达数组的最后一个位置。</p>
+<p>假设你总是可以到达数组的最后一个位置。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: nums = [2,3,1,1,4]</span><br><span class="line">输出: 2</span><br><span class="line">解释: 跳到最后一个位置的最小跳跃数是 2。</span><br><span class="line">     从下标为 0 跳到下标为 1 的位置，跳 1 步，然后跳 3 步到达数组的最后一个位置。</span><br></pre></td></tr></table></figure>
+
+<p><strong>所以真正解题的时候，要从覆盖范围出发，不管怎么跳，覆盖范围内一定是可以跳到的，以最小的步数增加覆盖范围，覆盖范围一旦覆盖了终点，得到的就是最小步数！</strong></p>
+<p><strong>这里需要统计两个覆盖范围，当前这一步的最大覆盖和下一步最大覆盖</strong>。</p>
+<p>如果移动下标达到了当前这一步的最大覆盖最远距离了，还没有到终点的话，那么就必须再走一步来增加覆盖范围，直到覆盖范围覆盖了终点。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">jump</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> curDistance = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> step = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> nextDistance = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>() - <span class="number">1</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            nextDistance = <span class="built_in">max</span>(nextDistance, nums[i] + i);</span><br><span class="line">            <span class="keyword">if</span>(i == curDistance)</span><br><span class="line">            &#123;</span><br><span class="line">                curDistance = nextDistance;</span><br><span class="line">                step++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> step;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximize-sum-of-array-after-k-negations/">1005. K 次取反后最大化的数组和 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<p>给你一个整数数组 nums 和一个整数 k ，按以下方法修改该数组：</p>
+<p>选择某个下标 i 并将 nums[i] 替换为 -nums[i] 。<br>重复这个过程恰好 k 次。可以多次选择同一个下标 i 。</p>
+<p>以这种方式修改数组后，返回数组 可能的最大和 。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [4,2,3], k = 1</span><br><span class="line">输出：5</span><br><span class="line">解释：选择下标 1 ，nums 变为 [4,-2,3] 。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>贪心的思路，局部最优：让绝对值大的负数变为正数，当前数值达到最大，整体最优：整个数组和达到最大。</p>
+<p>局部最优可以推出全局最优。</p>
+<p>那么如果将负数都转变为正数了，K依然大于0，此时的问题是一个有序正整数序列，如何转变K次正负，让 数组和 达到最大。</p>
+<p>那么又是一个贪心：局部最优：只找数值最小的正整数进行反转，当前数值可以达到最大（例如正整数数组{5, 3, 1}，反转1 得到-1 比 反转5得到的-5 大多了），全局最优：整个 数组和 达到最大。</p>
+<p>那么本题的解题步骤为：</p>
+<ul>
+<li>第一步：将数组按照绝对值大小从大到小排序，<strong>注意要按照绝对值的大小</strong></li>
+<li>第二步：从前向后遍历，遇到负数将其变为正数，同时K–</li>
+<li>第三步：如果K还大于0，那么反复转变数值最小的元素，将K用完，K为偶数不用变，K为奇数绝对值最小的数取反。</li>
+<li>第四步：求和</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">bool</span> <span class="title">compare</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">abs</span>(a) &gt; <span class="built_in">abs</span>(b);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">largestSumAfterKNegations</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>(), compare); <span class="comment">//按照绝对值从大到小的顺序排序</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i] &lt; <span class="number">0</span> &amp;&amp; k &gt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                nums[i] = nums[i] * <span class="number">-1</span>;</span><br><span class="line">                k--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(k % <span class="number">2</span> == <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">        nums[nums.<span class="built_in">size</span>() - <span class="number">1</span>] *= <span class="number">-1</span>; </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> num : nums)</span><br><span class="line">        &#123;</span><br><span class="line">            result = result + num;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 
       
 
@@ -578,11 +641,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
               </li>
              
               <li class="article-tag-list-item">
