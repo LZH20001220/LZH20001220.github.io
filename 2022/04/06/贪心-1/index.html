@@ -33,8 +33,9 @@
 <meta property="og:image" content="http://example.com/2022/04/06/%E8%B4%AA%E5%BF%83-1/1.png">
 <meta property="og:image" content="http://example.com/2022/04/06/%E8%B4%AA%E5%BF%83-1/1.gif">
 <meta property="og:image" content="http://example.com/2022/04/06/%E8%B4%AA%E5%BF%83-1/2.png">
+<meta property="og:image" content="http://example.com/2022/04/06/%E8%B4%AA%E5%BF%83-1/3.png">
 <meta property="article:published_time" content="2022-04-06T12:47:42.000Z">
-<meta property="article:modified_time" content="2022-04-09T05:40:25.809Z">
+<meta property="article:modified_time" content="2022-04-10T03:42:00.613Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -216,7 +217,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">3.2k字</span>
+        <span class="post-count">3.8k字</span>
       </span>
     </span>
 
@@ -225,7 +226,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">12分</span>
+        <span class="post-count">15分</span>
       </span>
     </span>
 </div>
@@ -375,6 +376,28 @@ var _hmt = _hmt || [];
 <li>第四步：求和</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">bool</span> <span class="title">compare</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">abs</span>(a) &gt; <span class="built_in">abs</span>(b);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">largestSumAfterKNegations</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>(), compare); <span class="comment">//按照绝对值从大到小的顺序排序</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i] &lt; <span class="number">0</span> &amp;&amp; k &gt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                nums[i] = nums[i] * <span class="number">-1</span>;</span><br><span class="line">                k--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(k % <span class="number">2</span> == <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">        nums[nums.<span class="built_in">size</span>() - <span class="number">1</span>] *= <span class="number">-1</span>; </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> num : nums)</span><br><span class="line">        &#123;</span><br><span class="line">            result = result + num;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/gas-station/">134. 加油站 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<p>在一条环路上有 n 个加油站，其中第 i 个加油站有汽油 gas[i] 升。</p>
+<p>你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1 个加油站需要消耗汽油 cost[i] 升。你从其中的一个加油站出发，开始时油箱为空。</p>
+<p>给定两个整数数组 gas 和 cost ，如果你可以绕环路行驶一周，则返回出发时加油站的编号，否则返回 -1 。如果存在解，则 保证 它是 唯一 的。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入: gas = [1,2,3,4,5], cost = [3,4,5,1,2]</span><br><span class="line">输出: 3</span><br><span class="line">解释:</span><br><span class="line">从 3 号加油站(索引为 3 处)出发，可获得 4 升汽油。此时油箱有 = 0 + 4 = 4 升汽油</span><br><span class="line">开往 4 号加油站，此时油箱有 4 - 1 + 5 = 8 升汽油</span><br><span class="line">开往 0 号加油站，此时油箱有 8 - 2 + 1 = 7 升汽油</span><br><span class="line">开往 1 号加油站，此时油箱有 7 - 3 + 2 = 6 升汽油</span><br><span class="line">开往 2 号加油站，此时油箱有 6 - 4 + 3 = 5 升汽油</span><br><span class="line">开往 3 号加油站，你需要消耗 5 升汽油，正好足够你返回到 3 号加油站。</span><br><span class="line">因此，3 可为起始索引。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>方法一：暴力解法</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间复杂度：$O(n^2)$</span></span><br><span class="line"><span class="comment">//空间复杂度：$O(n)$</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">canCompleteCircuit</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; gas, vector&lt;<span class="type">int</span>&gt;&amp; cost)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; gas.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> rest = gas[i] - cost[i];</span><br><span class="line">            <span class="type">int</span> index = (i + <span class="number">1</span>) % gas.<span class="built_in">size</span>();</span><br><span class="line">            <span class="keyword">while</span>(rest &gt;= <span class="number">0</span> &amp;&amp; index != i)</span><br><span class="line">            &#123;</span><br><span class="line">                rest = rest + gas[index] - cost[index];</span><br><span class="line">                index = (index + <span class="number">1</span>) % gas.<span class="built_in">size</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(index == i &amp;&amp; rest &gt;= <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>方法二：贪心法</p>
+<p><img src="/2022/04/06/%E8%B4%AA%E5%BF%83-1/3.png"></p>
+<p>可以换一个思路，首先如果总油量减去总消耗大于等于零那么一定可以跑完一圈，说明 各个站点的加油站 剩油量rest[i]相加一定是大于等于零的。</p>
+<p>每个加油站的剩余量rest[i]为gas[i] - cost[i]。</p>
+<p>i从0开始累加rest[i]，和记为curSum，一旦curSum小于零，说明[0, i]区间都不能作为起始位置，起始位置从i+1算起，再从0计算curSum</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间复杂度：$O(n)$</span></span><br><span class="line"><span class="comment">//空间复杂度：$O(1)$</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">canCompleteCircuit</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; gas, vector&lt;<span class="type">int</span>&gt;&amp; cost)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> start = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> curSum = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> totalSum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; gas.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            curSum = curSum + gas[i] - cost[i];</span><br><span class="line">            totalSum = totalSum + gas[i] - cost[i];</span><br><span class="line">            <span class="keyword">if</span>(curSum &lt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                start = i + <span class="number">1</span>;</span><br><span class="line">                curSum = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(totalSum &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">return</span> start;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -637,6 +660,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
@@ -662,10 +689,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">缓存</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
