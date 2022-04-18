@@ -35,7 +35,7 @@
 <meta property="og:image" content="http://example.com/2022/04/13/%E8%B4%AA%E5%BF%83-2/3.png">
 <meta property="og:image" content="http://example.com/2022/04/13/%E8%B4%AA%E5%BF%83-2/4.png">
 <meta property="article:published_time" content="2022-04-13T15:36:10.000Z">
-<meta property="article:modified_time" content="2022-04-14T10:20:15.350Z">
+<meta property="article:modified_time" content="2022-04-18T14:49:14.067Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -217,7 +217,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.7k字</span>
+        <span class="post-count">3.4k字</span>
       </span>
     </span>
 
@@ -226,7 +226,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">7分</span>
+        <span class="post-count">14分</span>
       </span>
     </span>
 </div>
@@ -301,6 +301,71 @@ var _hmt = _hmt || [];
 <p>即：intervals[i]的左边界在intervals[i - 1]左边界和右边界的范围内，那么一定有重复！</p>
 <p><img src="/2022/04/13/%E8%B4%AA%E5%BF%83-2/4.png"></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间复杂度：$O(n\log n)$ ，有一个快排</span></span><br><span class="line"><span class="comment">//空间复杂度：$O(1)$，没有算result数组（返回值所需容器占的空间）</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">bool</span> <span class="title">cmp</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;a, vector&lt;<span class="type">int</span>&gt; &amp;b)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a[<span class="number">0</span>] &lt; b[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">merge</span>(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; intervals) &#123;</span><br><span class="line">        vector &lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">        <span class="built_in">sort</span>(intervals.<span class="built_in">begin</span>(), intervals.<span class="built_in">end</span>(), cmp);</span><br><span class="line">        result.<span class="built_in">push_back</span>(intervals[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; intervals.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(result.<span class="built_in">back</span>()[<span class="number">1</span>] &gt;= intervals[i][<span class="number">0</span>]) <span class="comment">//合并区间</span></span><br><span class="line">            &#123;</span><br><span class="line">                result.<span class="built_in">back</span>()[<span class="number">1</span>] = <span class="built_in">max</span>(result.<span class="built_in">back</span>()[<span class="number">1</span>], intervals[i][<span class="number">1</span>]);<span class="comment">//更新右边界</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                result.<span class="built_in">push_back</span>(intervals[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/monotone-increasing-digits/">738. 单调递增的数字 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<p>当且仅当每个相邻位数上的数字 <code>x</code> 和 <code>y</code> 满足 <code>x &lt;= y</code> 时，我们称这个整数是单调递增的。</p>
+<p>给定一个整数 <code>n</code> ，返回 小于或等于 <code>n</code> 的最大数字，且数字呈 单调递增 。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: n = 10</span><br><span class="line">输出: 9</span><br></pre></td></tr></table></figure>
+
+<p><strong>局部最优：遇到strNum[i - 1] &gt; strNum[i]的情况，让strNum[i - 1]–，然后strNum[i]给为9，可以保证这两位变成最大单调递增整数</strong>。</p>
+<p><strong>全局最优：得到小于等于N的最大单调递增的整数</strong>。</p>
+<p><strong>但这里局部最优推出全局最优，还需要其他条件，即遍历顺序，和标记从哪一位开始统一改成9</strong>。</p>
+<p>此时是从前向后遍历还是从后向前遍历呢？</p>
+<p>从前向后遍历的话，遇到strNum[i - 1] &gt; strNum[i]的情况，让strNum[i - 1]减一，但此时如果strNum[i - 1]减一了，可能又小于strNum[i - 2]。</p>
+<p>这么说有点抽象，举个例子，数字：332，从前向后遍历的话，那么就把变成了329，此时2又小于了第一位的3了，真正的结果应该是299。</p>
+<p><strong>所以从前后向遍历会改变已经遍历过的结果！</strong></p>
+<p>那么从后向前遍历，就可以重复利用上次比较得出的结果了，从后向前遍历332的数值变化为：332 -&gt; 329 -&gt; 299</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间复杂度：$O(n)$，n 为数字长度</span></span><br><span class="line"><span class="comment">//空间复杂度：$O(n)$，需要一个字符串，转化为字符串操作更方便</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">monotoneIncreasingDigits</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        string strNum = <span class="built_in">to_string</span>(n);</span><br><span class="line">        <span class="type">int</span> flag = strNum.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = strNum.<span class="built_in">size</span>() - <span class="number">1</span>; i &gt;= <span class="number">1</span>; i--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(strNum[i - <span class="number">1</span>] &gt; strNum[i])</span><br><span class="line">            &#123;</span><br><span class="line">                strNum[i - <span class="number">1</span>]--;</span><br><span class="line">                flag = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = flag; i &lt; strNum.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            strNum[i] = <span class="string">&#x27;9&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">stoi</span>(strNum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">714. 买卖股票的最佳时机含手续费 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<p>给定一个整数数组 <code>prices</code>，其中 <code>prices[i]</code>表示第 <code>i</code> 天的股票价格 ；整数 <code>fee</code> 代表了交易股票的手续费用。</p>
+<p>你可以无限次地完成交易，但是你每笔交易都需要付手续费。如果你已经购买了一个股票，在卖出它之前你就不能再继续购买股票了。</p>
+<p>返回获得利润的最大值。</p>
+<p><strong>注意</strong>：这里的一笔交易指买入持有并卖出股票的整个过程，每笔交易你只需要为支付一次手续费。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：prices = [1, 3, 2, 8, 4, 9], fee = 2</span><br><span class="line">输出：8</span><br><span class="line">解释：能够达到的最大利润:  </span><br><span class="line">在此处买入 prices[0] = 1</span><br><span class="line">在此处卖出 prices[3] = 8</span><br><span class="line">在此处买入 prices[4] = 4</span><br><span class="line">在此处卖出 prices[5] = 9</span><br><span class="line">总利润: ((8 - 1) - 2) + ((9 - 4) - 2) = 8</span><br></pre></td></tr></table></figure>
+
+<p>此时无非就是要找到两个点，买入日期，和卖出日期。</p>
+<ul>
+<li>买入日期：其实很好想，遇到更低点就记录一下。</li>
+<li>卖出日期：这个就不好算了，但也没有必要算出准确的卖出日期，只要当前价格大于（最低价格+手续费），就可以收获利润，至于准确的卖出日期，就是连续收获利润区间里的最后一天（并不需要计算是具体哪一天）。</li>
+</ul>
+<p>所以我们在做收获利润操作的时候其实有三种情况：</p>
+<ul>
+<li>情况一：收获利润的这一天并不是收获利润区间里的最后一天（不是真正的卖出，相当于持有股票），所以后面要继续收获利润。</li>
+<li>情况二：前一天是收获利润区间里的最后一天（相当于真正的卖出了），今天要重新记录最小价格了。</li>
+<li>情况三：不作操作，保持原有状态（买入，卖出，不买不卖）</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxProfit</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; prices, <span class="type">int</span> fee)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> minPrice = prices[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; prices.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(prices[i] &lt; minPrice)</span><br><span class="line">            minPrice = prices[i];    <span class="comment">//股票价格低时买入股票，情况2</span></span><br><span class="line">            <span class="keyword">if</span>(prices[i] &gt;= minPrice &amp;&amp; prices[i] &lt;=minPrice + fee)</span><br><span class="line">            <span class="keyword">continue</span>;   <span class="comment">//股票价格高于之前的，但是还不挣钱，这时候就不买不卖，情况3</span></span><br><span class="line">            <span class="keyword">if</span>(prices[i] &gt; minPrice + fee)</span><br><span class="line">            &#123;</span><br><span class="line">                result = result + prices[i] - minPrice - fee;</span><br><span class="line">                minPrice = prices[i] - fee; <span class="comment">//更新minPrice,如果下一次循环此条件还成立，说明赚的更多了,情况1</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/binary-tree-cameras/">968. 监控二叉树 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<p>给定一个二叉树，我们在树的节点上安装摄像头。</p>
+<p>节点上的每个摄影头都可以监视<strong>其父对象、自身及其直接子对象。</strong></p>
+<p>计算监控树的所有节点所需的最小摄像头数量。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：[0,0,null,0,0]</span><br><span class="line">输出：1</span><br><span class="line">解释：如图所示，一台摄像头足以监控所有节点。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>情况1：左右节点都有覆盖</li>
+</ul>
+<p>左孩子有覆盖，右孩子有覆盖，那么此时中间节点应该就是无覆盖的状态了。</p>
+<ul>
+<li>情况2：左右节点至少有一个无覆盖的情况</li>
+</ul>
+<p>如果是以下情况，则中间节点（父节点）应该放摄像头：</p>
+<ul>
+<li>情况3：左右节点至少有一个有摄像头</li>
+</ul>
+<p>如果是以下情况，其实就是 左右孩子节点有一个有摄像头了，那么其父节点就应该是2（覆盖的状态）</p>
+<ul>
+<li>情况4：头结点没有覆盖</li>
+</ul>
+<p>以上都处理完了，递归结束之后，可能头结点 还有一个无覆盖的情况，如图：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> result;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">traversal</span><span class="params">(TreeNode* cur)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(cur == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">        <span class="type">int</span> left = <span class="built_in">traversal</span>(cur-&gt;left);</span><br><span class="line">        <span class="type">int</span> right = <span class="built_in">traversal</span>(cur-&gt;right);</span><br><span class="line">        <span class="comment">// 情况1</span></span><br><span class="line">        <span class="comment">// 左右节点都有覆盖</span></span><br><span class="line">        <span class="keyword">if</span>(left == <span class="number">2</span> &amp;&amp; right == <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 情况2</span></span><br><span class="line">        <span class="comment">// left == 0 &amp;&amp; right == 0 左右节点无覆盖</span></span><br><span class="line">        <span class="comment">// left == 1 &amp;&amp; right == 0 左节点有摄像头，右节点无覆盖</span></span><br><span class="line">        <span class="comment">// left == 0 &amp;&amp; right == 1 左节点有无覆盖，右节点摄像头</span></span><br><span class="line">        <span class="comment">// left == 0 &amp;&amp; right == 2 左节点无覆盖，右节点覆盖</span></span><br><span class="line">        <span class="comment">// left == 2 &amp;&amp; right == 0 左节点覆盖，右节点无覆盖</span></span><br><span class="line">        <span class="keyword">if</span>(left == <span class="number">0</span> || right == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            result++;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 情况3</span></span><br><span class="line">        <span class="comment">// left == 1 &amp;&amp; right == 2 左节点有摄像头，右节点有覆盖</span></span><br><span class="line">        <span class="comment">// left == 2 &amp;&amp; right == 1 左节点有覆盖，右节点有摄像头</span></span><br><span class="line">        <span class="comment">// left == 1 &amp;&amp; right == 1 左右节点都有摄像头</span></span><br><span class="line">        <span class="comment">// 其他情况前段代码均已覆盖</span></span><br><span class="line">        <span class="keyword">if</span>(left == <span class="number">1</span> || right == <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//其他情况出错</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">minCameraCover</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">traversal</span>(root) == <span class="number">0</span>) <span class="comment">//root无覆盖</span></span><br><span class="line">        result++;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -575,11 +640,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">科研</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color3">科研</a>
               </li>
              
               <li class="article-tag-list-item">
