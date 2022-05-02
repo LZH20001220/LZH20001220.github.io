@@ -23,19 +23,21 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta name="description" content="在VM环境下安装iKuai（爱快）软路由——适合小白（最新最全教程）_沙场烽火侵胡月的博客-CSDN博客_虚拟机安装爱快 主要可以参考此教程，ikuai相当于路由器，可以管理多组区域网。注意创建虚拟机时需要修改网络适配器选项，一个网络适配器相当于对应一个网口，每个网口在ikuai中都是一个网关的地址。在ikuai界面可以配置区域网或者广域网，网口号等等。然后通过浏览器登录ikuai可以进行进一步的">
+  <meta name="description" content="在VM环境下安装iKuai（爱快）软路由——适合小白（最新最全教程）_沙场烽火侵胡月的博客-CSDN博客_虚拟机安装爱快 可以参考此教程理解原理，ikuai相当于路由器，可以管理多组区域网。注意创建虚拟机时需要修改网络适配器选项，一个网络适配器相当于对应一个网口，每个网口在ikuai中都是一个网关的地址。在ikuai界面可以配置区域网或者广域网，网口号等等。然后通过浏览器登录ikuai可以进行进一">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ikuai路由配置">
 <meta property="og:url" content="http://example.com/2022/05/01/ikuai%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
-<meta property="og:description" content="在VM环境下安装iKuai（爱快）软路由——适合小白（最新最全教程）_沙场烽火侵胡月的博客-CSDN博客_虚拟机安装爱快 主要可以参考此教程，ikuai相当于路由器，可以管理多组区域网。注意创建虚拟机时需要修改网络适配器选项，一个网络适配器相当于对应一个网口，每个网口在ikuai中都是一个网关的地址。在ikuai界面可以配置区域网或者广域网，网口号等等。然后通过浏览器登录ikuai可以进行进一步的">
+<meta property="og:description" content="在VM环境下安装iKuai（爱快）软路由——适合小白（最新最全教程）_沙场烽火侵胡月的博客-CSDN博客_虚拟机安装爱快 可以参考此教程理解原理，ikuai相当于路由器，可以管理多组区域网。注意创建虚拟机时需要修改网络适配器选项，一个网络适配器相当于对应一个网口，每个网口在ikuai中都是一个网关的地址。在ikuai界面可以配置区域网或者广域网，网口号等等。然后通过浏览器登录ikuai可以进行进一">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/05/01/ikuai%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE/1.png">
 <meta property="article:published_time" content="2022-05-01T15:36:02.000Z">
-<meta property="article:modified_time" content="2022-05-01T16:51:14.238Z">
+<meta property="article:modified_time" content="2022-05-02T16:15:37.434Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="环境配置">
 <meta property="article:tag" content="网络">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/05/01/ikuai%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE/1.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -213,7 +215,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">305字</span>
+        <span class="post-count">468字</span>
       </span>
     </span>
 
@@ -243,11 +245,18 @@ var _hmt = _hmt || [];
 </p></center>
       
         <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43343299/article/details/113701449">在VM环境下安装iKuai（爱快）软路由——适合小白（最新最全教程）_沙场烽火侵胡月的博客-CSDN博客_虚拟机安装爱快</a></p>
-<p>主要可以参考此教程，ikuai相当于路由器，可以管理多组区域网。注意创建虚拟机时需要修改网络适配器选项，一个网络适配器相当于对应一个网口，每个网口在ikuai中都是一个网关的地址。在ikuai界面可以配置区域网或者广域网，网口号等等。然后通过浏览器登录ikuai可以进行进一步的配置。ikuai配置的地址相当于网关，给其他的设备配置同网段下的设备可以实现通信。</p>
+<p>可以参考此教程理解原理，ikuai相当于路由器，可以管理多组区域网。注意创建虚拟机时需要修改网络适配器选项，一个网络适配器相当于对应一个网口，每个网口在ikuai中都是一个网关的地址。在ikuai界面可以配置区域网或者广域网，网口号等等。然后通过浏览器登录ikuai可以进行进一步的配置。ikuai配置的地址相当于网关，给其他的设备配置同网段下的设备可以实现通信。</p>
 <span id="more"></span>
 
 <p><strong>VMware的各种网口配置</strong></p>
 <p>①Adapter&#x3D;VMnet1&#x3D;eth0(host-only)<br><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E8%99%9A%E6%8B%9F%E6%9C%BA&spm=1001.2101.3001.7020">虚拟机</a>之间、主机与虚拟机之间互访，但虚拟机无法访问外网。<br>②Adapter2&#x3D;VMnet8&#x3D;eth8(nat)<br>虚拟机之间、主机与虚拟机之间互访，虚拟机可以通过主机访问外网，外网无法访问虚拟机<br>③Adapter3&#x3D;VMnet0&#x3D;eth2(Bridged)<br>虚拟机相当于一台实体机，可以自由访问与被访问及上网</p>
+<p><a target="_blank" rel="noopener" href="https://www.ikuai8.com/zhic/install/xnj/f1af9.html">虚拟机多网卡（本机+带机上网）-爱快 iKuai-商业场景网络解决方案提供商 (ikuai8.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_34238633/article/details/94157090">爱快–虚拟机单网卡（带机上网）_weixin_34238633的博客-CSDN博客</a></p>
+<p>虚拟机环境搭建ikuai环境参考以上两个教程。</p>
+<p>首先搭建系统的拓扑图为</p>
+<p><img src="/2022/05/01/ikuai%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE/1.png"></p>
+<p>注意外网和内网搭建时都需要桥接模式，然后还需要一个网口专门管理ikuai，设置为仅主机模式，具体可以参考第一个历程。</p>
+<p>搭建完之后还需要对内网搭建对应的lan打开DHCP服务，然后才能实现本机+带机上网。</p>
 
       
 
@@ -520,15 +529,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">科研</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">大数据</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">科研</a>
               </li>
              
               <li class="article-tag-list-item">
