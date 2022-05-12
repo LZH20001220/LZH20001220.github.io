@@ -23,18 +23,18 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta name="description" content="TCP&#x2F;IP 存在问题：  效率低。管道是单源单路径的，容易造成拥塞，比如同一个视频，要从单个服务器发送无数次。  可扩展性差。不断打补丁，网络设计管理越来越复杂。IP地址也不够用了。  安全性弱。重视管道保护，但不能保证数据本身的可靠性。比如建立一个信任连接后，对方发的恶意代码也会照收无误。">
+  <meta name="description" content="TCP&#x2F;IP 存在问题：  效率低。管道是单源单路径的，容易造成拥塞，比如同一个视频，要从单个服务器发送无数次。 可扩展性差。不断打补丁，网络设计管理越来越复杂。IP地址也不够用了。 安全性弱。重视管道保护，但不能保证数据本身的可靠性。比如建立一个信任连接后，对方发的恶意代码也会照收无误。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="命名数据网络原理、技术与应用">
 <meta property="og:url" content="http://example.com/2022/05/11/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E3%80%81%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/index.html">
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
-<meta property="og:description" content="TCP&#x2F;IP 存在问题：  效率低。管道是单源单路径的，容易造成拥塞，比如同一个视频，要从单个服务器发送无数次。  可扩展性差。不断打补丁，网络设计管理越来越复杂。IP地址也不够用了。  安全性弱。重视管道保护，但不能保证数据本身的可靠性。比如建立一个信任连接后，对方发的恶意代码也会照收无误。">
+<meta property="og:description" content="TCP&#x2F;IP 存在问题：  效率低。管道是单源单路径的，容易造成拥塞，比如同一个视频，要从单个服务器发送无数次。 可扩展性差。不断打补丁，网络设计管理越来越复杂。IP地址也不够用了。 安全性弱。重视管道保护，但不能保证数据本身的可靠性。比如建立一个信任连接后，对方发的恶意代码也会照收无误。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2022/05/11/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E3%80%81%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/1.png">
 <meta property="og:image" content="http://example.com/2022/05/11/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E3%80%81%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/2.png">
 <meta property="og:image" content="http://example.com/2022/05/11/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E3%80%81%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/3.webp">
 <meta property="article:published_time" content="2022-05-11T07:51:24.000Z">
-<meta property="article:modified_time" content="2022-05-12T02:51:30.820Z">
+<meta property="article:modified_time" content="2022-05-12T12:25:40.413Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="科研">
 <meta property="article:tag" content="NDN">
@@ -248,13 +248,12 @@ var _hmt = _hmt || [];
       
         <p><strong>TCP&#x2F;IP 存在问题：</strong></p>
 <ol>
-<li><p>效率低。管道是单源单路径的，容易造成拥塞，比如同一个视频，要从单个服务器发送无数次。</p>
-</li>
-<li><p>可扩展性差。不断打补丁，网络设计管理越来越复杂。IP地址也不够用了。</p>
-</li>
-<li><p>安全性弱。重视管道保护，但不能保证数据本身的可靠性。比如建立一个信任连接后，对方发的恶意代码也会照收无误。</p>
-<span id="more"></span></li>
+<li>效率低。管道是单源单路径的，容易造成拥塞，比如同一个视频，要从单个服务器发送无数次。</li>
+<li>可扩展性差。不断打补丁，网络设计管理越来越复杂。IP地址也不够用了。</li>
+<li>安全性弱。重视管道保护，但不能保证数据本身的可靠性。比如建立一个信任连接后，对方发的恶意代码也会照收无误。</li>
 </ol>
+<span id="more"></span>
+
 <p><strong>信息中心网络ICN和命名数据网络NDN是一种未来的互联网网络架构。其主要设计原则为：</strong></p>
 <ol>
 <li>保留TCP&#x2F;IP的沙漏模型，允许上下层不断革新。</li>
