@@ -31,7 +31,7 @@
 <meta property="og:description" content="01背包问题有n件物品和一个最多能背重量为w 的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。每件物品只能用一次，求解将哪些物品装入背包里物品价值总和最大。  暴力的解法：把所有的情况全部试一遍，时间复杂度是$o(2^n)$">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-05-08T05:12:05.000Z">
-<meta property="article:modified_time" content="2022-05-09T02:36:59.319Z">
+<meta property="article:modified_time" content="2022-05-12T07:54:18.645Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -212,7 +212,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.9k字</span>
+        <span class="post-count">2.8k字</span>
       </span>
     </span>
 
@@ -221,7 +221,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">8分</span>
+        <span class="post-count">12分</span>
       </span>
     </span>
 </div>
@@ -330,6 +330,44 @@ var _hmt = _hmt || [];
 
 
 
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/target-sum/">494. 目标和 - 力扣（LeetCode）</a></p>
+<p>给你一个整数数组 <code>nums</code> 和一个整数 <code>target</code> 。</p>
+<p>向数组中的每个整数前添加 <code>&#39;+&#39;</code> 或 <code>&#39;-&#39;</code> ，然后串联起所有整数，可以构造一个 <strong>表达式</strong> ：</p>
+<p>例如，<code>nums = [2, 1]</code> ，可以在 <code>2</code> 之前添加 <code>&#39;+&#39;</code> ，在 <code>1</code> 之前添加 <code>&#39;-&#39;</code> ，然后串联起来得到表达式 <code>&quot;+2-1&quot;</code> 。<br>返回可以通过上述方法构造的、运算结果等于 <code>target</code> 的不同 <strong>表达式</strong> 的数目。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,1,1,1,1], target = 3</span><br><span class="line">输出：5</span><br><span class="line">解释：一共有 5 种方法让最终目标和为 3 。</span><br><span class="line">-1 + 1 + 1 + 1 + 1 = 3</span><br><span class="line">+1 - 1 + 1 + 1 + 1 = 3</span><br><span class="line">+1 + 1 - 1 + 1 + 1 = 3</span><br><span class="line">+1 + 1 + 1 - 1 + 1 = 3</span><br><span class="line">+1 + 1 + 1 + 1 - 1 = 3</span><br></pre></td></tr></table></figure>
+
+
+
+<p>动规五步曲：</p>
+<ol>
+<li>确定dp数组以及下标的含义，dp[j] 表示：填满j（包括j）这么大容积的包，有dp[j]种方法</li>
+<li>确定递推公式：dp[j] +&#x3D; dp[j - nums[i]]   求组合问题都是这个公式。</li>
+<li>dp数组如何初始化：从递归公式可以看出，在初始化的时候dp[0] 一定要初始化为1，因为dp[0]是在公式中一切递推结果的起源，如果dp[0]是0的话，递归结果将都是0。</li>
+<li>遍历顺序：我们讲过对于01背包问题一维dp的遍历，nums放在外循环，target在内循环，且内循环倒序。</li>
+<li>举例推导dp数组。</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间复杂度：O(n × m)，n为正数个数，m为背包容量</span></span><br><span class="line"><span class="comment">//空间复杂度：O(m)，m为背包容量</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">findTargetSumWays</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> num : nums)</span><br><span class="line">        &#123;</span><br><span class="line">            sum = sum + num;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>((sum + target) % <span class="number">2</span> == <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(sum &lt; <span class="built_in">abs</span>(target))</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> bagsize = (sum + target) / <span class="number">2</span>;</span><br><span class="line">        vector &lt;<span class="type">int</span>&gt; <span class="built_in">dp</span>(bagsize + <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = bagsize; j &gt;= nums[i]; j--)</span><br><span class="line">            &#123;</span><br><span class="line">                dp[j] = dp[j] + dp[j - nums[i]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[bagsize];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/ones-and-zeroes/">474. 一和零 - 力扣（LeetCode）</a></p>
+<p>给你一个二进制字符串数组 <code>strs</code> 和两个整数 <code>m</code> 和 <code>n</code> 。</p>
+<p>请你找出并返回 <code>strs</code> 的最大子集的长度，该子集中 最多 有 <code>m</code> 个 <code>0</code> 和 <code>n</code> 个 <code>1</code> 。</p>
+<p>如果 <code>x</code> 的所有元素也是 <code>y</code> 的元素，集合 <code>x</code> 是集合 <code>y</code> 的 <strong>子集</strong> 。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：strs = [&quot;10&quot;, &quot;0001&quot;, &quot;111001&quot;, &quot;1&quot;, &quot;0&quot;], m = 5, n = 3</span><br><span class="line">输出：4</span><br><span class="line">解释：最多有 5 个 0 和 3 个 1 的最大子集是 &#123;&quot;10&quot;,&quot;0001&quot;,&quot;1&quot;,&quot;0&quot;&#125; ，因此答案是 4 。</span><br><span class="line">其他满足题意但较小的子集包括 &#123;&quot;0001&quot;,&quot;1&quot;&#125; 和 &#123;&quot;10&quot;,&quot;1&quot;,&quot;0&quot;&#125; 。&#123;&quot;111001&quot;&#125; 不满足题意，因为它含 4 个 1 ，大于 n 的值 3 。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>动规五部曲：</p>
+<ol>
+<li>确定dp数组（dp table）以及下标的含义：<code>dp[i][j]：最多有i个0和j个1的strs的最大子集的大小为dp[i][j]</code>。</li>
+<li>递推公式：类比0，1背包的递推公式：<code>dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);   dp[i][j] </code>就可以是 <code>dp[i - zeroNum][j - oneNum] + 1。</code></li>
+<li>因为物品价值不会是负数，初始为0，保证递推的时候dp[i][j]不会被初始值覆盖。</li>
+<li>物品就是strs里的字符串，背包容量就是题目描述中的m和n。</li>
+<li>举例推导dp数组</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">findMaxForm</span><span class="params">(vector&lt;string&gt;&amp; strs, <span class="type">int</span> m, <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">       vector &lt;vector &lt;<span class="type">int</span>&gt;&gt; <span class="built_in">dp</span>(m + <span class="number">1</span>, vector &lt;<span class="type">int</span>&gt; (n + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">        <span class="keyword">for</span>(string str : strs)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> oneNum = <span class="number">0</span>, zeroNum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">char</span> c : str)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(c == <span class="string">&#x27;0&#x27;</span>) zeroNum++;</span><br><span class="line">                <span class="keyword">else</span> oneNum++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = m; i &gt;= zeroNum; i--)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="type">int</span> j = n; j &gt;=oneNum; j--)</span><br><span class="line">                dp[i][j] = <span class="built_in">max</span>(dp[i][j], dp[i - zeroNum][j - oneNum] + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[m][n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 
       
 
@@ -412,6 +450,15 @@ var _hmt = _hmt || [];
 
   
 <nav id="article-nav">
+  
+    <a href="/2022/05/11/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E3%80%81%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          命名数据网络原理、技术与应用
+        
+      </div>
+    </a>
   
   
     <a href="/2022/05/03/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-1/" id="article-nav-older" class="article-nav-link-wrap">
@@ -619,6 +666,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">周报</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
