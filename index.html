@@ -205,7 +205,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.4k字</span>
+        <span class="post-count">6.7k字</span>
       </span>
     </span>
 
@@ -214,7 +214,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">8分</span>
+        <span class="post-count">31分</span>
       </span>
     </span>
 </div>
@@ -235,97 +235,7 @@ var _hmt = _hmt || [];
 </p></center>
       
         <p>相比起之前的代码， <code>forwarder.cpp</code> 是一个大工程，头铁硬碰显然是不合适的。在看代码之前，我们应当对 <code>Forwarder</code> 类大致在干什么有一些初步的了解。实际上， <code>Forwarder</code> 类主要控制前向转发过程，我们可以把整个 <code>Forwarder</code> 类看作一个贴心的管家，通过 <code>nameTree</code> 管理手下的 <code>fib 、 pit 、 cs</code> ，还通过 <code>m_faceTable</code> 管理了手下的所有的 face 接口，并同时管理着其余的各项东西。</p>
-<p>既然是是一个管家，那么涉及的内容肯定是盘根错节的。但幸运的是，我们能在官网上查到NFD的开发者手册，该手册截至目前最新的版本为第11版，下载链接为<a target="_blank" rel="noopener" href="https://named-data.net/publications/techreports/ndn-0021-11-nfd-guide/">NFD Developer’s Guide (Latest Revision 11)</a></p>
-<p>在本手册的第四章，对于转发部分有着详细的讲解.</p>
-<h4 id="整体转发工作流程"><a href="#整体转发工作流程" class="headerlink" title="整体转发工作流程"></a>整体转发工作流程</h4><p>引用手册里的图，整个转发流程其实就很清晰了。整个转发分为三个大板块： <code>onIncomingInterest</code> 、 <code>onIncomingData</code> 、 <code>onIncomingNack</code> 。这里我对这些流程大方向进行一些简单的梳理：</p>
-<ul>
-<li>如果来了兴趣包，执行<code>onIncomingInterest</code><ul>
-<li>如果重复的 <code>Nonce</code> ，则说明发生了循环，执行 <code>onInterestLoop</code></li>
-<li>如果CS缓存未命中，则执行 <code>onContentStoreMiss</code> 函数，执行相应的策略</li>
-<li>如果CS缓存命中，则执行 <code>onContentStoreHit</code> 函数，执行相应的策略</li>
-<li>无论CS命中还是CS非命中，只要最后是决定要转发，都会执行 <code>onOutgoingInterest</code></li>
-</ul>
-</li>
-<li>如果来了数据包，执行<code>onIncomingData</code><ul>
-<li>如果查PIT查不到请求，那么数据包是不请自来的，执行 <code>onDataUnsolicited</code></li>
-<li>查有几个匹配的PIT条目，对所有条目的下游执行 <code>onOutgoingData</code></li>
-</ul>
-</li>
-</ul>
-<p><img src="/2022/05/20/ns-3%E5%92%8CNDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(3)/1.png"></p>
-<p>部分名词说明：</p>
-<ul>
-<li>in-record和out-record我没有进行翻译。</li>
-<li>downstream我翻译为了“下游”</li>
-<li>upstream我翻译为了“上游”</li>
-<li>其中in-record代表interest的下游接口，是内容的请求者。out-record代表interest的上游接口，是潜在的内容源。interest从下游到上游，data从上游到下游。</li>
-</ul>
-<h4 id="onIncomingInterest工作流程"><a href="#onIncomingInterest工作流程" class="headerlink" title="onIncomingInterest工作流程"></a>onIncomingInterest工作流程</h4><blockquote>
-<p>触发方式： <code>Forwarder::onIncomingInterest</code> 函数从 <code>Forwarder::startProcessInterest</code> 方法进入，该方法由接口 <code>Face::afterReceiveData</code> 信号触发。</p>
-</blockquote>
-<p>引用手册里的图，转发流程如下图所示。对于整个流程，简要地说：</p>
-<ul>
-<li>首先以 <code>/localhost</code> 为前缀是本地通信保留的，所以以这个为前缀的将会被直接扔掉。</li>
-<li>然后检测当前随机数有没有在死亡随机数列表里，如果在，说明兴趣包循环了，执行 <code>onInterestLoop</code></li>
-<li>再看有没有到生产者的区域，如果到了，就可以剥掉转发前缀了。</li>
-<li>接着查PIT（虽然我们在ndn原理里认为先查CS再查PIT，然而查CS开销可能会很大。所以可以先查PIT，如果PIT里有人请求过了，说明该兴趣如今还未决，CS肯定没有，就可以节省开销了），看看PIT里有没有重复随机数。如果没有就取消掉PIT的到期定时器，为PIT续1s</li>
-<li>最后查CS（其实先查CS再查PIT是等价的，只是先查PIT的话，如果PIT有就不用查CS了，节省开销），决定执行 <code>onContentStoreHit</code> 或者 <code>onContentStoreMiss</code> 。</li>
-</ul>
-<p><img src="/2022/05/20/ns-3%E5%92%8CNDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(3)/2.png"></p>
-<h4 id="onInterestLoop工作流程"><a href="#onInterestLoop工作流程" class="headerlink" title="onInterestLoop工作流程"></a>onInterestLoop工作流程</h4><p>上面 <code>onIncomingInterest</code> 说了，如果检测到相同的随机数，就说明发生了循环，这时就会执行 <code>onInterestLoop</code> 函数。这个时候分两种情况讨论：</p>
-<ul>
-<li>如果是点对点，那么发生循环相当于Not ACK，于是将原因标记为Nack。</li>
-<li>如果是多播的话，直接丢弃就行，不需要Nack。</li>
-</ul>
-<h4 id="onContentStoreHit工作流程"><a href="#onContentStoreHit工作流程" class="headerlink" title="onContentStoreHit工作流程"></a>onContentStoreHit工作流程</h4><p>如果缓存命中，就设置好到期定时器，并执行相应的 <code>afterContentStoreHit</code> 策略，如下图所示：</p>
-<p><img src="/2022/05/20/ns-3%E5%92%8CNDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(3)/3.png"></p>
-<p>​         此管道在 <code>Forwarder::onContentStoreHit</code> 方法中实现，并在执行内容存储查找并找到匹配项后进入传入的兴趣管道。 此管道的输入参数包括<strong>兴趣包、传入的 Face、PIT 条目和匹配的数据包</strong>。如图 9 所示，此管道首先将到期计时器设置为现在在 Interest 上，然后在 Content Store 命中所选策略的触发器后调用。</p>
-<h4 id="onContentStoreMiss工作流程"><a href="#onContentStoreMiss工作流程" class="headerlink" title="onContentStoreMiss工作流程"></a><strong>onContentStoreMiss工作流程</strong></h4><p>如果缓存未命中，就给对应条目的PIT插入一个in-record，到期时间设置为最后一个in-record的时间,默认是4秒。如果兴趣包内钦定好了下一跳的接口id，那就对该接口执行 <code>onOutgoingInterest</code> ，不然就执行策略 <code>afterReceiveInterest</code> ，通过FIB路由表查出下一跳（如果查到并决定转发，那么对查到的下一跳执行 <code>onOutgoingInterest</code> ）。若PIT in-record到期计时器到期，则执行 Interest Finalize 管道（第 4.2.6 节）。如下图所示：</p>
-<p><img src="/2022/05/20/ns-3%E5%92%8CNDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(3)/4.png"></p>
-<h4 id="onOutgoingInterest工作流程"><a href="#onOutgoingInterest工作流程" class="headerlink" title="onOutgoingInterest工作流程"></a>onOutgoingInterest工作流程</h4><p>首先插入一个out-record（如果已经存在相同的接口就更新），记录下最后一个包的随机数和到期时间，然后执行 <code>sendInterest</code> 函数。如下图所示：</p>
-<p><img src="/2022/05/20/ns-3%E5%92%8CNDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(3)/5.png"></p>
-<h4 id="onInterestFinalize工作流程"><a href="#onInterestFinalize工作流程" class="headerlink" title="onInterestFinalize工作流程"></a>onInterestFinalize工作流程</h4><p>一些善后工作，如插入死亡随机数列表、删除对应的PIT条目等。</p>
-<h4 id="onIncomingData工作流程"><a href="#onIncomingData工作流程" class="headerlink" title="onIncomingData工作流程"></a>onIncomingData工作流程</h4><blockquote>
-<p>触发方式： <code>Forwarder::onIncomingData</code> 函数从 <code>Forwarder::startProcessData</code> 方法进入，该方法由接口 <code>Face::afterReceiveData</code> 信号触发。</p>
-</blockquote>
-<p>简要地说：</p>
-<ul>
-<li>首先以 <code>/localhost</code> 为前缀是本地通信保留的，所以以这个为前缀的将会被直接扔掉。</li>
-<li>然后查PIT，如果PIT没有，但来了这个数据包，说明数据包是不请自来的（unsolicited）。如果PIT有，那么尝试将数据包插入CS。</li>
-<li>再检测有几个匹配的PIT条目（一般来说应该只有一个，因为多个PIT意味着多个转发策略，可能导致转发策略之间的冲突）<ul>
-<li>如果单个匹配，将PIT到期时间设置为现在，并调用 <code>afterReceiveData</code> 策略，标记该PIT条目已被满足，删掉out-record，尝试插入死亡随机数列表。</li>
-<li>如果多个匹配，对于每个匹配项目，管道会先记住其pending的下一跳们（最后汇总一起执行 <code>onOutgoingData</code> ），其余操作与单个匹配类似，只不过变成了调用 <code>beforeSatisfyInterest</code> 策略，并清除条目的out-record。</li>
-</ul>
-</li>
-</ul>
-<p><img src="/2022/05/20/ns-3%E5%92%8CNDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(3)/6.png"></p>
-<h4 id="onDataUnsolicited工作流程"><a href="#onDataUnsolicited工作流程" class="headerlink" title="onDataUnsolicited工作流程"></a>onDataUnsolicited工作流程</h4><p>如果数据是不请自来的，则根据 <code>m_unsolicitedDataPolicy</code> 的决定来判断。如果认为应当缓存就尝试缓存，否则啥都不干。</p>
-<h4 id="onOutgoingData工作流程"><a href="#onOutgoingData工作流程" class="headerlink" title="onOutgoingData工作流程"></a>onOutgoingData工作流程</h4><p>首先检查下 <code>/localhost</code> ，（然后下个版本计划进行流量管理，这个版本还没实现，）最后通过 <code>sendData</code> 函数传出去。</p>
-<h4 id="onIncomingNack函数"><a href="#onIncomingNack函数" class="headerlink" title="onIncomingNack函数"></a>onIncomingNack函数</h4><p>Nack(Not ACK)在NFD里会分为两部分处理： <code>Incoming Nack</code> 和 <code>Outgoing Nack</code> 。这部分讲的是Incoming Nack( processing of incoming Nacks)。</p>
-<blockquote>
-<p>触发方式： <code>Forwarder::onIncomingNack</code> 函数从 <code>Forwarder::startProcessNack</code> 方法进入，该方法由接口 <code>Face::afterReceiveNack</code> 信号触发。</p>
-</blockquote>
-<ul>
-<li>首先，如果传入接口不是点对点的，那么直接丢弃（因为Nack只在点对点链路上被定义）。</li>
-<li>如果和out-record的最后一个记录的随机数相同，相当于产生环路，那么该record将会被标记为Nack。如果所有out-record都Nack了，将到期时间设置到期时间为0，并执行策略 <code>afterReceiveNack</code> 。</li>
-<li>如果随机数不同，那么就不执行操作。</li>
-</ul>
-<h4 id="onOutgoingNack函数"><a href="#onOutgoingNack函数" class="headerlink" title="onOutgoingNack函数"></a>onOutgoingNack函数</h4><blockquote>
-<p>触发方式： <code>Forwarder::onOutgoingNack</code> 函数从 <code>Strategy::sendNack</code> 方法进入。</p>
-</blockquote>
-<ul>
-<li>首先，查in-record，如果查不到就不执行操作（不知道哪个interest的问题，不知道给谁发Nack）</li>
-<li>如果下一跳不是点对点的，那么直接丢弃（因为Nack只在点对点链路上被定义）。</li>
-<li>如果没毛病的话，就给in-record的interest贴上Nack，通过传出接口让链路层执行 <code>sendNack</code></li>
-</ul>
-<h4 id="前置补充内容：信号类"><a href="#前置补充内容：信号类" class="headerlink" title="前置补充内容：信号类"></a>前置补充内容：信号类</h4><p>在进入代码分析之前，我想先向大家介绍一下信号(Signal)类。为什么要介绍它呢？因为它在整个 <code>Forwarder</code> 类、甚至整个ndnSIM代码里都是大量出现的。因此，我们单独开了一个小章节来讲解信号类。其实信号类很简单，也很好理解，说白了，一个信号里面储存了一堆操作（函数），每当这个信号被触发的时候，这些操作就会被执行一遍。或者对于基础好一点的同学来说：一个信号里面储存了函数指针链表，并且将运算符 <code>()</code> 重载为了执行函数指针链表内的所有函数：</p>
-<ul>
-<li>具体而言，信号类的定义中最重要的部分如下所示。信号类重载了 <code>()</code> ，使得信号类的调用方式和函数一致。而且 <code>Owner</code> 作为了友元类，可以随意获取信号的私有成员。每当一个函数被 <code>connect</code> 到信号上，就会被添加到 <code>m_slot</code> 这个链表中。</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Owner, <span class="keyword">typename</span> ...TArgs&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Signal</span> : noncopyable</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="keyword">typedef</span> function&lt;<span class="type">void</span>(<span class="type">const</span> TArgs&amp;...)&gt; Handler;</span><br><span class="line">  <span class="comment">// 连接信号</span></span><br><span class="line">  <span class="function">Connection <span class="title">connect</span><span class="params">(Handler handler)</span></span>;</span><br><span class="line">  <span class="comment">// 重载()，使得能用()直接传递函数参数，让信号看起来跟函数一样</span></span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">const</span> TArgs&amp;... args)</span></span>;</span><br><span class="line">  <span class="comment">// 定义开头的模板参数Owner为友元类</span></span><br><span class="line">  <span class="keyword">friend</span> Owner;</span><br><span class="line">  <span class="comment">// 其余代码省略</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  SlotList m_slots;</span><br><span class="line">  <span class="comment">// 其余代码省略</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>信号类有什么好处呢？信号类可以让一个类调用另一个类的方法，比如 <code>Today</code> 这个函数就只用关心相对抽象层次高的内容，比如每天只需要干 <code>BeforeDoSomething</code> 、 <code>Dosomething</code> 、 <code>AfterDoSomething</code> ，至于具体 <code>BeforeDoSomething</code> 是什么，可以由其他类来往里面添加(connect)事项。这样就可以用一个“管家”方便地管理下面的子类了。</p>
-
+        
       
 
       
