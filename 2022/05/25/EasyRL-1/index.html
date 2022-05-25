@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>博客杂记 - Harder and Better</title>
+  <title>EasyRL-1 | 博客杂记 - Harder and Better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -23,14 +23,21 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="博客杂记 - Harder and Better">
-<meta property="og:url" content="http://example.com/page/8/index.html">
+  <meta name="description" content="强化学习主要符号表：   主要符号表      a：标量 a：向量 A：矩阵   $\mathbb{R}$：实数集 $arg_amaxf(a)$ ：$f(a)$取最大值时a的值 s：状态   a：动作 r：奖励 $\pi$：策略   $\gamma$：折扣因子 $\pi(s)$：根据确定性策略$\pi$在状态$s$选取的动作 $\tau$：轨迹   $V_{\pi}(s)$：状态$s$在策略$\p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EasyRL-1">
+<meta property="og:url" content="http://example.com/2022/05/25/EasyRL-1/index.html">
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
+<meta property="og:description" content="强化学习主要符号表：   主要符号表      a：标量 a：向量 A：矩阵   $\mathbb{R}$：实数集 $arg_amaxf(a)$ ：$f(a)$取最大值时a的值 s：状态   a：动作 r：奖励 $\pi$：策略   $\gamma$：折扣因子 $\pi(s)$：根据确定性策略$\pi$在状态$s$选取的动作 $\tau$：轨迹   $V_{\pi}(s)$：状态$s$在策略$\p">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/05/25/EasyRL-1/1.png">
+<meta property="og:image" content="http://example.com/2022/05/25/EasyRL-1/2.png">
+<meta property="article:published_time" content="2022-05-25T03:05:20.000Z">
+<meta property="article:modified_time" content="2022-05-25T10:09:57.464Z">
 <meta property="article:author" content="ygtrece">
-<meta property="article:tag" content="学习, 日常">
+<meta property="article:tag" content="机器学习">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/05/25/EasyRL-1/1.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -182,19 +189,22 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-tag电路图" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-EasyRL-1" class="article article-type-post " itemscope itemprop="blogPost">
   
 <div class="article-inner">
     
       <header class="article-header">
         
         
-        <a href="/2021/12/29/tag%E7%94%B5%E8%B7%AF%E5%9B%BE/" class="archive-article-date">
-  	<time datetime="2021-12-29T15:10:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-29</time>
+        <a href="/2022/05/25/EasyRL-1/" class="archive-article-date">
+  	<time datetime="2022-05-25T03:05:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-25</time>
 </a>
 
+
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
 
 
         <!-- 需要添加的位置 -->
@@ -205,7 +215,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">521字</span>
+        <span class="post-count">2.6k字</span>
       </span>
     </span>
 
@@ -214,7 +224,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
+        <span class="post-count">10分</span>
       </span>
     </span>
 </div>
@@ -228,15 +238,107 @@ var _hmt = _hmt || [];
        
       <center><p>
   
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2021/12/29/tag%E7%94%B5%E8%B7%AF%E5%9B%BE/">tag电路图</a>
+    <h1 class="article-title_code_ant" itemprop="name">
+      EasyRL-1
     </h1>
   
 </p></center>
       
-        <h3 id="tag电路图："><a href="#tag电路图：" class="headerlink" title="tag电路图："></a>tag电路图：</h3><p><img src="/2021/12/29/tag%E7%94%B5%E8%B7%AF%E5%9B%BE/1.png" alt="img"></p>
-<p>U8的20MHz为FPGA的外部时钟输入</p>
-        
+        <h5 id="强化学习主要符号表："><a href="#强化学习主要符号表：" class="headerlink" title="强化学习主要符号表："></a>强化学习主要符号表：</h5><table>
+<thead>
+<tr>
+<th>主要符号表</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>a：标量</td>
+<td><strong>a</strong>：向量</td>
+<td><strong>A：</strong>矩阵</td>
+</tr>
+<tr>
+<td>$\mathbb{R}$：实数集</td>
+<td>$arg_amaxf(a)$ ：$f(a)$取最大值时a的值</td>
+<td>s：状态</td>
+</tr>
+<tr>
+<td>a：动作</td>
+<td>r：奖励</td>
+<td>$\pi$：策略</td>
+</tr>
+<tr>
+<td>$\gamma$：折扣因子</td>
+<td>$\pi(s)$：根据确定性策略$\pi$在状态$s$选取的动作</td>
+<td>$\tau$：轨迹</td>
+</tr>
+<tr>
+<td>$V_{\pi}(s)$：状态$s$在策略$\pi$下的价值</td>
+<td>$Q_{\pi}(s,a)$：状态$s$在策略$\pi$下采取动作$a$的价值</td>
+<td>$G_t$：时刻$t$的回报</td>
+</tr>
+<tr>
+<td>$\pi_{\theta}$：参数$\theta$对应的策略</td>
+<td>$J(\theta)$：策略$\pi_{\theta}$的性能度量</td>
+<td></td>
+</tr>
+</tbody></table>
+<span id="more"></span>
+
+<h5 id="1-1-强化学习概述"><a href="#1-1-强化学习概述" class="headerlink" title="1.1 强化学习概述"></a>1.1 强化学习概述</h5><p><strong>强化学习</strong>（reinforcement learning，RL）讨论的问题是智能体（agent）怎么在复杂、不确定的环境（environment）里面去最大化它能获得的奖励。</p>
+<p>强化学习由两部分组成：智能体和环境。<br>在强化学习过程中，智能体与环境一直在交互。智能体在环境里面获取某个状态后，它会利用该状态输出一个动作（action），这个动作也称为决策（decision）。然后这个动作会在环境之中被执行，环境会根据智能体采取的动作，输出下一个状态以及当前这个动作带来的奖励。智能体的目的就是尽可能多地从环境中获取奖励。</p>
+<p><img src="/2022/05/25/EasyRL-1/1.png" alt="image-20220525110803561"></p>
+<p><strong>监督学习的特点：</strong>输入的数据是没有关联的，且需要告诉学习器标签是什么。</p>
+<p>强化学习这两点都不满足，以玩游戏为例，智能体得到的观测不是独立同分布的。(指随机过程中，任何时刻的取值都为随机变量，如果这些随机变量服从同一分布，并且互相独立，那么这些随机变量是<em>独立同分布</em>)；上一帧与下一帧间其实有非常强的连续性；另外，我们并没有立刻获得反馈，游戏没有告诉我们哪个动作是正确动作，智能体不能立即得到反馈。</p>
+<h5 id="1-2-决策序列"><a href="#1-2-决策序列" class="headerlink" title="1.2 决策序列"></a>1.2 决策序列</h5><p>环境有自己的函数${s_t}^e &#x3D; f^e\left( H_t \right)$，智能体的内部也有一个函数${s_t}^a &#x3D; f^a\left( H_t \right)$。</p>
+<p>当智能体的状态与环境的状态等价的时候，即当智能体能够观察到环境的所有状态时，我们称这个环境是&#x3D;&#x3D;完全可观测的&#x3D;&#x3D;（fully observed）。在这种情况下面，强化学习通常被建模成一个<strong>马尔可夫决策过程</strong>（Markov decision process，MDP）的问题。在马尔可夫决策过程中，$o_t &#x3D; {s_t}^e &#x3D; {s_a}^e$</p>
+<p>当智能体只能看到部分的观测，我们就称这个环境是&#x3D;&#x3D;部分可观测的&#x3D;&#x3D;（partially observed）。<br>在这种情况下，强化学习通常被建模成部分<strong>可观测马尔可夫决策过程</strong>（partially observable Markovdecision process, POMDP）的问题。部分可观测马尔可夫决策过程可以用一个七元组描述：$\left(S,A,T,R,\Omega,O,\gamma \right)$.中S 表示状态空间，为隐变量，A 为动作空间，<br>T(s′|s, a) 为状态转移概率，R 为奖励函数，Ω(o|s, a) 为观测概率，O 为观测空间，γ 为折扣因子。</p>
+<h5 id="1-3-动作空间"><a href="#1-3-动作空间" class="headerlink" title="1.3 动作空间"></a>1.3 动作空间</h5><p>像雅达利游戏和围棋（Go）这样的环境有离散动作空间（discrete action space），在这个动作空间里，智能体的<strong>动作数量是有限的</strong>。</p>
+<p>在其他环境，比如在物理世界中控制一个智能体，在这个环境中就有连续动作空间（continuous action space）。在连续动作空间中，<strong>动作是实值的向量</strong>。</p>
+<h5 id="1-4-智能体的组成成分和类型"><a href="#1-4-智能体的组成成分和类型" class="headerlink" title="1.4 智能体的组成成分和类型"></a>1.4 智能体的组成成分和类型</h5><p>对于一个强化学习智能体，它可能有一个或多个如下的组成成分。</p>
+<ul>
+<li><p>策略（policy）。智能体会用策略来选取下一步的动作。</p>
+<p>策略决定了智能体的动作，其包括<strong>随机性策略</strong>和<strong>确定性策略</strong>。</p>
+<ul>
+<li>随机性策略（stochastic policy）就是$\pi$函数，即$\pi(a|s) &#x3D; p(a_t &#x3D; a | s_t &#x3D; s)$。输入一个状态s，输出一个概率。</li>
+<li>确定性策略就是智能体直接采取最有可能的动作，即$a^{*} &#x3D; argmax \pi(a | s)$。</li>
+</ul>
+</li>
+<li><p>价值函数（value function）。我们用价值函数来对当前状态进行评估。价值函数用于评估智能体进入某个状态后，可以对后面的奖励带来多大的影响。价值函数值越大，说明智能体进入这个状态越有利。</p>
+<ul>
+<li><p>我们可以把折扣因子放到价值函数的定义里面，价值函数的定义为:</p>
+<p>$V_{\pi}(s) \doteq \mathbb{E}<em>{\pi}\left[G</em>{t} \mid s_{t}&#x3D;s\right]&#x3D;\mathbb{E}<em>{\pi}\left[\sum</em>{k&#x3D;0}^{\infty} \gamma^{k} r_{t+k+1} \mid s_{t}&#x3D;s\right]$</p>
+</li>
+<li><p>另外一种价值函数：Q函数</p>
+<p>$Q_{\pi}(s, a) \doteq \mathbb{E}<em>{\pi}\left[G</em>{t} \mid s_{t}&#x3D;s, a_{t}&#x3D;a\right]&#x3D;\mathbb{E}<em>{\pi}\left[\sum</em>{k&#x3D;0}^{\infty} \gamma^{k} r_{t+k+1} \mid s_{t}&#x3D;s, a_{t}&#x3D;a\right]$</p>
+<p>未来可以获得奖励的期望取决于当前的状态和当前的动作</p>
+</li>
+</ul>
+</li>
+<li><p>模型（model）：模型表示智能体对环境的状态进行理解，它决定了环境中世界的运行方式。模型决定了下一步的状态。下一步的状态取决于当前的状态以及当前采取的<br>动作。它由状态转移概率和奖励函数两个部分组成。</p>
+</li>
+</ul>
+<p>​          状态转移概率：               $p_{s s^{\prime}}^{a}&#x3D;p\left(s_{t+1}&#x3D;s^{\prime} \mid s_{t}&#x3D;s, a_{t}&#x3D;a\right)$</p>
+<p>​          奖励函数：                      $R(s, a)&#x3D;\mathbb{E}\left[r_{t+1} \mid s_{t}&#x3D;s, a_{t}&#x3D;a\right]$</p>
+<p>当我们有了策略、价值函数和模型3 个组成部分后，就形成了一个马尔可夫决策过程（Markov decision process）</p>
+<p><img src="/2022/05/25/EasyRL-1/2.png" alt="image-20220525154526424"></p>
+<p><strong>基于策略的强化学习（policy-based RL）方法：</strong>策略梯度算法等</p>
+<p>当学习好了这个环境后，在每一个状态，我们都会得到一个最佳的动作。我们给它一个状态，它就会输出对应动作的概率。基于策略的智能体并没有学习价值函数。</p>
+<p><strong>基于价值的强化学习（value-based RL）方法：</strong>Q 学习（Q-learning）、Sarsa等</p>
+<p>所以通过学习的价值的不同，我们可以抽取出现在最佳的策略。显式地学习价值函数，隐式地学习它的策略。策略是其从学到的价值函数里面推算出来的。这种方法只能应用在不连续的、离散的环境下（如围棋或某些游戏领域）；对于动作集合规模庞大、动作连续的场景（如机器人控制领域），其很难学习到较好的结果（此时基于策略迭代的方法能够根据设定的策略来选择连续的动作）。</p>
+<p>把基于价值的智能体和基于策略的智能体结合起来就有了<strong>演员-评论员智能体</strong>（actor-critic agent）。这一类智能体把策略和价值函数都学习了，然后通过两者的交互得到最佳的动作。其中，智能体会根据策略做出动作，而价值函数会对做出的动作给出价值，这样可以在原有的策略梯度算法的基础上加速学习过程，取得更好的效果。</p>
+<p><strong>有模型（model-based）强化学习智能体：</strong></p>
+<p>它通过学习状态的转移来采取动作。将任务表示成$&lt;S,A,P,R&gt;$,如果四元组中元素均已知，且状态集合和动作集合在有限步内是有限集，则智能体可以对真实环境进行建模。当智能体知道状态转移函数$P\left(s_{t+1} \mid s_{t}, a_{t}\right)$ 和奖励函数$R\left(s_{t}, a_{t}\right)$后，它就能知道在虚拟环境中某一状态下执行某一动作后能带来的奖励和环境的下一状态</p>
+<p><strong>免模型（model-free）强化学习智能体：</strong></p>
+<p>它没有去直接估计状态的转移，也没有得到环境的具体转移变量。智能体只能在真实环境中通过一定的策略来执行动作，等待奖励和状态迁移，然后根据这些反馈信息来更新动作策略，这样反复迭代直到学习到最优策略。</p>
+<p>利用<a target="_blank" rel="noopener" href="https://gym.openai.com/">OpenAI Gym</a> 进行实验。是一个环境仿真库，里面包含了很多现有的环境</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Created on Wed May 25 16:44:28 2022</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: 李政翰</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> gym</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">env = gym.make(<span class="string">&#x27;MountainCar-v0&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;观测空间 = &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(env.observation_space))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;动作空间 = &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(env.action_space))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;观测范围 = &#123;&#125; ~ &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(env.observation_space.low,</span><br><span class="line">        env.observation_space.high))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;动作数 = &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(env.action_space.n))</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BespokeAgent</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, env</span>): <span class="comment"># 类似于构造函数</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">decide</span>(<span class="params">self, observation</span>): <span class="comment"># 决策</span></span><br><span class="line">        position, velocity = observation</span><br><span class="line">        lb = <span class="built_in">min</span>(-<span class="number">0.09</span> * (position + <span class="number">0.25</span>) ** <span class="number">2</span> + <span class="number">0.03</span>,</span><br><span class="line">                <span class="number">0.3</span> * (position + <span class="number">0.9</span>) ** <span class="number">4</span> - <span class="number">0.008</span>)</span><br><span class="line">        ub = -<span class="number">0.07</span> * (position + <span class="number">0.38</span>) ** <span class="number">2</span> + <span class="number">0.07</span></span><br><span class="line">        <span class="keyword">if</span> lb &lt; velocity &lt; ub:</span><br><span class="line">            action = <span class="number">2</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            action = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> action <span class="comment"># 返回动作</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">learn</span>(<span class="params">self, *args</span>): <span class="comment"># 学习</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    </span><br><span class="line">agent = BespokeAgent(env)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">play_montecarlo</span>(<span class="params">env, agent, render=<span class="literal">False</span>, train=<span class="literal">False</span></span>):</span><br><span class="line">    episode_reward = <span class="number">0.</span> <span class="comment"># 记录回合总奖励，初始化为0</span></span><br><span class="line">    observation = env.reset() <span class="comment"># 重置游戏环境，开始新回合</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>: <span class="comment"># 不断循环，直到回合结束</span></span><br><span class="line">        <span class="keyword">if</span> render: <span class="comment"># 判断是否显示</span></span><br><span class="line">            env.render() <span class="comment"># 显示图形界面，图形界面可以用 env.close() 语句关闭</span></span><br><span class="line">        action = agent.decide(observation)</span><br><span class="line">        next_observation, reward, done, _ = env.step(action) <span class="comment"># 执行动作</span></span><br><span class="line">        episode_reward += reward <span class="comment"># 收集回合奖励</span></span><br><span class="line">        <span class="keyword">if</span> train: <span class="comment"># 判断是否训练智能体</span></span><br><span class="line">            agent.learn(observation, action, reward, done) <span class="comment"># 学习</span></span><br><span class="line">        <span class="keyword">if</span> done: <span class="comment"># 回合结束，跳出循环</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        observation = next_observation</span><br><span class="line">    <span class="keyword">return</span> episode_reward <span class="comment"># 返回回合总奖励</span></span><br><span class="line"></span><br><span class="line">env.seed(<span class="number">0</span>) <span class="comment"># 设置随机数种子,只是为了让结果可以精确复现,一般情况下可删去</span></span><br><span class="line">episode_rewards = [play_montecarlo(env, agent) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>)]</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;平均回合奖励 = &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(np.mean(episode_rewards)))</span><br><span class="line">env.close() <span class="comment"># 此语句可关闭图形界面</span></span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">观测空间 = Box([-1.2  -0.07], [0.6  0.07], (2,), float32)</span><br><span class="line">动作空间 = Discrete(3)</span><br><span class="line">观测范围 = [-1.2  -0.07] ~ [0.6  0.07]</span><br><span class="line">动作数 = 3</span><br><span class="line">平均回合奖励 = -105.4</span><br></pre></td></tr></table></figure>
+
+<p>总结一下 Gym 的用法：使用 <code>env=gym.make(环境名)</code> 取出环境，使用 <code>env.reset()</code>初始化环境，使用<code>env.step(动作)</code>执行一步环境，使用 <code>env.render()</code>显示环境，使用 <code>env.close()</code> 关闭环境。</p>
+
       
 
       
@@ -249,7 +351,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习</a>
         		</li>
       		
 		</ul>
@@ -258,16 +360,75 @@ var _hmt = _hmt || [];
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/29/tag%E7%94%B5%E8%B7%AF%E5%9B%BE/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/05/25/EasyRL-1/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2022/05/23/ns-3%E5%92%8CNDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(5)/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ns-3和NDN代码分析(5)</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -282,320 +443,19 @@ var _hmt = _hmt || [];
         </div>
         
         
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-周报12-20-12-26" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-<div class="article-inner">
-    
-      <header class="article-header">
-        
-        
-        <a href="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/" class="archive-article-date">
-  	<time datetime="2021-12-26T09:08:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-26</time>
-</a>
-
-
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">5.3k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">19分</span>
-      </span>
-    </span>
-</div>
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/">周报12.20-12.26</a>
-    </h1>
-  
-</p></center>
-      
-        <p><strong>第一部分：文献阅读</strong></p>
-<p><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/10.1145/3300061.3300121">文献1：OFDMA-Enabled Wi-Fi Backscatter | The 25th Annual International Conference on Mobile Computing and Networking (acm.org)</a></p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">周报</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B8%BB%E8%A6%81%E7%AC%A6%E5%8F%B7%E8%A1%A8%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">强化学习主要符号表：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-1-%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%A6%82%E8%BF%B0"><span class="toc-number">2.</span> <span class="toc-text">1.1 强化学习概述</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-2-%E5%86%B3%E7%AD%96%E5%BA%8F%E5%88%97"><span class="toc-number">3.</span> <span class="toc-text">1.2 决策序列</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-3-%E5%8A%A8%E4%BD%9C%E7%A9%BA%E9%97%B4"><span class="toc-number">4.</span> <span class="toc-text">1.3 动作空间</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-4-%E6%99%BA%E8%83%BD%E4%BD%93%E7%9A%84%E7%BB%84%E6%88%90%E6%88%90%E5%88%86%E5%92%8C%E7%B1%BB%E5%9E%8B"><span class="toc-number">5.</span> <span class="toc-text">1.4 智能体的组成成分和类型</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-Libero" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-<div class="article-inner">
-    
-      <header class="article-header">
-        
-        
-        <a href="/2021/11/29/Libero/" class="archive-article-date">
-  	<time datetime="2021-11-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-29</time>
-</a>
-
-
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.2k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">4分</span>
-      </span>
-    </span>
-</div>
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2021/11/29/Libero/">Microsemi Libero学习和使用笔记</a>
-    </h1>
-  
-</p></center>
-      
-        <h3 id="一、下载和安装"><a href="#一、下载和安装" class="headerlink" title="一、下载和安装"></a>一、下载和安装</h3><p>下载和安装可以参考以下<a target="_blank" rel="noopener" href="https://blog.csdn.net/whik1194/article/details/90483763">教程</a>。其中申请license的步骤推荐使用<a target="_blank" rel="noopener" href="http://24mail.chacuo.net/">临时邮箱</a>,其他的信息可以随便填。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">FPGA</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/29/Libero/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-软件无线电基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-<div class="article-inner">
-    
-      <header class="article-header">
-        
-        
-        <a href="/2021/10/31/%E8%BD%AF%E4%BB%B6%E6%97%A0%E7%BA%BF%E7%94%B5%E5%9F%BA%E7%A1%80/" class="archive-article-date">
-  	<time datetime="2021-10-31T15:28:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-31</time>
-</a>
-
-
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">3分</span>
-      </span>
-    </span>
-</div>
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2021/10/31/%E8%BD%AF%E4%BB%B6%E6%97%A0%E7%BA%BF%E7%94%B5%E5%9F%BA%E7%A1%80/">软件无线电基础</a>
-    </h1>
-  
-</p></center>
-      
-        <p>Exploring GNU radio(GNU radio探密)是GNU radio创始人Eric Blossom所写的，为我们用GNU radio工具构建软件无线电系统做了简明扼要的介绍。读完之后有几点需要自己注意的地方：</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/31/%E8%BD%AF%E4%BB%B6%E6%97%A0%E7%BA%BF%E7%94%B5%E5%9F%BA%E7%A1%80/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
     </div>
 </aside>
 
@@ -603,11 +463,13 @@ var _hmt = _hmt || [];
 
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/7/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span>
-    </nav>
   
 
+  
+
+  
+
+  
 
           </div>
         </div>
@@ -649,8 +511,8 @@ var _hmt = _hmt || [];
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
