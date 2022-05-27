@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2022 | 博客杂记 - Harder and Better</title>
+  <title>命名数据网络的命名和缓存机制 | 博客杂记 - Harder and Better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -23,13 +23,18 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="博客杂记 - Harder and Better">
-<meta property="og:url" content="http://example.com/archives/2022/page/3/index.html">
+  <meta name="description" content="第3章：命名数据网络命名机制ICN提出以信息为中心的概念，关注的重点放在信息内容本身，因此命名是关键内容，通过命名才能够进行确定信息对象，并且实现加密。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="命名数据网络的命名和缓存机制">
+<meta property="og:url" content="http://example.com/2022/05/27/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E7%9A%84%E5%91%BD%E5%90%8D%E5%92%8C%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/index.html">
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
+<meta property="og:description" content="第3章：命名数据网络命名机制ICN提出以信息为中心的概念，关注的重点放在信息内容本身，因此命名是关键内容，通过命名才能够进行确定信息对象，并且实现加密。">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-05-27T04:37:09.000Z">
+<meta property="article:modified_time" content="2022-05-27T05:40:25.009Z">
 <meta property="article:author" content="ygtrece">
-<meta property="article:tag" content="学习, 日常">
+<meta property="article:tag" content="科研">
+<meta property="article:tag" content="NDN">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
@@ -182,439 +187,248 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-命名数据网络的命名和缓存机制" class="article article-type-post " itemscope itemprop="blogPost">
   
+<div class="article-inner">
+    
+      <header class="article-header">
+        
+        
+        <a href="/2022/05/27/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E7%9A%84%E5%91%BD%E5%90%8D%E5%92%8C%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/" class="archive-article-date">
+  	<time datetime="2022-05-27T04:37:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-27</time>
+</a>
+
+
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">3分</span>
+      </span>
+    </span>
+</div>
+          
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p>
   
-    
-    
+    <h1 class="article-title_code_ant" itemprop="name">
+      命名数据网络的命名和缓存机制
+    </h1>
+  
+</p></center>
+      
+        <h4 id="第3章：命名数据网络命名机制"><a href="#第3章：命名数据网络命名机制" class="headerlink" title="第3章：命名数据网络命名机制"></a>第3章：命名数据网络命名机制</h4><p>ICN提出<strong>以信息为中心</strong>的概念，关注的重点放在信息内容本身，因此命名是关键内容，通过命名才能够进行确定信息对象，并且实现加密。</p>
+<span id="more"></span>
+<p>命名机制有以下<strong>几个原则</strong>：</p>
+<ol>
+<li>方便进行数据复制</li>
+<li>充分利用整个网络缓存内容</li>
+<li>通过解耦命名和寻址实现原生支持组播、移动性和多网址，无需采用附加解决方案</li>
+<li>内容名字可以持久标识对象，独立于主机，名字是不变的</li>
+<li>命名应有适应不同网络架构、适应不同网络的能力</li>
+</ol>
+<p>NDN命名是<strong>层次化命名</strong>，命名是可读的，通过外部信任源签名</p>
+<h4 id="第4章：命名数据网络缓存机制"><a href="#第4章：命名数据网络缓存机制" class="headerlink" title="第4章：命名数据网络缓存机制"></a>第4章：命名数据网络缓存机制</h4><p>设计初衷是减少网络冗余流量，提高对用户请求的响应速度，降低服务器的负载等。</p>
+<p><strong>网络性能评价</strong>指标包括：</p>
+<ol>
+<li>平均跳数：用户请求得到响应需要传输节点数量的平均值。</li>
+<li>下载时间：从用户请求到被相应需要的时间，当链路带宽(也就是通信速率)一定的情况下，条数小，下载时间小。</li>
+<li>负载公平性：单个节点收到的请求和响应与整个网络的请求和响应之比，用来分析节点的过载情况。</li>
+<li>链路流量：链路上的流量情况，评价链路流量即衡量冗余流量的减少程度。</li>
+<li>跨域流量：内容服务器位于其他域内。</li>
+</ol>
+<p><strong>路由器设备缓存</strong>角度评价指标</p>
+<ol>
+<li>缓存命中率：用户请求缓存中就有的和所有请求的比例。</li>
+<li>缓存替除数：节点按照一定策略替除的内容数目。</li>
+<li>缓存效率：节点命中的内容数和节点缓存的总内容数之比。</li>
+<li>缓存频率：节点缓存的内容数和流经节点的所有内容之比。</li>
+<li>缓存多样性和冗余度：多样性是缓存的不同内容总数，冗余度是缓存相同内容的总数。</li>
+</ol>
+<p><strong>缓存决定策略：</strong>包括非合作型(1 ~ 2)和合作型(3 ~ 10)</p>
+<ol>
+<li>LCE策略：内容返回路径所有节点都存一份。</li>
+<li>Fix(p)策略：返回路径每个节点有概率p缓存内容</li>
+<li>Breadcrumbs策略：像LCE一样缓存数据包，但是缓存同时将缓存轨迹添加到一个新的特殊表项中。</li>
+<li>Intra-AS Co策略：在Breadcrumbs策略基础上，不仅维护自己的内容表，还维护邻居的。</li>
+<li>ProbCache策略：对流行内容缓存，减小缓存冗余。</li>
+<li>CBC策略：只选传输路径最中间的路由器缓存数据包。</li>
+<li>LCD和MCD策略：LCD在包中设置标记位，使其只能被一个节点缓存。MCD在其基础上下一节点缓存后，前一节点删除内容块。</li>
+<li>WAVE策略：流行内容在离用户近的地方，非流行在离用户原的地方。</li>
+<li>CLS策略：MCD升级版，依照标志位缓存，增加记录缓存轨迹的记录。</li>
+<li>DCM策略：引入缓存管理者的概念，不同域间交换缓存状态。</li>
+</ol>
+<p><strong>缓存替换策略：</strong></p>
+<ol>
+<li>LRU：(Least Recent Used)缓存删去最远使用的一项。</li>
+<li>LFU：(Least Frenquecy Used)表中最不常用的策略。</li>
+<li>Least Benefit策略：在LFU基础上考虑了距离因素的影响。</li>
+<li>SLRU策略：最近最少使用策略，LRU和LFU的结合，使用频率高的就让其多呆一会，使用频率低的尽快走人，可以理解为通过频率给多长时间没用加了个权。</li>
+<li>SIZE策略：最大的移除，腾出更多的空间。</li>
+<li>LUV策略：(Least Unified Value) 依照缓存对象的访问历史评估对象再次被访问的可能性。设计了一个代价函数，有点机器学习的意思…</li>
+<li>RAND策略：随机缓存替换策略，不大理解为什么这也能称为策略…</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/04/13/Spark%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/" class="archive-article-date">
-  	<time datetime="2022-04-13T07:28:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-13</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/04/13/Spark%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/">Spark大数据分析平台搭建</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">大数据</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NDN</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/05/27/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E7%9A%84%E5%91%BD%E5%90%8D%E5%92%8C%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/04/10/GoldenEye%E6%94%BB%E5%87%BB%E7%A8%8B%E5%BA%8F%E6%B5%8B%E8%AF%95/" class="archive-article-date">
-  	<time datetime="2022-04-10T08:26:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-10</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2022/05/25/EasyRL-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">EasyRL-1</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
 
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/04/10/GoldenEye%E6%94%BB%E5%87%BB%E7%A8%8B%E5%BA%8F%E6%B5%8B%E8%AF%95/">GoldenEye攻击程序测试</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">网络</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC3%E7%AB%A0%EF%BC%9A%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E5%91%BD%E5%90%8D%E6%9C%BA%E5%88%B6"><span class="toc-number">1.</span> <span class="toc-text">第3章：命名数据网络命名机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC4%E7%AB%A0%EF%BC%9A%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6"><span class="toc-number">2.</span> <span class="toc-text">第4章：命名数据网络缓存机制</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/04/10/C++-primer-9%E7%AB%A0/" class="archive-article-date">
-  	<time datetime="2022-04-09T16:30:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-10</time>
-</a>
+        
+    </div>
+</aside>
 
 
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/04/10/C++-primer-9%E7%AB%A0/">C++ primer 9章 顺序容器</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/04/08/kali%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-  	<time datetime="2022-04-08T09:06:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-08</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/04/08/kali%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">kali环境配置</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">环境配置</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/" class="archive-article-date">
-  	<time datetime="2022-04-08T01:40:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-08</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/">操作系统 - 内存管理和调度</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/04/06/%E8%B4%AA%E5%BF%83-1/" class="archive-article-date">
-  	<time datetime="2022-04-06T12:47:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-06</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/04/06/%E8%B4%AA%E5%BF%83-1/">贪心 (1)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/04/05/%E5%88%A9%E7%94%A8GoldenEyes%E5%AE%9E%E7%8E%B0DOS%E6%94%BB%E5%87%BB/" class="archive-article-date">
-  	<time datetime="2022-04-05T15:00:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-05</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/04/05/%E5%88%A9%E7%94%A8GoldenEyes%E5%AE%9E%E7%8E%B0DOS%E6%94%BB%E5%87%BB/">利用GoldenEyes实现DOS攻击</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">网络</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/04/04/C++-primer-8%E7%AB%A0/" class="archive-article-date">
-  	<time datetime="2022-04-04T09:12:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-04</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/04/04/C++-primer-8%E7%AB%A0/">C++ primer 8章 IO库</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/04/01/%E5%9B%9E%E6%BA%AF-2/" class="archive-article-date">
-  	<time datetime="2022-04-01T11:44:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-01</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/04/01/%E5%9B%9E%E6%BA%AF-2/">回溯 (2)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/03/31/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%E5%8E%9F%E7%90%86%E5%8F%8AGo%E5%AE%9E%E7%8E%B0-2/" class="archive-article-date">
-  	<time datetime="2022-03-31T07:05:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-31</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/03/31/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%E5%8E%9F%E7%90%86%E5%8F%8AGo%E5%AE%9E%E7%8E%B0-2/">分布式缓存原理及Go实现 - 第二章</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Go</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">缓存</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2022/page/2/">上一页</a><a class="page-number" href="/archives/2022/">1</a><a class="page-number" href="/archives/2022/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/2022/page/4/">4</a><a class="page-number" href="/archives/2022/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2022/page/8/">8</a><a class="extend next" rel="next" href="/archives/2022/page/4/">下一页;</a>
-    </nav>
   
 
+  
+
+  
 
           </div>
         </div>
@@ -657,8 +471,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
