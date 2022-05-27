@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>ns-3和NDN代码分析(5) | 博客杂记 - Harder and Better</title>
+  <title>Tag: 科研 | 博客杂记 - Harder and Better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -23,23 +23,14 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta name="description" content="从consumer发兴趣包到producer返回data包的全过程一图明白整个发包、收包流程 黄颜色可以理解为预处理流程，发端执行「黄色+蓝色」的流程 中间的节点执行「绿色+蓝色」的流程 最后的节点（生产者或消费者）执行「绿色+蓝色+紫色」的流程">
-<meta property="og:type" content="article">
-<meta property="og:title" content="ns-3和NDN代码分析(5)">
-<meta property="og:url" content="http://example.com/2022/05/23/ns-3%E5%92%8CNDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(5)/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="博客杂记 - Harder and Better">
+<meta property="og:url" content="http://example.com/tags/%E7%A7%91%E7%A0%94/page/3/index.html">
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
-<meta property="og:description" content="从consumer发兴趣包到producer返回data包的全过程一图明白整个发包、收包流程 黄颜色可以理解为预处理流程，发端执行「黄色+蓝色」的流程 中间的节点执行「绿色+蓝色」的流程 最后的节点（生产者或消费者）执行「绿色+蓝色+紫色」的流程">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2022/05/23/ns-3%E5%92%8CNDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(5)/ns-3和NDN代码分析(5">
-<meta property="og:image" content="http://example.com/2022/05/23/ns-3%E5%92%8CNDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(5)/ns-3和NDN代码分析(5">
-<meta property="og:image" content="http://example.com/2022/05/23/ns-3%E5%92%8CNDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(5)/ns-3和NDN代码分析(5">
-<meta property="article:published_time" content="2022-05-23T07:26:53.000Z">
-<meta property="article:modified_time" content="2022-05-24T10:48:44.883Z">
 <meta property="article:author" content="ygtrece">
-<meta property="article:tag" content="科研">
-<meta property="article:tag" content="NDN">
+<meta property="article:tag" content="学习, 日常">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/05/23/ns-3%E5%92%8CNDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(5)/ns-3和NDN代码分析(5">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -191,128 +182,38 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-ns-3和NDN代码分析(5)" class="article article-type-post " itemscope itemprop="blogPost">
+            
   
-<div class="article-inner">
+  
     
-      <header class="article-header">
-        
-        
-        <a href="/2022/05/23/ns-3%E5%92%8CNDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(5)/" class="archive-article-date">
-  	<time datetime="2022-05-23T07:26:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-23</time>
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2021" class="archive-year">2021</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2021/10/31/%E8%BD%AF%E4%BB%B6%E6%97%A0%E7%BA%BF%E7%94%B5%E5%9F%BA%E7%A1%80/" class="archive-article-date">
+  	<time datetime="2021-10-31T15:28:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-31</time>
 </a>
 
 
-        <!-- 不蒜子统计 -->
-        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
-        </span>
-
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">3.7k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">16分</span>
-      </span>
-    </span>
-</div>
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-      <center><p>
+        </div>
+    	 
   
-    <h1 class="article-title_code_ant" itemprop="name">
-      ns-3和NDN代码分析(5)
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2021/10/31/%E8%BD%AF%E4%BB%B6%E6%97%A0%E7%BA%BF%E7%94%B5%E5%9F%BA%E7%A1%80/">软件无线电基础</a>
     </h1>
   
-</p></center>
-      
-        <h3 id="从consumer发兴趣包到producer返回data包的全过程"><a href="#从consumer发兴趣包到producer返回data包的全过程" class="headerlink" title="从consumer发兴趣包到producer返回data包的全过程"></a>从consumer发兴趣包到producer返回data包的全过程</h3><h4 id="一图明白整个发包、收包流程"><a href="#一图明白整个发包、收包流程" class="headerlink" title="一图明白整个发包、收包流程"></a>一图明白整个发包、收包流程</h4><ul>
-<li>黄颜色可以理解为预处理流程，发端执行「黄色+蓝色」的流程</li>
-<li>中间的节点执行「绿色+蓝色」的流程</li>
-<li>最后的节点（生产者或消费者）执行「绿色+蓝色+紫色」的流程</li>
-</ul>
-<span id="more"></span>
-<p><img src="/2022/05/23/ns-3%E5%92%8CNDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(5)/ns-3和NDN代码分析(5" alt>/1.png)</p>
-<h4 id="生产者发包"><a href="#生产者发包" class="headerlink" title="生产者发包"></a>生产者发包</h4><p>上篇文章中，我们知道了：整个ns3软件的仿真流程就是：添加事件-&gt;仿真器执行所有事件。</p>
-<p>那么， <code>Consumer</code> 发兴趣包的事件是如何添加的呢？答案是：我们设置了消费者的兴趣频率是10，所以每秒发10个包。具体而言，消费者的类型是 <code>ConsumerCbr</code> ，而其中发包则是由函数 <code>ScheduleNextPacket</code> 控制，核心代码如下——</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span></span></span><br><span class="line"><span class="function"><span class="title">ConsumerCbr::ScheduleNextPacket</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (m_firstTime) &#123;</span><br><span class="line">    m_sendEvent = Simulator::<span class="built_in">Schedule</span>(<span class="built_in">Seconds</span>(<span class="number">0.0</span>), &amp;Consumer::SendPacket, <span class="keyword">this</span>);</span><br><span class="line">    m_firstTime = <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (!m_sendEvent.<span class="built_in">IsRunning</span>())</span><br><span class="line">    m_sendEvent = Simulator::<span class="built_in">Schedule</span>((m_random == <span class="number">0</span>) ? <span class="built_in">Seconds</span>(<span class="number">1.0</span> / m_frequency)</span><br><span class="line">                                                      : <span class="built_in">Seconds</span>(m_random-&gt;<span class="built_in">GetValue</span>()),</span><br><span class="line">                                      &amp;Consumer::SendPacket, <span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>该函数的事件请求调用基类的 <code>Consumer::SendPacket</code> 函数，该函数造出一个兴趣包，然后用 <code>m_appLink-&gt;onReceiveInterest</code> 发出去.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span></span></span><br><span class="line"><span class="function"><span class="title">Consumer::SendPacket</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">// ...省略前面的seq处理过程，下面是核心逻辑</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// shared_ptr&lt;Interest&gt; interest = make_shared&lt;Interest&gt; ();</span></span><br><span class="line">  shared_ptr&lt;Interest&gt; interest = <span class="built_in">make_shared</span>&lt;Interest&gt;();<span class="comment">//shared_ptr是智能指针，make_shared动态分配类型为Interest的对象，()为初始化参数</span></span><br><span class="line">  interest-&gt;<span class="built_in">setNonce</span>(m_rand-&gt;<span class="built_in">GetValue</span>(<span class="number">0</span>, std::numeric_limits&lt;<span class="type">uint32_t</span>&gt;::<span class="built_in">max</span>()));</span><br><span class="line">  interest-&gt;<span class="built_in">setName</span>(*nameWithSequence);</span><br><span class="line">  interest-&gt;<span class="built_in">setCanBePrefix</span>(<span class="literal">false</span>);</span><br><span class="line">  <span class="function">time::milliseconds <span class="title">interestLifeTime</span><span class="params">(m_interestLifeTime.GetMilliSeconds())</span></span>;</span><br><span class="line">  interest-&gt;<span class="built_in">setInterestLifetime</span>(interestLifeTime);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">WillSendOutInterest</span>(seq);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">m_transmittedInterests</span>(interest, <span class="keyword">this</span>, m_face);</span><br><span class="line">  m_appLink-&gt;<span class="built_in">onReceiveInterest</span>(*interest);  <span class="comment">// 核心逻辑</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">ScheduleNextPacket</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>AppLinkService::onReceiveInterest</code> 则是调用了 <code>LinkService::receiveInterest</code> 函数，该函数触发了 <code>LinkService</code> 的 <code>afterReceiveInterest</code> 信号。</p>
-<p>等下，有没有感觉这个信号很熟悉？回一下 <code>Forwarder</code> 的构造函数，里面的 <code>faceTable</code> 将里面每个 <code>face</code> 的 <code>afterReceiveInterest</code> 信号都连接到了 <code>Forwarder::startProcessInterest</code> 上。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">m_faceTable.afterAdd.<span class="built_in">connect</span>([<span class="keyword">this</span>] (<span class="type">const</span> Face&amp; face) &#123;</span><br><span class="line">  face.afterReceiveInterest.<span class="built_in">connect</span>(</span><br><span class="line">    [<span class="keyword">this</span>, &amp;face] (<span class="type">const</span> Interest&amp; interest, <span class="type">const</span> EndpointId&amp; endpointId) &#123;</span><br><span class="line">      <span class="keyword">this</span>-&gt;<span class="built_in">startProcessInterest</span>(<span class="built_in">FaceEndpoint</span>(face, endpointId), interest);<span class="comment">//注意这句话！！！</span></span><br><span class="line">    &#125;);</span><br><span class="line">  face.afterReceiveData.<span class="built_in">connect</span>(</span><br><span class="line">    [<span class="keyword">this</span>, &amp;face] (<span class="type">const</span> Data&amp; data, <span class="type">const</span> EndpointId&amp; endpointId) &#123;</span><br><span class="line">      <span class="keyword">this</span>-&gt;<span class="built_in">startProcessData</span>(<span class="built_in">FaceEndpoint</span>(face, endpointId), data);</span><br><span class="line">    &#125;);</span><br><span class="line">  face.afterReceiveNack.<span class="built_in">connect</span>(</span><br><span class="line">    [<span class="keyword">this</span>, &amp;face] (<span class="type">const</span> lp::Nack&amp; nack, <span class="type">const</span> EndpointId&amp; endpointId) &#123;</span><br><span class="line">      <span class="keyword">this</span>-&gt;<span class="built_in">startProcessNack</span>(<span class="built_in">FaceEndpoint</span>(face, endpointId), nack);</span><br><span class="line">    &#125;);</span><br><span class="line">  face.onDroppedInterest.<span class="built_in">connect</span>(</span><br><span class="line">    [<span class="keyword">this</span>, &amp;face] (<span class="type">const</span> Interest&amp; interest) &#123;</span><br><span class="line">      <span class="keyword">this</span>-&gt;<span class="built_in">onDroppedInterest</span>(<span class="built_in">FaceEndpoint</span>(face, <span class="number">0</span>), interest);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>但好像还是差点意思，因为前面触发的是 <code>LinkService</code> 的 <code>afterReceiveInterest</code> 信号，这里是 <code>face</code> 的 <code>afterReceiveInterest</code> 信号。它们之间是不是有什么联系呢？我们看看 <code>LinkService</code> 的头文件定义，再结合 <code>Face</code> 的构造函数，发现里面有玄机。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 链路服务类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">LinkService</span> : <span class="keyword">protected</span> <span class="keyword">virtual</span> LinkServiceCounters, noncopyable</span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">// 前面的函数省略，关键在里面的成员函数</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  Face* m_face;  </span><br><span class="line">  Transport* m_transport;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ndnStack在InstallAll时，调用了本函数，为节点生成了链路、物理传输助手，并把它们绑定到face上</span></span><br><span class="line"><span class="function">shared_ptr&lt;Face&gt;</span></span><br><span class="line"><span class="function"><span class="title">StackHelper::PointToPointNetDeviceCallback</span><span class="params">(Ptr&lt;Node&gt; node, Ptr&lt;L3Protocol&gt; ndn,</span></span></span><br><span class="line"><span class="params"><span class="function">                                           Ptr&lt;NetDevice&gt; device)</span> <span class="type">const</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">// 前面省略，这里创建的链路助手和物理传输层助手，并交给这个face管理</span></span><br><span class="line">  <span class="keyword">auto</span> linkService = <span class="built_in">make_unique</span>&lt;::nfd::face::GenericLinkService&gt;(opts);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">auto</span> transport = <span class="built_in">make_unique</span>&lt;NetDeviceTransport&gt;(node, netDevice,</span><br><span class="line">                                                   <span class="built_in">constructFaceUri</span>(netDevice),</span><br><span class="line">                                                   <span class="built_in">constructFaceUri</span>(remoteNetDevice));</span><br><span class="line"></span><br><span class="line">  <span class="keyword">auto</span> face = std::<span class="built_in">make_shared</span>&lt;Face&gt;(std::<span class="built_in">move</span>(linkService), std::<span class="built_in">move</span>(transport));</span><br><span class="line">  face-&gt;<span class="built_in">setMetric</span>(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">  ndn-&gt;<span class="built_in">addFace</span>(face);</span><br><span class="line">  <span class="built_in">NS_LOG_LOGIC</span>(<span class="string">&quot;Node &quot;</span> &lt;&lt; node-&gt;<span class="built_in">GetId</span>() &lt;&lt; <span class="string">&quot;: added Face as face #&quot;</span></span><br><span class="line">                       &lt;&lt; face-&gt;<span class="built_in">getLocalUri</span>());</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> face;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Face的构造函数，构造Face时将会和链路服务、物理传输层服务捆绑到一起</span></span><br><span class="line">Face::<span class="built_in">Face</span>(unique_ptr&lt;LinkService&gt; service, unique_ptr&lt;Transport&gt; transport)</span><br><span class="line">  : <span class="built_in">afterReceiveInterest</span>(service-&gt;afterReceiveInterest)</span><br><span class="line">  , <span class="built_in">afterReceiveData</span>(service-&gt;afterReceiveData)</span><br><span class="line">  , <span class="built_in">afterReceiveNack</span>(service-&gt;afterReceiveNack)</span><br><span class="line">  , <span class="built_in">onDroppedInterest</span>(service-&gt;onDroppedInterest)</span><br><span class="line">  , <span class="built_in">afterStateChange</span>(transport-&gt;afterStateChange)</span><br><span class="line">  , <span class="built_in">m_id</span>(INVALID_FACEID)</span><br><span class="line">  , <span class="built_in">m_service</span>(std::<span class="built_in">move</span>(service))</span><br><span class="line">  , <span class="built_in">m_transport</span>(std::<span class="built_in">move</span>(transport))</span><br><span class="line">  , <span class="built_in">m_counters</span>(m_service-&gt;<span class="built_in">getCounters</span>(), m_transport-&gt;<span class="built_in">getCounters</span>())</span><br><span class="line">  , <span class="built_in">m_metric</span>(<span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">  m_service-&gt;<span class="built_in">setFaceAndTransport</span>(*<span class="keyword">this</span>, *m_transport);</span><br><span class="line">  m_transport-&gt;<span class="built_in">setFaceAndLinkService</span>(*<span class="keyword">this</span>, *m_service);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注意到 <code>Signal</code> 继承了 <code>noncopyable</code> ，而 <code>Face</code> 的构造函数中 <code>afterReceiveData(service-&gt;afterReceiveData)</code> 又把自己的信号和链路服务的信号捆绑到了一起，所以 <code>LinkService</code> 的 <code>afterReceiveInterest</code> 通过 <code>Face</code> 连接到了 <code>Forwarder::startProcessInterest</code> 上。</p>
-<p>也就是说， <code>LinkService</code> 的 <code>afterReceiveInterest</code> 信号等价于 <code>Forwarder::startProcessInterest</code> 函数！</p>
-<p>而 <code>Forwarder::startProcessInterest</code> 移交给了 <code>Forwarder::onIncomingInterest</code> 函数，详见文章<a target="_blank" rel="noopener" href="https://blog.csdn.net/MamiyaHasaki/article/details/120787248">ndnSIM学习（七）——转发处理forwarder.cpp、forwarder.hpp</a>，该函数流程图如下</p>
-<p><img src="/2022/05/23/ns-3%E5%92%8CNDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(5)/ns-3和NDN代码分析(5" alt>/2.png)</p>
-<p>总之就是 <code>Forwarder</code> 对兴趣包进行处理。如果找到了，就会执行 <code>Strategy::sendData</code> 。否则就是 <code>onOutgoingInterest</code> 向下一跳继续往后找。这里我们假设没找到，继续向下一跳找。</p>
-<p>这里执行 <code>face.sendInterest</code> 函数，又执行 <code>LinkService::sendInterest</code> ，然后 <code>GenericLinkService::doSendInterest</code> 到 <code>sendNetPacket</code> 给链路层进行 <code>Frag</code> 分片，分完片执行 <code>sendLpPacket</code> ，再通过 <code>sendPacket</code> 交给物理传输层执行 <code>Transport::send</code> ，再交给 <code>NetDeviceTransport::doSend</code> ，移交给 <code>PointToPointNetDevice::Send</code> ，其中执行了 <code>TransmitStart</code> ，又踢皮球给了 <code>PointToPointChannel::TransmitStart</code> 。终于，经过无数踢皮球后，我们终于看到了这一句话——</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Simulator::<span class="built_in">ScheduleWithContext</span> (m_link[wire].m_dst-&gt;<span class="built_in">GetNode</span> ()-&gt;<span class="built_in">GetId</span> (),</span><br><span class="line">                                txTime + m_delay, &amp;PointToPointNetDevice::Receive,</span><br><span class="line">                                m_link[wire].m_dst, p-&gt;<span class="built_in">Copy</span> ());</span><br></pre></td></tr></table></figure>
-<p>也就是说，如果向下一跳继续往后找的话，最终就是给目标节点 <code>dst</code> 添加一个 <code>PointToPointNetDevice::Receive</code> 事件。我个人比较好奇：每个包发了后，会让仿真系统推迟一段时间 <code>txTime</code> ，这是如何实现的。其实是在这里实现的——</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span></span></span><br><span class="line"><span class="function"><span class="title">PointToPointNetDevice::TransmitStart</span> <span class="params">(Ptr&lt;Packet&gt; p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">// 前面的设置略</span></span><br><span class="line"></span><br><span class="line">  Time txTime = m_bps.<span class="built_in">CalculateBytesTxTime</span> (p-&gt;<span class="built_in">GetSize</span> ());  <span class="comment">// 就是这里，用m_bps结合p-&gt;GetSize()算出来的</span></span><br><span class="line">  Time txCompleteTime = txTime + m_tInterframeGap;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">NS_LOG_LOGIC</span> (<span class="string">&quot;Schedule TransmitCompleteEvent in &quot;</span> &lt;&lt; txCompleteTime.<span class="built_in">GetSeconds</span> () &lt;&lt; <span class="string">&quot;sec&quot;</span>);</span><br><span class="line">  Simulator::<span class="built_in">Schedule</span> (txCompleteTime, &amp;PointToPointNetDevice::TransmitComplete, <span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">  <span class="type">bool</span> result = m_channel-&gt;<span class="built_in">TransmitStart</span> (p, <span class="keyword">this</span>, txTime);</span><br><span class="line">  <span class="keyword">if</span> (result == <span class="literal">false</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">m_phyTxDropTrace</span> (p);</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>PointToPointNetDevice::Receive</code> 事件触发后，会执行 <code>m_promiscCallback</code> 回调函数。妈呀，看到回调函数就头疼了。经过我一个小时的探案，终于发现这个回调函数绑定的是 <code>Node::PromiscReceiveFromDevice</code> 函数，这个函数踢皮球给 <code>ReceiveFromDevice</code> ，它执行该节点的 <code>m_handlers</code> ，而这个 <code>ProtocolHandler</code> 。。。我吐了，怎么又是回调函数啊！还是回调函数族。</p>
-<p>还好，这个比较好找，这个回调函数是由 <code>Node::RegisterProtocolHandler</code> 执行 <code>m_handlers.push_back</code> 。这次运气很好，我眼睛很尖，一眼就看到了 <code>NetDeviceTransport</code> 的构造函数里有这样的代码</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">m_node-&gt;</span><span class="language-bash">RegisterProtocolHandler(MakeCallback(&amp;NetDeviceTransport::receiveFromNetDevice, this),</span></span><br><span class="line">                                L3Protocol::ETHERNET_FRAME_TYPE, m_netDevice,</span><br><span class="line">                                true /*promiscuous mode*/);</span><br></pre></td></tr></table></figure>
-<p>也就是说，<code>Node::ReceiveFromDevice</code> 把皮球踢给了 <code>NetDeviceTransport::receiveFromNetDevice</code> ，这个函数去掉报头扔给 <code>Transport::receive</code> 。这个函数终于把数据转交给了链路层函数 <code>LinkService::receivePacket</code> ，这个函数一脚踢给 <code>GenericLinkService::doReceivePacket</code> 。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span></span></span><br><span class="line"><span class="function"><span class="title">GenericLinkService::doReceivePacket</span><span class="params">(<span class="type">const</span> Block&amp; packet, <span class="type">const</span> EndpointId&amp; endpoint)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// 省略前面的代码</span></span><br><span class="line"></span><br><span class="line">    <span class="type">bool</span> isReassembled = <span class="literal">false</span>;</span><br><span class="line">    Block netPkt;</span><br><span class="line">    lp::Packet firstPkt;</span><br><span class="line">    std::<span class="built_in">tie</span>(isReassembled, netPkt, firstPkt) = m_reassembler.<span class="built_in">receiveFragment</span>(endpoint, pkt);</span><br><span class="line">    <span class="keyword">if</span> (isReassembled) &#123;</span><br><span class="line">      <span class="keyword">this</span>-&gt;<span class="built_in">decodeNetPacket</span>(netPkt, firstPkt, endpoint);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">catch</span> (<span class="type">const</span> tlv::Error&amp; e) &#123;</span><br><span class="line">    <span class="comment">// 省略这部分代码</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>也就是说，这个函数负责接收每个 <code>Fragment</code> ，合并它们，并检查其完整性。如果完整，那么就可以执行 <code>decodeNetPacket</code> 解码函数了。具体内容贴代码就行了，这里不细讲了。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span></span></span><br><span class="line"><span class="function"><span class="title">GenericLinkService::decodeNetPacket</span><span class="params">(<span class="type">const</span> Block&amp; netPkt, <span class="type">const</span> lp::Packet&amp; firstPkt,</span></span></span><br><span class="line"><span class="params"><span class="function">                                    <span class="type">const</span> EndpointId&amp; endpointId)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">switch</span> (netPkt.<span class="built_in">type</span>()) &#123;</span><br><span class="line">      <span class="keyword">case</span> tlv::Interest:</span><br><span class="line">        <span class="keyword">if</span> (firstPkt.<span class="built_in">has</span>&lt;lp::NackField&gt;()) &#123;</span><br><span class="line">          <span class="keyword">this</span>-&gt;<span class="built_in">decodeNack</span>(netPkt, firstPkt, endpointId);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">this</span>-&gt;<span class="built_in">decodeInterest</span>(netPkt, firstPkt, endpointId);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> tlv::Data:</span><br><span class="line">        <span class="keyword">this</span>-&gt;<span class="built_in">decodeData</span>(netPkt, firstPkt, endpointId);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">        ++<span class="keyword">this</span>-&gt;nInNetInvalid;</span><br><span class="line">        <span class="built_in">NFD_LOG_FACE_WARN</span>(<span class="string">&quot;unrecognized network-layer packet TLV-TYPE &quot;</span> &lt;&lt; netPkt.<span class="built_in">type</span>() &lt;&lt; <span class="string">&quot;: DROP&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">catch</span> (<span class="type">const</span> tlv::Error&amp; e) &#123;</span><br><span class="line">    ++<span class="keyword">this</span>-&gt;nInNetInvalid;</span><br><span class="line">    <span class="built_in">NFD_LOG_FACE_WARN</span>(<span class="string">&quot;packet parse error (&quot;</span> &lt;&lt; e.<span class="built_in">what</span>() &lt;&lt; <span class="string">&quot;): DROP&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>因为我们这里收到的是兴趣包，所以执行 <code>GenericLinkService::decodeInterest</code> 。在这个函数将 <code>Block</code> 类型的 <code>netPkt</code> 输入强制转化为了 <code>Interest</code> 类型，然后按照 <code>lp::Packet&amp; firstPkt</code> 给兴趣包打上各种标签，最后执行 <code>LinkService::receiveInterest</code> ，火箭发射，芜湖！</p>
-<p><code>LinkService::receiveInterest</code> 通过 <code>afterReceiveInterest</code> 信号，移交给 <code>Forwarder</code> 层的 <code>Forwarder::startProcessInterest</code> 再到 <code>Forwarder::onIncomingInterest</code> 。什么？你这里看不懂？前面已经分析过一遍了，不用再讲了吧，看不懂再回去看吧。</p>
-<p>这里执行 <code>face.sendInterest</code> 函数，又执行 <code>LinkService::sendInterest</code> ，然后这里因为已经到了生产者了，而生产者由 <code>AppLinkService</code> 管理，所以不是 <code>GenericLinkService::doSendInterest</code> ，而是 <code>AppLinkService::doSendInterest</code> 进行。该函数添加了事件 <code>App::OnInterest</code> ，而实际上根据其虚特性，真正执行了 <code>Producer::OnInterest</code></p>
-<h4 id="消费者回包"><a href="#消费者回包" class="headerlink" title="消费者回包"></a>消费者回包</h4><p>消费者用 <code>Producer::OnInterest</code> 收到了兴趣包后，返回一个数据包，调用 <code>AppLinkService::onReceiveData</code> ，再调用 <code>LinkService::receiveData</code> ，触发 <code>afterReceiveData</code> 。还是前面分析的，信号会连接到 <code>Forwarder</code> 层的 <code>Forwarder::startProcessData</code> 再到 <code>Forwarder::onIncomingData</code> ，详见文章<a target="_blank" rel="noopener" href="https://blog.csdn.net/MamiyaHasaki/article/details/120787248">ndnSIM学习（七）——转发处理forwarder.cpp、forwarder.hpp</a>，该函数流程图如下</p>
-<p><img src="/2022/05/23/ns-3%E5%92%8CNDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(5)/ns-3和NDN代码分析(5" alt>/3.png)</p>
-<p>最后执行 <code>onOutgoingData</code> ，跳到 <code>Face::sendData</code> ，再跳到 <code>LinkService::sendData</code> ，继续跳到 <code>GenericLinkService::doSendData</code> ，跳到 <code>GenericLinkService::sendNetPacket</code> ，跳到 <code>GenericLinkService::sendLpPacket</code> ，跳到 <code>LinkService::sendPacket</code> ，终于该到物理传输层了。</p>
-<p>交给物理传输层执行 <code>Transport::send</code> ，再交给 <code>NetDeviceTransport::doSend</code> ，移交给 <code>PointToPointNetDevice::Send</code> ，其中执行了 <code>TransmitStart</code> ，又踢皮球给了 <code>PointToPointChannel::TransmitStart</code> 。给目标节点 <code>dst</code> 添加一个 <code>PointToPointNetDevice::Receive</code> 事件，执行 <code>m_promiscCallback</code> 回调函数（这个回调函数绑定的是 <code>Node::PromiscReceiveFromDevice</code> 函数）。</p>
-<p>这个函数踢皮球给 <code>ReceiveFromDevice</code> ，它执行该节点的 <code>m_handlers</code> ，通过回调函数执行 <code>NetDeviceTransport::receiveFromNetDevice</code> ，这个函数去掉报头扔给 <code>Transport::receive</code> 。这个函数终于把数据转交给了链路层函数 <code>LinkService::receivePacket</code> ，这个函数一脚踢给 <code>GenericLinkService::doReceivePacket</code> ，执行 <code>decodeNetPacket</code> 解码函数了。</p>
-<p>好了！终于到和前面不一样的地方了！因为这里是数据包，执行 <code>decodeData</code> ，转到 <code>LinkService::receiveData</code> ，就到了 <code>afterReceiveData</code> 信号了。信号会连接到 <code>Forwarder</code> 层的 <code>Forwarder::startProcessData</code> 再到 <code>Forwarder::onIncomingData</code> 。</p>
-<p>假设现在已经到了消费者的地方了。执行 <code>onOutgoingData</code> ，跳到 <code>Face::sendData</code> ，再跳到 <code>LinkService::sendData</code> 。因为已经到了消费者了，而消费者是由 <code>AppLinkService</code> 管理的，所以是由<code>AppLinkService::doSendData</code> 进行。该函数添加了事件 <code>App::Data</code> ，而实际上根据其虚特性，真正执行了 <code>Consumer::Data</code> 。</p>
-<p><strong>奈斯！全部搞定了</strong>！</p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>虽然过程实在是很晕，但其实整个代码的逻辑还是很清晰的。将代码分为网络层、链路层、物理传输层，每层都干自己该干的事情，组合起来就是从consumer发兴趣包到producer返回data包的全过程了。</p>
-<h3 id="apps之ndn-producer-cpp和ndn-consumer-cpp源码分析"><a href="#apps之ndn-producer-cpp和ndn-consumer-cpp源码分析" class="headerlink" title="apps之ndn-producer.cpp和ndn-consumer.cpp源码分析"></a>apps之ndn-producer.cpp和ndn-consumer.cpp源码分析</h3><p><code>~/ndnSIM/ns-3/src/ndnSIM/apps/ndn-producer.hpp</code> 文件中定义了ndnSIM中生产者(producer)类的定义，代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Producer</span> : <span class="keyword">public</span> App &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="comment">// 接口，返回关于本类对象的TypeId信息，方便外部配置</span></span><br><span class="line">  <span class="function"><span class="type">static</span> TypeId <span class="title">GetTypeId</span><span class="params">(<span class="type">void</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 构造函数，每当构造一个对象时，日志里输出相关信息</span></span><br><span class="line">  <span class="comment">// e.g. 输出[+0.000000000s 2 ndn.Producer:Producer()]</span></span><br><span class="line">  <span class="built_in">Producer</span>();  </span><br><span class="line"></span><br><span class="line">  <span class="comment">// 收到interest包后，装载一个data包（内部有编码为block的成员），最后把任务交接给到m_appLink-&gt;onReceiveData</span></span><br><span class="line">  <span class="comment">// 后续详见下面的流程图</span></span><br><span class="line">  <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">OnInterest</span><span class="params">(shared_ptr&lt;<span class="type">const</span> Interest&gt; interest)</span></span>; <span class="comment">//后续跳转到onReceiveData</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">  <span class="comment">// 调用App创建相关的App管理接口，如AppLinkService这种东西，并把管理链路层和传输层的接口放到Ndn Stack里</span></span><br><span class="line">  <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">StartApplication</span><span class="params">()</span></span>; <span class="comment">// Called at time specified by Start</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// m_active = false并关闭m_face</span></span><br><span class="line">  <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">StopApplication</span><span class="params">()</span></span>; <span class="comment">// Called at time specified by Stop</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  Name m_prefix;  <span class="comment">// 前缀</span></span><br><span class="line">  Name m_postfix;  <span class="comment">// 后缀</span></span><br><span class="line">  <span class="type">uint32_t</span> m_virtualPayloadSize;  <span class="comment">// 一个包装载数据byte数</span></span><br><span class="line">  Time m_freshness;  <span class="comment">// Fresh time</span></span><br><span class="line"></span><br><span class="line">  <span class="type">uint32_t</span> m_signature;  <span class="comment">// SignatureValue</span></span><br><span class="line">  Name m_keyLocator;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p><code>~/ndnSIM/ns-3/src/ndnSIM/apps/ndn-consumer.hpp</code> 文件中定义了ndnSIM中消费者(consumer)类的定义，代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Consumer</span> : <span class="keyword">public</span> App &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="comment">// 接口，返回关于本类对象的TypeId信息</span></span><br><span class="line">  <span class="function"><span class="type">static</span> TypeId <span class="title">GetTypeId</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 构造函数以及虚析构函数（便于派生）</span></span><br><span class="line">  <span class="built_in">Consumer</span>();</span><br><span class="line">  <span class="keyword">virtual</span> ~<span class="built_in">Consumer</span>()&#123;&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 收到消费者返回的Data包，执行相应的处理与回显，并更新RTT(Round-Trip Time)</span></span><br><span class="line">  <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">OnData</span><span class="params">(shared_ptr&lt;<span class="type">const</span> Data&gt; contentObject)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 如果Not ACK，显示对应的信息与原因</span></span><br><span class="line">  <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">OnNack</span><span class="params">(shared_ptr&lt;<span class="type">const</span> lp::Nack&gt; nack)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 超时就重传（RTT翻倍）</span></span><br><span class="line">  <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">OnTimeout</span><span class="params">(<span class="type">uint32_t</span> sequenceNumber)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 发interest包，该函数由ScheduleNextPacket设置事件触发</span></span><br><span class="line">  <span class="comment">// 该函数给interest包填充信息后把任务交接给m_appLink-&gt;onReceiveInterest准备向自己的链路层发interest</span></span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">SendPacket</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 在兴趣包实际发送之前的准备工作</span></span><br><span class="line">  <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">WillSendOutInterest</span><span class="params">(<span class="type">uint32_t</span> sequenceNumber)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*LastRetransmittedInterestDataDelayCallback)</span><span class="params">(Ptr&lt;App&gt; app, <span class="type">uint32_t</span> seqno, Time delay, <span class="type">int32_t</span> hopCount)</span></span>;  <span class="comment">// 函数指针类型</span></span><br><span class="line">  <span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*FirstInterestDataDelayCallback)</span><span class="params">(Ptr&lt;App&gt; app, <span class="type">uint32_t</span> seqno, Time delay, <span class="type">uint32_t</span> retxCount, <span class="type">int32_t</span> hopCount)</span></span>;  <span class="comment">// 函数指针类型</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">  <span class="comment">// 调用App创建相关的App管理接口，如AppLinkService这种东西，并把管理链路层和传输层的接口放到Ndn Stack里</span></span><br><span class="line">  <span class="comment">// 创建完执行ScheduleNextPacket，调用派生类的发包控制函数</span></span><br><span class="line">  <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">StartApplication</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// m_active = false并关闭m_face</span></span><br><span class="line">  <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">StopApplication</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 发包的调度策略，如Cbr就是以恒定速率发包（纯虚函数，由子类实现）</span></span><br><span class="line">  <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">ScheduleNextPacket</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 检查数据包是否需要超时重传</span></span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">CheckRetxTimeout</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 设置检查重传超时的频率</span></span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">SetRetxTimer</span><span class="params">(Time retxTimer)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 获取当前检查重传超时的频率</span></span><br><span class="line">  <span class="function">Time <span class="title">GetRetxTimer</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">  Ptr&lt;UniformRandomVariable&gt; m_rand; <span class="comment">// 随机数nonce生成器</span></span><br><span class="line"></span><br><span class="line">  <span class="type">uint32_t</span> m_seq;      <span class="comment">// 标志目前的请求序列数值seq</span></span><br><span class="line">  <span class="type">uint32_t</span> m_seqMax;   <span class="comment">// 最多请求多少个seq</span></span><br><span class="line">  EventId m_sendEvent; <span class="comment">// 发包对应的事件Id，在子类的发包事件中会返回一个发包事件Id，当App结束时，将会取消掉该事件</span></span><br><span class="line">  Time m_retxTimer;    <span class="comment">// 重传时间</span></span><br><span class="line">  EventId m_retxEvent; <span class="comment">// m_retxEvent对应的事件Id</span></span><br><span class="line"></span><br><span class="line">  Ptr&lt;RttEstimator&gt; m_rtt; <span class="comment">// RTT估计器</span></span><br><span class="line"></span><br><span class="line">  Time m_offTime;          <span class="comment">///&lt; \brief Time interval between packets</span></span><br><span class="line">  Name m_interestName;     <span class="comment">// 就是ndn-simple.cpp设置的Prefix</span></span><br><span class="line">  Time m_interestLifeTime; <span class="comment">// 就是ndn-simple.cpp设置的LifeTime</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 省略部分定义</span></span><br><span class="line"></span><br><span class="line">  RetxSeqsContainer m_retxSeqs; <span class="comment">// 重传序列，每当超时的时候，就将目标序列号加入该重传序列</span></span><br><span class="line">  </span><br><span class="line">  SeqTimeoutsContainer m_seqTimeouts; <span class="comment">// 超时序列号+时间</span></span><br><span class="line"></span><br><span class="line">  SeqTimeoutsContainer m_seqLastDelay;<span class="comment">// </span></span><br><span class="line">  SeqTimeoutsContainer m_seqFullDelay;</span><br><span class="line">  std::map&lt;<span class="type">uint32_t</span>, <span class="type">uint32_t</span>&gt; m_seqRetxCounts;</span><br><span class="line"></span><br><span class="line">  TracedCallback&lt;Ptr&lt;App&gt; <span class="comment">/* app */</span>, <span class="type">uint32_t</span> <span class="comment">/* seqno */</span>, Time <span class="comment">/* delay */</span>, <span class="type">int32_t</span> <span class="comment">/*hop count*/</span>&gt;</span><br><span class="line">    m_lastRetransmittedInterestDataDelay;</span><br><span class="line">  TracedCallback&lt;Ptr&lt;App&gt; <span class="comment">/* app */</span>, <span class="type">uint32_t</span> <span class="comment">/* seqno */</span>, Time <span class="comment">/* delay */</span>,</span><br><span class="line">                 <span class="type">uint32_t</span> <span class="comment">/*retx count*/</span>, <span class="type">int32_t</span> <span class="comment">/*hop count*/</span>&gt; m_firstInterestDataDelay;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p><code>ndn-simple.cpp</code> 里的消费者是 <code>ConsumerCbr</code> ，其中我推测 <code>Cbr</code> 的含义是 <code>Constant BitRate</code> 的缩写，所以 <code>ConsumerCbr</code> 其实就是以常数速率发包的消费者。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ConsumerCbr</span> : <span class="keyword">public</span> Consumer &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="function"><span class="type">static</span> TypeId <span class="title">GetTypeId</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">ConsumerCbr</span>();</span><br><span class="line">  <span class="keyword">virtual</span> ~<span class="built_in">ConsumerCbr</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">  <span class="comment">// 发包规则：以常数频率Frequence发interest</span></span><br><span class="line">  <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">ScheduleNextPacket</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 设置随机性规则，可以选择均匀分布、泊松分布</span></span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">SetRandomize</span><span class="params">(<span class="type">const</span> std::string&amp; value)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 获取随机规则</span></span><br><span class="line">  <span class="function">std::string <span class="title">GetRandomize</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">  <span class="type">double</span> m_frequency;  <span class="comment">// 发包频率</span></span><br><span class="line">  <span class="type">bool</span> m_firstTime;  <span class="comment">// 标志是不是第一次请求</span></span><br><span class="line">  Ptr&lt;RandomVariableStream&gt; m_random;  <span class="comment">// 随机数生成器</span></span><br><span class="line">  std::string m_randomType;  <span class="comment">// 随机的规则</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h4 id="其他消费者"><a href="#其他消费者" class="headerlink" title="其他消费者"></a>其他消费者</h4><p>因为基类 <code>Consumer</code> 的函数 <code>ScheduleNextPacket</code> 是纯虚函数，所以消费者一定得用其派生类，比如前面的 <code>ConsumerCbr</code> 就是一个派生类。这里列举一下ndnSIM的消费者（我没细看，可能有错误，仅供参考）</p>
-<ul>
-<li><code>ConsumerBatches</code> 用于批量管理消费者，下面管理了一个消费者的节点链表。一旦 <code>ConsumerBatches::StartApplication</code> 被执行，整个类就会为它管理的所有节点执行 <code>ConsumerBatches::ScheduleNextPacket</code> 。其中每过 <code>m_rtt-&gt;RetransmitTimeout()</code> 就会触发该消费者的 <code>Consumer::SendPacket</code></li>
-<li><code>ConsumerCbr</code> 是以恒定速率发送兴趣包请求的消费者。</li>
-<li><code>ConsumerZipfMandelbrot</code> 继承了 <code>ConsumerCbr</code> ，发包服从Zipf-Mandelbrot律，我也不知道是什么玩意。</li>
-<li><code>ConsumerWindow</code> 似乎是以滑动窗口的方式执行拥塞控制的消费者，我没有仔细看里面的代码，所以并不确定。代码里提到本类是高度实验性的，要小心使用</li>
-<li><code>ConsumerPcon</code> 继承了 <code>ConsumerWindow</code> 类，参考了论文<a target="_blank" rel="noopener" href="https://dl.acm.org/citation.cfm?id=2984369">https://dl.acm.org/citation.cfm?id=2984369</a></li>
-</ul>
 
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -320,136 +221,28 @@ var _hmt = _hmt || [];
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
         		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NDN</a>
-        		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/05/23/ns-3%E5%92%8CNDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(5)/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2022/05/25/EasyRL-1/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          EasyRL-1
-        
-      </div>
-    </a>
   
   
-    <a href="/2022/05/21/ns-3%E5%92%8CNDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(4)/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">ns-3和NDN代码分析(4)</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8Econsumer%E5%8F%91%E5%85%B4%E8%B6%A3%E5%8C%85%E5%88%B0producer%E8%BF%94%E5%9B%9Edata%E5%8C%85%E7%9A%84%E5%85%A8%E8%BF%87%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">从consumer发兴趣包到producer返回data包的全过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E5%9B%BE%E6%98%8E%E7%99%BD%E6%95%B4%E4%B8%AA%E5%8F%91%E5%8C%85%E3%80%81%E6%94%B6%E5%8C%85%E6%B5%81%E7%A8%8B"><span class="toc-number">1.1.</span> <span class="toc-text">一图明白整个发包、收包流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85%E5%8F%91%E5%8C%85"><span class="toc-number">1.2.</span> <span class="toc-text">生产者发包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B6%88%E8%B4%B9%E8%80%85%E5%9B%9E%E5%8C%85"><span class="toc-number">1.3.</span> <span class="toc-text">消费者回包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.4.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#apps%E4%B9%8Bndn-producer-cpp%E5%92%8Cndn-consumer-cpp%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">apps之ndn-producer.cpp和ndn-consumer.cpp源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E6%B6%88%E8%B4%B9%E8%80%85"><span class="toc-number">2.1.</span> <span class="toc-text">其他消费者</span></a></li></ol></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
+    
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/tags/%E7%A7%91%E7%A0%94/page/2/">上一页</a><a class="page-number" href="/tags/%E7%A7%91%E7%A0%94/">1</a><a class="page-number" href="/tags/%E7%A7%91%E7%A0%94/page/2/">2</a><span class="page-number current">3</span>
+    </nav>
   
 
-  
-
-  
 
           </div>
         </div>
@@ -492,9 +285,9 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
@@ -603,19 +396,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">科研</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
+                <a href="javascript:void(0)" class="js-tag color3">科研</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -624,6 +417,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ns3</a>
               </li>
              
               <li class="article-tag-list-item">
