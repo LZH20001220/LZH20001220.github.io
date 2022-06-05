@@ -33,7 +33,7 @@
 <meta property="og:image" content="http://example.com/2022/06/03/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-1/1.png">
 <meta property="og:image" content="http://example.com/2022/06/03/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-1/2.png">
 <meta property="article:published_time" content="2022-06-03T10:01:45.000Z">
-<meta property="article:modified_time" content="2022-06-04T05:57:53.628Z">
+<meta property="article:modified_time" content="2022-06-04T09:02:43.784Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="项目">
@@ -248,7 +248,7 @@ var _hmt = _hmt || [];
         <h4 id="牛客网Linux高性能服务器项目学习总结："><a href="#牛客网Linux高性能服务器项目学习总结：" class="headerlink" title="牛客网Linux高性能服务器项目学习总结："></a>牛客网Linux高性能服务器项目学习总结：</h4><p>课程链接：<a target="_blank" rel="noopener" href="https://www.nowcoder.com/study/live/504">课程列表_牛客网 (nowcoder.com)</a></p>
 <p>资料下载：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1S71h4HDaekbXCsadiVLIGg#list/path=%2FC%2B%2B课件和代码&amp;parentPath=%2F">C++课件和代码_免费高速下载|百度网盘-分享无限制 (baidu.com)</a></p>
 <span id="more"></span>
-<h5 id="0-1-前言"><a href="#0-1-前言" class="headerlink" title="0.1 前言"></a><strong>0.1</strong> 前言</h5><p>对于想在C++领域求职的人来说，Linux服务器部分基本是必须要掌握的内容，这部分涉及到的内容比较广，包括网络编程，计算机网络，Linux内核等方面的内容。我们可能都学过这些课程，但是想要将学过的知识融会贯通，形成一套体系，并且能够做项目还是有一定难度的，这也是本课程的意义所在。</p>
+<h4 id="0-1-前言"><a href="#0-1-前言" class="headerlink" title="0.1 前言"></a><strong>0.1</strong> 前言</h4><p>对于想在C++领域求职的人来说，Linux服务器部分基本是必须要掌握的内容，这部分涉及到的内容比较广，包括网络编程，计算机网络，Linux内核等方面的内容。我们可能都学过这些课程，但是想要将学过的知识融会贯通，形成一套体系，并且能够做项目还是有一定难度的，这也是本课程的意义所在。</p>
 <h4 id="1-1-开发环境"><a href="#1-1-开发环境" class="headerlink" title="1.1 开发环境"></a>1.1 开发环境</h4><p>首先需要配置本次课程涉及到的开发环境，包括linux环境，VScode，Xshell，Xftp等。其中linux环境安装在虚拟机中，在虚拟机中的linux系统上安装ssh server后，就可以通过电脑主机通过Xshell连接电脑主机进行命令行操作了。</p>
 <p>此外，也可以通过VScode配合插件查看linux中的程序，并通过命令行进行调试了。</p>
 <h4 id="1-2-GCC"><a href="#1-2-GCC" class="headerlink" title="1.2 GCC"></a>1.2 GCC</h4><p>GCC(GNU Compile Collection)是一个编译器套件，可以编译C，C++，Java等语言，也包括了这些语言的库。</p>
@@ -431,10 +431,8 @@ var _hmt = _hmt || [];
 </ul>
 <p>缺点：</p>
 <ul>
-<li><p>加载速度比静态库慢                                                             </p>
-</li>
-<li><p>发布程序时需要提供依赖的动态库</p>
-</li>
+<li>加载速度比静态库慢</li>
+<li>发布程序时需要提供依赖的动态库</li>
 </ul>
 <p><strong>动态库和静态库的对比：</strong></p>
 <p>静态库在程序编译时会被连接到目标代码中，程序运行时将不再需要该静态库，<strong>因此体积较大</strong>。</p>
@@ -526,6 +524,15 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
+    <a href="/2022/06/04/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Linux服务器项目-2
+        
+      </div>
+    </a>
+  
   
     <a href="/2022/05/27/ns3%E4%BD%BF%E7%94%A8-2/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">ns3使用-2</div>
@@ -555,7 +562,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%9B%E5%AE%A2%E7%BD%91Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">牛客网Linux高性能服务器项目学习总结：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#0-1-%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">0.1 前言</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="toc-number">2.</span> <span class="toc-text">1.1 开发环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-GCC"><span class="toc-number">3.</span> <span class="toc-text">1.2 GCC</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93"><span class="toc-number">4.</span> <span class="toc-text">1.3 静态库和动态库</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%9B%E5%AE%A2%E7%BD%91Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">牛客网Linux高性能服务器项目学习总结：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0-1-%E5%89%8D%E8%A8%80"><span class="toc-number">2.</span> <span class="toc-text">0.1 前言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="toc-number">3.</span> <span class="toc-text">1.1 开发环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-GCC"><span class="toc-number">4.</span> <span class="toc-text">1.2 GCC</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93"><span class="toc-number">5.</span> <span class="toc-text">1.3 静态库和动态库</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -720,11 +727,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
+                <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Go</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -740,11 +747,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
+                <a href="javascript:void(0)" class="js-tag color3">科研</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">科研</a>
+                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
