@@ -36,9 +36,9 @@
 <meta property="og:image" content="http://example.com/2022/06/08/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-5/4.png">
 <meta property="og:image" content="http://example.com/2022/06/08/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-5/5.png">
 <meta property="og:image" content="http://example.com/2022/06/08/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-5/6.png">
-<meta property="og:image" content="http://example.com/2022/06/08/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-5/Users/李政翰/AppData/Roaming/Typora/typora-user-images/image-20220609150916956.png">
+<meta property="og:image" content="http://example.com/2022/06/08/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-5/7.png">
 <meta property="article:published_time" content="2022-06-08T06:31:55.000Z">
-<meta property="article:modified_time" content="2022-06-09T08:23:58.549Z">
+<meta property="article:modified_time" content="2022-06-09T14:07:34.263Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="项目">
@@ -401,7 +401,7 @@ var _hmt = _hmt || [];
 </ul>
 <p><code>find / 2 &gt; /dev/null | wc l &amp;</code>指令<code>find / 2</code>表示查找2，<code>&gt;</code>表示重定向到<code>/dev/null</code>这个文件，<code>| wc l</code>表示通过管道查看数量，创建一个子进程。<code>&amp;</code>表示后台运行。</p>
 <p><code>sort &lt; longlist | uniq c</code>在前台运行</p>
-<p><img src="/2022/06/08/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-5/Users\李政翰\AppData\Roaming\Typora\typora-user-images\image-20220609150916956.png" alt="image-20220609150916956"></p>
+<p><img src="/2022/06/08/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-5/7.png" alt="image-20220609150916956"></p>
 <p>会话的首进程是bash，bash中只能同时运行一个前台进程组。会话ID是SID</p>
 <p><strong>进程组、会话操作函数</strong></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">pid_t</span> <span class="title">getpgrp</span><span class="params">(<span class="type">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="type">pid_t</span> <span class="title">getpgid</span><span class="params">(<span class="type">pid_t</span> pid)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">setpgid</span><span class="params">(<span class="type">pid_t</span> pid, <span class="type">pid_t</span> pgid)</span></span>;</span><br><span class="line"><span class="function"><span class="type">pid_t</span> <span class="title">getsid</span><span class="params">(<span class="type">pid_t</span> pid)</span></span>;</span><br><span class="line"><span class="function"><span class="type">pid_t</span> <span class="title">setsid</span><span class="params">(<span class="type">void</span>)</span></span>;</span><br></pre></td></tr></table></figure>
