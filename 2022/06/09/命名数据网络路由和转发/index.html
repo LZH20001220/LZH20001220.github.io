@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives | 博客杂记 - Harder and Better</title>
+  <title>命名数据网络路由和转发 | 博客杂记 - Harder and Better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -23,13 +23,18 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="博客杂记 - Harder and Better">
-<meta property="og:url" content="http://example.com/archives/index.html">
+  <meta name="description" content="5.1 路由和转发概述：NDN采用基于名字进行路由和转发的机制，因为名字空间无限，不涉及地址有限的问题。(存疑，IP虽然地址有限，但是长度一样方便管理，NDN这种方式名字长度不一样对转发是否有影响？) 转发层和路由层相互分离，转发层考虑了具有状态的数据平面的状态信息，使NDN的转发策略有IP没有的自适应性和多路径性。(实际上就是IP网络路由表只能选择一个最优的下一条地址转发，而NDN根据各个接口的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="命名数据网络路由和转发">
+<meta property="og:url" content="http://example.com/2022/06/09/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E8%B7%AF%E7%94%B1%E5%92%8C%E8%BD%AC%E5%8F%91/index.html">
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
+<meta property="og:description" content="5.1 路由和转发概述：NDN采用基于名字进行路由和转发的机制，因为名字空间无限，不涉及地址有限的问题。(存疑，IP虽然地址有限，但是长度一样方便管理，NDN这种方式名字长度不一样对转发是否有影响？) 转发层和路由层相互分离，转发层考虑了具有状态的数据平面的状态信息，使NDN的转发策略有IP没有的自适应性和多路径性。(实际上就是IP网络路由表只能选择一个最优的下一条地址转发，而NDN根据各个接口的">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-06-09T11:57:54.000Z">
+<meta property="article:modified_time" content="2022-06-09T14:04:23.845Z">
 <meta property="article:author" content="ygtrece">
-<meta property="article:tag" content="学习, 日常">
+<meta property="article:tag" content="NDN">
+<meta property="article:tag" content="科研">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
@@ -182,38 +187,112 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-命名数据网络路由和转发" class="article article-type-post " itemscope itemprop="blogPost">
   
-  
+<div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/06/09/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E8%B7%AF%E7%94%B1%E5%92%8C%E8%BD%AC%E5%8F%91/" class="archive-article-date">
+      <header class="article-header">
+        
+        
+        <a href="/2022/06/09/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E8%B7%AF%E7%94%B1%E5%92%8C%E8%BD%AC%E5%8F%91/" class="archive-article-date">
   	<time datetime="2022-06-09T11:57:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-09</time>
 </a>
 
 
-        </div>
-    	 
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.1k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">3分</span>
+      </span>
+    </span>
+</div>
+          
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/06/09/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E8%B7%AF%E7%94%B1%E5%92%8C%E8%BD%AC%E5%8F%91/">命名数据网络路由和转发</a>
+    <h1 class="article-title_code_ant" itemprop="name">
+      命名数据网络路由和转发
     </h1>
   
+</p></center>
+      
+        <h4 id="5-1-路由和转发概述："><a href="#5-1-路由和转发概述：" class="headerlink" title="5.1 路由和转发概述："></a>5.1 路由和转发概述：</h4><p>NDN采用基于名字进行路由和转发的机制，因为名字空间无限，不涉及地址有限的问题。(存疑，IP虽然地址有限，但是长度一样方便管理，NDN这种方式名字长度不一样对转发是否有影响？)</p>
+<p>转发层和路由层相互分离，转发层考虑了具有状态的数据平面的状态信息，<strong>使NDN的转发策略有IP没有的自适应性和多路径性</strong>。(实际上就是IP网络路由表只能选择一个最优的下一条地址转发，而NDN根据各个接口的优先级排序进行转发)；传统IP网络中的路由算法也适用于NDN。</p>
+<p>NDN新增加了一个PIT，用于记录转发的请求和指导数据包的传输路径</p>
+<span id="more"></span>
+<p><strong>IP网络路由转发流程：</strong></p>
+<ol>
+<li>路由器从收到的数据包的首部提取目的IP地址。</li>
+<li>判断是不是直接在接口完成交付，如果不是，将数据包发送给下一跳路由。</li>
+<li>如果路由表有默认路由，就发给默认路由。</li>
+</ol>
+<p>IP存在的问题是“聪明的路由，笨拙的转发”。路由有状态和自适应性，但是转发有状态和适应性。</p>
+<p><strong>NDN网络路由转发机制：</strong></p>
+<ol>
+<li>发送端发送Interest包。</li>
+<li>路由器接收到包后，首先判断CS中是否有，如果有直接将Data返回请求的节点。没有就在PIT中找是不是有这个名字包的请求，如果之前就有请求了只要将PIT这个包的条目后面加上请求端进入路由器的节点编号即可。要是没有就把请求信息写入PIT，接着路由器就根据FIB判断Interest包从哪个接口发出。</li>
+<li>如果转发过程某个节点缓存了与Name匹配的数据时，节点就响应Interest包，返回Data。</li>
+<li>路由器收到返回的Data包，根据PIT判断从哪个端口返回Data包。</li>
+</ol>
+<p><strong>NDN的优势体现在：</strong></p>
+<ol>
+<li>转发有状态，有灵活的转发策略。</li>
+<li>如果转发中途节点的CS就有请求信息，就不用到目的节点找了。</li>
+<li>数据回传不依赖端到端连接，而是依赖PIT中记录的请求包编号。</li>
+<li>Interest包中有随机非重复的标志，即nonce字段，NDN的路由节点可以识别并丢弃返回原请求节点的Interest包，也就是避免了环路路由。</li>
+</ol>
+<h4 id="5-2-网络的性能评价指标："><a href="#5-2-网络的性能评价指标：" class="headerlink" title="5.2 网络的性能评价指标："></a><strong>5.2 网络的性能评价指标：</strong></h4><p>吞吐量：单位时间成功传输的数据包数量，MSPS(Million Search Per Second)</p>
+<p>内存效率：进程所占内存与总内存的比值。</p>
+<p>更新率：内容发布和删除的更新。</p>
+<p>前缀劫持：就是丢包，导致请求方发出的请求超时。</p>
+<p>查找延时，可扩展性，连接失败，阻塞等。</p>
+<h4 id="5-3-NDN路由策略："><a href="#5-3-NDN路由策略：" class="headerlink" title="5.3 NDN路由策略："></a><strong>5.3 NDN路由策略：</strong></h4><h4 id="5-4-NDN转发策略："><a href="#5-4-NDN转发策略：" class="headerlink" title="5.4 NDN转发策略："></a>5.4 NDN转发策略：</h4><p>路由器转发并在PIT中维护未响应请求的状态表。同时设置了Interest请求否定应答NACK，根据否定原因进行网络故障诊断。</p>
+<ol>
+<li>新来的Interest请求：如果CS没有，就创建PIT，将Interest转发给优先级最高的可用接口。没有可用接口，就返回阻塞应答，同时开启一个计时器，以便超时重传。</li>
+<li>后续Interest请求：如果请求之前PIT中有，但是兴趣包的nonce还不一样，如果计时器每超时，就不转发后续请求了。</li>
+<li>请求的否定应答：收到否定应答后，会向优先级次之的接口请求数据。</li>
+<li>接口状态的探测：探测到原来不可用的接口可用了并且可能更好的获取兴趣包就可以路由。</li>
+</ol>
+<p><strong>其他转发策略：</strong></p>
+<ol>
+<li>基于概率的自适应转发策略。通过蚁群算法计算转发接口的选择概率</li>
+<li>基于熵值的概率转发策略：通过熵值的概念分配各种属性的权重，从而设计接口的转发策略。</li>
+<li>集中式架构的转发策略：比如将转发路径通过过滤器加到分组的首部。(感觉这就和IP没什么区别了？)</li>
+</ol>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -229,416 +308,119 @@ var _hmt = _hmt || [];
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/06/09/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E8%B7%AF%E7%94%B1%E5%92%8C%E8%BD%AC%E5%8F%91/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/06/08/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-5/" class="archive-article-date">
-  	<time datetime="2022-06-08T06:31:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-08</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2022/06/08/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-5/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Linux服务器项目-5</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
 
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/06/08/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-5/">Linux服务器项目-5</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-%E8%B7%AF%E7%94%B1%E5%92%8C%E8%BD%AC%E5%8F%91%E6%A6%82%E8%BF%B0%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">5.1 路由和转发概述：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-%E7%BD%91%E7%BB%9C%E7%9A%84%E6%80%A7%E8%83%BD%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">5.2 网络的性能评价指标：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-3-NDN%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">5.3 NDN路由策略：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-4-NDN%E8%BD%AC%E5%8F%91%E7%AD%96%E7%95%A5%EF%BC%9A"><span class="toc-number">4.</span> <span class="toc-text">5.4 NDN转发策略：</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/06/07/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-4/" class="archive-article-date">
-  	<time datetime="2022-06-07T05:37:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-07</time>
-</a>
+        
+    </div>
+</aside>
 
 
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/06/07/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-4/">Linux服务器项目-4</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/06/06/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-3/" class="archive-article-date">
-  	<time datetime="2022-06-06T03:44:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-06</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/06/06/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-3/">Linux服务器项目-3</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/06/04/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-2/" class="archive-article-date">
-  	<time datetime="2022-06-04T08:59:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-04</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/06/04/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-2/">Linux服务器项目-2</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/06/03/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-1/" class="archive-article-date">
-  	<time datetime="2022-06-03T10:01:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-03</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/06/03/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-1/">Linux服务器项目-1</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/05/27/ns3%E4%BD%BF%E7%94%A8-2/" class="archive-article-date">
-  	<time datetime="2022-05-27T11:41:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-27</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/05/27/ns3%E4%BD%BF%E7%94%A8-2/">ns3使用-2</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ns3</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/05/27/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E7%9A%84%E5%91%BD%E5%90%8D%E5%92%8C%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/" class="archive-article-date">
-  	<time datetime="2022-05-27T04:37:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-27</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/05/27/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E7%9A%84%E5%91%BD%E5%90%8D%E5%92%8C%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/">命名数据网络的命名和缓存机制</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NDN</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/05/25/EasyRL-1/" class="archive-article-date">
-  	<time datetime="2022-05-25T03:05:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-25</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/05/25/EasyRL-1/">EasyRL-1</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/05/23/NDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(5)/" class="archive-article-date">
-  	<time datetime="2022-05-23T07:26:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-23</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/05/23/NDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(5)/">NDN代码分析(5) 兴趣包和数据包代码</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NDN</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/9/">9</a><a class="extend next" rel="next" href="/archives/page/2/">下一页;</a>
-    </nav>
   
 
+  
+
+  
 
           </div>
         </div>
@@ -681,8 +463,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
