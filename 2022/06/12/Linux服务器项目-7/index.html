@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2022 | 博客杂记 - Harder and Better</title>
+  <title>Linux服务器项目-7 | 博客杂记 - Harder and Better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -23,14 +23,32 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="博客杂记 - Harder and Better">
-<meta property="og:url" content="http://example.com/archives/2022/page/2/index.html">
+  <meta name="description" content="1. 网络结构模式C&#x2F;S结构简介 客户机 - 服务器，即 Client - Server（C&#x2F;S）结构。C&#x2F;S 结构通常采取两层结构。服务器负责数据的管理，客户机负责完成与用户的交互任务。客户机是因特网上访问别人信息的机器，服务器则是提供信息供人访问的计算机。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux服务器项目-7">
+<meta property="og:url" content="http://example.com/2022/06/12/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-7/index.html">
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
+<meta property="og:description" content="1. 网络结构模式C&#x2F;S结构简介 客户机 - 服务器，即 Client - Server（C&#x2F;S）结构。C&#x2F;S 结构通常采取两层结构。服务器负责数据的管理，客户机负责完成与用户的交互任务。客户机是因特网上访问别人信息的机器，服务器则是提供信息供人访问的计算机。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206121547280.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206121558250.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206121622202.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206121637982.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206121657131.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206121701253.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206121704274.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206121709244.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206121710912.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206121712928.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206121726639.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206121736103.png">
+<meta property="article:published_time" content="2022-06-12T07:28:00.000Z">
+<meta property="article:modified_time" content="2022-06-12T10:01:17.766Z">
 <meta property="article:author" content="ygtrece">
-<meta property="article:tag" content="学习, 日常">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="项目">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206121547280.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -182,451 +200,365 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Linux服务器项目-7" class="article article-type-post " itemscope itemprop="blogPost">
   
+<div class="article-inner">
+    
+      <header class="article-header">
+        
+        
+        <a href="/2022/06/12/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-7/" class="archive-article-date">
+  	<time datetime="2022-06-12T07:28:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-12</time>
+</a>
+
+
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">7.2k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">25分</span>
+      </span>
+    </span>
+</div>
+          
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p>
   
-    
-    
+    <h1 class="article-title_code_ant" itemprop="name">
+      Linux服务器项目-7
+    </h1>
+  
+</p></center>
+      
+        <h3 id="1-网络结构模式"><a href="#1-网络结构模式" class="headerlink" title="1. 网络结构模式"></a>1. 网络结构模式</h3><h4 id="C-S结构"><a href="#C-S结构" class="headerlink" title="C/S结构"></a>C/S结构</h4><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><blockquote>
+<p>客户机 - 服务器，即 Client - Server（C/S）结构。C/S 结构通常采取两层结构。服务器负责数据的管理，客户机负责完成与用户的交互任务。客户机是因特网上访问别人信息的机器，服务器则是提供信息供人访问的计算机。</p>
+</blockquote>
+<span id="more"></span>
+<blockquote>
+<p>客户机通过局域网与服务器相连，接受用户的请求，并通过网络向服务器提出请求，对数据库进行操作。服务器接受客户机的请求，将数据提交给客户机，客户机将数据进行计算并将结果呈现给用户。服务器还要提供完善安全保护及对数据完整性的处理等操作，并允许多个客户机同时访问服务器，这就对服务器的硬件处理数据能力提出了很高的要求。<br>在C/S结构中，应用程序分为两部分：服务器部分和客户机部分。服务器部分是多个用户共享的信息与功能，执行后台服务，如控制共享数据库的操作等；客户机部分为用户所专有，负责执行前台功能，在出错提示、在线帮助等方面都有强大的功能，并且可以在子程序间自由切换。</p>
+</blockquote>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ol>
+<li>能充分发挥客户端 PC 的处理能力，很多工作可以在客户端处理后再提交给服务器，所以 C/S 结构客户端响应速度快；</li>
+<li>操作界面漂亮、形式多样，可以充分满足客户自身的个性化要求；</li>
+<li>C/S 结构的管理信息系统具有较强的事务处理能力，能实现复杂的业务流程；</li>
+<li>安全性较高，C/S 一般面向相对固定的用户群，程序更加注重流程，它可以对权限进行多层次校验，提供了更安全的存取模式，对信息安全的控制能力很强，一般高度机密的信息系统采用 C/S 结构适宜。</li>
+</ol>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ol>
+<li>客户端需要安装专用的客户端软件。首先涉及到安装的工作量，其次任何一台电脑出问题，如病毒、硬件损坏，都需要进行安装或维护。系统软件升级时，每一台客户机需要重新安装，其维护和升级成本非常高；</li>
+<li>对客户端的操作系统一般也会有限制，不能够跨平台。</li>
+</ol>
+<h3 id="B-S结构"><a href="#B-S结构" class="headerlink" title="B/S结构"></a>B/S结构</h3><h4 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h4><blockquote>
+<p>B/S 结构（Browser/Server，浏览器/服务器模式），是 WEB 兴起后的一种网络结构模式，WEB浏览器是客户端最主要的应用软件。这种模式统一了客户端，将系统功能实现的核心部分集中到服务器上，简化了系统的开发、维护和使用。客户机上只要安装一个浏览器，如 Firefox 或 InternetExplorer，服务器安装 SQL Server、Oracle、MySQL 等数据库。浏览器通过 Web Server 同数据库进行数据交互。</p>
+</blockquote>
+<h4 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h4><p>B/S 架构最大的优点是总体拥有成本低、维护方便、 分布性强、开发简单，可以不用安装任何专门的软件就能实现在任何地方进行操作，客户端零维护，系统的扩展非常容易，只要有一台能上网的电脑就能使用。</p>
+<h4 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h4><ol>
+<li>通信开销大、系统和数据的安全性较难保障;</li>
+<li>个性特点明显降低，无法实现具有个性化的功能要求；</li>
+<li>协议一般是固定的：http/https</li>
+<li>客户端服务器端的交互是请求-响应模式，通常动态刷新页面，响应速度明显降低。</li>
+</ol>
+<h3 id="2-MAC地址"><a href="#2-MAC地址" class="headerlink" title="2. MAC地址"></a>2. MAC地址</h3><blockquote>
+<p>网卡是一块被设计用来允许计算机在计算机网络上进行通讯的计算机硬件，又称为网络适配器或网络接口卡NIC。其拥有 MAC 地址，属于 OSI 模型的第 2 层，它使得用户可以通过电缆或无线相互连接。每一个网卡都有一个被称为 MAC 地址的独一无二的 48 位串行号。网卡包括无线网卡,以太网卡等。网卡的主要功能：1.数据的封装与解封装、2.链路管理、3.数据编码与译码。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206121547280.png" alt="image-20220612154657268"></p>
+<p>网卡包括无线网卡,以太网卡等.</p>
+<blockquote>
+<p>MAC 地址（Media Access Control Address），直译为媒体存取控制位址，也称为局域网地址、以太网地址、物理地址或硬件地址，它是一个用来确认网络设备位置的位址，由网络设备制造商生产时烧录在网卡中。在 OSI 模型中，第三层网络层负责 IP 地址，第二层数据链路层则负责 MAC地址 。MAC 地址用于在网络中唯一标识一个网卡，一台设备若有一或多个网卡，则每个网卡都需要并会有一个唯一的 MAC 地址。</p>
+<p>MAC 地址的长度为 48 位（6个字节），通常表示为 12 个 16 进制数，如：00-16-EA-AE-3C-40 就是一个MAC 地址，其中前 3 个字节，16 进制数 00-16-EA 代表网络硬件制造商的编号，它由IEEE（电气与电子工程师协会）分配，而后 3 个字节，16进制数 AE-3C-40 代表该制造商所制造的某个网络产品（如网卡）的系列号。只要不更改自己的 MAC 地址，MAC 地址在世界是唯一的。形象地说，MAC 地址就如同身份证上的身份证号码，具有唯一性。</p>
+</blockquote>
+<h2 id="3-IP-地址"><a href="#3-IP-地址" class="headerlink" title="3. IP 地址"></a>3. IP 地址</h2><h4 id="简介-2"><a href="#简介-2" class="headerlink" title="简介"></a>简介</h4><blockquote>
+<p>IP 协议是为计算机网络相互连接进行通信而设计的协议。在因特网中，它是能使连接到网上的所有计算机网络实现相互通信的一套规则，规定了计算机在因特网上进行通信时应当遵守的规则。任何厂家生产的计算机系统，只要遵守 IP 协议就可以与因特网互连互通。各个厂家生产的网络系统和设备，如以太网、分组交换网等，它们相互之间不能互通，不能互通的主要原因是因为它们所传送数据的基本单元（技术上称之为“帧”）的格式不同。IP 协议实际上是一套由软件程序组成的协议软件，它把各种不同“帧”统一转换成“IP 数据报”格式，这种转换是因特网的一个最重要的特点，使所有各种计算机都能在因特网上实现互通，即具有“开放性”的特点。正是因为有了 IP 协议，因特网才得以迅速发展成为世界上最大的、开放的计算机通信网络。因此，IP 协议也可以叫做“因特网协议”。</p>
+<p>IP 地址（Internet Protocol Address）是指互联网协议地址，又译为网际协议地址。IP 地址是 IP协议提供的一种统一的地址格式，它为互联网上的每一个网络和每一台主机分配一个<strong>逻辑地址</strong>，以此来屏蔽物理地址的差异。</p>
+<p>IP 地址是一个 32 位的二进制数，通常被分割为 4 个“ 8 位二进制数”（也就是 4 个字节）。IP 地址通常用“点分十进制”表示成（a.b.c.d）的形式，其中，a,b,c,d都是 0~255 之间的十进制整数。例：点分十进IP地址（100.4.5.6），实际上是 32 位二进制数（01100100.00000100.00000101.00000110）。</p>
+</blockquote>
+<h4 id="IP-地址编址方式"><a href="#IP-地址编址方式" class="headerlink" title="IP 地址编址方式"></a>IP 地址编址方式</h4><p>最初设计互联网络时，为了便于寻址以及层次化构造网络，每个 IP 地址包括两个标识码（ID），即网络<br>ID 和主机 ID。同一个物理网络上的所有主机都使用同一个网络 ID，网络上的一个主机（包括网络上工<br>作站，服务器和路由器等）有一个主机 ID 与其对应。Internet 委员会定义了 5 种 IP 地址类型以适合不<br>同容量的网络，即 A 类~ E 类。</p>
+<p>其中 A、B、C 3类（如下表格）由 InternetNIC 在全球范围内统一分配，D、E 类为特殊地址。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206121558250.png" alt="image-20220612155851966"></p>
+<h4 id="A类IP地址"><a href="#A类IP地址" class="headerlink" title="A类IP地址"></a>A类IP地址</h4><blockquote>
+<p>一个 A 类 IP 地址是指， 在 IP 地址的四段号码中，第一段号码为网络号码，剩下的三段号码为本地计算机的号码。如果用二进制表示 IP 地址的话，A 类 IP 地址就由 1 字节的网络地址和 3 字节主机地址组成，网络地址的最高位必须是“0”。A 类 IP 地址中网络的标识长度为 8 位，主机标识的长度为 24 位，A类网络地址数量较少，有 126 个网络，每个网络可以容纳主机数达 1600 多万台。</p>
+<p>A 类 IP 地址 地址范围 1.0.0.1 - 126.255.255.254（二进制表示为：00000001 00000000 0000000000000001 - 01111111 11111111 11111111 11111110）。最后一个是广播地址。</p>
+<p>A 类 IP 地址的子网掩码为 255.0.0.0，每个网络支持的最大主机数为 256 的 3 次方 - 2 = 16777214 台。</p>
+</blockquote>
+<h4 id="B类IP地址"><a href="#B类IP地址" class="headerlink" title="B类IP地址"></a>B类IP地址</h4><blockquote>
+<p>一个 B 类 IP 地址是指，在 IP 地址的四段号码中，前两段号码为网络号码。如果用二进制表示 IP 地址的话，B 类 IP 地址就由 2 字节的网络地址和 2 字节主机地址组成，网络地址的最高位必须是“10”。B 类 IP地址中网络的标识长度为 16 位，主机标识的长度为 16 位，B 类网络地址适用于中等规模的网络，有16384 个网络，每个网络所能容纳的计算机数为 6 万多台。</p>
+<p>B 类 IP 地址地址范围 128.0.0.1 - 191.255.255.254 （二进制表示为：10000000 00000000 0000000000000001 - 10111111 11111111 11111111 11111110）。 最后一个是广播地址。</p>
+<p>B 类 IP 地址的子网掩码为 255.255.0.0，每个网络支持的最大主机数为 256 的 2 次方 - 2 = 65534 台。</p>
+</blockquote>
+<h4 id="C类IP地址"><a href="#C类IP地址" class="headerlink" title="C类IP地址"></a>C类IP地址</h4><blockquote>
+<p>一个 C 类 IP 地址是指，在 IP 地址的四段号码中，前三段号码为网络号码，剩下的一段号码为本地计算机的号码。如果用二进制表示 IP 地址的话，C 类 IP 地址就由 3 字节的网络地址和 1 字节主机地址组成，网络地址的最高位必须是“110”。C 类 IP 地址中网络的标识长度为 24 位，主机标识的长度为 8 位，C 类网络地址数量较多，有 209 万余个网络。适用于小规模的局域网络，每个网络最多只能包含254台计算机。<br>C 类 IP 地址范围 192.0.0.1-223.255.255.254 （二进制表示为: 11000000 00000000 00000000 00000001 - 11011111 11111111 11111111 11111110）。<br>C类IP地址的子网掩码为 255.255.255.0，每个网络支持的最大主机数为 256 - 2 = 254 台。</p>
+</blockquote>
+<h4 id="D类IP地址"><a href="#D类IP地址" class="headerlink" title="D类IP地址"></a>D类IP地址</h4><blockquote>
+<p>D 类 IP 地址在历史上被叫做多播地址（multicast address），即组播地址。在以太网中，多播地址命名了一组应该在这个网络中应用接收到一个分组的站点。多播地址的最高位必须是 “1110”，范围从224.0.0.0 - 239.255.255.255。<br>特殊的网址<br>每一个字节都为 0 的地址（ “0.0.0.0” ）对应于当前主机；<br>IP 地址中的每一个字节都为 1 的 IP 地址（ “255.255.255.255” ）是当前子网的广播地址；<br>IP 地址中凡是以 “11110” 开头的 E 类 IP 地址都保留用于将来和实验使用。<br>IP地址中不能以十进制 “127” 作为开头，该类地址中数字 127.0.0.1 到 127.255.255.255 用于回路测<br>试，如：127.0.0.1可以代表本机IP地址。</p>
+</blockquote>
+<h4 id="特殊的网址"><a href="#特殊的网址" class="headerlink" title="特殊的网址"></a>特殊的网址</h4><blockquote>
+<p>每一个字节都为 0 的地址（ “0.0.0.0” ）对应于当前主机；<br>IP 地址中的每一个字节都为 1 的 IP 地址（ “255.255.255.255” ）是当前子网的广播地址；<br>IP 地址中凡是以 “11110” 开头的 E 类 IP 地址都保留用于将来和实验使用。<br>IP地址中不能以十进制 “127” 作为开头，该类地址中数字 127.0.0.1 到 127.255.255.255 用于回路测试，如：127.0.0.1可以代表本机IP地址。</p>
+</blockquote>
+<h4 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h4><blockquote>
+<p>子网掩码（subnet mask）又叫网络掩码、地址掩码、子网络遮罩，它是一种用来指明一个 IP 地址的哪些位标识的是主机所在的子网，以及哪些位标识的是主机的位掩码。子网掩码不能单独存在，它必须结合 IP 地址一起使用。子网掩码只有一个作用，就是将某个 IP 地址划分成网络地址和主机地址两部分。</p>
+<p>子网掩码是一个 32 位地址，用于屏蔽 IP 地址的一部分以区别网络标识和主机标识，并说明该 IP地址是在局域网上，还是在广域网上。</p>
+</blockquote>
+<h3 id="4-端口"><a href="#4-端口" class="headerlink" title="4. 端口"></a>4. 端口</h3><h4 id="简介-3"><a href="#简介-3" class="headerlink" title="简介"></a>简介</h4><blockquote>
+<p>“端口” 是英文 port 的意译，可以认为是设备与外界通讯交流的出口。端口可分为虚拟端口和物理端口，其中虚拟端口指计算机内部或交换机路由器内的端口，不可见，是特指TCP/IP协议中的端口，是逻辑意义上的端口。例如计算机中的 80 端口、21 端口、23 端口等。物理端口又称为接口，是可见端口，计算机背板的 RJ45 网口，交换机路由器集线器等 RJ45 端口。电话使用 RJ11 插口也属于物理端口的范畴。</p>
+<p>如果把 IP 地址比作一间房子，端口就是出入这间房子的门。真正的房子只有几个门，但是一个 IP地址的端口可以有 65536（即：2^16）个之多！端口是通过端口号来标记的，端口号只有整数，范围是从 0 到65535（2^16-1）。不同的进程有不同的端口号.</p>
+</blockquote>
+<p><strong>端口类型:</strong> 周知端口, 注册端口, 动态端口/私有端口;</p>
+<h3 id="5-网络模型"><a href="#5-网络模型" class="headerlink" title="5. 网络模型"></a>5. 网络模型</h3><h4 id="OSI-七层参考模型"><a href="#OSI-七层参考模型" class="headerlink" title="OSI 七层参考模型"></a>OSI 七层参考模型</h4><p>七层模型，亦称 OSI（Open System Interconnection）参考模型，即开放式系统互联。参考模型是国际标准化组织（ISO）制定的一个用于计算机或通信系统间互联的标准体系，一般称为 OSI 参考模型或七层模型。</p>
+<p>它是一个七层的、抽象的模型体，不仅包括一系列抽象的术语或概念，也包括具体的协议。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206121622202.png" alt="image-20220612162232854"></p>
+<ol>
+<li>物理层：主要定义物理设备标准，如网线的接口类型、光纤的接口类型、各种传输介质的传输速率等。它的主要作用是传输比特流（就是由1、0转化为电流强弱来进行传输，到达目的地后再转化为1、0，也就是我们常说的数模转换与模数转换）。这一层的数据叫做比特。</li>
+<li>数据链路层：建立逻辑连接、进行硬件地址寻址、差错校验等功能。定义了如何让格式化数据以帧为单位进行传输，以及如何让控制对物理介质的访问。将比特组合成字节进而组合成帧，用MAC地址访问介质。</li>
+<li>网络层：进行逻辑地址寻址，在位于不同地理位置的网络中的两个主机系统之间提供连接和路径选择Internet的发展使得从世界各站点访问信息的用户数大大增加，而网络层正是管理这种连接的层。</li>
+<li>传输层：定义了一些传输数据的协议和端口号（ WWW 端口 80 等），如：TCP（传输控制协议，传输效率低，可靠性强，用于传输可靠性要求高，数据量大的数据），UDP（用户数据报协议，与TCP 特性恰恰相反，用于传输可靠性要求不高，数据量小的数据，如 QQ 聊天数据就是通过这种方式传输的）。 主要是将从下层接收的数据进行分段和传输，到达目的地址后再进行重组。常常把这一层数据叫做段。</li>
+<li>会话层：通过传输层（端口号：传输端口与接收端口）建立数据传输的通路。主要在你的系统之间发起会话或者接受会话请求。</li>
+<li>表示层：数据的表示、安全、压缩。主要是进行对接收的数据进行解释、加密与解密、压缩与解压缩等（也就是把计算机能够识别的东西转换成人能够能识别的东西（如图片、声音等）。</li>
+<li>应用层：网络服务与最终用户的一个接口。这一层为用户的应用程序（例如电子邮件、文件传输和终端仿真）提供网络服务。</li>
+</ol>
+<blockquote>
+<p><strong>总结：</strong>最后数据都要通过物理层进行传输的，物理层通过比特流(可以理解为高低电平分别表示1 0刚好与二进制10对应)，数据链路层的数据格式为帧，寻找MAC地址(物理地址)，网络层的数据的格式是报文，寻找IP地址，所以通过IP地址就能将网络中的不同主机之间建立连接（会进行路由选择，选择路径嘛），传输层锁定端口(端口标识了进程)，就可以找到相应的进程，其实计算机间在网络间通信说白了是不同主机间进程的通信，进程找到了，如何通信就设计到了通信协议TCP、UDP(数据传输)…然后就到了会话层，运输层找到了要传输的两端，会话层就进行连接，打通这条道，建立通路。表示层就更好理解了，将计算机能识别的东西转换成人能识别的，主要通过解释、压缩、解压缩，加密（保证数据安全）什么的。应用层就是用户与网路服务的接口。</p>
+</blockquote>
+<h3 id="TCP-IP-四层模型"><a href="#TCP-IP-四层模型" class="headerlink" title="TCP/IP 四层模型"></a>TCP/IP 四层模型</h3><h4 id="简介-4"><a href="#简介-4" class="headerlink" title="简介"></a>简介</h4><p>现在 Internet（因特网）使用的主流协议族是 <strong>TCP/IP 协议族</strong>，它是一个分层、多协议的通信体系。TCP/IP协议族是一个四层协议系统，自底而上分别是数据链路层、网络层、传输层和应用层。每一层完成不同的功能，且通过若干协议来实现，上层协议使用下层协议提供的服务。(下面图片OSPF应该位于网络层)</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206121637982.png" alt="image-20220612163700530"></p>
+<p>TCP/IP 协议在一定程度上参考了 OSI 的体系结构。OSI 模型共有七层，从下到上分别是物理层、数据链路层、网络层、传输层、会话层、表示层和应用层。但是这显然是有些复杂的，所以在 TCP/IP 协议中，它们被简化为了四个层次。</p>
+<ol>
+<li>应用层、表示层、会话层三个层次提供的服务相差不是很大，所以在 TCP/IP 协议中，它们被合并为应用层一个层次。</li>
+<li>由于传输层和网络层在网络协议中的地位十分重要，所以在 TCP/IP 协议中它们被作为独立的两个层次。</li>
+<li>因为数据链路层和物理层的内容相差不多，所以在 TCP/IP 协议中它们被归并在网络接口层一个层次里。只有四层体系结构的 TCP/IP 协议，与有七层体系结构的 OSI 相比要简单了不少，也正是这样，TCP/IP 协议在实际的应用中效率更高，成本更低。</li>
+</ol>
+<h3 id="6-协议"><a href="#6-协议" class="headerlink" title="6. 协议"></a>6. 协议</h3><h4 id="简介-5"><a href="#简介-5" class="headerlink" title="简介"></a>简介</h4><blockquote>
+<p>协议，网络协议的简称，网络协议是通信计算机双方必须共同遵从的一组约定。如怎么样建立连接、怎么样互相识别等。只有遵守这个约定，计算机之间才能相互通信交流。它的三要素是：语法、语义、时序。</p>
+<p>为了使数据在网络上从源到达目的，网络通信的参与方必须遵循相同的规则，这套规则称为协议（protocol），它最终体现为在网络上传输的数据包的格式。协议往往分成几个层次进行定义，分层定义是为了使某一层协议的改变不影响其他层次的协议。</p>
+</blockquote>
+<h4 id="常见协议"><a href="#常见协议" class="headerlink" title="常见协议"></a>常见协议</h4><ul>
+<li>应用层常见的协议有：FTP协议（File Transfer Protocol 文件传输协议）、HTTP协议（Hyper Text Transfer Protocol 超文本传输协议）、NFS（Network File System 网络文件系统）。</li>
+<li>传输层常见协议有：TCP协议（Transmission Control Protocol 传输控制协议）、UDP协议（User Datagram Protocol 用户数据报协议）。</li>
+<li>网络层常见协议有：IP 协议（Internet Protocol 因特网互联协议）、ICMP 协议（Internet Control Message Protocol 因特网控制报文协议）、IGMP 协议（Internet Group Management Protocol 因特<br>网组管理协议）。</li>
+<li>网络接口层常见协议有：ARP协议（Address Resolution Protocol 地址解析协议）、RARP协议（Reverse Address Resolution Protocol 反向地址解析协议）。</li>
+</ul>
+<p>Xshell连接ubuntu虚拟机的原理就是通过sshd实现的。sshd是ubuntu中的一个守护进程，ubuntu作为服务器，Xshell通过ssh访问服务器。</p>
+<h4 id="UDP协议"><a href="#UDP协议" class="headerlink" title="UDP协议"></a>UDP协议</h4><p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206121657131.png" alt="image-20220612165737581"></p>
+<ol>
+<li>源端口号：发送方端口号</li>
+<li>目的端口号：接收方端口号</li>
+<li>长度：UDP用户数据报的长度，最小值是8（仅有首部）</li>
+<li>校验和：检测UDP用户数据报在传输中是否有错，有错就丢弃</li>
+</ol>
+<h4 id="TCP协议"><a href="#TCP协议" class="headerlink" title="TCP协议"></a>TCP协议</h4><p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206121701253.png" alt="image-20220612170100064"></p>
+<ol>
+<li>源端口号：发送方端口号</li>
+<li>目的端口号：接收方端口号</li>
+<li>序列号：本报文段的数据的第一个字节的序号</li>
+<li>确认序号：期望收到对方下一个报文段的第一个数据字节的序号</li>
+<li>首部长度（数据偏移）：TCP 报文段的数据起始处距离 TCP 报文段的起始处有多远，即首部长度。单位：32位，即以 4 字节为计算单位</li>
+<li>保留：占 6 位，保留为今后使用，目前应置为 0</li>
+<li>紧急 URG ：此位置 1 ，表明紧急指针字段有效，它告诉系统此报文段中有紧急数据，应尽快传送</li>
+<li>确认 ACK：仅当 ACK=1 时确认号字段才有效，TCP 规定，在连接建立后所有传达的报文段都必须把 ACK 置1</li>
+<li>推送 PSH：当两个应用进程进行交互式的通信时，有时在一端的应用进程希望在键入一个命令后立即就能够收到对方的响应。在这种情况下，TCP 就可以使用推送（push）操作，这时，发送方TCP 把 PSH 置 1，并立即创建一个报文段发送出去，接收方收到 PSH = 1 的报文段，就尽快地（即“推送”向前）交付给接收应用进程，而不再等到整个缓存都填满后再向上交付</li>
+<li>复位 RST：用于复位相应的 TCP 连接</li>
+<li><p>同步 SYN：仅在三次握手建立 TCP 连接时有效。当 SYN = 1 而 ACK = 0 时，表明这是一个连接请求报文段，对方若同意建立连接，则应在相应的报文段中使用 SYN = 1 和 ACK = 1。因此，SYN 置1 就表示这是一个连接请求或连接接受报文</p>
+</li>
+<li><p>终止 FIN：用来释放一个连接。当 FIN = 1 时，表明此报文段的发送方的数据已经发送完毕，并要求释放运输连接</p>
+</li>
+<li>窗口：指发送本报文段的一方的接收窗口（而不是自己的发送窗口）</li>
+<li>校验和：校验和字段检验的范围包括首部和数据两部分，在计算校验和时需要加上 12 字节的伪头部</li>
+<li>紧急指针：仅在 URG = 1 时才有意义，它指出本报文段中的紧急数据的字节数（紧急数据结束后就是普通数据），即指出了紧急数据的末尾在报文中的位置，注意：即使窗口为零时也可发送紧急数据</li>
+<li>选项：长度可变，最长可达 40 字节，当没有使用选项时，TCP 首部长度是 20 字节</li>
+</ol>
+<h4 id="IP协议"><a href="#IP协议" class="headerlink" title="IP协议"></a>IP协议</h4><p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206121704274.png" alt="image-20220612170443574"></p>
+<ol>
+<li>版本：IP 协议的版本。通信双方使用过的 IP 协议的版本必须一致，目前最广泛使用的 IP 协议版本号为 4（即IPv4)</li>
+<li>首部长度：单位是 32 位（4 字节）</li>
+<li>服务类型：一般不适用，取值为 0</li>
+<li>总长度：指首部加上数据的总长度，单位为字节</li>
+<li>标识（identification）：IP 软件在存储器中维持一个计数器，每产生一个数据报，计数器就加 1，并将此值赋给标识字段</li>
+<li>标志（flag）：目前只有两位有意义。<br>标志字段中的最低位记为 MF。MF = 1 即表示后面“还有分片”的数据报。MF = 0 表示这已是若干数据报片中的最后一个。<br>标志字段中间的一位记为 DF，意思是“不能分片”，只有当 DF = 0 时才允许分片</li>
+<li>片偏移：指出较长的分组在分片后，某片在源分组中的相对位置，也就是说，相对于用户数据段的起点，该片从何处开始。片偏移以 8 字节为偏移单位。</li>
+<li>生存时间：TTL，表明是数据报在网络中的寿命，即为“跳数限制”，由发出数据报的源点设置这个字段。路由器在转发数据之前就把 TTL 值减一，当 TTL 值减为零时，就丢弃这个数据报，为了防止环路。</li>
+<li>协议：指出此数据报携带的数据时使用何种协议，以便使目的主机的 IP 层知道应将数据部分上交给哪个处理过程，常用的 ICMP(1)，IGMP(2)，TCP(6)，UDP(17)，IPv6（41）</li>
+<li>首部校验和：只校验数据报的首部，不包括数据部分。</li>
+<li>源地址：发送方 IP 地址</li>
+<li>目的地址：接收方 IP 地址</li>
+</ol>
+<h4 id="以太网帧协议"><a href="#以太网帧协议" class="headerlink" title="以太网帧协议"></a>以太网帧协议</h4><p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206121709244.png" alt="image-20220612170946043"></p>
+<p>类型：0x800表示 IP、0x806表示 ARP、0x835表示 RARP</p>
+<h4 id="ARP协议"><a href="#ARP协议" class="headerlink" title="ARP协议"></a>ARP协议</h4><p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206121710912.png" alt="image-20220612171040647"></p>
+<ol>
+<li>硬件类型：1 表示 MAC 地址</li>
+<li>协议类型：0x800 表示 IP 地址</li>
+<li>硬件地址长度：6</li>
+<li>协议地址长度：4</li>
+<li>操作：1 表示 ARP 请求，2 表示 ARP 应答，3 表示 RARP 请求，4 表示 RARP 应答</li>
+</ol>
+<h4 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h4><p>上层协议是如何使用下层协议提供的服务的呢？其实这是通过封装（encapsulation）实现的。应用程序数据在发送到物理网络上之前，将沿着协议栈从上往下依次传递。每层协议都将在上层数据的基础上加上自己的头部信息（有时还包括尾部信息），以实现该层的功能，这个过程就称为封装。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206121712928.png" alt="image-20220612171222589"></p>
+<h4 id="分用"><a href="#分用" class="headerlink" title="分用"></a>分用</h4><p>当帧到达目的主机时，将沿着协议栈自底向上依次传递。各层协议依次处理帧中本层负责的头部数据，以获取所需的信息，并最终将处理后的帧交给目标应用程序。这个过程称为分用（demultiplexing）。分用是依靠头部信息中的类型字段实现的。</p>
+<p>网络通信的流程：以QQ发送一个数据包为例。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206121726639.png" alt="网络通信的过程"></p>
+<p>注意这里发送的时候以太网帧头需要MAC地址需要用到ARP协议，通过目标的IP地址解析到其MAC地址后添入以太网帧头中才可以发送。</p>
+<h5 id="arp协议请求封装的过程："><a href="#arp协议请求封装的过程：" class="headerlink" title="arp协议请求封装的过程："></a>arp协议请求封装的过程：</h5><p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206121736103.png" alt="arp请求封装"></p>
+<p><strong>arp地址解析协议的工作原理：</strong><br>每台主机在其ARP缓存区中维护一个arp列表，当源主机想发送数据给目的主机的时候，先在自己的arp列表中查找是否有该mac地址，如果有就之间将数据发送给目的主机,如果没有就向本地网段发送一个ARP请求广播包来查询目的之举对应的mac地址。</p>
+<p>当本地网络中的所有主机都接受到该arp数据包时，首先检查数据包中的IP是否是自己的IP地址，如果不是，则忽略该数据包。如果是，取出数据包中的源主机的IP和MAC地址，并写入自己的arp列表中，并将自己的mac地址发送给源主机。源主机收到相应包之后，先将目的主机中的IP和mac写入自己的arp列表中，并将数据发送给目的主机。如果没有响应包，则表示ARP查询失败。【广播发送ARP请求，单播发送响应】</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/05/25/EasyRL-1/" class="archive-article-date">
-  	<time datetime="2022-05-25T03:05:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-25</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/05/25/EasyRL-1/">EasyRL-1</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/05/23/NDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(5)/" class="archive-article-date">
-  	<time datetime="2022-05-23T07:26:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-23</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/05/23/NDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(5)/">NDN代码分析(5) 兴趣包和数据包代码</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NDN</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">项目</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/06/12/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-7/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/05/21/NDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(4)/" class="archive-article-date">
-  	<time datetime="2022-05-21T04:54:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-21</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2022/06/10/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-6/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Linux服务器项目-6</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
 
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/05/21/NDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(4)/">ns-3和NDN代码分析(4) ndn-simple进一步剖析</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NDN</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">1. 网络结构模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#C-S%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.</span> <span class="toc-text">C&#x2F;S结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.2.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%82%B9"><span class="toc-number">1.3.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-number">1.4.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B-S%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text">B&#x2F;S结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B-1"><span class="toc-number">2.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%82%B9-1"><span class="toc-number">2.2.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9-1"><span class="toc-number">2.3.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-MAC%E5%9C%B0%E5%9D%80"><span class="toc-number">3.</span> <span class="toc-text">2. MAC地址</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-IP-%E5%9C%B0%E5%9D%80"><span class="toc-number"></span> <span class="toc-text">3. IP 地址</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B-2"><span class="toc-number">0.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IP-%E5%9C%B0%E5%9D%80%E7%BC%96%E5%9D%80%E6%96%B9%E5%BC%8F"><span class="toc-number">0.2.</span> <span class="toc-text">IP 地址编址方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#A%E7%B1%BBIP%E5%9C%B0%E5%9D%80"><span class="toc-number">0.3.</span> <span class="toc-text">A类IP地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#B%E7%B1%BBIP%E5%9C%B0%E5%9D%80"><span class="toc-number">0.4.</span> <span class="toc-text">B类IP地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#C%E7%B1%BBIP%E5%9C%B0%E5%9D%80"><span class="toc-number">0.5.</span> <span class="toc-text">C类IP地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#D%E7%B1%BBIP%E5%9C%B0%E5%9D%80"><span class="toc-number">0.6.</span> <span class="toc-text">D类IP地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E7%9A%84%E7%BD%91%E5%9D%80"><span class="toc-number">0.7.</span> <span class="toc-text">特殊的网址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81"><span class="toc-number">0.8.</span> <span class="toc-text">子网掩码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%AB%AF%E5%8F%A3"><span class="toc-number">1.</span> <span class="toc-text">4. 端口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B-3"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">5. 网络模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#OSI-%E4%B8%83%E5%B1%82%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.1.</span> <span class="toc-text">OSI 七层参考模型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP-IP-%E5%9B%9B%E5%B1%82%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">TCP&#x2F;IP 四层模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B-4"><span class="toc-number">3.1.</span> <span class="toc-text">简介</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%8D%8F%E8%AE%AE"><span class="toc-number">4.</span> <span class="toc-text">6. 协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B-5"><span class="toc-number">4.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E5%8D%8F%E8%AE%AE"><span class="toc-number">4.2.</span> <span class="toc-text">常见协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#UDP%E5%8D%8F%E8%AE%AE"><span class="toc-number">4.3.</span> <span class="toc-text">UDP协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E5%8D%8F%E8%AE%AE"><span class="toc-number">4.4.</span> <span class="toc-text">TCP协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IP%E5%8D%8F%E8%AE%AE"><span class="toc-number">4.5.</span> <span class="toc-text">IP协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A5%E5%A4%AA%E7%BD%91%E5%B8%A7%E5%8D%8F%E8%AE%AE"><span class="toc-number">4.6.</span> <span class="toc-text">以太网帧协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ARP%E5%8D%8F%E8%AE%AE"><span class="toc-number">4.7.</span> <span class="toc-text">ARP协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%81%E8%A3%85"><span class="toc-number">4.8.</span> <span class="toc-text">封装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E7%94%A8"><span class="toc-number">4.9.</span> <span class="toc-text">分用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#arp%E5%8D%8F%E8%AE%AE%E8%AF%B7%E6%B1%82%E5%B0%81%E8%A3%85%E7%9A%84%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="toc-number">4.9.1.</span> <span class="toc-text">arp协议请求封装的过程：</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/05/21/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-4/" class="archive-article-date">
-  	<time datetime="2022-05-21T04:16:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-21</time>
-</a>
+        
+    </div>
+</aside>
 
 
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/05/21/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-4/">动态规划-4</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/05/20/NDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(3)/" class="archive-article-date">
-  	<time datetime="2022-05-20T07:36:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-20</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/05/20/NDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(3)/">NDN代码分析(3) forwarder模块代码</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NDN</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/05/18/NDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(2)/" class="archive-article-date">
-  	<time datetime="2022-05-17T16:12:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/05/18/NDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(2)/">NDN代码分析(2) tlv编码和cs代码</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NDN</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/05/17/ns3%E4%BD%BF%E7%94%A8-1/" class="archive-article-date">
-  	<time datetime="2022-05-17T09:41:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-17</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/05/17/ns3%E4%BD%BF%E7%94%A8-1/">ns3使用-1</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ns3</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/05/16/NFD-C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2022-05-16T11:14:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-16</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/05/16/NFD-C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">NFD-C基本使用</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NDN</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/05/16/%E5%90%84%E7%A7%8D%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/" class="archive-article-date">
-  	<time datetime="2022-05-16T10:31:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-16</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/05/16/%E5%90%84%E7%A7%8D%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/">各种实用技巧</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">其他</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/05/15/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-3/" class="archive-article-date">
-  	<time datetime="2022-05-15T12:30:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-15</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/05/15/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-3/">动态规划-3</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2022/">上一页</a><a class="page-number" href="/archives/2022/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2022/page/3/">3</a><a class="page-number" href="/archives/2022/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2022/page/9/">9</a><a class="extend next" rel="next" href="/archives/2022/page/3/">下一页;</a>
-    </nav>
   
 
+  
+
+  
 
           </div>
         </div>
@@ -669,8 +601,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
