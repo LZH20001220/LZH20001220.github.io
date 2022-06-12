@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2022 | 博客杂记 - Harder and Better</title>
+  <title>Linux服务器项目-8 | 博客杂记 - Harder and Better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -23,14 +23,27 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="博客杂记 - Harder and Better">
-<meta property="og:url" content="http://example.com/archives/2022/page/4/index.html">
+  <meta name="description" content="socket通信基础网络编程实际上是实现不同主机间进程间通信。  所谓 socket（套接字），就是对网络中不同主机上的应用进程之间进行双向通信的端点的抽象。一个套接字就是网络上进程通信的一端，提供了应用层进程利用网络协议交换数据的机制。从所处的地位来讲，套接字上联应用进程，下联网络协议栈，(类似于栈先进后出)是应用程序通过网络协议进行通信的接口，是应用程序与网络协议根进行交互的接口。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux服务器项目-8">
+<meta property="og:url" content="http://example.com/2022/06/12/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-8/index.html">
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
+<meta property="og:description" content="socket通信基础网络编程实际上是实现不同主机间进程间通信。  所谓 socket（套接字），就是对网络中不同主机上的应用进程之间进行双向通信的端点的抽象。一个套接字就是网络上进程通信的一端，提供了应用层进程利用网络协议交换数据的机制。从所处的地位来讲，套接字上联应用进程，下联网络协议栈，(类似于栈先进后出)是应用程序通过网络协议进行通信的接口，是应用程序与网络协议根进行交互的接口。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206122151051.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206122242109.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206122204163.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206122204486.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206122248330.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206122251986.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206122255039.png">
+<meta property="article:published_time" content="2022-06-12T13:05:43.000Z">
+<meta property="article:modified_time" content="2022-06-12T15:36:57.192Z">
 <meta property="article:author" content="ygtrece">
-<meta property="article:tag" content="学习, 日常">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="项目">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206122151051.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -182,431 +195,248 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Linux服务器项目-8" class="article article-type-post " itemscope itemprop="blogPost">
   
-  
+<div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/04/13/%E8%B4%AA%E5%BF%83-2/" class="archive-article-date">
-  	<time datetime="2022-04-13T15:36:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-13</time>
+      <header class="article-header">
+        
+        
+        <a href="/2022/06/12/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-8/" class="archive-article-date">
+  	<time datetime="2022-06-12T13:05:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-12</time>
 </a>
 
 
-        </div>
-    	 
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">3.3k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">13分</span>
+      </span>
+    </span>
+</div>
+          
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/04/13/%E8%B4%AA%E5%BF%83-2/">贪心 (2)</a>
+    <h1 class="article-title_code_ant" itemprop="name">
+      Linux服务器项目-8
     </h1>
   
+</p></center>
+      
+        <h3 id="socket通信基础"><a href="#socket通信基础" class="headerlink" title="socket通信基础"></a>socket通信基础</h3><p>网络编程实际上是实现不同主机间进程间通信。</p>
+<blockquote>
+<p>所谓 socket（套接字），<strong>就是对网络中不同主机上的应用进程之间进行双向通信的端点的抽象</strong>。一个套接字就是网络上进程通信的一端，提供了应用层进程利用网络协议交换数据的机制。从所处的地位来讲，套接字上联应用进程，下联网络协议栈，(类似于栈先进后出)是应用程序通过网络协议进行通信的接口，是应用程序与网络协议根进行交互的接口。</p>
+</blockquote>
+<span id="more"></span>
+<blockquote>
+<p>socket 可以看成是两个网络应用程序进行通信时，各自通信连接中的端点，这是一个逻辑上的概念。它是网络环境中<strong>进程间通信的 API</strong>，也是可以被命名和寻址的通信端点，使用中的每一个套接字都有其类型和一个与之相连进程。通信时其中一个网络应用程序将要传输的一段信息写入它所在主机的 socket 中，该 socket 通过与网络接口卡（NIC）相连的传输介质将这段信息送到另外一台主机的 socket 中，使对方能够接收到这段信息。socket 是由 IP 地址和端口(port)结合的，提供向应用层进程传送数据包的机制。</p>
+<p>socket 本身有“插座”的意思，在 Linux 环境下，用于表h示进程间网络通信的特殊文件类型。<strong>本质为内核借助缓冲区形成的伪文件</strong>。既然是文件，那么理所当然的，我们可以使用文件描述符引用套接字。与有名管道类似的，Linux 系统将其封装成文件的目的是为了统一接口，使得读写套接字和读写文件的操作一致。区别是管道主要应用于本地进程间通信，而套接字多应用于网络进程间数据的传递。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206122151051.png" alt="image-20220612215129161"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 套接字通信分两部分：</span></span><br><span class="line">- 服务器端：被动接受连接，一般不会主动发起连接</span><br><span class="line">- 客户端：主动向服务器发起连接</span><br><span class="line">socket是一套通信的接口，Linux 和 Windows 都有，但是有一些细微的差别。</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206122242109.png" alt="image-20220612224220615"></p>
+<h3 id="字节序"><a href="#字节序" class="headerlink" title="字节序"></a>字节序</h3><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><blockquote>
+<p>现代 CPU 的累加器一次都能装载（至少）4 字节（这里考虑 32 位机），即一个整数。那么这 4字节在内存中排列的顺序将影响它被累加器装载成的整数的值，这就是字节序问题。在各种计算机体系结构中，对于字节、字等的存储机制有所不同，因而引发了计算机通信领域中一个很重要的问题，即通信双方交流的信息单元（比特、字节、字、双字等等）应该以什么样的顺序进行传送。如果不达成一致的规则，通信双方将无法进行正确的编码/译码从而导致通信失败。</p>
+<p>==字节序，顾名思义字节的顺序，就是大于一个字节类型的数据在内存中的存放顺序(一个字节的数<br>据当然就无需谈顺序的问题了)。==<br>字节序分为大端字节序（Big-Endian） 和小端字节序（Little-Endian）。大端字节序是指一个整数的最高位字节（23 ~ 31 bit）存储在内存的低地址处，低位字节（0 ~ 7 bit）存储在内存的高地址处；小端字节序则是指整数的高位字节存储在内存的高地址处，而低位字节则存储在内存的低地址处。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206122204163.png" alt="image-20220612220355769"></p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206122204486.png" alt="image-20220612220406513"></p>
+<p>判断字节序：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*  </span></span><br><span class="line"><span class="comment">    字节序：字节在内存中存储的顺序。</span></span><br><span class="line"><span class="comment">    小端字节序：数据的高位字节存储在内存的高位地址，低位字节存储在内存的低位地址</span></span><br><span class="line"><span class="comment">    大端字节序：数据的低位字节存储在内存的高位地址，高位字节存储在内存的低位地址</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过代码检测当前主机的字节序</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">        <span class="type">short</span> value;    <span class="comment">// 2字节</span></span><br><span class="line">        <span class="type">char</span> bytes[<span class="keyword">sizeof</span>(<span class="type">short</span>)];  <span class="comment">// char[2], 这些数据共享同一段内存，以达到节省空间的目的</span></span><br><span class="line">    &#125; test;</span><br><span class="line"></span><br><span class="line">    test.value = <span class="number">0x0102</span>;</span><br><span class="line">    <span class="keyword">if</span>((test.bytes[<span class="number">0</span>] == <span class="number">1</span>) &amp;&amp; (test.bytes[<span class="number">1</span>] == <span class="number">2</span>)) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;大端字节序\n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>((test.bytes[<span class="number">0</span>] == <span class="number">2</span>) &amp;&amp; (test.bytes[<span class="number">1</span>] == <span class="number">1</span>)) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;小端字节序\n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;未知\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="字节序转换函数："><a href="#字节序转换函数：" class="headerlink" title="字节序转换函数："></a>字节序转换函数：</h3><p>当格式化的数据在两台使用不同字节序的主机之间直接传递时，接收端必然错误的解释之。解决问题的方法是：发送端总是把要发送的数据转换成大端字节序数据后再发送，而接收端知道对方传送过来的数据总是采用大端字节序，所以接收端可以根据自身采用的字节序决定是否对接收到的数据进行转换（小端机转换，大端机不转换）。</p>
+<p><strong>网络字节顺序</strong>是 TCP/IP 中规定好的一种数据表示格式，它与具体的 CPU 类型、操作系统等无关，从而可以保证数据在不同主机之间传输时能够被正确解释，网络字节顺序采用大端排序方式。</p>
+<p>BSD Socket提供了封装好的转换接口，方便程序员使用。包括从主机字节序到网络字节序的转换函数：htons、htonl；从网络字节序到主机字节序的转换函数：ntohs、ntohl。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">h - host 主机，主机字节序</span><br><span class="line">to - 转换成什么</span><br><span class="line">n - network 网络字节序</span><br><span class="line">s - <span class="type">short</span> <span class="type">unsigned</span> <span class="type">short</span></span><br><span class="line">l - <span class="type">long</span> <span class="type">unsigned</span> <span class="type">int</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"><span class="comment">// 转换端口, 0 ~ 25536, 16位</span></span><br><span class="line"><span class="type">uint16_t</span> <span class="title function_">htons</span><span class="params">(<span class="type">uint16_t</span> hostshort)</span>; <span class="comment">// 主机字节序 - 网络字节序</span></span><br><span class="line"><span class="type">uint16_t</span> <span class="title function_">ntohs</span><span class="params">(<span class="type">uint16_t</span> netshort)</span>; <span class="comment">// 主机字节序 - 网络字节序</span></span><br><span class="line"><span class="comment">// 转IP, IP地址32位</span></span><br><span class="line"><span class="type">uint32_t</span> <span class="title function_">htonl</span><span class="params">(<span class="type">uint32_t</span> hostlong)</span>; <span class="comment">// 主机字节序 - 网络字节序</span></span><br><span class="line"><span class="type">uint32_t</span> <span class="title function_">ntohl</span><span class="params">(<span class="type">uint32_t</span> netlong)</span>; <span class="comment">// 主机字节序 - 网络字节序</span></span><br></pre></td></tr></table></figure>
+<p>应用实例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    网络通信时，需要将主机字节序转换成网络字节序（大端），</span></span><br><span class="line"><span class="comment">    另外一段获取到数据以后根据情况将网络字节序转换成主机字节序。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    // 转换端口</span></span><br><span class="line"><span class="comment">    uint16_t htons(uint16_t hostshort);		// 主机字节序 - 网络字节序</span></span><br><span class="line"><span class="comment">    uint16_t ntohs(uint16_t netshort);		// 主机字节序 - 网络字节序</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    // 转IP</span></span><br><span class="line"><span class="comment">    uint32_t htonl(uint32_t hostlong);		// 主机字节序 - 网络字节序</span></span><br><span class="line"><span class="comment">    uint32_t ntohl(uint32_t netlong);		// 主机字节序 - 网络字节序</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// htons 转换端口</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">short</span> a = <span class="number">0x0102</span>; <span class="comment">//没有负数时用unsigned比较规范</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a : %x\n&quot;</span>, a);</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">short</span> b = htons(a);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;b : %x\n&quot;</span>, b);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;=======================\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// htonl  转换IP</span></span><br><span class="line">    <span class="type">char</span> buf[<span class="number">4</span>] = &#123;<span class="number">192</span>, <span class="number">168</span>, <span class="number">1</span>, <span class="number">100</span>&#125;;</span><br><span class="line">    <span class="type">int</span> num = *(<span class="type">int</span> *)buf;</span><br><span class="line">    <span class="type">int</span> sum = htonl(num);</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> *p = (<span class="type">char</span> *)&amp;sum;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d %d %d %d\n&quot;</span>, *p, *(p+<span class="number">1</span>), *(p+<span class="number">2</span>), *(p+<span class="number">3</span>));</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;=======================\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ntohl</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> buf1[<span class="number">4</span>] = &#123;<span class="number">1</span>, <span class="number">1</span>, <span class="number">168</span>, <span class="number">192</span>&#125;;</span><br><span class="line">    <span class="type">int</span> num1 = *(<span class="type">int</span> *)buf1;</span><br><span class="line">    <span class="type">int</span> sum1 = ntohl(num1);</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> *p1 = (<span class="type">unsigned</span> <span class="type">char</span> *)&amp;sum1;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d %d %d %d\n&quot;</span>, *p1, *(p1+<span class="number">1</span>), *(p1+<span class="number">2</span>), *(p1+<span class="number">3</span>));</span><br><span class="line">     <span class="comment">// ntohs</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-Socket地址"><a href="#3-Socket地址" class="headerlink" title="3. Socket地址"></a>3. Socket地址</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// socket地址其实是一个结构体，封装端口号和IP等信息。后面的socket相关的api中需要使用到这个</span></span><br><span class="line">socket地址。</span><br><span class="line"><span class="comment">// 客户端 -&gt; 服务器（IP, Port）</span></span><br></pre></td></tr></table></figure>
+<p>socket 网络编程接口中表示 socket 地址的是结构体 sockaddr，其定义如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/socket.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr</span> &#123;</span></span><br><span class="line"><span class="type">sa_family_t</span> sa_family; <span class="comment">//地址族类型</span></span><br><span class="line"><span class="type">char</span> sa_data[<span class="number">14</span>]; <span class="comment">//地址详细的数据，包括IP的值，端口的值等</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">short</span> <span class="type">int</span> <span class="type">sa_family_t</span>; <span class="comment">//2个字节</span></span><br></pre></td></tr></table></figure>
+<p>sa_family 成员是地址族类型（sa_family_t）的变量。地址族类型通常与协议族类型对应。常见的协议族（protocol family，也称 domain）和对应的地址族入下所示：</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206122248330.png" alt="image-20220612224835210"></p>
+<p>宏 PF_<em> 和 AF_</em> 都定义在 bits/socket.h 头文件中，且后者与前者有完全相同的值，所以二者通常混用。</p>
+<p>sa_data 成员用于存放 socket 地址值。但是，不同的协议族的地址值具有不同的含义和长度，如下所示：</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206122251986.png" alt="image-20220612225100522"></p>
+<p>由上表可知，14 字节的 sa_data 根本无法容纳多数协议族的地址值。因此，Linux 定义了下面这个新的通用的 socket 地址结构体，这个结构体不仅提供了足够大的空间用于存放地址值，而且是内存对齐的。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/socket.h&gt;</span></span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">sockaddr_storage</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="type">sa_family_t</span> sa_family; <span class="comment">//地址族类型</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> <span class="type">int</span> __ss_align; <span class="comment">//用于内存对齐</span></span><br><span class="line"><span class="type">char</span> __ss_padding[ <span class="number">128</span> - <span class="built_in">sizeof</span>(__ss_align) ]; <span class="comment">//存取具体的IP，端口号等信息</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">short</span> <span class="type">int</span> <span class="type">sa_family_t</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="专用socket地址"><a href="#专用socket地址" class="headerlink" title="专用socket地址"></a>专用socket地址</h3><p>很多网络编程函数诞生早于 IPv4 协议，那时候都使用的是 struct sockaddr 结构体，为了向前兼容，现在sockaddr 退化成了（void *）的作用，传递一个地址给函数，至于这个函数是 sockaddr_in 还是sockaddr_in6，由地址族确定，然后函数内部再强制类型转化为所需的地址类型。</p>
+<p>用的时候创建结构体，然后为结构体内的成员赋值就行了。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202206122255039.png" alt="image-20220612225534884"></p>
+<p>UNIX 本地域协议族使用如下专用的 socket 地址结构体：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/un.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_un</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="type">sa_family_t</span> sin_family;</span><br><span class="line"><span class="type">char</span> sun_path[<span class="number">108</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>TCP/IP 协议族有 sockaddr_in 和 sockaddr_in6 两个专用的 socket 地址结构体，它们分别用于 IPv4 和IPv6：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;netinet/in.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="type">sa_family_t</span> sin_family; <span class="comment">/* __SOCKADDR_COMMON(sin_) */</span></span><br><span class="line">	<span class="type">in_port_t</span> sin_port; <span class="comment">/* Port number. */</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">in_addr</span> <span class="title">sin_addr</span>;</span> <span class="comment">/* Internet address. */</span></span><br><span class="line">	<span class="comment">/* Pad to size of `struct sockaddr&#x27;. */</span></span><br><span class="line">	<span class="type">unsigned</span> <span class="type">char</span> sin_zero[<span class="keyword">sizeof</span> (<span class="keyword">struct</span> sockaddr) - __SOCKADDR_COMMON_SIZE -</span><br><span class="line">	<span class="keyword">sizeof</span> (<span class="type">in_port_t</span>) - <span class="keyword">sizeof</span> (<span class="keyword">struct</span> in_addr)];<span class="comment">//填充的部分</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">in_addr</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="type">in_addr_t</span> s_addr;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in6</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="type">sa_family_t</span> sin6_family;</span><br><span class="line">	<span class="type">in_port_t</span> sin6_port; <span class="comment">/* Transport layer port # */</span></span><br><span class="line">	<span class="type">uint32_t</span> sin6_flowinfo; <span class="comment">/* IPv6 flow information */</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">in6_addr</span> <span class="title">sin6_addr</span>;</span> <span class="comment">/* IPv6 address */</span></span><br><span class="line">	<span class="type">uint32_t</span> sin6_scope_id; <span class="comment">/* IPv6 scope-id */</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">short</span> <span class="type">uint16_t</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">int</span> <span class="type">uint32_t</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">uint16_t</span> <span class="type">in_port_t</span>; <span class="comment">//unsigned short</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">uint32_t</span> <span class="type">in_addr_t</span>; <span class="comment">//unsigned int</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __SOCKADDR_COMMON_SIZE (sizeof (unsigned short int))</span></span><br></pre></td></tr></table></figure>
+<p>所有专用 socket 地址（以及 sockaddr_storage）类型的变量在实际使用时都需要转化为通用 socket 地址类型 sockaddr（强制转化即可），因为所有 socket 编程接口使用的地址参数类型都是 sockaddr。</p>
+<h3 id="4-IP地址转换（字符串ip-整数-，主机、网络字节序的转换）"><a href="#4-IP地址转换（字符串ip-整数-，主机、网络字节序的转换）" class="headerlink" title="4. IP地址转换（字符串ip-整数 ，主机、网络字节序的转换）"></a>4. IP地址转换（字符串ip-整数 ，主机、网络字节序的转换）</h3><p>通常，人们习惯用可读性好的字符串来表示 IP 地址，比如用点分十进制字符串表示 IPv4 地址，以及用十六进制字符串表示 IPv6 地址。但编程中我们需要先把它们转化为整数（二进制数）方能使用。而记录日志时则相反，我们要把整数表示的 IP 地址转化为可读的字符串。下面 3 个函数可用于用点分十进制字符串表示的 IPv4 地址和用网络字节序整数表示的 IPv4 地址之间的转换：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"><span class="type">in_addr_t</span> <span class="title function_">inet_addr</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *cp)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">inet_aton</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *cp, <span class="keyword">struct</span> in_addr *inp)</span>;</span><br><span class="line"><span class="type">char</span> *<span class="title function_">inet_ntoa</span><span class="params">(<span class="keyword">struct</span> in_addr in)</span>;</span><br></pre></td></tr></table></figure>
+<p>下面这对更新的函数也能完成前面 3 个函数同样的功能，并且它们同时适用 IPv4 地址和 IPv6 地址：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"><span class="comment">// p:点分十进制的IP字符串，n:表示network，网络字节序的整数</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">inet_pton</span><span class="params">(<span class="type">int</span> af, <span class="type">const</span> <span class="type">char</span> *src, <span class="type">void</span> *dst)</span></span>;</span><br><span class="line">	af:地址族： AF_INET AF_INET6</span><br><span class="line">	src:需要转换的点分十进制的IP字符串</span><br><span class="line">	dst:转换后的结果保存在这个里面</span><br><span class="line"><span class="comment">// 将网络字节序的整数，转换成点分十进制的IP地址字符串</span></span><br><span class="line"><span class="function"><span class="type">const</span> <span class="type">char</span> *<span class="title">inet_ntop</span><span class="params">(<span class="type">int</span> af, <span class="type">const</span> <span class="type">void</span> *src, <span class="type">char</span> *dst, <span class="type">socklen_t</span> size)</span></span>;</span><br><span class="line">	af:地址族： AF_INET AF_INET6</span><br><span class="line">	src: 要转换的ip的整数的地址</span><br><span class="line">	dst: 转换成IP地址字符串保存的地方</span><br><span class="line">	size：第三个参数的大小（数组的大小）</span><br><span class="line">	返回值：返回转换后的数据的地址（字符串），和 dst 是一样的</span><br></pre></td></tr></table></figure>
+<p>socket中IP地址转换函数的使用</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    #include &lt;arpa/inet.h&gt;</span></span><br><span class="line"><span class="comment">    // p:点分十进制的IP字符串，n:表示network，网络字节序的整数</span></span><br><span class="line"><span class="comment">    int inet_pton(int af, const char *src, void *dst);</span></span><br><span class="line"><span class="comment">        af:地址族： AF_INET  AF_INET6</span></span><br><span class="line"><span class="comment">        src:需要转换的点分十进制的IP字符串</span></span><br><span class="line"><span class="comment">        dst:转换后的结果保存在这个里面</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    // 将网络字节序的整数，转换成点分十进制的IP地址字符串</span></span><br><span class="line"><span class="comment">    const char *inet_ntop(int af, const void *src, char *dst, socklen_t size);</span></span><br><span class="line"><span class="comment">        af:地址族： AF_INET  AF_INET6</span></span><br><span class="line"><span class="comment">        src: 要转换的ip的整数的地址</span></span><br><span class="line"><span class="comment">        dst: 转换成IP地址字符串保存的地方</span></span><br><span class="line"><span class="comment">        size：第三个参数的大小（数组的大小）</span></span><br><span class="line"><span class="comment">        返回值：返回转换后的数据的地址（字符串），和 dst 是一样的</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//创建一个字符串</span></span><br><span class="line">    <span class="type">char</span> buf[] = <span class="string">&quot;192.168.1.4&quot;</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> num = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//将点分十进制IP字符串转换为网络字节序的整数</span></span><br><span class="line">    <span class="built_in">inet_pton</span>(AF_INET, buf, &amp;num);</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> *p = (<span class="type">unsigned</span> <span class="type">char</span> *)&amp;num;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d %d %d %d\n&quot;</span>,*p, *(p+<span class="number">1</span>), *(p+<span class="number">2</span>), *(p+<span class="number">3</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">//将网络字节序的IP整数转换为点分十进制的IP字符串</span></span><br><span class="line">    <span class="type">char</span> ip[<span class="number">16</span>] = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">char</span>* str = <span class="built_in">inet_ntop</span>(AF_INET, &amp;num, ip, <span class="number">16</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;str:%s\n&quot;</span>, str);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ip == str); <span class="comment">//传入的IP和返回的str一样</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/04/13/Spark%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/" class="archive-article-date">
-  	<time datetime="2022-04-13T07:28:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-13</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/04/13/Spark%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/">Spark大数据分析平台搭建</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">大数据</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">项目</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/06/12/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-8/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/04/10/GoldenEye%E6%94%BB%E5%87%BB%E7%A8%8B%E5%BA%8F%E6%B5%8B%E8%AF%95/" class="archive-article-date">
-  	<time datetime="2022-04-10T08:26:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-10</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2022/06/12/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-7/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Linux服务器项目-7</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
 
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/04/10/GoldenEye%E6%94%BB%E5%87%BB%E7%A8%8B%E5%BA%8F%E6%B5%8B%E8%AF%95/">GoldenEye攻击程序测试</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">网络</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#socket%E9%80%9A%E4%BF%A1%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">socket通信基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E8%8A%82%E5%BA%8F"><span class="toc-number">2.</span> <span class="toc-text">字节序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">2.1.</span> <span class="toc-text">简介</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E8%8A%82%E5%BA%8F%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">字节序转换函数：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Socket%E5%9C%B0%E5%9D%80"><span class="toc-number">4.</span> <span class="toc-text">3. Socket地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%93%E7%94%A8socket%E5%9C%B0%E5%9D%80"><span class="toc-number">5.</span> <span class="toc-text">专用socket地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-IP%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%EF%BC%88%E5%AD%97%E7%AC%A6%E4%B8%B2ip-%E6%95%B4%E6%95%B0-%EF%BC%8C%E4%B8%BB%E6%9C%BA%E3%80%81%E7%BD%91%E7%BB%9C%E5%AD%97%E8%8A%82%E5%BA%8F%E7%9A%84%E8%BD%AC%E6%8D%A2%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">4. IP地址转换（字符串ip-整数 ，主机、网络字节序的转换）</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/04/10/C++-primer-9%E7%AB%A0/" class="archive-article-date">
-  	<time datetime="2022-04-09T16:30:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-10</time>
-</a>
+        
+    </div>
+</aside>
 
 
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/04/10/C++-primer-9%E7%AB%A0/">C++ primer 9章 顺序容器</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/04/08/kali%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-  	<time datetime="2022-04-08T09:06:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-08</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/04/08/kali%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">kali环境配置</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">环境配置</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/" class="archive-article-date">
-  	<time datetime="2022-04-08T01:40:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-08</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/">操作系统 - 内存管理和调度</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/04/06/%E8%B4%AA%E5%BF%83-1/" class="archive-article-date">
-  	<time datetime="2022-04-06T12:47:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-06</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/04/06/%E8%B4%AA%E5%BF%83-1/">贪心 (1)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/04/05/%E5%88%A9%E7%94%A8GoldenEyes%E5%AE%9E%E7%8E%B0DOS%E6%94%BB%E5%87%BB/" class="archive-article-date">
-  	<time datetime="2022-04-05T15:00:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-05</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/04/05/%E5%88%A9%E7%94%A8GoldenEyes%E5%AE%9E%E7%8E%B0DOS%E6%94%BB%E5%87%BB/">利用GoldenEyes实现DOS攻击</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">网络</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/04/04/C++-primer-8%E7%AB%A0/" class="archive-article-date">
-  	<time datetime="2022-04-04T09:12:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-04</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/04/04/C++-primer-8%E7%AB%A0/">C++ primer 8章 IO库</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/04/01/%E5%9B%9E%E6%BA%AF-2/" class="archive-article-date">
-  	<time datetime="2022-04-01T11:44:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-01</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/04/01/%E5%9B%9E%E6%BA%AF-2/">回溯 (2)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2022/page/3/">上一页</a><a class="page-number" href="/archives/2022/">1</a><a class="page-number" href="/archives/2022/page/2/">2</a><a class="page-number" href="/archives/2022/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/archives/2022/page/5/">5</a><a class="page-number" href="/archives/2022/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2022/page/9/">9</a><a class="extend next" rel="next" href="/archives/2022/page/5/">下一页;</a>
-    </nav>
   
 
+  
+
+  
 
           </div>
         </div>
@@ -649,8 +479,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
