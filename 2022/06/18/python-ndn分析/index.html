@@ -31,7 +31,7 @@
 <meta property="og:description" content="Python-ndn是Python 3 中支持 AsyncIO 的命名数据网络客户端库。 个人理解：通过调用python-ndn库可以创建新的客户端节点，节点可以产生和接收兴趣包和数据包，节点需要通过NFD进行路由和转发。 简介：ndn.app 包包含类 NDNApp ，它连接 NDN 应用程序和 NFD 节点。NDNApp 提供类似于ndn-cxx 中的应用程序Face 的功能，包括：建立与NF">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-06-18T08:21:19.000Z">
-<meta property="article:modified_time" content="2022-07-01T01:52:46.887Z">
+<meta property="article:modified_time" content="2022-07-03T03:04:42.862Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="NDN">
 <meta name="twitter:card" content="summary">
@@ -244,6 +244,7 @@ var _hmt = _hmt || [];
         <p>Python-ndn是Python 3 中支持 AsyncIO 的命名数据网络<strong>客户端库</strong>。</p>
 <p>个人理解：通过调用python-ndn库可以创建新的客户端节点，节点可以产生和接收兴趣包和数据包，节点需要通过NFD进行路由和转发。</p>
 <p><strong>简介：</strong>ndn.app 包包含类 NDNApp ，它连接 NDN 应用程序和 NFD 节点。NDNApp 提供类似于ndn-cxx 中的应用程序Face 的功能，包括：建立与NFD 节点的连接。表达兴趣并处理返回的数据。使用兴趣处理函数注册和取消注册路由。</p>
+<p><code>/home/ygtrece/.local/lib/python3.6/site-packages/</code></p>
 <span id="more"></span>
 <p>ndn.app模块包括构造函数，创建用于连接NFD节点的face，(平台默认的接口，Linux下是Unix接口)，用于存储身份和密钥的keychain，兴趣包和数据包的默认验证器。</p>
 <p>async def _receive(self, typ: int, data: BinaryStr):函数用于根据不同的包的类型(兴趣包，数据包，Nack包)对包进行解析，提取出对应的字段，并根据包的类型不同调用后续的 _on_xxx函数</p>
@@ -581,11 +582,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
+                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
               </li>
              
               <li class="article-tag-list-item">
