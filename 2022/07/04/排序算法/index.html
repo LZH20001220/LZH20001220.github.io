@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>博客杂记 - Harder and Better</title>
+  <title>排序算法 | 博客杂记 - Harder and Better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -23,14 +23,20 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="博客杂记 - Harder and Better">
-<meta property="og:url" content="http://example.com/page/10/index.html">
+  <meta name="description" content="一、冒泡排序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="排序算法">
+<meta property="og:url" content="http://example.com/2022/07/04/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
+<meta property="og:description" content="一、冒泡排序">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207041756360.png">
+<meta property="article:published_time" content="2022-07-04T09:43:56.000Z">
+<meta property="article:modified_time" content="2022-07-04T09:56:28.852Z">
 <meta property="article:author" content="ygtrece">
-<meta property="article:tag" content="学习, 日常">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207041756360.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -182,19 +188,22 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-周报12.27-1.2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-排序算法" class="article article-type-post " itemscope itemprop="blogPost">
   
 <div class="article-inner">
     
       <header class="article-header">
         
         
-        <a href="/2022/01/02/%E5%91%A8%E6%8A%A512.27-1.2/" class="archive-article-date">
-  	<time datetime="2022-01-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-02</time>
+        <a href="/2022/07/04/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" class="archive-article-date">
+  	<time datetime="2022-07-04T09:43:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-04</time>
 </a>
 
+
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
 
 
         <!-- 需要添加的位置 -->
@@ -205,114 +214,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.9k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">10分</span>
-      </span>
-    </span>
-</div>
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2022/01/02/%E5%91%A8%E6%8A%A512.27-1.2/">周报:12.27-1.2</a>
-    </h1>
-  
-</p></center>
-      
-        <h3 id="一、继续学习gnuradio中Wifi系统的框图"><a href="#一、继续学习gnuradio中Wifi系统的框图" class="headerlink" title="一、继续学习gnuradio中Wifi系统的框图"></a>一、继续学习gnuradio中Wifi系统的框图</h3><h4 id="（1）-xml文件和yaml文件"><a href="#（1）-xml文件和yaml文件" class="headerlink" title="（1） xml文件和yaml文件"></a>（1） xml文件和yaml文件</h4><h5 id="xml文件："><a href="#xml文件：" class="headerlink" title="xml文件："></a>xml文件：</h5><p>xml:可扩展标记语言，其可以在任何应用程序中读/写数据，是html的演进,一个简单的程序如下:</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">周报</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/01/02/%E5%91%A8%E6%8A%A512.27-1.2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-复杂度" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-<div class="article-inner">
-    
-      <header class="article-header">
-        
-        
-        <a href="/2022/01/02/%E5%A4%8D%E6%9D%82%E5%BA%A6/" class="archive-article-date">
-  	<time datetime="2022-01-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-02</time>
-</a>
-
-
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1k字</span>
+        <span class="post-count">910字</span>
       </span>
     </span>
 
@@ -335,15 +237,20 @@ var _hmt = _hmt || [];
        
       <center><p>
   
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2022/01/02/%E5%A4%8D%E6%9D%82%E5%BA%A6/">复杂度</a>
+    <h1 class="article-title_code_ant" itemprop="name">
+      排序算法
     </h1>
   
 </p></center>
       
-        <p>复杂度包括时间复杂度和空间复杂度</p>
-<h3 id="1-时间复杂度-描述算法的运行时间，O-表示算法最坏情况下运行时间的上界。"><a href="#1-时间复杂度-描述算法的运行时间，O-表示算法最坏情况下运行时间的上界。" class="headerlink" title="1. 时间复杂度:描述算法的运行时间，O()表示算法最坏情况下运行时间的上界。"></a>1. 时间复杂度:描述算法的运行时间，<code>O()</code>表示算法最坏情况下运行时间的上界。</h3>
-        
+        <h4 id="一、冒泡排序"><a href="#一、冒泡排序" class="headerlink" title="一、冒泡排序"></a>一、冒泡排序</h4><span id="more"></span>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 冒泡排序</span></span><br><span class="line"><span class="comment">* 比较交换相邻元素</span></span><br><span class="line"><span class="comment">* 思路简单，仅学习用</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Bubble</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">mysort</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n - i - <span class="number">1</span>; j++) <span class="comment">//把最大的元素移到最右边</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (nums[j] &gt; nums[j + <span class="number">1</span>])</span><br><span class="line">				&#123;</span><br><span class="line">				<span class="type">int</span> temp = nums[j];</span><br><span class="line">				nums[j] = nums[j + <span class="number">1</span>];</span><br><span class="line">				nums[j + <span class="number">1</span>] = temp;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; nums = &#123;<span class="number">9</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">2</span>&#125;;</span><br><span class="line">Bubble bubble;</span><br><span class="line">bubble.<span class="built_in">mysort</span>(nums);</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> num : nums)</span><br><span class="line">&#123;</span><br><span class="line">cout &lt;&lt; num &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="二、选择排序"><a href="#二、选择排序" class="headerlink" title="二、选择排序"></a>二、选择排序</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 选择排序</span></span><br><span class="line"><span class="comment">* 思路：找最小元素，放到最终位置</span></span><br><span class="line"><span class="comment">* 特点：时间：O(n²)、非稳定排序</span></span><br><span class="line"><span class="comment">* 适用：数据量少</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Select</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">mysort</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++)</span><br><span class="line">		&#123;</span><br><span class="line">		<span class="type">int</span> minPos = i;</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>; j &lt; n; j++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (nums[j] &lt; nums[minPos])  <span class="comment">//记录最小的元素的下标赋值给minPos,并将其移动到i</span></span><br><span class="line">				&#123;</span><br><span class="line">				minPos = j;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		<span class="type">int</span> temp = nums[i];</span><br><span class="line">		nums[i] = nums[minPos];</span><br><span class="line">		nums[minPos] = temp;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; nums = &#123;<span class="number">9</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">2</span>&#125;;</span><br><span class="line">Select select;</span><br><span class="line">select.<span class="built_in">mysort</span>(nums);</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> num : nums)</span><br><span class="line">&#123;</span><br><span class="line">cout &lt;&lt; num &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="三、插入排序"><a href="#三、插入排序" class="headerlink" title="三、插入排序"></a>三、插入排序</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 插入排序</span></span><br><span class="line"><span class="comment">* 思路：抓牌一样，插入当前手牌中的适当位置</span></span><br><span class="line"><span class="comment">* 特点：时间：O(n²)</span></span><br><span class="line"><span class="comment">* 适用：基本有序</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Insert</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">mysort</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">	<span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">		<span class="type">int</span> pos = i - <span class="number">1</span>;</span><br><span class="line">		<span class="type">int</span> cur = nums[i];</span><br><span class="line">		<span class="keyword">while</span> (pos &gt;= <span class="number">0</span> &amp;&amp; cur &lt; nums[pos]) <span class="comment">//维护所有i前面的元素的顺序</span></span><br><span class="line">		&#123;</span><br><span class="line">		nums[pos + <span class="number">1</span>] = nums[pos];</span><br><span class="line">		pos--;</span><br><span class="line">		&#125;</span><br><span class="line">		nums[pos + <span class="number">1</span>] = cur;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; nums = &#123;<span class="number">9</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">2</span>&#125;;</span><br><span class="line">Insert insert;</span><br><span class="line">insert.<span class="built_in">mysort</span>(nums);</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> num : nums)</span><br><span class="line">&#123;</span><br><span class="line">cout &lt;&lt; num &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="四、希尔排序"><a href="#四、希尔排序" class="headerlink" title="四、希尔排序"></a>四、希尔排序</h4><p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207041756360.png" alt="img"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*https://www.runoob.com/datastructures/shellsort.html</span></span><br><span class="line"><span class="comment">* 希尔排序</span></span><br><span class="line"><span class="comment">* 思路：间隔分组+自定义排序（这里给出的是冒泡）</span></span><br><span class="line"><span class="comment">* 特点：时间：O(nlogn)、非稳定排序</span></span><br><span class="line"><span class="comment">* 适用：数据量大</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Shell</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">mysort</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">		<span class="type">int</span> gap = n / <span class="number">2</span>;</span><br><span class="line">		<span class="keyword">while</span> (gap &gt; <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> j = gap; j &lt; n; j++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="type">int</span> i = j;</span><br><span class="line">				<span class="keyword">while</span> (i &gt;= gap &amp;&amp; nums[i] &lt; nums[i - gap]) <span class="comment">//注意这里用while</span></span><br><span class="line">				&#123;</span><br><span class="line">					<span class="type">int</span> temp = nums[i];</span><br><span class="line">					nums[i] = nums[i - gap];</span><br><span class="line">					nums[i - gap] = temp;</span><br><span class="line">					i -= gap;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		gap /= <span class="number">2</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; nums = &#123;<span class="number">9</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">2</span>&#125;;</span><br><span class="line">Shell shell;</span><br><span class="line">shell.<span class="built_in">mysort</span>(nums);</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> num : nums)</span><br><span class="line">&#123;</span><br><span class="line">cout &lt;&lt; num &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="五、归并排序"><a href="#五、归并排序" class="headerlink" title="五、归并排序"></a>五、归并排序</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 归并排序</span></span><br><span class="line"><span class="comment">* 思路：递归思想</span></span><br><span class="line"><span class="comment">* 特点：时间：O(nlogn)、空间：O(n)——非原地</span></span><br><span class="line"><span class="comment">* 适用：不受数据影响，所需空间与n成正比</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> std::vector;</span><br><span class="line"><span class="keyword">using</span> std::cout;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Merge</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">mysort</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums, <span class="type">int</span> left, <span class="type">int</span> right)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (left &lt; right)</span><br><span class="line">		&#123;</span><br><span class="line">		<span class="type">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">		<span class="built_in">mysort</span>(nums, left, mid);</span><br><span class="line">		<span class="built_in">mysort</span>(nums, mid + <span class="number">1</span>, right);</span><br><span class="line">		<span class="built_in">merge</span>(nums, left, right);</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums, <span class="type">int</span> left, <span class="type">int</span> right)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">	<span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">temp</span><span class="params">(nums.size())</span></span>;	<span class="comment">//temp用来存储临时数组，将数组一分为二，先把小的放在temp中，有点递归的意思</span></span><br><span class="line">	<span class="type">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">	<span class="type">int</span> p = left;</span><br><span class="line">	<span class="type">int</span> q = mid + <span class="number">1</span>;</span><br><span class="line">	<span class="type">int</span> k = left;</span><br><span class="line">	<span class="keyword">while</span> (p &lt;= mid &amp;&amp; q &lt;= right)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (nums[p] &lt; nums[q])</span><br><span class="line">			temp[k++] = nums[p++];</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			temp[k++] = nums[q++];</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">while</span> (p &lt;= mid)</span><br><span class="line">	temp[k++] = nums[p++];</span><br><span class="line">	<span class="keyword">while</span> (q &lt;= right)</span><br><span class="line">	temp[k++] = nums[q++];</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = left; i &lt;= right; i++)</span><br><span class="line">	nums[i] = temp[i];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; nums = &#123;<span class="number">9</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">2</span>&#125;;</span><br><span class="line">Merge merge;</span><br><span class="line">merge.<span class="built_in">mysort</span>(nums, <span class="number">0</span>, nums.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> num : nums)</span><br><span class="line">cout &lt;&lt; num &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
 
       
@@ -365,228 +272,75 @@ var _hmt = _hmt || [];
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/01/02/%E5%A4%8D%E6%9D%82%E5%BA%A6/">展开全文 >></a>
-        </p>
-      
 
       
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
         
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-tag电路图" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-<div class="article-inner">
-    
-      <header class="article-header">
-        
-        
-        <a href="/2021/12/29/tag%E7%94%B5%E8%B7%AF%E5%9B%BE/" class="archive-article-date">
-  	<time datetime="2021-12-29T15:10:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-29</time>
-</a>
-
-
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">521字</span>
-      </span>
+      </div>
     </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
-      </span>
-    </span>
+  </div>
 </div>
-          
-        <!-- 添加完成 -->
 
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2021/12/29/tag%E7%94%B5%E8%B7%AF%E5%9B%BE/">tag电路图</a>
-    </h1>
-  
-</p></center>
-      
-        <h3 id="tag电路图："><a href="#tag电路图：" class="headerlink" title="tag电路图："></a>tag电路图：</h3><p><img src="/2021/12/29/tag%E7%94%B5%E8%B7%AF%E5%9B%BE/1.png" alt="img"></p>
-<p>U8的20MHz为FPGA的外部时钟输入</p>
-        
-      
-
-      
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/07/04/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" alt="微信分享二维码">
     </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/29/tag%E7%94%B5%E8%B7%AF%E5%9B%BE/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-周报12-20-12-26" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-<div class="article-inner">
-    
-      <header class="article-header">
-        
-        
-        <a href="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/" class="archive-article-date">
-  	<time datetime="2021-12-26T09:08:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-26</time>
-</a>
-
-
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">5.2k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">19分</span>
-      </span>
-    </span>
 </div>
-          
-        <!-- 添加完成 -->
 
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/">周报12.20-12.26</a>
-    </h1>
-  
-</p></center>
-      
-        <p><strong>第一部分：文献阅读</strong></p>
-<p><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/10.1145/3300061.3300121">文献1：OFDMA-Enabled Wi-Fi Backscatter | The 25th Annual International Conference on Mobile Computing and Networking (acm.org)</a></p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">周报</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/26/%E5%91%A8%E6%8A%A512-20-12-26/">展开全文 >></a>
-        </p>
-      
-
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2022/07/04/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E7%A7%BB%E5%8A%A8%E6%80%A7%E7%AE%A1%E7%90%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">命名数据网络移动性管理</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -601,212 +355,19 @@ var _hmt = _hmt || [];
         </div>
         
         
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-Libero" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-<div class="article-inner">
-    
-      <header class="article-header">
-        
-        
-        <a href="/2021/11/29/Libero/" class="archive-article-date">
-  	<time datetime="2021-11-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-29</time>
-</a>
-
-
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.2k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">4分</span>
-      </span>
-    </span>
-</div>
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2021/11/29/Libero/">Microsemi Libero学习和使用笔记</a>
-    </h1>
-  
-</p></center>
-      
-        <h3 id="一、下载和安装"><a href="#一、下载和安装" class="headerlink" title="一、下载和安装"></a>一、下载和安装</h3><p>下载和安装可以参考以下<a target="_blank" rel="noopener" href="https://blog.csdn.net/whik1194/article/details/90483763">教程</a>。其中申请license的步骤推荐使用<a target="_blank" rel="noopener" href="http://24mail.chacuo.net/">临时邮箱</a>,其他的信息可以随便填。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">FPGA</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/29/Libero/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F"><span class="toc-number">1.</span> <span class="toc-text">一、冒泡排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F"><span class="toc-number">2.</span> <span class="toc-text">二、选择排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="toc-number">3.</span> <span class="toc-text">三、插入排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F"><span class="toc-number">4.</span> <span class="toc-text">四、希尔排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F"><span class="toc-number">5.</span> <span class="toc-text">五、归并排序</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-软件无线电基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-<div class="article-inner">
-    
-      <header class="article-header">
-        
-        
-        <a href="/2021/10/31/%E8%BD%AF%E4%BB%B6%E6%97%A0%E7%BA%BF%E7%94%B5%E5%9F%BA%E7%A1%80/" class="archive-article-date">
-  	<time datetime="2021-10-31T15:28:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-31</time>
-</a>
-
-
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">3分</span>
-      </span>
-    </span>
-</div>
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2021/10/31/%E8%BD%AF%E4%BB%B6%E6%97%A0%E7%BA%BF%E7%94%B5%E5%9F%BA%E7%A1%80/">软件无线电基础</a>
-    </h1>
-  
-</p></center>
-      
-        <p>Exploring GNU radio(GNU radio探密)是GNU radio创始人Eric Blossom所写的，为我们用GNU radio工具构建软件无线电系统做了简明扼要的介绍。读完之后有几点需要自己注意的地方：</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/31/%E8%BD%AF%E4%BB%B6%E6%97%A0%E7%BA%BF%E7%94%B5%E5%9F%BA%E7%A1%80/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
     </div>
 </aside>
 
@@ -814,11 +375,13 @@ var _hmt = _hmt || [];
 
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/9/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span>
-    </nav>
   
 
+  
+
+  
+
+  
 
           </div>
         </div>
@@ -860,8 +423,8 @@ var _hmt = _hmt || [];
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
