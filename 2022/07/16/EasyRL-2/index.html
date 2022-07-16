@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>C++ primer 6章 函数 | 博客杂记 - Harder and Better</title>
+  <title>EasyRL-2 | 博客杂记 - Harder and Better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -23,18 +23,21 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta name="description" content="第6章：函数函数基础 函数定义：包括返回类型、函数名字和0个或者多个形参（parameter）组成的列表和函数体。 调用运算符：调用运算符的形式是一对圆括号 ()，作用于一个表达式，该表达式是函数或者指向函数的指针。 调用函数时圆括号内是用逗号隔开的实参（argument）列表。">
+  <meta name="description" content="第2 章马尔可夫决策过程智能体得到环境的状态后，它会采取动作，并把这个采取的动作返还给环境。环境得到智能体的动作后，它会进入下一个状态，把下一个状态传给智能体。在强化学习中，智能体与环境就是这样进行交互的，这个交互过程可以通过马尔可夫决策过程来表示，所以马尔可夫决策过程是强化学习的基本框架。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++ primer 6章 函数">
-<meta property="og:url" content="http://example.com/2022/02/28/C++-primer-6%E7%AB%A0/index.html">
+<meta property="og:title" content="EasyRL-2">
+<meta property="og:url" content="http://example.com/2022/07/16/EasyRL-2/index.html">
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
-<meta property="og:description" content="第6章：函数函数基础 函数定义：包括返回类型、函数名字和0个或者多个形参（parameter）组成的列表和函数体。 调用运算符：调用运算符的形式是一对圆括号 ()，作用于一个表达式，该表达式是函数或者指向函数的指针。 调用函数时圆括号内是用逗号隔开的实参（argument）列表。">
+<meta property="og:description" content="第2 章马尔可夫决策过程智能体得到环境的状态后，它会采取动作，并把这个采取的动作返还给环境。环境得到智能体的动作后，它会进入下一个状态，把下一个状态传给智能体。在强化学习中，智能体与环境就是这样进行交互的，这个交互过程可以通过马尔可夫决策过程来表示，所以马尔可夫决策过程是强化学习的基本框架。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-02-28T02:51:32.000Z">
-<meta property="article:modified_time" content="2022-02-28T12:45:41.788Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207161157971.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207161225778.png">
+<meta property="article:published_time" content="2022-07-16T03:54:47.000Z">
+<meta property="article:modified_time" content="2022-07-16T13:01:54.787Z">
 <meta property="article:author" content="ygtrece">
-<meta property="article:tag" content="C++">
+<meta property="article:tag" content="强化学习">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207161157971.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -186,15 +189,15 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-C++-primer-6章" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-EasyRL-2" class="article article-type-post " itemscope itemprop="blogPost">
   
 <div class="article-inner">
     
       <header class="article-header">
         
         
-        <a href="/2022/02/28/C++-primer-6%E7%AB%A0/" class="archive-article-date">
-  	<time datetime="2022-02-28T02:51:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-28</time>
+        <a href="/2022/07/16/EasyRL-2/" class="archive-article-date">
+  	<time datetime="2022-07-16T03:54:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-16</time>
 </a>
 
 
@@ -212,7 +215,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.7k字</span>
+        <span class="post-count">1.7k字</span>
       </span>
     </span>
 
@@ -221,7 +224,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">10分</span>
+        <span class="post-count">7分</span>
       </span>
     </span>
 </div>
@@ -236,198 +239,74 @@ var _hmt = _hmt || [];
       <center><p>
   
     <h1 class="article-title_code_ant" itemprop="name">
-      C++ primer 6章 函数
+      EasyRL-2
     </h1>
   
 </p></center>
       
-        <h2 id="第6章：函数"><a href="#第6章：函数" class="headerlink" title="第6章：函数"></a>第6章：函数</h2><h3 id="函数基础"><a href="#函数基础" class="headerlink" title="函数基础"></a>函数基础</h3><ul>
-<li><strong>函数定义</strong>：包括返回类型、函数名字和0个或者多个<strong>形参</strong>（parameter）组成的列表和函数体。</li>
-<li><strong>调用运算符</strong>：调用运算符的形式是一对圆括号 <code>()</code>，作用于一个表达式，该表达式是函数或者指向函数的指针。</li>
-<li>调用函数时圆括号内是用逗号隔开的<strong>实参</strong>（argument）列表。</li>
-</ul>
+        <h3 id="第2-章马尔可夫决策过程"><a href="#第2-章马尔可夫决策过程" class="headerlink" title="第2 章马尔可夫决策过程"></a>第2 章马尔可夫决策过程</h3><p>智能体得到环境的状态后，它会采取动作，并把这个采取的动作返还给环境。环境得到智能体的动作后，它会进入下一个状态，把下一个状态传给智能体。在强化学习中，智能体与环境就是这样进行交互的，这个交互过程可以通过马尔可夫决策过程来表示，所以马尔可夫决策过程是强化学习的基本框架。</p>
 <span id="more"></span>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207161157971.png" alt="image-20220716115750100"></p>
+<p>这部分介绍<strong>马尔可夫决策过程</strong>，先介绍它的简化版本：<strong>马尔可夫过程</strong>（Markov process，MP）以及<strong>马尔可夫奖励过程</strong>（Markov reward process，MRP）</p>
+<p>其次，会介绍马尔可夫决策过程中的策略评估（policy evaluation），就是当给定决策后，我们怎么去计算它的价值函数。</p>
+<p>最后，会介绍马尔可夫决策过程的控制，具体有策略迭代（policy iteration）和价值迭代（value iteration）两种算法。</p>
+<h4 id="2-1-马尔可夫过程"><a href="#2-1-马尔可夫过程" class="headerlink" title="2.1 马尔可夫过程"></a>2.1 马尔可夫过程</h4><p><strong>2.1.1 马尔可夫性质</strong></p>
+<p><strong>马尔可夫性质</strong>（Markov property）是指一个随机过程在给定现在状态及所有过去状态情况下，其未来状态的条件概率分布仅依赖于当前状态。</p>
+<p>$p\left(X_{t+1}=x_{t+1} \mid X_{0: t}=x_{0: t}\right)=p\left(X_{t+1}=x_{t+1} \mid X_{t}=x_{t}\right)$</p>
+<p>其中，X0:t 表示变量集合X0,X1, · · · ,Xt，x0:t 为在状态空间中的状态序列x0, x1, · · · , xt。</p>
+<p>马尔可夫性质也可以描述为给定当前状态时，将来的状态与过去状态是条件独立的。如果某一个过程满足马尔可夫性质，那么==未来的转移与过去的是独立的，它只取决于现在==。马尔可夫性质是所有马尔可夫过程的基础。</p>
+<p><strong>2.1.2 马尔可夫过程/马尔可夫链</strong></p>
+<p>马尔可夫过程是一组具有马尔可夫性质的随机变量序列$s_1,…,s_t$，其中下一个时刻的状态$s_{t+1}$ 只取决于当前状态$s_t$。我们设状态的历史为$h_t = \left\{s_1, s_2, … s_t\right\}$（$h_t$ 包含了之前的所有状态），则马尔可夫过程满足条件：</p>
+<p>$p\left(s_{t+1} \mid s_{t}\right)=p\left(s_{t+1} \mid h_{t}\right)$</p>
+<p>从当前$s_t$ 转移到$s_{t+1}$ ，它是直接就等于它之前所有的状态转移到$s_{t+1}$ 。</p>
+<p><strong>离散时间的马尔可夫过程也称为马尔可夫链（Markov chain）</strong></p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207161225778.png" alt="image-20220716122515157"></p>
+<p>我们可以用状态转移矩阵（state transition matrix）P 来描述状态转移$p\left(s_{t+1}=s^{\prime} \mid s_{t}=s\right)$</p>
+<p>$\boldsymbol{P}=\left(\begin{array}{cccc}p\left(s_{1} \mid s_{1}\right) &amp; p\left(s_{2} \mid s_{1}\right) &amp; \ldots &amp; p\left(s_{N} \mid s_{1}\right) \ p\left(s_{1} \mid s_{2}\right) &amp; p\left(s_{2} \mid s_{2}\right) &amp; \ldots &amp; p\left(s_{N} \mid s_{2}\right) \ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \ p\left(s_{1} \mid s_{N}\right) &amp; p\left(s_{2} \mid s_{N}\right) &amp; \ldots &amp; p\left(s_{N} \mid s_{N}\right)\end{array}\right)$</p>
+<p>状态转移矩阵类似于条件概率（conditional probability），它表示当我们知道当前我们在状态$s_t$  时，到达下面所有状态的概率。所以它的每一行描述的是从一个节点到达所有其他节点的概率。</p>
+<h4 id="2-2-马尔可夫奖励过程"><a href="#2-2-马尔可夫奖励过程" class="headerlink" title="2.2 马尔可夫奖励过程"></a>2.2 马尔可夫奖励过程</h4><p><strong>马尔可夫奖励过程</strong>（Markov reward process, MRP）是马尔可夫链加上奖励函数。奖励函数R 是一个期望，表示当我们到达某一个状态的时候，可以获得多大的奖励。这里另外定义了折扣因子γ。如果状态数是有限的，那么R 可以是一个向量。</p>
+<p><strong>2.2.1 回报与价值函数</strong></p>
+<p>$G_{t}=r_{t+1}+\gamma r_{t+2}+\gamma^{2} r_{t+3}+\gamma^{3} r_{t+4}+\ldots+\gamma^{T-t-1} r_{T}$</p>
+<p>这里有一个折扣因子，越往后得到的奖励，折扣越多。当我们有了回报之后，就可以定义状态的价值了，就是状态价值函数（state-value function）。对于马尔可夫奖励过程，状态价值函数被定义成回报的期望，即：</p>
+<p>$\begin{aligned} V^{t}(s) &amp;=\mathbb{E}\left[G_{t} \mid s_{t}=s\right] \ &amp;=\mathbb{E}\left[r_{t+1}+\gamma r_{t+2}+\gamma^{2} r_{t+3}+\ldots+\gamma^{T-t-1} r_{T} \mid s_{t}=s\right] \end{aligned}$</p>
+<p>期望也可以看成未来可能获得奖励的当前价值的表现，就是当我们进入某一个状态后，我们现在有多大的价值。不同的折扣因子，可以得到不同的动作的智能体。</p>
+<p>使用折扣因子的几个原因：</p>
 <ul>
-<li>函数调用过程：<ul>
-<li>1.主调函数（calling function）的执行被中断。</li>
-<li>2.被调函数（called function）开始执行。</li>
+<li>有些马尔可夫过程是带环的，避免无穷的奖励。</li>
+<li>希望立即得到奖励，而不是未来得到奖励。</li>
 </ul>
-</li>
-<li><strong>形参和实参</strong>：形参和实参的<strong>个数</strong>和<strong>类型</strong>必须匹配上。</li>
-<li><strong>返回类型</strong>： <code>void</code>表示函数不返回任何值。函数的返回类型不能是数组类型或者函数类型，但可以是指向数组或者函数的指针。</li>
-<li><strong>名字</strong>：名字的作用于是程序文本的一部分，名字在其中可见。</li>
-</ul>
-<h4 id="局部对象"><a href="#局部对象" class="headerlink" title="局部对象"></a>局部对象</h4><ul>
-<li><strong>生命周期</strong>：对象的生命周期是程序执行过程中该对象存在的一段时间。</li>
-<li><strong>局部变量</strong>（local variable）：形参和函数体内部定义的变量统称为局部变量。它对函数而言是局部的，对函数外部而言是<strong>隐藏</strong>的。</li>
-<li><strong>自动对象</strong>：只存在于块执行期间的对象。当块的执行结束后，它的值就变成<strong>未定义</strong>的了，形参就是一种自动对象。</li>
-<li><strong>局部静态对象</strong>： <code>static</code>类型的局部变量，生命周期贯穿函数调用前后。</li>
-</ul>
-<h4 id="函数声明"><a href="#函数声明" class="headerlink" title="函数声明"></a>函数声明</h4><ul>
-<li><strong>函数声明</strong>：函数的声明和定义唯一的区别是声明无需函数体，用一个分号替代。函数声明主要用于描述函数的接口，也称<strong>函数原型</strong>。</li>
-<li><strong>在头文件中进行函数声明</strong>：建议变量在头文件中声明；在源文件中定义。</li>
-<li><strong>分离编译</strong>： <code>CC a.cc b.cc</code>直接编译生成可执行文件；<code>CC -c a.cc b.cc</code>编译生成对象代码<code>a.o b.o</code>； <code>CC a.o b.o</code>编译生成可执行文件。</li>
-</ul>
-<h3 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h3><ul>
-<li>形参初始化的机理和变量初始化一样。</li>
-<li><strong>引用传递</strong>（passed by reference）：又称传引用调用（called by reference），指<strong>形参是引用类型</strong>，引用形参是它对应的实参的别名。</li>
-<li><strong>值传递</strong>（passed by value）：又称传值调用（called by value），指实参的值是通过<strong>拷贝</strong>传递给形参。</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//指针传递的写法</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">swap</span><span class="params">(<span class="type">int</span>* lhs, <span class="type">int</span>* rhs)</span></span></span><br><span class="line"><span class="function"></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">swap</span>(&amp;lft, &amp;rht);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="传值参数"><a href="#传值参数" class="headerlink" title="传值参数"></a>传值参数</h4><ul>
-<li>当初始化一个非引用类型的变量时，初始值被拷贝给变量。</li>
-<li>函数对形参做的所有操作都不会影响实参。</li>
-<li><strong>指针形参</strong>：常用在C中，<code>C++</code>建议使用引用类型的形参代替指针。</li>
-<li>引用也比直接进行值传递，也就是进行值拷贝效率更高，甚至有的类型不支持拷贝操作，因此应该尽量用引用。当函数不需要改变形参的值时，应该将其声明为常量引用。</li>
-</ul>
-<h4 id="传引用参数"><a href="#传引用参数" class="headerlink" title="传引用参数"></a>传引用参数</h4><ul>
-<li>通过使用引用形参，允许函数改变一个或多个实参的值。</li>
-<li>引用形参直接关联到绑定的对象，而非对象的副本。</li>
-<li>使用引用形参可以用于<strong>返回额外的信息</strong>。</li>
-<li>经常用引用形参来避免不必要的复制。</li>
-<li><code>void swap(int &amp;v1, int &amp;v2)</code></li>
-<li>如果无需改变引用形参的值，最好将其声明为常量引用。</li>
-<li>当传入的实参为右值（字面值）时，不能使用引用传递。</li>
-</ul>
-<p><strong><code>void f(T)</code>和<code>void f(&amp;T)</code>的区别：</strong></p>
-<p><code>void f(T)</code>的参数通过值传递，在函数中<code>T</code>是实参的副本，改变<code>T</code>不会影响到原来的实参。 <code>void f(&amp;T)</code>的参数通过引用传递，在函数中的<code>T</code>是实参的引用，<code>T</code>的改变也就是实参的改变。</p>
-<h4 id="const形参和实参"><a href="#const形参和实参" class="headerlink" title="const形参和实参"></a>const形参和实参</h4><ul>
-<li>形参的顶层<code>const</code>被忽略。<code>void func(const int i);</code>调用时既可以传入<code>const int</code>也可以传入<code>int</code>。</li>
-<li>我们可以使用非常量初始化一个底层<code>const</code>对象，但是反过来不行。</li>
-<li>在函数中，不能改变实参的<strong>局部副本</strong>。</li>
-<li>尽量使用常量引用，除非要修改传输实参的值。</li>
-</ul>
-<h4 id="数组形参"><a href="#数组形参" class="headerlink" title="数组形参"></a>数组形参</h4><ul>
-<li>当我们为函数传递一个数组时，实际上传递的是指向数组首元素的指针。</li>
-<li>要注意数组的实际长度，不能越界。</li>
-</ul>
-<h4 id="main处理命令行选项"><a href="#main处理命令行选项" class="headerlink" title="main处理命令行选项"></a>main处理命令行选项</h4><ul>
-<li><code>int main(int argc, char *argv[])&#123;...&#125;</code></li>
-<li>第一个形参代表参数的个数；第二个形参是参数C风格字符串数组，<code>argv</code>的实参从<code>argv[1]</code>开始，<code>argv[0]</code>保存程序的名字，并非用户输入。</li>
-</ul>
-<h4 id="可变形参"><a href="#可变形参" class="headerlink" title="可变形参"></a>可变形参</h4><p><code>initializer_list</code>提供的操作（<code>C++ 11</code>）：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>操作</th>
-<th>解释</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>initializer_list&lt;T&gt; lst;</code></td>
-<td>默认初始化；<code>T</code>类型元素的空列表</td>
-</tr>
-<tr>
-<td><code>initializer_list&lt;T&gt; lst&#123;a,b,c...&#125;;</code></td>
-<td><code>lst</code>的元素数量和初始值一样多；<code>lst</code>的元素是对应初始值的副本；列表中的元素是<code>const</code>。</td>
-</tr>
-<tr>
-<td><code>lst2(lst)</code></td>
-<td>拷贝或赋值一个<code>initializer_list</code>对象不会拷贝列表中的元素；拷贝后，原始列表和副本共享元素。</td>
-</tr>
-<tr>
-<td><code>lst2 = lst</code></td>
-<td>同上</td>
-</tr>
-<tr>
-<td><code>lst.size()</code></td>
-<td>列表中的元素数量</td>
-</tr>
-<tr>
-<td><code>lst.begin()</code></td>
-<td>返回指向<code>lst</code>中首元素的指针</td>
-</tr>
-<tr>
-<td><code>lst.end()</code></td>
-<td>返回指向<code>lst</code>中微元素下一位置的指针</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><code>initializer_list</code>使用demo：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">err_msg</span><span class="params">(ErrCode e, initializer_list&lt;string&gt; il)</span></span>&#123;</span><br><span class="line">    cout &lt;&lt; e.msg &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> bed = il.<span class="built_in">begin</span>(); beg != il.<span class="built_in">end</span>(); ++ beg)</span><br><span class="line">        cout &lt;&lt; *beg &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">err_msg</span>(<span class="built_in">ErrCode</span>(<span class="number">0</span>), &#123;<span class="string">&quot;functionX&quot;</span>, <span class="string">&quot;okay&#125;);</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>所有实参类型相同，可以使用 <code>initializer_list</code>的标准库类型。</li>
-<li>实参类型不同，可以使用<code>可变参数模板</code>。</li>
-<li><p>省略形参符： <code>...</code>，便于<code>C++</code>访问某些C代码，这些C代码使用了 <code>varargs</code>的C标准功能。</p>
-</li>
-<li><p><code>initializer_list</code>永远是常量值，因此无法改变<code>initializer_list</code>中元素的值，因此在使用时如果用到了引用，应该使用常量引用类型。</p>
-</li>
-</ul>
-<h3 id="返回类型和return语句"><a href="#返回类型和return语句" class="headerlink" title="返回类型和return语句"></a>返回类型和return语句</h3><h4 id="无返回值函数"><a href="#无返回值函数" class="headerlink" title="无返回值函数"></a>无返回值函数</h4><p>没有返回值的 <code>return</code>语句只能用在返回类型是 <code>void</code>的函数中，返回 <code>void</code>的函数不要求非得有 <code>return</code>语句。</p>
-<h4 id="有返回值函数"><a href="#有返回值函数" class="headerlink" title="有返回值函数"></a>有返回值函数</h4><ul>
-<li><code>return</code>语句的返回值的类型必须和函数的返回类型相同，或者能够<strong>隐式地</strong>转换成函数的返回类型。</li>
-<li>值的返回：返回的值用于初始化调用点的一个<strong>临时量</strong>，该临时量就是函数调用的结果。</li>
-<li><strong>不要返回局部对象的引用或指针</strong>。</li>
-<li><strong>引用返回左值</strong>：函数的返回类型决定函数调用是否是左值。调用一个返回引用的函数得到左值；其他返回类型得到右值。</li>
-<li><strong>列表初始化返回值</strong>：函数可以返回花括号包围的值的列表。（<code>C++11</code>）</li>
-<li><strong>主函数main的返回值</strong>：如果结尾没有<code>return</code>，编译器将隐式地插入一条返回0的<code>return</code>语句。返回0代表执行成功。</li>
-</ul>
-<h4 id="返回数组指针"><a href="#返回数组指针" class="headerlink" title="返回数组指针"></a>返回数组指针</h4><ul>
-<li><p><code>int *p1[10]</code>指的是含有十个指针的数组；<code>int (*p1)[10]</code>指的是p1是指向含有十个数据的数组的指针 ;</p>
-</li>
-<li><p><code>Type (*function (parameter_list))[dimension]</code></p>
-</li>
-<li>使用类型别名： <code>typedef int arrT[10];</code> 或者 <code>using arrT = int[10;]</code>，然后 <code>arrT* func() &#123;...&#125;</code></li>
-<li>使用 <code>decltype</code>： <code>decltype(odd) *arrPtr(int i) &#123;...&#125;</code></li>
-<li><strong>尾置返回类型</strong>： 在形参列表后面以一个<code>-&gt;</code>开始：<code>auto func(int i) -&gt; int(*)[10]</code>（<code>C++11</code>）</li>
-</ul>
-<p><strong>例子：编写一个函数声明，使其返回数组的引用并且该数组包含10个<code>string</code>对象。</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> (&amp;<span class="built_in">fun</span>())[<span class="number">10</span>];<span class="comment">//直接返回string</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> string str_arr[<span class="number">10</span>];<span class="comment">//使用类型别名</span></span><br><span class="line"><span class="function">str_arr&amp; <span class="title">fun</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">fun</span><span class="params">()</span>-&gt;<span class="title">string</span><span class="params">(&amp;)</span>[10]</span>;<span class="comment">//尾置返回类型</span></span><br><span class="line"></span><br><span class="line">string s[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">decltype</span>(s)&amp; <span class="built_in">fun</span>();<span class="comment">//使用decltype</span></span><br></pre></td></tr></table></figure>
-<h4 id="函数重载"><a href="#函数重载" class="headerlink" title="函数重载"></a>函数重载</h4><ul>
-<li><strong>重载</strong>：如果同一作用域内几个函数名字相同但形参列表不同，我们称之为重载（overload）函数。</li>
-<li><code>main</code>函数不能重载。</li>
-<li>重载和const形参：<ul>
-<li>一个有顶层const的形参和没有它的函数无法区分。 <code>Record lookup(Phone* const)</code>和 <code>Record lookup(Phone*)</code>无法区分。</li>
-<li>相反，是否有某个底层const形参可以区分。 <code>Record lookup(Account*)</code>和 <code>Record lookup(const Account*)</code>可以区分。</li>
-</ul>
-</li>
-<li><strong>重载和作用域</strong>：若在内层作用域中声明名字，它将隐藏外层作用域中声明的同名实体，在不同的作用域中无法重载函数名。</li>
-</ul>
-<h3 id="特殊用途语言特性"><a href="#特殊用途语言特性" class="headerlink" title="特殊用途语言特性"></a>特殊用途语言特性</h3><h4 id="默认实参"><a href="#默认实参" class="headerlink" title="默认实参"></a>默认实参</h4><ul>
-<li><code>string screen(sz ht = 24, sz wid = 80, char backgrnd = &#39; &#39;);</code></li>
-<li>一旦某个形参被赋予了默认值，那么它之后的形参都必须要有默认值。</li>
-<li>有默认形参的函数可以传入实参，也可以不传入。</li>
-</ul>
-<h4 id="内联（inline）函数"><a href="#内联（inline）函数" class="headerlink" title="内联（inline）函数"></a>内联（inline）函数</h4><ul>
-<li>普通函数的缺点：调用函数比求解等价表达式要慢得多。</li>
-<li><code>inline</code>函数可以避免函数调用的开销，可以让编译器在编译时<strong>内联地展开</strong>该函数。</li>
-<li><code>inline</code>函数应该在头文件中定义，在函数返回值的前面加上<code>inline</code>关键字即可声明内联函数。</li>
-<li>内联机制一般用于规模较小，流程直接，频繁调用的函数。</li>
-</ul>
-<h4 id="constexpr函数"><a href="#constexpr函数" class="headerlink" title="constexpr函数"></a>constexpr函数</h4><ul>
-<li>指能用于常量表达式的函数。</li>
-<li><code>constexpr int new_sz() &#123;return 42;&#125;</code></li>
-<li>函数的返回类型及所有形参类型都要是字面值类型，函数体中有且仅有一条return语句。</li>
-<li><code>constexpr</code>函数应该在头文件中定义。</li>
-</ul>
-<h4 id="调试帮助"><a href="#调试帮助" class="headerlink" title="调试帮助"></a>调试帮助</h4><ul>
-<li><p><code>assert</code>预处理宏（preprocessor macro）：<code>assert(expr);</code></p>
-<p><code>expr</code>为0，<code>assert</code>输出信息并终止程序的执行；<code>expr</code>不为0，<code>assert</code>什么也不做。</p>
-</li>
-</ul>
-<p>开关调试状态：</p>
-<p><code>CC -D NDEBUG main.c</code>可以定义这个变量<code>NDEBUG</code>，如果定义<code>NDEBUG</code>，关闭调试状态。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="meta">#<span class="keyword">ifndef</span> NDEBUG</span></span><br><span class="line">        cerr &lt;&lt; __func__ &lt;&lt; <span class="string">&quot;...&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="函数匹配"><a href="#函数匹配" class="headerlink" title="函数匹配"></a>函数匹配</h3><ul>
-<li>重载函数匹配的<strong>三个步骤</strong>：1.候选函数；2.可行函数；3.寻找最佳匹配。</li>
-<li><strong>候选函数</strong>：选定本次调用对应的重载函数集，集合中的函数称为候选函数（candidate function）。</li>
-<li><strong>可行函数</strong>：考察本次调用提供的实参，选出可以被这组实参调用的函数，新选出的函数称为可行函数（viable function）。</li>
-<li><strong>寻找最佳匹配</strong>：基本思想：实参类型和形参类型越接近，它们匹配地越好。</li>
-</ul>
-<h3 id="函数指针"><a href="#函数指针" class="headerlink" title="函数指针"></a>函数指针</h3><ul>
-<li><strong>函数指针</strong>：是指向函数的指针。</li>
-<li><code>bool (*pf)(const string &amp;, const string &amp;);</code> 注：两端的括号不可少。</li>
-<li>函数指针形参：<ul>
-<li>形参中使用函数定义或者函数指针定义效果一样。</li>
-<li>使用类型别名或者<code>decltype</code>。</li>
-</ul>
-</li>
-<li><strong>返回指向函数的指针</strong>：1.类型别名；2.尾置返回类型。</li>
-</ul>
-
+<p><strong>2.2.2 贝尔曼方程</strong></p>
+<p>从价值函数里面推导出贝尔曼方程</p>
+<p>$V(s)=\underbrace{R(s)}_{\text {即时奖励 }}+\gamma \underbrace{\sum_{s^{\prime} \in S} p\left(s^{\prime} \mid s\right) V\left(s^{\prime}\right)}_{\text {末来奖励的折扣总和 }}$</p>
+<p>贝尔曼方程定义了当前状态与未来状态之间的关系。未来奖励的折扣总和加上即时奖励，就组成了贝尔曼方程。</p>
+<p>贝尔曼方程的推导过程如下：</p>
+<p>$\begin{aligned} V(s) &amp;=\mathbb{E}\left[G_{t} \mid s_{t}=s\right] \ &amp;=\mathbb{E}\left[r_{t+1}+\gamma r_{t+2}+\gamma^{2} r_{t+3}+\ldots \mid s_{t}=s\right] \ &amp;=\mathbb{E}\left[r_{t+1} \mid s_{t}=s\right]+\gamma \mathbb{E}\left[r_{t+2}+\gamma r_{t+3}+\gamma^{2} r_{t+4}+\ldots \mid s_{t}=s\right] \ &amp;=R(s)+\gamma \mathbb{E}\left[G_{t+1} \mid s_{t}=s\right] \ &amp;=R(s)+\gamma \mathbb{E}\left[V\left(s_{t+1}\right) \mid s_{t}=s\right] \ &amp;=R(s)+\gamma \sum_{s^{\prime} \in S} p\left(s^{\prime} \mid s\right) V\left(s^{\prime}\right) \end{aligned}$</p>
+<p>我们可以把贝尔曼方程写成矩阵的形式：</p>
+<script type="math/tex; mode=display">
+\left(\begin{array}{c}
+V\left(s_{1}\right) \\
+V\left(s_{2}\right) \\
+\vdots \\
+V\left(s_{N}\right)
+\end{array}\right)=\left(\begin{array}{c}
+R\left(s_{1}\right) \\
+R\left(s_{2}\right) \\
+\vdots \\
+R\left(s_{N}\right)
+\end{array}\right)+\gamma\left(\begin{array}{cccc}
+p\left(s_{1} \mid s_{1}\right) & p\left(s_{2} \mid s_{1}\right) & \ldots & p\left(s_{N} \mid s_{1}\right) \\
+p\left(s_{1} \mid s_{2}\right) & p\left(s_{2} \mid s_{2}\right) & \ldots & p\left(s_{N} \mid s_{2}\right) \\
+\vdots & \vdots & \ddots & \vdots \\
+p\left(s_{1} \mid s_{N}\right) & p\left(s_{2} \mid s_{N}\right) & \ldots & p\left(s_{N} \mid s_{N}\right)
+\end{array}\right)\left(\begin{array}{c}
+V\left(s_{1}\right) \\
+V\left(s_{2}\right) \\
+\vdots \\
+V\left(s_{N}\right)
+\end{array}\right)</script><p>我们可以直接得到解析解（analytic solution）：</p>
+<p>$\boldsymbol{V}=(\boldsymbol{I}-\gamma \boldsymbol{P})^{-1} \boldsymbol{R}$</p>
+<p>蒙特卡洛采样的方法：，从某一状态开始让其随机发展，当积累了一定数量的轨迹之后，我们直接用Gt 除以轨迹数量，就会得到某个状态的价值。</p>
+<h4 id="2-3-马尔可夫决策过程"><a href="#2-3-马尔可夫决策过程" class="headerlink" title="2.3 马尔可夫决策过程"></a>2.3 马尔可夫决策过程</h4>
       
 
       
@@ -440,7 +319,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">强化学习</a>
         		</li>
       		
 		</ul>
@@ -496,7 +375,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/02/28/C++-primer-6%E7%AB%A0/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/07/16/EasyRL-2/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -510,18 +389,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2022/03/01/%E4%BA%8C%E5%8F%89%E6%A0%91-5/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          二叉树 (5)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2022/02/27/C++-primer-5%E7%AB%A0/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">C++ primer 5章 语句</div>
+    <a href="/2022/07/15/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%9C%BA%E5%88%B6/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">命名数据网络安全机制</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -548,7 +418,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC6%E7%AB%A0%EF%BC%9A%E5%87%BD%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">第6章：函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%9F%BA%E7%A1%80"><span class="toc-number">1.1.</span> <span class="toc-text">函数基础</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%80%E9%83%A8%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.1.1.</span> <span class="toc-text">局部对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E"><span class="toc-number">1.1.2.</span> <span class="toc-text">函数声明</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92"><span class="toc-number">1.2.</span> <span class="toc-text">参数传递</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%A0%E5%80%BC%E5%8F%82%E6%95%B0"><span class="toc-number">1.2.1.</span> <span class="toc-text">传值参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%A0%E5%BC%95%E7%94%A8%E5%8F%82%E6%95%B0"><span class="toc-number">1.2.2.</span> <span class="toc-text">传引用参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#const%E5%BD%A2%E5%8F%82%E5%92%8C%E5%AE%9E%E5%8F%82"><span class="toc-number">1.2.3.</span> <span class="toc-text">const形参和实参</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E5%BD%A2%E5%8F%82"><span class="toc-number">1.2.4.</span> <span class="toc-text">数组形参</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#main%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4%E8%A1%8C%E9%80%89%E9%A1%B9"><span class="toc-number">1.2.5.</span> <span class="toc-text">main处理命令行选项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E5%8F%98%E5%BD%A2%E5%8F%82"><span class="toc-number">1.2.6.</span> <span class="toc-text">可变形参</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%B1%BB%E5%9E%8B%E5%92%8Creturn%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.3.</span> <span class="toc-text">返回类型和return语句</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A0%E8%BF%94%E5%9B%9E%E5%80%BC%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.1.</span> <span class="toc-text">无返回值函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%89%E8%BF%94%E5%9B%9E%E5%80%BC%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.2.</span> <span class="toc-text">有返回值函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88"><span class="toc-number">1.3.3.</span> <span class="toc-text">返回数组指针</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD"><span class="toc-number">1.3.4.</span> <span class="toc-text">函数重载</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E7%94%A8%E9%80%94%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7"><span class="toc-number">1.4.</span> <span class="toc-text">特殊用途语言特性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E5%AE%9E%E5%8F%82"><span class="toc-number">1.4.1.</span> <span class="toc-text">默认实参</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E8%81%94%EF%BC%88inline%EF%BC%89%E5%87%BD%E6%95%B0"><span class="toc-number">1.4.2.</span> <span class="toc-text">内联（inline）函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#constexpr%E5%87%BD%E6%95%B0"><span class="toc-number">1.4.3.</span> <span class="toc-text">constexpr函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E8%AF%95%E5%B8%AE%E5%8A%A9"><span class="toc-number">1.4.4.</span> <span class="toc-text">调试帮助</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%8C%B9%E9%85%8D"><span class="toc-number">1.5.</span> <span class="toc-text">函数匹配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88"><span class="toc-number">1.6.</span> <span class="toc-text">函数指针</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC2-%E7%AB%A0%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E5%86%B3%E7%AD%96%E8%BF%87%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">第2 章马尔可夫决策过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E8%BF%87%E7%A8%8B"><span class="toc-number">1.1.</span> <span class="toc-text">2.1 马尔可夫过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E5%A5%96%E5%8A%B1%E8%BF%87%E7%A8%8B"><span class="toc-number">1.2.</span> <span class="toc-text">2.2 马尔可夫奖励过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E5%86%B3%E7%AD%96%E8%BF%87%E7%A8%8B"><span class="toc-number">1.3.</span> <span class="toc-text">2.3 马尔可夫决策过程</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
