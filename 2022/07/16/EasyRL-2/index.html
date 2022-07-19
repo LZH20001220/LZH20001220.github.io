@@ -32,8 +32,9 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207161157971.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207161225778.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207171729433.png">
 <meta property="article:published_time" content="2022-07-16T03:54:47.000Z">
-<meta property="article:modified_time" content="2022-07-16T13:01:54.787Z">
+<meta property="article:modified_time" content="2022-07-17T09:47:12.506Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="强化学习">
 <meta name="twitter:card" content="summary">
@@ -215,7 +216,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.7k字</span>
+        <span class="post-count">2.5k字</span>
       </span>
     </span>
 
@@ -224,7 +225,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">7分</span>
+        <span class="post-count">10分</span>
       </span>
     </span>
 </div>
@@ -306,7 +307,24 @@ V\left(s_{N}\right)
 \end{array}\right)</script><p>我们可以直接得到解析解（analytic solution）：</p>
 <p>$\boldsymbol{V}=(\boldsymbol{I}-\gamma \boldsymbol{P})^{-1} \boldsymbol{R}$</p>
 <p>蒙特卡洛采样的方法：，从某一状态开始让其随机发展，当积累了一定数量的轨迹之后，我们直接用Gt 除以轨迹数量，就会得到某个状态的价值。</p>
-<h4 id="2-3-马尔可夫决策过程"><a href="#2-3-马尔可夫决策过程" class="headerlink" title="2.3 马尔可夫决策过程"></a>2.3 马尔可夫决策过程</h4>
+<h4 id="2-3-马尔可夫决策过程"><a href="#2-3-马尔可夫决策过程" class="headerlink" title="2.3 马尔可夫决策过程"></a>2.3 马尔可夫决策过程</h4><p>相对于马尔可夫奖励过程，马尔可夫决策过程多了决策（决策是指动作），其他的定义与马尔可夫奖励过程的是类似的。马尔可夫决策过程满足条件：它也多了一个当前的动作   $p\left(s_{t+1} \mid s_{t}, a_{t}\right)=p\left(s_{t+1} \mid h_{t}, a_{t}\right)$</p>
+<p><strong>2.3.1 马尔可夫决策过程中的策略</strong></p>
+<p>策略定义了在某一个状态应该采取什么样的动作。知道当前状态后，我们可以把当前状态代入策略函数来得到一个概率，即   $\pi(a \mid s)=p\left(a_{t}=a \mid s_{t}=s\right)$</p>
+<p>已知马尔可夫决策过程和策略π，我们可以把马尔可夫决策过程转换成马尔可夫奖励过程。  $P_{\pi}\left(s^{\prime} \mid s\right)=\sum_{a \in A} \pi(a \mid s) p\left(s^{\prime} \mid s, a\right)$</p>
+<p>对于奖励函数，我们也可以把动作去掉，这样就会得到类似于马尔可夫奖励过程的奖励函数，即   $r_{\pi}(s)=\sum_{a \in A} \pi(a \mid s) R(s, a)$</p>
+<p><strong>2.3.2 马尔可夫决策过程和马尔可夫过程/马尔可夫奖励过程的区别</strong></p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207171729433.png" alt="image-20220717172913080"></p>
+<p><strong>2.3.3 马尔可夫决策过程中的价值函数</strong></p>
+<p>马尔可夫决策过程中的价值函数可定义为:   $V_{\pi}(s)=\mathbb{E}_{\pi}\left[G_{t} \mid s_{t}=s\right]$</p>
+<p>其中，期望基于我们采取的策略。当策略决定后，我们通过对策略进行采样来得到一个期望，计算出它的价值函数。</p>
+<p>这里我们另外引入了一个Q 函数（Q-function）。Q 函数也被称为动作价值函数（action-value function）。Q 函数定义的是在某一个状态采取某一个动作，它有可能得到的回报的一个期望，即   $Q_{\pi}(s, a)=\mathbb{E}_{\pi}\left[G_{t} \mid s_{t}=s, a_{t}=a\right]$</p>
+<p>这里的期望其实也是基于策略函数的。所以我们需要对策略函数进行一个加和，然后得到它的价值。对Q函数中的动作进行加和，就可以得到价值函数：   $V_{\pi}(s)=\sum_{a \in A} \pi(a \mid s) Q_{\pi}(s, a)$</p>
+<p><strong>2.3.4  贝尔曼期望方程</strong></p>
+<p>我们可以把状态价值函数和Q 函数拆解成两个部分：即时奖励和后续状态的折扣价值。通过对状态价值函数进行分解，我们就可以得到一个类似于之前马尔可夫奖励过程的贝尔曼方程——贝尔曼期望方程（Bellman expectation equation）：</p>
+<p>$V_{\pi}(s)=\mathbb{E}_{\pi}\left[r_{t+1}+\gamma V_{\pi}\left(s_{t+1}\right) \mid s_{t}=s\right]$</p>
+<p>Q 函数的贝尔曼期望方程：</p>
+<p>$Q_{\pi}(s, a)=\mathbb{E}_{\pi}\left[r_{t+1}+\gamma Q_{\pi}\left(s_{t+1}, a_{t+1}\right) \mid s_{t}=s, a_{t}=a\right]$</p>
+
       
 
       
@@ -587,19 +605,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">项目</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
               </li>
              
               <li class="article-tag-list-item">
