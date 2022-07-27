@@ -184,6 +184,225 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-高性能网络编程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  
+<div class="article-inner">
+    
+      <header class="article-header">
+        
+        
+        <a href="/2022/07/25/%E9%AB%98%E6%80%A7%E8%83%BD%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="archive-article-date">
+  	<time datetime="2022-07-25T02:25:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-25</time>
+</a>
+
+
+
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">6.4k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">23分</span>
+      </span>
+    </span>
+</div>
+          
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p>
+  
+    <h1 itemprop="name">
+      <a class="article-title_code_ant" href="/2022/07/25/%E9%AB%98%E6%80%A7%E8%83%BD%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">高性能网络编程(1)</a>
+    </h1>
+  
+</p></center>
+      
+        <h2 id="高性能网络编程（一）——accept建立连接"><a href="#高性能网络编程（一）——accept建立连接" class="headerlink" title="高性能网络编程（一）——accept建立连接"></a>高性能网络编程（一）——accept建立连接</h2><p><strong>高性能</strong>，它是指程序员设计编写的服务器需要处理很大的吞吐量，这与简单网络应用就有了质的不同。</p>
+<p>因为：1、高吞吐量下，容易触发到一些设计上的边界条件；2、偶然性的小概率事件，会在高吞吐量下变成必然性事件。3、IO是慢速的，高吞吐量通常意味着高并发，如同一时刻存在数以万计、十万计、百万计的TCP活动连接。</p>
+<p>高性能网络编程，涉及到对网络、操作系统协议栈、进程与线程、常见的网络组件等知识点。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207261126486.jpeg" alt="img"></p>
+<p>如上图红色文字所示，我认为编写高性能服务器的关注点有3个：</p>
+<p>1、如果基于通用组件编程，关注点多是在组件如何封装套接字编程细节。为了使应用程序不感知套接字层，这些组件往往是通过各种回调机制来向应用层代码提供网络服务，通常，出于为应用层提供更高的开发效率，组件都大量使用了线程（Nginx等是个例外），当然，使用了线程后往往可以降低代码复杂度。但多线程引入的并发解决机制还是需要重点关注的，特别是锁的使用。另外，使用多线程意味着把应用层的代码复杂度扔给了操作系统，大吞吐量时，需要关注多线程给操作系统内核带来的性能损耗。</p>
+<p>基于通用组件编程，为了程序的高性能运行，需要清楚的了解组件的以下特性：怎么使用IO多路复用或者异步IO的？怎么实现并发性的？ 怎么组织线程模型的？ 怎么处理高吞吐量引发的异常情况的？</p>
+<p>2、通用组件只是在封装套接字，操作系统是通过提供套接字来为进程提供网络通讯能力的。所以，不了解套接字编程，往往对组件的性能就没有原理上的认识。学习套接字层的编程是有必要的，或许很少会自己从头去写，但操作系统的API提供方式经久不变，一经学会，受用终身，同时在项目的架构设计时，选用何种网络组件就非常准确了。</p>
+<p>学习套接字编程，关注点主要在：套接字的编程方法有哪些？阻塞套接字的各方法是如何阻塞住当前代码段的？非阻塞套接字上的方法如何不阻塞当前代码段的？IO多路复用机制是怎样与套接字结合的？异步IO是如何实现的？网络协议的各种异常情况、操作系统的各种异常情况是怎么通过套接字传递给应用性程序的？</p>
+<p>3、网络的复杂性会影响到服务器的吞吐量，而且，高吞吐量场景下，多种临界条件会导致应用程序的不正常，特别是组件中有bug或考虑不周或没有配置正确时。了解网络分组可以定位出这些问题，可以正确的配置系统、组件，可以正确的理解系统的瓶颈。</p>
+<p>这里的关注点主要在：TCP、UDP、IP协议的特点？linux等操作系统如何处理这些协议的？使用tcpdump等抓包工具分析各网络分组。</p>
+<p>一般掌握以上3点，就可以挥洒自如的实现高性能网络服务器了。</p>
+<p><strong>本文就主要以TCP协议为例来说明网络IO。</strong></p>
+<p>网络IO中应用服务器往往聚焦于以下几个由网络IO组成的功能中：A）与客户端建立起TCP连接。B）读取客户端的请求流。C）向客户端发送响应流。D）关闭TCP连接。E）向其他服务器发起TCP连接。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207261134458.jpeg" alt="img"></p>
+<p>应用层往往只需要调用类似于accept的API就可以建立TCP连接。建立连接的流程大家都了解—三次握手，它如何与accept交互呢？</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207261136324.jpeg" alt="img"></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/78879634">网络编程：backlog的含义 - 知乎 (zhihu.com)</a></p>
+<p>研究过backlog含义的朋友都很容易理解上图。这两个队列是内核实现的，当服务器绑定、监听了某个端口后，这个端口的SYN队列和ACCEPT队列就建立好了。客户端使用connect向服务器发起TCP连接，当图中1.1步骤客户端的SYN包到达了服务器后，内核会把这一信息放到SYN队列（即未完成握手队列）中，同时回一个SYN+ACK包给客户端。一段时间后，在较中2.1步骤中客户端再次发来了针对服务器SYN包的ACK网络分组时，内核会把连接从SYN队列中取出，再把这个连接放到ACCEPT队列（即已完成握手队列）中。而服务器在第3步调用accept时，其实就是直接从ACCEPT队列中取出已经建立成功的连接套接字而已。</p>
+<p>现有我们可以来讨论应用层组件：为何有的应用服务器进程中，会单独使用1个线程，只调用accept方法来建立连接，例如tomcat；有的应用服务器进程中，却用1个线程做所有的事，包括accept获取新连接。</p>
+<p>企业级的服务器进程中，若某一线程既使用accept获取新连接，又继续在这个连接上读、写字符流，那么，这个连接对应的套接字通常要设为非阻塞。原因如上图，调用accept时不会长期占用所属线程的CPU时间片，使得线程能够及时的做其他工作。</p>
+<p>对阻塞套接字，accept行为如下图：</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207261145182.jpeg" alt="img"></p>
+<p>对非阻塞套接字，accept会有两种返回</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207261145705.jpeg" alt="img"></p>
+<h2 id="高性能网络编程2——TCP消息的发送"><a href="#高性能网络编程2——TCP消息的发送" class="headerlink" title="高性能网络编程2——TCP消息的发送"></a>高性能网络编程2——TCP消息的发送</h2><p>操作TCP协议发送数据时，面对的是数据流。通常调用诸如send或者write方法来发送数据到另一台主机，那么，调用这样的方法时，在操作系统内核中发生了什么事情呢？</p>
+<p>探究的三个问题：发送方法成功返回时，能保证TCP另一端的主机接收到吗？能保证数据已经发送到网络上了吗？套接字为阻塞或者非阻塞时，发送方法做的事情有何不同？</p>
+<p><a target="_blank" rel="noopener" href="https://blog.51cto.com/u_14813744/2718767">TCP报文发送的那些事_wx5eb8fd0c124b1的技术博客_51CTO博客</a></p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207261146029.jpeg" alt="img"></p>
+<ul>
+<li>MTU：用来通知对方所能接受数据服务单元的最大尺寸，说明发送方能够接受的有效载荷大小。</li>
+<li>MSS：最大报文长度，MSS选项用于在TCP连接建立时，收发双方协商通信时每一个报文段所能承载的最大数据长度。</li>
+</ul>
+<p>无论何种类型的数据链路层，都会对网络分组的长度有一个限制。例如以太网限制为1500字节，802.3限制为1492字节。当内核的IP网络层试图发送报文时，若一个报文的长度大于MTU限制，就会被分成若干个小于MTU的报文，每个报文都会有独立的IP头部。</p>
+<p>若TCP层在以太网中试图发送一个大于1500字节的消息，调用IP网络层方法发送消息时，IP层会自动的获取所在局域网的MTU值，并按照所在网络的MTU大小来分片。IP层同时希望这个分片对于传输层来说是透明的，接收方的IP层会根据收到的多个IP包头部，将发送方IP层分片出的IP包重组为一个消息。</p>
+<p>这种IP层的分片效率是很差的，因为必须所有分片都到达才能重组成一个包，其中任何一个分片丢失了，都必须重发所有分片。所以，TCP层会试图避免IP层执行数据报分片。</p>
+<p>为了避免IP层的分片，TCP协议定义了一个新的概念：最大报文段长度MSS。它定义了一个TCP连接上，一个主机期望对端主机发送单个报文的最大长度。TCP3次握手建立连接时，连接双方都要互相告知自己期望接收到的MSS大小。</p>
+<p><strong>IP头和TCP头都是20字节。</strong></p>
+<p><strong>发送报文的基本流程：</strong></p>
+<p>(1) 调用send方法来发送一段较长的数据。然后send函数调用内核态的tcp_sendmsg方法进行处理。</p>
+<p>(2) 主要注意的是，send方法返回成功，内核也不一定真正将IP报文都发送到网络中，也就是说内核发送报文和send方法是不同步的。所以，内核需要将用户态内存中的发送数据，拷贝到内核态内存中，不依赖于用户态内存，使得进程可以快速释放发送数据占用的用户态内存。</p>
+<p>(3) 在拷贝过程中，内核将待发送的数据，按照MSS来划分成多个尽量接近MSS大小的分片，放到这个TCP连接对应的tcp_write_queue发送队列中。</p>
+<p>(4) 内核中为这个TCP连接分配的内核缓存是有限的（ /proc/sys/net/core/wmem_default ）。当没有多余的内核态缓存来复制用户态的待发送数据时，就需要调用一个方法 sk_stream_wait_memory来等待滑动窗口移动，释放出一些缓存出来（接收到ACK，就释放缓存）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wait_for_memory:</span><br><span class="line">			<span class="keyword">if</span> (copied)</span><br><span class="line">				<span class="built_in">tcp_push</span>(sk, tp, flags &amp; ~MSG_MORE, mss_now, TCP_NAGLE_PUSH);</span><br><span class="line">			<span class="keyword">if</span> ((err = <span class="built_in">sk_stream_wait_memory</span>(sk, &amp;timeo)) != <span class="number">0</span>)</span><br><span class="line">				<span class="keyword">goto</span> do_error;</span><br></pre></td></tr></table></figure>
+<p>这里的 sk_stream_wait_memory方法接受一个参数timeo，就是等待超时的时间。这个时间是tcp_sendmsg方法刚开始就拿到的，如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timeo = <span class="built_in">sock_sndtimeo</span>(sk, flags &amp; MSG_DONTWAIT);</span><br></pre></td></tr></table></figure>
+<p>其具体实现：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">long</span> <span class="title">sock_sndtimeo</span><span class="params">(<span class="type">const</span> <span class="keyword">struct</span> sock *sk, <span class="type">int</span> noblock)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> noblock ? <span class="number">0</span> : sk-&gt;sk_sndtimeo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>也就是说，当这个套接字是阻塞套接字时，timeo就是SO_SNDTIMEO选项指定的发送超时时间。如果这个套接字是非阻塞套接字， timeo变量就会是0。</p>
+<p>实际上，sk_stream_wait_memory对于非阻塞套接字会直接返回，并将 errno错误码置为EAGAIN。</p>
+<p>(5) 在图1的例子中，我们假定使用了阻塞套接字，且等待了足够久的时间，收到了对方的ACK，滑动窗口释放出了缓存。</p>
+<p>(6) 将剩下的用户态数据都组成MSS报文拷贝到内核态的sk_buff中。</p>
+<p>(7) 最后，调用tcp_push等方法，它最终会调用IP层的方法来发送tcp_write_queue队列中的报文。注意，IP层返回时，并不一定是把报文发送了出去。</p>
+<p>(8) 发送方法返回。</p>
+<p>从图1的10个步骤中可知，无论是使用阻塞还是非阻塞套接字，发送方法成功返回时（无论全部成功或者部分成功），既不代表TCP连接的另一端主机接收到了消息，也不代表本机把消息发送到了网络上，只是说明，内核将会试图保证把消息送达对方。</p>
+<p>tcp_push方法的具体流程</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207261227973.jpeg" alt="img"></p>
+<h2 id="高性能网络编程3——TCP消息的接收"><a href="#高性能网络编程3——TCP消息的接收" class="headerlink" title="高性能网络编程3——TCP消息的接收"></a>高性能网络编程3——TCP消息的接收</h2><p>第一幅图描述的场景是，TCP连接上将要收到的消息序号是S1（TCP上的每个报文都有序号，详见《TCP/IP协议详解》），此时操作系统内核依次收到了序号S1-S2的报文、S3-S4、S2-S3的报文，注意后两个包乱序了。之后，用户进程分配了一段len大小的内存用于接收TCP消息，此时，len是大于S4-S1的。另外，用户进程始终没有对这个socket设置过SO_RCVLOWAT参数，因此，接收阀值SO_RCVLOWAT使用默认值1。另外，系统参数tcp_low_latency设置为0，即从操作系统的总体效率出发，使用prequeue队列提升吞吐量。当然，由于用户进程收消息时，并没有新包来临，所以此图中prequeue队列始终为空。先不细表。</p>
+<p> <img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207261646955.jpeg" alt="img"></p>
+<p>上图中有13个步骤，应用进程使用了阻塞套接字，调用recv等方法时flag标志位为0，用户进程读取套接字时没有发生进程睡眠。内核在处理接收到的TCP报文时使用了4个队列容器（当链表理解也可），分别为receive、out_of_order、prequeue、backlog队列，本文会说明它们存在的意义。下面详细说明这13个步骤。</p>
+<p>1、当网卡接收到报文并判断为TCP协议后，将会调用到内核的tcp_v4_rcv方法。此时，这个TCP连接上需要接收的下一个报文序号恰好就是S1，而这一步里，网卡上收到了S1-S2的报文，所以，tcp_v4_rcv方法会把这个报文直接插入到receive队列中。</p>
+<p>注意：receive队列是允许用户进程直接读取的，它是将已经接收到的TCP报文，去除了TCP头部、排好序放入的、用户进程可以直接按序读取的队列。由于socket不在进程上下文中（也就是没有进程在读socket），由于我们需要S1序号的报文，而恰好收到了S1-S2报文，因此，它进入了receive队列。</p>
+<p>2、接着，我们收到了S3-S4报文。在第1步结束后，这时我们需要收到的是S2序号，但到来的报文却是S3打头的，怎么办呢？进入out_of_order队列！从这个队列名称就可以看出来，所有乱序的报文都会暂时放在这。</p>
+<p>3、仍然没有进入来读取socket，但又过来了我们期望的S2-S3报文，它会像第1步一样，直接进入receive队列。不同的时，由于此时out_of_order队列不像第1步是空的，所以，引发了接来的第4步。</p>
+<p>4、每次向receive队列插入报文时都会检查out_of_order队列。由于收到S2-S3报文后，期待的序号成为了S3，这样，out_of_order队列里的唯一报文S3-S4报文将会移出本队列而插入到receive队列中（这件事由tcp_ofo_queue方法完成）。</p>
+<p>5、终于有用户进程开始读取socket了。做过应用端编程的同学都知道，先要在进程里分配一块内存，接着调用read或者recv等方法，把内存的首地址和内存长度传入，再把建立好连接的socket也传入。当然，对这个socket还可以配置其属性。这里，假定没有设置任何属性，都使用默认值，因此，此时socket是阻塞式，它的SO_RCVLOWAT(接收低潮限度)是默认的1。当然，recv这样的方法还会接收一个flag参数，它可以设置为MSG_WAITALL、MSG_PEEK、MSG_TRUNK等等，这里我们假定为最常用的0。进程调用了recv方法。</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/brucemengbm/p/7079961.html">GNU Linux中的SO_RCVLOWAT和SO_SNDLOWAT说明 - brucemengbm - 博客园 (cnblogs.com)</a></p>
+<p>6、无论是何种接口，C库和内核经过层层封装，接收TCP消息最终一定会走到<strong>tcp_recvmsg方法。下面介绍代码细节时，它会是重点。</strong></p>
+<p>7、在tcp_recvmsg方法里，会首先锁住socket。为什么呢？因此socket是可以被多进程同时使用的，同时，内核中断也会操作它，而下面的代码都是核心的、操作数据的、有状态的代码，不可以被重入的，锁住后，再有用户进程进来时拿不到锁就要休眠在这了。内核中断看到被锁住后也会做不同的处理，参见图2、图3。</p>
+<p>8、此时，第1-4步已经为receive队列里准备好了3个报文。最上面的报文是S1-S2，将它拷贝到用户态内存中。由于第5步flag参数并没有携带MSG_PEEK这样的标志位，因此，再将S1-S2报文从receive队列的头部移除，从内核态释放掉。反之，MSG_PEEK标志位会导致receive队列不会删除报文。所以，MSG_PEEK主要用于多进程读取同一套接字的情形。</p>
+<p>9、如第8步，拷贝S2-S3报文到用户态内存中。当然，执行拷贝前都会检查用户态内存的剩余空间是否足以放下当前这个报文，不足以时会直接返回已经拷贝的字节数。</p>
+<p>10、同上。</p>
+<p>11、receive队列为空了，此时会先来检查SO_RCVLOWAT这个阀值。如果已经拷贝的字节数到现在还小于它，那么可能导致进程会休眠，等待拷贝更多的数据。第5步已经说明过了，socket套接字使用的默认的SO_RCVLOWAT，也就是1，这表明，只要读取到报文了，就认为可以返回了。</p>
+<p>做完这个检查了，再检查backlog队列。backlog队列是进程正在拷贝数据时，网卡收到的报文会进这个队列。此时若backlog队列有数据，就顺带处理下。图3会覆盖这种场景。</p>
+<p>12、在本图对应的场景中，backlog队列是没有数据的，已经拷贝的字节数为S4-S1，它是大于1的，因此，释放第7步里加的锁，准备返回用户态了。</p>
+<p>13、用户进程代码开始执行，此时recv等方法返回的就是S4-S1，即从内核拷贝的字节数。</p>
+<p>图2给出了第2种场景，这里涉及到prequeue队列。用户进程调用recv方法时，连接上没有任何接收并缓存到内核的报文，而socket是阻塞的，所以进程睡眠了。然后网卡中收到了TCP连接上的报文，此时prequeue队列开始产生作用。图2中tcp_low_latency为默认的0，套接字socket的SO_RCVLOWAT是默认的1，仍然是阻塞socket，如下图：</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207271159930.jpeg" alt="img"></p>
+<p>简单描述上述11个步骤：</p>
+<p>1、用户进程分配了一块len大小的内存，将其传入recv这样的函数，同时socket参数皆为默认，即阻塞的、SO_RCVLOWAT为1。调用接收方法，其中flags参数为0。</p>
+<p>2、C库和内核最终调用到tcp_recvmsg方法来处理。</p>
+<p>3、锁住socket。</p>
+<p>4、由于此时receive、prequeue、backlog队列都是空的，即没有拷贝1个字节的消息到用户内存中，而我们的最低要求是拷贝至少SO_RCVLOWAT为1长度的消息。此时，开始进入阻塞式套接字的等待流程。最长等待时间为SO_RCVTIMEO指定的时间。</p>
+<p>这个等待函数叫做sk_wait_data，有必要看下其实现：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">sk_wait_data</span><span class="params">(<span class="keyword">struct</span> sock *sk, <span class="type">long</span> *timeo)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="comment">//注意，它的自动唤醒条件有两个，要么timeo时间到达，要么receive队列不为空</span></span><br><span class="line">	rc = <span class="built_in">sk_wait_event</span>(sk, timeo, !<span class="built_in">skb_queue_empty</span>(&amp;sk-&gt;sk_receive_queue));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>sk_wait_event也值得我们简单看下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> sk_wait_event(__sk, __timeo, __condition)		\</span></span><br><span class="line"><span class="meta">(&#123;	int rc;							\</span></span><br><span class="line"><span class="meta">	release_sock(__sk);					\</span></span><br><span class="line"><span class="meta">	rc = __condition;					\</span></span><br><span class="line"><span class="meta">	<span class="keyword">if</span> (!rc) &#123;						\</span></span><br><span class="line"><span class="meta">		*(__timeo) = schedule_timeout(*(__timeo));	\</span></span><br><span class="line"><span class="meta">	&#125;							\</span></span><br><span class="line"><span class="meta">	lock_sock(__sk);					\</span></span><br><span class="line"><span class="meta">	rc = __condition;					\</span></span><br><span class="line"><span class="meta">	rc;							\</span></span><br><span class="line"><span class="meta">&#125;)</span></span><br></pre></td></tr></table></figure>
+<p>注意，它在睡眠前会调用release_sock，这个方法会释放socket锁，使得下面的第5步中，新到的报文不再只能进入backlog队列。</p>
+<p>5、这个套接字上期望接收的序号也是S1，此时网卡恰好收到了S1-S2的报文，在tcp_v4_rcv方法中，通过调用tcp_prequeue方法把报文插入到prequeue队列中。</p>
+<p>6、插入prequeue队列后，此时会接着调用wake_up_interruptible方法，唤醒在socket上睡眠的进程。参见tcp_prequque方法。</p>
+<p>7、用户进程被唤醒后，重新调用lock_sock接管了这个socket，此后再进来的报文都只能进入backlog队列了。</p>
+<p>8、进程醒来后，先去检查receive队列，当然仍然是空的；再去检查prequeue队列，发现有一个报文S1-S2，正好是socket连接待拷贝的起始序号S1，于是，从prequeue队列中取出这个报文并把内容复制到用户内存中，再释放内核中的这个报文。</p>
+<p>9、目前已经拷贝了S2-S1个字节到用户态，检查这个长度是否超过了最低阀值（即len和SO_RCVLOWAT的最小值）。</p>
+<p>10、由于SO_RCVLOWAT使用了默认的1，所以准备返回用户。此时会顺带再看看backlog队列中有没有数据，若有，则检查这个无序的队列中是否有可以直接拷贝给用户的报文。当然，此时是没有的。所以准备返回，释放socket锁。</p>
+<p>11、返回用户已经拷贝的字节数。</p>
+<p>图3给出了第3种场景。这个场景中，我们把系统参数tcp_low_latency设为1，socket上设置了SO_RCVLOWAT属性的值。服务器先是收到了S1-S2这个报文，但S2-S1的长度是小于SO_RCVLOWAT的，用户进程调用recv方法读套接字时，虽然读到了一些，但没有达到最小阀值，所以进程睡眠了，与此同时，在睡眠前收到的乱序的S3-S4包直接进入backlog队列。此时先到达了S2-S3包，由于没有使用prequeue队列，而它起始序号正是下一个待拷贝的值，所以直接拷贝到用户内存中，总共拷贝字节数已满足SO_RCVLOWAT的要求！最后在返回用户前把backlog队列中S3-S4报文也拷贝给用户了。如下图：</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207271241731.jpeg" alt="img"></p>
+<p>简明描述上述15个步骤：</p>
+<p>1、内核收到报文S1-S2，S1正是这个socket连接上待接收的序号，因此，直接将它插入有序的receive队列中。</p>
+<p>2、用户进程所处的linux操作系统上，将sysctl中的tcp_low_latency设置为1。这意味着，这台服务器希望TCP进程能够更及时的接收到TCP消息。用户调用了recv方法接收socket上的消息，这个socket上设置了SO_RCVLOWAT属性为某个值n，这个n是大于S2-S1，也就是第1步收到的报文大小。这里，仍然是阻塞socket，用户依然是分配了足够大的len长度内存以接收TCP消息。</p>
+<p>3、通过tcp_recvmsg方法来完成接收工作。先锁住socket，避免并发进程读取同一socket的同时，也在告诉内核网络软中断处理到这一socket时要有不同行为，如第6步。</p>
+<p>4、准备处理内核各个接收队列中的报文。</p>
+<p>5、receive队列中的有序报文可直接拷贝，在检查到S2-S1是小于len之后，将报文内容拷贝到用户态内存中。</p>
+<p>6、在第5步进行的同时，socket是被锁住的，这时内核又收到了一个S3-S4报文，因此报文直接进入backlog队列。注意，这个报文不是有序的，因为此时连接上期待接收序号为S2。</p>
+<p>7、在第5步，拷贝了S2-S1个字节到用户内存，它是小于SO_RCVLOWAT的，因此，由于socket是阻塞型套接字（超时时间在本文中忽略），进程将不得不转入睡眠。转入睡眠之前，还会干一件事，就是处理backlog队列里的报文，图2的第4步介绍过休眠方法sk_wait_data，它在睡眠前会执行release_sock方法，看看是如何实现的：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> fastcall <span class="title">release_sock</span><span class="params">(<span class="keyword">struct</span> sock *sk)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">mutex_release</span>(&amp;sk-&gt;sk_lock.dep_map, <span class="number">1</span>, _RET_IP_);</span><br><span class="line">	<span class="built_in">spin_lock_bh</span>(&amp;sk-&gt;sk_lock.slock);</span><br><span class="line">        <span class="comment">//这里会遍历backlog队列中的每一个报文</span></span><br><span class="line">	<span class="keyword">if</span> (sk-&gt;sk_backlog.tail)</span><br><span class="line">		__release_sock(sk);</span><br><span class="line">        <span class="comment">//这里是网络中断执行时，告诉内核，现在socket并不在进程上下文中</span></span><br><span class="line">	sk-&gt;sk_lock.owner = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">waitqueue_active</span>(&amp;sk-&gt;sk_lock.wq))</span><br><span class="line">		<span class="built_in">wake_up</span>(&amp;sk-&gt;sk_lock.wq);</span><br><span class="line">	<span class="built_in">spin_unlock_bh</span>(&amp;sk-&gt;sk_lock.slock);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再看看__release_sock方法是如何遍历backlog队列的：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">void</span> __release_sock(<span class="keyword">struct</span> sock *sk)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">struct</span> <span class="title class_">sk_buff</span> *skb = sk-&gt;sk_backlog.head;</span><br><span class="line">        <span class="comment">//遍历backlog队列</span></span><br><span class="line">	<span class="keyword">do</span> &#123;</span><br><span class="line">		sk-&gt;sk_backlog.head = sk-&gt;sk_backlog.tail = <span class="literal">NULL</span>;</span><br><span class="line">		<span class="built_in">bh_unlock_sock</span>(sk);</span><br><span class="line">		<span class="keyword">do</span> &#123;</span><br><span class="line">			<span class="keyword">struct</span> <span class="title class_">sk_buff</span> *next = skb-&gt;next;</span><br><span class="line">			skb-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">                  <span class="comment">//处理报文，其实就是tcp_v4_do_rcv方法，上文介绍过，不再赘述</span></span><br><span class="line">			sk-&gt;<span class="built_in">sk_backlog_rcv</span>(sk, skb);</span><br><span class="line">			<span class="built_in">cond_resched_softirq</span>();</span><br><span class="line">			skb = next;</span><br><span class="line">		&#125; <span class="keyword">while</span> (skb != <span class="literal">NULL</span>);</span><br><span class="line">		<span class="built_in">bh_lock_sock</span>(sk);</span><br><span class="line">	&#125; <span class="keyword">while</span>((skb = sk-&gt;sk_backlog.head) != <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//此时遍历到S3-S4报文，但因为它是失序的，所以从backlog队列中移入out_of_order队列中（参见上文说过的tcp_ofo_queue方法）。</span></span><br></pre></td></tr></table></figure>
+<p>8、进程休眠，直到超时或者receive队列不为空。</p>
+<p>9、内核接收到了S2-S3报文。注意，这里由于打开了tcp_low_latency标志位，这个报文是不会进入prequeue队列以待进程上下文处理的。</p>
+<p>10、此时，由于S2是连接上正要接收的序号，同时，有一个用户进程正在休眠等待接收数据中，且它要等待的数据起始序号正是S2，于是，这种种条件下，使得这一步同时也是网络软中断执行上下文中，把S2-S3报文直接拷贝进用户内存。</p>
+<p>11、上文介绍tcp_data_queue方法时大家可以看到，每处理完1个有序报文（无论是拷贝到receive队列还是直接复制到用户内存）后都会检查out_of_order队列，看看是否有报文可以处理。那么，S3-S4报文恰好是待处理的，于是拷贝进用户内存。然后唤醒用户进程。</p>
+<p>12、用户进程被唤醒了，当然唤醒后会先来拿到socket锁。以下执行又在进程上下文中了。</p>
+<p>13、此时会检查已拷贝的字节数是否大于SO_RCVLOWAT，以及backlog队列是否为空。两者皆满足，准备返回。</p>
+<p>14、释放socket锁，退出tcp_recvmsg方法。</p>
+<p>15、返回用户已经复制的字节数S4-S1。</p>
+<p>好了，这3个场景读完，想必大家对于TCP的接收流程是怎样的已经非常清楚了，本文起始的6个问题也在这一大篇中都涉及到了。下一篇我们来讨论TCP连接的关闭。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">网络编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/07/25/%E9%AB%98%E6%80%A7%E8%83%BD%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
     <article id="post-EasyRL-2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   
 <div class="article-inner">
@@ -1134,76 +1353,9 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="C++-primer-第10章-C++-primer-10章" class="article article-type-C++-primer-第10章  article-index" itemscope itemprop="blogPost">
-  
-<div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-      <center><p></p></center>
-      
-        <h2 id="第十章-泛型算法"><a href="#第十章-泛型算法" class="headerlink" title="第十章 泛型算法"></a>第十章 泛型算法</h2><h3 id="泛型算法"><a href="#泛型算法" class="headerlink" title="泛型算法"></a>泛型算法</h3><ul>
-<li>因为它们实现共同的操作，所以称之为“<strong>算法</strong>”；而“<strong>泛型</strong>”、指的是它们可以操作在多种容器类型上。</li>
-<li>泛型算法本身不执行容器操作，只是单独依赖迭代器和迭代器操作实现。</li>
-<li>头文件： <code>#include &lt;algorithm&gt;</code>或者 <code>#include &lt;numeric&gt;</code>(算数相关)</li>
-<li>大多数算法是通过遍历两个迭代器标记的一段元素来实现其功能。</li>
-<li>必要的编程假定：算法永远不会改变底层容器的大小。算法可能改变容器中保存的元素的值，也可能在容器内移动元素，但不能直接添加或者删除元素。</li>
-</ul>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/06/25/C++-primer-10%E7%AB%A0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
     </nav>
   
 
@@ -1352,11 +1504,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
+                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1372,15 +1524,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">科研</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1413,6 +1565,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
               </li>
             
             <div class="clearfix"></div>
