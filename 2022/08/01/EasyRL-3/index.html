@@ -32,8 +32,9 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202208011646245.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202208011727559.png">
+<meta property="og:image" content="http://example.com/2022/08/01/EasyRL-3/Users/李政翰/AppData/Roaming/Typora/typora-user-images/image-20220810164259038.png">
 <meta property="article:published_time" content="2022-08-01T08:42:27.000Z">
-<meta property="article:modified_time" content="2022-08-01T09:32:43.401Z">
+<meta property="article:modified_time" content="2022-08-10T08:44:15.554Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="强化学习">
 <meta name="twitter:card" content="summary">
@@ -215,7 +216,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">697字</span>
+        <span class="post-count">929字</span>
       </span>
     </span>
 
@@ -224,7 +225,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">2分</span>
+        <span class="post-count">3分</span>
       </span>
     </span>
 </div>
@@ -254,6 +255,11 @@ var _hmt = _hmt || [];
 <p>Q 函数有一个需要注意的问题是，策略π 在看到状态s 的时候，它采取的动作不一定是a。Q 函数假设在状态s 强制采取动作a，而不管我们现在考虑的策略π 会不会采取动作a，这并不重要。在状态s强制采取动作a。接下来都用策略π 继续玩下去，就只有在状态s，我们才强制一定要采取动作a，接下来就进入自动模式，让策略π 继续玩下去，得到的期望奖励才是Qπ(s, a) 。</p>
 <p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202208011727559.png" alt></p>
 <p>我们可以估计某一个策略的Q 函数，接下来就可以找到另外一个策略π′ 比原来的策略π 还要更好。</p>
+<p><img src="/2022/08/01/EasyRL-3/Users\李政翰\AppData\Roaming\Typora\typora-user-images\image-20220810164259038.png" alt="image-20220810164259038"></p>
+<h3 id="双深度Q-网络"><a href="#双深度Q-网络" class="headerlink" title="双深度Q 网络"></a>双深度Q 网络</h3><p>DDQN 的方法可以让预估值与真实值比较接近。</p>
+<p>在原来的深度Q 网络里面，我们穷举所有的a，把每一个a 都代入Q 函数，看哪一个a 可以得到的Q 值最高，就把那个Q 值加上rt。</p>
+<p>但是在DDQN 里面有两个Q 网络，第一个Q 网络Q 决定哪一个动作的Q 值最大（我们把所有的a 代入Q 函数中，看看哪一个a 的Q 值最大）。我们决定动作以后，Q 值是用Q′ 算出来的。</p>
+<p>假设我们有两个Q 函数——Q 和Q′，如果Q 高估了它选出来的动作a，只要Q′<br>没有高估动作a 的值，算出来的就还是正常的值。假设Q′ 高估了某一个动作的值，也是没问题的，因为只要Q 不选这个动作就可以。</p>
 
       
 
@@ -375,7 +381,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6Q%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94DQN"><span class="toc-number">1.</span> <span class="toc-text">深度Q网络——DQN</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A8%E4%BD%9C%E4%BB%B7%E5%80%BC%E5%87%BD%E6%95%B0"><span class="toc-number">1.0.1.</span> <span class="toc-text">动作价值函数</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6Q%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94DQN"><span class="toc-number">1.</span> <span class="toc-text">深度Q网络——DQN</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A8%E4%BD%9C%E4%BB%B7%E5%80%BC%E5%87%BD%E6%95%B0"><span class="toc-number">1.0.1.</span> <span class="toc-text">动作价值函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E6%B7%B1%E5%BA%A6Q-%E7%BD%91%E7%BB%9C"><span class="toc-number">1.1.</span> <span class="toc-text">双深度Q 网络</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
