@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202208261531216.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202208291757905.png">
 <meta property="article:published_time" content="2022-08-26T07:26:08.000Z">
-<meta property="article:modified_time" content="2022-08-29T10:04:30.485Z">
+<meta property="article:modified_time" content="2022-08-30T02:32:25.667Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="NDN">
 <meta property="article:tag" content="科研">
@@ -216,7 +216,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">950字</span>
+        <span class="post-count">1.7k字</span>
       </span>
     </span>
 
@@ -225,7 +225,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">3分</span>
+        <span class="post-count">6分</span>
       </span>
     </span>
 </div>
@@ -266,6 +266,50 @@ var _hmt = _hmt || [];
 <p>传输层处理都集成在了InternetStackHelper中。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">InternetStackHelper Stack;</span><br><span class="line">stack.<span class="built_in">install</span>(nodes);</span><br></pre></td></tr></table></figure>
 <p>这样就为节点安装了TCP和UDP。</p>
+<h4 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h4><p><strong>ns-3实现了TCP的核心算法，支持原生TCP和Cradle TCP。</strong>前者是TCP在ns-3中的实现，后者可以让ns-3运行Linux内核中的TCP协议栈，但只支持较早版本的Linux内核。</p>
+<p>它的Socket和IpL4Protocol子类分别是TcpSocketBase和TcpL4Protocol</p>
+<p>默认配置下，TcpSocketBase实现以New Reno拥塞控制算法为基础，结合使用选择性应答(SACK)和窗口扩大等选项的TCP协议。</p>
+<p><a target="_blank" rel="noopener" href="https://www.likecs.com/show-203914524.html">TCP拥塞控制算法之NewReno和SACK - 爱码网 (likecs.com)</a></p>
+<p>TCP的属性和变量主要集中在3个核心类中：</p>
+<ul>
+<li>TcpSocket：定义了一些基本的TCP属性。</li>
+<li>TcpSocketBase：窗口管理，拥塞控制等主要TCP算法。</li>
+<li>TcpL4Protocol，与网络层的接口，也负责创建TcpSocketBase。</li>
+</ul>
+<p><strong>1. 关键属性：</strong></p>
+<blockquote>
+<p>SocketType：不同场景对应的不同的TCP拥塞控制算法，ns3::TcpL4Protocol/SocketType</p>
+<p>MSS：最大分组长度，ns3::TcpSocket/SegmentSize</p>
+</blockquote>
+<p><strong>2. 关键trace：</strong></p>
+<blockquote>
+<p>拥塞控制窗口大小：ns3::TcpSocketBase/CongestionWindow</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//回调函数</span></span><br><span class="line"><span class="function"><span class="type">static</span> <span class="type">void</span></span></span><br><span class="line"><span class="function"><span class="title">CwndTracer</span><span class="params">(<span class="type">uint32_t</span> oldval, <span class="type">uint32_t</span> newval)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//配置trace</span></span><br><span class="line">Config::<span class="built_in">ConnectWithoutContext</span>(</span><br><span class="line"><span class="string">&quot;/NodeList/0/$ns3::TcpL4Protocol/SocketList/0/\</span></span><br><span class="line"><span class="string">CongestionWindow&quot;</span>,</span><br><span class="line"><span class="built_in">MakeCallback</span>(&amp;CwndTracer));</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>也可以使用TcpSocketBase的分组发送和接收trace变量。</p>
+</blockquote>
+<p>TCP分组头结构由TcpHeader类定义，使用TcpHeader::Print()可以打印除校验位之外的所有TCP分组头信息。</p>
+<p><strong>TCP的两个重要窗口：发送端的拥塞窗口和接收端的接收窗口。</strong>前者用于防止网络拥堵，后者反应结点接收分组的能力(流量控制)。</p>
+<ul>
+<li><p>接收窗口：直接相关的参数为ns3::TcpSocketBase/AdvWND和ns3::TcpSocketBase/RWND，ns3::TcpSocketBase/RevBufSize可以模拟终端的最大接受缓存。</p>
+<ul>
+<li>AdvWND表示接收端实际可以接受的最大字节数，</li>
+<li>RWND表示发送端从ACK消息中获取的接收端接收窗口。</li>
+</ul>
+</li>
+<li><p>拥塞窗口：可以由ns3::TcpSocketBase/CongestionWindow trace变量获得。由两部分组成：已发出但未收到ACK的分组(可以由ns3::TcpSocketBase/BytesInFlight trace获取)；另一部分是可以发送但尚未发送的总字节大小。</p>
+</li>
+</ul>
+<p>拥塞控制主要包括慢启动，拥塞避免，快速重传和快速恢复这几种算法。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40459977/article/details/123079343">TCP的拥塞控制算法：慢启动、拥塞避免、快重传、快恢复_咖啡与乌龙的博客-CSDN博客_tcp慢启动和拥塞避免</a></p>
+<p>当出现没有收到ACK时(RTO超时)会重发分组，将RTO超时时间加倍，把拥塞窗口设为1*MSS，重新进入慢启动阶段。</p>
+<h4 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h4><p>UDP相较TCP支持广播和多播，其主要属性和trace如下:</p>
+<ul>
+<li>ns3::UdpSocket/RcvBufSize属性：接收端缓存，单位是B。没有发送端缓存，传输层从应用层接收后直接发给IP。</li>
+<li>ns3::UdpSocketImpl/Drop trace变量：分组丢失trace。当接收端缓存满了之后，就会丢失新接收的UDP分组。</li>
+</ul>
+<p>UDP分组头结构由UDPHeader类定义，使用UDPHeader::Print()可以打印除校验位之外的所有UDP分组头信息。</p>
 
       
 
@@ -391,7 +435,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">应用层：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E8%BE%93%E5%B1%82"><span class="toc-number">2.</span> <span class="toc-text">传输层</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">应用层：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E8%BE%93%E5%B1%82"><span class="toc-number">2.</span> <span class="toc-text">传输层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP"><span class="toc-number">2.1.</span> <span class="toc-text">TCP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#UDP"><span class="toc-number">2.2.</span> <span class="toc-text">UDP</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -548,11 +592,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -576,15 +620,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">科研</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
