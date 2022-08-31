@@ -236,12 +236,7 @@ var _hmt = _hmt || [];
       
         <p>发送兴趣包返回数据包的代码在<code>forwarder.c</code>中，<code>forwarder.c</code>实际上包含六个函数，<code>on_incoming_interest</code>，<code>onContentStoreMiss</code>，<code>onContentStoreHit</code>，<code>onOutgoingInterest</code>，<code>onIncomingData</code>，<code>onOutgoingData</code>.</p>
 <p>如果想要加入ACK包，应该添加两个函数,需要新添加一个包类型，ack类型的包，tlv如何编码和解码ack包，face部分应该添加一个send_ack方法。</p>
-<p>ACK的逻辑和data包的逻辑应该是一样的，分为两部分，首先<code>on_incoming_interest</code>对兴趣包进行解析，如果在CS找到了与兴趣包匹配的数据包，调用<code>on_contentstore_hit</code>，直接通过接口返回数据包，这时候应该同时加上ACK包。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">on_contentstore_hit</span><span class="params">(<span class="type">pit_entry_t</span> *pit_entry, <span class="keyword">struct</span> <span class="type">data_t</span> *data, <span class="keyword">struct</span> <span class="type">face_t</span> *face)</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="comment">//send_ack(face, ack)</span></span><br><span class="line">  send_data(face, data);</span><br><span class="line">  pit_entry-&gt;is_satisfied = <span class="literal">true</span>;</span><br><span class="line">  pit_entry-&gt;data_freshness_period_time = data-&gt;meta.freshness_period;  <span class="comment">//设置好到期定时器</span></span><br><span class="line">  pit_erase(pit_entry); <span class="comment">//擦除PIT表项</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>否则应该调用<code>on_contentstore_miss</code>，首先将<code>interest</code>和<code>face</code>添加或者更新到PIT中，然后通过<code>on_outgoing_interest</code>转发兴趣包。<code>on_outgoing_interest</code>主要根据FIB找到下一跳的<code>faceid</code>，对所有可行的下一跳的face都在PIT中添加新的条目，并向这些face转发兴趣包。接着这些face又会通过<code>on_incoming_interest</code>继续判断，直到可以在CS中找到data包。</p>
-<p>数据包部分主要包括<code>on_incoming_data</code>和<code>on_outgoing_data</code>。<code>on_incoming_data</code>首先会查PIT中有没有data对应的名字，若果没有输出<code>&quot;NO pit record&quot;</code>，实际上相当于数据包是unsolicited不请自来的。如果PIT有，就应该将数据包插入到CS中以便后续使用。然后删除这个PIT条目，然后执行on_outgoing_data转发数据包。如果到期时间大于当前时间，就将data发送到对应端口，这里同样有send_data,这里也应该加上send_ack</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">on_outgoing_data</span><span class="params">(<span class="type">pit_entry_t</span> *pit_entry, <span class="keyword">struct</span> <span class="type">data_t</span> *data)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// printf (&quot;on_outgoing_data forwarder data is %s\n&quot;, data-&gt;value);</span></span><br><span class="line"></span><br><span class="line">  <span class="type">face_record_t</span> *face_record = pit_entry-&gt;incoming_faces;</span><br><span class="line">  <span class="keyword">while</span> (face_record != <span class="literal">NULL</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> (face_record-&gt;expiry &gt; time_now_us())  <span class="comment">//如果到期时间大于当前时间，就将data发送到对应端口</span></span><br><span class="line">     <span class="comment">//send_ack(face_record-&gt;face, ack)</span></span><br><span class="line">      send_data(face_record-&gt;face, data);</span><br><span class="line"></span><br><span class="line">    face_record = face_record-&gt;next;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+        
       
 
       
@@ -318,7 +313,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.7k字</span>
+        <span class="post-count">2.8k字</span>
       </span>
     </span>
 
@@ -327,7 +322,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">6分</span>
+        <span class="post-count">10分</span>
       </span>
     </span>
 </div>
@@ -1400,11 +1395,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1428,15 +1423,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">科研</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">

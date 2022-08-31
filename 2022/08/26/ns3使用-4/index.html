@@ -32,8 +32,10 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202208261531216.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202208291757905.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202208310853238.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202208310950919.jpg">
 <meta property="article:published_time" content="2022-08-26T07:26:08.000Z">
-<meta property="article:modified_time" content="2022-08-30T02:32:25.667Z">
+<meta property="article:modified_time" content="2022-08-31T02:23:43.002Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="NDN">
 <meta property="article:tag" content="科研">
@@ -216,7 +218,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.7k字</span>
+        <span class="post-count">2.8k字</span>
       </span>
     </span>
 
@@ -225,7 +227,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">6分</span>
+        <span class="post-count">10分</span>
       </span>
     </span>
 </div>
@@ -310,6 +312,74 @@ var _hmt = _hmt || [];
 <li>ns3::UdpSocketImpl/Drop trace变量：分组丢失trace。当接收端缓存满了之后，就会丢失新接收的UDP分组。</li>
 </ul>
 <p>UDP分组头结构由UDPHeader类定义，使用UDPHeader::Print()可以打印除校验位之外的所有UDP分组头信息。</p>
+<h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><p>传输层提供的是端到端服务。在实际传输中，不同结点间的通信路径上往往存在着多个中间结点(路由器，交换机，无线基站等)</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202208310853238.jpg" alt="9e9f12335a6f0f2eb20dada9c701ef5"></p>
+<p>ns3网络层的主要基类如下：</p>
+<ul>
+<li>Ipv4：定义了IPV4协议的接口函数。</li>
+<li>Ipv4L3Protocol：定义了IPv4协议的主要算法。</li>
+<li>Ipv4Interface：网络层和链路层交互的媒介，每一个NetDevice都对应唯一的Ipv4Interface对象，Ipv4Interface内部保存着所属NetDevice的一个或多个IP地址。必要时Ipv4Interface还可以通过ARP协议获取目标节点的链路层地址。</li>
+<li>Ipv4RoutingProtocol：Ipv4路由协议的基类，ns-3中的各种路由都是它的子类。</li>
+</ul>
+<p><strong>下行分组：</strong>Ipv4L3Protocol获取下一跳IP地址，确定将分组发送到哪一个Ipv4Interface对象。Ipv4Interface会检查NetDevice接口状态，如果接口可用会直接把分组转发给NetDevice对象。必要时Ipv4Interface还可以通过ARP协议获取目标节点的链路层地址。</p>
+<p><strong>上行分组：</strong>NetDevice通过回调函数把分组传给Node对象中的handler向量数据结构，这个结构用于确认一个分组是IPv4还是IPv6协议，从而确定将分组转发到Ipv4L3Protocol还是Ipv6L3Protocol。ns-3中新添加的网络层协议都需要在handler结构中注册，才可以正常的接收分组。最后Ipv4L3Protocol提取分组头的协议号确定将分组发送给哪一个传输层协议对象。</p>
+<p>在脚本中，网络层的创建包括在结点中<strong>安装网络层协议栈</strong>和<strong>地址分配</strong>两部分。</p>
+<blockquote>
+<p>安装网络层协议栈通过InternetStackHelper::Install()函数，其除了安装传输层协议架构外，还会为指定节点安装Ipv4L3Protocol和Ipv6L3Protocol协议对象，并建立他们与路由协议之间的关联。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">InternetStackHelper stack;</span><br><span class="line">stack.<span class="built_in">install</span>(nodes);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>ns-3地址分配支持手动和DHCP自动两种地址分配方式。分配地址的助手类是Ipv4AddressHelper和Ipv6AddressHelper。分配好的IP地址存在Ipv4Interface或Ipv6Interface中。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Ipv4AddressHelper address;</span><br><span class="line"><span class="comment">//设置Ipv4地址和子网掩码</span></span><br><span class="line">address.<span class="built_in">SetBase</span>(<span class="string">&quot;10.1.1.0&quot;</span>,<span class="string">&quot;255.255.255.0&quot;</span>,<span class="string">&quot;0.0.0.1&quot;</span>);	<span class="comment">//网络号 子网掩码 主机号(可选)</span></span><br><span class="line">Ipv4InterfaceContainer interfaces</span><br><span class="line">    = address.<span class="built_in">Assign</span>(devices);</span><br><span class="line"></span><br><span class="line">Ipv6AddressHelper address;</span><br><span class="line"><span class="comment">//设置Ipv6地址和子网掩码</span></span><br><span class="line">address.<span class="built_in">SetBase</span>(<span class="string">&quot;2001:1::&quot;</span>,<span class="built_in">Ipv6Prefix</span>(<span class="number">64</span>));</span><br><span class="line">Ipv6InterfaceContainer interfaces</span><br><span class="line">    = address.<span class="built_in">Assign</span>(devices);</span><br></pre></td></tr></table></figure>
+<p>Ipv4AddressHelper::Assign()会按照索引顺序为容器devices中的NetDevice对象依次分配地址。</p>
+<h4 id="自动分配IP地址：DHCP"><a href="#自动分配IP地址：DHCP" class="headerlink" title="自动分配IP地址：DHCP"></a><strong>自动分配IP地址：DHCP</strong></h4><p>通过使用DhcpHelper助手类，用户可以在脚本中指定DHCPv4服务器，为安装了DHCP客户端的结点分配Ipv4地址。</p>
+<p>图10-1没有标出流量管理层(Traffic Control layer)。TC层位于网络层和链路层之间，对于下行分组来说，其位于Ipv4Interface和Netdevice之间。对于上行分组来说，它位于node handler和Ipv4L3Protocol之间。</p>
+<p>TC层可以通过不同队列算法控制分组的收发行为。目前只实现了对下行分组的流量控制，支持先入先出，随机早期检测，控制延时等算法。</p>
+<h4 id="脚本配置和trace"><a href="#脚本配置和trace" class="headerlink" title="脚本配置和trace"></a>脚本配置和trace</h4><p>最常见的网络层配置是路由协议，使用OLSR路由协议(专门为Ad hoc网络设计)的实例如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OlsrHelper olsr;</span><br><span class="line">InternetStackHelper internet;</span><br><span class="line">internet.<span class="built_in">SetRoutingHelper</span>(olsr);</span><br></pre></td></tr></table></figure>
+<p><strong>trace</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>trace变量名</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tx</td>
+<td>成功发送IP分组</td>
+</tr>
+<tr>
+<td>Rx</td>
+<td>成功接收IP分组</td>
+</tr>
+<tr>
+<td>Drop</td>
+<td>丢弃IP分组</td>
+</tr>
+<tr>
+<td>SendOutgoing</td>
+<td>成功产生IP分组</td>
+</tr>
+<tr>
+<td>LocalDeliver</td>
+<td>成功接收IP分组</td>
+</tr>
+<tr>
+<td>UnicastForward</td>
+<td>转发IP分组</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202208310950919.jpg" alt="6abc884c219408b75c14d11fec492af"></p>
+<p><strong>发送分组trace：</strong>Tx必须成功发送到Ipv4Interface才产生trace记录。SendOutgoing只要发送就会记录trace。</p>
+<p><strong>接收分组trace：</strong>Rx只要从一个开启状态的接口接到分组，就产生trace，无论分组是否发往本地。LocalDeliver只记录发到本地的分组。Rx可以看作Local Deliver和UnicastForward的集合。</p>
+<h3 id="路由协议"><a href="#路由协议" class="headerlink" title="路由协议"></a>路由协议</h3><p>每一个安装了网络层的结点都会维护一个路由表，当结点发送一个分组时，Ipv4L3Protocol对象通过查询路由表确定分组的下一跳结点地址。路由协议负责路由表项的创建，更新和维护。</p>
+<p>路由都是Ipv4RoutingProtocol的子类。默认情况下使用的是列表路由，即可以为一个结点配置多个路由协议，并为其设置优先级，每个路由协议都维护一个路由表。</p>
 
       
 
@@ -435,7 +505,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">应用层：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E8%BE%93%E5%B1%82"><span class="toc-number">2.</span> <span class="toc-text">传输层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP"><span class="toc-number">2.1.</span> <span class="toc-text">TCP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#UDP"><span class="toc-number">2.2.</span> <span class="toc-text">UDP</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">应用层：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E8%BE%93%E5%B1%82"><span class="toc-number">2.</span> <span class="toc-text">传输层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP"><span class="toc-number">2.1.</span> <span class="toc-text">TCP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#UDP"><span class="toc-number">2.2.</span> <span class="toc-text">UDP</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="toc-number">3.</span> <span class="toc-text">网络层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%88%86%E9%85%8DIP%E5%9C%B0%E5%9D%80%EF%BC%9ADHCP"><span class="toc-number">3.1.</span> <span class="toc-text">自动分配IP地址：DHCP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%84%9A%E6%9C%AC%E9%85%8D%E7%BD%AE%E5%92%8Ctrace"><span class="toc-number">3.2.</span> <span class="toc-text">脚本配置和trace</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE"><span class="toc-number">4.</span> <span class="toc-text">路由协议</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -592,11 +662,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -620,15 +690,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">科研</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
