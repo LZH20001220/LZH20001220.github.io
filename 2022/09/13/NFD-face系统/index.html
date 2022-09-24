@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>nfd-c添加ACK包 | 博客杂记 - Harder and Better</title>
+  <title>NFD-face系统 | 博客杂记 - Harder and Better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -23,19 +23,24 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta name="description" content="发送兴趣包返回数据包的代码在forwarder.c中，forwarder.c实际上包含六个函数，on_incoming_interest，onContentStoreMiss，onContentStoreHit，onOutgoingInterest，onIncomingData，onOutgoingData. 如果想要加入ACK包，应该添加两个函数,需要新添加一个包类型，ack类型的包，tlv如何">
+  <meta name="description" content="Face接口：广义网络接口，可以理解为：  物理链路的接口； 与NFD远程节点的通信信道（接口）； 本地节点与本地应用程序的通信信道（接口）。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nfd-c添加ACK包">
-<meta property="og:url" content="http://example.com/2022/08/28/nfd-c%E6%B7%BB%E5%8A%A0ACK%E5%8C%85/index.html">
+<meta property="og:title" content="NFD-face系统">
+<meta property="og:url" content="http://example.com/2022/09/13/NFD-face%E7%B3%BB%E7%BB%9F/index.html">
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
-<meta property="og:description" content="发送兴趣包返回数据包的代码在forwarder.c中，forwarder.c实际上包含六个函数，on_incoming_interest，onContentStoreMiss，onContentStoreHit，onOutgoingInterest，onIncomingData，onOutgoingData. 如果想要加入ACK包，应该添加两个函数,需要新添加一个包类型，ack类型的包，tlv如何">
+<meta property="og:description" content="Face接口：广义网络接口，可以理解为：  物理链路的接口； 与NFD远程节点的通信信道（接口）； 本地节点与本地应用程序的通信信道（接口）。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-08-28T07:55:35.000Z">
-<meta property="article:modified_time" content="2022-08-31T02:58:51.693Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202209130915423.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202209241252421.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202209241708895.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202209241719403.png">
+<meta property="article:published_time" content="2022-09-13T01:13:16.000Z">
+<meta property="article:modified_time" content="2022-09-24T09:52:43.571Z">
 <meta property="article:author" content="ygtrece">
-<meta property="article:tag" content="NDN">
 <meta property="article:tag" content="科研">
+<meta property="article:tag" content="NFD">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202209130915423.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -187,15 +192,15 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-nfd-c添加ACK包" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-NFD-face系统" class="article article-type-post " itemscope itemprop="blogPost">
   
 <div class="article-inner">
     
       <header class="article-header">
         
         
-        <a href="/2022/08/28/nfd-c%E6%B7%BB%E5%8A%A0ACK%E5%8C%85/" class="archive-article-date">
-  	<time datetime="2022-08-28T07:55:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-28</time>
+        <a href="/2022/09/13/NFD-face%E7%B3%BB%E7%BB%9F/" class="archive-article-date">
+  	<time datetime="2022-09-13T01:13:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-13</time>
 </a>
 
 
@@ -213,7 +218,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">500字</span>
+        <span class="post-count">1.6k字</span>
       </span>
     </span>
 
@@ -222,7 +227,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">2分</span>
+        <span class="post-count">6分</span>
       </span>
     </span>
 </div>
@@ -237,19 +242,87 @@ var _hmt = _hmt || [];
       <center><p>
   
     <h1 class="article-title_code_ant" itemprop="name">
-      nfd-c添加ACK包
+      NFD-face系统
     </h1>
   
 </p></center>
       
-        <p>发送兴趣包返回数据包的代码在<code>forwarder.c</code>中，<code>forwarder.c</code>实际上包含六个函数，<code>on_incoming_interest</code>，<code>onContentStoreMiss</code>，<code>onContentStoreHit</code>，<code>onOutgoingInterest</code>，<code>onIncomingData</code>，<code>onOutgoingData</code>.</p>
-<p>如果想要加入ACK包，应该添加两个函数,需要新添加一个包类型，ack类型的包，tlv如何编码和解码ack包，face部分应该添加一个send_ack方法。</p>
+        <p>Face接口：广义网络接口，可以理解为：</p>
+<ul>
+<li>物理链路的接口；</li>
+<li>与NFD远程节点的通信信道（接口）；</li>
+<li>本地节点与本地应用程序的通信信道（接口）。</li>
+</ul>
 <span id="more"></span>
-<p>ACK的逻辑和data包的逻辑应该是一样的，分为两部分，首先<code>on_incoming_interest</code>对兴趣包进行解析，如果在CS找到了与兴趣包匹配的数据包，调用<code>on_contentstore_hit</code>，直接通过接口返回数据包，这时候应该同时加上ACK包。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">on_contentstore_hit</span><span class="params">(<span class="type">pit_entry_t</span> *pit_entry, <span class="keyword">struct</span> <span class="type">data_t</span> *data, <span class="keyword">struct</span> <span class="type">face_t</span> *face)</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="comment">//send_ack(face, ack)</span></span><br><span class="line">  send_data(face, data);</span><br><span class="line">  pit_entry-&gt;is_satisfied = <span class="literal">true</span>;</span><br><span class="line">  pit_entry-&gt;data_freshness_period_time = data-&gt;meta.freshness_period;  <span class="comment">//设置好到期定时器</span></span><br><span class="line">  pit_erase(pit_entry); <span class="comment">//擦除PIT表项</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>否则应该调用<code>on_contentstore_miss</code>，首先将<code>interest</code>和<code>face</code>添加或者更新到PIT中，然后通过<code>on_outgoing_interest</code>转发兴趣包。<code>on_outgoing_interest</code>主要根据FIB找到下一跳的<code>faceid</code>，对所有可行的下一跳的face都在PIT中添加新的条目，并向这些face转发兴趣包。接着这些face又会通过<code>on_incoming_interest</code>继续判断，直到可以在CS中找到data包。</p>
-<p>数据包部分主要包括<code>on_incoming_data</code>和<code>on_outgoing_data</code>。<code>on_incoming_data</code>首先会查PIT中有没有data对应的名字，若果没有输出<code>&quot;NO pit record&quot;</code>，实际上相当于数据包是unsolicited不请自来的。如果PIT有，就应该将数据包插入到CS中以便后续使用。然后删除这个PIT条目，然后执行on_outgoing_data转发数据包。如果到期时间大于当前时间，就将data发送到对应端口，这里同样有send_data,这里也应该加上send_ack</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">on_outgoing_data</span><span class="params">(<span class="type">pit_entry_t</span> *pit_entry, <span class="keyword">struct</span> <span class="type">data_t</span> *data)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// printf (&quot;on_outgoing_data forwarder data is %s\n&quot;, data-&gt;value);</span></span><br><span class="line"></span><br><span class="line">  <span class="type">face_record_t</span> *face_record = pit_entry-&gt;incoming_faces;</span><br><span class="line">  <span class="keyword">while</span> (face_record != <span class="literal">NULL</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> (face_record-&gt;expiry &gt; time_now_us())  <span class="comment">//如果到期时间大于当前时间，就将data发送到对应端口</span></span><br><span class="line">     <span class="comment">//send_ack(face_record-&gt;face, ack)</span></span><br><span class="line">      send_data(face_record-&gt;face, data);</span><br><span class="line"></span><br><span class="line">    face_record = face_record-&gt;next;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>nfd的Face由链路服务和传输两个模块组成：<code>linkservice</code>和<code>transport</code></p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202209130915423.png" alt="image-20220913091538759"></p>
+<p>Face在整个ndnSIM中定义主要涉及到<code>src/ndnSIM/NFD/daemon/face/face.cpp</code>;<code>src/ndnSIM/ndn-cxx/ndn-cxx/face.cpp</code>;通过<code>src/ndnSIM/NFD/daemon/face/internal-face.cpp</code>将两者联系起来</p>
+<p><strong>ndn Face的创建和调用：以ndn-simple为例：</strong></p>
+<p><strong>创建：</strong>ndn-simple中创建StackHelper时，通过调用其构造函数中的回调函数中实现。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ndn-simple.cpp</span></span><br><span class="line">ndn::StackHelper ndnHelper; </span><br><span class="line"><span class="comment">//ndn-stack-helper.cpp</span></span><br><span class="line">m_netDeviceCallbacks.<span class="built_in">push_back</span>(</span><br><span class="line">    std::<span class="built_in">make_pair</span>(PointToPointNetDevice::<span class="built_in">GetTypeId</span>(),                 <span class="built_in">MakeCallback</span>(&amp;StackHelper::PointToPointNetDeviceCallback, <span class="keyword">this</span>)));</span><br><span class="line"><span class="comment">//StackHelper::PointToPointNetDeviceCallback</span></span><br><span class="line"><span class="keyword">auto</span> face = std::<span class="built_in">make_shared</span>&lt;Face&gt;(std::<span class="built_in">move</span>(linkService), std::<span class="built_in">move</span>(transport));</span><br></pre></td></tr></table></figure>
+<p><strong>调用：</strong>ndn face</p>
+<ul>
+<li><p>consumer到forwarder之间通过face的Linkservice实现。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ndn-comsumer的send packet</span></span><br><span class="line">m_appLink-&gt;<span class="built_in">onReceiveInterest</span>(*interest); </span><br><span class="line"><span class="comment">//AppLinkService::onReceiveInterest</span></span><br><span class="line"><span class="keyword">this</span>-&gt;<span class="built_in">receiveInterest</span>(interest);	<span class="comment">//实际上调用的linkservice的receiveInterest</span></span><br><span class="line"><span class="comment">//LinkService::receiveInterest</span></span><br><span class="line"><span class="built_in">afterReceiveInterest</span>(interest);	<span class="comment">//触发了信号signal::Signal&lt;LinkService, Interest&gt; afterReceiveInterest;(定义在hpp中)</span></span><br><span class="line"><span class="comment">//face的构造函数中将service的信号传给face的信号</span></span><br><span class="line"><span class="built_in">afterReceiveInterest</span>(service-&gt;afterReceiveInterest)</span><br><span class="line"><span class="comment">//forward的构造函数中，face的信号触发了forwarder的startProcessInterest</span></span><br><span class="line">m_faceTable.afterAdd.<span class="built_in">connect</span>([<span class="keyword">this</span>] (Face&amp; face) &#123;</span><br><span class="line">    face.afterReceiveInterest.<span class="built_in">connect</span>(</span><br><span class="line">      [<span class="keyword">this</span>, &amp;face] (<span class="type">const</span> Interest&amp; interest) &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;<span class="built_in">startProcessInterest</span>(face, interest);   <span class="comment">//通过LinkService::receiveInterest，进一步触发Forwarder::startProcessInterest</span></span><br><span class="line">      &#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>forwarder处理完后向下层转发时使用。</p>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Forwarder::onOutgoingInterest</span></span><br><span class="line">outFace.<span class="built_in">sendInterest</span>(interest);  	<span class="comment">//调用nfd中face的sendInterest函数</span></span><br><span class="line"><span class="comment">//Face::sendInterest</span></span><br><span class="line">m_service-&gt;<span class="built_in">sendInterest</span>(interest);	<span class="comment">//交给Linkserviceservice继续处理</span></span><br></pre></td></tr></table></figure>
+<p><strong>cxx Face的创建：以ndn-simple为例：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ndn-simple</span></span><br><span class="line">ndnHelper.<span class="built_in">InstallAll</span>();	<span class="comment">//实际上计划执行doinstall</span></span><br><span class="line"><span class="comment">// ndn-stack-helper的doinstall函数</span></span><br><span class="line">Ptr&lt;L3Protocol&gt; ndn = m_ndnFactory.<span class="built_in">Create</span>&lt;L3Protocol&gt;();</span><br><span class="line"><span class="comment">//L3Protocol</span></span><br><span class="line">std::shared_ptr&lt;::nfd::face::Face&gt; m_internalFace;    </span><br><span class="line">std::shared_ptr&lt;::ndn::Face&gt; m_internalClientFace;    </span><br></pre></td></tr></table></figure>
+<p><strong>Internal-face：</strong>连接起了ndnsim中的face和NFD中的face</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//internal-face.hpp</span></span><br><span class="line">std::tuple&lt;shared_ptr&lt;Face&gt;, shared_ptr&lt;ndn::Face&gt;&gt; <span class="built_in">makeInternalFace</span>(ndn::KeyChain&amp; clientKeyChain);<span class="comment">//Face对应nfd中的face, ndn::Face对应ndn-cxx中的face，makeInternalFace返回的是一个tuple元组</span></span><br><span class="line"><span class="comment">//makeInternalFace函数，创建两个face，连接起来</span></span><br><span class="line">clientTransport-&gt;<span class="built_in">connectToForwarder</span>(forwarderTransport);</span><br><span class="line"><span class="comment">//InternalClientTransport::connectToForwarder</span></span><br><span class="line">    m_fwToClientTransmitConn = forwarderTransport-&gt;afterSend.<span class="built_in">connect</span>(<span class="built_in">bind</span>(&amp;asyncReceive, <span class="keyword">this</span>, _1));  <span class="comment">//clienttransport和forwardtransport双向绑定，前面这个是forward发送，client接收。传入的第一个参数是this指针，也就是InternalClientTransport的对象</span></span><br><span class="line">    m_clientToFwTransmitConn = <span class="keyword">this</span>-&gt;afterSend.<span class="built_in">connect</span>(<span class="built_in">bind</span>(&amp;asyncReceive, forwarderTransport, _1));</span><br></pre></td></tr></table></figure>
+<p><strong>nfd中的face：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Face::<span class="built_in">Face</span>(unique_ptr&lt;LinkService&gt; service, unique_ptr&lt;Transport&gt; transport) <span class="comment">//构造函数</span></span><br><span class="line">  : <span class="built_in">afterReceiveInterest</span>(service-&gt;afterReceiveInterest)</span><br><span class="line">  , <span class="built_in">afterReceiveData</span>(service-&gt;afterReceiveData)</span><br><span class="line">  , <span class="built_in">afterReceiveNack</span>(service-&gt;afterReceiveNack)</span><br><span class="line">  , <span class="built_in">onDroppedInterest</span>(service-&gt;onDroppedInterest)</span><br><span class="line">  , <span class="built_in">afterStateChange</span>(transport-&gt;afterStateChange)</span><br><span class="line">  , <span class="built_in">m_id</span>(INVALID_FACEID)</span><br><span class="line">  , <span class="built_in">m_service</span>(std::<span class="built_in">move</span>(service)) <span class="comment">//强制类型转换，它无条件地将实参转为右值引用类型（匿名对象，是个右值），继而用于移动语义</span></span><br><span class="line">  , <span class="built_in">m_transport</span>(std::<span class="built_in">move</span>(transport))</span><br><span class="line">  , <span class="built_in">m_counters</span>(m_service-&gt;<span class="built_in">getCounters</span>(), m_transport-&gt;<span class="built_in">getCounters</span>())</span><br><span class="line">  , <span class="built_in">m_metric</span>(<span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">  m_service-&gt;<span class="built_in">setFaceAndTransport</span>(*<span class="keyword">this</span>, *m_transport);	<span class="comment">//进行绑定</span></span><br><span class="line">  m_transport-&gt;<span class="built_in">setFaceAndLinkService</span>(*<span class="keyword">this</span>, *m_service);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>主要功能：给linkservice和tranport派活，起到一个组织管理的角色。</p>
+<p><strong>ndncxx中的face：</strong></p>
+<p>类似与一个client端的face，并且建立了和face之间的通道，主要用作和nfd的face之间传递管理信息。</p>
+<p><strong>L3Protocol：</strong>将cxx中的face和ndn中的face联系起来。和face相关的主要包括faceTable，faceSystem，两组internal-face。(internalFace和internalClientFace；internalFaceForInjects和internalClientFaceForInjects)</p>
+<blockquote>
+<p><strong>Facetable：</strong>管理face的一个map，键存的是faceID，值存的是整个Face类</p>
+<p><strong>Facesystem：</strong>包括facetable和NetworkMonitor，NetworkMonitor感觉是管理face是否确实接入到了网络中，如果确实接入了，就会触发一些信号。</p>
+</blockquote>
+<p>internalFaceForInjects和internalClientFaceForInjects用于建立一组内部的face获取管理信息。其基本流程为：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//client face发送请求兴趣包，ndn-fib-helper和ndn=stratege-choice-helper用到了injectInterest函数，实际上是交给forwarder处理的</span></span><br><span class="line">m_impl-&gt;m_internalClientFaceForInjects-&gt;<span class="built_in">expressInterest</span>(interest, <span class="literal">nullptr</span>, <span class="literal">nullptr</span>, <span class="literal">nullptr</span>);</span><br><span class="line"><span class="comment">//expressInterest实际调用了asyncExpressInterest，这个函数发送兴趣包</span></span><br><span class="line">m_face.m_transport-&gt;<span class="built_in">send</span>();</span><br><span class="line"><span class="comment">//InternalClientTransport</span></span><br><span class="line">m_forwarder-&gt;<span class="built_in">receivePacket</span>(wire);</span><br><span class="line"><span class="comment">//实际调用他的父类Transport::receive的方法，交给link-service处理，后面和正常传数据的流程基本一样</span></span><br><span class="line">m_service-&gt;<span class="built_in">receivePacket</span>(packet, endpoint);</span><br></pre></td></tr></table></figure>
+<p>internalFace和internalClientFace用于创建Dispatcher,用于常见的兴趣包，数据包处理。Dispatcher用于和各种manager进行交互，这个不需要经过forwarder。</p>
+<p><strong>Dispatcher的几种机制：</strong></p>
+<ul>
+<li>Control Command：所有改变NFD状态的管理操作都需要使用控制命令</li>
+<li>Notification streams：是NFD管理协议的一种机制，用于监视NFD状态</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">m_impl-&gt;m_dispatcher = <span class="built_in">make_unique</span>&lt;::ndn::mgmt::Dispatcher&gt;(*m_impl-&gt;m_internalClientFace, StackHelper::<span class="built_in">getKeyChain</span>());</span><br><span class="line">m_impl-&gt;m_faceManager = <span class="built_in">make_unique</span>&lt;::nfd::FaceManager&gt;(*m_impl-&gt;m_faceSystem, *m_impl-&gt;m_dispatcher, *m_impl-&gt;m_authenticator);</span><br><span class="line">m_impl-&gt;m_fibManager = <span class="built_in">make_shared</span>&lt;::nfd::FibManager&gt;(m_impl-&gt;m_forwarder-&gt;<span class="built_in">getFib</span>(), *m_impl-&gt;m_faceTable,*m_impl-&gt;m_dispatcher, *m_impl-&gt;m_authenticator);</span><br></pre></td></tr></table></figure>
+<p>ManagerBase是所有manager的基类，face-manager，cs-manager，fib-manager等。此类包含Dispatcher和CommandValidator。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202209241252421.png" alt="image-20220924125213237"></p>
+<ul>
+<li><p>manager:管理器总是由一系列处理程序组成，每个处理程序负责处理control command请求兴趣包，主要包括：face,fib,strategy-choice等</p>
+</li>
+<li><p>dispatcher:管理器利用ndn :: Dispatcher作为抽象处理常见兴趣包/数据包     </p>
+<p>1.管理器向调度程序注册一个处理程序，该部分由管理器的名称和动词组成。     registerCommandHandler(const std::string&amp; verb,const ControlCommandHandler&amp; handler);     </p>
+<p>2.在所有管理器都注册了处理程序之后，调度程序使用该部分名称加上每个注册的顶级前缀（例如/ localhost / nfd）创建完整的前缀    </p>
+<p>3.然后为它们设置兴趣包过滤器          </p>
+<p>4.兴趣包经过过滤后，定向到具体的管理器处理程序</p>
+</li>
+</ul>
+<p>(更多相关的内容可以参考NFD开发手册管理模块)</p>
+<h4 id="Control-Command-控制命令"><a href="#Control-Command-控制命令" class="headerlink" title="Control Command  控制命令"></a><strong>Control Command  控制命令</strong></h4><p>请求的签名兴趣包格式：/<prefix>/<management-module>/<command-verb>/<control-parameters>/<command-interest-components>    </command-interest-components></control-parameters></command-verb></management-module></prefix></p>
+<ul>
+<li>prefix是NFD管理前缀。除非另有说明，否则所有命令都使用/ localhost / nfd前缀    </li>
+<li>management-module是需要将命令分派到的管理模块的名称    </li>
+<li>command-verb是要执行的操作    </li>
+<li>control-parameters是一个包含在NameComponent中的ControlParameters TLV元素    </li>
+<li>command-interest-components是命令兴趣包规范定义的四个附加组件</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202209241708895.png" alt="image-20220924170742200"></p>
+<h4 id="Notification-streams："><a href="#Notification-streams：" class="headerlink" title="Notification streams："></a><strong>Notification streams：</strong></h4><ul>
+<li>Notification streams在特定名称前缀(/localhost/nfd前缀)下发布  </li>
+<li>Notification是此名称前缀下的数据包，带有序列号 </li>
+<li>序列号组件是NameComponentWithMarkerAndNumber，与NDN命名规则一样。该组件0xFE标记开头，后跟nonNegativeInteger </li>
+<li>同一流中的通知的序列号应该是连续的并且在增加      </li>
+<li>每个通知仅限一个数据包</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202209241719403.png" alt="image-20220924171909370"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//manager-base.cpp manager向Dispatcher注册通知流</span></span><br><span class="line">ndn::<span class="function">mgmt::PostNotification</span></span><br><span class="line"><span class="function"><span class="title">ManagerBase::registerNotificationStream</span><span class="params">(<span class="type">const</span> std::string&amp; verb)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> m_dispatcher.<span class="built_in">addNotificationStream</span>(<span class="built_in">makeRelPrefix</span>(verb));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//调用Dispatcher::queryStorage将请求的兴趣包与存储的通知匹配</span></span><br><span class="line"><span class="function"><span class="type">void</span></span></span><br><span class="line"><span class="function"><span class="title">Dispatcher::queryStorage</span><span class="params">(<span class="type">const</span> Name&amp; prefix, <span class="type">const</span> Interest&amp; interest,</span></span></span><br><span class="line"><span class="params"><span class="function">                         <span class="type">const</span> InterestHandler&amp; missContinuation)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">auto</span> data = m_storage.<span class="built_in">find</span>(interest);</span><br><span class="line">  <span class="keyword">if</span> (data == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">    <span class="comment">// invoke missContinuation to process this Interest if the query fails.</span></span><br><span class="line">    <span class="keyword">if</span> (missContinuation)</span><br><span class="line">      <span class="built_in">missContinuation</span>(prefix, interest);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// send the fetched data through face if query succeeds.</span></span><br><span class="line">    <span class="built_in">sendOnFace</span>(*data);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
 
@@ -263,11 +336,11 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NDN</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NFD</a>
         		</li>
       		
 		</ul>
@@ -323,7 +396,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/08/28/nfd-c%E6%B7%BB%E5%8A%A0ACK%E5%8C%85/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/09/13/NFD-face%E7%B3%BB%E7%BB%9F/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -337,9 +410,18 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
+    <a href="/2022/09/24/Map-Reduce%E5%AE%9E%E7%8E%B0%E8%AF%8D%E9%A2%91%E7%BB%9F%E8%AE%A1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Map-Reduce实现词频统计
+        
+      </div>
+    </a>
   
-    <a href="/2022/08/26/ns3%E4%BD%BF%E7%94%A8-4/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">ns3使用-4</div>
+  
+    <a href="/2022/08/28/nfd-c%E6%B7%BB%E5%8A%A0nack%E5%8C%85/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">nfd-c添加ACK包</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -366,7 +448,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Control-Command-%E6%8E%A7%E5%88%B6%E5%91%BD%E4%BB%A4"><span class="toc-number">1.</span> <span class="toc-text">Control Command  控制命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Notification-streams%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">Notification streams：</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -551,6 +633,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
@@ -563,11 +649,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
+                <a href="javascript:void(0)" class="js-tag color4">NFD</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
+                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
               </li>
              
               <li class="article-tag-list-item">
