@@ -30,11 +30,13 @@
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
 <meta property="og:description" content="2. 两数相加 - 力扣（LeetCode） 给你两个 非空 的链表，表示两个非负的整数。它们每位数字都是按照 逆序 的方式存储的，并且每个节点只能存储 一位 数字。 请你将两个数相加，并以相同形式返回一个表示和的链表。 你可以假设除了数字 0 之外，这两个数都不会以 0 开头。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210070922121.jpeg">
 <meta property="article:published_time" content="2022-09-30T08:53:56.000Z">
-<meta property="article:modified_time" content="2022-10-03T10:36:58.864Z">
+<meta property="article:modified_time" content="2022-10-07T02:07:24.194Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210070922121.jpeg">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -212,7 +214,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.8k字</span>
+        <span class="post-count">2.5k字</span>
       </span>
     </span>
 
@@ -221,7 +223,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">8分</span>
+        <span class="post-count">11分</span>
       </span>
     </span>
 </div>
@@ -285,6 +287,19 @@ var _hmt = _hmt || [];
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">P   A   H   N</span><br><span class="line">A P L S I I G</span><br><span class="line">Y   I   R</span><br></pre></td></tr></table></figure>
 <p>本质上是找规律，找到图形的周期，用一个二维数组进行存储，计算出二维数组的长和宽，然后香气中放入元素，最后通过顺序输出</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//周期为2 * numRows - 2, 因此 Z 字形变换的周期 t=r+r-2=2r-2t=r+r−2=2r−2，每个周期会占用矩阵上的 1+r-2=r-11+r−2=r−1 列。</span></span><br><span class="line">    <span class="function">string <span class="title">convert</span><span class="params">(string s, <span class="type">int</span> numRows)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = s.<span class="built_in">length</span>(), r = numRows;</span><br><span class="line">        <span class="keyword">if</span> (r == <span class="number">1</span> || r &gt;= n) &#123;</span><br><span class="line">            <span class="keyword">return</span> s;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> t = r * <span class="number">2</span> - <span class="number">2</span>;  <span class="comment">//周期</span></span><br><span class="line">        <span class="type">int</span> c = (n + t - <span class="number">1</span>) / t * (r - <span class="number">1</span>);  <span class="comment">//n / t向上取整(代表有几个周期), 乘每个周期的列数 r - 1， 这里周期取大点也没关系，因为赋给的初值都是0</span></span><br><span class="line">        <span class="function">vector&lt;string&gt; <span class="title">mat</span><span class="params">(r, string(c, <span class="number">0</span>))</span></span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>, x = <span class="number">0</span>, y = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            mat[x][y] = s[i];</span><br><span class="line">            <span class="keyword">if</span> (i % t &lt; r - <span class="number">1</span>) &#123;</span><br><span class="line">                ++x; <span class="comment">// 向下移动</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                --x;</span><br><span class="line">                ++y; <span class="comment">// 向右上移动</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        string ans;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;row : mat) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">char</span> ch : row) &#123;</span><br><span class="line">                <span class="keyword">if</span> (ch) &#123;   <span class="comment">//如果ch不为0</span></span><br><span class="line">                    ans += ch;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-integer/">7. 整数反转 - 力扣（LeetCode）</a></p>
+<p>给你一个 32 位的有符号整数 x ，返回将 x 中的数字部分反转后的结果。</p>
+<p>如果反转后整数超过 32 位的有符号整数的范围 [−231,  231 − 1] ，就返回 0。</p>
+<p><strong>假设环境不允许存储 64 位整数（有符号或无符号）。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：x = 123</span><br><span class="line">输出：321</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210070922121.jpeg" alt="1.jpg"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">reverse</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="type">long</span> <span class="type">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> last = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(x!=<span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">//每次取末尾数字</span></span><br><span class="line">            <span class="type">int</span> tmp = x%<span class="number">10</span>;</span><br><span class="line">            result = result*<span class="number">10</span> + tmp;</span><br><span class="line">            <span class="keyword">if</span>(result &gt; <span class="built_in">pow</span>(<span class="number">2</span>, <span class="number">31</span>) - <span class="number">1</span> || result &lt; - <span class="built_in">pow</span>(<span class="number">2</span>, <span class="number">31</span>)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            x /= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/string-to-integer-atoi/">8. 字符串转换整数 (atoi) - 力扣（LeetCode）</a></p>
+<p>请你来实现一个 myAtoi(string s) 函数，使其能将字符串转换成一个 32 位有符号整数（类似 C/C++ 中的 atoi 函数）。</p>
+<p>函数 myAtoi(string s) 的算法如下：</p>
+<p>读入字符串并丢弃无用的前导空格<br>检查下一个字符（假设还未到字符末尾）为正还是负号，读取该字符（如果有）。 确定最终结果是负数还是正数。 如果两者都不存在，则假定结果为正。<br>读入下一个字符，直到到达下一个非数字字符或到达输入的结尾。字符串的其余部分将被忽略。<br>将前面步骤读入的这些数字转换为整数（即，”123” -&gt; 123， “0032” -&gt; 32）。如果没有读入数字，则整数为 0 。必要时更改符号（从步骤 2 开始）。<br>如果整数数超过 32 位有符号整数范围 [−231,  231 − 1] ，需要截断这个整数，使其保持在这个范围内。具体来说，小于 −231 的整数应该被固定为 −231 ，大于 231 − 1 的整数应该被固定为 231 − 1 。<br>返回整数作为最终结果。<br>注意：</p>
+<p>本题中的空白字符只包括空格字符 ‘ ‘ 。<br>除前导空格或数字后的其余字符串外，请勿忽略 任何其他字符。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">myAtoi</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="type">long</span> <span class="type">long</span> <span class="type">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> tmp = <span class="number">0</span>;</span><br><span class="line">        <span class="type">bool</span> neg = <span class="literal">false</span>;</span><br><span class="line">        <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> start;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++) &#123;		<span class="comment">//跳过空格</span></span><br><span class="line">            <span class="keyword">if</span>(s[i] == <span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                start = i;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(s[start] == <span class="string">&#x27;-&#x27;</span>) &#123;		<span class="comment">//判断符号</span></span><br><span class="line">            neg = <span class="literal">true</span>;</span><br><span class="line">            start = start + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(s[start] == <span class="string">&#x27;+&#x27;</span>) &#123;</span><br><span class="line">            neg = <span class="literal">false</span>;</span><br><span class="line">            start = start + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            neg = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = start; i &lt; s.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(s[start] &gt; <span class="string">&#x27;9&#x27;</span> || s[start] &lt; <span class="string">&#x27;0&#x27;</span>) &#123;	<span class="comment">//第一个字符不是数字，直接返回</span></span><br><span class="line">                result = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(s[i] &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; s[i] &lt;= <span class="string">&#x27;9&#x27;</span>) &#123;	<span class="comment">//是数字，就进行转换</span></span><br><span class="line">                tmp = s[i] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">                <span class="keyword">if</span>(neg == <span class="literal">true</span>) &#123;</span><br><span class="line">                    tmp = -tmp;</span><br><span class="line">                &#125;</span><br><span class="line">                result = result * <span class="number">10</span> + tmp;</span><br><span class="line">                <span class="keyword">if</span>(result &gt; <span class="built_in">pow</span>(<span class="number">2</span>, <span class="number">31</span>) - <span class="number">1</span>) &#123;	<span class="comment">//判断溢出</span></span><br><span class="line">                    result = <span class="built_in">pow</span>(<span class="number">2</span>, <span class="number">31</span>) - <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(result &lt; -<span class="built_in">pow</span>(<span class="number">2</span>, <span class="number">31</span>)) &#123;</span><br><span class="line">                    result = -<span class="built_in">pow</span>(<span class="number">2</span>, <span class="number">31</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
       
 
@@ -367,6 +382,15 @@ var _hmt = _hmt || [];
 
   
 <nav id="article-nav">
+  
+    <a href="/2022/10/06/Computer-communication%E6%8A%95%E7%A8%BF%E6%B5%81%E7%A8%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Computer_communication投稿流程
+        
+      </div>
+    </a>
   
   
     <a href="/2022/09/24/Map-Reduce%E5%AE%9E%E7%8E%B0%E8%AF%8D%E9%A2%91%E7%BB%9F%E8%AE%A1/" id="article-nav-older" class="article-nav-link-wrap">
@@ -554,6 +578,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">科研</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
@@ -594,19 +626,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">科研</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NFD</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">大数据</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -777,5 +801,21 @@ MathJax.Hub.Queue(function() {
 
 </div>
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
