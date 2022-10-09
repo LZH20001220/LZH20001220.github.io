@@ -35,7 +35,7 @@
 <meta property="og:image" content="http://example.com/2022/03/22/%E5%9B%9E%E6%BA%AF-1/3.png">
 <meta property="og:image" content="http://example.com/2022/03/22/%E5%9B%9E%E6%BA%AF-1/4.png">
 <meta property="article:published_time" content="2022-03-22T14:32:51.000Z">
-<meta property="article:modified_time" content="2022-04-05T03:08:23.598Z">
+<meta property="article:modified_time" content="2022-10-09T02:41:23.921Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -217,7 +217,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.6k字</span>
+        <span class="post-count">2.8k字</span>
       </span>
     </span>
 
@@ -226,7 +226,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">12分</span>
+        <span class="post-count">13分</span>
       </span>
     </span>
 </div>
@@ -308,6 +308,10 @@ var _hmt = _hmt || [];
 <p>解集 <strong>不能</strong> 包含重复的子集。返回的解集中，子集可以按 <strong>任意顺序</strong> 排列。</p>
 <p>和上一题相比增加了去重，同样也是通过新加一个bool型的used数组进行判断，首先将数组按从小到大排序，然后通过判断如果当前元素与上一个元素相同且前一个元素没有用时，跳过本次循环，这样就实现了去重。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;vector &lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(vector &lt;<span class="type">int</span>&gt; &amp;nums, <span class="type">int</span> startIndex, vector &lt;<span class="type">bool</span>&gt; &amp;used)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        result.<span class="built_in">push_back</span>(path);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = startIndex; i &lt; nums.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i - <span class="number">1</span>] &amp;&amp; used[i - <span class="number">1</span>] == <span class="literal">false</span>)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">            path.<span class="built_in">push_back</span>(nums[i]);</span><br><span class="line">            used[i] = <span class="literal">true</span>;</span><br><span class="line">            <span class="built_in">backtracking</span>(nums, i + <span class="number">1</span>, used);</span><br><span class="line">            used[i] = <span class="literal">false</span>;</span><br><span class="line">            path.<span class="built_in">pop_back</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">subsetsWithDup</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        result.<span class="built_in">clear</span>();</span><br><span class="line">        path.<span class="built_in">clear</span>();</span><br><span class="line">        vector &lt;<span class="type">bool</span>&gt; <span class="built_in">used</span>(nums.<span class="built_in">size</span>(), <span class="literal">false</span>);</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="built_in">backtracking</span>(nums, <span class="number">0</span>, used);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/generate-parentheses/">22. 括号生成 - 力扣（LeetCode）</a></p>
+<p>数字 <code>n</code> 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 <strong>有效的</strong> 括号组合。</p>
+<p>这种类似与组合内的排列组合的题本质上都是回溯的思想</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtrack</span><span class="params">(vector&lt;string&gt;&amp; ans, string&amp; cur, <span class="type">int</span> open, <span class="type">int</span> close, <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (cur.<span class="built_in">size</span>() == n * <span class="number">2</span>) &#123;</span><br><span class="line">            ans.<span class="built_in">push_back</span>(cur);</span><br><span class="line">            <span class="comment">//return;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (open &lt; n) &#123;</span><br><span class="line">            cur.<span class="built_in">push_back</span>(<span class="string">&#x27;(&#x27;</span>); <span class="comment">//push (</span></span><br><span class="line">            <span class="built_in">backtrack</span>(ans, cur, open + <span class="number">1</span>, close, n);    <span class="comment">//递归调用</span></span><br><span class="line">            cur.<span class="built_in">pop_back</span>(); <span class="comment">//回溯到push前的元素</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (close &lt; open) &#123;</span><br><span class="line">            cur.<span class="built_in">push_back</span>(<span class="string">&#x27;)&#x27;</span>);</span><br><span class="line">            <span class="built_in">backtrack</span>(ans, cur, open, close + <span class="number">1</span>, n);</span><br><span class="line">            cur.<span class="built_in">pop_back</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;string&gt; <span class="title">generateParenthesis</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        vector&lt;string&gt; result;</span><br><span class="line">        string current;</span><br><span class="line">        <span class="built_in">backtrack</span>(result, current, <span class="number">0</span>, <span class="number">0</span>, n);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
       
 
@@ -606,19 +610,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">项目</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
               </li>
              
               <li class="article-tag-list-item">
