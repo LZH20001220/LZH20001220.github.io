@@ -33,8 +33,9 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210091534498.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210091627878.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210091640048.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210101009315.png">
 <meta property="article:published_time" content="2022-10-09T07:18:23.000Z">
-<meta property="article:modified_time" content="2022-10-09T08:57:29.430Z">
+<meta property="article:modified_time" content="2022-10-10T02:54:31.536Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="科研">
 <meta property="article:tag" content="NDN">
@@ -218,7 +219,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">5k字</span>
+        <span class="post-count">8.5k字</span>
       </span>
     </span>
 
@@ -227,7 +228,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">17分</span>
+        <span class="post-count">29分</span>
       </span>
     </span>
 </div>
@@ -286,6 +287,34 @@ var _hmt = _hmt || [];
 <p>此调度算法基于名称，因此具有相同名称的两个兴趣最终位于同一转发线程中，从而确保兴趣聚合的有效性。通过使用名称前缀而不是整个名称，具有公共前缀的兴趣将转到同一转发线程，从而使转发策略能够基于每个前缀收集度量值。<br>正如我们将在第6节中看到的，转发策略以FIB入口粒度运行。理论上，interest分配可以遵循FIB条目，这将实现上述两个目标。然而，FIB是一个相当复杂的数据结构，在输入阶段执行完全查找会太慢。因此，调度算法使用了一种更简单的方法来确定粒度：它将Interest名称的前k个组件作为前缀。如果兴趣的名称组件少于k个，则使用整个名称。选择k的值时，应确保生成的前缀比大多数FIB条目短，以保持转发策略测量有效，但也应足够长，以便有足够数量的不同前缀在转发线程之间进行负载平衡。NDN-DPDK在其默认配置中设置k=2，但此参数可以根据传入流量的特性进行调整。<br>确定名称前缀后，调度算法查询名称调度表（NDT），这是NDNDPDK转发器特有的表（图3）。输入线程将Interest分派到队列中，该队列指向由NDT条目标识的转发线程。为了尽可能简单并保持可预测的查找速度，NDT不是名称索引数据结构，而是2b个条目的线性向量（默认情况下为b=16），其中每个条目包含一个转发线程标识符。查找算法在名称前缀上计算SipHash[2]，将哈希值的低位b作为向量的索引，并在该条目中返回转发线程标识符。这允许NDT查找在O（1）时间复杂度内完成。</p>
 <h4 id="3-3根据Token分派数据包"><a href="#3-3根据Token分派数据包" class="headerlink" title="3.3根据Token分派数据包"></a>3.3根据Token分派数据包</h4><p>数据必须发送到处理兴趣的同一转发线程。如第2.2节所述，每次转发线程有一个PIT的私有实例。因此，有关待处理Interest的信息仅在转发Interest的转发线程中可用，并且只有该线程能够正确处理数据以响应转发Interest。<br>尽管我们可以对数据名称执行另一个基于前缀的调度，但名称调度算法在一个特定的情况下会崩溃。NDN协议允许名称发现：如果兴趣的名称是数据名称的前缀，并且兴趣包含CanBePrefix标志，则可以满足兴趣。例如，数据/A/B/1可以满足名称为/A且CanBePrefix=1的兴趣。应用第3.2节中的名称分派算法，并观察到在这种情况下兴趣名称少于两个组件，我们可以看到数据将在/A/B前缀下分派，而兴趣将在/A前缀下分派。<strong>如果与这些前缀对应的NDT条目映射到两个不同的线程标识符，则数据将转到不了解兴趣的转发线程。</strong><br>为了解决这个问题，我们引入了PIT令牌，即每个数据包的NDNLP头中包含的8字节逐跳字段[21]。<br>下游节点在传输兴趣时附加PIT令牌。<br><strong>上游节点在用Data或Nack数据包回复Interest时应附加相同的令牌。NDN-DPDK使用此令牌的一些位来编码转发线程标识符。</strong><br>当转发线程传输兴趣时，它将自己的标识符放入PIT令牌。当数据返回时，输入线程可以简单地读取PIT令牌的这一部分，并将数据发送到正确的转发线程。<br>对于Nack数据包，两种调度方法都可以正常工作。<br>我们选择了令牌调度方法，因为它更高效。</p>
 <h4 id="3-4输出阶段"><a href="#3-4输出阶段" class="headerlink" title="3.4输出阶段"></a>3.4输出阶段</h4><p>输出阶段控制传出数据包的传输。<br>对于每个传出的网络层数据包，它执行NDNLP分段（如果需要），预先发送以太网头，并将生成的链路层帧排队，以便在以太网适配器上传输。在当前版本的NDN-DPDK中，输出线程的工作负载很轻。然而，随着我们计划在输出阶段实施更先进的拥塞控制和队列管理方案，未来这种情况可能会增加。</p>
+<h3 id="4-FIB-结构"><a href="#4-FIB-结构" class="headerlink" title="4. FIB 结构"></a>4. FIB 结构</h3><p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210101009315.png" alt="image-20221010100938904"></p>
+<p>FIB是一个以读取为主的表。转发线程在FIB上执行最长前缀匹配（LPM），以确定每个传入兴趣的发送位置。另一方面，很少需要FIB更新，只在响应来自控制平面的管理命令时才进行更新。<br>NDN-DPDK的FIB设计灵感来自So等人[30]。在其设计中，FIB条目存储在由名称前缀键控的哈希表中。他们还提出了一种两阶段LPM查找算法：</p>
+<p>（1）FIB有一个固定参数M，因此大多数FIB条目名称的组件少于M。<br>（2） 当插入名称超过M个组件的FIB条目时，会在深度M处插入一个虚拟条目，该条目指示前缀下的最大FIB深度。<br>（3） 给定一个Interest，FIB上的LPM以Interest名称的Mcomponent前缀开头。</p>
+<p>（4） 如果此查找找到虚拟条目，LPM将在虚拟条目中指示的最大FIB深度处重新启动。<br>（5） 否则，LPM将继续使用较短的前缀，直到找到正常的FIB条目。</p>
+<p>在NDN-DPDK中，我们采用了相同的FIB结构（图4）和相同的两阶段查找算法。然而，我们的多线程架构需要线程安全，这是通过两种技术实现的。<br>首先，我们使用Userspace Read-Copy Update（URCU）库[3]，13]允许来自转发线程的FIB查询和来自管理线程的FIC更新同时进行。<br>RCU的一个优点是其读取端开销最小，这与FIB的以读取为主的特性非常匹配。我们使用基于静态的RCU风格，因为它的开销最小。这种风格要求每个线程定期指示静态状态；对于转发线程，这发生在处理每个突发数据包之前。哈希表实现来自URCU的无锁可调整大小的RCU哈希表，禁用了调整大小功能以提供更可预测的性能。<br>FIB条目是从DPDK内存池而不是默认的malloc（）内存分配器分配的。<br>其次，每个转发线程都被赋予其私有FIB实例。<br>每个FIB实例仅包含转发线程提供的名称前缀。与在所有转发线程之间共享单个FIB相比，此方法确保FIB条目与转发线程分配在同一NUMA套接字上，避免了跨NUMA边界的内存访问。此外，它允许转发策略（第6节）将收集的测量值存储在FIB条目本身，而不需要单独的测量值表。</p>
+<h3 id="5-组合PIT和CS设计"><a href="#5-组合PIT和CS设计" class="headerlink" title="5. 组合PIT和CS设计"></a>5. 组合PIT和CS设计</h3><p>PIT和Content Store都在数据平面中频繁读取和修改，特别是：</p>
+<p>（1）查询CS中的每个传入兴趣，以检查缓存的数据是否能够满足它。<br>（2） 如果没有，则转发interest，并且必须插入PIT条目，除非已经存在PIT条目。<br>（3） 收到数据包后，将查询PIT，以确定可以满足哪些待定interest。<br>（4） 当满足PIT条目时，必须擦除该条目并插入CS条目以缓存数据。</p>
+<p>（5） 如果CS已满，则可能需要收回一些条目，以便为新数据腾出空间。</p>
+<p>注意到第4项通常会删除一个PIT条目，并在相同的名称前缀处插入一个CS条目，因此等[30]建议将PIT和CS合并到一个哈希表中，这样就可以用CS条目替换一个满意的PIT条目而不会产生第二次查表的成本。NDN-DPDK采用了这种设计，并将PIT和CS合并到PIT-CS复合表（PCCT）中。<br>然而，[30]适用于CCNx协议[14]，它与NDN在“兴趣到数据”匹配规则上有所不同。如果NDN和CCNx具有相同的名称，则它们都会分配Data3数据包以满足兴趣。如果兴趣名称是数据名称的前缀，并且兴趣带有CanBePrefix标志，则NDN还允许数据满足兴趣。此外，NDN兴趣可以携带转发提示，当存在时，应使用该提示代替兴趣名称来确定转发路径。这些主要协议差异使得我们的PCCT设计不可避免地与[30]中描述的不同。<br>考虑到PIT和CS中的频繁更新，跨所有转发线程共享的线程安全PCCT很容易成为瓶颈。我们早就决定每个转发线程都应该有自己的PCCT私有实例。与FIB情况相反，控制平面不需要与PIT或CS交互。因此，我们可以使用非线程安全的数据结构来实现PCCT，这些结构通常比线程安全的对应结构更快。</p>
+<h4 id="5-1逻辑结构"><a href="#5-1逻辑结构" class="headerlink" title="5.1逻辑结构"></a>5.1逻辑结构</h4><p>PCCT的总体结构是三种数据结构的组合：</p>
+<ul>
+<li>用于分配PCCT条目的DPDK内存池。</li>
+<li>用于基于名称的查找的名称哈希表。这将重用在数据包调度期间已经计算的SipHash值（第3.2节）。</li>
+<li>令牌散列表，使用数据包上携带的PIT令牌，查找传入数据可以满足哪些PIT条目（第5.2节）。<br>逻辑上，每个PCCT条目都包含一个名称、一个选择的转发提示、两个PIT条目和一个CS条目（图5）。名称是必需的，但所有其他字段都是可选的。<br>条目由其名称和所选转发提示的组合标识。当转发线程处理携带转发提示的Interest时，它使用这些提示执行FIB查找，并选择与FIB条目匹配的第一个提示。然后，根据该兴趣创建的PIT条目及其回复数据的CS条目被放置在具有所选转发提示的PCCT条目上。将后者作为PCCT条目标识符的一部分，在逻辑上将每个转发提示的PIT和CS隔离到不同的分区中。这减轻了由转发提示引起的众所周知的缓存中毒攻击，并使NDN-DPDK成为第一个安全支持转发提示的NDN转发器。<br>每个PCCT条目最多可以包含两个具有相同名称和所选转发提示的PIT条目。根据NDN协议[19]，兴趣可以带有CanBePrefix和/或MustBeFresh标志影响转发和缓存中的“兴趣到数据”匹配。<br>然而，该协议对PIT应如何聚合具有相同名称但不同标志的兴趣的方式含糊不清。我们认为，两个仅在CanBePrefix标志上不同的兴趣可以聚合，因为此标志的存在会扩大可匹配的数据集。另一方面，无法聚合MustBeFresh标志不同的两个兴趣，因为使用标志集转发它们会拒绝非新数据，否则会满足没有标志的兴趣，而如果没有标志转发它们，则可能会错误地使用非新数据满足MustBeRefresh兴趣。因此，我们决定在每个PCCT条目中最多存储两个PIT条目，一个带有MustBeFresh，另一个没有。</li>
+</ul>
+<h4 id="5-2按数据进行PIT查找"><a href="#5-2按数据进行PIT查找" class="headerlink" title="5.2按数据进行PIT查找"></a>5.2按数据进行PIT查找</h4><p>如前所述，NDN协议允许兴趣和数据之间的前缀匹配。当数据包到达时，转发器必须在PIT上执行LPM查找，以确定可以满足哪些待定兴趣。这可能会成为性能瓶颈，甚至成为攻击面，因为数据名称可以包含许多组件。将两阶段查找算法（第4节）应用于PIT是不可行的，因为维护M的开销太高。相反，我们提出了一种基于PIT令牌的不同方法，即第3.3节中已经介绍的用于数据包调度的短逐跳报头字段。在这里，我们扩展了它的用法，以加速PIT查找。<br>每当转发线程插入PIT条目时，它都会将PCCT条目令牌分配给封闭的PCCT条目，并将其添加到令牌哈希表中。然后，从此PIT条目创建的每个传出利息将在其PIT令牌字段中携带PCCT条目令牌。<br>当数据包返回时，转发线程可以通过令牌哈希表在O（1）时间内快速找到PCCT条目。仍有必要通过名称比较验证数据是否确实满足兴趣，以防止来自伪造令牌的攻击。</p>
+<h4 id="5-3内容存储中的前缀匹配"><a href="#5-3内容存储中的前缀匹配" class="headerlink" title="5.3内容存储中的前缀匹配"></a>5.3内容存储中的前缀匹配</h4><p>作为哈希表，PCCT仅支持使用由兴趣/数据名称和所选转发提示组成的键进行精确匹配查询。因此，如果兴趣名称是数据名称的前缀，并且兴趣带有CanBePrefix标志，则完全匹配算法无法从哈希表中检索数据。这严重限制了网络内缓存的有效性，因为任何带有不精确名称的兴趣都必须由制作人回答，而不是由CS来满足。<br>为了解决这个问题，NDN-DPDK引入了间接CS条目的概念，以提供对前缀匹配的部分支持。间接CS条目是以兴趣命名的特殊CS条目，包含指向直接CS条目的指针。相比之下，直接CS条目是以数据命名的常规CS条目，包含数据包本身的位。<br>当转发器收到一个数据以回复具有非精确名称的兴趣时，它会将两个条目插入CS：一个带有数据名称和数据包的直接条目，一个带有兴趣名称和指向直接条目的指针的间接条目。这允许CS与前缀名称匹配，前提是使用者应用程序始终使用相同的前缀（或前缀的一小部分）来执行名称发现。如果未来的兴趣与之前的兴趣同名，则使用该兴趣名称在CS中进行精确匹配查找将找到间接条目，从中我们可以跟踪指针并检索直接条目和缓存的数据包。相反，如果到达具有不同名称的Interest，即使它与Data匹配，转发器也无法找到缓存的Data，因为该Interest名称的间接CS条目不存在。</p>
+<h3 id="6-转发战略"><a href="#6-转发战略" class="headerlink" title="6. 转发战略"></a>6. 转发战略</h3><p>转发策略是控制兴趣转发行为各个方面的组件。当本地CS无法满足即将到来的兴趣时，该策略决定将其转发到何处。它还决定在收到Nack时是否执行任何纠正措施。这些决定基于输入，例如匹配FIB条目中的下一个跃点、PIT条目中的下游和上游记录，以及共享公共前缀的兴趣最近数据检索的任何收集的测量值。<br>早期NDN部署的经验表明，不同的应用程序需要不同的兴趣转发行为。<br>这为使用不同的决策算法支持多种转发策略，并根据应用程序需求和网络环境动态选择转发策略提供了强大的动力。正如Jacobson等人[9]所述，基本思想是每个FIB条目都包含一个程序，该程序是为专门用于转发选择的抽象机器编写的，它决定了如何转发兴趣。NDN-DPDK使用扩展的BPF（eBPF）[5，18]实现了这一愿景，这是对原始伯克利包过滤器（BPF）[12]的改进。</p>
+<h4 id="6-1策略程序"><a href="#6-1策略程序" class="headerlink" title="6.1策略程序"></a>6.1策略程序</h4><p>每个策略都是一个eBPF程序，即可以由eBPF虚拟机执行的低级指令列表，例如加载/存储、算术和比较运算符。此外，程序可以调用核心转发引擎为策略提供的一些高级例程。这些包括设置计时器，在指定的面上发送当前兴趣，以及用Nack响应兴趣。</p>
+<p>策略程序导出在以下情况下调用或触发的主函数：</p>
+<ul>
+<li>兴趣数据包到达，无法满足缓存的数据。战略必须决定如何推进。</li>
+<li>数据包到达并满足兴趣。此触发器允许策略收集路径度量，例如往返时间和满意度</li>
+<li>Nack数据包到达，不属于转发平面自动处理的简单情况之一。然后，该策略可以决定是否必须采取任何纠正措施。</li>
+<li>策略先前计划的计时器到期。</li>
+</ul>
+<p>FIB和PIT条目都包含一个可写的暂存区，用于存储策略的状态和记录度量值。FIB条目暂存区（图4）适用于与整个名称空间相关的信息，而PIT条目暂存区域（图5）适用于特定待定兴趣相关的信息。除这些区域外，该策略能够检查当前数据包，并对FIB和PIT条目中的字段子集具有只读访问权限。</p>
+<h4 id="6-2-策略选择和FIB更新"><a href="#6-2-策略选择和FIB更新" class="headerlink" title="6.2 策略选择和FIB更新"></a>6.2 策略选择和FIB更新</h4><p>NDN-DPDK将转发策略与每个FIB条目相关联。<br>当兴趣到达且CS无法满足时，转发平面执行FIB查找，匹配的FIB条目不仅确定潜在的下一跳，还确定应该处理兴趣的策略。该设计与[9]一致，但策略eBPF程序不存储在FIB条目中，而是由FIB条目引用，因此可以由多个FIB条目使用相同的策略，而不存储重复副本。数据和Nacks始终由处理兴趣的相同策略处理。如果策略或FIB条目在利息待定期间发生更改，转发器将使用内置的回退程序处理返回的数据/拒绝数据包，并且不会触发任何策略。<br>FIB更新后，该策略必须使用空的暂存区域重新启动，因为在FIB更新期间迁移暂存区域中的数据是不可行的。事实上，尽管FIB条目受RCU保护（第4节），但FIB条目暂存区不受保护。<br>虽然这允许策略修改暂存区域，而无需执行相对昂贵的写入端RCU过程，但这也意味着控制平面线程无法安全地将暂存区域内容从旧FIB条目复制到新FIB条目。</p>
 
       
 
@@ -377,6 +406,15 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
+    <a href="/2022/10/11/%E6%97%A0%E4%BA%BA%E6%9C%BA%E8%87%AA%E7%BB%84%E7%BD%91%E8%AE%BA%E6%96%87/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          无人机自组网论文
+        
+      </div>
+    </a>
+  
   
     <a href="/2022/10/06/Computer-communication%E6%8A%95%E7%A8%BF%E6%B5%81%E7%A8%8B/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">Computer_communication投稿流程</div>
@@ -406,7 +444,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-number">1.</span> <span class="toc-text">摘要:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E8%AF%8D"><span class="toc-number">2.</span> <span class="toc-text">关键词:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%AE%80%E4%BB%8B"><span class="toc-number">3.</span> <span class="toc-text">1. 简介:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%AE%BE%E8%AE%A1%E6%A6%82%E8%BF%B0"><span class="toc-number">4.</span> <span class="toc-text">2.设计概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-%E5%86%85%E5%AD%98%E6%B1%A0%E5%92%8CNUMA%E5%A5%97%E6%8E%A5%E5%AD%97"><span class="toc-number">4.1.</span> <span class="toc-text">2.1 内存池和NUMA套接字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2%E5%88%86%E7%89%87%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">4.2.</span> <span class="toc-text">2.2分片数据结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3%E5%86%85%E9%83%A8%E6%95%B0%E6%8D%AE%E5%8C%85%E9%98%9F%E5%88%97"><span class="toc-number">4.3.</span> <span class="toc-text">2.3内部数据包队列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4%E6%95%B0%E6%8D%AE%E5%8C%85%E7%9A%84%E5%AF%BF%E5%91%BD"><span class="toc-number">4.4.</span> <span class="toc-text">2.4数据包的寿命</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-face-I-O%E5%92%8C%E6%95%B0%E6%8D%AE%E5%8C%85%E8%B0%83%E5%BA%A6"><span class="toc-number">5.</span> <span class="toc-text">3.face I&#x2F;O和数据包调度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-Input-Stage"><span class="toc-number">5.1.</span> <span class="toc-text">3.1 Input Stage</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E6%8C%89name%E5%88%86%E6%B4%BEInterest"><span class="toc-number">5.2.</span> <span class="toc-text">3.2 按name分派Interest</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3%E6%A0%B9%E6%8D%AEToken%E5%88%86%E6%B4%BE%E6%95%B0%E6%8D%AE%E5%8C%85"><span class="toc-number">5.3.</span> <span class="toc-text">3.3根据Token分派数据包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4%E8%BE%93%E5%87%BA%E9%98%B6%E6%AE%B5"><span class="toc-number">5.4.</span> <span class="toc-text">3.4输出阶段</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-number">1.</span> <span class="toc-text">摘要:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E8%AF%8D"><span class="toc-number">2.</span> <span class="toc-text">关键词:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%AE%80%E4%BB%8B"><span class="toc-number">3.</span> <span class="toc-text">1. 简介:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%AE%BE%E8%AE%A1%E6%A6%82%E8%BF%B0"><span class="toc-number">4.</span> <span class="toc-text">2.设计概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-%E5%86%85%E5%AD%98%E6%B1%A0%E5%92%8CNUMA%E5%A5%97%E6%8E%A5%E5%AD%97"><span class="toc-number">4.1.</span> <span class="toc-text">2.1 内存池和NUMA套接字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2%E5%88%86%E7%89%87%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">4.2.</span> <span class="toc-text">2.2分片数据结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3%E5%86%85%E9%83%A8%E6%95%B0%E6%8D%AE%E5%8C%85%E9%98%9F%E5%88%97"><span class="toc-number">4.3.</span> <span class="toc-text">2.3内部数据包队列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4%E6%95%B0%E6%8D%AE%E5%8C%85%E7%9A%84%E5%AF%BF%E5%91%BD"><span class="toc-number">4.4.</span> <span class="toc-text">2.4数据包的寿命</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-face-I-O%E5%92%8C%E6%95%B0%E6%8D%AE%E5%8C%85%E8%B0%83%E5%BA%A6"><span class="toc-number">5.</span> <span class="toc-text">3.face I&#x2F;O和数据包调度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-Input-Stage"><span class="toc-number">5.1.</span> <span class="toc-text">3.1 Input Stage</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E6%8C%89name%E5%88%86%E6%B4%BEInterest"><span class="toc-number">5.2.</span> <span class="toc-text">3.2 按name分派Interest</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3%E6%A0%B9%E6%8D%AEToken%E5%88%86%E6%B4%BE%E6%95%B0%E6%8D%AE%E5%8C%85"><span class="toc-number">5.3.</span> <span class="toc-text">3.3根据Token分派数据包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4%E8%BE%93%E5%87%BA%E9%98%B6%E6%AE%B5"><span class="toc-number">5.4.</span> <span class="toc-text">3.4输出阶段</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-FIB-%E7%BB%93%E6%9E%84"><span class="toc-number">6.</span> <span class="toc-text">4. FIB 结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E7%BB%84%E5%90%88PIT%E5%92%8CCS%E8%AE%BE%E8%AE%A1"><span class="toc-number">7.</span> <span class="toc-text">5. 组合PIT和CS设计</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1%E9%80%BB%E8%BE%91%E7%BB%93%E6%9E%84"><span class="toc-number">7.1.</span> <span class="toc-text">5.1逻辑结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2%E6%8C%89%E6%95%B0%E6%8D%AE%E8%BF%9B%E8%A1%8CPIT%E6%9F%A5%E6%89%BE"><span class="toc-number">7.2.</span> <span class="toc-text">5.2按数据进行PIT查找</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-3%E5%86%85%E5%AE%B9%E5%AD%98%E5%82%A8%E4%B8%AD%E7%9A%84%E5%89%8D%E7%BC%80%E5%8C%B9%E9%85%8D"><span class="toc-number">7.3.</span> <span class="toc-text">5.3内容存储中的前缀匹配</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E8%BD%AC%E5%8F%91%E6%88%98%E7%95%A5"><span class="toc-number">8.</span> <span class="toc-text">6. 转发战略</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1%E7%AD%96%E7%95%A5%E7%A8%8B%E5%BA%8F"><span class="toc-number">8.1.</span> <span class="toc-text">6.1策略程序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-2-%E7%AD%96%E7%95%A5%E9%80%89%E6%8B%A9%E5%92%8CFIB%E6%9B%B4%E6%96%B0"><span class="toc-number">8.2.</span> <span class="toc-text">6.2 策略选择和FIB更新</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -563,15 +601,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">科研</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">论文</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -644,6 +682,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">自组网</a>
               </li>
              
               <li class="article-tag-list-item">
