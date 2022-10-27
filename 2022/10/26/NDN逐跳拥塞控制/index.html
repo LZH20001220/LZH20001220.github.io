@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives | 博客杂记 - Harder and Better</title>
+  <title>NDN逐跳拥塞控制 | 博客杂记 - Harder and Better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -23,14 +23,35 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="博客杂记 - Harder and Better">
-<meta property="og:url" content="http://example.com/archives/page/10/index.html">
+  <meta name="description" content="NDN网络中&#x3D;&#x3D;逐跳拥塞&#x3D;&#x3D;控制机制综述NDN传输机制：接收方驱动(消费者端，下游)，一兴趣一数据，中心节点缓存，多源，多路径。 在NDN体系结构中，数据包是拥塞的主要原因，因为它们比兴趣包更大。为了避免拥塞，之前的方法分为三类：  基于接收器的方法； 逐跳法； 混合方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NDN逐跳拥塞控制">
+<meta property="og:url" content="http://example.com/2022/10/26/NDN%E9%80%90%E8%B7%B3%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/index.html">
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
+<meta property="og:description" content="NDN网络中&#x3D;&#x3D;逐跳拥塞&#x3D;&#x3D;控制机制综述NDN传输机制：接收方驱动(消费者端，下游)，一兴趣一数据，中心节点缓存，多源，多路径。 在NDN体系结构中，数据包是拥塞的主要原因，因为它们比兴趣包更大。为了避免拥塞，之前的方法分为三类：  基于接收器的方法； 逐跳法； 混合方法。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210260952805.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210260956793.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210261021987.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210261503974.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210261605811.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210261622538.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210261621573.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210271034598.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210271034811.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210271042132.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210271052579.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210271444096.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210271452755.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210271521496.png">
+<meta property="article:published_time" content="2022-10-26T01:38:25.000Z">
+<meta property="article:modified_time" content="2022-10-27T08:21:40.966Z">
 <meta property="article:author" content="ygtrece">
-<meta property="article:tag" content="学习, 日常">
+<meta property="article:tag" content="科研">
+<meta property="article:tag" content="网络">
+<meta property="article:tag" content="NDN">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210260952805.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -182,38 +203,303 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-NDN逐跳拥塞控制" class="article article-type-post " itemscope itemprop="blogPost">
   
-  
+<div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/03/01/%E5%91%A8%E6%8A%A52-28-3-6/" class="archive-article-date">
-  	<time datetime="2022-03-01T06:56:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-01</time>
+      <header class="article-header">
+        
+        
+        <a href="/2022/10/26/NDN%E9%80%90%E8%B7%B3%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/" class="archive-article-date">
+  	<time datetime="2022-10-26T01:38:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-26</time>
 </a>
 
 
-        </div>
-    	 
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">6.6k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">22分</span>
+      </span>
+    </span>
+</div>
+          
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/03/01/%E5%91%A8%E6%8A%A52-28-3-6/">周报2.28-3.6</a>
+    <h1 class="article-title_code_ant" itemprop="name">
+      NDN逐跳拥塞控制
     </h1>
   
+</p></center>
+      
+        <h2 id="NDN网络中-逐跳拥塞-控制机制综述"><a href="#NDN网络中-逐跳拥塞-控制机制综述" class="headerlink" title="NDN网络中==逐跳拥塞==控制机制综述"></a>NDN网络中==逐跳拥塞==控制机制综述</h2><p>NDN传输机制：接收方驱动(消费者端，下游)，一兴趣一数据，中心节点缓存，多源，多路径。</p>
+<p>在NDN体系结构中，数据包是拥塞的主要原因，因为它们比兴趣包更大。为了避免拥塞，之前的方法分为三类：</p>
+<ul>
+<li>基于接收器的方法；</li>
+<li>逐跳法；</li>
+<li>混合方法。</li>
+</ul>
+<span id="more"></span>
+<p>NDN拥塞控制的优势：可以使用中间节点来控制拥塞，中间路由器可以<strong>通过管理PIT的大小来处理流量负载</strong>，因此，NDN体系结构很容易实现逐跳拥塞控制机制。通过调节发送兴趣包的速率来控制接收方返回数据包的速率</p>
+<p>逐跳控制的基本思想是，每个中间节点检测拥塞并调整其兴趣包发送速率，以调整返回数据包的传输速率。主要有两种方式：==基于速率的逐跳拥塞控制==和==基于窗口的逐跳拥塞控制==。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210260952805.png" alt="image-20221026095218111"></p>
+<h4 id="A：基于速率的机制"><a href="#A：基于速率的机制" class="headerlink" title="A：基于速率的机制"></a>A：基于速率的机制</h4><p>基于速率的机制允许用户和路由器根据本地信息（如链路带宽）控制发送兴趣包的速率。下图显示了基于速率的逐跳控制的基本思想。中间节点Ri通过监视传入数据队列的长度来确定其拥塞状态。路由器根据拥塞状态决定成形速率是增加还是减少。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210260956793.png" alt="image-20221026095607859"></p>
+<p><strong>主要的考量因素：队列占有率，队列长度，队列滞留时间</strong></p>
+<p><code>HoBHIS：</code>使用数据队列占用率来计算成形率，通过计时器过期定期把过期的兴趣包清除，降低队列占有率和成形率(队列占有率)</p>
+<p><code>HIS：</code>使用中间路由器来监控传入兴趣包，并根据最佳预期兴趣包与实际传入兴趣包速率之间的差异来调整兴趣包发送率。</p>
+<p><code>HBH：</code>监视每个中间节点的传出队列的占用情况，以识别拥塞。如果队列大小达到其指定的最小或最大阈值，将向路由器和下游消费者发送明确通知（指定增加或减少速率）</p>
+<p><code>PCON：</code>使用<code>CoDel AQM</code>[11]检测拥塞。<code>CoDel</code>测量数据包队列时间，并通过显式标记某些数据包将此状态发送给消费者。<code>PCON</code>通过将后续兴趣包部分转移到其他非拥堵路线来应对拥堵，而消费者则通过降低兴趣包速率来应对拥塞。</p>
+<p><code>CC：</code>消除了连续<code>NACK</code>数据包导致的兴趣包速率过度降低。该方法设计用于在拥塞速率降低后，直到速率降低有效为止，不修改<code>NACK</code>数据包的兴趣包速率。</p>
+<h4 id="B：基于窗口的机制"><a href="#B：基于窗口的机制" class="headerlink" title="B：基于窗口的机制"></a>B：基于窗口的机制</h4><p>基于窗口的机制允许使用者在<strong>窗口大小的限制内连续发送兴趣包</strong>。而窗口的大小必须根据<strong>带宽和往返时间（RTT）</strong>确定。这种方法的一个示例如[3]所示，其中介绍了==使用H-ACK进行每跳兴趣传输的窗口大小控制==，以及在窗口关闭时存储兴趣包的队列。这种方法允许您根据与每个流和RTT链路相关联的兴趣发送率来确定特定流的兴趣窗口的大小，从而允许数据分组利用其最大链路带宽。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210261021987.png" alt="image-20221026102145245"></p>
+<p>Fi. 3.说明了一个典型的基于窗口的模型。首先，<code>router i − 1</code>以其窗口的大小连续发送兴趣包。当 <code>router i</code> 获得这些兴趣包时，它会将它们保存在兴趣队列中，因为它的<code>router i + 1</code> 的窗口被关闭。接下来，<code>router i</code> 在<code>router i + 1</code>处获取一个<code>H-ACK</code>包，并在窗口大小内发送排队的兴趣包。以这种方式，每个路由器将发送感兴趣的数据包，以便数据包将使用最大链路带宽 [3]。</p>
+<h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a><strong>总结：</strong></h4><p>基于速率的方法通过监视兴趣或数据包的<strong>队列长度</strong>来检测拥塞，而基于窗口的方法通过每个流的每跳中的<strong>兴趣窗口大小</strong>来检测拥堵。</p>
+<p>总的来说，基于窗口的机制的吞吐量小于基于速率的机制的吞吐率。因此，==基于速率的方法被认为适用于NDN==。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>机制</th>
+<th>拥塞检测方法</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HOBHIS[6]</td>
+<td>监控数据队列长度</td>
+<td>它通过在向上游转发之前调整路由器的兴趣来防止拥塞。</td>
+<td>与公平性问题和拥塞处理时间相关的缺陷。</td>
+</tr>
+<tr>
+<td>HIS[8]</td>
+<td>监控传入兴趣包速率</td>
+<td>避免拥塞并优化网络资源的使用。</td>
+<td>不考虑未知链路带宽的可能性，并未说明这种情况下的行为。</td>
+</tr>
+<tr>
+<td>NACK[7]</td>
+<td>监控发送兴趣队列</td>
+<td>可以在管理黑洞劫持、链路故障和网络拥塞方面提供高性能。</td>
+<td>由于NACK分组的传播延迟，兴趣发送速率被过度降低。</td>
+</tr>
+<tr>
+<td>HWCC[3]</td>
+<td>每个流的每跳的兴趣窗口大小</td>
+<td>数据分组可以有效地利用网络带宽。<br>达到高吞吐量性能。因此，最大限度地提高了公平性，同时有效地避免了拥塞。</td>
+<td>为每个流分离窗口大小。忽略队列大小。</td>
+</tr>
+<tr>
+<td>PCON[10]</td>
+<td>测量分组排队时间</td>
+<td>达到更高的总吞吐量，可以适应IP隧道和无线链路的演进容量。</td>
+<td>花更多时间将传输百分比调整到最佳水平，以确定最合适的接口。</td>
+</tr>
+<tr>
+<td>HBH[4]</td>
+<td>每个路由器监视其输出队列</td>
+<td>对于NDN节点，它避免了兴趣输出面的拥塞，并在所有活动输入面之间公平地共享兴趣输出链路容量。</td>
+<td>消除响应延迟参数，不考虑多生产者。</td>
+</tr>
+<tr>
+<td>IRNA[5]</td>
+<td>监控传出兴趣队列占用率</td>
+<td>它可以在缓冲区达到其极限之前防止拥塞，确保每个输入面的公平分配，并为同时使用的用户提供正确的带宽利用率</td>
+<td>消除响应延迟参数，不考虑多生产者。</td>
+</tr>
+<tr>
+<td>CC[9]</td>
+<td>监控发送兴趣队列</td>
+<td>消除了由连续的否定确认分组导致的利率的过度降低，并实现了高吞吐量。</td>
+<td>与公平性相关的缺陷</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="PCON：一种实用的命名数据网络拥塞控制方案"><a href="#PCON：一种实用的命名数据网络拥塞控制方案" class="headerlink" title="PCON：一种实用的命名数据网络拥塞控制方案"></a>PCON：一种实用的命名数据网络拥塞控制方案</h2><h3 id="0-摘要："><a href="#0-摘要：" class="headerlink" title="0. 摘要："></a>0. 摘要：</h3><p>传统的拥塞控制机制是为端到端连接设计的，不适合命名数据网络（NDN）体系结构，在NDN体系结构中，可以从多个源和通过多个路径检索内容。为了充分利用NDN架构，拥塞控制方案必须考虑网络内缓存、多路径转发和多播数据传递的影响。此外，解决方案不得假设已知==链路带宽或数据包大小==。</p>
+<p>PCON基于<code>CoDel AQM</code>（通过测量<strong>数据包排队时间</strong>）扩展的主动队列管理（AQM）方案检测其本地链路上的拥塞。然后监控输出链路上的队列，通过显式标记某些数据包向消费者发送信号，以便下游路由器可以选择其他路径或者降低兴趣包发送速率。</p>
+<p><a target="_blank" rel="noopener" href="http://wiki.wosku.com/html/a73f5ec82a2f80a5f6ab58a73cc59c9a.html">CoDel CoDel的意思解释|CoDel是什么意思 -我酷百科 (wosku.com)</a></p>
+<h3 id="1-背景："><a href="#1-背景：" class="headerlink" title="1. 背景："></a>1. <strong>背景：</strong></h3><p>传统的TCP拥塞控制基于两个端点之间建立的连接。发送方通过测量往返时间（RTT）或分组丢失来检测拥塞，然后相应地调整其发送速率。由于NDN的多径，多源特性，基于RTT的超时成为不可靠的拥塞指标</p>
+<p>之前的很多研究都是假设已知或可预测的链路带宽和数据块大小，但实际这些参数可能不知道。本文的方法不需要已知或可预测的链路带宽和数据块大小。</p>
+<h3 id="2-设计原理"><a href="#2-设计原理" class="headerlink" title="2. 设计原理"></a>2. 设计原理</h3><h5 id="考量的因素：NDN相较IP的独特特性"><a href="#考量的因素：NDN相较IP的独特特性" class="headerlink" title="考量的因素：NDN相较IP的独特特性"></a>考量的因素：NDN相较IP的独特特性</h5><h4 id="1-多个路径和端点"><a href="#1-多个路径和端点" class="headerlink" title="1. 多个路径和端点"></a>1. 多个路径和端点</h4><p>消除了两个端点之间连接的概念。不知道下一个数据包来自何处，这导致了三个问题：</p>
+<ul>
+<li><p>第一次之后到达的兴趣（也就是之前请求过的兴趣）看到的RTT短，这样可能设置的RTO(恢复时间目标，超过这个时间就重传)设置（<code>meanRTT+4\*varRTT</code>）的也短。这样导致发送速率降低，重传增加。</p>
+<blockquote>
+<p>解决方法：设置更高的最小RTO，但这也增加了检测数据包丢失的时间</p>
+<p>PCON通过将高的最小RTO与用于快速反应的显式拥塞信令相结合，避免了这种困境。</p>
+</blockquote>
+</li>
+<li><p>消费者的最佳拥塞窗口（定义为带宽延迟乘积–BDP）可能会因缓存多样性而变化。如果从较远的缓存获取数据，此路径有较低的BDP(带宽延时积)，兴趣包可能溢出队列</p>
+<blockquote>
+<p>解决方法：通过使缓冲区足够大以处理临时流量突发，并在缓冲区达到其极限之前使用CoDel AQM方案检测和发送拥塞信号来缓解此问题</p>
+</blockquote>
+</li>
+<li><p>消费者不能再使用接收到的数据包（无序传送）的序列号间隔作为数据包丢失的标志来判断拥塞，因为无序到达可能是由于从不同缓存或沿多条路径接收数据造成的。</p>
+</li>
+</ul>
+<h4 id="2-基于拉动的数据检索和HBH流量平衡。"><a href="#2-基于拉动的数据检索和HBH流量平衡。" class="headerlink" title="2. 基于拉动的数据检索和HBH流量平衡。"></a><strong>2. 基于拉动的数据检索和HBH流量平衡。</strong></h4><p>NDN采用兴趣包拉动数据包的机制。PCON使用==分组排队时间==[14]和==本地链路丢失检测==（第3.5节）作为更可靠的拥塞指标，而不是试图估计链路带宽或预期负载。</p>
+<h4 id="3-不同的部署场景"><a href="#3-不同的部署场景" class="headerlink" title="3. 不同的部署场景"></a><strong>3. 不同的部署场景</strong></h4><h4 id="4-流语义和公平性"><a href="#4-流语义和公平性" class="headerlink" title="4.流语义和公平性"></a><strong>4.流语义和公平性</strong></h4><p>流语义指的是需要对内容对象的定义达成全局协议，比如层编码视频，是将整个视频看作一个整体，还是每一部分看作一块内容。</p>
+<h3 id="3-系统设计"><a href="#3-系统设计" class="headerlink" title="3. 系统设计"></a>3. 系统设计</h3><p>基本原则：1）通过采用AQM进行早期拥塞检测，2）显式拥塞信令，3）利用多径转发，4）特别考虑IP覆盖和无线链路。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210261503974.png" alt="image-20221026150308213"></p>
+<p>如图1所示，PCON由五个组件组成：</p>
+<ul>
+<li>拥塞检测（3.1）：每个节点通过监控其输出队列来本地检测拥塞。</li>
+<li>拥塞信令（3.2）：在检测到拥塞后，节点标记数据包以通知下游路由器和消费者。</li>
+<li>消费者兴趣包速率调整（3.3）：终端消费者通过调整其兴趣包的发送率对拥堵信号作出反应。</li>
+<li>多径转发（3.4）：下游路由器通过调整流量分配比对拥塞信号做出反应。</li>
+<li>本地链路丢失检测（3.5）：在无线和IP覆盖链路上，我们本地检测数据包丢失，并使用NACK将其发送回。</li>
+</ul>
+<h4 id="3-1-拥塞检测"><a href="#3-1-拥塞检测" class="headerlink" title="3.1 拥塞检测"></a><strong>3.1 拥塞检测</strong></h4><p>我们通过监测==每个路由器的输出队列==来检测拥塞，而不是像IP试图通过监测数据包丢失或往返时间来推断消费者的拥塞</p>
+<p>采用AQM(主动队列管理)的CoDel方案。CoDel测量每个数据包在其输出链路上的排队延迟（“停留时间”）。如果一段时间内（默认：100ms）的最小停留时间超过阈值（默认：5ms），则认为该链路拥塞。</p>
+<blockquote>
+<p>优点：队列延迟隐含地考虑了链路带宽（对于固定队列大小，较高的带宽导致较低的队列延迟）</p>
+<p>缺点：这种方式不易实现，测量队列长度的方法更好实现，且更精准。</p>
+</blockquote>
+<p>我们通过监测本地链路上的数据包丢失来推断拥塞级别，数据包丢失导致越来越大的PIT，可能会溢出路由器的内存。</p>
+<blockquote>
+<p>解决方法：可以向下游发送过度增长的PIT状态信号，以减少传入兴趣的数量，这个是创新点，就是检测PIT的大小是否超过设定阈值，超过了就通知消费端降速。</p>
+</blockquote>
+<h4 id="3-2-拥塞信令"><a href="#3-2-拥塞信令" class="headerlink" title="3.2 拥塞信令"></a><strong>3.2 拥塞信令</strong></h4><p>在路由器检测到其一个出站端口链路拥塞后，它会向消费者和路径上的所有路由器发出信号。通过标记NDN数据包表示拥塞。==标记数越多，标记间隔时间越短==(标记间隔从1.1*码间隔（110ms）开始，并与标记数的平方根成反比减少)</p>
+<p>一个标记的数据包会分支到每个请求它的消费者，这将降低他们的速率。</p>
+<h4 id="3-3-消费者兴趣包速率调整"><a href="#3-3-消费者兴趣包速率调整" class="headerlink" title="3.3 消费者兴趣包速率调整"></a><strong>3.3 消费者兴趣包速率调整</strong></h4><p>在未标记数据包上增加发送速率；而在收到标记数据包、NACK和超时状况时应减少发送兴趣的速率。我们通过应用“基于TCP SACK的保守丢失恢复算法”[3]来防止这种过度调整（参见算法1）：消费者每RTT最多执行一个窗口减少。对于IP底层网络中的超时（由缓冲区溢出引起）和缓冲区溢出导致的NACK采取这种方法。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210261605811.png" alt="image-20221026160521814"></p>
+<p>窗口减少不仅由超时触发(超时可能是由于队列溢出)，还由包标记（类似于TCP ECN标记）和NACK触发。</p>
+<h4 id="3-4-多路径转发"><a href="#3-4-多路径转发" class="headerlink" title="3.4 多路径转发"></a><strong>3.4 多路径转发</strong></h4><p>设计多径转发策略的目标是最大化最终用户吞吐量，同时尽可能降低网络成本。</p>
+<ul>
+<li>如果最短路径可以满足需求，则不应在其他路径上分割流量。</li>
+<li>如果需求超过最短路径的容量，则应在下一条最短路径上递增分布。</li>
+<li>如果需求超过所有可用链路容量之和，则应以完全占用带宽的方式进行拆分，而不考虑路径长度。</li>
+</ul>
+<p>基于接收到的拥塞标记设计转发自适应：</p>
+<p>对于每个FIB前缀，PCON保持每个接口的转发百分比，对于最短路径（由路由协议给出）初始化为100%，对于所有其他路径初始化为0%。然后，对于每个标记的数据包，它减少传入接口的转发百分比，同时将所有其他接口的转发百分比增加到相等的量：</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210261622538.png" alt="image-20221026162217126"></p>
+<p>fwPerc（F）是当前面的转发百分比，CHANGE_PERC是一个固定参数，它在将转发比率调整到最佳值的速度（越高越好）和围绕该值振荡的程度（越低越好）之间进行权衡。<img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210261621573.png" alt="image-20221026162148289"></p>
+<p>P1是最短路径，P3是最长路径</p>
+<p>对于多路径转发，靠近内容存储库的路由器比靠近消费者的路由器看到更少的拥塞标记，因为后者看到来自更多链路的标记。为了避免这些路由器的过度调整，并解决更靠近发生拥塞的地方的拥塞，我们在远离拥塞链路的路由器上调整转发比：f（距离）≥ 1</p>
+<blockquote>
+<p>实际上就是上游路由器f（距离）设置的大，对应的reduction小，阻塞调控程度小。越靠近消费者，对拥塞反应越强烈</p>
+<p>对于PCON，消费者对每个拥塞标记的反应比路由器更强烈（例如，通过将cwnd减半），</p>
+</blockquote>
+<h4 id="3-5本地链路丢失检测"><a href="#3-5本地链路丢失检测" class="headerlink" title="3.5本地链路丢失检测"></a>3.5本地链路丢失检测</h4><p>到目前为止所描述的设计假设网络中数据包丢失的唯一原因是路由器缓冲区溢出</p>
+<h4 id="3-6高度拥挤的路段"><a href="#3-6高度拥挤的路段" class="headerlink" title="3.6高度拥挤的路段"></a>3.6高度拥挤的路段</h4><p>在某些情况下，PCON无法防止特定链路上的拥塞：拥塞可能是由无响应的消费者、IP交叉流量、软件故障、PIT入口溢出或硬件限制引起的。即使在这些情况下我们无法避免拥塞，我们仍然可以通过在转发策略中禁用这些“高度拥塞”的链路来避免使用它们。</p>
+<h2 id="基于队列大小反馈的有效NDN拥塞控制"><a href="#基于队列大小反馈的有效NDN拥塞控制" class="headerlink" title="基于队列大小反馈的有效NDN拥塞控制"></a>基于队列大小反馈的有效NDN拥塞控制</h2><h3 id="0-摘要"><a href="#0-摘要" class="headerlink" title="0. 摘要"></a>0. 摘要</h3><p>在NDN-QSF中，转发器估计上行带宽并使用队列大小作为拥塞反馈，以通知下行路由器限制感兴趣的传输速率。</p>
+<h3 id="1-背景"><a href="#1-背景" class="headerlink" title="1. 背景"></a>1. 背景</h3><p><strong>数据多播、网络缓存和多路径转发</strong>是提高计算机网络中数据对象检索性能的理想功能。</p>
+<blockquote>
+<p>当多个消费者请求相同数据时，数据多播和网络内缓存减少了网络流量，多路径转发探索并利用所有可用的网络资源以进一步提高吞吐量。</p>
+</blockquote>
+<p>NDN自动支持数据多播（通过兴趣聚合）和网络缓存。</p>
+<blockquote>
+<p>当数据传输不再沿着单一路径进行时，TCP/IP拥塞控制中使用的单一路径的“排队延迟”和“带宽延迟积”等概念不再适用</p>
+</blockquote>
+<p><strong>本工作旨在</strong>为NDN转发器设计==具有拥塞控制的多路径转发==，1）利用多个转发路径最大化网络吞吐量，2）控制拥塞，并具有低排队延迟。这两个目标都应该在存在网络内缓存和多路径转发的情况下实现。</p>
+<p>模拟侧重于一个或多个消费者获取相同数据对象的场景，评估指标衡量消费者吞吐量和网络拥塞水平。</p>
+<h4 id="本文贡献："><a href="#本文贡献：" class="headerlink" title="本文贡献："></a>本文贡献：</h4><ul>
+<li><p>使用模拟研究来调查<strong>网络内缓存</strong>和<strong>多路径转发</strong>对终端测量的影响，并观察到这两个特性使得终端消费者难以准确检测网络拥塞。</p>
+</li>
+<li><p>设计了一种拥塞控制算法NDN-QSF，该算法==使用上游队列大小作为拥塞反馈==，并<strong>逐跳控制拥塞</strong>，以有效控制NDN中的拥塞。</p>
+</li>
+<li><p>为了使多径转发决策适应网络负载，我们扩展了NDN-QSF，以基于上游拥塞反馈做出多径转发决定。</p>
+</li>
+<li><p>我们将NDN-QSF实施为NFD的转发策略(NDN有多种转发策略)，并通过ndnSIM模拟对其进行评估。</p>
+</li>
+</ul>
+<h3 id="2-相关工作"><a href="#2-相关工作" class="headerlink" title="2. 相关工作"></a>2. 相关工作</h3><p>MIRCC：该设计基于瓶颈转发器检测拥塞并<strong>为每个消费者分配每流发送速率</strong>的思想，消费者按照分配的速率发送每个流的兴趣。</p>
+<p>VIP：使用队列大小信息作为对邻居的反馈，以检测拥塞并做出多路径转发决策。</p>
+<p>NDN-QSF：与PCON和VIP类似，将<strong>队列大小</strong>相关信息作为拥塞反馈发送给消费者。与MIRCC分享了直接<strong>控制兴趣包速率</strong>和 使用智能转发器与哑巴消费者 的想法。</p>
+<p>NDN-QSF是逐跳拥塞检测，避免了需要知道网络中哪一个端点可以满足数据的假设。</p>
+<h3 id="3-NDN影响消费者的本地拥塞测量"><a href="#3-NDN影响消费者的本地拥塞测量" class="headerlink" title="3 NDN影响消费者的本地拥塞测量"></a>3 NDN影响消费者的本地拥塞测量</h3><p>NDN难以像IP使用本地RTT和速率测量来检测网络拥塞。</p>
+<p><strong>3.1 多路径转发发影响</strong></p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210271034598.png" alt="image-20221027103437996"></p>
+<p>消费者可以使用受多路径转发影响的平均RTT，但是不精准。当定向到长延迟路径的流量部分增加时，消费者实际吞吐量低于其兴趣包发送速率。</p>
+<h5 id="3-2-网络内缓存对消费者测量的影响"><a href="#3-2-网络内缓存对消费者测量的影响" class="headerlink" title="3.2 网络内缓存对消费者测量的影响"></a>3.2 网络内缓存对消费者测量的影响</h5><p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210271034811.png" alt="image-20221027103447198"></p>
+<p>消费者2最初将由缓存满足，并最终耗尽缓存，并由生产者满足，因为它比消费者1更快地请求数据。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210271042132.png" alt="image-20221027104222564"></p>
+<p>当C2从向缓存请求数据到向Consumer请求数据的转变中，RTT增大，可能导致错误的拥塞检测。</p>
+<h4 id="3-3-误读测量时错误检测拥塞"><a href="#3-3-误读测量时错误检测拥塞" class="headerlink" title="3.3 误读测量时错误检测拥塞"></a>3.3 误读测量时错误检测拥塞</h4><p>NDN消费者无法基于其本地RTT和数据到达率测量可靠地检测拥塞。相反，我们需要使用转发器可以提供的信息来推断拥塞。因此使用转发器的==本地排队信息作为下游拥塞信号==。</p>
+<h3 id="4-缓存存在时的有效拥塞控制"><a href="#4-缓存存在时的有效拥塞控制" class="headerlink" title="4.缓存存在时的有效拥塞控制"></a>4.缓存存在时的有效拥塞控制</h3><p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210271052579.png" alt="image-20221027105221929"></p>
+<p>所提出的转发过程基于现有的NDN转发管道，添加了按名称前缀的==兴趣排队(Interest Queue)、速率限制(Rate Limit Calculation)、测量(Measurement)、以及拥塞反馈模块(Feedback)==。</p>
+<p>在设计中，</p>
+<ul>
+<li>每个转发器的兴趣和数据队列大小作为拥塞反馈发送到下游。(Queue-Size Feedback Update)</li>
+<li>每个转发器保持对生产者可用带宽的每个上行估计。(Upstream Measurement Update)</li>
+<li>从下游接收的具有相同名称前缀的所有感兴趣分组被放入兴趣包队列(Interest Queue)。从上游的估计带宽和特定名称前缀的队列大小计算名称前缀朝向上游的速率限制。(Rate Limit Calculation)</li>
+<li>当上游拥塞反馈显示大队列时，应降低速率限制以耗尽上游队列。然后，转发策略向上游转发兴趣包队列中的兴趣，同时确保遵守兴趣包限制。(Queue-Size Feedback Update)</li>
+</ul>
+<h4 id="4-1-队列和队列大小反馈"><a href="#4-1-队列和队列大小反馈" class="headerlink" title="4.1 队列和队列大小反馈"></a><strong>4.1 队列和队列大小反馈</strong></h4><p>==队列大小==反馈作为拥塞信号向下游传递。反馈通过在每个数据包上进行背负来传输。</p>
+<p>队列大小反馈的值由当前转发器处的兴趣队列和数据队列大小以及与数据分组相对应的兴趣分组是否命中高速缓存或被聚集来确定</p>
+<blockquote>
+<p>兴趣包未命中缓存或被聚集，对应的数据包将具有拥塞反馈值。</p>
+<p>兴趣包命中缓存或被聚集，反馈下游的数据队列大小。</p>
+</blockquote>
+<p>由于队列大小反馈被背负在每个数据包上，转发器保持最小的兴趣包发送速率，以保持上游队列大小的最新视图。</p>
+<h4 id="4-2-估计上行带宽"><a href="#4-2-估计上行带宽" class="headerlink" title="4.2 估计上行带宽"></a>4.2 估计上行带宽</h4><p>每个转发器估计通过每个上游到生产者的带宽。使用每个上游的数据到达率和队列大小反馈来估计该带宽。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210271444096.png" alt="image-20221027144437838"></p>
+<p>利用每个上游的队列大小和数据到达率信息，上游的带宽被估计为其队列建立时上游的数据到达率。(感觉就是最大的数据到达速率所谓带宽估计值)</p>
+<ul>
+<li>如果队列大小  &gt;  <code>queue_THRESHOLD</code>，则将估计带宽设置为当前数据到达率。</li>
+<li>如果数据到达速率  &gt;  估计带宽，则将带宽设置为当前数据到达速率。</li>
+</ul>
+<h4 id="4-3-限制速率的计算"><a href="#4-3-限制速率的计算" class="headerlink" title="4.3 限制速率的计算"></a>4.3 限制速率的计算</h4><p>转发代理对向上游发包的速率限制进行定期调整。<code>ROUND_LENGTH</code>参数用于定义调整周期。</p>
+<p>此文用网络<code>RTT</code>作为<code>ROUND_LENGTH</code>，<code>u</code>应该对应的是一条<code>upstream</code>路径，<code>queueSize</code>是上游队列的大小</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210271452755.png" alt="image-20221027145242386"></p>
+<h4 id="4-3-1-拥塞控制"><a href="#4-3-1-拥塞控制" class="headerlink" title="4.3.1  拥塞控制"></a>4.3.1  拥塞控制</h4><p>通过调整速率限制，逐跳控制拥塞。检测上游队列的大小是否高于阈值。如果是，就限制向上游发送的速率。</p>
+<p><code>QUEUE_THRESHOLD</code>参数表示稳态队列大小的预期数量，5效果最好</p>
+<p>每一轮，上游队列被耗尽<code>bandwidth × round_length × (1 − MD_FACTOR)</code></p>
+<p>拥塞控制触发时，想拥塞上游发送的兴趣包速率降低，下游兴趣包可能排队导致下游阻塞，此时应该告知消费者减慢发包速率。</p>
+<h4 id="4-3-2-速率探测"><a href="#4-3-2-速率探测" class="headerlink" title="4.3.2 速率探测"></a>4.3.2 速率探测</h4><p>允许转发器通过以高于其估计带宽的速率向上游发送来校正其低估的上游带宽，（在<code>queueSize(u) &lt; QUEUE_THRESHOLD</code>这个分支）</p>
+<p>当上游已经拥塞时，当前数据到达率应该是其带宽的最新估计，（进入前面的else分支，<code>rate_limit[u] &lt;-- bandwidth[u]</code></p>
+<h4 id="4-4-用户拥塞控制"><a href="#4-4-用户拥塞控制" class="headerlink" title="4.4 用户拥塞控制"></a>4.4 用户拥塞控制</h4><p>本文使用了一个天真的消费者，在第一跳转发器处保持了一个大队列</p>
+<h4 id="4-5-通过公平排队"><a href="#4-5-通过公平排队" class="headerlink" title="4.5 通过公平排队"></a>4.5 通过公平排队</h4><p>公平排队可以是一个有用的原语，与<code>NDN-QSF</code>一起使用，以提供公平性。</p>
+<h3 id="5多路径转发"><a href="#5多路径转发" class="headerlink" title="5多路径转发"></a>5多路径转发</h3><p>使用“上游队列大小反馈”的<code>NDN-QSF</code>在多径转发下是有效的。此外拥塞控制算法估计的带宽可用于指导多路径之间的流量分割。因此可以扩展算法，做出多路径转发决策</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210271521496.png" alt="image-20221027152131850"></p>
+<ul>
+<li>对于转发到多条路径的流量，估计每个上游的带宽，并计算每个上游的速率限制，以便在控制拥塞的同时向多条路径分割感兴趣的分组。( <code>congestion control</code> )</li>
+<li>转发器通过增加其速率限制来探测上游，直到探测的上游具有高于阈值的队列大小。( <code>rate_limit * 1.05</code> )</li>
+<li>当被探测的上游已建立队列时，将选择另一个没有大队列的上游进行后续调整。(<code>selectUpstream2Probe</code>)</li>
+<li>后续调整对应<code>Avoid Unnecessary Contentions</code>，选出来的<code>Upstream2Probe</code>调大<code>rate_limit</code>，没选出来的也就是队列长的减小<code>rate_limit</code></li>
+</ul>
+<p>此方法与之前的Rate-Limit算法有些不同。</p>
+<h4 id="5-2-转发策略"><a href="#5-2-转发策略" class="headerlink" title="5.2 转发策略"></a>5.2 转发策略</h4><p>转发策略负责将输入兴趣队列中的兴趣分割到不同的上游转发器，同时遵守每个上游的速率限制。</p>
+<h3 id="6-仿真"><a href="#6-仿真" class="headerlink" title="6 仿真"></a>6 仿真</h3><p>存在缓存时的拥塞控制，存在多路径转发时的拥塞控制，共享同一瓶颈链路的多个转发路径，多路径转发的吞吐量最大化，高速缓存和多路径转发下的拥塞控制，具有公平排队的多个消费者。</p>
+<h3 id="7-讨论"><a href="#7-讨论" class="headerlink" title="7 讨论"></a>7 讨论</h3><p>NDN拥塞控制需要网络反馈。NDN的网络内缓存和多路径转发有助于扩展数据传输并最大化整体网络吞吐量。</p>
+<h3 id="8-结论"><a href="#8-结论" class="headerlink" title="8 结论"></a>8 结论</h3><p>本文研究了多路径转发和网络内缓存对拥塞控制的影响，使用转发器的本地队列大小作为对下游的拥塞反馈。</p>
+<p>设计了一个拥塞控制解决方案，NDN-QSF，它可以在存在网络缓存的情况下工作。拥塞控制设计是逐跳的，转发器的本地队列大小作为对下游的拥塞反馈。转发器通过其上行链路测量可用带宽，并基于估计的上行带宽和拥塞反馈来限制兴趣包传输速率。然后将NDN-QSF应用到多路径转发环境中，并将其扩展为多路径转发。</p>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -223,394 +509,129 @@ var _hmt = _hmt || [];
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">周报</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/03/01/%E4%BA%8C%E5%8F%89%E6%A0%91-5/" class="archive-article-date">
-  	<time datetime="2022-03-01T01:49:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-01</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/03/01/%E4%BA%8C%E5%8F%89%E6%A0%91-5/">二叉树 (5)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/28/C++-primer-6%E7%AB%A0/" class="archive-article-date">
-  	<time datetime="2022-02-28T02:51:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-28</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/28/C++-primer-6%E7%AB%A0/">C++ primer 6章 函数</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/27/C++-primer-5%E7%AB%A0/" class="archive-article-date">
-  	<time datetime="2022-02-27T12:20:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-27</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/27/C++-primer-5%E7%AB%A0/">C++ primer 5章 语句</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/26/%E5%91%A8%E6%8A%A52-21-2-27/" class="archive-article-date">
-  	<time datetime="2022-02-26T07:38:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-26</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/26/%E5%91%A8%E6%8A%A52-21-2-27/">周报2.21-2.27</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">网络</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">周报</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NDN</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/10/26/NDN%E9%80%90%E8%B7%B3%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/25/%E4%BA%8C%E5%8F%89%E6%A0%91-4/" class="archive-article-date">
-  	<time datetime="2022-02-25T10:37:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-25</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2022/10/24/leetcode-hot-100-4/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">leetcode-hot-100-4</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
 
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/25/%E4%BA%8C%E5%8F%89%E6%A0%91-4/">二叉树 (4)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#NDN%E7%BD%91%E7%BB%9C%E4%B8%AD-%E9%80%90%E8%B7%B3%E6%8B%A5%E5%A1%9E-%E6%8E%A7%E5%88%B6%E6%9C%BA%E5%88%B6%E7%BB%BC%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">NDN网络中&#x3D;&#x3D;逐跳拥塞&#x3D;&#x3D;控制机制综述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#A%EF%BC%9A%E5%9F%BA%E4%BA%8E%E9%80%9F%E7%8E%87%E7%9A%84%E6%9C%BA%E5%88%B6"><span class="toc-number">1.0.1.</span> <span class="toc-text">A：基于速率的机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#B%EF%BC%9A%E5%9F%BA%E4%BA%8E%E7%AA%97%E5%8F%A3%E7%9A%84%E6%9C%BA%E5%88%B6"><span class="toc-number">1.0.2.</span> <span class="toc-text">B：基于窗口的机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-number">1.0.3.</span> <span class="toc-text">总结：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PCON%EF%BC%9A%E4%B8%80%E7%A7%8D%E5%AE%9E%E7%94%A8%E7%9A%84%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E6%96%B9%E6%A1%88"><span class="toc-number">2.</span> <span class="toc-text">PCON：一种实用的命名数据网络拥塞控制方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0-%E6%91%98%E8%A6%81%EF%BC%9A"><span class="toc-number">2.1.</span> <span class="toc-text">0. 摘要：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%83%8C%E6%99%AF%EF%BC%9A"><span class="toc-number">2.2.</span> <span class="toc-text">1. 背景：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86"><span class="toc-number">2.3.</span> <span class="toc-text">2. 设计原理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%80%83%E9%87%8F%E7%9A%84%E5%9B%A0%E7%B4%A0%EF%BC%9ANDN%E7%9B%B8%E8%BE%83IP%E7%9A%84%E7%8B%AC%E7%89%B9%E7%89%B9%E6%80%A7"><span class="toc-number">2.3.0.1.</span> <span class="toc-text">考量的因素：NDN相较IP的独特特性</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%A4%9A%E4%B8%AA%E8%B7%AF%E5%BE%84%E5%92%8C%E7%AB%AF%E7%82%B9"><span class="toc-number">2.3.1.</span> <span class="toc-text">1. 多个路径和端点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%9F%BA%E4%BA%8E%E6%8B%89%E5%8A%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E6%A3%80%E7%B4%A2%E5%92%8CHBH%E6%B5%81%E9%87%8F%E5%B9%B3%E8%A1%A1%E3%80%82"><span class="toc-number">2.3.2.</span> <span class="toc-text">2. 基于拉动的数据检索和HBH流量平衡。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E4%B8%8D%E5%90%8C%E7%9A%84%E9%83%A8%E7%BD%B2%E5%9C%BA%E6%99%AF"><span class="toc-number">2.3.3.</span> <span class="toc-text">3. 不同的部署场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E6%B5%81%E8%AF%AD%E4%B9%89%E5%92%8C%E5%85%AC%E5%B9%B3%E6%80%A7"><span class="toc-number">2.3.4.</span> <span class="toc-text">4.流语义和公平性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.4.</span> <span class="toc-text">3. 系统设计</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E6%8B%A5%E5%A1%9E%E6%A3%80%E6%B5%8B"><span class="toc-number">2.4.1.</span> <span class="toc-text">3.1 拥塞检测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E6%8B%A5%E5%A1%9E%E4%BF%A1%E4%BB%A4"><span class="toc-number">2.4.2.</span> <span class="toc-text">3.2 拥塞信令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-%E6%B6%88%E8%B4%B9%E8%80%85%E5%85%B4%E8%B6%A3%E5%8C%85%E9%80%9F%E7%8E%87%E8%B0%83%E6%95%B4"><span class="toc-number">2.4.3.</span> <span class="toc-text">3.3 消费者兴趣包速率调整</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-%E5%A4%9A%E8%B7%AF%E5%BE%84%E8%BD%AC%E5%8F%91"><span class="toc-number">2.4.4.</span> <span class="toc-text">3.4 多路径转发</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5%E6%9C%AC%E5%9C%B0%E9%93%BE%E8%B7%AF%E4%B8%A2%E5%A4%B1%E6%A3%80%E6%B5%8B"><span class="toc-number">2.4.5.</span> <span class="toc-text">3.5本地链路丢失检测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-6%E9%AB%98%E5%BA%A6%E6%8B%A5%E6%8C%A4%E7%9A%84%E8%B7%AF%E6%AE%B5"><span class="toc-number">2.4.6.</span> <span class="toc-text">3.6高度拥挤的路段</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E9%98%9F%E5%88%97%E5%A4%A7%E5%B0%8F%E5%8F%8D%E9%A6%88%E7%9A%84%E6%9C%89%E6%95%88NDN%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="toc-number">3.</span> <span class="toc-text">基于队列大小反馈的有效NDN拥塞控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0-%E6%91%98%E8%A6%81"><span class="toc-number">3.1.</span> <span class="toc-text">0. 摘要</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%83%8C%E6%99%AF"><span class="toc-number">3.2.</span> <span class="toc-text">1. 背景</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%AC%E6%96%87%E8%B4%A1%E7%8C%AE%EF%BC%9A"><span class="toc-number">3.2.1.</span> <span class="toc-text">本文贡献：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C"><span class="toc-number">3.3.</span> <span class="toc-text">2. 相关工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-NDN%E5%BD%B1%E5%93%8D%E6%B6%88%E8%B4%B9%E8%80%85%E7%9A%84%E6%9C%AC%E5%9C%B0%E6%8B%A5%E5%A1%9E%E6%B5%8B%E9%87%8F"><span class="toc-number">3.4.</span> <span class="toc-text">3 NDN影响消费者的本地拥塞测量</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2-%E7%BD%91%E7%BB%9C%E5%86%85%E7%BC%93%E5%AD%98%E5%AF%B9%E6%B6%88%E8%B4%B9%E8%80%85%E6%B5%8B%E9%87%8F%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-number">3.4.0.1.</span> <span class="toc-text">3.2 网络内缓存对消费者测量的影响</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-%E8%AF%AF%E8%AF%BB%E6%B5%8B%E9%87%8F%E6%97%B6%E9%94%99%E8%AF%AF%E6%A3%80%E6%B5%8B%E6%8B%A5%E5%A1%9E"><span class="toc-number">3.4.1.</span> <span class="toc-text">3.3 误读测量时错误检测拥塞</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%BC%93%E5%AD%98%E5%AD%98%E5%9C%A8%E6%97%B6%E7%9A%84%E6%9C%89%E6%95%88%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="toc-number">3.5.</span> <span class="toc-text">4.缓存存在时的有效拥塞控制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-%E9%98%9F%E5%88%97%E5%92%8C%E9%98%9F%E5%88%97%E5%A4%A7%E5%B0%8F%E5%8F%8D%E9%A6%88"><span class="toc-number">3.5.1.</span> <span class="toc-text">4.1 队列和队列大小反馈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-%E4%BC%B0%E8%AE%A1%E4%B8%8A%E8%A1%8C%E5%B8%A6%E5%AE%BD"><span class="toc-number">3.5.2.</span> <span class="toc-text">4.2 估计上行带宽</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-%E9%99%90%E5%88%B6%E9%80%9F%E7%8E%87%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="toc-number">3.5.3.</span> <span class="toc-text">4.3 限制速率的计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-1-%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="toc-number">3.5.4.</span> <span class="toc-text">4.3.1  拥塞控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-2-%E9%80%9F%E7%8E%87%E6%8E%A2%E6%B5%8B"><span class="toc-number">3.5.5.</span> <span class="toc-text">4.3.2 速率探测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-4-%E7%94%A8%E6%88%B7%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="toc-number">3.5.6.</span> <span class="toc-text">4.4 用户拥塞控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-5-%E9%80%9A%E8%BF%87%E5%85%AC%E5%B9%B3%E6%8E%92%E9%98%9F"><span class="toc-number">3.5.7.</span> <span class="toc-text">4.5 通过公平排队</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E5%A4%9A%E8%B7%AF%E5%BE%84%E8%BD%AC%E5%8F%91"><span class="toc-number">3.6.</span> <span class="toc-text">5多路径转发</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-%E8%BD%AC%E5%8F%91%E7%AD%96%E7%95%A5"><span class="toc-number">3.6.1.</span> <span class="toc-text">5.2 转发策略</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E4%BB%BF%E7%9C%9F"><span class="toc-number">3.7.</span> <span class="toc-text">6 仿真</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E8%AE%A8%E8%AE%BA"><span class="toc-number">3.8.</span> <span class="toc-text">7 讨论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E7%BB%93%E8%AE%BA"><span class="toc-number">3.9.</span> <span class="toc-text">8 结论</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/24/C++-primer-4%E7%AB%A0/" class="archive-article-date">
-  	<time datetime="2022-02-24T15:06:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-24</time>
-</a>
+        
+    </div>
+</aside>
 
 
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/24/C++-primer-4%E7%AB%A0/">C++ primer 4章 表达式</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/24/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="archive-article-date">
-  	<time datetime="2022-02-24T11:35:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-24</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/24/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">Linux环境Matlab2019b破解方法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">环境配置</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/23/%E5%A4%A7%E6%95%B0%E6%8D%AE/" class="archive-article-date">
-  	<time datetime="2022-02-23T07:31:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-23</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/23/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/22/C++-primer-3%E7%AB%A0/" class="archive-article-date">
-  	<time datetime="2022-02-22T15:06:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-22</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/22/C++-primer-3%E7%AB%A0/">C++ primer 3章 字符串、向量和数组</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/9/">上一页</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/8/">8</a><a class="page-number" href="/archives/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/archives/page/11/">11</a><a class="page-number" href="/archives/page/12/">12</a><a class="page-number" href="/archives/page/13/">13</a><a class="extend next" rel="next" href="/archives/page/11/">下一页;</a>
-    </nav>
   
 
+  
+
+  
 
           </div>
         </div>
@@ -653,8 +674,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
