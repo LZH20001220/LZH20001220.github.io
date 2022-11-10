@@ -34,7 +34,7 @@
 <meta property="og:image" content="http://example.com/2022/06/09/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E8%B7%AF%E7%94%B1%E5%92%8C%E8%BD%AC%E5%8F%91/2.png">
 <meta property="og:image" content="http://example.com/2022/06/09/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E8%B7%AF%E7%94%B1%E5%92%8C%E8%BD%AC%E5%8F%91/3.png">
 <meta property="article:published_time" content="2022-06-09T11:57:54.000Z">
-<meta property="article:modified_time" content="2022-06-10T13:28:22.634Z">
+<meta property="article:modified_time" content="2022-11-02T03:16:21.217Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="科研">
 <meta property="article:tag" content="NDN">
@@ -325,7 +325,7 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 <p>每个 <em>Root Advise</em> 兴趣包都有一个存活期（<em>lifetime</em>），路由器在 <em>Root Advise</em> 兴趣包到期后会发送一个新的 <em>Root Advise</em> 兴趣包。这种周期性传输机制的设计是为了防止 <em>Root Advise</em> 兴趣包丢包的发生（<em>试设想，如果Root Advise 兴趣包的存活期无限大，会一直等待回复，如果 Root Advise 兴趣包在传输的过程中丢失了，而发送方又不知道，且不重传，那么发送方会以为没有新的更新，一直不去拉取最新的更新</em>），从而降低由于丢包带来的路由收敛延迟。但是，如果数据包的丢失率很低，频繁的发送 <em>Root Advise</em> 兴趣包亦会带来无意义的额外开销。在理想情况下，我们希望根据路由需求和网络特性来调整 <em>Root Advise</em> 兴趣包的发送频率。为了支持这个特性并解决 <em>CNNx Sync</em> 实现中的一些其它问题，我们正在致力于开发内建有同步机制的新版本的NLSR，以实现相同的LSA逐跳传播的效果。</p>
-<h5 id="4-多路径计算（Multipath-Calculation）"><a href="#4-多路径计算（Multipath-Calculation）" class="headerlink" title="4. 多路径计算（Multipath Calculation）"></a>4. 多路径计算（Multipath Calculation）</h5><p>基于 <strong>邻接LSAs</strong>（<em>Adjacency LSAs</em>）提供的网络节点间的连接信息，每个NLSR节点都能构建出完整的网络拓扑。接着路由器只需运行一个简单的扩展 <em>Dijkstra</em> (有权图最短路径问题)算法便可以为每一个目的节点计算出多跳路由。从 <strong>前缀LSAs</strong>（<em>Prefix LSAs</em>）中，我们可以知道每个路由器都关联了哪些前缀。我们可以综合上述的信息计算出到达每个名称前缀的下一跳列表。</p>
+<h5 id="4-多路径计算（Multipath-Calculation）"><a href="#4-多路径计算（Multipath-Calculation）" class="headerlink" title="4. 多路径计算（Multipath Calculation）"></a>4. 多路径计算（Multipath Calculation）</h5><p>基于 <strong>邻接LSAs</strong>（<em>Adjacency LSAs</em>）提供的网络节点间的连接信息，<strong>每个NLSR节点都能构建出完整的网络拓扑。接着路由器只需运行一个简单的扩展 <em>Dijkstra</em> (有权图最短路径问题)算法便可以为每一个目的节点计算出多跳路由。</strong>从 <strong>前缀LSAs</strong>（<em>Prefix LSAs</em>）中，我们可以知道每个路由器都关联了哪些前缀。我们可以综合上述的信息计算出到达每个名称前缀的下一跳列表。</p>
 <p>我们设计的NLSR中某个路由器计算多路径路由的方式如下：</p>
 <ul>
 <li>首先路由器移除（并非断开，只是排除）到除了一个邻居外的其它直接相连的邻居的路径（即，只保留一个直接相连的邻居）；</li>
