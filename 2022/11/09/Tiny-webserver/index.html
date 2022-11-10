@@ -30,11 +30,13 @@
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
 <meta property="og:description" content="服务器程序通常需要处理三类事件：I&#x2F;O事件，信号及定时事件。有两种事件处理模式：  Reactor模式：主线程监听描述符，监听到把读写工作和逻辑处理外包给子线程进行。 要求主线程（I&#x2F;O处理单元）只负责监听文件描述符上是否有事件发生（可读、可写），若有，则立即通知工作线程（逻辑单元），将socket可读可写事件放入请求队列，交给工作线程处理。  Proactor模式：主线程监听描述符，监听到主线程">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211102001749.jpeg">
 <meta property="article:published_time" content="2022-11-09T11:32:40.000Z">
-<meta property="article:modified_time" content="2022-11-09T12:05:35.214Z">
+<meta property="article:modified_time" content="2022-11-10T12:30:22.228Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="项目">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211102001749.jpeg">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -212,7 +214,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.2k字</span>
+        <span class="post-count">3k字</span>
       </span>
     </span>
 
@@ -221,7 +223,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">4分</span>
+        <span class="post-count">10分</span>
       </span>
     </span>
 </div>
@@ -268,6 +270,83 @@ var _hmt = _hmt || [];
 <p>==可以理解为LT只要检测到文件描述符可读写就会触发。ET模式只有不可读写变化到可读写的时候，才会触发。==</p>
 <p>在使用ET模式时，必须要保证该文件描述符是非阻塞的（确保在没有数据可读时，该文件描述符不会一直阻塞）；并且每次调用<code>read</code>和<code>write</code>的时候都必须等到它们返回<code>EWOULDBLOCK</code>（确保所有数据都已读完或写完）。</p>
 <h4 id="Web服务器如何处理以及响应接收到的HTTP请求报文呢"><a href="#Web服务器如何处理以及响应接收到的HTTP请求报文呢" class="headerlink" title="Web服务器如何处理以及响应接收到的HTTP请求报文呢?"></a>Web服务器如何处理以及响应接收到的HTTP请求报文呢?</h4><p>该项目使用线程池（半同步半反应堆模式）并发处理用户请求，主线程负责读写，工作线程（线程池中的线程）负责处理逻辑（HTTP请求报文的解析等等）。</p>
+<h3 id="服务器编程基本框架"><a href="#服务器编程基本框架" class="headerlink" title="服务器编程基本框架"></a>服务器编程基本框架</h3><p>主要由I/O单元，逻辑单元和网络存储单元组成，其中每个单元之间通过请求队列进行通信，从而协同完成任务。</p>
+<p>其中I/O单元用于处理客户端连接，读写网络数据；逻辑单元用于处理业务逻辑的线程；网络存储单元指本地数据库和文件等。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211102001749.jpeg" alt="图片"></p>
+<h3 id="五种I-O模型"><a href="#五种I-O模型" class="headerlink" title="五种I/O模型"></a>五种I/O模型</h3><ul>
+<li><strong>阻塞IO</strong>:调用者调用了某个函数，等待这个函数返回，期间什么也不做，不停的去检查这个函数有没有返回，必须等这个函数返回才能进行下一步动作</li>
+<li><strong>非阻塞IO</strong>:非阻塞等待，每隔一段时间就去检测IO事件是否就绪。没有就绪就可以做其他事。非阻塞I/O执行系统调用总是立即返回，不管时间是否已经发生，若时间没有发生，则返回-1，此时可以根据errno区分这两种情况，对于accept，recv和send，事件未发生时，errno通常被设置成eagain</li>
+<li><strong>信号驱动IO</strong>:linux用套接口进行信号驱动IO，安装一个信号处理函数，进程继续运行并不阻塞，当IO时间就绪，进程收到SIGIO信号。然后处理IO事件。</li>
+<li><strong>IO复用</strong>:linux用select/poll函数实现IO复用模型，这两个函数也会使进程阻塞，但是和阻塞IO所不同的是这两个函数可以同时阻塞多个IO操作。而且可以同时对多个读操作、写操作的IO函数进行检测。知道有数据可读或可写时，才真正调用IO操作函数</li>
+<li><strong>异步IO</strong>:linux中，可以调用aio_read函数告诉内核描述字缓冲区指针和缓冲区的大小、文件偏移及通知的方式，然后立即返回，当内核将数据拷贝到缓冲区后，再通知应用程序。</li>
+</ul>
+<p><strong>注意：阻塞I/O，非阻塞I/O，信号驱动I/O和I/O复用都是同步I/O。</strong></p>
+<p>同步I/O指内核向应用程序通知的是就绪事件，比如只通知有客户端连接，要求用户代码自行执行I/O操作。</p>
+<p>异步I/O是指内核向应用程序通知的是完成事件，比如读取客户端的数据后才通知应用程序，由内核完成I/O操作。</p>
+<h3 id="事件处理模式"><a href="#事件处理模式" class="headerlink" title="事件处理模式"></a>事件处理模式</h3><ul>
+<li>reactor模式中，主线程(<strong>I/O处理单元</strong>)只负责监听文件描述符上是否有事件发生，有的话立即通知工作线程(<strong>逻辑单元</strong> )，读写数据、接受新连接及处理客户请求均在工作线程中完成。通常由<strong>同步I/O</strong>实现。</li>
+<li>proactor模式中，主线程和内核负责处理读写数据、接受新连接等I/O操作，工作线程仅负责业务逻辑，如处理客户请求。通常由<strong>异步I/O</strong>实现，但也能同步实现。</li>
+</ul>
+<h3 id="同步I-O模拟proactor模式"><a href="#同步I-O模拟proactor模式" class="headerlink" title="同步I/O模拟proactor模式"></a>同步I/O模拟proactor模式</h3><p>由于异步I/O并不成熟，实际中使用较少，这里将使用同步I/O模拟实现proactor模式。</p>
+<p>同步I/O模型的工作流程如下（epoll_wait为例）：</p>
+<blockquote>
+<ul>
+<li>主线程往epoll内核事件表注册socket上的读就绪事件。</li>
+<li>主线程调用epoll_wait等待socket上有数据可读</li>
+<li>当socket上有数据可读，epoll_wait通知主线程,主线程从socket循环读取数据，直到没有更多数据可读，然后将读取到的数据封装成一个请求对象并插入请求队列。</li>
+<li>睡眠在请求队列上某个工作线程被唤醒，它获得请求对象并处理客户请求，然后往epoll内核事件表中注册该socket上的写就绪事件</li>
+<li>主线程调用epoll_wait等待socket可写。</li>
+<li>当socket上有数据可写，epoll_wait通知主线程。主线程往socket上写入服务器处理客户请求的结果。</li>
+</ul>
+</blockquote>
+<p>半同步/半异步模式工作流程</p>
+<blockquote>
+<ul>
+<li>同步线程用于处理客户逻辑</li>
+<li>异步线程用于处理I/O事件</li>
+<li>异步线程监听到客户请求后，就将其封装成请求对象并插入请求队列中</li>
+<li>请求队列将通知某个工作在<strong>同步模式的工作线程</strong>来读取并处理该请求对象</li>
+</ul>
+</blockquote>
+<p>半同步/半反应堆工作流程（以Proactor模式为例）</p>
+<blockquote>
+<ul>
+<li>主线程充当异步线程，负责监听所有socket上的事件</li>
+<li>若有新请求到来，主线程接收之以得到新的连接socket，然后往epoll内核事件表中注册该socket上的读写事件</li>
+<li>如果连接socket上有读写事件发生，主线程从socket上接收数据，并将数据封装成请求对象插入到请求队列中</li>
+<li>所有工作线程睡眠在请求队列上，当有任务到来时，通过竞争（如互斥锁）获得任务的接管权</li>
+</ul>
+</blockquote>
+<h3 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h3><ul>
+<li>空间换时间,浪费服务器的硬件资源,换取运行效率.</li>
+<li>池是一组资源的集合,这组资源在服务器启动之初就被完全创建好并初始化,这称为静态资源.</li>
+<li>当服务器进入正式运行阶段,开始处理客户请求的时候,如果它需要相关的资源,可以直接从池中获取,无需动态分配.</li>
+<li>当服务器处理完一个客户连接后,可以把相关的资源放回池中,无需执行系统调用释放资源.</li>
+</ul>
+<h4 id="静态成员变量"><a href="#静态成员变量" class="headerlink" title="静态成员变量"></a><strong>静态成员变量</strong></h4><p>将类成员变量声明为static，则为静态成员变量，与一般的成员变量不同，<strong>无论建立多少对象，都只有一个静态成员变量的拷贝</strong>，静态成员变量属于一个类，所有对象共享。</p>
+<p>静态变量在编译阶段就分配了空间，对象还没创建时就已经分配了空间，放到全局静态区。</p>
+<ul>
+<li><p>静态成员变量</p>
+</li>
+<li><ul>
+<li>最好是类内声明，类外初始化（以免类名访问静态成员访问不到）。</li>
+<li>无论公有，私有，静态成员都可以在类外定义，但私有成员仍有访问权限。</li>
+<li>非静态成员类外不能初始化。</li>
+<li>静态成员数据是共享的。</li>
+</ul>
+</li>
+</ul>
+<h4 id="静态成员函数"><a href="#静态成员函数" class="headerlink" title="静态成员函数"></a><strong>静态成员函数</strong></h4><p>将类成员函数声明为static，则为静态成员函数。</p>
+<ul>
+<li><p>静态成员函数</p>
+</li>
+<li><ul>
+<li>静态成员函数可以直接访问静态成员变量，不能直接访问普通成员变量，但可以通过参数传递的方式访问。</li>
+<li>普通成员函数可以访问普通成员变量，也可以访问静态成员变量。</li>
+<li>静态成员函数没有this指针。<strong>非静态数据成员为对象单独维护，但静态成员函数为共享函数</strong>，无法区分是哪个对象，因此不能直接访问普通变量成员，也没有this指针。</li>
+</ul>
+</li>
+</ul>
 
       
 
@@ -380,7 +459,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5IO"><span class="toc-number">1.</span> <span class="toc-text">同步和异步IO</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IO%E5%A4%8D%E7%94%A8%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-number">2.</span> <span class="toc-text">IO复用的比较</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LT%EF%BC%88%E7%94%B5%E5%B9%B3%E8%A7%A6%E5%8F%91%EF%BC%89%E5%92%8CET%EF%BC%88%E8%BE%B9%E7%BC%98%E8%A7%A6%E5%8F%91%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">LT（电平触发）和ET（边缘触发）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Web%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E4%BB%A5%E5%8F%8A%E5%93%8D%E5%BA%94%E6%8E%A5%E6%94%B6%E5%88%B0%E7%9A%84HTTP%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%E5%91%A2"><span class="toc-number">4.</span> <span class="toc-text">Web服务器如何处理以及响应接收到的HTTP请求报文呢?</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5IO"><span class="toc-number">1.</span> <span class="toc-text">同步和异步IO</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IO%E5%A4%8D%E7%94%A8%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-number">2.</span> <span class="toc-text">IO复用的比较</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LT%EF%BC%88%E7%94%B5%E5%B9%B3%E8%A7%A6%E5%8F%91%EF%BC%89%E5%92%8CET%EF%BC%88%E8%BE%B9%E7%BC%98%E8%A7%A6%E5%8F%91%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">LT（电平触发）和ET（边缘触发）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Web%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E4%BB%A5%E5%8F%8A%E5%93%8D%E5%BA%94%E6%8E%A5%E6%94%B6%E5%88%B0%E7%9A%84HTTP%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%E5%91%A2"><span class="toc-number">4.</span> <span class="toc-text">Web服务器如何处理以及响应接收到的HTTP请求报文呢?</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6"><span class="toc-number"></span> <span class="toc-text">服务器编程基本框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E7%A7%8DI-O%E6%A8%A1%E5%9E%8B"><span class="toc-number"></span> <span class="toc-text">五种I&#x2F;O模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E6%A8%A1%E5%BC%8F"><span class="toc-number"></span> <span class="toc-text">事件处理模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5I-O%E6%A8%A1%E6%8B%9Fproactor%E6%A8%A1%E5%BC%8F"><span class="toc-number"></span> <span class="toc-text">同步I&#x2F;O模拟proactor模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="toc-number"></span> <span class="toc-text">线程池</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F"><span class="toc-number">1.</span> <span class="toc-text">静态成员变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">静态成员函数</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -565,11 +644,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color3">项目</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">项目</a>
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
               </li>
              
               <li class="article-tag-list-item">
