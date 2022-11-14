@@ -31,8 +31,10 @@
 <meta property="og:description" content="服务器程序通常需要处理三类事件：I&#x2F;O事件，信号及定时事件。有两种事件处理模式：  Reactor模式：主线程监听描述符，监听到把读写工作和逻辑处理外包给子线程进行。 要求主线程（I&#x2F;O处理单元）只负责监听文件描述符上是否有事件发生（可读、可写），若有，则立即通知工作线程（逻辑单元），将socket可读可写事件放入请求队列，交给工作线程处理。  Proactor模式：主线程监听描述符，监听到主线程">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211102001749.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211141511495.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211141542404.jpeg">
 <meta property="article:published_time" content="2022-11-09T11:32:40.000Z">
-<meta property="article:modified_time" content="2022-11-10T12:30:22.228Z">
+<meta property="article:modified_time" content="2022-11-14T08:59:57.698Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="项目">
 <meta name="twitter:card" content="summary">
@@ -214,7 +216,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">3k字</span>
+        <span class="post-count">4.2k字</span>
       </span>
     </span>
 
@@ -223,7 +225,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">10分</span>
+        <span class="post-count">15分</span>
       </span>
     </span>
 </div>
@@ -347,6 +349,106 @@ var _hmt = _hmt || [];
 </ul>
 </li>
 </ul>
+<h4 id="EPOLL"><a href="#EPOLL" class="headerlink" title="EPOLL"></a>EPOLL</h4><ul>
+<li><p>epoll_create时，内核除了帮我们在epoll文件系统里建了个红黑树用于存储以后epoll_ctl传来的fd外，还会再建立一个list链表，用于存储准备就绪的事件，当epoll_wait调用时，仅仅观察这个list链表里有没有数据即可。</p>
+</li>
+<li><p>EPOLLONESHOT</p>
+</li>
+<li><ul>
+<li>一个线程读取某个socket上的数据后开始处理数据，在处理过程中该socket上又有新数据可读，此时另一个线程被唤醒读取，此时出现两个线程处理同一个socket</li>
+<li>我们期望的是一个socket连接在任一时刻都只被一个线程处理，通过epoll_ctl对该文件描述符注册epolloneshot事件，一个线程处理socket时，其他线程将无法处理，<strong>当该线程处理完后，需要通过epoll_ctl重置epolloneshot事件</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="HTTP报文格式"><a href="#HTTP报文格式" class="headerlink" title="HTTP报文格式"></a>HTTP报文格式</h3><p>HTTP报文分为请求报文和响应报文两种，每种报文必须按照特有格式生成，才能被浏览器端识别。</p>
+<p>其中，浏览器端向服务器发送的为请求报文，服务器处理后返回给浏览器端的为响应报文。</p>
+<h4 id="请求报文"><a href="#请求报文" class="headerlink" title="请求报文"></a><strong>请求报文</strong></h4><p>HTTP请求报文由请求行（request line）、请求头部（header）、空行和请求数据四个部分组成。</p>
+<p>其中，请求分为两种，GET和POST。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> 1    GET /562f25980001b1b106000338.jpg HTTP/1.1</span><br><span class="line"> 2    Host:img.mukewang.com</span><br><span class="line"> 3    User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64)</span><br><span class="line"> 4    AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36</span><br><span class="line"> 5    Accept:image/webp,image/*,*/*;q=0.8</span><br><span class="line"> 6    Referer:http://www.imooc.com/</span><br><span class="line"> 7    Accept-Encoding:gzip, deflate, sdch</span><br><span class="line"> 8    Accept-Language:zh-CN,zh;q=0.8</span><br><span class="line"> 9    空行</span><br><span class="line">10    请求数据为空</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1    POST / HTTP1.1</span><br><span class="line">2    Host:www.wrox.com</span><br><span class="line">3    User-Agent:Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727; .NET CLR 3.0.04506.648; .NET CLR 3.5.21022)</span><br><span class="line">4    Content-Type:application/x-www-form-urlencoded</span><br><span class="line">5    Content-Length:40</span><br><span class="line">6    Connection: Keep-Alive</span><br><span class="line">7    空行</span><br><span class="line">8    name=Professional%20Ajax&amp;publisher=Wiley</span><br></pre></td></tr></table></figure>
+<h4 id="响应报文"><a href="#响应报文" class="headerlink" title="响应报文"></a><strong>响应报文</strong></h4><p>HTTP响应也由四个部分组成，分别是：状态行、消息报头、空行和响应正文。</p>
+<h4 id="http报文处理流程"><a href="#http报文处理流程" class="headerlink" title="http报文处理流程"></a><strong>http报文处理流程</strong></h4><ul>
+<li>浏览器端发出http连接请求，主线程创建http对象接收请求并将所有数据读入对应buffer，将该对象插入任务队列，工作线程从任务队列中取出一个任务进行处理。(<strong>本篇讲</strong>)</li>
+<li>工作线程取出任务后，调用process_read函数，通过主、从状态机对请求报文进行解析。(<strong>中篇讲</strong>)</li>
+<li>解析完之后，跳转do_request函数生成响应报文，通过process_write写入buffer，返回给浏览器端。(<strong>下篇讲</strong>)</li>
+</ul>
+<h3 id="HTTP状态码"><a href="#HTTP状态码" class="headerlink" title="HTTP状态码"></a>HTTP状态码</h3><p>HTTP有5种类型的状态码，具体的：</p>
+<ul>
+<li><p>1xx：指示信息—表示请求已接收，继续处理。</p>
+</li>
+<li><p>2xx：成功—表示请求正常处理完毕。</p>
+</li>
+<li><ul>
+<li>200 OK：客户端请求被正常处理。</li>
+<li>206 Partial content：客户端进行了范围请求。</li>
+</ul>
+</li>
+<li><p>3xx：重定向—要完成请求必须进行更进一步的操作。</p>
+</li>
+<li><ul>
+<li>301 Moved Permanently：永久重定向，该资源已被永久移动到新位置，将来任何对该资源的访问都要使用本响应返回的若干个URI之一。</li>
+<li>302 Found：临时重定向，请求的资源现在临时从不同的URI中获得。</li>
+</ul>
+</li>
+<li><p>4xx：客户端错误—请求有语法错误，服务器无法处理请求。</p>
+</li>
+<li><ul>
+<li>400 Bad Request：请求报文存在语法错误。</li>
+<li>403 Forbidden：请求被服务器拒绝。</li>
+<li>404 Not Found：请求不存在，服务器上找不到请求的资源。</li>
+</ul>
+</li>
+<li><p>5xx：服务器端错误—服务器处理请求出错。</p>
+</li>
+<li><ul>
+<li>500 Internal Server Error：服务器在执行请求时出现错误。</li>
+</ul>
+</li>
+</ul>
+<h3 id="流程图与状态机"><a href="#流程图与状态机" class="headerlink" title="流程图与状态机"></a>流程图与状态机</h3><p><strong>从状态机负责读取报文的一行，主状态机负责对该行数据进行解析</strong>，主状态机内部调用从状态机，从状态机驱动主状态机。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211141511495.jpeg" alt="图片"></p>
+<p>三种状态，标识解析位置。</p>
+<ul>
+<li>CHECK_STATE_REQUESTLINE，解析请求行</li>
+<li>CHECK_STATE_HEADER，解析请求头</li>
+<li>CHECK_STATE_CONTENT，解析消息体，仅用于解析POST请求</li>
+</ul>
+<p>三种状态，标识解析一行的读取状态。</p>
+<ul>
+<li>LINE_OK，完整读取一行</li>
+<li>LINE_BAD，报文语法有误</li>
+<li>LINE_OPEN，读取的行不完整</li>
+</ul>
+<h4 id="HTTP-CODE含义"><a href="#HTTP-CODE含义" class="headerlink" title="HTTP_CODE含义"></a><strong>HTTP_CODE含义</strong></h4><p>表示HTTP请求的处理结果，在头文件中初始化了八种情形，在报文解析时只涉及到四种。</p>
+<ul>
+<li><p>NO_REQUEST</p>
+</li>
+<li><ul>
+<li>请求不完整，需要继续读取请求报文数据</li>
+</ul>
+</li>
+<li><p>GET_REQUEST</p>
+</li>
+<li><ul>
+<li>获得了完整的HTTP请求</li>
+</ul>
+</li>
+<li><p>BAD_REQUEST</p>
+</li>
+<li><ul>
+<li>HTTP请求报文有语法错误</li>
+</ul>
+</li>
+<li><p>INTERNAL_ERROR</p>
+</li>
+<li><ul>
+<li>服务器内部错误，该结果在主状态机逻辑switch的default下，一般不会触发</li>
+</ul>
+</li>
+</ul>
+<h3 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h3><p>浏览器端发出HTTP请求报文，服务器端接收该报文并调用<code>process_read</code>对其进行解析，根据解析结果<code>HTTP_CODE</code>，进入相应的逻辑和模块。</p>
+<p>其中，服务器子线程完成报文的解析与响应；主线程监测读写事件，调用<code>read_once</code>和<code>http_conn::write</code>完成数据的读取与发送。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211141542404.jpeg" alt="图片"></p>
 
       
 
@@ -430,6 +532,15 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
+    <a href="/2022/11/13/%E4%B8%93%E5%88%A9%E7%BA%BF%E4%B8%8A%E7%94%B3%E8%AF%B7%E6%B5%81%E7%A8%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          专利线上申请流程
+        
+      </div>
+    </a>
+  
   
     <a href="/2022/11/09/%E5%89%91%E6%8C%87offer-2/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">剑指offer-2</div>
@@ -459,7 +570,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5IO"><span class="toc-number">1.</span> <span class="toc-text">同步和异步IO</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IO%E5%A4%8D%E7%94%A8%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-number">2.</span> <span class="toc-text">IO复用的比较</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LT%EF%BC%88%E7%94%B5%E5%B9%B3%E8%A7%A6%E5%8F%91%EF%BC%89%E5%92%8CET%EF%BC%88%E8%BE%B9%E7%BC%98%E8%A7%A6%E5%8F%91%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">LT（电平触发）和ET（边缘触发）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Web%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E4%BB%A5%E5%8F%8A%E5%93%8D%E5%BA%94%E6%8E%A5%E6%94%B6%E5%88%B0%E7%9A%84HTTP%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%E5%91%A2"><span class="toc-number">4.</span> <span class="toc-text">Web服务器如何处理以及响应接收到的HTTP请求报文呢?</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6"><span class="toc-number"></span> <span class="toc-text">服务器编程基本框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E7%A7%8DI-O%E6%A8%A1%E5%9E%8B"><span class="toc-number"></span> <span class="toc-text">五种I&#x2F;O模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E6%A8%A1%E5%BC%8F"><span class="toc-number"></span> <span class="toc-text">事件处理模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5I-O%E6%A8%A1%E6%8B%9Fproactor%E6%A8%A1%E5%BC%8F"><span class="toc-number"></span> <span class="toc-text">同步I&#x2F;O模拟proactor模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="toc-number"></span> <span class="toc-text">线程池</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F"><span class="toc-number">1.</span> <span class="toc-text">静态成员变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">静态成员函数</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5IO"><span class="toc-number">1.</span> <span class="toc-text">同步和异步IO</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IO%E5%A4%8D%E7%94%A8%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-number">2.</span> <span class="toc-text">IO复用的比较</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LT%EF%BC%88%E7%94%B5%E5%B9%B3%E8%A7%A6%E5%8F%91%EF%BC%89%E5%92%8CET%EF%BC%88%E8%BE%B9%E7%BC%98%E8%A7%A6%E5%8F%91%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">LT（电平触发）和ET（边缘触发）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Web%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E4%BB%A5%E5%8F%8A%E5%93%8D%E5%BA%94%E6%8E%A5%E6%94%B6%E5%88%B0%E7%9A%84HTTP%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%E5%91%A2"><span class="toc-number">4.</span> <span class="toc-text">Web服务器如何处理以及响应接收到的HTTP请求报文呢?</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6"><span class="toc-number"></span> <span class="toc-text">服务器编程基本框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E7%A7%8DI-O%E6%A8%A1%E5%9E%8B"><span class="toc-number"></span> <span class="toc-text">五种I&#x2F;O模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E6%A8%A1%E5%BC%8F"><span class="toc-number"></span> <span class="toc-text">事件处理模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5I-O%E6%A8%A1%E6%8B%9Fproactor%E6%A8%A1%E5%BC%8F"><span class="toc-number"></span> <span class="toc-text">同步I&#x2F;O模拟proactor模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="toc-number"></span> <span class="toc-text">线程池</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F"><span class="toc-number">1.</span> <span class="toc-text">静态成员变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">静态成员函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#EPOLL"><span class="toc-number">3.</span> <span class="toc-text">EPOLL</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="toc-number"></span> <span class="toc-text">HTTP报文格式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87"><span class="toc-number">1.</span> <span class="toc-text">请求报文</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87"><span class="toc-number">2.</span> <span class="toc-text">响应报文</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#http%E6%8A%A5%E6%96%87%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">http报文处理流程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP%E7%8A%B6%E6%80%81%E7%A0%81"><span class="toc-number"></span> <span class="toc-text">HTTP状态码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B%E5%9B%BE%E4%B8%8E%E7%8A%B6%E6%80%81%E6%9C%BA"><span class="toc-number"></span> <span class="toc-text">流程图与状态机</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#HTTP-CODE%E5%90%AB%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">HTTP_CODE含义</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="toc-number"></span> <span class="toc-text">流程图</span></a>
                     </div>
                 </span>
             </div>
@@ -644,11 +755,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">项目</a>
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color3">项目</a>
               </li>
              
               <li class="article-tag-list-item">
