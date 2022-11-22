@@ -23,22 +23,26 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta name="description" content="服务器程序通常需要处理三类事件：I&#x2F;O事件，信号及定时事件。有两种事件处理模式：  Reactor模式：主线程监听描述符，监听到把读写工作和逻辑处理外包给子线程进行。 要求主线程（I&#x2F;O处理单元）只负责监听文件描述符上是否有事件发生（可读、可写），若有，则立即通知工作线程（逻辑单元），将socket可读可写事件放入请求队列，交给工作线程处理。  Proactor模式：主线程监听描述符，监听到主线程">
+  <meta name="description" content="整体流程：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tiny-webserver">
 <meta property="og:url" content="http://example.com/2022/11/09/Tiny-webserver/index.html">
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
-<meta property="og:description" content="服务器程序通常需要处理三类事件：I&#x2F;O事件，信号及定时事件。有两种事件处理模式：  Reactor模式：主线程监听描述符，监听到把读写工作和逻辑处理外包给子线程进行。 要求主线程（I&#x2F;O处理单元）只负责监听文件描述符上是否有事件发生（可读、可写），若有，则立即通知工作线程（逻辑单元），将socket可读可写事件放入请求队列，交给工作线程处理。  Proactor模式：主线程监听描述符，监听到主线程">
+<meta property="og:description" content="整体流程：">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211161641013.jpeg">
 <meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211102001749.jpeg">
 <meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211141511495.jpeg">
 <meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211141542404.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211151506252.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211151835257.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211161537191.jpeg">
 <meta property="article:published_time" content="2022-11-09T11:32:40.000Z">
-<meta property="article:modified_time" content="2022-11-14T08:59:57.698Z">
+<meta property="article:modified_time" content="2022-11-16T08:42:12.709Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="项目">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211102001749.jpeg">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211161641013.jpeg">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -216,7 +220,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">4.2k字</span>
+        <span class="post-count">8.1k字</span>
       </span>
     </span>
 
@@ -225,7 +229,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">15分</span>
+        <span class="post-count">28分</span>
       </span>
     </span>
 </div>
@@ -245,7 +249,10 @@ var _hmt = _hmt || [];
   
 </p></center>
       
-        <p>服务器程序通常需要处理三类事件：I/O事件，信号及定时事件。有两种事件处理模式：</p>
+        <p>整体流程：</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211161641013.jpeg" alt="img"></p>
+<span id="more"></span>
+<p>服务器程序通常需要处理三类事件：I/O事件，信号及定时事件。有两种事件处理模式：</p>
 <ul>
 <li><p>Reactor模式：主线程监听描述符，监听到把读写工作和逻辑处理外包给子线程进行。</p>
 <p>要求主线程（I/O处理单元）只负责监听文件描述符上是否有事件发生（可读、可写），若有，则立即通知工作线程（逻辑单元），将socket可读可写事件放入请求队列，交给工作线程处理。</p>
@@ -254,7 +261,7 @@ var _hmt = _hmt || [];
 <p>子线程将所有的I/O操作都交给主线程和内核来处理（进行读、写），工作线程仅负责处理逻辑，如主线程读完成后<code>users[sockfd].read()</code>，选择一个工作线程来处理客户请求<code>pool-&gt;append(users + sockfd)</code>。</p>
 </li>
 </ul>
-<span id="more"></span>
+<!-- more -->
 <h4 id="同步和异步IO"><a href="#同步和异步IO" class="headerlink" title="同步和异步IO"></a>同步和异步IO</h4><p>通常使用同步I/O模型（如<code>epoll_wait</code>）实现Reactor，使用异步I/O（如<code>aio_read</code>和<code>aio_write</code>）实现Proactor。但在此项目中，我们使用的是<strong>同步I/O模拟的Proactor</strong>事件处理模式。</p>
 <h4 id="IO复用的比较"><a href="#IO复用的比较" class="headerlink" title="IO复用的比较"></a>IO复用的比较</h4><p>能够克服 select 函数缺点的 epoll 函数具有以下优点，这些优点正好与之前的 select 函数缺点相反。</p>
 <ul>
@@ -364,8 +371,8 @@ var _hmt = _hmt || [];
 <p>其中，浏览器端向服务器发送的为请求报文，服务器处理后返回给浏览器端的为响应报文。</p>
 <h4 id="请求报文"><a href="#请求报文" class="headerlink" title="请求报文"></a><strong>请求报文</strong></h4><p>HTTP请求报文由请求行（request line）、请求头部（header）、空行和请求数据四个部分组成。</p>
 <p>其中，请求分为两种，GET和POST。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> 1    GET /562f25980001b1b106000338.jpg HTTP/1.1</span><br><span class="line"> 2    Host:img.mukewang.com</span><br><span class="line"> 3    User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64)</span><br><span class="line"> 4    AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36</span><br><span class="line"> 5    Accept:image/webp,image/*,*/*;q=0.8</span><br><span class="line"> 6    Referer:http://www.imooc.com/</span><br><span class="line"> 7    Accept-Encoding:gzip, deflate, sdch</span><br><span class="line"> 8    Accept-Language:zh-CN,zh;q=0.8</span><br><span class="line"> 9    空行</span><br><span class="line">10    请求数据为空</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1    POST / HTTP1.1</span><br><span class="line">2    Host:www.wrox.com</span><br><span class="line">3    User-Agent:Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727; .NET CLR 3.0.04506.648; .NET CLR 3.5.21022)</span><br><span class="line">4    Content-Type:application/x-www-form-urlencoded</span><br><span class="line">5    Content-Length:40</span><br><span class="line">6    Connection: Keep-Alive</span><br><span class="line">7    空行</span><br><span class="line">8    name=Professional%20Ajax&amp;publisher=Wiley</span><br></pre></td></tr></table></figure>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> GET /562f25980001b1b106000338.jpg HTTP/1.1</span><br><span class="line"> Host:img.mukewang.com</span><br><span class="line"> User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64)</span><br><span class="line"> AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36</span><br><span class="line"> Accept:image/webp,image/*,*/*;q=0.8</span><br><span class="line"> Referer:http://www.imooc.com/</span><br><span class="line"> Accept-Encoding:gzip, deflate, sdch</span><br><span class="line"> Accept-Language:zh-CN,zh;q=0.8</span><br><span class="line"> 空行</span><br><span class="line">请求数据为空</span><br></pre></td></tr></table></figure>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">POST / HTTP1.1</span><br><span class="line">Host:www.wrox.com</span><br><span class="line">User-Agent:Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727; .NET CLR 3.0.04506.648; .NET CLR 3.5.21022)</span><br><span class="line">Content-Type:application/x-www-form-urlencoded</span><br><span class="line">Content-Length:40</span><br><span class="line"><span class="attribute">Connection</span><span class="punctuation">: </span>Keep-Alive</span><br><span class="line">空行</span><br><span class="line">name=Professional%20Ajax&amp;publisher=Wiley</span><br></pre></td></tr></table></figure>
 <h4 id="响应报文"><a href="#响应报文" class="headerlink" title="响应报文"></a><strong>响应报文</strong></h4><p>HTTP响应也由四个部分组成，分别是：状态行、消息报头、空行和响应正文。</p>
 <h4 id="http报文处理流程"><a href="#http报文处理流程" class="headerlink" title="http报文处理流程"></a><strong>http报文处理流程</strong></h4><ul>
 <li>浏览器端发出http连接请求，主线程创建http对象接收请求并将所有数据读入对应buffer，将该对象插入任务队列，工作线程从任务队列中取出一个任务进行处理。(<strong>本篇讲</strong>)</li>
@@ -446,9 +453,129 @@ var _hmt = _hmt || [];
 </ul>
 </li>
 </ul>
-<h3 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h3><p>浏览器端发出HTTP请求报文，服务器端接收该报文并调用<code>process_read</code>对其进行解析，根据解析结果<code>HTTP_CODE</code>，进入相应的逻辑和模块。</p>
+<h4 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h4><p>浏览器端发出HTTP请求报文，服务器端接收该报文并调用<code>process_read</code>对其进行解析，根据解析结果<code>HTTP_CODE</code>，进入相应的逻辑和模块。</p>
 <p>其中，服务器子线程完成报文的解析与响应；主线程监测读写事件，调用<code>read_once</code>和<code>http_conn::write</code>完成数据的读取与发送。</p>
 <p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211141542404.jpeg" alt="图片"></p>
+<h3 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h3><h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><p><code>非活跃</code>，是指客户端（这里是浏览器）与服务器端建立连接后，长时间不交换数据，一直占用服务器端的文件描述符，导致连接资源的浪费。</p>
+<p><code>定时事件</code>，是指固定一段时间之后触发某段代码，由该段代码处理一个事件，如从内核事件表删除事件，并关闭文件描述符，释放连接资源。</p>
+<p><code>定时器</code>，是指利用结构体或其他形式，将多种定时事件进行封装起来。具体的，这里只涉及一种定时事件，即定期检测非活跃连接，这里将该定时事件与连接资源封装为一个结构体定时器。</p>
+<p><code>定时器容器</code>，是指使用某种容器类数据结构，将上述多个定时器组合起来，便于对定时事件统一管理。具体的，项目中使用升序链表将所有定时器串联组织起来。</p>
+<h3 id="整体概述"><a href="#整体概述" class="headerlink" title="整体概述"></a>整体概述</h3><p>本项目中，服务器主循环为每一个连接创建一个定时器，并对每个连接进行定时。另外，利用升序时间链表容器将所有定时器串联起来，若主循环接收到定时通知，则在链表中依次执行定时任务。</p>
+<p><code>Linux</code>下提供了三种定时的方法:此项目使用SIGALRM信号</p>
+<ul>
+<li>socket选项SO_RECVTIMEO和SO_SNDTIMEO</li>
+<li>SIGALRM信号</li>
+<li>I/O复用系统调用的超时参数</li>
+</ul>
+<p><strong>基础API</strong>，描述<code>sigaction</code>结构体、<code>sigaction</code>函数、<code>sigfillset</code>函数、<code>SIGALRM</code>信号、<code>SIGTERM</code>信号、<code>alarm</code>函数、<code>socketpair</code>函数、<code>send</code>函数。</p>
+<p><strong>信号通知流程</strong>，介绍统一事件源和信号处理机制。</p>
+<h4 id="sigaction结构体"><a href="#sigaction结构体" class="headerlink" title="sigaction结构体"></a><strong>sigaction结构体</strong></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">sigaction</span> &#123;</span><br><span class="line">    <span class="built_in">void</span> (*sa_handler)(<span class="type">int</span>);	<span class="comment">//指向信号处理函数</span></span><br><span class="line">    <span class="built_in">void</span> (*sa_sigaction)(<span class="type">int</span>, <span class="type">siginfo_t</span> *, <span class="type">void</span> *);	<span class="comment">//信号处理函数，获取信号更详细的信息</span></span><br><span class="line">    <span class="type">sigset_t</span> sa_mask;	<span class="comment">//需要被屏蔽的信号</span></span><br><span class="line">    <span class="type">int</span> sa_flags;	<span class="comment">//指定信号处理的行为</span></span><br><span class="line">    <span class="built_in">void</span> (*sa_restorer)(<span class="type">void</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="sigaction函数"><a href="#sigaction函数" class="headerlink" title="sigaction函数"></a><strong>sigaction函数</strong></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">sigaction</span><span class="params">(<span class="type">int</span> signum, <span class="type">const</span> <span class="keyword">struct</span> sigaction *act, <span class="keyword">struct</span> sigaction *oldact)</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>signum表示操作的信号。</li>
+<li>act表示对信号设置新的处理方式。</li>
+<li>oldact表示信号原来的处理方式。</li>
+<li>返回值，0 表示成功，-1 表示有错误发生。</li>
+</ul>
+<h4 id="sigfillset函数"><a href="#sigfillset函数" class="headerlink" title="sigfillset函数"></a><strong>sigfillset函数</strong></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">sigfillset</span><span class="params">(<span class="type">sigset_t</span> *set)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>用来将参数set信号集初始化，然后把所有的信号加入到此信号集里。</p>
+<h4 id="SIGALRM、SIGTERM信号"><a href="#SIGALRM、SIGTERM信号" class="headerlink" title="SIGALRM、SIGTERM信号"></a><strong>SIGALRM、SIGTERM信号</strong></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> SIGALRM  14     <span class="comment">//由alarm系统调用产生timer时钟信号</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SIGTERM  15     <span class="comment">//终端发送的终止信号，ctrl + c</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="socketpair函数"><a href="#socketpair函数" class="headerlink" title="socketpair函数"></a><strong>socketpair函数</strong></h4><p>在linux下，使用socketpair函数能够创建一对套接字进行通信，项目中使用管道通信。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">socketpair</span><span class="params">(<span class="type">int</span> domain, <span class="type">int</span> type, <span class="type">int</span> protocol, <span class="type">int</span> sv[<span class="number">2</span>])</span></span>;</span><br></pre></td></tr></table></figure>
+<h4 id="send函数"><a href="#send函数" class="headerlink" title="send函数"></a><strong>send函数</strong></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">ssize_t</span> <span class="title">send</span><span class="params">(<span class="type">int</span> sockfd, <span class="type">const</span> <span class="type">void</span> *buf, <span class="type">size_t</span> len, <span class="type">int</span> flags)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>当套接字发送缓冲区变满时，send通常会阻塞，除非套接字设置为非阻塞模式，当缓冲区变满时，返回EAGAIN或者EWOULDBLOCK错误，此时可以调用select函数来监视何时可以发送数据。</p>
+<h3 id="信号通知流程"><a href="#信号通知流程" class="headerlink" title="信号通知流程"></a>信号通知流程</h3><p>Linux下的信号采用的异步处理机制，信号处理函数和当前进程是两条不同的执行路线。具体的，当进程收到信号时，操作系统会中断进程当前的正常流程，转而进入信号处理函数执行操作，完成后再返回中断的地方继续执行。</p>
+<p>一般的信号处理函数需要处理该信号对应的逻辑，当该逻辑比较复杂时，信号处理函数执行时间过长，会导致信号屏蔽太久。</p>
+<p>这里的解决方案是，<strong>信号处理函数仅仅发送信号通知程序主循环，将信号对应的处理逻辑放在程序主循环中，由主循环执行信号对应的逻辑代码</strong>。</p>
+<h4 id="统一事件源"><a href="#统一事件源" class="headerlink" title="统一事件源"></a><strong>统一事件源</strong></h4><p>统一事件源，是指将信号事件与其他事件一样被处理。</p>
+<p>具体的，信号处理函数使用管道将信号传递给主循环，<strong>信号处理函数往管道的写端写入信号值，主循环则从管道的读端读出信号值</strong>，使用I/O复用系统调用来监听管道读端的可读事件，这样信号事件与其他文件描述符都可以通过epoll来监测，从而实现统一处理。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211151506252.jpeg" alt="图片"></p>
+<p>可以看出信号处理主要包括信号的接收，信号的检查和信号的处理三步，中间需要在用户态和内核态之间来回切换。</p>
+<h4 id="信号处理函数"><a href="#信号处理函数" class="headerlink" title="信号处理函数"></a><strong>信号处理函数</strong></h4><p>自定义信号处理函数，创建sigaction结构体变量，设置信号函数。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//信号处理函数</span></span><br><span class="line"> <span class="function"><span class="type">void</span> <span class="title">sig_handler</span><span class="params">(<span class="type">int</span> sig)</span></span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line">     <span class="comment">//为保证函数的可重入性，保留原来的errno</span></span><br><span class="line">     <span class="comment">//可重入性表示中断后再次进入该函数，环境变量与之前相同，不会丢失数据</span></span><br><span class="line">     <span class="type">int</span> save_errno = errno;</span><br><span class="line">     <span class="type">int</span> msg = sig;</span><br><span class="line"> </span><br><span class="line">     <span class="comment">//将信号值从管道写端写入，传输字符类型，而非整型</span></span><br><span class="line">    <span class="built_in">send</span>(pipefd[<span class="number">1</span>], (<span class="type">char</span> *)&amp;msg, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//将原来的errno赋值为当前的errno</span></span><br><span class="line">    errno = save_errno;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>信号处理函数中仅仅通过管道发送信号值，不处理信号对应的逻辑，缩短异步执行时间，减少对主程序的影响。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//设置信号函数</span></span><br><span class="line"> <span class="function"><span class="type">void</span> <span class="title">addsig</span><span class="params">(<span class="type">int</span> sig, <span class="type">void</span>(handler)(<span class="type">int</span>), <span class="type">bool</span> restart = <span class="literal">true</span>)</span></span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line">     <span class="comment">//创建sigaction结构体变量</span></span><br><span class="line">     <span class="keyword">struct</span> <span class="title class_">sigaction</span> sa;</span><br><span class="line">     <span class="built_in">memset</span>(&amp;sa, <span class="string">&#x27;\0&#x27;</span>, <span class="built_in">sizeof</span>(sa));</span><br><span class="line"> </span><br><span class="line">     <span class="comment">//信号处理函数中仅仅发送信号值，不做对应逻辑处理</span></span><br><span class="line">     sa.sa_handler = handler;</span><br><span class="line">    <span class="keyword">if</span> (restart)</span><br><span class="line">        sa.sa_flags |= SA_RESTART;</span><br><span class="line">    <span class="comment">//将所有信号添加到信号集中</span></span><br><span class="line">    <span class="built_in">sigfillset</span>(&amp;sa.sa_mask);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//执行sigaction函数</span></span><br><span class="line">    <span class="built_in">assert</span>(<span class="built_in">sigaction</span>(sig, &amp;sa, <span class="literal">NULL</span>) != <span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>项目中设置信号函数，仅关注SIGTERM和SIGALRM两个信号。</p>
+<h4 id="信号通知逻辑"><a href="#信号通知逻辑" class="headerlink" title="信号通知逻辑"></a><strong>信号通知逻辑</strong></h4><ul>
+<li><p>创建管道，其中管道写端写入信号值，管道读端通过I/O复用系统监测读事件</p>
+</li>
+<li><p>设置信号处理函数SIGALRM（时间到了触发）和SIGTERM（kill会触发，Ctrl+C）</p>
+</li>
+<li><ul>
+<li>通过struct sigaction结构体和sigaction函数注册信号捕捉函数</li>
+<li>在结构体的handler参数设置信号处理函数，具体的，从管道写端写入信号的名字</li>
+</ul>
+</li>
+<li><p>利用I/O复用系统监听管道读端文件描述符的可读事件</p>
+</li>
+<li><p>信息值传递给主循环，主循环再根据接收到的信号值执行目标信号对应的逻辑代码</p>
+</li>
+</ul>
+<h4 id="定时器及其容器设计"><a href="#定时器及其容器设计" class="headerlink" title="定时器及其容器设计"></a>定时器及其容器设计</h4><p>定时器处理非活动连接模块，主要分为两部分，其一为定时方法与信号通知流程，其二为定时器及其容器设计、定时任务的处理。<strong>一个双向链表的类</strong></p>
+<p><code>定时器设计</code>，将连接资源和定时事件等封装起来，具体包括连接资源、超时时间和回调函数，这里的回调函数指向定时事件。</p>
+<p><code>定时器容器设计</code>，将多个定时器串联组织起来统一处理，具体包括升序链表设计。升序链表比较的是到期时间expire，<strong>到期时间越长，越靠后。</strong></p>
+<p><code>定时任务处理函数</code>，该函数封装在容器类中，具体的，函数遍历升序链表容器，根据超时时间，处理对应的定时器。</p>
+<p><code>代码分析-使用定时器</code>，通过代码分析，如何在项目中使用定时器。</p>
+<h4 id="定时任务处理函数"><a href="#定时任务处理函数" class="headerlink" title="定时任务处理函数"></a>定时任务处理函数</h4><p>使用统一事件源，SIGALRM信号每次被触发，主循环中调用一次定时任务处理函数，处理链表容器中到期的定时器。</p>
+<p>具体的逻辑如下，</p>
+<ul>
+<li>遍历定时器升序链表容器，从头结点开始依次处理每个定时器，直到遇到尚未到期的定时器</li>
+<li>若当前时间小于定时器超时时间，跳出循环，即未找到到期的定时器</li>
+<li>若当前时间大于定时器超时时间，即找到了到期的定时器，执行回调函数，然后将它从链表中删除，然后继续遍历</li>
+</ul>
+<h3 id="日志系统"><a href="#日志系统" class="headerlink" title="日志系统"></a>日志系统</h3><h4 id="基础知识-1"><a href="#基础知识-1" class="headerlink" title="基础知识"></a>基础知识</h4><p><strong><code>日志</code></strong>，由服务器自动创建，并记录运行状态，错误信息，访问数据的文件。</p>
+<p><strong><code>同步日志</code></strong>，日志写入函数与工作线程串行执行，由于涉及到I/O操作，当单条日志比较大的时候，同步模式会阻塞整个处理流程，服务器所能处理的并发能力将有所下降，尤其是在峰值的时候，写日志可能成为系统的瓶颈。</p>
+<p><strong><code>生产者-消费者模型</code></strong>，并发编程中的经典模型。以多线程为例，为了实现线程间数据同步，生产者线程与消费者线程共享一个缓冲区，其中生产者线程往缓冲区中push消息，消费者线程从缓冲区中pop消息。</p>
+<p><strong><code>阻塞队列</code></strong>，将生产者-消费者模型进行封装，使用循环数组实现队列，作为两者共享的缓冲区。</p>
+<p><strong><code>异步日志</code></strong>，将所写的日志内容先存入阻塞队列，写线程从阻塞队列中取出内容，写入日志。</p>
+<p><strong><code>单例模式</code></strong>，最简单也是被问到最多的设计模式之一，保证一个类只创建一个实例，同时提供全局访问的方法，通过将构造函数放在私有成员中实现。</p>
+<p>懒汉模式就是使用的时候再创建对象，GetInstance函数中创建静态对象。</p>
+<p>饿汉模式就是在类中就已经创建好了对象，使用时GetInstance只是获取指向对象的一个指针。</p>
+<h4 id="整体概述-1"><a href="#整体概述-1" class="headerlink" title="整体概述"></a>整体概述</h4><p>本项目中，使用单例模式创建日志系统，对服务器运行状态、错误信息和访问数据进行记录，该系统可以实现按天分类，超行分类功能，可以根据实际情况分别使用同步和异步写入两种方式。</p>
+<p>其中异步写入方式，将生产者-消费者模型封装为阻塞队列，创建一个写线程，工作线程将要写的内容push进队列，写线程从队列中取出内容，写入日志文件。</p>
+<p>日志系统大致可以分成两部分，其一是单例模式与阻塞队列的定义，其二是日志类的定义与使用。</p>
+<h4 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h4><p>单例模式作为最常用的设计模式之一，保证一个类仅有一个实例，并提供一个访问它的全局访问点，该实例被所有程序模块共享。</p>
+<p>实现思路：私有化它的构造函数，以防止外界创建单例类的对象；使用类的私有静态指针变量指向类的唯一实例，并用一个公有的静态方法获取该实例。</p>
+<p>单例模式有两种实现方法，分别是懒汉和饿汉模式。顾名思义，懒汉模式，即非常懒，不用的时候不去初始化，所以在第一次被使用时才进行初始化；饿汉模式，即迫不及待，在程序运行时立即初始化。</p>
+<h4 id="日志类的定义与使用"><a href="#日志类的定义与使用" class="headerlink" title="日志类的定义与使用"></a>日志类的定义与使用</h4><p>具体的涉及到基础API，流程图与日志类定义，功能实现。</p>
+<p><strong>基础API</strong>，描述fputs，可变参数宏<strong>VA_ARGS</strong>，fflush</p>
+<p><strong>流程图与日志类定义</strong>，描述日志系统整体运行流程，介绍日志类的具体定义</p>
+<p><strong>功能实现</strong>，结合代码分析同步、异步写文件逻辑，分析超行、按天分文件和日志分级的具体实现</p>
+<h4 id="fputs"><a href="#fputs" class="headerlink" title="fputs"></a><strong>fputs</strong></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">fputs</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *str, FILE *stream)</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>str，一个数组，包含了要写入的以空字符终止的字符序列。</li>
+<li>stream，指向FILE对象的指针，该FILE对象标识了要被写入字符串的流。</li>
+</ul>
+<h4 id="可变参数宏VA-ARGS"><a href="#可变参数宏VA-ARGS" class="headerlink" title="可变参数宏VA_ARGS"></a><strong>可变参数宏<strong>VA_ARGS</strong></strong></h4><p><strong>VA_ARGS</strong>是一个可变参数的宏，定义时宏定义中参数列表的最后一个参数为省略号，在实际使用时会发现有时会加##，有时又不加。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//最简单的定义</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> my_print1(...)  printf(__VA_ARGS__)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//搭配va_list的format使用</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> my_print2(format, ...) printf(format, __VA_ARGS__)  </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> my_print3(format, ...) printf(format, ##__VA_ARGS__)</span></span><br></pre></td></tr></table></figure>
+<p><strong>VA_ARGS</strong>宏前面加上##的作用在于，当可变参数的个数为0时，这里printf参数列表中的的##会把前面多余的”,”去掉，否则会编译出错，建议使用后面这种，使得程序更加健壮。</p>
+<h4 id="fflush"><a href="#fflush" class="headerlink" title="fflush"></a><strong>fflush</strong></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">fflush</span><span class="params">(FILE *stream)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>fflush()会强迫将缓冲区内的数据写回参数stream 指定的文件中，如果参数stream 为NULL，fflush()会将所有打开的文件数据更新。</p>
+<p>在使用多个输出函数连续进行多次输出到控制台时，有可能下一个数据再上一个数据还没输出完毕，还在输出缓冲区中时，下一个printf就把另一个数据加入输出缓冲区，结果冲掉了原来的数据，出现输出错误。</p>
+<p>在prinf()后加上fflush(stdout); 强制马上输出到控制台，可以避免出现上述错误。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211151835257.jpeg" alt="图片"></p>
+<h3 id="数据库连接池"><a href="#数据库连接池" class="headerlink" title="数据库连接池"></a>数据库连接池</h3><h3 id="基础知识-2"><a href="#基础知识-2" class="headerlink" title="基础知识"></a>基础知识</h3><p><strong>什么是数据库连接池？</strong></p>
+<blockquote>
+<p>池是一组资源的集合，<strong>这组资源在服务器启动之初就被完全创建好并初始化</strong>。通俗来说，池是资源的容器，本质上是对资源的复用。</p>
+<p>顾名思义，连接池中的资源为一组数据库连接，由程序动态地对池中的连接进行使用，释放。</p>
+<p>当系统开始处理客户请求的时候，如果它需要相关的资源，可以直接从池中获取，无需动态分配；当服务器处理完一个客户连接后,可以把相关的资源放回池中，无需执行系统调用释放资源。</p>
+</blockquote>
+<p>数据库访问的一般流程是什么？</p>
+<blockquote>
+<p>当系统需要访问数据库时，先系统创建数据库连接，完成数据库操作，然后系统断开数据库连接。</p>
+</blockquote>
+<p>为什么要创建连接池？</p>
+<blockquote>
+<p>从一般流程中可以看出，若系统需要频繁访问数据库，则需要频繁创建和断开数据库连接，而创建数据库连接是一个很耗时的操作，也容易对数据库造成安全隐患。</p>
+<p>在程序初始化的时候，集中创建多个数据库连接，并把他们集中管理，供程序使用，可以保证较快的数据库读写速度，更加安全可靠。</p>
+</blockquote>
+<p>本篇将介绍数据库连接池的定义，具体的涉及到单例模式创建、连接池代码实现、RAII机制释放数据库连接。</p>
+<h3 id="注册登录"><a href="#注册登录" class="headerlink" title="注册登录"></a>注册登录</h3><p><strong>流程图</strong>，描述服务器从报文中提取出用户名密码，并完成注册和登录校验后，实现页面跳转的逻辑。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211161537191.jpeg" alt="图片"></p>
+<p><strong>载入数据库表</strong>，结合代码将数据库中的数据载入到服务器中。</p>
+<p><strong>提取用户名和密码</strong>，结合代码对报文进行解析，提取用户名和密码。</p>
+<p><strong>注册登录流程</strong>，结合代码对描述服务器进行注册和登录校验的流程。</p>
+<p><strong>页面跳转</strong>，结合代码对页面跳转机制进行详解。</p>
 
       
 
@@ -570,7 +697,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5IO"><span class="toc-number">1.</span> <span class="toc-text">同步和异步IO</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IO%E5%A4%8D%E7%94%A8%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-number">2.</span> <span class="toc-text">IO复用的比较</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LT%EF%BC%88%E7%94%B5%E5%B9%B3%E8%A7%A6%E5%8F%91%EF%BC%89%E5%92%8CET%EF%BC%88%E8%BE%B9%E7%BC%98%E8%A7%A6%E5%8F%91%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">LT（电平触发）和ET（边缘触发）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Web%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E4%BB%A5%E5%8F%8A%E5%93%8D%E5%BA%94%E6%8E%A5%E6%94%B6%E5%88%B0%E7%9A%84HTTP%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%E5%91%A2"><span class="toc-number">4.</span> <span class="toc-text">Web服务器如何处理以及响应接收到的HTTP请求报文呢?</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6"><span class="toc-number"></span> <span class="toc-text">服务器编程基本框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E7%A7%8DI-O%E6%A8%A1%E5%9E%8B"><span class="toc-number"></span> <span class="toc-text">五种I&#x2F;O模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E6%A8%A1%E5%BC%8F"><span class="toc-number"></span> <span class="toc-text">事件处理模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5I-O%E6%A8%A1%E6%8B%9Fproactor%E6%A8%A1%E5%BC%8F"><span class="toc-number"></span> <span class="toc-text">同步I&#x2F;O模拟proactor模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="toc-number"></span> <span class="toc-text">线程池</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F"><span class="toc-number">1.</span> <span class="toc-text">静态成员变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">静态成员函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#EPOLL"><span class="toc-number">3.</span> <span class="toc-text">EPOLL</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="toc-number"></span> <span class="toc-text">HTTP报文格式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87"><span class="toc-number">1.</span> <span class="toc-text">请求报文</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87"><span class="toc-number">2.</span> <span class="toc-text">响应报文</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#http%E6%8A%A5%E6%96%87%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">http报文处理流程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP%E7%8A%B6%E6%80%81%E7%A0%81"><span class="toc-number"></span> <span class="toc-text">HTTP状态码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B%E5%9B%BE%E4%B8%8E%E7%8A%B6%E6%80%81%E6%9C%BA"><span class="toc-number"></span> <span class="toc-text">流程图与状态机</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#HTTP-CODE%E5%90%AB%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">HTTP_CODE含义</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="toc-number"></span> <span class="toc-text">流程图</span></a>
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5IO"><span class="toc-number">1.</span> <span class="toc-text">同步和异步IO</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IO%E5%A4%8D%E7%94%A8%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-number">2.</span> <span class="toc-text">IO复用的比较</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LT%EF%BC%88%E7%94%B5%E5%B9%B3%E8%A7%A6%E5%8F%91%EF%BC%89%E5%92%8CET%EF%BC%88%E8%BE%B9%E7%BC%98%E8%A7%A6%E5%8F%91%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">LT（电平触发）和ET（边缘触发）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Web%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E4%BB%A5%E5%8F%8A%E5%93%8D%E5%BA%94%E6%8E%A5%E6%94%B6%E5%88%B0%E7%9A%84HTTP%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%E5%91%A2"><span class="toc-number">4.</span> <span class="toc-text">Web服务器如何处理以及响应接收到的HTTP请求报文呢?</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6"><span class="toc-number"></span> <span class="toc-text">服务器编程基本框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E7%A7%8DI-O%E6%A8%A1%E5%9E%8B"><span class="toc-number"></span> <span class="toc-text">五种I&#x2F;O模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E6%A8%A1%E5%BC%8F"><span class="toc-number"></span> <span class="toc-text">事件处理模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5I-O%E6%A8%A1%E6%8B%9Fproactor%E6%A8%A1%E5%BC%8F"><span class="toc-number"></span> <span class="toc-text">同步I&#x2F;O模拟proactor模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="toc-number"></span> <span class="toc-text">线程池</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F"><span class="toc-number">1.</span> <span class="toc-text">静态成员变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">静态成员函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#EPOLL"><span class="toc-number">3.</span> <span class="toc-text">EPOLL</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="toc-number"></span> <span class="toc-text">HTTP报文格式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87"><span class="toc-number">1.</span> <span class="toc-text">请求报文</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87"><span class="toc-number">2.</span> <span class="toc-text">响应报文</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#http%E6%8A%A5%E6%96%87%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">http报文处理流程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP%E7%8A%B6%E6%80%81%E7%A0%81"><span class="toc-number"></span> <span class="toc-text">HTTP状态码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B%E5%9B%BE%E4%B8%8E%E7%8A%B6%E6%80%81%E6%9C%BA"><span class="toc-number"></span> <span class="toc-text">流程图与状态机</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#HTTP-CODE%E5%90%AB%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">HTTP_CODE含义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="toc-number">2.</span> <span class="toc-text">流程图</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number"></span> <span class="toc-text">定时器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number"></span> <span class="toc-text">基础知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B4%E4%BD%93%E6%A6%82%E8%BF%B0"><span class="toc-number"></span> <span class="toc-text">整体概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#sigaction%E7%BB%93%E6%9E%84%E4%BD%93"><span class="toc-number">1.</span> <span class="toc-text">sigaction结构体</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sigaction%E5%87%BD%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">sigaction函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sigfillset%E5%87%BD%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">sigfillset函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SIGALRM%E3%80%81SIGTERM%E4%BF%A1%E5%8F%B7"><span class="toc-number">4.</span> <span class="toc-text">SIGALRM、SIGTERM信号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#socketpair%E5%87%BD%E6%95%B0"><span class="toc-number">5.</span> <span class="toc-text">socketpair函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#send%E5%87%BD%E6%95%B0"><span class="toc-number">6.</span> <span class="toc-text">send函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7%E9%80%9A%E7%9F%A5%E6%B5%81%E7%A8%8B"><span class="toc-number"></span> <span class="toc-text">信号通知流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%9F%E4%B8%80%E4%BA%8B%E4%BB%B6%E6%BA%90"><span class="toc-number">1.</span> <span class="toc-text">统一事件源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">信号处理函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7%E9%80%9A%E7%9F%A5%E9%80%BB%E8%BE%91"><span class="toc-number">3.</span> <span class="toc-text">信号通知逻辑</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8%E5%8F%8A%E5%85%B6%E5%AE%B9%E5%99%A8%E8%AE%BE%E8%AE%A1"><span class="toc-number">4.</span> <span class="toc-text">定时器及其容器设计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-number">5.</span> <span class="toc-text">定时任务处理函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F"><span class="toc-number"></span> <span class="toc-text">日志系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-1"><span class="toc-number">1.</span> <span class="toc-text">基础知识</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B4%E4%BD%93%E6%A6%82%E8%BF%B0-1"><span class="toc-number">2.</span> <span class="toc-text">整体概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">单例模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E4%BD%BF%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">日志类的定义与使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#fputs"><span class="toc-number">5.</span> <span class="toc-text">fputs</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E5%AE%8FVA-ARGS"><span class="toc-number">6.</span> <span class="toc-text">可变参数宏VA_ARGS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#fflush"><span class="toc-number">7.</span> <span class="toc-text">fflush</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0"><span class="toc-number"></span> <span class="toc-text">数据库连接池</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-2"><span class="toc-number"></span> <span class="toc-text">基础知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C%E7%99%BB%E5%BD%95"><span class="toc-number"></span> <span class="toc-text">注册登录</span></a>
                     </div>
                 </span>
             </div>
@@ -727,15 +854,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">科研</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">论文</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -747,11 +874,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
+                <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Go</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -763,11 +890,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">

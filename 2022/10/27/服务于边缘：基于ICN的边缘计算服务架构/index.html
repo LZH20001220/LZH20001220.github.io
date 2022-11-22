@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211012208494.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211012255860.png">
 <meta property="article:published_time" content="2022-10-27T11:17:50.000Z">
-<meta property="article:modified_time" content="2022-11-02T06:48:39.104Z">
+<meta property="article:modified_time" content="2022-11-17T09:08:55.311Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="科研">
 <meta property="article:tag" content="NDN">
@@ -218,7 +218,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.1k字</span>
+        <span class="post-count">2.2k字</span>
       </span>
     </span>
 
@@ -227,7 +227,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">7分</span>
+        <span class="post-count">8分</span>
       </span>
     </span>
 </div>
@@ -478,6 +478,54 @@ var _hmt = _hmt || [];
 <p><strong>5. NDN1根据存力表判断哪些节点不可以作为缓存节点，将路由表中含有不满足条件的缓存节点的路由条目删除。</strong>（假如需要上载一个2.5T的数据，NDN4和NDN8被排除在外，剩下的里面选3跳及以上的条目中代价最小的，最后选定是1-&gt;2-&gt;3-&gt;6。）(1.2中加粗的部分)</p>
 <p><strong>6. NDN1向NDN6根据SR路由的邻接SID转发兴趣包，(兴趣包包括数据大小size和邻接SID 103，202，303)，兴趣包沿着确定的路径走到NDN6，NDN6反馈回一个数据包用作应答确认。</strong></p>
 <p><strong>7.然后NDN6根据size大小向NDN1发送对应数量的请求兴趣包，NDN1返回对应的内容数据包，中间节点2，3，6都会对数据进行缓存。</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>目的节点</th>
+<th>所有路径</th>
+<th>路由代价Cr</th>
+<th>缓存代价Cs</th>
+<th>通信代价Cc</th>
+<th>邻接段标识</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>node6</td>
+<td>5→6</td>
+<td>120</td>
+<td>100</td>
+<td>220</td>
+<td>601</td>
+</tr>
+<tr>
+<td>node8</td>
+<td>5→8</td>
+<td>100</td>
+<td>80</td>
+<td>180</td>
+<td>803</td>
+</tr>
+<tr>
+<td>node9</td>
+<td>5→6→9</td>
+<td>230</td>
+<td>180</td>
+<td>410</td>
+<td>601，903</td>
+</tr>
+<tr>
+<td>node9</td>
+<td>5→8→9</td>
+<td>230</td>
+<td>160</td>
+<td>390</td>
+<td>803，902</td>
+</tr>
+</tbody>
+</table>
+</div>
 
       
 
@@ -760,15 +808,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">科研</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">论文</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -780,11 +828,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
+                <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Go</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -796,11 +844,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
