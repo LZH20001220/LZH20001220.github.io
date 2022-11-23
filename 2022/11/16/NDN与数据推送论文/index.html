@@ -39,7 +39,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211211635472.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211211809886.png">
 <meta property="article:published_time" content="2022-11-16T10:23:51.000Z">
-<meta property="article:modified_time" content="2022-11-21T10:21:55.774Z">
+<meta property="article:modified_time" content="2022-11-22T06:37:36.385Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="科研">
 <meta name="twitter:card" content="summary">
@@ -308,7 +308,7 @@ var _hmt = _hmt || [];
 <h2 id="Reliable-Publish-Subscribe-in-Content-Centric-Networks"><a href="#Reliable-Publish-Subscribe-in-Content-Centric-Networks" class="headerlink" title="Reliable Publish/Subscribe in Content-Centric Networks"></a>Reliable Publish/Subscribe in Content-Centric Networks</h2><p>在以内容为中心的网络中，由于缺少可控制流的端到端会话上下文，因此管理拥塞是一项挑战。在以内容为中心的发布/订阅系统中，流量和拥塞控制以及可靠的交付通常被认为是更大的挑战，其中信息传播的性质类似于多播。这些也是IP多播的长期挑战。由于Publisher数量不详，以内容为中心的发布/订阅环境加剧了这些问题，需要新的解决方案。</p>
 <p>在本文中，我们对以内容为中心的发布/订阅系统提出了一种轻量级增强，以实现流量和拥塞控制以及可靠性。R-COPSS允许Publisher高效地使用以内容为中心的网络，让Subscriber生成及时的反馈，同时使Subscriber能够利用NDN执行本地修复以实现可靠的交付。我们不是让所有用户都为每个数据包生成反馈（ACK），而是在一个层次结构中选择特定的用户来提供反馈，其余的用户则需要定期总结。我们的方法不仅减少了发布者的负载，还消除了发布者将其发送速率限制到最慢订户的要求。</p>
 <p>我们的初步结果表明，R-COPSS在总体<strong>吞吐量方面表现更好</strong>，对竞争对手的流来说是公平的。</p>
-<p><strong>个人理解：主要思路就是不再采用原有NDN的类似多播的机制，不为每一个用户提供服务，只为特定的用户提供服务，其余的用户可以通过本地修复恢复数据，即从邻居节点获得数据包，或者发送丢失数据包的兴趣，。</strong></p>
+<p><strong>个人理解：主要思路就是不再采用原有NDN的类似多播的机制，不为每一个用户提供服务，只为特定的用户提供服务，其余的用户可以通过本地修复恢复数据，即从邻居节点获得数据包，或者发送丢失数据包的兴趣。</strong></p>
 <p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211211809886.png" alt="image-20221121180934698"></p>
 
       
@@ -588,10 +588,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">科研</a>
               </li>
              
@@ -600,7 +596,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -608,7 +604,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Go</a>
+                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -616,11 +612,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">项目</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
               </li>
              
               <li class="article-tag-list-item">
