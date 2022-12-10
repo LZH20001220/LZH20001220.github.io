@@ -38,8 +38,15 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211211110712.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211211635472.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211211809886.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202212011032453.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202212021612913.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202212051036480.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202212051040826.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202212051101738.png">
+<meta property="og:image" content="https://s2.loli.net/2022/12/06/t2PNr5qQjX9TZM4.png">
+<meta property="og:image" content="https://s2.loli.net/2022/12/06/JRyC5VH6Kgvx7lB.png">
 <meta property="article:published_time" content="2022-11-16T10:23:51.000Z">
-<meta property="article:modified_time" content="2022-11-22T06:37:36.385Z">
+<meta property="article:modified_time" content="2022-12-06T03:48:57.072Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="科研">
 <meta name="twitter:card" content="summary">
@@ -221,7 +228,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.7k字</span>
+        <span class="post-count">5.7k字</span>
       </span>
     </span>
 
@@ -230,7 +237,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">9分</span>
+        <span class="post-count">19分</span>
       </span>
     </span>
 </div>
@@ -310,6 +317,45 @@ var _hmt = _hmt || [];
 <p>我们的初步结果表明，R-COPSS在总体<strong>吞吐量方面表现更好</strong>，对竞争对手的流来说是公平的。</p>
 <p><strong>个人理解：主要思路就是不再采用原有NDN的类似多播的机制，不为每一个用户提供服务，只为特定的用户提供服务，其余的用户可以通过本地修复恢复数据，即从邻居节点获得数据包，或者发送丢失数据包的兴趣。</strong></p>
 <p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211211809886.png" alt="image-20221121180934698"></p>
+<h2 id="Content-based-Hyperbolic-Routing-and-Push-Mechanism-in-Named-Data-Networking"><a href="#Content-based-Hyperbolic-Routing-and-Push-Mechanism-in-Named-Data-Networking" class="headerlink" title="Content-based Hyperbolic Routing and Push Mechanism in Named Data Networking"></a>Content-based Hyperbolic Routing and Push Mechanism in Named Data Networking</h2><p>双曲路由（HR）不需要维护完整的路由表，我们首先提出了一种基于内容的双曲路由，称为Pop-Hyper。结果，分组被发送到具有高中间性和高流行度的节点。然后，提出了一种基于Pop-Hyper的推送机制，称为HyperPush。</p>
+<p>HR是基于虚拟坐标的贪婪路由，可将数据包转发到最接近目的地的下一跳邻居，路由开销是通过简单计算坐标距离来确定的。</p>
+<p>节点的中心性/受欢迎程度：节点的受欢迎程度定义为该节点中缓存的高人气内容的数量。(这个在缓存的时候也可以考虑)</p>
+<p>根据物联网的特性，基于推送的通信分为时间驱动和事件驱动。</p>
+<p>这个机制需要首先消费者发出推送兴趣将其存在PDT中，Producer有数据就会返回对应的数据，这套机制与传统的NDN一样。区别就是返回数据包时并不会直接删掉PDT里的条目，是否删除PDT的条目是由消费者说的算的，如果消费者需要，PDT就一直有这个条目。如果生产者数据源改变了，会将改变后的数据推送到网络中，再由路由器转发给消费者。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202212011032453.png" alt="image-20221201103210308"></p>
+<h2 id="Extension-of-Information-Centric-Networking-for-Push-Based-Contents-Deliver"><a href="#Extension-of-Information-Centric-Networking-for-Push-Based-Contents-Deliver" class="headerlink" title="Extension of Information-Centric Networking for Push-Based Contents Deliver"></a>Extension of Information-Centric Networking for Push-Based Contents Deliver</h2><p>本文主要针对的是<strong>短时间内出现大量的针对相同内容的兴趣包</strong>而在高速缓存中不存在的问题，服务器会在对该内容产生大量兴趣之前将预测的内容推送到相邻节点</p>
+<p>提出了“推送-传递”方法，该方法可以在<strong>用户请求之前传递并缓存在用户的邻居节点中</strong>。</p>
+<p>内容受欢迎度：对于特定的小容量内容（例如，众多用户的新闻），访问次数在短时间内迅速增加</p>
+<p>本文只限推送到边缘路由器上，再由消费者取，主要是为了降低网络冗余流量。涉及的技术是按照是否是来自边缘路由器的兴趣包建立一个AFT（反向的路由表），将内容按照这个表推送到边缘节点，中间节点不缓存这些内容。所提的<strong>判定是否是边缘节点的方法</strong>有一定的创新性。</p>
+<p>判断边缘节点：使得持有标志1的节点是边缘路由器，而持有标志0的节点是中继路由器。随后，仅对持有标记1的节点执行推送分发内容的缓存。</p>
+<p>将推送数据和常规数据区分开：服务器将Tag1和Tag0分别添加到包含推送内容和常规内容的数据中。仅当附加到数据的标签为Tag1(说明是推送数据)，并且节点的标志为1(说明是用户的邻居节点)时，才缓存推式分发的内容。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202212021612913.png" alt="image-20221202161236480"></p>
+<h2 id="基于命名数据网络的车载自组织网络数据分发机制"><a href="#基于命名数据网络的车载自组织网络数据分发机制" class="headerlink" title="基于命名数据网络的车载自组织网络数据分发机制"></a>基于命名数据网络的车载自组织网络数据分发机制</h2><p>本文贡献：优化命名数据网络的消息类型和数据结构，结合车载自组织网络的特性，提出段路由的方式，减少数据分发的开销。</p>
+<p>路由建立：在NDN中，生产者首先广播已有的资源，其他节点根据收到的消息，建立FIB。</p>
+<p>资源探测：消费者发送探测包寻找资源，生产者端收到后A、 BMS中的数据采集和访问在典型的BMS部署中，传感器通常通过硬接线连接到智能面板或控制器，这些面板或控制器连接到公共高速主干网络，通常在逻辑上和/或物理上与其他内部和外部网络隔离。<br>未来的BMS还可以结合与有线聚合器相关联的无线传感器，或者甚至将低成本的无线传感器直接连接到网络。<br>在这样的系统中，不同类型的传感器连续产生大量测量值，例如室温、功耗和冷冻水流量。由于典型面板和控制器的存储和处理能力有限，这些数据点在历史上一直被收集到企业级的专用存储中，并在一定时间段（通常为一年或两年）内存档，以服务于不同的数据分析应用程序。<br>企业级BMS需要高级数据访问支持，以满足各种应用要求，包括：不同的消费者可能对不同传感器产生的数据感兴趣。需要每个传感器/消费者对之间的直接通信将无法很好地扩展。<br>消费者应用程序可以在各种平台上运行，从高端服务器、智能手机到嵌入式系统。这些应用以不同的时间和速度消耗传感器数据，并且在产生新数据时可能不总是可用的。<br>不同的应用程序在使用数据时可能具有不同的语义。例如，一些应用程序可能只对实时生成的最新数据感兴趣，而其他应用程序则希望定期从一批收集的数据中接收一些随机样本。B、 NDN和BMS NDN是一种新的互联网架构，在网络层提供以数据为中心的通信。NDN机具已经为NDN架构提出了几种同步协议[11]，包括ChronSync[12]、iSync[13]和PSync[14]。在ChronSync中，同步组中的生产者发布由生产者的名称和单调递增的序列号标识的数据。1数据集的状态简洁地表示为键值对列表，将每个生产者映射到其最新序列号。ChronSync协议通过多播传播新数据的序列号，以便同步组中的每个人都可以相应地更新其本地状态。iSync使用可逆布隆过滤器（IBF）[15]通过将数据名称的哈希值存储在IBF中来表示一组任意名称。iSync中的每个生产者都会定期发布其IBF摘要。，如果有对应资源的记录回复确认包，否则在自己的路段加入探测包，并进行转发。</p>
+<h2 id="Publish-Subscribe-Communication-in-Building-Management-Systems-over-Named-Data-Networking"><a href="#Publish-Subscribe-Communication-in-Building-Management-Systems-over-Named-Data-Networking" class="headerlink" title="Publish-Subscribe Communication in Building Management Systems over Named Data Networking"></a>Publish-Subscribe Communication in Building Management Systems over Named Data Networking</h2><p>NDN-PS利用分布式NDN存储库来存储和重新发布可由不同应用程序使用的大量BMS数据。它采用数据同步机制来聚合由多个感测设备发布的多个数据流，并为消费者实现新数据的有效通知。</p>
+<p>生产者将其所有数据流中的最新数据名称编码到IBF中，IBF在PSync回复中发送给消费者，消费者在PSync兴趣中再次发送，以跟踪生产者数据集的变化。此外，消费者的每个PSync Interest都包含其订阅列表，以便存储可以过滤掉与消费者相关的更改。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202212051036480.png" alt="image-20221205103645172"></p>
+<p>一旦repo检索到数据点，它将使用PSync的完全同步API将后台的数据复制到同一组中的其他repo。在接收到新的传感器数据后，所有repo将数据插入其本地数据存储。在Pub子接口上运行的PSync部分同步生成器侦听repo插入事件，并将更新的IBF和丢失的名称通知任何订阅的消费者。数据订阅NDN-PS中的数据订阅允许消费者应用程序从发布子组中发布的数据流的子集有效地接收更新。在幕后，消费者使用PSyncInterest消息从存储中检索每个订阅流的最新数据名称。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202212051040826.png" alt></p>
+<h2 id="A-Detailed-Simulation-Study-of-the-Push-based-Protocol-for-Critical-Data-Dissemination-in-Vehicular-Named-Data-Networks"><a href="#A-Detailed-Simulation-Study-of-the-Push-based-Protocol-for-Critical-Data-Dissemination-in-Vehicular-Named-Data-Networks" class="headerlink" title="A Detailed Simulation Study of the Push-based Protocol for Critical Data Dissemination in Vehicular Named Data Networks"></a>A Detailed Simulation Study of the Push-based Protocol for Critical Data Dissemination in Vehicular Named Data Networks</h2><p>基于推送的方法带来的问题：数据包泛洪(数据包向除了数据包流入到的接口之外的全部接口转发)，产生环路，兴趣包满意度延时</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202212051101738.png" alt="image-20221205110147585"></p>
+<p>最初，生产者车辆P在时间ti向其邻居生成信标消息处理传入的内容分组。信标消息包含关键内容的元数据。每个邻居在其PIT中创建合成兴趣条目（在内容具有多个块的情况下生成多个条目），并且该信标被进一步转发。为了限制泛洪，信标被转发到最近的RSU。在时间ti+1，生产者将关键内容推向最近的RSU。邻居的合成条目允许他们处理并进一步转发关键内容。转发内容后，这些合成条目将被删除。</p>
+<p>不足：数据泛滥性质极大地影响了兴趣满意度延迟和网络中转发的内容块的数量(流量过大)。</p>
+<h2 id="A-Subscription-Based-Push-Mechanism-for-IoT-ICN"><a href="#A-Subscription-Based-Push-Mechanism-for-IoT-ICN" class="headerlink" title="A Subscription-Based Push Mechanism for IoT-ICN"></a>A Subscription-Based Push Mechanism for IoT-ICN</h2><p>设计了一个sPIT表，有了第一个开机请求兴趣包后，就建立了一个到该内容的请求PIT表项，而收到回来的data包后，不对sPIT表中的对应表项进行删除，一直存在，相当于一直存在一个回程路由，这样生产者就可以随时推送所需分享的数据包给消费者，因这个回路始终存在，这样就构成了开机订阅，随后按需推送的内容数据包传输机制。这就相当于建立了一条始终不变的回路。</p>
+<p>现有的推送机制：轮询，长期兴趣，兴趣触发，兴趣重载。</p>
+<ul>
+<li>轮询：消费者应定期检查新数据。周期性兴趣包传输会消耗网络带宽。</li>
+<li>长期兴趣：这是轮询的一种变体，兴趣设置为长期兴趣。使用寿命长的感兴趣数据包的传输会导致路由器上PIT表的消耗。（图1b）</li>
+<li>兴趣触发：它使用兴趣触发应用程序的PULL。为了让生产者发送兴趣包，FIB表中必须有所有消费者的前缀。这是FIB的可扩展性问题。还需要再发送一次兴趣分组以进行触发。（图1c）</li>
+<li>兴趣过载：兴趣后面加上更多的参数，以传递通知消息。为了让生产者发送兴趣包，FIB表中必须有所有消费者的前缀。这是FIB的可扩展性问题。（图1d）</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/12/06/t2PNr5qQjX9TZM4.png" alt="image-20221206101031436"></p>
+<h2 id="A-Networking-Scheme-for-Large-Scale-Pub-Sub-Service-over-NDN"><a href="#A-Networking-Scheme-for-Large-Scale-Pub-Sub-Service-over-NDN" class="headerlink" title="A Networking Scheme for Large-Scale Pub/Sub Service over NDN"></a>A Networking Scheme for Large-Scale Pub/Sub Service over NDN</h2><p>从发布者到代理的消息(发布消息Pub)传递以单播的形式完成，从代理到订户的传递(订阅消息Sub)是基于多播的。</p>
+<p><img src="https://s2.loli.net/2022/12/06/JRyC5VH6Kgvx7lB.png" alt="image-20221206102909209"></p>
+<p>仿真参数：代理的位置对延时的影响，订阅者数量对延时的影响，</p>
+<h2 id="NDN-Automatic-Prefix-Propagation"><a href="#NDN-Automatic-Prefix-Propagation" class="headerlink" title="NDN Automatic Prefix Propagation"></a>NDN Automatic Prefix Propagation</h2><p>在NDN网络中，当生产者应用程序想要发布数据时，它在同一主机上向本地NDN转发守护程序（NFD）注册数据的名称前缀P；该注册通知本地NFD在哪里转发名称属于P的兴趣。要<strong>将可达性传播到本地NFD之外的P</strong>，需要额外的机制，例如运行路由协议。本文描述了自动前缀传播协议，它是在通过一个或多个NDN网关路由器连接到NDN网络的主机上运行全功能路由协议的替代方案。自动前缀传播协议使用NDN证书的本地配置和推断出的网关路由器的存在来在必要时自动发送远程注册请求。</p>
+<p>个人理解：生产者想要发送数据需要告诉网络中各节点自身数据的可达性，使终端主机能够将本地应用程序的可达性传播到网关路由器。这样网关路由器可以更准确地将兴趣转发到终端主机。</p>
 
       
 
@@ -431,7 +477,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Data-Pushing-Framework-in-NDN-enabled-IoT"><span class="toc-number">1.</span> <span class="toc-text">1.Data Pushing Framework in NDN-enabled IoT</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Internet-of-Things-via-Named-Data-Networking-The-Support-of-Push-Traffic"><span class="toc-number">2.</span> <span class="toc-text">Internet of Things via Named Data Networking: The Support of Push Traffic</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B4%E8%B6%A3%E9%80%9A%E7%9F%A5%EF%BC%9A"><span class="toc-number">2.0.1.</span> <span class="toc-text">兴趣通知：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%AA%E7%BB%8F%E8%AF%B7%E6%B1%82%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%9A"><span class="toc-number">2.0.2.</span> <span class="toc-text">未经请求的数据：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%85%B4%E8%B6%A3%E5%8C%85%E8%BD%AE%E8%AF%A2%EF%BC%9A"><span class="toc-number">2.0.3.</span> <span class="toc-text">虚拟兴趣包轮询：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Enabling-Push-Based-Critical-Data-Forwarding-in-Vehicular-Named-Data-Networks"><span class="toc-number">3.</span> <span class="toc-text">Enabling Push-Based Critical Data Forwarding in Vehicular Named Data Networks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reliable-Publish-Subscribe-in-Content-Centric-Networks"><span class="toc-number">4.</span> <span class="toc-text">Reliable Publish&#x2F;Subscribe in Content-Centric Networks</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Data-Pushing-Framework-in-NDN-enabled-IoT"><span class="toc-number">1.</span> <span class="toc-text">1.Data Pushing Framework in NDN-enabled IoT</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Internet-of-Things-via-Named-Data-Networking-The-Support-of-Push-Traffic"><span class="toc-number">2.</span> <span class="toc-text">Internet of Things via Named Data Networking: The Support of Push Traffic</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B4%E8%B6%A3%E9%80%9A%E7%9F%A5%EF%BC%9A"><span class="toc-number">2.0.1.</span> <span class="toc-text">兴趣通知：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%AA%E7%BB%8F%E8%AF%B7%E6%B1%82%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%9A"><span class="toc-number">2.0.2.</span> <span class="toc-text">未经请求的数据：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%85%B4%E8%B6%A3%E5%8C%85%E8%BD%AE%E8%AF%A2%EF%BC%9A"><span class="toc-number">2.0.3.</span> <span class="toc-text">虚拟兴趣包轮询：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Enabling-Push-Based-Critical-Data-Forwarding-in-Vehicular-Named-Data-Networks"><span class="toc-number">3.</span> <span class="toc-text">Enabling Push-Based Critical Data Forwarding in Vehicular Named Data Networks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reliable-Publish-Subscribe-in-Content-Centric-Networks"><span class="toc-number">4.</span> <span class="toc-text">Reliable Publish&#x2F;Subscribe in Content-Centric Networks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Content-based-Hyperbolic-Routing-and-Push-Mechanism-in-Named-Data-Networking"><span class="toc-number">5.</span> <span class="toc-text">Content-based Hyperbolic Routing and Push Mechanism in Named Data Networking</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Extension-of-Information-Centric-Networking-for-Push-Based-Contents-Deliver"><span class="toc-number">6.</span> <span class="toc-text">Extension of Information-Centric Networking for Push-Based Contents Deliver</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E7%9A%84%E8%BD%A6%E8%BD%BD%E8%87%AA%E7%BB%84%E7%BB%87%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E5%88%86%E5%8F%91%E6%9C%BA%E5%88%B6"><span class="toc-number">7.</span> <span class="toc-text">基于命名数据网络的车载自组织网络数据分发机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Publish-Subscribe-Communication-in-Building-Management-Systems-over-Named-Data-Networking"><span class="toc-number">8.</span> <span class="toc-text">Publish-Subscribe Communication in Building Management Systems over Named Data Networking</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#A-Detailed-Simulation-Study-of-the-Push-based-Protocol-for-Critical-Data-Dissemination-in-Vehicular-Named-Data-Networks"><span class="toc-number">9.</span> <span class="toc-text">A Detailed Simulation Study of the Push-based Protocol for Critical Data Dissemination in Vehicular Named Data Networks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#A-Subscription-Based-Push-Mechanism-for-IoT-ICN"><span class="toc-number">10.</span> <span class="toc-text">A Subscription-Based Push Mechanism for IoT-ICN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#A-Networking-Scheme-for-Large-Scale-Pub-Sub-Service-over-NDN"><span class="toc-number">11.</span> <span class="toc-text">A Networking Scheme for Large-Scale Pub&#x2F;Sub Service over NDN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NDN-Automatic-Prefix-Propagation"><span class="toc-number">12.</span> <span class="toc-text">NDN Automatic Prefix Propagation</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -588,15 +634,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">科研</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
+                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
+                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -608,19 +662,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">科研</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">项目</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
               </li>
              
               <li class="article-tag-list-item">
