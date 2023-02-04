@@ -184,6 +184,473 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-NFDC添加缓存队列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  
+<div class="article-inner">
+    
+      <header class="article-header">
+        
+        
+        <a href="/2022/10/12/NFDC%E6%B7%BB%E5%8A%A0%E7%BC%93%E5%AD%98%E9%98%9F%E5%88%97/" class="archive-article-date">
+  	<time datetime="2022-10-12T11:27:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-12</time>
+</a>
+
+
+
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">2.7k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">14分</span>
+      </span>
+    </span>
+</div>
+          
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p>
+  
+    <h1 itemprop="name">
+      <a class="article-title_code_ant" href="/2022/10/12/NFDC%E6%B7%BB%E5%8A%A0%E7%BC%93%E5%AD%98%E9%98%9F%E5%88%97/">NFDC添加缓存队列</a>
+    </h1>
+  
+</p></center>
+      
+        <p>main函数的基本流程：每个节点创建一个socket套接字(server_sock)用作监听，epoll用于检测文件描述符。每当检测到监听描述符就会通过unix_stream_face_create新建一个face。当检测到其他的描述符时说明需要通信了。会通过刚刚创建的face的face_recv为本地节点接收数据，存到recv_msg中，recv_msg包括face，起始的buf地址，数据的大小。然后调用线程中的handle_msg对recv_msg进行处理，进一步判断收到的包的类型，如何转发等(后面的on_incoming_xxx)。</p>
+<p>起始的interest是通过app_face的express_interest发出来的,比如ping工具。</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/10/12/NFDC%E6%B7%BB%E5%8A%A0%E7%BC%93%E5%AD%98%E9%98%9F%E5%88%97/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+    <article id="post-leetcode-hot-100-2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  
+<div class="article-inner">
+    
+      <header class="article-header">
+        
+        
+        <a href="/2022/10/12/leetcode-hot-100-2/" class="archive-article-date">
+  	<time datetime="2022-10-12T04:06:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-12</time>
+</a>
+
+
+
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">4k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">19分</span>
+      </span>
+    </span>
+</div>
+          
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p>
+  
+    <h1 itemprop="name">
+      <a class="article-title_code_ant" href="/2022/10/12/leetcode-hot-100-2/">leetcode-hot-100-2</a>
+    </h1>
+  
+</p></center>
+      
+        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/rotate-image/">48. 旋转图像 - 力扣（LeetCode）</a></p>
+<p>给定一个 n × n 的二维矩阵 matrix 表示一个图像。请你将图像顺时针旋转 90 度。</p>
+<p>你必须在 原地 旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要 使用另一个矩阵来旋转图像。</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/10/12/leetcode-hot-100-2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+    <article id="post-无人机自组网论文" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  
+<div class="article-inner">
+    
+      <header class="article-header">
+        
+        
+        <a href="/2022/10/11/%E6%97%A0%E4%BA%BA%E6%9C%BA%E8%87%AA%E7%BB%84%E7%BD%91%E8%AE%BA%E6%96%87/" class="archive-article-date">
+  	<time datetime="2022-10-11T07:23:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-11</time>
+</a>
+
+
+
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">7.9k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">27分</span>
+      </span>
+    </span>
+</div>
+          
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p>
+  
+    <h1 itemprop="name">
+      <a class="article-title_code_ant" href="/2022/10/11/%E6%97%A0%E4%BA%BA%E6%9C%BA%E8%87%AA%E7%BB%84%E7%BD%91%E8%AE%BA%E6%96%87/">无人机自组网论文</a>
+    </h1>
+  
+</p></center>
+      
+        <p>飞行自组网（无人机）我个人推荐看这篇综述，看这一篇其实就够了 </p>
+<blockquote>
+<p>[1] Oubbati O S, Atiquzzaman M, Lorenz P, et al. Routing in flying ad hoc networks: Survey, constraints, and future challenge perspectives[J]. IEEE Access, 2019, 7: 81057-81105.</p>
+</blockquote>
+<p>这篇综述各个方面都讲了，但是可以把侧重点放在<strong>第4章的路由协议</strong>上。这里面讲得比较全，所以也显得有点乱，主要重点可以放在第17-19页。</p>
+<p> 总的来说移动自组网中经典的基于拓扑路由协议其实就是<strong>主动式路由协议（Proactive）和反应式路由协议（Reactive）</strong>这两类，这不只是无人机领域，普通的移动自组网也是这样。</p>
+<p> 主动式路由协议可以理解为每个节点试图同步全网拓扑，反应式路由协议可以理解为需要发的时候主动找拓扑，不需要就不找。OLSR是前者的经典例子，AODV是后者的经典例子。前者一般转发速度快，但拓扑维护开销大，且在高动态场景性能差，后者则反之。<br> 关于AODV协议，如果要详细了解的话，看这一篇就行： <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36267931/article/details/105315739">https://blog.csdn.net/qq_36267931/article/details/105315739</a> </p>
+<p>然后还有一类就是地理路由协议，也是我在做的这个。其实建议先结合CSDN的讲解，看一下GPSR的原始文献，这个挺好理解的。<br> [2] Karp B, Kung H T. GPSR: Greedy perimeter stateless routing for wireless networks[C]. Proceedings  of the 6th annual international conference on Mobile computing and networking. 2000: 243-254.</p>
+<p> 然后因为无人机是三维的，GPSR是二维的。如果要做无人机的话，你可以参考综述[1]的31-35页。</p>
+<p> 我个人觉得的话，要是水文章，一个方法是移动自组网+NDN，把前面的协议结合NDN特性来做，这个估计可以有很多可以吹嘘的地方。另一个方法是无人机+NDN，这个思路和前面类似，但是可以参考一些无人机的协议，具体的话看综述[1]</p>
+<h2 id="飞行自组网-FANET-中的路由：调查、限制和未来挑战展望"><a href="#飞行自组网-FANET-中的路由：调查、限制和未来挑战展望" class="headerlink" title="飞行自组网(FANET)中的路由：调查、限制和未来挑战展望"></a>飞行自组网(FANET)中的路由：调查、限制和未来挑战展望</h2><h3 id="0-摘要"><a href="#0-摘要" class="headerlink" title="0. 摘要:"></a>0. 摘要:</h3><p>由于无线通信和网络技术的爆炸式发展，成本效益高的无人机（UAV）最近出现，不久将占据我们天空的大部分。当UAV作为一个自组织网络协同组织时，可以利用UAV有效地完成复杂任务，从而创建著名的自组织网络（FANET）(Flying Ad-hoc Network)。如果不部署有效的网络模型，允许无人机之间进行可靠的信息交换，则建立此类网络是不可行的。FANET继承了移动自组织网络（MANET）及其子类（如车载自组织网络和无线传感器网络）的共同特征。不幸的是，无人机通常部署在空中，采用由其预期处理的任务性质决定的机动性模型，因此有别于任何传统网络。此外，FANET的多种限制和高度动态的拓扑结构使路由协议的设计成为一项复杂的任务。本文全面介绍了FANET的体系结构、约束条件、移动性模型、路由技术和仿真工具。详细介绍了FANET专用的大量现有路由协议的分类、描述和比较研究。此外，本文描述了未来的挑战视角，帮助科学研究人员发现一些仅在文献中表面上解决的主题，需要更多的调查。这项调查的新颖之处在于，它能够提供对主要FANET路由协议的完整分析，并根据基于关键参数的不同约束条件对其进行严格比较，从而更好地展示这一特定研究领域的最新技术。</p>
+<h3 id="1-引言："><a href="#1-引言：" class="headerlink" title="1.引言："></a>1.引言：</h3><p>随着越来越多的无人机（UAV）飞越我们的头顶，越来越需要这些设备之间的协调、通信、安全和信息共享，以便成为各种应用的实际选择，包括搜索和救援、巡逻、货物运送和军事[1]。此外，由于其覆盖面大且易于安装，无人机可以用作无线中继，甚至可以在空中基站上作为传感器。有效及时地完成给定的应用程序，一组协作无人机而不是单个无人机必须分布在感兴趣的区域，从而增强多任务能力，增加网络寿命，并增加可扩展性[5]、[6]。然而，一些具有挑战性的问题被区分开来，例如，无人机的高机动性及其稀疏部署[7]。<br>最复杂的问题之一是<strong>遭受严重损失的无人机之间的信息交换</strong>。</p>
+<p><strong>A、</strong> <strong>动机无人机之间的可靠通信或路由协议构成了每个应用程序中的数据交付[8]。</strong></p>
+<p>因此，需要设计一个精心设计的网络模型，使无人机能够相互通信并自行组织成一个网络，称为飞行自组织网络（FANET）[9]，[10]。虽然与移动自组织网络（MANET）及其子类都类似，但FANET扩展了其概念，以便能够转发数据包、收集和共享信息[11]。然而，无人机的行为中有几个具有挑战性的特点，应该得到充分尊重，<strong>例如它们的高机动性、不可预测的运动以及它们在网络上的不均匀分布，这会导致频繁的拓扑变化</strong>，因此，FANET路由协议的设计是一项非常复杂的任务[12]。<br>为了支持越来越多的FANET应用程序，并保持其功能的可靠性和稳定性，必须对路由协议进行增量设计，以解决上述问题，并照顾到FANET的独特特性[13]。因此，为FANET提出了大量使用不同技术的路由协议，以提供并发性能，避免数据包丢失，并能够适应不同的场景和情况。此外，由于其与MANET相似，研究人员研究了在FANET中应用这些环境中使用的路由技术的可能性[14]。然而，即使进行了一些修改，也忽略了不同的要求，<strong>例如移动性模式、能量约束、部署区域、节点本地化和QoS要求。</strong><br>因此，对不同路由协议的限制和现有技术的了解，使我们能够始终根据需要开发新的路由方案，并了解在给定情况下在无人机之间应用哪些接近最佳的方法。</p>
+<p><strong>B、 无人机分类如图1所示</strong></p>
+<p>FANET中的无人机根据其高度自然分为高空无人机（HAU）、中高度无人机（MAU）和低空无人机（LAU）[43]。HAU的高度在20公里以上，它们几乎是静止的，例如卫星、飞艇和热气球。MAU可以在中等高度（如飞机）达到11公里，并且从地面节点的角度来看移动速度更快。至于LAU，它们的高度可达几公里，高度机动，如无人机或直升机。<br>传统上，FANET通常由控制站管理，例如地面基站或卫星，用于通信和共享关键信息[44]。有一些特定的无人机，根据几个特征被指定与地面站、地面移动节点（例如，车辆或船舶）和卫星通信，从而通过基础设施实现无人机对无人机（U2U）通信[45]。然而，基于基础设施的概念表现出多种多样限制，例如硬件要求、通信可靠性以及无人机和基础设施的覆盖范围受限。<br>作为一种解决方案，在通信节点之间建立多跳连接时，网络应以临时方式组织。这样，每个无人机都可以通过一系列无人机与另一个无人机或基础设施进行通信，所有无人机都构成一个特设网络。由于拓扑高度动态，FANET有时需要节点之间的对等连接。</p>
+<p><strong>C、 现在存在的缺陷和本文的贡献</strong></p>
+<p>然而，到目前为止，除了一些研究特别关注FANET中的路由以及其他问题外，没有一个研究关注路由问题。表1提供了一项基于文献中大多数现有调查和我们的调查之间路由中必须解决的关键点的比较研究。随着这项研究的不断扩展，这项调查是第一次关于如何开发无人机潜力和正确管理无人机之间信息交换的综合指南。为此，我们的调查组织如下：</p>
+<ul>
+<li>在第二节中，我们将FANET定义为一个独特的自组织网络及其体系结构。这允许对FANET和MANET子类的独特特性进行比较研究。</li>
+<li>在第三节中，我们深入描述和比较了专为FANET设计或适用于FANET的现有流动模型。</li>
+<li>在第四节中，我们介绍了FANET中使用的主要路由技术、它们的特点和复杂性。<br>每种路由技术都有一个解释性图表来说明。</li>
+<li>在第五节中，基于一种新颖的原始分类法，我们对应用于或专门开发用于FANET的大多数路由协议进行了全面调查，并根据以下九类进行分类：（i）基于拓扑，（ii）基于安全，（iii）基于群，（iv）基于层次，（V）基于能量，（vi）基于异构，（vii）基于位置，（viii）基于DTN，和（ix）基于跨层。每个协议都是用一个具体的例子来描述的，用一个图表来说明。基于比较研究，对每个类别进行了严格描述。</li>
+<li>然后，在第六节中，我们对所讨论的FANET路由协议进行了全局比较分析，这使我们能够对所采用的路由策略、不同的要求、特性和要使用的实验验证类型进行概述。</li>
+<li>在第七节中，我们概述了为充分发挥FANET应用程序的潜力而应解决的具有挑战性的未决问题。</li>
+<li>最后，第八节总结了本次调查，并对这一热门研究课题的更多调查提出了更多的观点和见解。</li>
+</ul>
+<h3 id="2-FANET架构"><a href="#2-FANET架构" class="headerlink" title="2. FANET架构"></a>2. FANET架构</h3><h4 id="包括组织方式，通信，特点"><a href="#包括组织方式，通信，特点" class="headerlink" title="包括组织方式，通信，特点"></a>包括组织方式，通信，特点</h4><p>FANET是一组无人机和地面基站（GBS）相互自主连接，无需预先存在的通信配置[46]。也就是说，这些实体之间的通信应以特殊方式进行，其中无人机和GBS都参与数据传输[47]。通常，==该系统选择具有进一步能力的特定无人机作为GBS和其他无人机之间的网关==，从而显著扩展网络覆盖范围[48]。此外，使用不同种类的通信，应用不同的网络组织，不同的应用需要不同的功能[49]。为此，本节分为三个小节。第一个主题是文献中普遍采用的FANET主要组织。其次，描述了不同的FANET通信。最后，详细介绍了FANET的独特特性和特点。对于每个描述，我们总是在下面的小节中参考图2。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210111620041.png" alt="image-20221011162023347"></p>
+<h4 id="A、-FANET组织设计"><a href="#A、-FANET组织设计" class="headerlink" title="A、 FANET组织设计"></a><strong>A、 FANET组织设计</strong></h4><p>一个完全合作的FANET系统需要一套机制和规则，以确定无人机和GBS之间的信息交换方式。根据无人机计划完成的应用，使用了许多通信组织[50]。然而，据我们所知，没有足够令人信服的研究能够初步确定哪一个组织最有效。因此，在本小节中，我们分析了在大多数应用程序中经常使用的<strong>集中式组织、多组组织和蜂窝组织</strong>（c.f.，图2）。此外，我们强调了他们的优势和劣势。</p>
+<p><strong>1） 集中式组织</strong>：对应图2的Centralized</p>
+<p>==所有无人机都直接连接到一个或多个GBS，可以同时与每个无人机通信==。由于UAV之间不可能进行通信，所有数据传输必须通过GBS进行路由[51]。这样的组织有很多好处，例如提高了无人机故障时的容错能力，任务的并行性，以及增强了计算和存储能力。然而，由于其集中式性质，该组织有三个主要缺点。</p>
+<ul>
+<li>首先，由于每个无人机都有一个专用带宽，预计总带宽将随着无人机的增加而成比例增加，因此需要更昂贵的带宽下行链路。</li>
+<li>第二，通过GBS集中导致的高延迟。</li>
+<li>最后，<strong>GBS构成一个单点故障可能会破坏整个网络</strong>。</li>
+</ul>
+<p><strong>2） 多组组织</strong>：对应图2的Multi-Group</p>
+<p>在该组织中，无人机可以以特殊方式相互通信，同时保护集中式组织。此外，==还形成了多个组，其中每个指定的UAV扮演着将组与GBS连接起来的网关的角色==[52]。组内通信不涉及GBS，但组间通信通过GBS进行。与支持大量具有不同通信和照明功能的无人机的集中式组织相比，该组织提供了更好的性能。然而，==由于该组织的半集中式性质，由于某些数据传输通过GBS传输，因此可靠性问题仍然存在==。<br>此外，给定GBS的故障可能会导致网络分区问题，从而将一组UAV与网络的其余部分隔离开来。</p>
+<p><strong>3） 蜂窝组织</strong></p>
+<p>GBS提供的包含无人机的蜂窝可以被视为一种有希望的解决方案，可以简化许多民用和军事应用的部署。==每个小区使用唯一的频率来避免彼此之间的干扰==[53]。结合在一起，Cell可以在特定区域提供重要的信号覆盖[54]。在这样的组织中，无人机可以直接相互通信或通过GBS通信。然而，由于只有在事先知道任务区域的情况下才部署GBS，因此单元并不是一个成本效益高的解决方案。此外，由于固定GBS可能随时失效，导致许多或所有UAV完全失控，因此该组织容易受到攻击。<br>因此，在广泛部署蜂窝网络之前，必须仔细研究几个挑战。</p>
+<h4 id="B、-FANET通信"><a href="#B、-FANET通信" class="headerlink" title="B、 FANET通信"></a><strong>B、 FANET通信</strong></h4><p>根据上面讨论的FANET组织，网络中的每个节点（即UAV、GBS和卫星）都可以充当终端系统[55]。然而，两个远程节点的通信受到不同的限制，例如突然断开、数据包丢失和网络的永久碎片。因此，所有这些节点都可以作为中继进行协作和组织，以便更好地应对频繁的拓扑变化[56]。==因此，FANET需要考虑三种通信类型：（i）无人机对无人机，（ii）无人机对地，以及（iii）卫星通信==。这些通信将在后续章节中详细讨论。</p>
+<p><strong>1） 无人机对无人机（U2U）通信</strong></p>
+<p>为了满足不同任务的需要，无人机之间通过频繁交换数据包进行直接通信。==然而，由于传输范围的限制，多跳通信在其他无人机上进行==。这对于扩大特定领域的覆盖范围至关重要。在大多数情况下，视距传输（LoS）在U2U通信中占主导地位，因为空中无人机之间不存在障碍物[57]。然而，在一些特殊情况下，视距传输无法保证，尤其是当无人机暴露在高层建筑或山区时。</p>
+<p><strong>2） 无人机对地（U2G）通信</strong></p>
+<p>为了更好地控制无人机，地面上固定了GBS形式的基础设施，以交换关键控制和指挥信息[58]。此外，GBS还用于将不同组的无人机彼此连接起来。通常，有特定的无人机能够与GBS通信，以减少网络拥塞并提高吞吐量和连接性。<br>如果无人机处于高海拔，则低空系统在U2G链路中占主导地位。然而，在低海拔地区，由于地面上存在障碍物，导致反射和绕射现象，UAV无法确保具有GBS的视距传输</p>
+<p><strong>3） 卫星通信（SATCOM）</strong></p>
+<p>无人机通常部署在复杂的环境中，如海洋和山区，在那里很难安装GBS。此外，当FANET需要连续连接且网络严重分区时，需要一个集中式实体来确保永久连接。<br>卫星可以作为中继站，以集中方式控制无人机，并提供重要的LoS覆盖，从而建立卫星通信（SATCOM），代替了GBS[60]。卫星通信有助于支持无人机之间的关键数据交换，并将收集到的信息传送到远离地面的无线电台。然而，这不是一个经济高效的解决方案。<br>简要比较了所讨论的FANET通信类型。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>U2U</th>
+<th>U2G</th>
+<th>SATCOM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LOS</td>
+<td>High</td>
+<td>Medium</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Cost</td>
+<td>Cheaper</td>
+<td>Expensive</td>
+<td>Highly expensive</td>
+</tr>
+<tr>
+<td>Coverage</td>
+<td>Medium</td>
+<td>Large</td>
+<td>Huge</td>
+</tr>
+<tr>
+<td>Exploitation</td>
+<td>Short-term</td>
+<td>Mid-term</td>
+<td>Long-term</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="C、-FANET特点"><a href="#C、-FANET特点" class="headerlink" title="C、 FANET特点"></a><strong>C、 FANET特点</strong></h4><p>每个任务或应用程序在无人机数量、适配时间和通信限制方面都有不同的要求。这使FANET的特性多样化，并使其独特，从而使其区别于其他类型的自组织网络。在本节中，我们详细描述了在部署此类网络时考虑的最关键的FANET特性。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210111652130.png" alt="image-20221011165252782"></p>
+<h3 id="3、-FANET移动模型"><a href="#3、-FANET移动模型" class="headerlink" title="3、 FANET移动模型"></a>3、 FANET移动模型</h3><p>FANETs中的另一个挑战性问题是描述无人机在特定区域内运动的机动性模型（即，随时间变化的方向、速度和加速度）[98]。机动性使无人机能够适应每个应用的要求，从而提供更好的性能和更大的灵活性。在仿真方面，机动性模型能够以现实的方式模拟无人机的行为，以便在实际部署和测试之前获得尽可能真实的结果[99]。在文献中，有一些经典的MANET移动性模型已用于评估FANET，还有一些其他是专门为FANET设计的。在本节中，如图4所示，我们将现有的移动性模型分为ve类：<strong>（i）基于随机的，（ii）基于时间的，（iii）基于路径的，（iv）基于组的，和（v）基于拓扑的</strong>。<br>然后，我们彻底回顾了每个类别中的现有流动模型，每个模型都有一个解释性图表。最后，提供了一个全球比较研究，总结了每种流动模式的特点、可部署的应用程序及其主要思想。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210111700827.png" alt="image-20221011170051120"></p>
+<p><strong>A、 基于随机的机动性模型</strong></p>
+<p>由于其简单性，这种机动性模式已被用于确定无人机的运动和评估FANET的性能。事实上，每个无人机随机选择其运动，完全独立于其他无人机。这些运动是按照速度、方向、距离和运动时间随机进行的。</p>
+<ul>
+<li>RW（RandomWalk）[100]是一种基于随机的模型，允许移动节点在时间t的每个固定持续时间选择随机方向、速度和距离。后一个参数从预定范围中选择，并在每次移动结束时重新计算。如果移动节点到达区域边界，它将以新的方向弹回边界。<br>如图5（a）所示，RW通常显示方向的突然变化。在方向更改期间，新选定的方向与当前方向解除关联。<br>该模型被许多FANET协议和应用程序采用。</li>
+<li>RWP（Random WayPoint）[104]使用了与RW[100]相同的原理，但它<strong>增加了方向变化之间的暂停时间</strong>。。</li>
+<li>RD（Random Direction）采用与RW相同的原则，其中移动节点选择随机方向、速度和距离。与RW的唯一区别是节点的分布是均匀的，而不管其初始位置如何**。RD模型在[110]中的FANETs中进行了测试。</li>
+<li>MG（Manhattan Grid）[111]是一个使用网格道路拓扑的基于随机的移动模型。MG用于真实模拟城市环境中的车辆运动[112]。</li>
+</ul>
+<p><strong>B、 基于时间的机动性模型</strong></p>
+<p>这类无人机的运动基于不同的数学方程、时间瞬间以及之前的方向和速度进行定义。所有这些参数都是为了平稳更新动作，避免速度和方向的突然急剧变化。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210111706548.png" alt="image-20221011170638294"></p>
+<p><strong>C、 基于路径的机动性模型</strong></p>
+<p>在这一类别中，预先计算预定轨迹，并将其加载到每个UAV中，使其在不进行随机运动的情况下被迫跟随该轨迹。在计划路径的末尾，无人机可以随机改变方向并重复相同的过程。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210111707752.png" alt="image-20221011170705498"></p>
+<p><strong>D、 基于组的机动模型</strong></p>
+<p>通常，为了及时完成涉及FANET的任务，无人机倾向于在参考点指示的指定区域内一起移动。这引入了无人机之间的空间和时间依赖性。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210111708835.png" alt="image-20221011170843863"></p>
+<p><strong>E、 基于拓扑的机动性模型</strong></p>
+<p>当应用程序或网络约束需要在一段时间内永久满足时，需要实时控制无人机的机动度。为了做到这一点，无人机应该通过相互协调位置来了解自己的拓扑结构。例如，当网络的连通性需要永久保持时，应持续控制无人机的运动，同时避免无用的随机运动。</p>
+<p><img src="/2022/10/11/%E6%97%A0%E4%BA%BA%E6%9C%BA%E8%87%AA%E7%BB%84%E7%BD%91%E8%AE%BA%E6%96%87/Users\李政翰\AppData\Roaming\Typora\typora-user-images\image-20221011170935598.png" alt="image-20221011170935598"></p>
+<ul>
+<li><p>DPR（Distributed Pheromone Repel）[128]是一种专用于FANET的机动性模型，它使用信息素和本地化搜索将无人机引导至其他无人机最近未访问过的区域。</p>
+</li>
+<li><p>H3MP（含信息素的混合马尔可夫移动模型）[144]是DPR和马尔可夫模型的组合，在区域分解的特定区域中利用了两者的优势。马尔可夫模型利用无人机在区间的先前位置，增强了无人机的整体运动。</p>
+</li>
+<li><p>SDPC（Self-Deployable Point Coverage，自部署点覆盖）[145]是一种专用于FANET的基于拓扑的移动模型。SDPC可用于增强地面上最大移动节点的覆盖范围，同时保持无人机之间的连接性。为此，必须考虑无人机的最佳定位，以覆盖尽可能大的区域（参见图9（c））。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210111712256.png" alt="image-20221011171209918"></p>
+<p>为了更直观地概述，表5总结了所有描述的FANET移动模型，包括其主要思想、潜在FANET应用以及它们所属的类别。主要特征之间的比较被认为是区分移动模型的关键组件，例如，确定每个机动性模型中使用的随机运动程度的随机性、避免碰撞、定义为UAV之间的距离的连接性以及部署区域。</p>
+</li>
+</ul>
+<h3 id="4、-路由技术"><a href="#4、-路由技术" class="headerlink" title="4、 路由技术"></a>4、 路由技术</h3><p>设计了几种布线技术，以适应FANET中随时可能出现的各种约束[146]。此外，由于无人机的移动可以采用多种移动性模型，因此，为了减少分组丢失并提高性能，中继的选择方法多样化[147]。每种技术只能在网络的特定情况下或发生给定事件时使用。在本节中，<strong>我们描述了FANET中最常用的十二种技术及其局限性和缺点</strong>。<br>此外，我们还提供了十二个解释性图表，其中显示了每种路由技术的具体示例（参见图10）。最后，表6给出了所讨论的路由技术之间的简要比较研究。</p>
+<p><strong>A、 STORE-CARY AND FORWARD（SCF）</strong>当网络出现间歇性连接时，保管人会继续携带数据包，直到遇到另一个节点或相应的目的地。如图10（a）所示，UAV D不在保管人UAV C的范围内，在特定时间t’（t‘ = t2- t1）直到与数据包转发的UAV D会面。作为限制，此技术引入了高延迟，因此不适合实时应用。</p>
+<p><strong>B、 GREEDY FORWARDING（GF）</strong>这项技术的目的是减少数据包在单个通信过程中可以通过的传输中继的数量。每个数据包都转发给地理位置上距离目的地最近的相邻UAV。如图10（b）所示，<strong>当前的UAV C选择UAV F1而不是UAV F2作为下一个跃点，以在UAV D之前传递数据包，因为它是最接近UAV D的数据包（D1&lt;D2）</strong>。作为一个缺点，这个过程可能会导致局部优化失败，而局部优化可以通过许多技术来恢复。</p>
+<p><strong>C、 预测（PR）</strong>有时需要使用下一个继电器的速度和方向来了解其未来位置，以便选择合适的继电器。例如，UAV S选择UAV F1作为下一跳，因为其未来位置越来越接近目的地（见图10（c））。此技术需要有关目的地和邻居的附加信息。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210121548784.png" alt="image-20221012154812905"></p>
+<p><strong>D、 DISCOVERY PROCESS（DP）</strong>由于其简单性，泛洪技术通常用于高度动态的网络，如FANET，尤其是在目的地位置未知的情况下。一般情况下，路由请求（RREQ）会发送给所有通往目的地UAV D的可能路径。最后，UAV D通过选择适当的数据传输路径来做出路由决策（参见图10（D））。作为一个缺点，尽管数据包将到达其目的地，但这可能会导致严重的拥塞和带宽消耗。</p>
+<p><strong>E、 集群（CL）</strong>当FANET高度密集时，最好以分区（集群）的形式组织，其中每个分区分别由集群头控制。当属于集群1的UAV S想要与属于集群2的UAV D建立通信时，传输必须通过各自的集群头进行传输（参见图10（e））。<br>然而，它会导致形成此类集群的重要开销。</p>
+<p><strong>F、 链路状态（LST）</strong>在每个拓扑变化中，关于整个网络的链路状态信息必须在所有UAV之间共享。这使得每个无人机都能对网络有准确的视觉，并计算通信无人机之间的最短路径（见图10（f））。然而，在这种技术中可以区分出大量的开销。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210121555725.png" alt="image-20221012155550244"></p>
+<p><strong>G、 层次（HR）</strong>这项技术包括以树的形式将网络划分为多个级别。每个级别至少由以下人员控制负责与上层和下层通信的根UAV（参见图10（g））。然而，这种技术需要低流动性。</p>
+<p><strong>H、 移动信息（MI）</strong>运动信息，例如位置、速度，都用于每次选择下一个继电器（c.f.，图10（H））。此外，该技术还允许了解网络中所有节点的运动信息。<br>但是，需要交换大量Hello数据包。</p>
+<p><strong>I、 能效（EE）</strong>为了延长FANET的寿命，无人机之间的能耗必须很好地平衡，因为在无人机S和无人机D之间的数据通信过程中，无人机的任何参与都会降低剩余能量（见图10（I））。然而，需要结合其他连接技术来避免数据包丢失。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210121558184.png" alt="image-20221012155838103"></p>
+<p><strong>J、 STATIC（STA）</strong>如图10（J）所示，通信无人机的路由表是预先填写的，数据传输总是使用相同的路由路径。然而，这种技术不支持拓扑的变化。</p>
+<p><strong>K、 安全（SC）</strong>如图10（K）所示，不同的安全机制用于保护网络中的所有现有链路，检测任何恶意UAV，并在数据传输期间避免它，同时只传输诚实的UAV。然而，无人机进行复杂的处理和计算。</p>
+<p><strong>L、 广播（BR）</strong>为确保数据传输成功，数据包通过网络从源UAV S传播到目标UAV D（见图10（L））。然而，在广播风暴问题的情况下，BR会在网络上引入大量开销并引发拥塞。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210121601959.png" alt="image-20221012160123516"></p>
+<h3 id="5、-FANET路由协议"><a href="#5、-FANET路由协议" class="headerlink" title="5、 FANET路由协议"></a><strong>5、 FANET路由协议</strong></h3><p>FANET网络层的概念是最严重的挑战之一[148]。这就增加了研究人员之间的竞争，使他们在构思或适应不同类型的路由协议的同时满足限制性设计约束，例如高度动态拓扑[149]、平衡能耗[77]、链路中断恢复[150]、可扩展性[151]、安全性[152]以及UAV资源和分配带宽的明智使用[153]。然而，一次完全满足上述所有限制几乎是不可能的，因此，根据网络的情况，FANET路由协议的类别多样化。如图11所示，FANET路由协议可以根据所采用的技术和要解决的问题分为八类。在接下来的部分中，我们将详细研究每个类别及其最相关的路由协议。</p>
+<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202210121619964.png" alt="image-20221012161907364"></p>
+<p>A、 <strong>基于拓扑的路由协议</strong>最初针对移动自组网提出了一些属于这一类别的路由协议，并对其进行了更新，以适应FANET的独特特性[154]。<br>这些协议基于链路信息，利用移动节点的IP地址在通信节点之间交换数据包。这一类别进一步分为四类：（i）主动式，（ii）反应式，（iii）混合式，和（iv）静态。</p>
+<p>1） PROACTIVE</p>
+<p>此类别在路由表中存储与每对移动节点之间的所有新链接相关的信息。这些表在每次拓扑更改时共享。<br>因此，很容易找出源和目标之间的最短路由路径，从而显著减少传递延迟。然而，由于FANET的拓扑结构是高度动态的，因此主动协议交换大量数据包，从而消耗带宽、拥塞网络并对断开做出缓慢反应。因此，只有在采用了一些关键更新的情况下，才适合使用主动协议。</p>
+<p>2） REACTIVE</p>
+<p>也称为按需路由协议，只有当UAV想要建立通信时，才会启动路由发现过程，其中探索、定义和维护了最大的路由路径。在大多数情况下，由于发现过程，这类问题会导致高延迟和延迟时间，这也会导致显著的开销，特别是在网络高度碎片化的情况下。</p>
+<p>3） HYBRID</p>
+<p>为了解决主动式和反应式协议的局限性，混合协议结合了两者的优点。事实上，主动式和反应式协议需要一个重要的开销来维护整个网络，并需要足够的时间来分别建立最佳路由。作为一种经典的解决方案，混合协议采用分区的概念，在分区内部署主动策略，从而限制了开销。<br>对于区域间通信，reactive策略仅在属于区域的特定节点之间使用。</p>
+<p>4） STATIC</p>
+<p>此类别适用于具有恒定拓扑结构的网络，这使得其不适用于FANET。为了进行通信，每个路由表都是预先计算和填写的，并存储在每个UAV中。应该强调的是，路由表无法更新，这使得无人机只能与几个无人机或基站通信在地面上。在链路故障的情况下，静态协议无法正常工作，从而干扰整个网络。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">论文</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">自组网</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/10/11/%E6%97%A0%E4%BA%BA%E6%9C%BA%E8%87%AA%E7%BB%84%E7%BD%91%E8%AE%BA%E6%96%87/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
     <article id="post-ndn-dpdk论文" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   
 <div class="article-inner">
@@ -716,7 +1183,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">6分</span>
+        <span class="post-count">7分</span>
       </span>
     </span>
 </div>
@@ -819,7 +1286,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.1k字</span>
+        <span class="post-count">1.4k字</span>
       </span>
     </span>
 
@@ -828,7 +1295,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">5分</span>
+        <span class="post-count">6分</span>
       </span>
     </span>
 </div>
@@ -1013,325 +1480,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-YaNFD-paper阅读" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-<div class="article-inner">
-    
-      <header class="article-header">
-        
-        
-        <a href="/2022/08/19/YaNFD-paper%E9%98%85%E8%AF%BB/" class="archive-article-date">
-  	<time datetime="2022-08-19T08:19:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-19</time>
-</a>
-
-
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">7.9k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">27分</span>
-      </span>
-    </span>
-</div>
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2022/08/19/YaNFD-paper%E9%98%85%E8%AF%BB/">YaNFD-paper阅读</a>
-    </h1>
-  
-</p></center>
-      
-        <h3 id="YaNFD-Yet-another-Named-Data-Networking-Forwarding-Daemon"><a href="#YaNFD-Yet-another-Named-Data-Networking-Forwarding-Daemon" class="headerlink" title="YaNFD: Yet another Named Data Networking Forwarding Daemon"></a>YaNFD: Yet another Named Data Networking Forwarding Daemon</h3><h4 id="0-摘要："><a href="#0-摘要：" class="headerlink" title="0. 摘要："></a>0. 摘要：</h4><p>开发了 YaNFD 作为 NDN 的新软件数据包转发器。  YaNFD 实现了与现有 NDN 应用程序和转发器的兼容性，以及<strong>高吞吐量</strong>。  YaNFD 具有<strong>多线程</strong>转发功能，与现有实现相比，代码库更小、更精简，并且可以使用现有的 NDN 转发器管理实用程序和协议进行管理。在本文中，我们讨论了我们的实现，包括它与以前的转发器的不同之处，基于它们在多年的开发和使用过程中获得的经验教训。<br>此外，我们还展示了从零开始为 NDN 开发新转发器的经验中吸取的经验教训。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">论文</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/08/19/YaNFD-paper%E9%98%85%E8%AF%BB/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-EasyRL-4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-<div class="article-inner">
-    
-      <header class="article-header">
-        
-        
-        <a href="/2022/08/15/EasyRL-4/" class="archive-article-date">
-  	<time datetime="2022-08-15T08:38:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-15</time>
-</a>
-
-
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">229字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
-      </span>
-    </span>
-</div>
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2022/08/15/EasyRL-4/">EasyRL-4</a>
-    </h1>
-  
-</p></center>
-      
-        <h3 id="第9-章演员-评论员算法"><a href="#第9-章演员-评论员算法" class="headerlink" title="第9 章演员-评论员算法"></a>第9 章演员-评论员算法</h3><p>演员-评论员算法是一种结合<strong>策略梯度</strong>和<strong>时序差分学习</strong>的强化学习方法，其中，演员是指策略函数πθ(a|s)，即学习一个策略以得到尽可能高的回报。评论员是指价值函数Vπ(s)，对当前策略的值函数进行估计，即评估演员的好坏。借助于价值函数，演员-评论员算法可以进行单步参数更新，不需要等到回合结束才进行更新。在演员-评论员算法里面，最知名的算法就是异步优势演员-评论员算法。如果我们去掉异步，则为优势演员-评论员（advantage actor-critic，A2C）算法。A2C 算法又被译作优势演员-评论员算法。如果我们加了异步，变成异步优势演员-评论员算法。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">强化学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/08/15/EasyRL-4/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-C++-primer-16章" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-<div class="article-inner">
-    
-      <header class="article-header">
-        
-        
-        <a href="/2022/08/13/C++-primer-16%E7%AB%A0/" class="archive-article-date">
-  	<time datetime="2022-08-13T10:45:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-13</time>
-</a>
-
-
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.4k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">8分</span>
-      </span>
-    </span>
-</div>
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2022/08/13/C++-primer-16%E7%AB%A0/">C++primer-16</a>
-    </h1>
-  
-</p></center>
-      
-        <h1 id="第十六章-模板和泛型编程"><a href="#第十六章-模板和泛型编程" class="headerlink" title="第十六章 模板和泛型编程"></a>第十六章 模板和泛型编程</h1><ul>
-<li>面向对象编程和泛型编程都能处理在编写程序时不知道类型的情况。<ul>
-<li>OOP能处理类型在程序运行之前都未知的情况；</li>
-<li>泛型编程中，在编译时就可以获知类型。</li>
-</ul>
-</li>
-</ul>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/08/13/C++-primer-16%E7%AB%A0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/4/">下一页</a>
@@ -1346,7 +1494,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info">
       <div class="footer-left">
-        &copy; 2022 ygtrece
+        &copy; 2023 ygtrece
       </div>
       <div class="footer-right">
           

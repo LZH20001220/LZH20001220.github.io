@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202209241708895.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202209241719403.png">
 <meta property="article:published_time" content="2022-09-13T01:13:16.000Z">
-<meta property="article:modified_time" content="2022-09-24T09:52:43.571Z">
+<meta property="article:modified_time" content="2023-02-03T06:22:45.852Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="科研">
 <meta property="article:tag" content="NFD">
@@ -227,7 +227,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">6分</span>
+        <span class="post-count">7分</span>
       </span>
     </span>
 </div>
@@ -323,6 +323,7 @@ var _hmt = _hmt || [];
 </ul>
 <p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202209241719403.png" alt="image-20220924171909370"></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//manager-base.cpp manager向Dispatcher注册通知流</span></span><br><span class="line">ndn::<span class="function">mgmt::PostNotification</span></span><br><span class="line"><span class="function"><span class="title">ManagerBase::registerNotificationStream</span><span class="params">(<span class="type">const</span> std::string&amp; verb)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> m_dispatcher.<span class="built_in">addNotificationStream</span>(<span class="built_in">makeRelPrefix</span>(verb));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//调用Dispatcher::queryStorage将请求的兴趣包与存储的通知匹配</span></span><br><span class="line"><span class="function"><span class="type">void</span></span></span><br><span class="line"><span class="function"><span class="title">Dispatcher::queryStorage</span><span class="params">(<span class="type">const</span> Name&amp; prefix, <span class="type">const</span> Interest&amp; interest,</span></span></span><br><span class="line"><span class="params"><span class="function">                         <span class="type">const</span> InterestHandler&amp; missContinuation)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">auto</span> data = m_storage.<span class="built_in">find</span>(interest);</span><br><span class="line">  <span class="keyword">if</span> (data == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">    <span class="comment">// invoke missContinuation to process this Interest if the query fails.</span></span><br><span class="line">    <span class="keyword">if</span> (missContinuation)</span><br><span class="line">      <span class="built_in">missContinuation</span>(prefix, interest);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// send the fetched data through face if query succeeds.</span></span><br><span class="line">    <span class="built_in">sendOnFace</span>(*data);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>定义face一个是为了能自己添加策略，另外一个是能通过trace统计输出。NLSR每个对象都对应了一个face。</p>
 
       
 
@@ -476,7 +477,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info">
       <div class="footer-left">
-        &copy; 2022 ygtrece
+        &copy; 2023 ygtrece
       </div>
       <div class="footer-right">
           
