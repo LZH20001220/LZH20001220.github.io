@@ -31,10 +31,11 @@
 <meta property="og:description" content="基于PTP SyncE的时间同步技术研究与实现详解PTP协议_jasonj33的博客-CSDN博客_ptp协议 网络通信中，有的时候会要求主机和其他主机保持时钟同步，或者说是在可接受的误差范围内 网络时钟同步分为时间同步和频率同步">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://s2.loli.net/2023/02/01/Ml6CdFsBYupb1OA.jpg">
+<meta property="og:image" content="https://s2.loli.net/2023/02/07/BQbtvrO37n4HGuM.jpg">
 <meta property="og:image" content="https://s2.loli.net/2023/02/01/mSTL7pbCe1zXVMK.png">
 <meta property="og:image" content="https://s2.loli.net/2023/02/01/iT2XgCLURbOBukK.png">
 <meta property="article:published_time" content="2023-02-01T07:25:51.000Z">
-<meta property="article:modified_time" content="2023-02-04T03:29:12.673Z">
+<meta property="article:modified_time" content="2023-02-07T03:34:55.998Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="科研">
 <meta property="article:tag" content="NDN">
@@ -217,7 +218,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.8k字</span>
+        <span class="post-count">3k字</span>
       </span>
     </span>
 
@@ -226,7 +227,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">9分</span>
+        <span class="post-count">10分</span>
       </span>
     </span>
 </div>
@@ -255,6 +256,14 @@ var _hmt = _hmt || [];
 <li>左半部分就是时间同步，任何时刻A和B的时间都是相等的</li>
 <li>右半部分就是频率同步，任何时刻A和B的时间的差值是相等的</li>
 </ul>
+<p><strong>请求应答机制：</strong>请求应答机制用于测量端到端的延时时间</p>
+<p><img src="https://s2.loli.net/2023/02/07/BQbtvrO37n4HGuM.jpg" alt="img"></p>
+<ul>
+<li>主时钟向从时钟发送Sync报文，并记录时间T1。从时钟收到Sync后，记录接收时间T2</li>
+<li>主时钟发送完Sync，紧接着发送一个带有T1值的Follow_Up报文给从时钟</li>
+<li>从时钟向主时钟发送Delay_Req报文，记录发送时间T3，主时钟收到后记录接收时间T4</li>
+<li>主时钟向从时钟发送携带T4的报文Delay_Resp</li>
+</ul>
 <p>背景：5G移动网络对基站时间同步提出了更高的要求（3ns以内）。</p>
 <p>精密时间协议(Precision Time Protocol)PTP：利用硬件时间戳，同步精度可以达到亚微秒级别。局限性在于自身的频率漂移和老化率特性不同，长时间导致钟差累计变大。软件实现为毫秒量级，硬件实现为纳米级别。</p>
 <p>同步以太网(Synchronous Ethernet, SyncE)技术能实现高精度时钟信息的传递和恢复，但是只能传递频率信息，不能传递时间信息。</p>
@@ -267,13 +276,15 @@ var _hmt = _hmt || [];
 </li>
 <li>时间戳的同步精度有限。</li>
 </ol>
+<p>分很多时间端，找到对应时间开始发送。</p>
 <h3 id="时延敏感网络-TSN-资源调度机制研究"><a href="#时延敏感网络-TSN-资源调度机制研究" class="headerlink" title="时延敏感网络(TSN)资源调度机制研究"></a>时延敏感网络(TSN)资源调度机制研究</h3><h4 id="摘要："><a href="#摘要：" class="headerlink" title="摘要："></a>摘要：</h4><p>时间敏感网络的核心思想是减少转发过程中的排队时延。在交换设备中将时间敏感流和非时间敏感流隔开，再通过为队列分配专用时隙的方式实现可预计的端到端时延。</p>
 <p>本文为网络服务请求和网络时隙资源建立了模型，建立的以最大化网络中部署的服务请求为目标的整数线性规划模型。本文还涉及了基于遗传算法的启发式算法，能为每项服务请求决策其在网络中是否部署，并为每个成功部署的服务请求规划路由并分配网络资源。</p>
 <p>时延敏感业务日益增长的需求迫切地要求人们改变传统以太网的尽力而为的设计思想，转变为适应新时代的准时准确控制端到端时延的的传输方法。</p>
 <p>时延敏感网络将流量按照优先级分为==时间敏感流、速率受限流和尽力而为流==。</p>
+<p>IP是流量链路共享的，路分成很多的时段，</p>
 <h4 id="相关技术："><a href="#相关技术：" class="headerlink" title="相关技术："></a>相关技术：</h4><p><strong>流量整形和流量调度是时间敏感网络中的关键技术。</strong>流量整形主要指流量在传输到链路上之前对其传输速率进行规范，防止网络中大量的突发流量影响网络性能。流量调度主要指在网络交换设备内部，选择不同队列进行传输以保证不同优先级数据的方法。</p>
 <p>为了达到确定性传输的目标，TSN 工作组主要从时钟同步（802.1AS[24]）、入队时单流粒度的过滤和管控（802.1Qci）、交换机内部队列的流量调度（802.1Qbv[25]）以及帧抢占（802.1Qbu）等方面对标准以太网交换流程进行增强。</p>
-<p>首先需要全网节点的时钟同步(802.1AS)，然后才可以将通信链路上的时间划分为大小相同的时隙，一个时隙只允许特定类型的流量进行传输802.1Qbv。</p>
+<p><strong>首先需要全网节点的时钟同步(802.1AS)，然后才可以将通信链路上的时间划分为大小相同的时隙，一个时隙只允许特定类型的流量进行传输802.1Qbv。</strong></p>
 <p>时间敏感网络中的调度算法，分为同步调度算法和异步调度算法两类。其中同步调度算法需要实现全网的时钟同步，而异步调度算法不需要。同步调度算法需要实现网络设备间的时钟同步，代表的是 802.1Qbv 提出的门控制机制和802.1Qch 提出的循环队列转发机制。</p>
 <p>异步调度算法的代表有基于优先级队列的调度算法和 802.1Qbu 提出的帧抢占算法等。</p>
 <p>帧抢占算法：通过打断低优先级帧的传送，来实现高优先级帧的及时调度。由于以太网帧存在最小发送长度的限制</p>
@@ -291,6 +302,8 @@ var _hmt = _hmt || [];
 <p>基于时隙剩余容量的超时隙分组调度算法：主要为了判断包到了目标节点后等待几个时隙，在哪个队列发送出去。当时隙有偏差时，不一定必须在对应的时隙转发，也可以在其他的空闲时隙转发，这样就降低了延时抖动。</p>
 <p>CSQF通过指定分组在各个节点发送时隙来解决LDN调度灵活性差的问题，但未考虑分组到达的随机性，<strong>分组可能在指定发送时隙开始之后到达而无法入队当前处于Open状态的发送队列</strong>，或在指定发送时隙中未得到预期的传输机会，或因时隙的循环性质，分组在实际指定的发送时隙结束后到达，而被延迟至下一周期的相同时隙才发送；</p>
 <p>本文提出的方法解决了Paternoster调度机制和LDN不支持分组按指定时隙发送的问题，规避了CQF和CSQF对时间同步和时隙对齐的严格要求，另一方面所设计的分组调度机制的时间复杂度只与本地队列数有关，与经过该节点的流数无关，适用于大规模网络。实际上就是改进了CSQF，让每个时隙都有发送数据的能力，具体能不能发送需要检测，这样就减小了因时钟不对齐导致的时延。</p>
+<p>NDN中，留一个时隙周期性的传输流媒体机制，利用确定性网络，利用到卫星网络上，链路变换的时候怎么分配时隙，时隙调度，时钟同步上了后把数据包都发出去。</p>
+<p>网卡时间沿的问题。</p>
 <h3 id="时间确定性网络调度算法设计"><a href="#时间确定性网络调度算法设计" class="headerlink" title="时间确定性网络调度算法设计"></a>时间确定性网络调度算法设计</h3><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI2OTQ5MzU4NA==&amp;mid=2247485147&amp;idx=1&amp;sn=187dec658ec75d36a3e4e7045c7c2af6&amp;chksm=eade32e4dda9bbf21cf0486bef0a28cc35460fcb1ed46006d965139cc3b4625d6c7d91cbf8d1&amp;scene=27">科普系列讲座——时间触发以太网（TTE） (qq.com)</a></p>
 <p>提出了两种的时间确定性网络调度算法：基于多矩阵周期联合调度的严格周期调度算法和基于多矩阵周期联合调度的非严格周期调度算法。</p>
 <p>时间触发通信的基本思想是：<strong>在全网时钟同步的前提下</strong>，网络中的设备节点按照调度表中规定的时间点发送和接收消息。端到端传输的确定性和实时性，避免了数据帧在物理链路上的冲突。时间触发系统的静态调度表可以最大程度地提高系统的可预测性。但是很难满足动态变化的需要，灵活性差。</p>
