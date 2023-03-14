@@ -31,7 +31,7 @@
 <meta property="og:description" content="发送兴趣包返回数据包的代码在forwarder.c中，forwarder.c实际上包含六个函数，on_incoming_interest，onContentStoreMiss，onContentStoreHit，onOutgoingInterest，onIncomingData，onOutgoingData. 如果想要加入ACK包，应该添加两个函数,需要新添加一个包类型，ack类型的包，tlv如何">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-08-28T07:55:35.000Z">
-<meta property="article:modified_time" content="2023-01-02T07:10:25.278Z">
+<meta property="article:modified_time" content="2023-02-21T08:05:07.335Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="科研">
 <meta property="article:tag" content="NDN">
@@ -213,7 +213,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.4k字</span>
+        <span class="post-count">1.5k字</span>
       </span>
     </span>
 
@@ -265,6 +265,7 @@ var _hmt = _hmt || [];
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//app-face的修改 </span></span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(type == TLV_Nack) &#123;</span><br><span class="line">      <span class="keyword">struct</span> Nack *nack = (<span class="keyword">struct</span> Nack *)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(<span class="keyword">struct</span> Nack));</span><br><span class="line">      <span class="keyword">if</span>(<span class="built_in">nack_tlv_decode</span>(nack, packet, packet_len) != <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">      <span class="type">char</span> nack_name[<span class="built_in">name_string_length</span>(&amp;nack-&gt;interest-&gt;name)];</span><br><span class="line">      <span class="built_in">name_to_string</span>(&amp;nack-&gt;interest-&gt;name, nack_name);</span><br><span class="line"></span><br><span class="line">      <span class="built_in">pthread_mutex_lock</span>(&amp;app_face-&gt;app_face_mutex);</span><br><span class="line">      <span class="keyword">struct</span> <span class="title class_">pending_interest_t</span> *pi = (<span class="keyword">struct</span> <span class="type">pending_interest_t</span> *)(<span class="built_in">htget</span>(app_face-&gt;pending_interest_table, nack_name, <span class="built_in">strlen</span>(nack_name)));</span><br><span class="line">      <span class="built_in">pthread_mutex_unlock</span>(&amp;(app_face-&gt;app_face_mutex));</span><br><span class="line">      <span class="comment">// printf(&quot;data before send to terminal: %s\n&quot;, data-&gt;value);</span></span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (pi != <span class="literal">NULL</span>) <span class="comment">//如果PIT中有数据包条目，才会进行处理</span></span><br><span class="line">      &#123;</span><br><span class="line">        <span class="built_in">cancel_timer</span>(app_face-&gt;tq ,pi-&gt;expire_timer);</span><br><span class="line">        <span class="keyword">if</span> (pi-&gt;on_nack)</span><br><span class="line">          pi-&gt;<span class="built_in">on_nack</span>(nack, pi-&gt;userdata);  <span class="comment">//进入处理数据的管道</span></span><br><span class="line">        <span class="built_in">pthread_mutex_lock</span>(&amp;(app_face-&gt;app_face_mutex));</span><br><span class="line">        <span class="built_in">htrm</span>(app_face-&gt;pending_interest_table, nack_name, <span class="built_in">strlen</span>(nack_name)); <span class="comment">//删除PIT表项</span></span><br><span class="line">        <span class="built_in">pthread_mutex_unlock</span>(&amp;(app_face-&gt;app_face_mutex));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//free(pi-&gt;nack);</span></span><br><span class="line">        <span class="built_in">free</span>(pi);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (pi-&gt;on_nack)</span><br><span class="line">        pi-&gt;<span class="built_in">on_nack</span>(nack, pi-&gt;userdata);  <span class="comment">//进入处理数据的管道</span></span><br><span class="line">      </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p>应用层每个程序当用到express_interest时都需要新添一个on_nack回调用来处理返回的nack包。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">on_nack</span><span class="params">(<span class="type">const</span> <span class="keyword">struct</span> Nack *nack, <span class="type">void</span> *userdata)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">char</span> nack_name_str[<span class="built_in">name_string_length</span>(&amp;nack-&gt;interest-&gt;name)];</span><br><span class="line">  <span class="built_in">name_to_string</span>(&amp;nack-&gt;interest-&gt;name, nack_name_str);</span><br><span class="line">  <span class="function">std::string <span class="title">nack_name</span><span class="params">(nack_name_str, strlen(nack_name_str))</span></span>;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;recv nack: %s, reason %d\n&quot;</span>, nack_name.<span class="built_in">c_str</span>(), nack-&gt;reason);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>发送端直接没有路就会进入app_face的process_events的disconnect管道</p>
 
       
 
@@ -543,11 +544,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color3">科研</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">科研</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">

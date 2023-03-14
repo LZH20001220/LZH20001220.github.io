@@ -184,6 +184,221 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-nfd-c添加nack包" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  
+<div class="article-inner">
+    
+      <header class="article-header">
+        
+        
+        <a href="/2022/08/28/nfd-c%E6%B7%BB%E5%8A%A0nack%E5%8C%85/" class="archive-article-date">
+  	<time datetime="2022-08-28T07:55:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-28</time>
+</a>
+
+
+
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.5k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">6分</span>
+      </span>
+    </span>
+</div>
+          
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p>
+  
+    <h1 itemprop="name">
+      <a class="article-title_code_ant" href="/2022/08/28/nfd-c%E6%B7%BB%E5%8A%A0nack%E5%8C%85/">nfd-c添加ACK包</a>
+    </h1>
+  
+</p></center>
+      
+        <p>发送兴趣包返回数据包的代码在<code>forwarder.c</code>中，<code>forwarder.c</code>实际上包含六个函数，<code>on_incoming_interest</code>，<code>onContentStoreMiss</code>，<code>onContentStoreHit</code>，<code>onOutgoingInterest</code>，<code>onIncomingData</code>，<code>onOutgoingData</code>.</p>
+<p>如果想要加入ACK包，应该添加两个函数,需要新添加一个包类型，ack类型的包，tlv如何编码和解码ack包，face部分应该添加一个send_ack方法。</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NDN</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/08/28/nfd-c%E6%B7%BB%E5%8A%A0nack%E5%8C%85/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+    <article id="post-ns3使用-4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  
+<div class="article-inner">
+    
+      <header class="article-header">
+        
+        
+        <a href="/2022/08/26/ns3%E4%BD%BF%E7%94%A8-4/" class="archive-article-date">
+  	<time datetime="2022-08-26T07:26:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-26</time>
+</a>
+
+
+
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">3.2k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">11分</span>
+      </span>
+    </span>
+</div>
+          
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p>
+  
+    <h1 itemprop="name">
+      <a class="article-title_code_ant" href="/2022/08/26/ns3%E4%BD%BF%E7%94%A8-4/">ns3使用-4</a>
+    </h1>
+  
+</p></center>
+      
+        <h3 id="应用层："><a href="#应用层：" class="headerlink" title="应用层："></a>应用层：</h3><p>应用层协议主要负责数据分组的发送，处理和接收。可以将其看作物理网络中应用程序的网络传输部分。</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NDN</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/08/26/ns3%E4%BD%BF%E7%94%A8-4/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
     <article id="post-YaNFD-paper阅读" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   
 <div class="article-inner">
@@ -1037,218 +1252,9 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-MySQL牛客网习题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-<div class="article-inner">
-    
-      <header class="article-header">
-        
-        
-        <a href="/2022/07/28/MySQL%E7%89%9B%E5%AE%A2%E7%BD%91%E4%B9%A0%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2022-07-28T10:34:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-28</time>
-</a>
-
-
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.5k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">7分</span>
-      </span>
-    </span>
-</div>
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2022/07/28/MySQL%E7%89%9B%E5%AE%A2%E7%BD%91%E4%B9%A0%E9%A2%98/">MySQL牛客网习题</a>
-    </h1>
-  
-</p></center>
-      
-        <h4 id="查询结果去重"><a href="#查询结果去重" class="headerlink" title="查询结果去重"></a>查询结果去重</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select distinct university from user_profile;</span><br><span class="line">select university from user_profile group by university;</span><br></pre></td></tr></table></figure>
-<h4 id="查询结果并限制返回行数"><a href="#查询结果并限制返回行数" class="headerlink" title="查询结果并限制返回行数"></a>查询结果并限制返回行数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select device_id from user_profile limit 2;</span><br></pre></td></tr></table></figure>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/07/28/MySQL%E7%89%9B%E5%AE%A2%E7%BD%91%E4%B9%A0%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-高性能网络编程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-<div class="article-inner">
-    
-      <header class="article-header">
-        
-        
-        <a href="/2022/07/25/%E9%AB%98%E6%80%A7%E8%83%BD%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2022-07-25T02:25:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-25</time>
-</a>
-
-
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">9k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">32分</span>
-      </span>
-    </span>
-</div>
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2022/07/25/%E9%AB%98%E6%80%A7%E8%83%BD%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">高性能网络编程(1)</a>
-    </h1>
-  
-</p></center>
-      
-        <h2 id="高性能网络编程（一）——accept建立连接"><a href="#高性能网络编程（一）——accept建立连接" class="headerlink" title="高性能网络编程（一）——accept建立连接"></a>高性能网络编程（一）——accept建立连接</h2><p><strong>高性能</strong>，它是指程序员设计编写的服务器需要处理很大的吞吐量，这与简单网络应用就有了质的不同。</p>
-<p>因为：1、高吞吐量下，容易触发到一些设计上的边界条件；2、偶然性的小概率事件，会在高吞吐量下变成必然性事件。3、IO是慢速的，高吞吐量通常意味着高并发，如同一时刻存在数以万计、十万计、百万计的TCP活动连接。</p>
-<p>高性能网络编程，涉及到对网络、操作系统协议栈、进程与线程、常见的网络组件等知识点。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">网络编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/07/25/%E9%AB%98%E6%80%A7%E8%83%BD%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/5/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/5/">下一页</a>
     </nav>
   
 
@@ -1385,11 +1391,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color3">科研</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">科研</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
