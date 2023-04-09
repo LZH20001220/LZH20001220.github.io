@@ -184,6 +184,459 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-MySQL 是怎样运行的笔记记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  
+<div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p></p></center>
+      
+        <p>深入学习一门技术，亦可以达到面试等级，最好的方法无不是在现有的知识基础上，再去阅读相关书籍，到达更深层的理解。本文内容，便是在以前学习 MySQL 的基础上，再去读《MySQL 是怎样运行的》一书，并通过阅读本书，做的笔记记录。</p>
+<h1 id="第-1-章：初始-MySQL"><a href="#第-1-章：初始-MySQL" class="headerlink" title="第 1 章：初始 MySQL"></a>第 1 章：初始 MySQL</h1><h3 id="客户端与服务器连接的过程"><a href="#客户端与服务器连接的过程" class="headerlink" title="客户端与服务器连接的过程"></a>客户端与服务器连接的过程</h3><h4 id="TCP-IP"><a href="#TCP-IP" class="headerlink" title="TCP/IP"></a>TCP/IP</h4><p>MySQL 采用 TCP 作为服务器和客户端之间的网络通信协议。并且 MySQL 服务器会默认监听 3306 端口。如果 3306 端口被占用或者想自定义监听的端口，在启动服务器程序时，输入如下命令即可<br>这样就把监听端口改成了 3307</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqld -P 3307</span><br></pre></td></tr></table></figure>
+<h4 id="命名管道和内存共享"><a href="#命名管道和内存共享" class="headerlink" title="命名管道和内存共享"></a>命名管道和内存共享</h4><p>如果是在 Windows 电脑下，并且是在自己电脑上联系使用 MySQL，那么可以考虑在客户端进程和服务器进程之间使用命名管道或共享内存进行通信。不过需要参数设置。  </p>
+<p>对于使用命名管道进行进程通信：需要在启动服务器程序的命令中加上–enable-named-pipe 参数，然后在启动客户端程序的命令中加上–pipe 或者–protocol=pipe 参数。  </p>
+<p>对于使用共享内存进行进程通信：需要在启动服务器程序的命令中加上–shared-memory 参数。也可以在启动客户端程序的命令中加上–protocol=memory 参数来显示指定使用共享内存进行通信。</p>
+<h3 id="服务器处理客户端请求"><a href="#服务器处理客户端请求" class="headerlink" title="服务器处理客户端请求"></a>服务器处理客户端请求</h3><p>客户端向服务器发送请求（sql 语句）的执行过程：  </p>
+<p>以比较复杂的查询请求为例：<br><img src="https://img-blog.csdnimg.cn/0ecc9e11caea4ba9ad8e40f206c5ec4b.jpeg" alt></p>
+<p>服务器在处理客户端请求时，大概需要部分：连接管理、解析与优化、存储引擎。</p>
+<h4 id="连接管理"><a href="#连接管理" class="headerlink" title="连接管理"></a>连接管理</h4><p>每当有一个客户端进程连接到服务器进程时，服务器进程都会创建一个线程专门处理与这个客户端的交互；当该客户端退出时会与服务器断开连接，服务器并不会立即把与该客户端交互的线程销毁，<strong>而是把它缓存起来</strong>，在另一个新客户端再进行连接时，把这个缓存的线程分配给该新客户端。这样就不用频繁地创建和销毁线程，从而节省开销。</p>
+<h4 id="解析与优化"><a href="#解析与优化" class="headerlink" title="解析与优化"></a>解析与优化</h4><h6 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h6><p>MySQL 服务器程序处理查询请求的过程中会把刚刚处理过的查询请求和结果缓存起来。<strong>如果下一次有同样的请求过来，直接从缓存中查找结果就好了，就不用再去底层的表中查找了</strong>，这个查询缓存可以在不同的客户端之间共享。但如果这两个查询请求有任何字符上的不同（例如，空格、注释、大小写），都会导致缓存不会命中。并且如果查询请求中包含某些系统函数、用户自定义变量和函数、系统表，则这个请求就不会被缓存。  </p>
+<p><strong>对于缓存失效问题：</strong> MySQL 的缓存系统会检测涉及的每张表，只要该表的结构或者数据被修改，比如对该表使用了 insert、update、delete、truncate table、alter table、drop table 或者 drop database 语句，则与该表有关的所有查询缓存都将变为无效并从查询缓存中删除。  </p>
+<p><strong>系统性能：</strong> 查询缓存有时可以提升性能，但不得不因维护这块缓存而造成一些开销。比如每次都要去查询缓存中检索，查询请求处理完后需要更新询缓存，需要维护该查询缓存对应的内存区域等。从 MySQL 5.7.20 开始，不推荐使用查询缓存，在 MySQL 8.0 直接将其删除。</p>
+<p><strong>语法解析：</strong>客户端程序发送过来的请求只是一段文本，所以 MySQL 服务器程序首先要对这段文本进行分析，判断请求的语法是否正确，然后从文本中将要查询的表、各种查询条件都提取出来放到 MySQL 服务器内部使用的一些数据结构上。</p>
+<p><strong>查询优化：</strong>MySQL 的优化程序会对我们的语句做一些优化，如外连接转换为内连接、表达式简化、子查询转为连接等一堆东西。</p>
+<p><strong>存储引擎</strong>：MySQL 服务器把数据的存储和提取操作都封装到了一个名为存储引擎的模块中。在物理上如何表示记录，怎么从表中读取数据，以及怎么把数据写入具体的物理存储器上，都是存储引擎负责的事情。</p>
+<h1 id="第-2-章：MySQL-的启动配置"><a href="#第-2-章：MySQL-的启动配置" class="headerlink" title="第 2 章：MySQL 的启动配置"></a>第 2 章：MySQL 的启动配置</h1><p>这章主要讲述关于 MySQL 的配置，感觉没什么可以做笔记的，毕竟在配置中哪里遇到问题，就在网上搜哪里就行了啊</p>
+<h1 id="第-3-章：字符集和比较规则"><a href="#第-3-章：字符集和比较规则" class="headerlink" title="第 3 章：字符集和比较规则"></a>第 3 章：字符集和比较规则</h1><h3 id="字符集简介"><a href="#字符集简介" class="headerlink" title="字符集简介"></a>字符集简介</h3><p>计算机存储字符串实际上存储的是二进制，需要建立字符与二进制数据的映射关系。将字符映射成二进制数据的过程叫做<strong>编码</strong>，将二进制数据映射到字符的过程叫做<strong>解码</strong>。</p>
+<h3 id="一些重要的字符集"><a href="#一些重要的字符集" class="headerlink" title="一些重要的字符集"></a>一些重要的字符集</h3><ul>
+<li>ASCII 字符集：共收录 128 个字符，使用一个字节来进行编码。  </li>
+<li>GB2312 字符集：收录了汉字等一些字母，同时又兼任 ASCII 字符集。在编码中，如果该字符在 ASCII 字符集中，则采用一字节编码，否则采用两字节编码。  </li>
+<li>GBK 字符集：只是对 GB2312 在收录范围上进行了扩充。  </li>
+<li>UTF-8 字符集：兼任 ASCII 字符集。采用变长编码方式，编码一个字符时需要<strong>使用 1~4 字节。</strong></li>
+</ul>
+<h3 id="MySQL-中支持的字符集和比较规则"><a href="#MySQL-中支持的字符集和比较规则" class="headerlink" title="MySQL 中支持的字符集和比较规则"></a>MySQL 中支持的字符集和比较规则</h3><p>在 MySQL 中，字符集表示一个字符所用的最大字节长度  </p>
+<p>在 MySQL 的设计中：  </p>
+<p>utf8mb3：“阉割” 过的 UTF-8 字符集，使用 1~3 字节表示字符。  在 MySQL 中 utf8 是 utf8mb3 的别名，所以在 MySQL 中提到 utf8 时，就意味着使用 1~3 字节来表示一个字符。</p>
+<p>utf8mb4: 正宗的 UTF-8 字符集，使用 1~4 字节表示字符。  比如：存储一些 emoji 表情，使用 4 字节编码一个字符，就使用 utf8mb4。</p>
+<h6 id="字符集的查看"><a href="#字符集的查看" class="headerlink" title="字符集的查看"></a>字符集的查看</h6><p>请看下图 MySQL 中常见的字符集：  Maxlen 表示这种字符最多需要几个字节来表示一个字符 </p>
+<p><img src="https://img-blog.csdnimg.cn/8b03514e5c594fa3b86ec1878d3fccfa.png" alt></p>
+<h6 id="比较规则的查看"><a href="#比较规则的查看" class="headerlink" title="比较规则的查看"></a>比较规则的查看</h6><p>通过命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show collation [like 匹配模式]</span><br></pre></td></tr></table></figure>
+<p>通过命令查看 utf8 字符集的比较规则<br><img src="https://img-blog.csdnimg.cn/2f4a4c4c249a49ceb8ab1e573aa92cfc.png" alt><br>规则命名的含义：  </p>
+<ol>
+<li>比较规则的名称以与其关联的字符集的名称开头；比如上面的查询结果，比较规则的名称都是以 utf8 开头。  </li>
+<li>后面紧跟着该比较规则所应应用的语言。比如，utf8_polish_ci 表示波兰语的比较规则；utf8_general_ci 是一种通用的比较规则  </li>
+<li>名称后缀意味着该比较规则是否区分语言中的重音、大小写等。如下图：<br><img src="https://img-blog.csdnimg.cn/14802596cc2b489c94d0e15d58acbdda.png" alt><br>比如比较规则 utf8_general_ci 是以 ci 结尾的，说明不区分大小写。</li>
+</ol>
+<h3 id="字符集和比较规则的应用"><a href="#字符集和比较规则的应用" class="headerlink" title="字符集和比较规则的应用"></a>字符集和比较规则的应用</h3><h6 id="各级别的字符集和比较规则"><a href="#各级别的字符集和比较规则" class="headerlink" title="各级别的字符集和比较规则"></a>各级别的字符集和比较规则</h6><p>MySQL 的 4 个级别的字符集和比较规则：服务器级别、数据库级别、表级别、列级别<br>服务器级别：<br>提供了两个系统变量来表示服务器级别的字符集和比较规则。<br>如图所示：<br><img src="https://img-blog.csdnimg.cn/9ea19483abeb49b7950b20089760d1d4.png" alt> </p>
+<p>通过命令查看：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show variables like &#x27;character_set_server&#x27;;</span><br><span class="line">show variables like &#x27;collation_server&#x27;;</span><br></pre></td></tr></table></figure>
+<p><strong>数据库级别：</strong><br>创建和修改数据库时可以指定数据库的字符集和比较规则：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create database 数据库名</span><br><span class="line">		[[default] character set 字符集名称]</span><br><span class="line">		[[default] collate  比较规则名称]</span><br><span class="line">alter database  数据库名</span><br><span class="line">		[[default] character set 字符集名称]</span><br><span class="line">		[[default] collate 比较规则名称];</span><br></pre></td></tr></table></figure>
+<p>如果查看当前数据库使用的字符集和比较规则，可以查看两个系统变量：<br><img src="https://img-blog.csdnimg.cn/d14dbf5c15fd4cef9ce667419fe40b6d.png" alt> </p>
+<p>注意不能通过修改这两个变量的值来改变当前数据库的字符集和比较规则。</p>
+<p><strong>表级别：</strong><br>同样也可以在创建和修改表的时候指定表的字符集和比较规则。</p>
+<p><strong>列级别：</strong><br>对于存储字符串的列，同一个表中不同的列也可以有不同的字符集和比较规则，可以在创建和修改列的时候指定该列的字符集和比较规则。语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create table 表名(</span><br><span class="line">	列名  字符串类型  [character set 字符集名称] [collate 比较规则名称],</span><br><span class="line">	其他列…</span><br><span class="line">	);</span><br><span class="line">alter table 表名 modify 列名  字符串类型 [character set 字符集名称] [collate 比较规则名称];</span><br></pre></td></tr></table></figure>
+<p>注意：在修改列的字符集时需要注意 <strong>，如果列中存储的数据不能用修改后的字符集进行表示，则会发送错误</strong> 。比如，列最初使用的字符集是 utf8，列中存储了一些汉字，现在把列的字符集转换为 ascii 就会出错，因为 ascii 字符集并不能表示汉字字符。</p>
+<p>仅修改字符集或仅修改比较规则：<br>由于字符集和比较规则之间相互关联，因此如果只修改字符集，比较规则也会跟着变化；如果只修改比较规则，字符集也会跟着变化。具体规则如下：<br><strong>只修改字符集，则比较规则将变为修改后的字符集默认的比较规则；<br>只修改比较规则，则字符集将变为修改后的比较规则对应的字符集</strong></p>
+<p>各级别字符集和比较规则小结：<br>如果创建或修改列时没有显式指定字符集和比较规则，则该<strong>列默认使用表</strong>的字符集和比较规则；<br>如果创建表时没有显式指定字符集和比较规则，则该<strong>表默认使用数据库</strong>的字符集和比较规则；<br>如果创建数据库时没有显式指定字符集和比较规则，则该<strong>数据库默认使用服务器</strong>的字符集和比较规则；<br>知道了字符集和比较规则，可以清楚的知道存储数据所占用的存储空间的大小。</p>
+<h5 id="客户端和服务器通信过程中使用的字符集"><a href="#客户端和服务器通信过程中使用的字符集" class="headerlink" title="客户端和服务器通信过程中使用的字符集"></a>客户端和服务器通信过程中使用的字符集</h5><ol>
+<li><p>编码和解码使用的字符集不一致<br>字符串在计算机上体现就是一个字节序列。如果使用不同的字符集去解码这个字节序列，可能会出现乱码。<br>比如用 utf-8 编码，用 gbk 解码可能会出现乱码的错误。</p>
+</li>
+<li><p>字符集转换的概念<br>比如通过 utf-8 发来的数据，用 utf-8 解码，然后用按照 gbk 编码。把这个字符串从 utf-8 字符集转换为 gbk 字符集的过程就叫做字符集的转换。</p>
+</li>
+<li><p>MySQL 中的字符集转换过程<br>MySQL 客户端与服务器进行通信的过程中事先规定好的数据格式称为 MySQL 通信协议。</p>
+</li>
+</ol>
+<p><strong>客户端发送请求：</strong><br>一般情况下，客户端编码请求字符串使用的字符集与操作系统当前使用的字符集一致。<br>在启动客户端程序时，可以通过命令来选择编码格式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql --default-character-set=utf8</span><br></pre></td></tr></table></figure>
+<p>此时客户端将会以 utf-8 字符集对请求的字符串进行编码</p>
+<p>服务器接收请求：<br>每个客户端与服务器建立连接后，服务器都会为该客户端维护一个单独的 <strong>character_set_client 变量</strong>（session 级别），并且服务器把接收到的字节序看做是使用系统变量 character_set_client 代表的字符集进行编码的字节序列。<br>客户端在编码请求字符串时实际使用的字符集与服务器在收到一个字节序列后认为该字节序列所采用的的编码字符集，是两个独立的字符集。</p>
+<p>服务器处理请求：<br>服务器会将请求的字节序列当作采用 character_set_client 对应的字符集进行编码的字节序列，但在<strong>真正处理请求时</strong>又会将其转换为使用 session 级别的系统变量 character_set_connection 对应的字符集进行编码的字节序列。 </p>
+<p>==注：session是会话变量，每次关闭再重新启动会失效，重启后会重新读取配置文件my.ini中的配置==</p>
+<p>这样做的作用：<br>看下面的 SQL 语句</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select &#x27;a&#x27; = &#x27;A&#x27;;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/fb65014dc5ae4eaa9195fd5ca4499b2a.png" alt><br>我们从结果中可以看到，这两个字符是相等的（因为我们此时的 character_set_connection 是 utf8，对应的比较规则是 utf8_general_ci 不区分大小写）</p>
+<p>我们将其比较规则修改一下，再进行比较。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set collation_connection=utf8_bin;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/03699605d92e475f977e5fb3352e600a.png" alt><br>这个时候我们再看，这两个字符便不相等了，我们修改的是 <strong>character_set_connection</strong> 的比较规则，发现它起作用了！<br>与 character_set_connection 配套的还有个系统变量 collation_connection 这个系统变量表示这些字符串应该应用使用哪种比较规则。<br>另一种情况：请求中的字符串和某个列进行比较<br>看代码，创建个表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create table temp(</span><br><span class="line">    -&gt; c varchar(10)</span><br><span class="line">    -&gt; )engine=InnoDB charset=gbk;</span><br><span class="line"></span><br><span class="line">mysql&gt; insert into temp (c) values(&#x27;我&#x27;);</span><br></pre></td></tr></table></figure>
+<p>我们创建了如下表，只有一行数据。<br><img src="https://img-blog.csdnimg.cn/d6c3ed3326324a638f5aa4e5a60fee00.png" alt><br>接下来，我们要执行一条语句（铺垫一下，此时我们的 <strong>character_set_connection</strong> 为 utf8，比较规则 <strong>collation_connection</strong> 为 utf8_bin，而对应的列，我们在建表时已经规定它的编码方式了，为 gbk 和 gbk_chinses_ci)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from temp where c = &#x27;我&#x27;;</span><br></pre></td></tr></table></figure>
+<p>服务器在进行字节序列处理的时候，根据的是 character_set_connection 的字符集进行编码，也就是 utf8，比较规则 collation_connection 为 utf8_bin，而此时语句中我的编码便与之对应<br>另一方面，表的列中的我，采用的则是 gbk 编码和 gbk_chinses_ci 比较规则，那么这种情况下，该如何比较呢？<br>我们执行看看结果！<br><img src="https://img-blog.csdnimg.cn/ec63140d95864fbe88e204683ac590c3.png" alt><br>在这种情况下啊，<strong>列的字符集和排列规则的优先级更高</strong>。因此需要将请求中的字符串 ‘我’ 先从 gbk 字符集转换为 utf-8 字符集，然后再使用列 c 的比较规则 utf8_general_ci 进行比较。</p>
+<p>服务器生成响应：<br>服务器将数据发送给客户端的编码格式，依据 character_set_results</p>
+<p>看下这三个系统变量的作用<br><img src="https://img-blog.csdnimg.cn/ff73151b29504e52a6c993ec93249772.png" alt> </p>
+<p>这三个都是 session 级别。每个客户端与服务器建立连接后，服务器都会为这个连接维护这 3 个变量。<br>在服务器收到客户端连接时，服务器会将 character_set_client 、character_set_connection 和 character_set_results 这三个系统变量的值初始化为客户端的默认字符集。<br>如图：<br><img src="https://img-blog.csdnimg.cn/77a86dda583146b38fe15a9dee6ba682.png" alt></p>
+<h6 id="比较规则的应用"><a href="#比较规则的应用" class="headerlink" title="比较规则的应用"></a>比较规则的应用</h6><p>比较规则通常用来比较字符串的大小以及对某些字符串进行排序</p>
+<h1 id="第-4-章：-InnoDB-记录存储结构"><a href="#第-4-章：-InnoDB-记录存储结构" class="headerlink" title="第 4 章： InnoDB 记录存储结构"></a>第 4 章： InnoDB 记录<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84&amp;spm=1001.2101.3001.7020">存储结构</a></h1><p>MySQL 服务器中负责对表中的数据进行读取和写入工作的部分是存储引擎，真实的数据在不同存储引擎中的存放格式一般也是不同的。InnoDB 是 MySQL 默认的存储引擎，也是我们最常用的存储引擎。</p>
+<h3 id="InnoDB-页简介"><a href="#InnoDB-页简介" class="headerlink" title="InnoDB 页简介"></a>InnoDB 页简介</h3><p>InnoDB 是一个将表中的数据存储到磁盘上的存储引擎，但真正处理数据的过程发送在内存中，所以需要把磁盘中的数据加载到内存中。InnoDB 采取的方式是，将数据划分为若干个页，以页作为磁盘和内存之间交互的基本单位。InnoDB 中的页大小一般为 <strong>16KB</strong>，就是说一般情况下，一次最少从磁盘中读取 16KB 的内容到内存中，一次最少把内存中的 16KB 内容刷新到磁盘中。（在服务器运行过程中不可以更改页面大小）</p>
+<h3 id="InnoDB-行格式"><a href="#InnoDB-行格式" class="headerlink" title="InnoDB 行格式"></a>InnoDB 行格式</h3><p><strong>以记录为单位向表中插入数据，这些记录在磁盘上的存放形式也被称为行格式或者记录格式。</strong> </p>
+<p>InnoDB 存储引擎一共 4 种不同类型的行格式：COMPACT 、REDUNDANT、 DYNAMIC、 COMPRESSED </p>
+<p>创建或修改表的语句中指定记录所使用的行格式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create table 表名 (列的信息) row_format=行格式名称;</span><br><span class="line">alter table 表名 row_format=行格式名称;</span><br></pre></td></tr></table></figure>
+<p>下面来介绍下这四种行格式</p>
+<h5 id="COMPACT-行格式"><a href="#COMPACT-行格式" class="headerlink" title="COMPACT 行格式"></a>COMPACT 行格式</h5><p>看下行的结构：<br><img src="https://img-blog.csdnimg.cn/3708700030ab488aa5b3e1dbcab15cec.png" alt><br>一条完整的记录被分为记录的额外信息和记录的真实数据。</p>
+<ol>
+<li>记录的额外信息</li>
+</ol>
+<ul>
+<li>变长字段长度列表：所有变长字段的真实数据占用的字节数都存放在记录的开头位置，从而形成一个变长字段长度列表 <strong>（逆序存放，并且只存储值为非 NULL 的列的内容长度，不存储值为 NULL 的列的内容长度）</strong><br>对于变长字段长度列表中的字节数是用 1 字节还是用 2 字节表示，InnoDB 的判断规则：<br>假设某个字符集中最多需要 <strong>W</strong> 字节来表示一个字符（比如，utf8 字符集中的 W 是 3，ASCII 字符集中的 W 就是 1）；对于变长类型把 varchar（<strong>M</strong>），这种类型表示能存储最多 M 个字符 <strong>（注意是字符不是字节）</strong>，所以这种类型表示的字符串最多占用的<strong>字节数是 M_W</strong>。假设该变长字段实际存储的字节数是 <strong>L</strong>。那么确定是 1 字节还是 2 字节表示的规则是：<br><strong> 如果 M_W 小于等于 255，那么使用 1 字节来表示真实数据占用的字节数。</strong><br><strong>如果 M*W 大于 255，并且 L 小于等于 127，那么使用 1 字节来表示。</strong><br><strong>如果 M*W 大于 255，并且 L 大于 127，那么使用 2 字节来表示。</strong></li>
+</ul>
+<p>NULL 值列表的优化：<br>一条记录某些列可能存储 NULL 值，如果把这些 NULL 值都放到记录的真实数据中存储会很占地方，所以 COMPACT 行格式把一条记录中值为 NULL 的列同一管理起来。</p>
+<ol>
+<li><p>记录的真实数据<br>MySQL 除了自己定义列数据外，还会为每个记录默认地添加一些列（也称为隐藏列）。<br>具体如下图：<br><img src="https://img-blog.csdnimg.cn/cb271727dacf40e79baba1d70751efa5.png" alt><br>==InnoDB 表的主键生成策略： 优先使用用户<strong>自定义的主键作为主键</strong>；如果用户没有定义主键，则选取<strong>一个不允许存储 NULL 值的 UNIQUE 键</strong>作为主键；==如果表中连不允许存储 NULL 值的 UNIQUE 键都没有定义，则 InnoDB 会为表默认添加一个名为 row_id 的隐藏列作为主键。<br>InnoDB 会为每条记录都添加 trx_id 和 roll_pointer 这两个列，但是 row_id 是可选的（在没有自定义主键以及不允许存储 NULL 值的 UNIQUE 键的情况下才会添加该列)</p>
+</li>
+<li><p>char（M）列的存储格式<br>对于 <strong>char（M）</strong>类型列，当列采用的是定长编码的字符集时，该列占用的字节数 <strong>被加到变长字段长度列表；</strong>而如果采用变长编码的字符集时（如 utf8），该列占用的字节数就会被加到变长字段长度列表<strong>。并且采用变长编码字符集的</strong> char（M） 类型的列要求至少占用 M 字节（真实数据占不够，就用空格填充），比如类型为 char（10）的列（utf8 编码），该列存储的数据占用的字节长度范围就是 10~30 字节，即使是空字符串也会占用 10 字节。 <strong>（目的是：在将来更新该列时，在新值的字节长度大于旧值的字节长度但不大于 10 个字节时，可以在该记录处直接更新，而不是在存储空间中再重新分配一个新的记录空间，导致原有的记录空间成为所为的碎片化）</strong></p>
+</li>
+</ol>
+<h6 id="PEDUNDANT-行格式"><a href="#PEDUNDANT-行格式" class="headerlink" title="PEDUNDANT 行格式"></a>PEDUNDANT 行格式</h6><p>REDUNDANT 行格式如下图：<br><img src="https://img-blog.csdnimg.cn/606317d4b3124898a7b5cbe69dc2c2a1.png" alt></p>
+<ol>
+<li><p>字段长度偏移列表<br>REDUNDANT 行格式会把该记录中<strong>所有的列（包括隐藏列）</strong> 的长度信息都按照<strong>逆序存储</strong>到长度偏移列表中，；并且它是采用两个相邻偏移量的差值来计算各个列值的长度</p>
+</li>
+<li><p>REDUNDANT 行格式中 NULL 值的处理<br>将列对应的偏移量值的第一个比特位作为是否为 NULL 的依据</p>
+</li>
+<li><p>CHAR(M) 列的存储格式<br>对于 REDUNDANT 行格式，不管该列使用的字符集是啥，只要使用 CHAR（M）类型，该列的真实数据占用的存储空间大小就是该字符集表示一个字符最多需要的字节数和 M 乘积。比如，使用 utf8 字符集的 char（10）类型的列，其真实数据占用的存储空间大小始终为 30 字节。</p>
+</li>
+</ol>
+<h5 id="溢出列"><a href="#溢出列" class="headerlink" title="溢出列"></a>溢出列</h5><p>在 COMPACT 和 REDUNDANT 行格式中，对于占用存储空间非常多的列，在记录的真实数据处只会存储该列的一部分数据，而把剩余的数据分散存储在几个其他的页中，然后在记录的真实数据处用 20 字节存储指向这些页的地址（这 20 字节还包括分散在其他页面中的数据所占用的字节数），从而可以找到剩余数据所在的页，如下图：<br><img src="https://img-blog.csdnimg.cn/4981cec194734b159c9399cedb0d0d46.png" alt><br>对于 COMPACT 和 REDUNDANT 行格式，如果某一列中的数据非常多，则在本记录的真实数据处只会存储该列前 768 字节的数据以及一个指向其他页的地址，然后把剩下的数据存放到其他页中。如下图：<br><img src="https://img-blog.csdnimg.cn/fd2ef615007c4b5f85e27e8f09a99495.png" alt><br>如果一条记录的某个列中存储的数据占用的字节数非常多时，该列就可能成为溢出列。</p>
+<h5 id="DYNAMIC-行格式和-COMPRESSED-行格式"><a href="#DYNAMIC-行格式和-COMPRESSED-行格式" class="headerlink" title="DYNAMIC 行格式和 COMPRESSED 行格式"></a>DYNAMIC 行格式和 COMPRESSED 行格式</h5><p>这两个行格式不会在记录的真实数据处存储该溢出列真实数据的前 768 字节，而是把该列的所有真实数据都存储到溢出页中，只在记录真实数据处存储 20 字节大小的指向溢出页的地址。如下图所示：<br><img src="https://img-blog.csdnimg.cn/709a7af3ddb54e669ca2d8e6c64c7674.png" alt></p>
+<h1 id="第-5-章：InnoDB-数据页结构"><a href="#第-5-章：InnoDB-数据页结构" class="headerlink" title="第 5 章：InnoDB 数据页结构"></a>第 5 章：InnoDB 数据页结构</h1><h3 id="不同类型页简介"><a href="#不同类型页简介" class="headerlink" title="不同类型页简介"></a>不同类型页简介</h3><p>InnoDB 为了不同目的而设计了多种不同的类型的页，比如存放表空间头部信息的页、存放 Change Buffer 信息页、存放 INODE 的信息页、存放 undo 日志信息的页，存放表中记录的那种类型页（索引页 或者成为<strong>数据页</strong>）</p>
+<h3 id="数据页的结构"><a href="#数据页的结构" class="headerlink" title="数据页的结构"></a>数据页的结构</h3><p>数据页代表的这块 16KB 大小的存储空间可以划分为多个部分，如下图：<br><img src="https://img-blog.csdnimg.cn/c2ac86b4a98e4d678683567acc7f0169.png" alt> </p>
+<p>可以看下每个部分存储什么内容：</p>
+<p><img src="https://img-blog.csdnimg.cn/7bb17d0e3500492c9fe88f1f2ba4beb9.png" alt></p>
+<h3 id="记录在页中的存储"><a href="#记录在页中的存储" class="headerlink" title="记录在页中的存储"></a>记录在页中的存储</h3><p>==自己存储的记录会按照指定的行格式存储到 User Records 部分==。（一开始生成页的时候，其实并没有 User Records 部分）。插入流程如下：<br><img src="https://img-blog.csdnimg.cn/63302f0a381b449cbbf108393db1f25c.png" alt></p>
+<h5 id="记录头信息"><a href="#记录头信息" class="headerlink" title="记录头信息"></a>记录头信息</h5><p>我们首先看下记录头主要包含了那些信息<br><img src="https://img-blog.csdnimg.cn/be4818f4667241a08593cbc6647b6dc5.png" alt><br><img src="https://img-blog.csdnimg.cn/3ac0f934034947579d8474da5cfa4272.png" alt><img src="https://img-blog.csdnimg.cn/fa16e10240cb4bdfb614ce857785751b.png" alt></p>
+<ul>
+<li><p>deleted_flag<br>这个属性用来标记当前记录是否被删除，占用 1 比特。<br>值为 1 时表示记录被删除了，但还真实的在磁盘上，只打一个删除标记（不在磁盘移除它们的原因是，如果移除还需要在磁盘上重新排列其他的记录，这会带来性能的消耗），放在一个垃圾链表中。</p>
+</li>
+<li><p>min_rec_flag<br>B + 树每层非叶子节点中的最小</p>
+</li>
+<li><p>heap_no（在分配之后就不会发生改动了，即使之后删除 l 堆的某条记录，这条被删除记录的 heap_no 值也仍然保持不变）<br>把一条记录（这条记录的 deleted_flag 可以为 1）在堆（把记录一条一条无间排列的结构）中的相对位置称之为 heap_no。在页面前边的记录 heap_no 相对较小，在页面后边的记录 heap_no 相对较大，每新申请一条记录的存储空间时，该条记录比物理位置在它前边的那条记录的 heap_no 值大于 1。<br>虚拟记录：一条代表页面中的最小记录（Infimum 记录），另外一条代表页面中最大记录（Supremum 记录），分别占据了 heap_no 的 0 和 1，说明它们在页面中的相对位置最靠前。<br><strong>注意：比较记录的大小就是比较主键的大小</strong><br>虽然 Infimum 记录和 Supremum 记录没有主键值，但是任何用户记录都比 Infimum 记录大，任何用户记录都比 Supremum 记录小</p>
+</li>
+<li><p>record_type<br>这个属性表示当前记录的类型<br>一共 4 种类型的记录，0 表示普通记录，1 表示 B + 树非叶节点的目录项记录，2 表示 Infimum 记录，3 表示 Supremum 记录</p>
+</li>
+<li><p>next_record<br>表示从当前记录的真实数据到下一条记录的真实数据的距离。<br>比如，第 1 条记录的 next_record 值为 32，意味着从第 1 条记录的真实数据的地址处向后找 32 字节便是下一条记录的真实数据。（下一条记录指的并不是插入顺序中的下一条记录，而是按照主键值由小到大的顺序排列的下一条记录）<br><strong>各条记录按照主键从小到大的顺序形成一个单向链表。</strong><br>next_record 指针指向记录头信息和真实数据之间的位置的原因？原因是这个位置刚刚好，向左读取就是记录头信息，向右读取就是真实数据，并且还可以使记录中位置靠前的字段和它们对应的字段长度信息在内存中的距离更近，提高高速缓存的命中率。<br>当数据页存在多条被删除的记录时，可以使用这些记录的 next_record 属性将这些被删除的记录组成一个垃圾链表，以备之后重用这部分存储空间</p>
+</li>
+</ul>
+<h3 id="Page-Directory（页目录）"><a href="#Page-Directory（页目录）" class="headerlink" title="Page Directory（页目录）"></a>Page Directory（页目录）</h3><p>分组中记录的条数规定：对于 Infimum 记录所在的分组只能有 1 条记录，Supremum 记录所在的分组拥有的记录条数只能在 1~8 条之间，剩下的分组中记录的条数范围只能是 4 ~8 条之间。</p>
+<p>在一个数据页中查找指定主键值的记录时，过程分为两步：  </p>
+<ol>
+<li>通过二分法确定该记录所在分组对应的槽，然后找到该槽所在分组中主键值最小的那条记录。  </li>
+<li>通过记录的 next_record 属性遍历该槽所在的组中的各个记录。</li>
+</ol>
+<h3 id="File-Trailer（文件尾部）"><a href="#File-Trailer（文件尾部）" class="headerlink" title="File Trailer（文件尾部）"></a>File Trailer（文件尾部）</h3><p>为了检测一个页是否完整（也就是在刷新时有没有发生只刷新了一部分的尴尬情况），设计了一个 File Trailer 部分。</p>
+<h1 id="第-6-章：B-树索引"><a href="#第-6-章：B-树索引" class="headerlink" title="第 6 章：B + 树索引"></a>第 6 章：B + 树索引</h1><p>各个数据页可以组成一个双向链表，每个数据页中的记录会按照主键值从小到大的顺序组成一个单向链表。每个数据页都会为存储在它里面的记录生成一个页目录，在通过主键查找某条记录的时候可以在页目录中使用二分法快速定位到对应的槽，然后再遍历该槽对应分组中的记录即可快速找到指定的记录。</p>
+<h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><p>创建索引时，如果添加元素，对页中记录进行增删改操作，可能会做一些诸如记录移动的操作来始终保证这个状态一直成立：下一个数据页中用户记录的键值必须大于上一个页用户记录的主键值。（页分裂）<br><img src="https://img-blog.csdnimg.cn/bd8dc53d22a24f3bbd707b2471afa65f.png" alt><br>B + 树都不会超过 4 层</p>
+<ol>
+<li>聚簇索引<br>B + 树特点：</li>
+</ol>
+<ul>
+<li>记录主键值的大小进行记录和页的排序<br>页（包括叶子节点和内节点）<strong>内</strong>的记录按照主键的大小顺序排成一个单向链表。<br>各个存放用户记录的页也是根据页中用户记录的主键大小顺序排成一个双向链表。<br>同一层级的页也排成一个双向链表。</li>
+<li>B + 树的叶子节点存储的是完整的用户记录（包括隐藏列）</li>
+</ul>
+<p>聚簇索引只能在搜索条件是主键值时才能发挥作用。</p>
+<ol>
+<li>二级索引（辅助索引）</li>
+</ol>
+<p>以其他列作为搜索条件<br>也创建个 B + 树，但是该 B + 树叶子节点存储的并不是完成的用户记录，而是该索引列 + 主键这两个列的值。<br>通过该 B + 树的叶子节点处定位到<strong>第一条</strong>符合条件的那条用户记录，然后需要根据该记录中的主键信息到聚簇索引中查找到完整的用户记录。<strong>这个通过携带主键信息到聚簇索引中重新定位完整的用户记录的过程成为回表</strong><br>然后再返回到这棵 B + 树的叶子节点处，找到刚才定位到的符合条件的那条用户记录，并沿着记录组成的单向链表向后继续搜索其他也满足的记录，每找到一条就继续回表操作，重复这个操作，直到下一条记录不满足为止。</p>
+<ol>
+<li>联合索引<br>本质也是二级索引，先按其中一个排序，这个相同再按另一个排序。</li>
+</ol>
+<h3 id="InnoDB-中-B-树索引的注意事项"><a href="#InnoDB-中-B-树索引的注意事项" class="headerlink" title="InnoDB 中 B + 树索引的注意事项"></a>InnoDB 中 B + 树索引的注意事项</h3><ol>
+<li><p>根页面万年不动<br>一个 B + 树索引的根节点自创建之日便不会再移动（也就是页号不再改变）</p>
+</li>
+<li><p>内节点中目录项记录的唯一性<br>对与像二级索引那样，索引不唯一，那在插入数据时，如果出现了重复，那该放入那页时懵了。因此二级索引的内节点的目录项内容由三部分构成：<br>索引列的值、 主键值、 页号</p>
+</li>
+</ol>
+<p>所以上面那个问题，就可以先比较该索引，如果相同，再比较主键值</p>
+<ol>
+<li>一个页面至少容纳 2 条记录<br>避免 B + 树的层级增长得过高</li>
+</ol>
+<h3 id="MyISAM-中的索引解决方案"><a href="#MyISAM-中的索引解决方案" class="headerlink" title="MyISAM 中的索引解决方案"></a>MyISAM 中的索引解决方案</h3><p>MyISAM 的索引方案是将索引和数据分开存储的。  </p>
+<ol>
+<li>将表中的记录按照记录的插入顺序单独存储在一个文件中（称之为数据文件）  </li>
+<li>把索引信息单独存储到另外一个文件（索引文件）<br>叶子节点存储的不是完整的用户记录，而是主键值与行号的组合。二级索引</li>
+</ol>
+<p>MyISAM 行格式有定长格式、变长格式、变长记录格式等。<br>对于变长格式，MyISAM 会直接在索引叶子节点处存储该条记录在数据文件中的地址偏移量。由此可见，MyISAM 的回表操作是十分快速的，因为它是拿着地址偏移量直接到文件中取数据。</p>
+<h3 id="MySQL-中创建和删除索引的语句"><a href="#MySQL-中创建和删除索引的语句" class="headerlink" title="MySQL 中创建和删除索引的语句"></a>MySQL 中创建和删除索引的语句</h3><p>InnoDB 和 MyISAM 会自动为主键或者带有 UNIQUE 属性的列建立索引。</p>
+<h1 id="第-7-章：B-树索引的使用"><a href="#第-7-章：B-树索引的使用" class="headerlink" title="第 7 章：B + 树索引的使用"></a>第 7 章：B + 树索引的使用</h1><h3 id="索引的代价"><a href="#索引的代价" class="headerlink" title="索引的代价"></a>索引的代价</h3><ul>
+<li><p>空间上的代价<br>每建立一个索引，都要为它建立一棵 B + 树，每一棵 B + 树的每一个节点都是一个数据页。</p>
+</li>
+<li><p>时间上的代价</p>
+</li>
+</ul>
+<p>存储引擎需要额外的时间进行<strong>页面分裂、页面回收</strong>等操作，以维护节点和记录的排序。并且在执行查询语句前，首先生成执行计划，在生成执行计划时需要计算使用不同索引执行查询时所需的成本，最后选取成本最低的那个索引执行查询</p>
+<h3 id="应用-B-树索引"><a href="#应用-B-树索引" class="headerlink" title="应用 B + 树索引"></a>应用 B + 树索引</h3><h6 id="扫描区间和边界条件"><a href="#扫描区间和边界条件" class="headerlink" title="扫描区间和边界条件"></a>扫描区间和边界条件</h6><ul>
+<li><p>扫描区间：把待扫描记录的值所在的区间成为扫描区间 </p>
+</li>
+<li><p>边界条件：形成扫描区间的搜索条件（如 id&gt;20 and id &lt;100） </p>
+</li>
+<li><p>单点扫描区间：只包含一个值的扫描区间</p>
+</li>
+<li><p>范围扫描区间：包含多个值的扫描区间 </p>
+<p>在有多个索引的情况下，在使用某个索引执行查询时，关键的问题就是通过搜索条件找出合适的扫描区间，然后再到对应的 B + 树中扫描区间中的第一条记录。 </p>
+<p><strong>需要注意的是：</strong></p>
+</li>
+</ul>
+<ul>
+<li>IN 操作符的语义与若干等值匹配操作符（=）之间用 OR 连接起来的语义是一样的，都会产生多个单点扫描区间。</li>
+<li>LIKE 操作符比较特殊，只有在匹配完整的字符串或者匹配字符串前缀时才产生合适的扫描区间。</li>
+</ul>
+<p>在执行一个查询语句时，首先需要找出所有可用的索引以及使用它们时对应的扫描区间。</p>
+<ol>
+<li>所有搜索条件都可以生成合适的扫描区间的情况</li>
+<li>有的搜索条件不能生成合适的扫描区间的情况</li>
+<li>从复杂的搜索条件中找出扫描区间</li>
+<li>使用联合索引执行查询时对应的扫描区间 ，索引下推进行优化</li>
+</ol>
+<h3 id="索引用于排序"><a href="#索引用于排序" class="headerlink" title="索引用于排序"></a>索引用于排序</h3><p>在 MySQL 中，这种在内存或者磁盘中进行排序的方式统称为文件排序。但是，如果 order by 子句中使用了索引，就有可能省去在内存或磁盘中的排序的步骤。</p>
+<ol>
+<li>使用联合索引进行排序时的注意事项<br>order by 子句后面的列的顺序也必须按照索引列的顺序给出，否则无法使用 B+ 树索引。<br>并且当联合索引的索引列左边连续的列为常量时，也可以使用联合索引对右边的列进行排序，如下面的 SQL 语句：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//key_part1 key_part2 key_part3为联合索引</span><br><span class="line">select * from table where key_part1=&#x27;a&#x27; and key_part2=&#x27;b&#x27; order by key_part3 limit 10; </span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>不可以使用索引进行排序的几种情况 </p>
+<p>（1）asc desc 混用 </p>
+<ul>
+<li>对于联合索引，要求各个排序列的排序规则是一致的，要么都是按照 asc（升序）规则，要么都是按照 desc（降序）规则排序。 </li>
+<li>对于降序规则排序的方法：<br>在查找当前记录的上一条记录时，找到该记录所在组的第一条记录（一直根据记录的 next_record 属性找下一条记录，直到某条记录的头信息的 n_owned 属性值不为 0，该记录就是本组中的 “带头大哥”。然后再从页目录中找到“带头大哥” 记录对应的槽的上一个槽，该槽对应记录的下一条记录就是本组中第一条记录），从第一条记录开始遍历该组中的记录，直到找到当前记录的前一条记录。 </li>
+<li>对于 order by 子句中 asc、desc 混用的情况，MySQL 8.0 引入了一种称为 Descending Index 的特性</li>
+</ul>
+</li>
+</ol>
+<p>​        （2）排序列包含非同一个索引的列，用来排序的多个列不是同一个索引中的，这种情况不能使用索引进行排序。</p>
+<p>​        （3）排序列是某个联合索引的索引列，但是这些排序列在联合索引中并不连续 </p>
+<p>​        （4）用来形成扫描区间的索引列与排序列不同 </p>
+<p>​        （5）排序列不是以单独列名的形式出现在 order by 子句中；要想使用索引进行排序操作，必须保证索引列是以单独列名的形式（而不是修饰过的形式）出现。</p>
+<h3 id="索引用于分组"><a href="#索引用于分组" class="headerlink" title="索引用于分组"></a>索引用于分组</h3><p>与使用 B + 树索引进行排序差不多，分组列的顺序也需要与索引列的顺序一致；也可以只使用索引列中左边连续的列进行分组。</p>
+<h3 id="回表的代价"><a href="#回表的代价" class="headerlink" title="回表的代价"></a>回表的代价</h3><p>InnoDB 中的数据页会被存放到磁盘中的一个或者多个文件中，页面的页号对应着该页在磁盘文件中的偏移量。<br>一般情况下，可以给查询语句指定 limit 子句来限制查询返回的记录数，这可能会让查询优化器倾向于选择使用二级索引 + 回表的方式进行查询，原因是回表的记录越少，性能提升越高。</p>
+<h3 id="更好地创建和使用索引"><a href="#更好地创建和使用索引" class="headerlink" title="更好地创建和使用索引"></a>更好地创建和使用索引</h3><p>（1）只为用于搜索、排序或分组的列创建索引</p>
+<p>只为出现在 where 子句中的列、连接子句中的连接列，或者出现在 order by 或 group by 子句中的列创建索引 </p>
+<p>（2）考虑索引中不重复值的个数 </p>
+<p>在执行查询时，某个扫描区间中包含的二级索引记录数量越多，就会导致回表操作的<strong>代价越大</strong>。在为某个列创建索引时，需要考虑该列中不重复值的个数占全部记录条数的比例。如果比例太低，则说明该列包含过多重复值，那么在通过二级索引 + 回表的方式执行查询时，就有可能执行太多次回表操作。 (索引重复越少越好)</p>
+<p>（3）索引列的类型尽量小 </p>
+<p>数据类型越小，索引占用的存储空间就越小，在一个数据页就可以存放更多的记录，磁盘 I/O 带来的性能损耗也就越小（一次页面 I/O 可以将更多的记录加载到内存中），读写效率也就越高<br>（4）为列前缀建立索引 </p>
+<p>即只将字符串的前几个字符存放到索引中，也就是说在二级索引的记录中只保留字符串的前几个字符。但是，只为列前缀建立索引的方式无法支持使用索引进行排序的需求。<br>（5）覆盖索引 </p>
+<p>把索引中已经包含所有需求读取的列的查询方式（如二级索引中包含了主键）称为覆盖索引。排序操作也优先使用覆盖索引查询。<br>（6）让索引列以列名的形式在搜索条件中单独出现 </p>
+<p>如下 SQL 语句：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from table where key*2&lt;4;</span><br></pre></td></tr></table></figure>
+<p>不会进行简化，而是会用全表扫描的方式进行</p>
+<p>（7）新插入记录时主键大小对效率的影响  </p>
+<p>为了避免性能消耗，在插入主键时，最好让它一次递增 </p>
+<p>（8）冗余和重复索引</p>
+<h1 id="第-8-章：MySQL-的数据目录"><a href="#第-8-章：MySQL-的数据目录" class="headerlink" title="第 8 章：MySQL 的数据目录"></a>第 8 章：MySQL 的数据目录</h1><h3 id="数据库和文件系统的关系"><a href="#数据库和文件系统的关系" class="headerlink" title="数据库和文件系统的关系"></a>数据库和文件系统的关系</h3><p>InnoDB、MyISAM 这样的存储引擎都是把表存储在磁盘上，而操作系统又是使用文件系统来管理磁盘。所以，像 InnoDB、MyISAM 这样的存储引擎都是把数据存储在文件系统上。</p>
+<h3 id="MySQL-数据目录"><a href="#MySQL-数据目录" class="headerlink" title="MySQL 数据目录"></a>MySQL 数据目录</h3><h6 id="如何确定-MySQL-中的数据目录"><a href="#如何确定-MySQL-中的数据目录" class="headerlink" title="如何确定 MySQL 中的数据目录"></a>如何确定 MySQL 中的数据目录</h6><p>可以通过命令查看：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like &#x27;datadir&#x27;;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/c148d9a471964585a57486b7a73eddc9.png" alt></p>
+<h3 id="数据目录的结构"><a href="#数据目录的结构" class="headerlink" title="数据目录的结构"></a>数据目录的结构</h3><h5 id="数据库在文件系统中的表示"><a href="#数据库在文件系统中的表示" class="headerlink" title="数据库在文件系统中的表示"></a>数据库在文件系统中的表示</h5><p>每个数据库都对应数据目录下的一个子目录，或者说对应一个文件夹</p>
+<h5 id="表在文件系统中的表示"><a href="#表在文件系统中的表示" class="headerlink" title="表在文件系统中的表示"></a>表在文件系统中的表示</h5><p>每个表的信息可以分为两种：</p>
+<ol>
+<li>表结构的定义<br>描述表结构的文件，表名. frm</li>
+<li>表中的数据</li>
+</ol>
+<ul>
+<li><p>InnoDB 是如何存储表数据的<br>表空间：对应文件系统上一个或多个真实文件（不同表空间对应的文件数量可能不同）。每一个表空间可以被划分为很多个页，表数据就存放在某个表空间下的某些页中<br>（1）系统表空间<br>在一个 MySQL 服务器中，系统表空间只有一份。从 MySQL 5.5.7 到 MySQL 5.6.5 之间的各个版本中，表中的数据都会被默认存储到这个系统表空间。</p>
+<p>（2）独立表空间<br>在使用独立表空间来存储表数据时，会在该表所属的数据库对应的子目录下创建一个表示该独立表空间的文件，其文件名和表名相同，如 表名. ibd；</p>
+</li>
+<li><p>MyISAM 是如何存储表数据的<br>MyISAM 中的索引相当于全部都是二级索引，该存储引擎的数据和索引是分开存放的</p>
+</li>
+</ul>
+<h1 id="第-9-章：InnoDB-的表空间"><a href="#第-9-章：InnoDB-的表空间" class="headerlink" title="第 9 章：InnoDB 的表空间"></a>第 9 章：InnoDB 的表空间</h1><p>表空间中的每一个页都对应着一个页号，可以通过这个页号在表空间中快速定位到指定的页面</p>
+<h3 id="独立表空间结构"><a href="#独立表空间结构" class="headerlink" title="独立表空间结构"></a>独立表空间结构</h3><h5 id="区的概念"><a href="#区的概念" class="headerlink" title="区的概念"></a>区的概念</h5><p>对于 16KB 的页来说，连续的 64 个页就是一个区，也就是说一个区默认占用 1MB 空间大小。每 256 个区被划分成一组。<br><img src="https://img-blog.csdnimg.cn/d0cb0c4864204e25adfad7899e0c22b4.png" alt></p>
+<p>第一个组最开始的 3 个页面的类型是固定的：<br>FSP_HDR: 这个类型的页面用来登记整个表空间的一些整体属性以及本组所有的区。<br>IBUF_BITMAP: 这个类型的页面用来存储关于 change buffer 的一些信息。<br>INODE：这个类型的页面存储了许多成为 INODE Entry 的数据结构。<br>其余各组最开始的 2 个页面的类型是固定的。</p>
+<h5 id="段的概念"><a href="#段的概念" class="headerlink" title="段的概念"></a>段的概念</h5><p>尽量让页面链表中相邻的页的物理位置也相邻，这样在扫描叶子节点中大量的记录时才可以使用顺序 I/O。所以引入区的概念，一个区就是在物理位置上连续的 64 个页（区里页面的页号都是连续的）。<br>在表中的数据量很大时，为某个索引分配空间的时候就不再按照页为单位分配了，而是按照区为单位进行分配。<br>叶子节点有自己独有的区，非叶子节点也有自己独有的区。存放叶子节点的区的集合就算是一个段，存放非叶子节点的区的集合也算是一个段。一个索引会生成两个段：一个叶子节点段和一个非叶子节点段。<br><strong>对于 “以完整的区为单位分配给某个段时，对于数据量较小的表来说太浪费存储空间” 这种情况</strong>，提出了碎片区的概念。<br>在一个碎片区中，并不是所有的页都是为了存储同一个段的数据而存在的，碎片区中的页可以用于不同的目的。碎片区直属于表空间，并不属于任何一个段。</p>
+<ul>
+<li>在刚开始向表中插入数据时，段是从某个碎片区以单个页面为单位来分配存储空间的；</li>
+<li>当某个段已经占用了 32 个碎片区页面之后，就会以完整的区为单位来分配存储空间（原先占用的碎片区页面并不会被复制到新申请的完整的区中）。</li>
+</ul>
+<h5 id="区的分类"><a href="#区的分类" class="headerlink" title="区的分类"></a>区的分类</h5><p>空闲的区、有剩余空闲页面的碎片的区、没有剩余空闲页面的碎片的区、附属于某个段的区<br><img src="https://img-blog.csdnimg.cn/4479bc82df0f459d9558476e8db6ccef.png" alt><br>处于 FREE、FREE_FRAG、以及 FULL_FRAG 这 3 种状态的区都是独立的，算是直属于表空间；而处于 FSEG 状态的区是附属于某个段的。</p>
+<p>为了管理这些区，设计 XDES Entry 的结构对应区的一些属性。<br><img src="https://img-blog.csdnimg.cn/fb235ac1be6d41f98087d3d841c18c94.png" alt></p>
+<ul>
+<li>Sagment ID（8 字节）：每一个段都有一个唯一的编号，用 ID 表示。前提是该区已经被分配给某个段了</li>
+<li>List Node（12 字节）：这个部分可以将若干个 XDES Entry 结构串连成一个链表。<br><img src="https://img-blog.csdnimg.cn/61150768500344f1ba43fa623b37cf3d.png" alt></li>
+</ul>
+<p>如果我们想定位表空间内的某一个位置，只需指定页号以及该位置在指定页号中的页内偏移量即可。</p>
+<ol>
+<li><p>XDES Entry 链表<br>把 FREE、FREE_FRAG、FULL_FRAG 状态的区分别建立链表</p>
+</li>
+<li><p>链表基节点<br>为了找到这些链表，设计了名为 List Base Node（链表基节点）：包含了链表的头节点和尾节点、以及包含了多少个节点的信息。<br><img src="https://img-blog.csdnimg.cn/fd1feb65bcda42189e07c498d9fc8cf7.png" alt></p>
+</li>
+</ol>
+<h5 id="段的结构"><a href="#段的结构" class="headerlink" title="段的结构"></a>段的结构</h5><h3 id="系统表空间"><a href="#系统表空间" class="headerlink" title="系统表空间"></a>系统表空间</h3><p>MySQL 进程只有一个系统表空间，系统表空间中需要记录一些与整个系统相关的信息。<br>InnoDB 数据字典<br>存储元数据的表</p>
+<h1 id="第-10-章：单表访问方法"><a href="#第-10-章：单表访问方法" class="headerlink" title="第 10 章：单表访问方法"></a>第 10 章：单表访问方法</h1><h3 id="访问方法的概念"><a href="#访问方法的概念" class="headerlink" title="访问方法的概念"></a>访问方法的概念</h3><p>把 MySQL 执行查询语句的方式称为访问方法或者访问类型。同一个查询语句可以使用多种不同的访问方法来执行。</p>
+<h3 id="const"><a href="#const" class="headerlink" title="const"></a>const</h3><p>通过主键或者唯一二级索引列来定位一条记录的访问方法定义为 const（意识是常数级别的，代价是可以忽略的）。不过这种 const 只能在与一个常数进行等值比较时才有效。</p>
+<h3 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h3><p>普通二级索引进行等值比较时，单点扫描称为 ref。<br>在执行 key is NULL 只能是 ref 访问方法，而不能是 const 方法（因为 NULL 可能会出现很多条）</p>
+<h3 id="ref-or-null"><a href="#ref-or-null" class="headerlink" title="ref_or_null"></a>ref_or_null</h3><p>扫描区间为单点扫描和 [NULL,NULL] 时称为 ref_or_null（注意 值为 NULL 的记录会被放在索引的最左边）</p>
+<h3 id="range"><a href="#range" class="headerlink" title="range"></a>range</h3><p>对扫描区间为若干个单点扫描区间或者范围扫描区间的访问方法称为 range</p>
+<h3 id="index"><a href="#index" class="headerlink" title="index"></a>index</h3><p>把这种扫描全部二级索引记录的访问方法称为 index 访问方法</p>
+<h3 id="all"><a href="#all" class="headerlink" title="all"></a>all</h3><p>全表扫描</p>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><h5 id="索引合并"><a href="#索引合并" class="headerlink" title="索引合并"></a>索引合并</h5><p>把使用多个索引来完成一次查询的执行方法称为 index merge（索引合并）<br>索引合并的方法有下面 3 种：</p>
+<ol>
+<li>Intersection 索引合并<br>如下 SQL 语句：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//key1  key3均是二级索引</span><br><span class="line">select * from table where key1=&#x27;a&#x27; and key3=&#x27;b&#x27;;</span><br></pre></td></tr></table></figure>
+<p>执行方案：同时使用 idx_key1 和 idx_key3 进行单点扫描，然后在找出主键值相同的列，再回表。（交集）<br><strong>要求获得的记录都是按照主键值排序的</strong><br>如果读取的记录不是按照主键值排序的，则不可以使用 Intersection 索引，比如下面的 SQL 查询：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from table where key1&gt;&#x27;a&#x27; and key=&#x27;b&#x27;;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>Union 索引合并（并集）<br>如下 SQL 语句：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from table where key1=&#x27;a&#x27; or key3=&#x27;b&#x27;;</span><br></pre></td></tr></table></figure>
+<p>先分别单点扫描，然后根据主键值进行去重，再根据<strong>去重</strong>后的主键值，执行回表（要求必须是按主键值进行排序的）</p>
+<ol>
+<li>Sort-Union 索引合并</li>
+</ol>
+<p>针对主键值没有排好序的情况，先对主键值进行排序，其他的和Union一样了。</p>
+<h1 id="第-11-章：连接的原理"><a href="#第-11-章：连接的原理" class="headerlink" title="第 11 章：连接的原理"></a>第 11 章：连接的原理</h1><h3 id="连接简介"><a href="#连接简介" class="headerlink" title="连接简介"></a>连接简介</h3><p>连接就是把各个表中的记录都取出来进行依次匹配，并把匹配后的组合发送给客户端。笛卡尔积</p>
+<h5 id="连接过程简介"><a href="#连接过程简介" class="headerlink" title="连接过程简介"></a>连接过程简介</h5><p>首先确定第一个需要查询的表（驱动表）进行单表查询；然后根据获取到的记录，都需要到另一张表中查找匹配记录。（注意：每获得一条驱动表记录，就立即到被驱动表中寻找匹配的记录）</p>
+<h5 id="内连接和外连接"><a href="#内连接和外连接" class="headerlink" title="内连接和外连接"></a>内连接和外连接</h5><p>内连接：<br>若驱动表中的记录在被驱动表中找不到匹配的记录，则该记录不会加入到最后的结果集。</p>
+<p>外连接：<br>即使驱动表中的记录在被驱动表中没有匹配的记录，也仍然需要加入到结果集。<br>为了解决有时需要把匹配失败加入结果集，有时不要把匹配失败加入结果集，所以把过滤条件分为了两种： </p>
+<p>（1）where 子句中的过滤条件<br>不论是内连接还是外连接，凡是不符合 where 子句中过滤条件的记录<strong>都不会被加入到最后的结果集。</strong> </p>
+<p>（2）on 子句中的过滤条件<br>如果无法在被驱动表中找到匹配 on 子句中过滤条件的记录，那么<strong>该驱动表仍然会被加入到结果集中</strong>，对应的被驱动表记录的各个字段使用 NULL 值填充。 （注意：on 子句是专门为 “外连接驱动表中的记录在被驱动表找不到匹配记录时是否应该把该驱动表记录加入结果集中” 这个场景提出的）</p>
+<h3 id="连接的原理"><a href="#连接的原理" class="headerlink" title="连接的原理"></a>连接的原理</h3><h5 id="嵌套循环连接"><a href="#嵌套循环连接" class="headerlink" title="嵌套循环连接"></a>嵌套循环连接</h5><p>驱动表只访问一次，但被驱动表却可能访问多次，且访问次数取决于对驱动表执行单表查询后的结果集中有多少条记录；这种连接执行方式称为嵌套循环连接。</p>
+<h5 id="使用索引加快连接速度"><a href="#使用索引加快连接速度" class="headerlink" title="使用索引加快连接速度"></a>使用索引加快连接速度</h5><p>建立索引，减小扫描代价。<br>建议做好不要使用 * 作为查询列表，而是把真正用到的列作为查询列表。</p>
+<h5 id="基于块的嵌套循环连接"><a href="#基于块的嵌套循环连接" class="headerlink" title="基于块的嵌套循环连接"></a>基于块的嵌套循环连接</h5><p>为了可以在把驱动表中记录加载到内存时，一次性地与驱动表中的多条记录进行匹配，大大减少重复从磁盘上加载被驱动表的代价。所以设计了 Join Buffer（连接缓冲区）的概念。</p>
+<h1 id="第-12-章：基于成本的优化"><a href="#第-12-章：基于成本的优化" class="headerlink" title="第 12 章：基于成本的优化"></a>第 12 章：基于成本的优化</h1><p>MySQL 中执行成本是由两个方面组成的</p>
+<ul>
+<li>I/O 成本：从磁盘到内存的加载过程损耗的时间称为 I/O 成本。</li>
+<li>CPU 成本：读取记录以及检测记录是否满足对应的搜索条件、对结果集进行排序等这些操作损耗的时间称为 CPU 成本。</li>
+</ul>
+<h3 id="单表查询的成本"><a href="#单表查询的成本" class="headerlink" title="单表查询的成本"></a>单表查询的成本</h3><h5 id="基于成本的优化步骤"><a href="#基于成本的优化步骤" class="headerlink" title="基于成本的优化步骤"></a>基于成本的优化步骤</h5><ol>
+<li>根据搜索条件，找出所有可能使用的索引  </li>
+<li>计算全表扫描的代价  </li>
+<li>计算使用不同索引执行查询的代价  </li>
+<li>对比各种执行方案的代价，找出成本最大的那个方案</li>
+</ol>
+<h5 id="基于索引统计数据的成本计算"><a href="#基于索引统计数据的成本计算" class="headerlink" title="基于索引统计数据的成本计算"></a>基于索引统计数据的成本计算</h5><p>把通过直接访问索引对应的 B + 树来计算某个扫描区间内对应的索引记录条数的方式称为 index dive。</p>
+<p>如果通过 IN 语句生成的单点扫描区间的数量小于 200 个，将使用 index dive 来计算各个单点扫描区间对应的记录条数；如果大于或等于 200 个，就不能使用 index dive 了，而是要使用索引统计数据来进行估算。（避免单点扫描个数较多，造成性能损失）</p>
+<h3 id="连接查询的成本"><a href="#连接查询的成本" class="headerlink" title="连接查询的成本"></a>连接查询的成本</h3><h5 id="条件过滤"><a href="#条件过滤" class="headerlink" title="条件过滤"></a>条件过滤</h5><p>把查询驱动表后得到的记录条数称为驱动表的扇出。（驱动表的扇出值越小，对被驱动表的查询次数也就越小，连接查询的总成本也就越低） </p>
+<p>下面两种情况下计算驱动表扇出值时，需要靠猜测：<br>（1）如果使用全表扫描的方式执行单表查询，那么计算驱动表扇出值时需要猜测满足全部搜索条件的记录到底有多少条 </p>
+<p>（2）如果使用索引来执行单表查询，那么计算驱动表扇出值时需要猜测除了满足形成索引扫描区间的搜索条件外，还满足其他搜索条件的记录有多少条。</p>
+<h5 id="两表连接的成本分析"><a href="#两表连接的成本分析" class="headerlink" title="两表连接的成本分析"></a>两表连接的成本分析</h5><p>在连接查询中 “占大头” 的其实是驱动表扇出数 * 单次访问被驱动表的成本，所以优化的重点就是这两点： </p>
+<p>（1）尽量减少驱动表的扇出 </p>
+<p>（2）访问被驱动表的成本要尽量低<br>需要尽量在被驱动表的连接列上建立索引，这样就可以使用 ref 访问方法来降低被驱动表的访问成本了。如果可以，被驱动表的连接列最好是该表的主键或者唯一二级索引列，这样就可以把访问被驱动表的成本降至更低了。</p>
+<h1 id="第-13-章：InnoDB-统计数据是如何收集的"><a href="#第-13-章：InnoDB-统计数据是如何收集的" class="headerlink" title="第 13 章：InnoDB 统计数据是如何收集的"></a>第 13 章：InnoDB 统计数据是如何收集的</h1><h3 id="统计数据的存储方式"><a href="#统计数据的存储方式" class="headerlink" title="统计数据的存储方式"></a>统计数据的存储方式</h3><p>永久性地存储统计数据：统计数据在磁盘上。<br>非永久性地存储统计数据：统计数据存储在内存上。</p>
+<h3 id="基于磁盘的永久性统计数据"><a href="#基于磁盘的永久性统计数据" class="headerlink" title="基于磁盘的永久性统计数据"></a>基于磁盘的永久性统计数据</h3><ol>
+<li>n_rows 统计项的收集<br>为什么是估值？ 计算方法：按照一定算法从聚簇索引中选取几个叶子节点页面，统计每个页面中包含的记录数量，然后计算一个页面中平均包含的记录数量，并将其乘以全部叶子节点的数量，结果就是该表的 n_rows 值。</li>
+</ol>
+<h1 id="第-14-章：基于规则的优化（内含子查询优化二三事）"><a href="#第-14-章：基于规则的优化（内含子查询优化二三事）" class="headerlink" title="第 14 章：基于规则的优化（内含子查询优化二三事）"></a>第 14 章：基于规则的优化（内含子查询优化二三事）</h1><h3 id="条件化简"><a href="#条件化简" class="headerlink" title="条件化简"></a>条件化简</h3><h5 id="移除不必要的括号"><a href="#移除不必要的括号" class="headerlink" title="移除不必要的括号"></a>移除不必要的括号</h5><p>如下面 SQL 语句：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from (t1,(t2,t3)) where t1.a=t2.a and t2.b=t3.b;</span><br></pre></td></tr></table></figure>
+<p>优化器会把语句中不必要的括号移除掉，移除后的效果如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from t1,t2,t3 where t1.a=t2.a  and t2.b=t3.b;</span><br></pre></td></tr></table></figure>
+<h5 id="常量传递"><a href="#常量传递" class="headerlink" title="常量传递"></a>常量传递</h5><p>当使用 and 操作符将这个表达式和其他涉及列 a 的表达式连接起来时，可以将其他表达式中 a 的值替换为常量，比如下面这个表达式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a=5 and b&gt;a</span><br></pre></td></tr></table></figure>
+<p>就可以被转换为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a=5 and b&gt;5;</span><br></pre></td></tr></table></figure>
+<h5 id="移除没用的条件"><a href="#移除没用的条件" class="headerlink" title="移除没用的条件"></a>移除没用的条件</h5><p>对于一些明显的永远 true 或者 false 的表达式，优化器会移除掉它们。<br>如下面的表达式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(a&lt;1 and b=b) or (a=6 or 5!=5)</span><br></pre></td></tr></table></figure>
+<p>很明显，b=b 这个表达式永远为 true，5！=5 这个表达式永远为 false，所以简化后成了如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(a&lt;1 and true) or (a=6 or false);</span><br></pre></td></tr></table></figure>
+<h5 id="表达式计算"><a href="#表达式计算" class="headerlink" title="表达式计算"></a>表达式计算</h5><p>如果表达式只包含常量，它的值会被先计算出来，如 a=5+1，会被简化成 a=6；<br>在搜索条件中，只有搜索列和常数使用某些运算符连接起来，才可能形成合适的范围区间来减少需要扫描的记录数量。所以，最好让索引列以单独的形式出现在搜索条件表达式中。</p>
+<h5 id="having-子句和-where-子句的合并"><a href="#having-子句和-where-子句的合并" class="headerlink" title="having 子句和 where 子句的合并"></a>having 子句和 where 子句的合并</h5><p>如果查询语句中没有出现诸如 sum、max 这样的聚集函数以及 group by 子句，查询优化器就把 having 子句和 where 子句合并起来。</p>
+<h5 id="常量表检测"><a href="#常量表检测" class="headerlink" title="常量表检测"></a>常量表检测</h5><p>默认下面这两种类型的查询运行的特别快：</p>
+<ul>
+<li><p>类型 1：查询的表中一条记录都没有，或者只有一条记录。</p>
+</li>
+<li><p>类型 2：使用主键等值匹配或者唯一二级索引列等值匹配作为搜索条件来查询某个表。 </p>
+<p>默认这两种查询方式花费的时间特别少，把通过这两种方式查询的表称为常量表。 查询优化器在分析一个查询语句时，首先执行常量表查询，然后把查询中涉及该表的条件全部替换成常数，最后再分析其余表的查询成本。</p>
+</li>
+</ul>
+<h3 id="外连接消除"><a href="#外连接消除" class="headerlink" title="外连接消除"></a>外连接消除</h3><p>在外连接查询中，指定的 where 子句中包含被驱动表中的列不为 NULL 值的条件称为空值拒绝。在被驱动表的 where 子句符合空值拒绝的条件后，外连接和内连接可以相互转换。这种转换带来的好处就是优化器可以通过评估表的不同连接顺序的成本，选出成本最低的连接顺序来执行查询。</p>
+<h3 id="子查询优化"><a href="#子查询优化" class="headerlink" title="子查询优化"></a>子查询优化</h3><h5 id="子查询语法注意事项"><a href="#子查询语法注意事项" class="headerlink" title="子查询语法注意事项"></a>子查询语法注意事项</h5><ol>
+<li>子查询必须用小括号括起来  </li>
+<li>在 select 子句中的子查询必须是标量子查询</li>
+</ol>
+<h5 id="子查询在-MySQL-中是怎么执行的"><a href="#子查询在-MySQL-中是怎么执行的" class="headerlink" title="子查询在 MySQL 中是怎么执行的"></a>子查询在 MySQL 中是怎么执行的</h5><ol>
+<li><p>标量子查询、行子查询的执行方式</p>
+</li>
+<li><p>in 子查询优化 </p>
+<p>（1）物化表的提出：对于不相关的 in 子查询，比如下面这样：</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from s1 where key1 in (select comm_filed from s2 where key=&#x27;a&#x27;);</span><br></pre></td></tr></table></figure>
+<p>对于这样，MySQL 的处理策略是将子查询的结果集当作外层查询的参数，而是将该结果集写入一个临时表中。在将结果集写入临时表时，有两点需要注意（该临时表的列就是子查询结果集中的列；写入临时表的记录会被去重）。把那个存储子查询结果集的临时表称为物化表。物化表中的记录都建立了索引（基于内存的物化表有哈希索引，基于磁盘的物化表有 B + 树索引）</p>
+<p>​        （2）物化表转连接：把子查询的结果集放到临时表中后，相当于两个表直接的操作，内连接。</p>
+<p>​        （3）将子查询转换为半连接：如上面的 SQL 语句；半连接概念。将 s1 表和 s2 表进行半连接的意思就是：对于 s1 表中的某条记录来说，我们只关心在 s2 表中是否存在与之匹配的记录，而不关心具体有多少条记录与之匹配，最终的结果集中只保留 s1 表的记录。</p>
+<h1 id="第-15-章：explain-详解"><a href="#第-15-章：explain-详解" class="headerlink" title="第 15 章：explain 详解"></a>第 15 章：explain 详解</h1><p>MySQL 提供了 explain 语句，可以查看某个查询语句的具体执行计划</p>
+<h3 id="执行计划输出中各个列详解"><a href="#执行计划输出中各个列详解" class="headerlink" title="执行计划输出中各个列详解"></a>执行计划输出中各个列详解</h3><p><strong>table：</strong>explain 语句输出的每条记录都对应着某个单表访问方法，该条记录的 table 列代表该表的表名</p>
+<p><strong>id：</strong>查询语句中每出现一个 select 关键字，就会为它分配一个唯一的 id 值。 在连接查询的执行计划中，每个表都会对应一条记录，这些记录的 id 列的值是相同的；出现在前面的表表示驱动表，出现在后面的表表示被驱动表</p>
+<p>对于 union， id 会多个 NULL，原因：union 会把多个查询的结果集合并起来并对结果集中的记录进行去重。（会创建个临时表）</p>
+<p><strong>type：</strong>type 列表明访问该表执行查询的方法是啥。</p>
+<p><strong>possible_keys 和 key：</strong>possible_keys 列表示在某个查询语句中，对某个表执行单表查询时可能用到的索引有哪些；key 列表示实际用到的索引有哪些。</p>
+<h1 id="第-16-章：optimizer-trace-的神奇功效"><a href="#第-16-章：optimizer-trace-的神奇功效" class="headerlink" title="第 16 章：optimizer trace 的神奇功效"></a>第 16 章：optimizer trace 的神奇功效</h1><h3 id="optimizer-trace-简介"><a href="#optimizer-trace-简介" class="headerlink" title="optimizer trace 简介"></a>optimizer trace 简介</h3><p>optimizer trace 功能可以让用户方便地查看优化器生成执行计划的整个过程</p>
+<h1 id="第-17-章：InnoDB-的-Buffer-Pool"><a href="#第-17-章：InnoDB-的-Buffer-Pool" class="headerlink" title="第 17 章：InnoDB 的 Buffer Pool"></a>第 17 章：InnoDB 的 Buffer Pool</h1><h3 id="InnoDB-的-Buffer-Pool"><a href="#InnoDB-的-Buffer-Pool" class="headerlink" title="InnoDB 的 Buffer Pool"></a>InnoDB 的 Buffer Pool</h3><h5 id="Buffer-Pool-的概念"><a href="#Buffer-Pool-的概念" class="headerlink" title="Buffer Pool 的概念"></a>Buffer Pool 的概念</h5><p>为了缓存磁盘中的页，在 MySQL 服务器启动时就向操作系统申请了一片连续的内存 ———-Buffer Pool（缓冲池）。默认情况下，Buffer Pool 只有 128MB。</p>
+<h5 id="Buffer-Pool-内部组成"><a href="#Buffer-Pool-内部组成" class="headerlink" title="Buffer Pool 内部组成"></a>Buffer Pool 内部组成</h5><p>Buffer Pool 对应的一片连续的内存被划分为若干个页面，页面大小与 InnoDB 表空间使用的页面大小一致，默认都是 16KB，称为缓冲页。InnoDB 为每一个缓冲页都创建了一些控制信息，每个缓冲页对应的控制信息占用的内存大小是相同的。把每个页对应的控制信息占用的一块内存称为一个控制块，控制块与缓冲页是<strong>一 一对应</strong>的。</p>
+<h5 id="free-链表的管理"><a href="#free-链表的管理" class="headerlink" title="free 链表的管理"></a>free 链表的管理</h5><p>把所有<strong>空闲</strong>的缓冲页对应的<strong>控制块</strong>作为一个节点放到链表中，这个链表也可以称为 free 链表（或者说空闲链表）。<br>为了管理 free 链表，为这个链表定义了一个基节点，链表的基节点占用的内存空间并不包含在为 Buffer Pool 申请的一大片连续内存空间之内，而是一块单独申请的内存空间。</p>
+<h5 id="缓冲页的哈希处理"><a href="#缓冲页的哈希处理" class="headerlink" title="缓冲页的哈希处理"></a>缓冲页的哈希处理</h5><p>为了确定该页是否在缓冲区？<br>根据表空间号 + 页号来定位一个页，也就是相当于表空间号 + 页号是一个 key（键），缓冲页控制块 就是对应的 value（值）。通过哈希表来确定。<br>如果有直接使用该缓冲页就好，如果没有，就从 free 链表中选一个空闲的缓冲页，然后把磁盘中对应的页加载到该缓冲页的位置。</p>
+<h5 id="flush-链表的管理"><a href="#flush-链表的管理" class="headerlink" title="flush 链表的管理"></a>flush 链表的管理</h5><p>脏页：缓冲页的数据与磁盘页上的不一致。<br>每次修改缓冲页后，不立即把修改刷新到磁盘上，而是在未来的某个时间点进行刷新。<br>创建一个存储脏页的链表，凡是修改过的缓冲页对应的控制块都会作为一个节点加入到这个链表（flush 链表）中。</p>
+<h5 id="LRU-链表的管理"><a href="#LRU-链表的管理" class="headerlink" title="LRU 链表的管理"></a>LRU 链表的管理</h5><p>（1）缓冲区不够的窘境<br>free 链表没有空闲的缓冲页，需要移除些缓冲页？ 移除使用不频繁的 </p>
+<p>（2）简单的 LRU 链表<br>LRU 链表：为了按照最近最少使用的原则去淘汰缓冲页的，所以这个链表可以被称为 LRU 链表。<br>对 LRU 链表的处理：</p>
+<ul>
+<li>如果该页不在 Buffer Pool 中，在把该页从磁盘加载到 Buffer Pool 中的缓冲页时，就把该缓冲页对应的控制块作为节点塞到 LRU 链表的头部；</li>
+<li>如果该页已经被加载到 Buffer Pool 中，则直接把该页对应的控制块移动到 LRU 链表的头部。</li>
+</ul>
+<p>（3）划分区域的 LRU 链表<br>预读：InnoDB 执行当前的请求时，可能会在后面读取某些页面，于是就预先把这些页面加载到 Buffer Pool 中。 可能降低 Buffer Pool 命中率的两种情况： </p>
+<ul>
+<li>加载到 Buffer Pool 中的页不一定被用到；</li>
+<li>如果有非常多的使用频率偏低的页被同时加载到 Buffer Pool 中，则可能会把那些使用频率非常高的页从 Buffer Pool 中淘汰掉。</li>
+</ul>
+<p>为了解决这两种情况，InnoDB 把 LRU 链表按照<strong>一定比例</strong>分成两截：</p>
+<ul>
+<li>一部分存储使用频率非常高的缓冲页；这一部分链表也称为热数据，或者称为 young 区域；</li>
+<li>另一部分存储使用频率不是很高的缓冲页；这一部分链表也称为冷数据，或者称为 old 区域。</li>
+</ul>
+<p>InnoDB 针对降低 Buffer Pool 命中率的情况进行优化：<br>针对预读的页面可能不进行后续访问的优化, 当初次页面加载到 Buffer Pool 中，该缓冲页对应的控制块会放大 old 区域的头部，而不会影响 young 区域中使用比较频繁的缓冲页。<br>针对全表扫描时，短时间内访问大量使用频率非常低的页面的优化，在对某个处于 old 区域的缓冲页进行第一次访问时，就在它对应的控制块中记录下这个访问时间，如果后续的访问时间与第一次访问的时间在某个时间间隔内，那么该页面就不会从 old 区域移动到 young 区域的头部，否则将它移动到 young 区域的头部。</p>
+<p>（4）更进一步优化 LRU 链表<br>只有被访问的缓冲页位于 young 区域 1/4 的后面时，才会被移动到 LRU 链表的头部，这样可以降低调整 LRU 链表的频率。</p>
+<h6 id="刷新脏页到磁盘"><a href="#刷新脏页到磁盘" class="headerlink" title="刷新脏页到磁盘"></a>刷新脏页到磁盘</h6><p>后台有专门的线程负责每隔一段时间就把脏数据刷新到磁盘，这样可以在不影响用户线程处理的正常的请求。刷新方式主要有下面两种：<br>（1）从 LRU 链表的冷数据中刷新一部分页面到磁盘。<br>（2）从 flush 链表中刷新一部分页面到磁盘</p>
+<h1 id="第-18-章：事务简介"><a href="#第-18-章：事务简介" class="headerlink" title="第 18 章：事务简介"></a>第 18 章：事务简介</h1><h3 id="事务的起源"><a href="#事务的起源" class="headerlink" title="事务的起源"></a>事务的起源</h3><h5 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h5><p>数据库操作是不可分割的，例如转账，要不就不转，要不就转账成功；</p>
+<h5 id="隔离性"><a href="#隔离性" class="headerlink" title="隔离性"></a>隔离性</h5><p>保证其他的状态转换不会影响到本次状态转换，这个规则称为隔离性。</p>
+<h5 id="一致性"><a href="#一致性" class="headerlink" title="一致性"></a>一致性</h5><p>数据库中的数据全部符合现实世界中的约束，就说这些数据是一致的，或者说符合一致性的。</p>
+<h5 id="持久性"><a href="#持久性" class="headerlink" title="持久性"></a>持久性</h5><p>数据库状态转换完成后，转换的结果将永久被保留。</p>
+<h3 id="事务的概念"><a href="#事务的概念" class="headerlink" title="事务的概念"></a>事务的概念</h3><p>把需要保证原子性、隔离性、一致性和持久性的一个或多个数据库操作称为事务。<br>事务的状态：活动的、部分提交的、失败的、中止的、提交的。</p>
+<h3 id="MySQL-中事务的语法"><a href="#MySQL-中事务的语法" class="headerlink" title="MySQL 中事务的语法"></a>MySQL 中事务的语法</h3><p>如果不显示指定事务的访问模式，那么该事务的访问模式就是读写模式。<br>目前只有 InnoDB 和 NDB 存储引擎支持事务。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/04/08/MySQL%20%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%90%E8%A1%8C%E7%9A%84%E7%AC%94%E8%AE%B0%E8%AE%B0%E5%BD%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
     <article id="post-Clonezilla克隆" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   
 <div class="article-inner">
@@ -1182,116 +1635,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-NFD-C添加兴趣包优先级和推送机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-<div class="article-inner">
-    
-      <header class="article-header">
-        
-        
-        <a href="/2022/12/10/NFD-C%E6%B7%BB%E5%8A%A0%E5%85%B4%E8%B6%A3%E5%8C%85%E4%BC%98%E5%85%88%E7%BA%A7%E5%92%8C%E6%8E%A8%E9%80%81%E6%9C%BA%E5%88%B6/" class="archive-article-date">
-  	<time datetime="2022-12-10T11:01:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-12-10</time>
-</a>
-
-
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">3.4k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">16分</span>
-      </span>
-    </span>
-</div>
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2022/12/10/NFD-C%E6%B7%BB%E5%8A%A0%E5%85%B4%E8%B6%A3%E5%8C%85%E4%BC%98%E5%85%88%E7%BA%A7%E5%92%8C%E6%8E%A8%E9%80%81%E6%9C%BA%E5%88%B6/">NFD-C添加兴趣包优先级和推送机制</a>
-    </h1>
-  
-</p></center>
-      
-        <h2 id="1-添加兴趣包优先级"><a href="#1-添加兴趣包优先级" class="headerlink" title="1. 添加兴趣包优先级"></a>1. 添加兴趣包优先级</h2><p>在之前添加了多个队列的基础上修改代码。</p>
-<p>首先在tlv.h中添加新的兴趣包优先级的字段</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TLV_InterestLevel = 47</span><br></pre></td></tr></table></figure>
-<p>然后就需要修改interest.h和interest.c中的各个函数。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NDN</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/12/10/NFD-C%E6%B7%BB%E5%8A%A0%E5%85%B4%E8%B6%A3%E5%8C%85%E4%BC%98%E5%85%88%E7%BA%A7%E5%92%8C%E6%8E%A8%E9%80%81%E6%9C%BA%E5%88%B6/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
@@ -1443,19 +1786,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
+                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1475,11 +1818,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">

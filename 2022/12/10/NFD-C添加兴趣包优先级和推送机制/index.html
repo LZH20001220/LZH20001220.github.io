@@ -23,15 +23,15 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta name="description" content="1. 添加兴趣包优先级在之前添加了多个队列的基础上修改代码。 首先在tlv.h中添加新的兴趣包优先级的字段 1TLV_InterestLevel &#x3D; 47 然后就需要修改interest.h和interest.c中的各个函数。">
+  <meta name="description" content="1. 添加兴趣包和数据包优先级在之前添加了多个队列的基础上修改代码。 首先在tlv.h中添加新的兴趣包优先级的字段 1TLV_InterestLevel &#x3D; 47 然后就需要修改interest.h和interest.c中的各个函数。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NFD-C添加兴趣包优先级和推送机制">
 <meta property="og:url" content="http://example.com/2022/12/10/NFD-C%E6%B7%BB%E5%8A%A0%E5%85%B4%E8%B6%A3%E5%8C%85%E4%BC%98%E5%85%88%E7%BA%A7%E5%92%8C%E6%8E%A8%E9%80%81%E6%9C%BA%E5%88%B6/index.html">
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
-<meta property="og:description" content="1. 添加兴趣包优先级在之前添加了多个队列的基础上修改代码。 首先在tlv.h中添加新的兴趣包优先级的字段 1TLV_InterestLevel &#x3D; 47 然后就需要修改interest.h和interest.c中的各个函数。">
+<meta property="og:description" content="1. 添加兴趣包和数据包优先级在之前添加了多个队列的基础上修改代码。 首先在tlv.h中添加新的兴趣包优先级的字段 1TLV_InterestLevel &#x3D; 47 然后就需要修改interest.h和interest.c中的各个函数。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-12-10T11:01:07.000Z">
-<meta property="article:modified_time" content="2023-02-21T08:03:18.000Z">
+<meta property="article:modified_time" content="2023-04-06T09:49:23.395Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="科研">
 <meta property="article:tag" content="NDN">
@@ -242,7 +242,7 @@ var _hmt = _hmt || [];
   
 </p></center>
       
-        <h2 id="1-添加兴趣包优先级"><a href="#1-添加兴趣包优先级" class="headerlink" title="1. 添加兴趣包优先级"></a>1. 添加兴趣包优先级</h2><p>在之前添加了多个队列的基础上修改代码。</p>
+        <h2 id="1-添加兴趣包和数据包优先级"><a href="#1-添加兴趣包和数据包优先级" class="headerlink" title="1. 添加兴趣包和数据包优先级"></a>1. 添加兴趣包和数据包优先级</h2><p>在之前添加了多个队列的基础上修改代码。</p>
 <p>首先在tlv.h中添加新的兴趣包优先级的字段</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TLV_InterestLevel = 47</span><br></pre></td></tr></table></figure>
 <p>然后就需要修改interest.h和interest.c中的各个函数。</p>
@@ -294,6 +294,7 @@ var _hmt = _hmt || [];
 <p><strong>一些编译方面的问题：</strong></p>
 <p>nfdc/tools用到了usr/local中的ndn库，这个库是nfdc目录下编译时生成的，因此如果想要改变兴趣包或数据包结构在app中用，不能直接make clean，make；需要make clean，make build，make install三步，具体每步的作用参考makefile。</p>
 <p>然后makefile实际上是cmake根据cmakelist.txt生成的，因此如果想要在app中新添文件，就需要修改app目录下的cmakelist.txt，把新文件如何编译添加进txt文件中，这样编译时就会编译新添加的文件了。</p>
+<p><code>ffmpeg -i input.flv -c copy -f mp4 output.mp4</code></p>
 
       
 
@@ -419,7 +420,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%B7%BB%E5%8A%A0%E5%85%B4%E8%B6%A3%E5%8C%85%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-number">1.</span> <span class="toc-text">1. 添加兴趣包优先级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%9C%A8NFD-C%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%95%B0%E6%8D%AE%E6%8E%A8%E9%80%81%E6%9C%BA%E5%88%B6"><span class="toc-number">2.</span> <span class="toc-text">2. 在NFD-C中添加数据推送机制</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%B7%BB%E5%8A%A0%E5%85%B4%E8%B6%A3%E5%8C%85%E5%92%8C%E6%95%B0%E6%8D%AE%E5%8C%85%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-number">1.</span> <span class="toc-text">1. 添加兴趣包和数据包优先级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%9C%A8NFD-C%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%95%B0%E6%8D%AE%E6%8E%A8%E9%80%81%E6%9C%BA%E5%88%B6"><span class="toc-number">2.</span> <span class="toc-text">2. 在NFD-C中添加数据推送机制</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -584,19 +585,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
+                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -616,11 +617,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
