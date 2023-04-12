@@ -31,7 +31,7 @@
 <meta property="og:description" content="整体流程： player端通过解析命令行输入的video名字得到兴趣包的prefix和video_name，有了prefix之后，首先需要创建一个app_face，创建app_face同时创建了其对应的套接字等信息，然后通过connect函数与player-server端建立连接。就可以通过sendDiscoverInterest(app_face, prefix);发送兴趣包，这个兴趣包的作用是">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-07-09T05:16:47.000Z">
-<meta property="article:modified_time" content="2023-04-10T14:23:09.238Z">
+<meta property="article:modified_time" content="2023-04-12T12:17:45.838Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="科研">
 <meta name="twitter:card" content="summary">
@@ -212,7 +212,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">780字</span>
+        <span class="post-count">811字</span>
       </span>
     </span>
 
@@ -221,7 +221,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">2分</span>
+        <span class="post-count">3分</span>
       </span>
     </span>
 </div>
@@ -248,7 +248,7 @@ var _hmt = _hmt || [];
 <p>在<code>express_interest</code>之后，<code>sendDiscoverInterest</code>执行<code>process_events</code>；其主要作用是不断更新<code>app_face</code>的<code>buffer</code>,有数据来了就放在<code>buffer</code>中，然后将<code>buffer</code>的数据存在<code>recvmsg</code>中，然后通过<code>handle_msg</code>函数<code>recvmsg</code>再进行下一步处理，由于<code>player</code>接收到数据包，如果能在PIT表中找到<code>data_name</code>，(原来存入了<code>interest_name</code>，<code>interest_name</code>和<code>data_name</code>一样，都是<code>/video/videoname/segment/i</code>或者是<code>/video/videoname//discovery</code>的形式)，而且表项的回调函数也在这个表项中，就执行回调函数，也就是执行<code>onDisvoverData()</code>，通过流水线获取data数据，获取完数据之后，最后需要擦除这个PIT中的表项。</p>
 <p><code>server</code>端通过命令行输入前缀并解析得到前缀，然后需要创建一个<code>app_face</code>，创建<code>app_face</code>同时创建了其对应的套接字等信息，然后通过<code>connect</code>函数与<code>player</code>端建立连接。然后通过<code>set_interest_filter()</code>对<code>interest</code>进行过滤，这里调用了一个回调函数<code>processReceivedInterest</code>，判断<code>interest</code>包是<code>discovery</code>包还是<code>segment</code>包。如果是<code>discovery</code>包就返回<code>player</code>端一个包含有需要的用于获取视频的兴趣包的个数的数据包，如果是<code>segment</code>包就将视频的信息分成若干个<code>data</code>包，然后通过<code>put</code>函数对数据包进行tlv编码然后通过<code>app_face_send</code>发送数据包，<code>app_face_send</code>函数底层调用了<code>write</code>函数。</p>
 <h3 id="视频播放的指令："><a href="#视频播放的指令：" class="headerlink" title="视频播放的指令："></a>视频播放的指令：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="language-bash">客户端</span></span><br><span class="line">sudo gnome-terminal -t &quot;player&quot; -x bash -c &quot;player -v output1.mp4;exec bash;&quot;</span><br><span class="line"><span class="meta">#</span><span class="language-bash">服务端</span></span><br><span class="line">sudo gnome-terminal -t &quot;player-server&quot; -x bash -c &quot;player-server -p /video;exec bash&quot;</span><br></pre></td></tr></table></figure>
-<h4 id="NFD-C视频播放不出来时需要转换一下格式"><a href="#NFD-C视频播放不出来时需要转换一下格式" class="headerlink" title="NFD-C视频播放不出来时需要转换一下格式"></a>NFD-C视频播放不出来时需要转换一下格式</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install ffmpeg</span><br><span class="line">ffmpeg -i input.mp4 -c copy -movflags faststart output.mp4</span><br></pre></td></tr></table></figure>
+<h4 id="NFD-C视频播放不出来时需要转换一下格式"><a href="#NFD-C视频播放不出来时需要转换一下格式" class="headerlink" title="NFD-C视频播放不出来时需要转换一下格式"></a>NFD-C视频播放不出来时需要转换一下格式</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install ffmpeg</span><br><span class="line">ffmpeg -i input.mp4 -c copy -movflags faststart output.mp4</span><br><span class="line"><span class="meta">#</span><span class="language-bash">截取视频的命令</span></span><br><span class="line">ffmpeg  -i 源文件名 -vcodec copy -acodec copy -ss 00:00:10 -to 00:00:15 目标文件名 -y</span><br></pre></td></tr></table></figure>
 
       
 
@@ -539,19 +539,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
+                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
