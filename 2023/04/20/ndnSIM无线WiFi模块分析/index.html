@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>高性能网络编程(1) | 博客杂记 - Harder and Better</title>
+  <title>ndnSIM无线WiFi模块分析 | 博客杂记 - Harder and Better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -23,32 +23,22 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta name="description" content="高性能网络编程（一）——accept建立连接高性能，它是指程序员设计编写的服务器需要处理很大的吞吐量，这与简单网络应用就有了质的不同。 因为：1、高吞吐量下，容易触发到一些设计上的边界条件；2、偶然性的小概率事件，会在高吞吐量下变成必然性事件。3、IO是慢速的，高吞吐量通常意味着高并发，如同一时刻存在数以万计、十万计、百万计的TCP活动连接。 高性能网络编程，涉及到对网络、操作系统协议栈、进程与线">
+  <meta name="description" content="1. 设计文档ns-3节点可以包含NetDevice对象的集合，就像实际的计算机包含以太网、Wifi、蓝牙等的单独接口卡一样。本章描述了ns-3的WifiNetDevice和相关模型。通过将WifiNetDevice对象添加到ns-3节点，可以创建基于802.11的基础设施和自组织网络的模型。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="高性能网络编程(1)">
-<meta property="og:url" content="http://example.com/2022/07/25/%E9%AB%98%E6%80%A7%E8%83%BD%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/index.html">
+<meta property="og:title" content="ndnSIM无线WiFi模块分析">
+<meta property="og:url" content="http://example.com/2023/04/20/ndnSIM%E6%97%A0%E7%BA%BFWiFi%E6%A8%A1%E5%9D%97%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
-<meta property="og:description" content="高性能网络编程（一）——accept建立连接高性能，它是指程序员设计编写的服务器需要处理很大的吞吐量，这与简单网络应用就有了质的不同。 因为：1、高吞吐量下，容易触发到一些设计上的边界条件；2、偶然性的小概率事件，会在高吞吐量下变成必然性事件。3、IO是慢速的，高吞吐量通常意味着高并发，如同一时刻存在数以万计、十万计、百万计的TCP活动连接。 高性能网络编程，涉及到对网络、操作系统协议栈、进程与线">
+<meta property="og:description" content="1. 设计文档ns-3节点可以包含NetDevice对象的集合，就像实际的计算机包含以太网、Wifi、蓝牙等的单独接口卡一样。本章描述了ns-3的WifiNetDevice和相关模型。通过将WifiNetDevice对象添加到ns-3节点，可以创建基于802.11的基础设施和自组织网络的模型。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207261126486.jpeg">
-<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207261134458.jpeg">
-<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207261136324.jpeg">
-<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207261145182.jpeg">
-<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207261145705.jpeg">
-<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207261146029.jpeg">
-<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207261227973.jpeg">
-<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207261646955.jpeg">
-<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207271159930.jpeg">
-<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207271241731.jpeg">
-<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207281940977.jpeg">
-<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207281946218.jpeg">
-<meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207281956916.jpeg">
-<meta property="article:published_time" content="2022-07-25T02:25:47.000Z">
-<meta property="article:modified_time" content="2022-08-06T13:28:34.000Z">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202304201900731.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202304201900183.png">
+<meta property="article:published_time" content="2023-04-20T10:57:01.000Z">
+<meta property="article:modified_time" content="2023-04-20T11:01:01.421Z">
 <meta property="article:author" content="ygtrece">
-<meta property="article:tag" content="网络编程">
+<meta property="article:tag" content="科研">
+<meta property="article:tag" content="ndn">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207261126486.jpeg">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202304201900731.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -200,15 +190,15 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-高性能网络编程" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-ndnSIM无线WiFi模块分析" class="article article-type-post " itemscope itemprop="blogPost">
   
 <div class="article-inner">
     
       <header class="article-header">
         
         
-        <a href="/2022/07/25/%E9%AB%98%E6%80%A7%E8%83%BD%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2022-07-25T02:25:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-25</time>
+        <a href="/2023/04/20/ndnSIM%E6%97%A0%E7%BA%BFWiFi%E6%A8%A1%E5%9D%97%E5%88%86%E6%9E%90/" class="archive-article-date">
+  	<time datetime="2023-04-20T10:57:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-20</time>
 </a>
 
 
@@ -226,7 +216,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">9k字</span>
+        <span class="post-count">8.2k字</span>
       </span>
     </span>
 
@@ -235,7 +225,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">32分</span>
+        <span class="post-count">29分</span>
       </span>
     </span>
 </div>
@@ -250,172 +240,199 @@ var _hmt = _hmt || [];
       <center><p>
   
     <h1 class="article-title_code_ant" itemprop="name">
-      高性能网络编程(1)
+      ndnSIM无线WiFi模块分析
     </h1>
   
 </p></center>
       
-        <h2 id="高性能网络编程（一）——accept建立连接"><a href="#高性能网络编程（一）——accept建立连接" class="headerlink" title="高性能网络编程（一）——accept建立连接"></a>高性能网络编程（一）——accept建立连接</h2><p><strong>高性能</strong>，它是指程序员设计编写的服务器需要处理很大的吞吐量，这与简单网络应用就有了质的不同。</p>
-<p>因为：1、高吞吐量下，容易触发到一些设计上的边界条件；2、偶然性的小概率事件，会在高吞吐量下变成必然性事件。3、IO是慢速的，高吞吐量通常意味着高并发，如同一时刻存在数以万计、十万计、百万计的TCP活动连接。</p>
-<p>高性能网络编程，涉及到对网络、操作系统协议栈、进程与线程、常见的网络组件等知识点。</p>
+        <h2 id="1-设计文档"><a href="#1-设计文档" class="headerlink" title="1. 设计文档"></a>1. 设计文档</h2><p>ns-3节点可以包含NetDevice对象的集合，就像实际的计算机包含以太网、Wifi、蓝牙等的单独接口卡一样。本章描述了ns-3的WifiNetDevice和相关模型。通过将WifiNetDevice对象添加到ns-3节点，可以创建基于802.11的基础设施和自组织网络的模型。</p>
 <span id="more"></span>
-<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207261126486.jpeg" alt="img"></p>
-<p>如上图红色文字所示，我认为编写高性能服务器的关注点有3个：</p>
-<p>1、如果基于通用组件编程，关注点多是在组件如何封装套接字编程细节。为了使应用程序不感知套接字层，这些组件往往是通过各种回调机制来向应用层代码提供网络服务，通常，出于为应用层提供更高的开发效率，组件都大量使用了线程（Nginx等是个例外），当然，使用了线程后往往可以降低代码复杂度。但多线程引入的并发解决机制还是需要重点关注的，特别是锁的使用。另外，使用多线程意味着把应用层的代码复杂度扔给了操作系统，大吞吐量时，需要关注多线程给操作系统内核带来的性能损耗。</p>
-<p>基于通用组件编程，为了程序的高性能运行，需要清楚的了解组件的以下特性：怎么使用IO多路复用或者异步IO的？怎么实现并发性的？ 怎么组织线程模型的？ 怎么处理高吞吐量引发的异常情况的？</p>
-<p>2、通用组件只是在封装套接字，操作系统是通过提供套接字来为进程提供网络通讯能力的。所以，不了解套接字编程，往往对组件的性能就没有原理上的认识。学习套接字层的编程是有必要的，或许很少会自己从头去写，但操作系统的API提供方式经久不变，一经学会，受用终身，同时在项目的架构设计时，选用何种网络组件就非常准确了。</p>
-<p>学习套接字编程，关注点主要在：套接字的编程方法有哪些？阻塞套接字的各方法是如何阻塞住当前代码段的？非阻塞套接字上的方法如何不阻塞当前代码段的？IO多路复用机制是怎样与套接字结合的？异步IO是如何实现的？网络协议的各种异常情况、操作系统的各种异常情况是怎么通过套接字传递给应用性程序的？</p>
-<p>3、网络的复杂性会影响到服务器的吞吐量，而且，高吞吐量场景下，多种临界条件会导致应用程序的不正常，特别是组件中有bug或考虑不周或没有配置正确时。了解网络分组可以定位出这些问题，可以正确的配置系统、组件，可以正确的理解系统的瓶颈。</p>
-<p>这里的关注点主要在：TCP、UDP、IP协议的特点？linux等操作系统如何处理这些协议的？使用tcpdump等抓包工具分析各网络分组。</p>
-<p>一般掌握以上3点，就可以挥洒自如的实现高性能网络服务器了。</p>
-<p><strong>本文就主要以TCP协议为例来说明网络IO。</strong></p>
-<p>网络IO中应用服务器往往聚焦于以下几个由网络IO组成的功能中：A）与客户端建立起TCP连接。B）读取客户端的请求流。C）向客户端发送响应流。D）关闭TCP连接。E）向其他服务器发起TCP连接。</p>
-<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207261134458.jpeg" alt="img"></p>
-<p>应用层往往只需要调用类似于accept的API就可以建立TCP连接。建立连接的流程大家都了解—三次握手，它如何与accept交互呢？</p>
-<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207261136324.jpeg" alt="img"></p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/78879634">网络编程：backlog的含义 - 知乎 (zhihu.com)</a></p>
-<p>研究过backlog含义的朋友都很容易理解上图。这两个队列是内核实现的，当服务器绑定、监听了某个端口后，这个端口的SYN队列和ACCEPT队列就建立好了。客户端使用connect向服务器发起TCP连接，当图中1.1步骤客户端的SYN包到达了服务器后，内核会把这一信息放到SYN队列（即未完成握手队列）中，同时回一个SYN+ACK包给客户端。一段时间后，在较中2.1步骤中客户端再次发来了针对服务器SYN包的ACK网络分组时，内核会把连接从SYN队列中取出，再把这个连接放到ACCEPT队列（即已完成握手队列）中。而服务器在第3步调用accept时，其实就是直接从ACCEPT队列中取出已经建立成功的连接套接字而已。</p>
-<p>现有我们可以来讨论应用层组件：为何有的应用服务器进程中，会单独使用1个线程，只调用accept方法来建立连接，例如tomcat；有的应用服务器进程中，却用1个线程做所有的事，包括accept获取新连接。</p>
-<p>企业级的服务器进程中，若某一线程既使用accept获取新连接，又继续在这个连接上读、写字符流，那么，这个连接对应的套接字通常要设为非阻塞。原因如上图，调用accept时不会长期占用所属线程的CPU时间片，使得线程能够及时的做其他工作。</p>
-<p>对阻塞套接字，accept行为如下图：</p>
-<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207261145182.jpeg" alt="img"></p>
-<p>对非阻塞套接字，accept会有两种返回</p>
-<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207261145705.jpeg" alt="img"></p>
-<h2 id="高性能网络编程2——TCP消息的发送"><a href="#高性能网络编程2——TCP消息的发送" class="headerlink" title="高性能网络编程2——TCP消息的发送"></a>高性能网络编程2——TCP消息的发送</h2><p>操作TCP协议发送数据时，面对的是数据流。通常调用诸如send或者write方法来发送数据到另一台主机，那么，调用这样的方法时，在操作系统内核中发生了什么事情呢？</p>
-<p>探究的三个问题：发送方法成功返回时，能保证TCP另一端的主机接收到吗？能保证数据已经发送到网络上了吗？套接字为阻塞或者非阻塞时，发送方法做的事情有何不同？</p>
-<p><a target="_blank" rel="noopener" href="https://blog.51cto.com/u_14813744/2718767">TCP报文发送的那些事_wx5eb8fd0c124b1的技术博客_51CTO博客</a></p>
-<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207261146029.jpeg" alt="img"></p>
+<h3 id="1-1-模型概述"><a href="#1-1-模型概述" class="headerlink" title="1.1 模型概述"></a>1.1 模型概述</h3><p>WifiNetDevice基于IEEE 802.11标准[iee80211]为无线网络接口控制器建模。</p>
+<p>我们将在下面进行更详细的介绍，但简而言之，ns-3为802.11的这些方面提供了模型：</p>
 <ul>
-<li>MTU：用来通知对方所能接受数据服务单元的最大尺寸，说明发送方能够接受的有效载荷大小。</li>
-<li>MSS：最大报文长度，MSS选项用于在TCP连接建立时，收发双方协商通信时每一个报文段所能承载的最大数据长度。</li>
+<li>具有基础设施和自组织模式的基本802.11 DCF（Distributed Coordination Function）</li>
+<li>802.11a、802.11b、802.11g、802.11n（2.4和5 GHz频带）、802.11ac、802.11ax（2.4、5和6 GHz频带）和802.11be物理层</li>
+<li>802.11n的MSDU聚合和MPDU聚合扩展，并且两者可以组合在一起（两级聚合）</li>
+<li>802.11ax DL OFDMA和UL OFDMA（包括对MU EDCA参数集的支持）</li>
+<li>802.11be多链路发现和设置</li>
+<li>802.11e的基于QoS的EDCA和排队扩展</li>
+<li>使用不同传播损耗模型和传播延迟模型的能力，请参阅传播一章了解更多详细信息</li>
+<li>已根据链路模拟和其他参考文献验证的数据包错误模型和帧检测模型</li>
+<li>各种速率控制算法，包括Aarf、Arf、Cara、Onoe、Rraa、ConstantRate、Minstrel和Minstrel HT</li>
+<li>802.11s（网状），在另一章中描述</li>
+<li>802.11p和WAVE（车载），在另一章中描述</li>
 </ul>
-<p>无论何种类型的数据链路层，都会对网络分组的长度有一个限制。例如以太网限制为1500字节，802.3限制为1492字节。当内核的IP网络层试图发送报文时，若一个报文的长度大于MTU限制，就会被分成若干个小于MTU的报文，每个报文都会有独立的IP头部。</p>
-<p>若TCP层在以太网中试图发送一个大于1500字节的消息，调用IP网络层方法发送消息时，IP层会自动的获取所在局域网的MTU值，并按照所在网络的MTU大小来分片。IP层同时希望这个分片对于传输层来说是透明的，接收方的IP层会根据收到的多个IP包头部，将发送方IP层分片出的IP包重组为一个消息。</p>
-<p>这种IP层的分片效率是很差的，因为必须所有分片都到达才能重组成一个包，其中任何一个分片丢失了，都必须重发所有分片。所以，TCP层会试图避免IP层执行数据报分片。</p>
-<p>为了避免IP层的分片，TCP协议定义了一个新的概念：最大报文段长度MSS。它定义了一个TCP连接上，一个主机期望对端主机发送单个报文的最大长度。TCP3次握手建立连接时，连接双方都要互相告知自己期望接收到的MSS大小。</p>
-<p><strong>IP头和TCP头都是20字节。</strong></p>
-<p><strong>发送报文的基本流程：</strong></p>
-<p>(1) 调用send方法来发送一段较长的数据。然后send函数调用内核态的tcp_sendmsg方法进行处理。</p>
-<p>(2) 主要注意的是，send方法返回成功，内核也不一定真正将IP报文都发送到网络中，也就是说内核发送报文和send方法是不同步的。所以，内核需要将用户态内存中的发送数据，拷贝到内核态内存中，不依赖于用户态内存，使得进程可以快速释放发送数据占用的用户态内存。</p>
-<p>(3) 在拷贝过程中，内核将待发送的数据，按照MSS来划分成多个尽量接近MSS大小的分片，放到这个TCP连接对应的tcp_write_queue发送队列中。</p>
-<p>(4) 内核中为这个TCP连接分配的内核缓存是有限的（ /proc/sys/net/core/wmem_default ）。当没有多余的内核态缓存来复制用户态的待发送数据时，就需要调用一个方法 sk_stream_wait_memory来等待滑动窗口移动，释放出一些缓存出来（接收到ACK，就释放缓存）</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wait_for_memory:</span><br><span class="line">			<span class="keyword">if</span> (copied)</span><br><span class="line">				<span class="built_in">tcp_push</span>(sk, tp, flags &amp; ~MSG_MORE, mss_now, TCP_NAGLE_PUSH);</span><br><span class="line">			<span class="keyword">if</span> ((err = <span class="built_in">sk_stream_wait_memory</span>(sk, &amp;timeo)) != <span class="number">0</span>)</span><br><span class="line">				<span class="keyword">goto</span> do_error;</span><br></pre></td></tr></table></figure>
-<p>这里的 sk_stream_wait_memory方法接受一个参数timeo，就是等待超时的时间。这个时间是tcp_sendmsg方法刚开始就拿到的，如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timeo = <span class="built_in">sock_sndtimeo</span>(sk, flags &amp; MSG_DONTWAIT);</span><br></pre></td></tr></table></figure>
-<p>其具体实现：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">long</span> <span class="title">sock_sndtimeo</span><span class="params">(<span class="type">const</span> <span class="keyword">struct</span> sock *sk, <span class="type">int</span> noblock)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> noblock ? <span class="number">0</span> : sk-&gt;sk_sndtimeo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>也就是说，当这个套接字是阻塞套接字时，timeo就是SO_SNDTIMEO选项指定的发送超时时间。如果这个套接字是非阻塞套接字， timeo变量就会是0。</p>
-<p>实际上，sk_stream_wait_memory对于非阻塞套接字会直接返回，并将 errno错误码置为EAGAIN。</p>
-<p>(5) 在图1的例子中，我们假定使用了阻塞套接字，且等待了足够久的时间，收到了对方的ACK，滑动窗口释放出了缓存。</p>
-<p>(6) 将剩下的用户态数据都组成MSS报文拷贝到内核态的sk_buff中。</p>
-<p>(7) 最后，调用tcp_push等方法，它最终会调用IP层的方法来发送tcp_write_queue队列中的报文。注意，IP层返回时，并不一定是把报文发送了出去。</p>
-<p>(8) 发送方法返回。</p>
-<p>从图1的10个步骤中可知，无论是使用阻塞还是非阻塞套接字，发送方法成功返回时（无论全部成功或者部分成功），既不代表TCP连接的另一端主机接收到了消息，也不代表本机把消息发送到了网络上，只是说明，内核将会试图保证把消息送达对方。</p>
-<p>tcp_push方法的具体流程</p>
-<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207261227973.jpeg" alt="img"></p>
-<h2 id="高性能网络编程3——TCP消息的接收"><a href="#高性能网络编程3——TCP消息的接收" class="headerlink" title="高性能网络编程3——TCP消息的接收"></a>高性能网络编程3——TCP消息的接收</h2><p>第一幅图描述的场景是，TCP连接上将要收到的消息序号是S1（TCP上的每个报文都有序号，详见《TCP/IP协议详解》），此时操作系统内核依次收到了序号S1-S2的报文、S3-S4、S2-S3的报文，注意后两个包乱序了。之后，用户进程分配了一段len大小的内存用于接收TCP消息，此时，len是大于S4-S1的。另外，用户进程始终没有对这个socket设置过SO_RCVLOWAT参数，因此，接收阀值SO_RCVLOWAT使用默认值1。另外，系统参数tcp_low_latency设置为0，即从操作系统的总体效率出发，使用prequeue队列提升吞吐量。当然，由于用户进程收消息时，并没有新包来临，所以此图中prequeue队列始终为空。先不细表。</p>
-<p> <img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207261646955.jpeg" alt="img"></p>
-<p>上图中有13个步骤，应用进程使用了阻塞套接字，调用recv等方法时flag标志位为0，用户进程读取套接字时没有发生进程睡眠。内核在处理接收到的TCP报文时使用了4个队列容器（当链表理解也可），分别为receive、out_of_order、prequeue、backlog队列，本文会说明它们存在的意义。下面详细说明这13个步骤。</p>
-<p>1、当网卡接收到报文并判断为TCP协议后，将会调用到内核的tcp_v4_rcv方法。此时，这个TCP连接上需要接收的下一个报文序号恰好就是S1，而这一步里，网卡上收到了S1-S2的报文，所以，tcp_v4_rcv方法会把这个报文直接插入到receive队列中。</p>
-<p>注意：receive队列是允许用户进程直接读取的，它是将已经接收到的TCP报文，去除了TCP头部、排好序放入的、用户进程可以直接按序读取的队列。由于socket不在进程上下文中（也就是没有进程在读socket），由于我们需要S1序号的报文，而恰好收到了S1-S2报文，因此，它进入了receive队列。</p>
-<p>2、接着，我们收到了S3-S4报文。在第1步结束后，这时我们需要收到的是S2序号，但到来的报文却是S3打头的，怎么办呢？进入out_of_order队列！从这个队列名称就可以看出来，所有乱序的报文都会暂时放在这。</p>
-<p>3、仍然没有进入来读取socket，但又过来了我们期望的S2-S3报文，它会像第1步一样，直接进入receive队列。不同的时，由于此时out_of_order队列不像第1步是空的，所以，引发了接来的第4步。</p>
-<p>4、每次向receive队列插入报文时都会检查out_of_order队列。由于收到S2-S3报文后，期待的序号成为了S3，这样，out_of_order队列里的唯一报文S3-S4报文将会移出本队列而插入到receive队列中（这件事由tcp_ofo_queue方法完成）。</p>
-<p>5、终于有用户进程开始读取socket了。做过应用端编程的同学都知道，先要在进程里分配一块内存，接着调用read或者recv等方法，把内存的首地址和内存长度传入，再把建立好连接的socket也传入。当然，对这个socket还可以配置其属性。这里，假定没有设置任何属性，都使用默认值，因此，此时socket是阻塞式，它的SO_RCVLOWAT(接收低潮限度)是默认的1。当然，recv这样的方法还会接收一个flag参数，它可以设置为MSG_WAITALL、MSG_PEEK、MSG_TRUNK等等，这里我们假定为最常用的0。进程调用了recv方法。</p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/brucemengbm/p/7079961.html">GNU Linux中的SO_RCVLOWAT和SO_SNDLOWAT说明 - brucemengbm - 博客园 (cnblogs.com)</a></p>
-<p>6、无论是何种接口，C库和内核经过层层封装，接收TCP消息最终一定会走到<strong>tcp_recvmsg方法。下面介绍代码细节时，它会是重点。</strong></p>
-<p>7、在tcp_recvmsg方法里，会首先锁住socket。为什么呢？因此socket是可以被多进程同时使用的，同时，内核中断也会操作它，而下面的代码都是核心的、操作数据的、有状态的代码，不可以被重入的，锁住后，再有用户进程进来时拿不到锁就要休眠在这了。内核中断看到被锁住后也会做不同的处理，参见图2、图3。</p>
-<p>8、此时，第1-4步已经为receive队列里准备好了3个报文。最上面的报文是S1-S2，将它拷贝到用户态内存中。由于第5步flag参数并没有携带MSG_PEEK这样的标志位，因此，再将S1-S2报文从receive队列的头部移除，从内核态释放掉。反之，MSG_PEEK标志位会导致receive队列不会删除报文。所以，MSG_PEEK主要用于多进程读取同一套接字的情形。</p>
-<p>9、如第8步，拷贝S2-S3报文到用户态内存中。当然，执行拷贝前都会检查用户态内存的剩余空间是否足以放下当前这个报文，不足以时会直接返回已经拷贝的字节数。</p>
-<p>10、同上。</p>
-<p>11、receive队列为空了，此时会先来检查SO_RCVLOWAT这个阀值。如果已经拷贝的字节数到现在还小于它，那么可能导致进程会休眠，等待拷贝更多的数据。第5步已经说明过了，socket套接字使用的默认的SO_RCVLOWAT，也就是1，这表明，只要读取到报文了，就认为可以返回了。</p>
-<p>做完这个检查了，再检查backlog队列。backlog队列是进程正在拷贝数据时，网卡收到的报文会进这个队列。此时若backlog队列有数据，就顺带处理下。图3会覆盖这种场景。</p>
-<p>12、在本图对应的场景中，backlog队列是没有数据的，已经拷贝的字节数为S4-S1，它是大于1的，因此，释放第7步里加的锁，准备返回用户态了。</p>
-<p>13、用户进程代码开始执行，此时recv等方法返回的就是S4-S1，即从内核拷贝的字节数。</p>
-<p>图2给出了第2种场景，这里涉及到prequeue队列。用户进程调用recv方法时，连接上没有任何接收并缓存到内核的报文，而socket是阻塞的，所以进程睡眠了。然后网卡中收到了TCP连接上的报文，此时prequeue队列开始产生作用。图2中tcp_low_latency为默认的0，套接字socket的SO_RCVLOWAT是默认的1，仍然是阻塞socket，如下图：</p>
-<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207271159930.jpeg" alt="img"></p>
-<p>简单描述上述11个步骤：</p>
-<p>1、用户进程分配了一块len大小的内存，将其传入recv这样的函数，同时socket参数皆为默认，即阻塞的、SO_RCVLOWAT为1。调用接收方法，其中flags参数为0。</p>
-<p>2、C库和内核最终调用到tcp_recvmsg方法来处理。</p>
-<p>3、锁住socket。</p>
-<p>4、由于此时receive、prequeue、backlog队列都是空的，即没有拷贝1个字节的消息到用户内存中，而我们的最低要求是拷贝至少SO_RCVLOWAT为1长度的消息。此时，开始进入阻塞式套接字的等待流程。最长等待时间为SO_RCVTIMEO指定的时间。</p>
-<p>这个等待函数叫做sk_wait_data，有必要看下其实现：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">sk_wait_data</span><span class="params">(<span class="keyword">struct</span> sock *sk, <span class="type">long</span> *timeo)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="comment">//注意，它的自动唤醒条件有两个，要么timeo时间到达，要么receive队列不为空</span></span><br><span class="line">	rc = <span class="built_in">sk_wait_event</span>(sk, timeo, !<span class="built_in">skb_queue_empty</span>(&amp;sk-&gt;sk_receive_queue));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>sk_wait_event也值得我们简单看下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> sk_wait_event(__sk, __timeo, __condition)		\</span></span><br><span class="line"><span class="meta">(&#123;	int rc;							\</span></span><br><span class="line"><span class="meta">	release_sock(__sk);					\</span></span><br><span class="line"><span class="meta">	rc = __condition;					\</span></span><br><span class="line"><span class="meta">	<span class="keyword">if</span> (!rc) &#123;						\</span></span><br><span class="line"><span class="meta">		*(__timeo) = schedule_timeout(*(__timeo));	\</span></span><br><span class="line"><span class="meta">	&#125;							\</span></span><br><span class="line"><span class="meta">	lock_sock(__sk);					\</span></span><br><span class="line"><span class="meta">	rc = __condition;					\</span></span><br><span class="line"><span class="meta">	rc;							\</span></span><br><span class="line"><span class="meta">&#125;)</span></span><br></pre></td></tr></table></figure>
-<p>注意，它在睡眠前会调用release_sock，这个方法会释放socket锁，使得下面的第5步中，新到的报文不再只能进入backlog队列。</p>
-<p>5、这个套接字上期望接收的序号也是S1，此时网卡恰好收到了S1-S2的报文，在tcp_v4_rcv方法中，通过调用tcp_prequeue方法把报文插入到prequeue队列中。</p>
-<p>6、插入prequeue队列后，此时会接着调用wake_up_interruptible方法，唤醒在socket上睡眠的进程。参见tcp_prequque方法。</p>
-<p>7、用户进程被唤醒后，重新调用lock_sock接管了这个socket，此后再进来的报文都只能进入backlog队列了。</p>
-<p>8、进程醒来后，先去检查receive队列，当然仍然是空的；再去检查prequeue队列，发现有一个报文S1-S2，正好是socket连接待拷贝的起始序号S1，于是，从prequeue队列中取出这个报文并把内容复制到用户内存中，再释放内核中的这个报文。</p>
-<p>9、目前已经拷贝了S2-S1个字节到用户态，检查这个长度是否超过了最低阀值（即len和SO_RCVLOWAT的最小值）。</p>
-<p>10、由于SO_RCVLOWAT使用了默认的1，所以准备返回用户。此时会顺带再看看backlog队列中有没有数据，若有，则检查这个无序的队列中是否有可以直接拷贝给用户的报文。当然，此时是没有的。所以准备返回，释放socket锁。</p>
-<p>11、返回用户已经拷贝的字节数。</p>
-<p>图3给出了第3种场景。这个场景中，我们把系统参数tcp_low_latency设为1，socket上设置了SO_RCVLOWAT属性的值。服务器先是收到了S1-S2这个报文，但S2-S1的长度是小于SO_RCVLOWAT的，用户进程调用recv方法读套接字时，虽然读到了一些，但没有达到最小阀值，所以进程睡眠了，与此同时，在睡眠前收到的乱序的S3-S4包直接进入backlog队列。此时先到达了S2-S3包，由于没有使用prequeue队列，而它起始序号正是下一个待拷贝的值，所以直接拷贝到用户内存中，总共拷贝字节数已满足SO_RCVLOWAT的要求！最后在返回用户前把backlog队列中S3-S4报文也拷贝给用户了。如下图：</p>
-<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207271241731.jpeg" alt="img"></p>
-<p>简明描述上述15个步骤：</p>
-<p>1、内核收到报文S1-S2，S1正是这个socket连接上待接收的序号，因此，直接将它插入有序的receive队列中。</p>
-<p>2、用户进程所处的linux操作系统上，将sysctl中的tcp_low_latency设置为1。这意味着，这台服务器希望TCP进程能够更及时的接收到TCP消息。用户调用了recv方法接收socket上的消息，这个socket上设置了SO_RCVLOWAT属性为某个值n，这个n是大于S2-S1，也就是第1步收到的报文大小。这里，仍然是阻塞socket，用户依然是分配了足够大的len长度内存以接收TCP消息。</p>
-<p>3、通过tcp_recvmsg方法来完成接收工作。先锁住socket，避免并发进程读取同一socket的同时，也在告诉内核网络软中断处理到这一socket时要有不同行为，如第6步。</p>
-<p>4、准备处理内核各个接收队列中的报文。</p>
-<p>5、receive队列中的有序报文可直接拷贝，在检查到S2-S1是小于len之后，将报文内容拷贝到用户态内存中。</p>
-<p>6、在第5步进行的同时，socket是被锁住的，这时内核又收到了一个S3-S4报文，因此报文直接进入backlog队列。注意，这个报文不是有序的，因为此时连接上期待接收序号为S2。</p>
-<p>7、在第5步，拷贝了S2-S1个字节到用户内存，它是小于SO_RCVLOWAT的，因此，由于socket是阻塞型套接字（超时时间在本文中忽略），进程将不得不转入睡眠。转入睡眠之前，还会干一件事，就是处理backlog队列里的报文，图2的第4步介绍过休眠方法sk_wait_data，它在睡眠前会执行release_sock方法，看看是如何实现的：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> fastcall <span class="title">release_sock</span><span class="params">(<span class="keyword">struct</span> sock *sk)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">mutex_release</span>(&amp;sk-&gt;sk_lock.dep_map, <span class="number">1</span>, _RET_IP_);</span><br><span class="line">	<span class="built_in">spin_lock_bh</span>(&amp;sk-&gt;sk_lock.slock);</span><br><span class="line">        <span class="comment">//这里会遍历backlog队列中的每一个报文</span></span><br><span class="line">	<span class="keyword">if</span> (sk-&gt;sk_backlog.tail)</span><br><span class="line">		__release_sock(sk);</span><br><span class="line">        <span class="comment">//这里是网络中断执行时，告诉内核，现在socket并不在进程上下文中</span></span><br><span class="line">	sk-&gt;sk_lock.owner = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">waitqueue_active</span>(&amp;sk-&gt;sk_lock.wq))</span><br><span class="line">		<span class="built_in">wake_up</span>(&amp;sk-&gt;sk_lock.wq);</span><br><span class="line">	<span class="built_in">spin_unlock_bh</span>(&amp;sk-&gt;sk_lock.slock);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>再看看__release_sock方法是如何遍历backlog队列的：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">void</span> __release_sock(<span class="keyword">struct</span> sock *sk)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">struct</span> <span class="title class_">sk_buff</span> *skb = sk-&gt;sk_backlog.head;</span><br><span class="line">        <span class="comment">//遍历backlog队列</span></span><br><span class="line">	<span class="keyword">do</span> &#123;</span><br><span class="line">		sk-&gt;sk_backlog.head = sk-&gt;sk_backlog.tail = <span class="literal">NULL</span>;</span><br><span class="line">		<span class="built_in">bh_unlock_sock</span>(sk);</span><br><span class="line">		<span class="keyword">do</span> &#123;</span><br><span class="line">			<span class="keyword">struct</span> <span class="title class_">sk_buff</span> *next = skb-&gt;next;</span><br><span class="line">			skb-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">                  <span class="comment">//处理报文，其实就是tcp_v4_do_rcv方法，上文介绍过，不再赘述</span></span><br><span class="line">			sk-&gt;<span class="built_in">sk_backlog_rcv</span>(sk, skb);</span><br><span class="line">			<span class="built_in">cond_resched_softirq</span>();</span><br><span class="line">			skb = next;</span><br><span class="line">		&#125; <span class="keyword">while</span> (skb != <span class="literal">NULL</span>);</span><br><span class="line">		<span class="built_in">bh_lock_sock</span>(sk);</span><br><span class="line">	&#125; <span class="keyword">while</span>((skb = sk-&gt;sk_backlog.head) != <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//此时遍历到S3-S4报文，但因为它是失序的，所以从backlog队列中移入out_of_order队列中（参见上文说过的tcp_ofo_queue方法）。</span></span><br></pre></td></tr></table></figure>
-<p>8、进程休眠，直到超时或者receive队列不为空。</p>
-<p>9、内核接收到了S2-S3报文。注意，这里由于打开了tcp_low_latency标志位，这个报文是不会进入prequeue队列以待进程上下文处理的。</p>
-<p>10、此时，由于S2是连接上正要接收的序号，同时，有一个用户进程正在休眠等待接收数据中，且它要等待的数据起始序号正是S2，于是，这种种条件下，使得这一步同时也是网络软中断执行上下文中，把S2-S3报文直接拷贝进用户内存。</p>
-<p>11、上文介绍tcp_data_queue方法时大家可以看到，每处理完1个有序报文（无论是拷贝到receive队列还是直接复制到用户内存）后都会检查out_of_order队列，看看是否有报文可以处理。那么，S3-S4报文恰好是待处理的，于是拷贝进用户内存。然后唤醒用户进程。</p>
-<p>12、用户进程被唤醒了，当然唤醒后会先来拿到socket锁。以下执行又在进程上下文中了。</p>
-<p>13、此时会检查已拷贝的字节数是否大于SO_RCVLOWAT，以及backlog队列是否为空。两者皆满足，准备返回。</p>
-<p>14、释放socket锁，退出tcp_recvmsg方法。</p>
-<p>15、返回用户已经复制的字节数S4-S1。</p>
-<p>好了，这3个场景读完，想必大家对于TCP的接收流程是怎样的已经非常清楚了，本文起始的6个问题也在这一大篇中都涉及到了。下一篇我们来讨论TCP连接的关闭。</p>
-<h2 id="高性能网络编程4—TCP连接的关闭"><a href="#高性能网络编程4—TCP连接的关闭" class="headerlink" title="高性能网络编程4—TCP连接的关闭"></a>高性能网络编程4—TCP连接的关闭</h2><p>TCP连接的关闭有两个方法close和shutdown，这篇文章将尽量精简的说明它们分别做了些什么。</p>
-<p>为方便阅读，我们可以带着以下5个问题来阅读本文：</p>
-<p>1、当socket被多进程或者多线程共享时，关闭连接时有何区别？</p>
-<p>2、关连接时，若连接上有来自对端的还未处理的消息，会怎么处理？</p>
-<p>3、关连接时，若连接上有本进程待发送却未来得及发送出的消息，又会怎么处理？</p>
-<p>4、so_linger这个功能的用处在哪？</p>
-<p>5、对于监听socket执行关闭，和对处于ESTABLISH这种通讯的socket执行关闭，有何区别？</p>
-<p>sys_close和sys_shutdown这两个系统调用最终是由tcp_close和tcp_shutdown方法来实现的，调用过程如下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207281940977.jpeg" alt="img"></p>
-<p>子进程会将父进程中已经建立的socket加上引用计数。当进程中close一个socket时，只会减少引用计数，仅当引用计数为0时才会触发tcp_close。</p>
-<p>到这里，对于第一个问题的close调用自然有了结论：单线程（进程）中使用close与多线程中是一致的，但这两者与多进程的行为并不一致，多进程中共享的同一个socket必须都调用了close才会真正的关闭连接。</p>
-<p>而shutdown则不然，这里是没有引用计数什么事的，只要调用了就会去试图按需关闭连接。所以，调用shutdown与多线程、多进程无关。</p>
-<p>下面我们首先深入探讨下close的行为，因为close比较shutdown来说要复杂许多。顺便回答其余四个问题。</p>
-<p>TCP连接是一种双工的连接，何谓双工？即连接双方可以并行的发送或者接收消息，而无须顾及对方此时到底在发还是收消息。这样，关闭连接时，就存在3种情形：完全关闭连接；关闭发送消息的功能；关闭接收消息的功能。其中，后两者就叫做半关闭，由shutdown实现（所以 shutdown多出一个参数正是控制关闭发送或者关闭接收），前者由close实现。</p>
-<p>TCP连接是一种可靠的连接，在这里可以这么理解：既要确认本机发出的包得到确认，又要确认收到的任何消息都已告知连接的对端。但还存在程序异常的情形，此时，则通过异常的那端发送RST复位报文通知另一端关闭连接。</p>
-<p>下图是close主要流程：<img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207281946218.jpeg" alt="img">的主</p>
-<p>这个图稍复杂，这是因为它覆盖了关闭监听句柄、关闭普通连接、关闭设置了SO_LINGER的连接这三种主要场景。</p>
-<p>1）关闭监听句柄</p>
-<p>先从最右边的分支说说关闭监听socket的那些事。用于listen的监听句柄也是使用close关闭，关闭这样的句柄含义当然很不同，它本身并不对应着某个TCP连接，但是，附着在它之上的却可能有半成品连接。什么意思呢？之前说过TCP是双工的，它的打开需要三次握手，三次握手也就是3个步骤，其含义为：客户端打开接收、发送的功能；服务器端认可并也打开接收、发送的功能；客户端认可。当第1、2步骤完成、第3步步骤未完成时，就会在服务器上有许多半连接，close这个操作主要是清理这些连接。</p>
-<p>参照上图，close首先会移除keepalive定时器。keepalive功能常用于服务器上，防止僵死、异常退出的客户端占用服务器连接资源。移除此定时器后，若ESTABLISH状态的TCP连接在tcp_keepalive_time时间（如服务器上常配置为2小时）内没有通讯，服务器就会主动关闭连接。</p>
-<p>接下来，关闭每一个半连接。如何关闭半连接？这时当然不能发FIN包，即正常的四次握手关闭连接，而是会发送RST复位标志去关闭请求。处理完所有半打开的连接close的任务就基本完成了。</p>
-<p>2）关闭普通ESTABLISH状态的连接（未设置so_linger）</p>
-<p>首先检查是否有接收到却未处理的消息。</p>
-<p>如果close调用时存在收到远端的、没有处理的消息，这时根据close这一行为的意义，是要丢弃这些消息的。但丢弃消息后，意味着连接远端误以为发出的消息已经被本机收到处理了（因为ACK包确认过了），但实际上确是收到未处理，此时也不能使用正常的四次握手关闭，而是会向远端发送一个RST非正常复位关闭连接。这个做法的依据请参考draft-ietf-tcpimpl-prob-03.txt文档3.10节， Failure to RST on close with data pending。所以，这也要求我们程序员在关闭连接时，要确保已经接收、处理了连接上的消息。</p>
-<p>如果此时没有未处理的消息，那么进入发送FIN来关闭连接的阶段。</p>
-<p>这时，先看看是否有待发送的消息。前一篇已经说过，发消息时要计算滑动窗口、拥塞窗口、angle算法等，这些因素可能导致消息会延迟发送的。如果有待发送的消息，那么要尽力保证这些消息都发出去的。所以，会在最后一个报文中加入FIN标志，同时，关闭用于减少网络中小报文的angle算法，向连接对端发送消息。如果没有待发送的消息，则构造一个报文，仅含有FIN标志位，发送出去关闭连接。</p>
-<p>3）使用了so_linger的连接</p>
-<p><strong>首先要澄清，为何要有so_linger这个功能？因为我们可能有强可靠性的需求</strong>，也就是说，必须确保发出的消息、FIN都被对方收到。例如，有些响应发出后调用close关闭连接，接下来就会关闭进程。如果close时发出的消息其实丢失在网络中了，那么，进程突然退出时连接上发出的RST就可能被对方收到，而且，之前丢失的消息不会有重发来保障可靠性了。</p>
-<p>so_linger用来保证对方收到了close时发出的消息，即，至少需要对方通过发送ACK且到达本机。</p>
-<p>怎么保证呢？等待！close会阻塞住进程，直到确认对方收到了消息再返回。然而，网络环境又得复杂的，如果对方总是不响应怎么办？所以还需要l_linger这个超时时间，控制close阻塞进程的最长时间。注意，务必慎用so_linger，它会在不经意间降低你程序中代码的执行速度（close的阻塞）。</p>
-<p>所以，当这个进程设置了so_linger后，前半段依然没变化。检查是否有未读消息，若有则发RST关连接，不会触发等待。接下来检查是否有未发送的消息时与第2种情形一致，设好FIN后关闭angle算法发出。接下来，则会设置最大等待时间l_linger，然后开始将进程睡眠，直到确认对方收到后才会醒来，将控制权交还给用户进程。</p>
-<p>这里需要注意，so_linger不是确保连接被四次握手关闭再使close返回，而只是保证我方发出的消息都已被对方收到。例如，若对方程序写的有问题，当它收到FIN进入CLOSE_WAIT状态，却一直不调用close发出FIN，此时，对方仍然会通过ACK确认，我方收到了ACK进入FIN_WAIT2状态，但没收到对方的FIN，我方的close调用却不会再阻塞，close直接返回，控制权交还用户进程。</p>
-<p>从上图可知，so_linger还有个偏门的用法，若l_linger超时时间竟被设为0，则不会触发FIN包的发送，而是直接RST复位关闭连接。我个人认为，这种玩法确没多大用处。</p>
-<p>最后做个总结。调用close时，可能导致发送RST复位关闭连接，例如有未读消息、打开so_linger但l_linger却为0、关闭监听句柄时半打开的连接。更多时会导致发FIN来四次握手关闭连接，但打开so_linger可能导致close阻塞住等待着对方的ACK表明收到了消息。</p>
-<p><strong>最后来看看较为简单的shutdown。</strong></p>
-<p><img src="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202207281956916.jpeg" alt="img"></p>
-<p>解释下上图：</p>
-<p>1）shutdown可携带一个参数，取值有3个，分别意味着：只关闭读、只关闭写、同时关闭读写。</p>
-<p>对于监听句柄，如果参数为关闭写，显然没有任何意义。但关闭读从某方面来说是有意义的，例如不再接受新的连接。看看最右边蓝色分支，针对监听句柄，若参数为关闭写，则不做任何事；若为关闭读，则把端口上的半打开连接使用RST关闭，与close如出一辙。</p>
-<p>2）若shutdown的是半打开的连接，则发出RST来关闭连接。</p>
-<p>3）若shutdown的是正常连接，那么关闭读其实与对端是没有关系的。只要本机把接收掉的消息丢掉，其实就等价于关闭读了，并不一定非要对端关闭写的。实际上，shutdown正是这么干的。若参数中的标志位含有关闭读，只是标识下，当我们调用read等方法时这个标识就起作用了，会使进程读不到任何数据。</p>
-<p>4）若参数中有标志位为关闭写，那么下面做的事与close是一致的：发出FIN包，告诉对方，本机不会再发消息了。</p>
-<p>以上，就是close与shutdown的主要行为，同时也回答了本文最初的5个问题。下一篇，我们开始讨论多路复用中常见的epoll。</p>
+<p>ns-3中提供的一组802.11模型试图提供802.11规范的准确MAC级实现，并为不同的PHY提供PHY级别的分组级抽象，对应于802.11a/b/g/n/ac/ax/be规范。</p>
+<p>在ns-3中，节点可以在单独的信道上具有多个WifiNetDevice，并且WifiNetDevices可以与其他设备类型共存。通过使用SpectrumWifiPhy框架，还可以在单个信道上构建涉及跨信道干扰或多种无线技术的场景。</p>
+<p>WifiNetDevice及其型号的源代码位于src/wifi目录中。</p>
+<p>该实现是模块化的，并提供了大约三个子层的模型：</p>
+<ul>
+<li>物理层模型：它们对特定修正和常见物理层操作和功能进行建模。</li>
+<li>所谓的MAC低模型：它们对介质访问（DCF和EDCA）、帧保护（RTS/CTS）和确认（ACK/BlockAck）等功能进行建模。在ns-3中，较低级别的MAC由<strong>帧交换管理器</strong>层次结构、<strong>信道接入管理器</strong>和<strong>MAC中间实体</strong>组成。</li>
+<li>所谓的MAC高模型：它们在Wifi中实现非时间关键过程，如MAC级信标生成、探测和关联状态机，以及一组速率控制算法。在文献中，该子层有时被称为上层MAC，并且由更多面向软件的实现与时间关键的硬件实现组成。</li>
+</ul>
+<p>接下来，我们提供了每一层的设计概述，如图WifiNetDevice架构所示。对于802.11be多链路设备（MLD），WifiPhy、FrameExchangeManager和ChannelAccessManager的实例数量与链路数量一样多。</p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202304201900731.png" alt="image-20230420185954679"></p>
+<h4 id="MAC高层模型"><a href="#MAC高层模型" class="headerlink" title="MAC高层模型"></a>MAC高层模型</h4><p>目前有三种MAC高模型提供了这三种（非网格；网格等价物，它是具有公共父节点ns3::WifiMac的这些节点的兄弟节点，此处不讨论）Wi-Fi拓扑元素-接入点（AP）（ns3::ApWifiMac）、非AP站（STA），和独立基本服务集（IBSS）中的STA，也称为自组织网络（ns3::AdhocWifiMac）。</p>
+<p>其中最简单的是ns3::AdhocWifiMac，它实现了一种不执行任何类型的信标生成、探测或关联的Wi-Fi MAC。ns3::StaWifiMac类实现了一个主动探测和关联状态机，该状态机在错过太多信标时处理自动重新关联。最后，ns3::ApWifiMac实现了一个AP，它生成周期性信标，并接受每一次关联尝试。</p>
+<p>这三种MAC高模型在ns3::WifiMac中共享一个共同的父级，该父级在其他MAC配置中公开了一个属性QosSupported，该属性允许配置802.11e/WMM风格的QoS支持。其实是都继承了ns3::RegularWifiMac，ns3::RegularWifiMac又继承了ns3::WifiMac；</p>
+<p>MAC低层也可以使用几种速率控制算法。可用速率控制算法的完整列表在单独的部分中提供。</p>
+<h4 id="MAC低层模型"><a href="#MAC低层模型" class="headerlink" title="MAC低层模型"></a>MAC低层模型</h4><p>MAC底层分为三个主要组件：</p>
+<ol>
+<li>ns3::FrameExchangeManager类层次结构，用于实现由支持的IEEE 802.11修订版引入的帧交换序列。它还处理帧聚合、帧重传、保护和确认。</li>
+<li>ns3::ChannelAccessManager，实现DCF和EDCAF功能。</li>
+<li>处理分组队列的ns3::Txop和ns3::QosTxop。ns3::Txop对象由未启用QoS的高MAC使用，并且用于传输帧（例如，类型为管理的帧），该标准认为应该使用DCF访问介质。ns3::QosTxop由启用QoS的高MAC使用。</li>
+</ol>
+<h4 id="物理层模型"><a href="#物理层模型" class="headerlink" title="物理层模型"></a>物理层模型</h4><p>简而言之，物理层模型主要负责对分组的接收进行建模并跟踪能量消耗。分组接收通常有三个主要组成部分：</p>
+<ul>
+<li>对接收到的每个数据包进行成功或失败接收的概率评估。概率取决于调制、数据包的信噪比（和干扰比）以及物理层的状态（例如，在传输或休眠时无法接收）；</li>
+<li>存在跟踪（记账）所有接收信号的对象，使得当必须做出接收决策时可以计算每个分组的正确干扰功率；</li>
+<li>使用与调制和标准相对应的一个或多个误差模型来查找成功接收的概率。</li>
+</ul>
+<h3 id="1-2-范围和限制"><a href="#1-2-范围和限制" class="headerlink" title="1.2 范围和限制"></a>1.2 范围和限制</h3><p>IEEE 802.11标准[iee80211]是一个大型规范，ns-3并没有涵盖所有方面；ns-3的一致性文档本身将导致一个非常长的文档。本节试图总结对标准和实践中发现的行为的遵守情况。</p>
+<p>物理层和信道模型以每个分组为基础进行操作，<strong>在使用默认YansWifiPhy模型时没有频率选择性传播，也没有干扰效应</strong>。此时也不支持定向天线。对于加性高斯白噪声（AWGN）场景或宽带干扰场景，性能取决于分析模型（基于调制和信道宽度等因素）对接收信噪比，其中噪声结合了热噪声和来自其他WiFi分组的干扰的影响。<strong>只有在使用SpectrumWifiPhy时，才会对来自其他无线技术的干扰进行建模</strong>。以下详细信息与物理层和通道模型有关：</p>
+<p>(频率选择性衰落就是信号带宽大于相关带宽)</p>
+<h3 id="1-3-设计细节"><a href="#1-3-设计细节" class="headerlink" title="1.3 设计细节"></a>1.3 设计细节</h3><p>本节的其余部分专门介绍一些Wi-Fi型号的更深入的设计说明。有兴趣跳过wifi模块使用部分（用户文档）的用户可以在此时跳过。我们通过首先描述信道和PHY模型，然后描述MAC模型，从底层开始组织这些更详细的部分。</p>
+<p>我们首先关注物理层框架之间的选择。ns-3包含对仅Wi-Fi的物理层模型YansWifiPhy的支持，该模型不提供信号的频率级分解。对于只涉及Wi-Fi信道上的Wi-Fi信号并且不涉及频率相关传播损耗或衰落模型的模拟，默认的YansWifiPhy框架是一个合适的选择。对于涉及同一信道上的混合技术或频率相关效应的模拟，SpectrumWifiPhy更合适。这两个框架的配置非常相似。</p>
+<p>SpectrumWifiPhy框架使用频谱模块信道框架。</p>
+<p>YansWifiChannel是ns-3无线网络模块中唯一的具体信道型号类别。ns3::YansWifiChannel实现使用ns-3传播模块中提供的传播损耗和延迟模型。特别地，可以将多个传播模型添加到信道对象（如果添加了多个损耗模型，则链接在一起），并且还添加了传播延迟模型。从ns3::YansWifiPhy对象发送到具有特定信号功率的信道上的数据包，在信号功率由于（一个或多个）传播损耗模型而降低，并且在与传输（串行化）延迟和由于任何信道传播延迟模型（通常由于设备位置之间的光速延迟）而导致的传播延迟相对应的延迟之后。</p>
+<p>只有ns3::YansWifiPhy的对象可以附加到ns3::YansWifiChannel；因此，不允许对诸如LTE之类的其他（干扰）技术进行建模的对象。此外，来自不同信道的分组不进行交互；如果信道被逻辑配置用于例如信道5和6，则分组不会引起相邻信道干扰（即使它们的信道号重叠）。</p>
+<h3 id="WifiPhy和相关模型"><a href="#WifiPhy和相关模型" class="headerlink" title="WifiPhy和相关模型"></a>WifiPhy和相关模型</h3><p>ns3::WifiPhy是表示802.11物理层功能的抽象基类。（通过Send()方法）传递给该对象的数据包通过信道对象发送，并且在接收时，接收PHY对象（基于信号功率和干扰）决定数据包是否成功。此类还为物理层事件的通知提供了许多回调，公开了可以针对MAC级别进程（如载波侦听）进行监控的状态机的概念，并处理睡眠/唤醒/关闭模型和能耗。ns3:：WifiPhy挂钩到WifiNetDevice中的ns3::FrameExchangeManager对象。</p>
+<p>WifiPhy目前有两种实现方式：ns3::YansWifiPhy和ns3::SpectrumWifiPhy。它们分别与其他五个对象协同工作：</p>
+<ul>
+<li>PhyEntity：包含物理层处理的特定修正部分</li>
+<li>WifiPpdu：建模特定修正的物理层协议数据单元（PPDU）</li>
+<li>WifiPhyStateHelper：维护物理层状态机</li>
+<li>InterferenceHelper：跟踪信道上观察到的所有数据包</li>
+<li>ErrorModel：计算给定SNR的错误概率</li>
+</ul>
+<h4 id="PhyEntity"><a href="#PhyEntity" class="headerlink" title="PhyEntity"></a><strong>PhyEntity</strong></h4><p>抽象基类ns3::PhyEntity使每个PHY实体能够使用一组唯一的API，对应于IEEE 802.11标准的不同修订。当前实现的PHY实体是：</p>
+<ul>
+<li>ns3::DsssPhy: PHY entity for DSSS and HR/DSSS (11b)</li>
+<li>ns3::OfdmPhy: PHY entity for OFDM (11a and 11p)</li>
+<li>ns3::ErpOfdmPhy: PHY entity for ERP-OFDM (11g)</li>
+<li>ns3::HtPhy: PHY entity for HT (11n)</li>
+<li>ns3::VhtPhy: PHY entity for VHT (11ac)</li>
+<li>ns3::HePhy: PHY entity for HE (11ax)</li>
+<li>ns3::EhtPhy: PHY entity for EHT (11be)</li>
+</ul>
+<h4 id="WifiPpdu"><a href="#WifiPpdu" class="headerlink" title="WifiPpdu"></a><strong>WifiPpdu</strong></h4><p>与PhyEntity相同，ns3::WifiPpdu基类已专门化为以下特定于修正案的PPDU：</p>
+<ul>
+<li>ns3::DsssPpdu: PPDU for DSSS and HR/DSSS (11b)</li>
+<li>ns3::OfdmPpdu: PPDU for OFDM (11a and 11p)</li>
+</ul>
+<h4 id="YansWifiPhy-and-WifiPhyStateHelper"><a href="#YansWifiPhy-and-WifiPhyStateHelper" class="headerlink" title="YansWifiPhy and WifiPhyStateHelper"></a><strong>YansWifiPhy and WifiPhyStateHelper</strong></h4><p>类ns3::YansWifiPhy负责接收从MAC（ns3::FrameExchangeManager对象）传递给它的数据包，并将它们发送到它所连接的ns3::YangsWifiChannel上。它还负责从该信道接收数据包，如果接收被认为是成功的，则将其传递给MAC。</p>
+<p>预期接收的信号的能量是根据传输功率计算的，并根据发射器的 Tx 增益、接收器的 Rx 增益以及有效的任何路径损耗传播模型。</p>
+<p>类ns3::WifiPhyStateHelper管理PHY层的状态机，并允许其他对象作为侦听器挂接以监视PHY状态。侦听器的主要用途是让MAC层知道PHY何时繁忙（用于传输和避免冲突）。</p>
+<ul>
+<li>TX：PHY当前正在代表其关联的MAC发送信号，上层向下层转发</li>
+<li>RX：PHY在信号上同步，并等待，直到它接收到最后一个比特，将其转发到MAC，下层向上层转发。</li>
+<li>CCA_BUSY：PHY正在为主信道发出PHY-CCA.指示（BUSY）指示。</li>
+<li>空闲：PHY不处于TX、RX或CCA_BUSY状态。</li>
+<li>切换：物理层正在切换信道。</li>
+<li>睡眠：PHY处于省电模式，既不能发送也不能接收帧。</li>
+<li>关闭：PHY电源关闭，无法发送或接收帧。</li>
+</ul>
+<p>数据包接收工作如下。对于YansWifiPhy来说，大部分逻辑都是在WifiPhy基类中实现的。YansWifiChannel调用WifiPhy::StartReceivePreamble()。后者调用适当PHY实体的PhyEntity::StartReceivePreamble()来开始分组接收，但首先要对照存储在属性WifiPhy::RxSensitivity中的阈值来检查分组的概念信号功率电平。功率低于RxSensitivity的任何数据包都将被丢弃，无需进一步处理。默认值为-101 dBm，这是室温下20 MHz信号的热噪声基底。<br>该属性的目的有两个：1）不会影响结果的非常弱的信号将消耗模拟内存和事件处理，因此将其丢弃；2）可以向上调整该值，以作为涉及空间重用考虑的实验的基本载波感知阈值限制。提醒用户注意提高此阈值的行为；即功率低于该阈值的所有分组将在接收时被丢弃。</p>
+<p>在StartReceivePreamble()中，数据包被立即添加到干扰辅助器以进行信噪比跟踪，然后根据PHY的状态决定进一步的接收步骤。例如，在PHY正在发送的情况下，数据包将被丢弃。如果PHY是IDLE，或者如果PHY正在接收并且正在使用可选的FrameCaptureModel（并且数据包在捕获窗口内），则接下来调用PhyEntity::StartPreambleDetectionPeriod()。</p>
+<p>PhyEntity::StartPreambleDetectionPeriod。自ns-3.30中的模型修订以来，任何从IDLE状态转换的状态机都被抑制，直到前导码检测事件之后。</p>
+<p>PhyEntity::EndPreambleDetectionPeriod()方法将使用前导码检测模型来检查信号是否足够强以被接收，如果足够强，则为前导码的结尾调度事件；PhyEntity::EndReceiveField()，并且PHY被置于CCA_BUSY状态。目前，ns-3中只有一种简单的基于阈值的前导码检测模型，称为ThresholdPreambleDetectionModel。如果不存在前导码检测模型，则假定已经检测到前导码。需要注意的是，从ns-3.30版本开始，WifiPhyHelper中的默认设置是添加阈值前导检测模型，阈值RSSI为-82dBm，阈值SNR为4dB。RSSI(接受信号强度)和SNR都必须高于这些相应的值，才能成功地检测到前导码。与以前的版本相比，ns-3.30中的默认灵敏度有所降低，因此以前成功的一些数据包接收现在将在这次检查中失败。</p>
+<p>PhyEntity::EndReceiveField()方法将检查当前前导码和报头字段的正确接收，如果是，则为下一个字段调用PhyEntity::StartReceiveField()。指示（BUSY）不是针对主通道发出的。</p>
+<p>PhyEntity::StartReceiveField（）处的下一个事件使用干扰助手和错误模型检查标头是否成功解码，如果成功，则检查PhyRxPayloadBegin回调（相当于PHY-RXSTART原语）被触发。PHY报头通常以比有效载荷更低的调制速率来发送。<br>基于观测到的SNR来评估与PHY报头相对应的分组的部分的错误概率。InterferenceHelper对象根据InterferenceHelp跟踪的SNR返回此标头的“错误概率（PER）”值。然后，PhyEntity从均匀分布中提取一个随机数，并将其与PER进行比较，并决定成功或失败。</p>
+<p>这是重复执行的，直到调用PhyEntity::StartReceivePayload（）的数据字段的开头。</p>
+<p>即使PHY接收到的分组对象不是接收过程的一部分，它们也会被InterferenceHelper对象跟踪，用于SINR计算和做出明确的信道评估决策。如果在接收过程中，由于PHY处于不能接收分组的状态而导致分组出错或丢弃，则将分组添加到干扰辅助器，并且将所有这样的信号的能量的总和与能量检测阈值进行比较，以确定PHY是否应进入CCA_BUSY状态。</p>
+<p>如果PHY已经接收到占用具有高于WifiPhy::CcaSensitivity（默认为-82dBm）的接收功率的主信道的信号，或者如果主信道上的测量能量高于能量检测阈值WifiPhy::CcaEdThreshold（默认为-62dBm），则发出PHY-CA.指示（BUSY）。</p>
+<p>当使用信道绑定时，还报告未占用主信道的信号的CCA指示。由于802.11ac及以上版本需要检测大于20 MHz的辅助信道的CCA灵敏度，因此可以使用VhtConfiguration::SecondaryCaSensitivityThresholds属性按辅助信道宽度调整CCA灵敏度阈值。</p>
+<p>对于802.11ax及以上，并且如果操作带宽等于或大于40MHz，则正在感测操作带宽的每个20MHz子信道，并且PHY-CA指示还报告这些20MHz子通道中的每个的CCA_BUSY持续时间指示。给定20MHz子信道的零持续时间指示20MHz子通道为空闲。</p>
+<p>上面描述了分组是单个MPDU的情况。对于使用MPDU聚合的最新Wi-Fi标准，StartReceivePayload为每个单独的MPDU的接收安排一个事件（ScheduleEndOfMpdus），然后在MPDU到达FrameExchangeManager时转发每个MPDU（如果MPDU接收成功）。一旦A-MPDU接收完成，FrameExchangeManager也会收到关于成功接收的MPDU数量的通知。</p>
+<h4 id="InterferenceHelper"><a href="#InterferenceHelper" class="headerlink" title="InterferenceHelper"></a><strong>InterferenceHelper</strong></h4><p>InterferenceHelper是一个跟踪所有传入分组并计算正在接收的分组的错误值概率的对象，还评估信道上的能量是否上升到给定阈值以上以及上升超过给定阈值的时间。</p>
+<p>误差概率计算的基本操作如图SNIR函数所示。在ns-3模型中，数据包被表示为比特（而不是符号），InterferenceHelper将数据包分解为一个或多个“块”，每个“块”具有不同的信噪比（SNIR）。通过从所使用的错误模型中询问给定数量的比特的错误概率来单独评估每个块。InterferenceHelper基于这些块及其持续时间构建一个聚合的“错误概率”值，并将其返回给WifiPhy以进行接收决策。</p>
+<p>根据SNIR函数，我们可以导出用于传输的调制和编码方案的误码率（BER）和分组误码率（PER）；</p>
+<p>如果使用MIMO，并且空间流的数量低于接收机处的活动天线的数量，则如下将增益应用于计算的SNIR（因为没有使用STBC）：</p>
+<h4 id="ErrorRateModel"><a href="#ErrorRateModel" class="headerlink" title="ErrorRateModel"></a><strong>ErrorRateModel</strong></h4><p>ns-3基于帧的输入接收SNR并且基于可能在时间上重叠的任何可能的干扰帧来做出分组错误或成功决策；即基于信噪比（加干扰）或SINR。ns-3中的分组差错率（PER）和SINR之间的关系由ns3:：ErrorRateModel定义，其中有几个。PER是帧的调制和编码（MCS）、其SINR以及为MCS配置的特定ErrorRateModel的函数。</p>
+<p>ns-3已经随着时间的推移更新了其默认的ErrorRateModel。最近基于OFDM的标准（即802.11n/ac/ax）的当前（截至ns-3.33版本）模型是ns3:：TableBasedErrorRateModel。802.11a/g的默认值是ns3::YansErrorRateModel，802.11b的默认值为ns3::DsssErrorRateModel。<br>最新标准的错误率模型在ns-3.33发布周期内进行了更新（以前是ns3:：NistErrorRateModel）。</p>
+<h4 id="SpectrumWifiPhy"><a href="#SpectrumWifiPhy" class="headerlink" title="SpectrumWifiPhy"></a><strong>SpectrumWifiPhy</strong></h4><p>当前的SpectrumWifiPhy类重用了现有的干扰管理器和最初为YansWifiPhy构建的错误率模型，但作为第一步，允许将外来（非Wi-Fi）信号视为附加噪声。</p>
+<p>为了使频谱框架适应Wi-Fi，需要进行两项主要更改。首先，物理层必须发送与频谱信道框架兼容的信号，特别是允许来自不同技术的信号共存的MultiModelSpectrumChannel。其次，必须扩展InterferenceHelper以支持非Wi-Fi信号的插入，并将其接收功率添加到噪声中，就像将非预期的Wi-Fi信号（可能来自不同的SSID或从隐藏节点延迟到达）添加到噪声一样。</p>
+<p>与没有外部信号的YansWifiPhy不同，对于高于CcaEdThreshold的外部信号，将提升CCA_BUSY状态（有关CCA模式1的定义，请参阅802.11-2012标准中的第16.4.8.5节）。因此，属性WifiPhy:：CcaEdThreshold在该模型中可能比YansWifiPhy模型中发挥更大的作用。</p>
+<p>为了支持频谱信道，YansWifiPhy的发射和接收方法被调整为使用频谱信道API。这需要开发一些与SpectrumModel相关的类。WifiSpectrumValueHelper类用于创建具有频谱框架的Wi-Fi信号，并将其能量分布在频带上。频谱被细分为子频带（OFDM子载波的宽度，这取决于技术）。分配给特定信道的功率大致根据功率将如何分配给子载波而分布在子频带上。相邻信道是通过使用如标准中所定义的OFDM发射频谱掩码来建模的。</p>
+<p>为了支持更轻松的用户配置体验，复制并调整了现有的YansWifi辅助类（src/wifi/helper中），以提供等效的SpectrumWifi帮助类。</p>
+<p>最后，出于避免C++多重继承问题的原因，在SpectrumWifiPhy和Spectrum信道之间插入了一个名为WifiSpectrumPhyInterface的小型转发类作为垫片。<br>WifiSpectrumPhyInterface调用不同的SpectrumWifiPhy:：StartRx（）方法来启动接收过程。该方法根据WifiPhy:：RxSensitivity属性执行信号功率检查，并丢弃弱信号，还检查信号是否为Wi-Fi信号；非Wi-Fi信号被添加到InterferenceHelper，并且可以引起CCA_。在这一点之后，有效的Wi-Fi信号导致WifiPhy:：StartReceivePreamble被调用，并且处理如上所述继续。</p>
+<h4 id="MAC-Model"><a href="#MAC-Model" class="headerlink" title="MAC Model"></a><strong>MAC Model</strong></h4><p>基础设施模式下的关联是由关联管理器执行的高级MAC功能，它通过基类（WifiAssocManager）和默认子类（WifiDefaultAssocManager）来实现。<br>站点MAC、Association Manager基类和子类之间的交互如图扫描过程所示。</p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202304201900183.png" alt="image-20230420190055671"></p>
+<p>STA wifi MAC请求关联管理器启动具有指定参数的扫描过程，包括扫描类型（主动或被动）、所需SSID、要扫描的信道列表等。然后，STA wifi MAC期望在扫描过程结束时被通知要关联的最佳AP。在扫描期间接收到的每个信标或探测响应帧被转发到关联管理器，该关联管理器保持与扫描参数匹配的候选AP的列表。这种列表的排序标准是由Association Manager子类定义的。默认关联管理器按照接收到的信标/探测响应帧的SNR的递减顺序对AP进行排序。</p>
+<p>当被通知扫描过程开始时，默认关联管理器调度对一个方法的调用，该方法处理包括在接收到的帧中的信息，直到调用这种方法为止。当AP和STA都具有多个链路（即它们是802.11be MLD）时，默认的关联管理器尝试设置为尽可能多的链接。这涉及切换STA的一些链路上的操作信道，以匹配与AP MLD相关联的AP正在其上操作的那些链路。</p>
+<p>如果AP出于某种原因拒绝了关联，则STA将尝试与下一个最佳AP关联，直到候选列表耗尽，然后将STA发送到“拒绝”状态。如果发生这种情况，模拟用户将需要以某种方式强制重新关联重试，可能是通过改变配置（即，STA不会在拒绝时持续尝试关联）。</p>
+<p>当关联时，如果模拟用户更改了配置，则STA将尝试与现有AP重新关联。</p>
+<p>如果丢失信标的数量超过阈值，则STA将通知设备的其余部分链路断开（关联丢失），并重新启动扫描过程。注意，当关联请求在没有明确拒绝的情况下失败时（即，AP未能响应关联请求），也可能发生这种情况。</p>
+<h4 id="Channel-access"><a href="#Channel-access" class="headerlink" title="Channel access"></a><strong>Channel access</strong></h4><p>802.11<strong>分布式协调功能</strong>(Distributed Coordination Function)用于计算何时授予对传输介质的访问。<br>虽然如果我们使用每个插槽都过期的重复计时器，实现DCF会特别容易，但我们选择使用[ji2004sslswn]中描述的方法，在该方法中，无论何时需要，都会延迟计算退避计时器持续时间，因为据称它比更简单的重复计时器解决方案具有更好的性能。</p>
+<p>DCF基本访问在[iee80211-2016]第10.3.4.2节中进行了描述。</p>
+<ul>
+<li>“当STA在DCF接入方法下操作时，当STA确定帧排队等待传输时介质空闲，并且在DIFS或EIFS的一段时间内保持空闲时，STA可以发送MPDU（10.3.2.3.7）从紧接在前的介质繁忙事件结束，以较大者为准，并且回退计时器为零。否则，应遵循10.3.4.3中所述的随机退避程序。”</li>
+</ul>
+<p>因此，如果满足以下所有条件，则允许站点不调用退避过程：</p>
+<ul>
+<li>当帧排队等待传输时，介质处于空闲状态</li>
+<li>介质保持空闲，直到这两个事件中的最近一个：帧排队等待传输时的DIFS；上一次中忙事件结束时的EIFS（与错误帧的接收相关）</li>
+<li>退避定时器为零</li>
+</ul>
+<p>DCF的退避程序如[iee80211-2016]第10.3.4.3节所述。</p>
+<ul>
+<li>“当发现物理或虚拟CS机制指示的介质繁忙时，STA应调用退避过程来传输帧。“</li>
+<li>”每次传输结束后，应立即执行退避程序，将具有子类型PS轮询的数据、管理或控制类型的MPDU的More Fragments位设置为0，即使当前没有其他传输排队。“</li>
+</ul>
+<p>EDCA退避程序与DCF退避程序略有不同，如[iee80211-2016]第10.22.2.2节所述。当发生以下任何事件时，EDCAF应调用退避程序：</p>
+<ul>
+<li>帧“排队等待传输，使得与该AC(无线接入控制器)相关联的一个传输队列现在变为非空，而与该AC关联的任何其他传输队列都是空的；主信道上的介质繁忙”</li>
+<li>“在该AC的TXOP期间，TXOP支架传输的最终PPDU中的MPDU传输已完成，TXNAV计时器已过期，并且该AC是主AC”</li>
+<li>“TXOP的初始PPDU中MPDU的传输失败[..]，该AC是一个主AC”</li>
+<li>“传输尝试与具有更高优先级的AC的另一个EDCAF内部冲突”</li>
+<li>（可选）“TXOP持有者在TXOP的非初始PPDU中传输MPDU失败”</li>
+</ul>
+<p>此外，[iee80211-2016]第10.22.2.4节引入了时隙边界的概念，其基本上发生在作为接收具有正确FCS的帧的结果的最后繁忙介质之后的空闲介质的SIFS+AIFSN<em>slotTime之后，或者发生在作为导致FCS错误的帧接收的结果的最近指示繁忙介质之后空闲介质的EIFS-DIFS+AIFSN</em>slotTime+SFS之后，或者紧接在这些条件中的任何一个之后出现的空闲介质的slotTime之后。</p>
+<p>在这些特定的插槽边界上，每个EDCAF应确定执行以下一项且仅执行其中一项功能：</p>
+<ul>
+<li>递减退避定时器。</li>
+<li>启动帧交换序列的传输。</li>
+<li>由于内部冲突而调用退避程序。</li>
+<li>什么都不做。</li>
+</ul>
+<p>因此，如果EDCAF在给定时隙边界上递减其退避定时器，并且因此退避定时器具有零值，则EDCAF不能立即发送，但是它必须等待空闲介质的另一个slotTime才能开始发送。</p>
+<p>当信道接入管理器确定可以准许信道接入时，它基于PHY提供的CCA-BUSY指示来确定被认为空闲的最大主信道。这样的信息被传递到Frame Exchange Manage，帧交换管理者依次通知多用户调度器（如果有的话）和Wifi Remote Station Manage。因此，PPDU在最大空闲主信道上传输。例如，如果STA在40MHz信道上操作，并且辅助20信道被指示为繁忙，则传输将在主20信道上发生。</p>
+<p>更高级别的MAC函数在一组其他C++类中实现，并处理：</p>
+<ul>
+<li>数据包碎片化和碎片整理</li>
+<li>RTS/CTS协议的使用</li>
+<li>速率控制算法</li>
+<li>与接入点的连接和断开</li>
+<li>MAC传输队列</li>
+<li>信标生成</li>
+<li>MSDU聚合</li>
+</ul>
+<h4 id="Frame-Exchange-Managers"><a href="#Frame-Exchange-Managers" class="headerlink" title="Frame Exchange Managers"></a><strong>Frame Exchange Managers</strong></h4><p>随着IEEE 802.11标准的发展，越来越多的特征被添加，并且越来越难以由单个组件来处理所有允许的帧交换序列。引入了FrameExchangeManager类的层次结构，以使代码干净且可扩展，同时避免代码重复。每个FrameExchangeManager类都处理由给定修改引入的帧交换序列。FrameExchangeManager层次结构如图FrameExchangeManager层级结构所示。</p>
+<h4 id="MAC-queues"><a href="#MAC-queues" class="headerlink" title="MAC queues"></a><strong>MAC queues</strong></h4><p>每个EDCA功能（在QoS站上）和DCF（在非QoS站上的）具有它们自己的MAC队列（WifiMacQueue类的实例），以存储从上层接收并等待传输的分组。在QoS站上，每个接收到的分组基于套接字优先级被分配一个用户优先级（例如，参见wifi multi-tos或wifi mac ofdma示例），该优先级确定处理分组的接入类别。默认情况下，wifi MAC队列支持流量控制，因此，如果相应的MAC队列中没有数据包的空间，上层就不会向下转发数据包。数据包一直保留在wifi MAC队列中，直到它们被确认或丢弃。数据包可能会被丢弃，因为例如，它的寿命已过期（即，它在队列中停留的时间太长）或达到了最大重试次数。数据包的最大生存期可以通过WifiMacQueue的MaxDelay属性进行配置。有许多跟踪可用于跟踪数据包传输的结果（请参阅相应的doxygen文档）：</p>
+<ul>
+<li>WifiMac trace sources: AckedMpdu, NAckedMpdu, DroppedMpdu, MpduResponseTimeout, PsduResponseTimeout, PsduMapResponseTimeout </li>
+<li>WifiMacQueue trace source: Expired</li>
+</ul>
+<p>在内部，wifi MAC队列由多个子队列组成，每个子队列存储给定类型的帧（即数据或管理），并具有给定的接收器地址和TID。对于单用户传输，下一个要服务的站点由wifi MAC队列调度器（由WifiMac实例持有）确定。wifi MAC队列调度器通过基类（WifiMacQueueScheduler）和定义特定调度策略的子类来实现。<br>默认调度器（FcfsWifiQueueScheduler）赋予管理帧比数据帧更高的优先级，并且以先到先得的方式服务数据帧。对于多用户传输（见下文），调度由多用户调度器执行，多用户调度器可以咨询也可以不咨询wifi MAC队列调度器，以识别要使用多用户DL或UL传输服务的站。</p>
+<h4 id="Ack-manager"><a href="#Ack-manager" class="headerlink" title="Ack manager"></a><strong>Ack manager</strong></h4><p>由于引入了IEEE 802.11e修正案，因此可以使用多个确认策略，这些确认策略在QoS数据帧的QoS控制字段中的Ack Policy子字段中进行编码（参见IEEE 802.11-2016标准的9.2.4.5.4节）。例如，A-MPDU可以用正常确认或隐式块确认请求策略来发送，在这种情况下，接收器根据A-MPDU包含单个MPDU还是多个MPDU来用正常确认或者块确认来回复，或者用块确认策略来回复，在这种情况下，接收器等待将来接收块确认请求，并用块确认来回应。</p>
+<p>WifiAckManager是一个抽象基类，用于为多个ack管理器提供接口。目前，默认的ack管理器是WifiDefaultAckManager。</p>
+<h4 id="WifiDefaultAckManager"><a href="#WifiDefaultAckManager" class="headerlink" title="WifiDefaultAckManager"></a><strong>WifiDefaultAckManager</strong></h4><p>WifiDefaultAckManager允许根据其属性的值来确定要使用的确认策略：</p>
+<ul>
+<li>UseExplicitBar：用于确定在需要接收方响应且当前传输包括多个帧（a-MPDU）或之前传输的帧需要确认时使用的ack策略。如果此属性为true，则使用“阻止确认”策略。否则，将使用隐式阻止确认请求策略。</li>
+<li>BaThreshold：用于确定Block Ack协议的发起人何时需要向接收方请求响应。零值意味着在每次帧传输时都会请求响应。否则，非零值（小于或等于1）意味着在发送序列号与发送窗口的起始序列号相距至少BaThreshold乘以发送窗口大小的帧时请求响应。</li>
+<li>DlMuAckSequenceType：用于选择DL MU帧的确认序列（单用户格式的确认，通过作为单用户帧发送的MU-BAR触发帧的确认，或通过聚合到数据帧的MU-BAR触发帧的承认）。</li>
+</ul>
+<h4 id="Modifying-Wifi-model"><a href="#Modifying-Wifi-model" class="headerlink" title="Modifying Wifi model"></a><strong>Modifying Wifi model</strong></h4><p>修改默认的wifi型号是进行研究时的常见任务之一。我们在本节中概述了如何更改默认的wifi模式。根据您的目标，常见任务有（没有特定顺序）：</p>
+<ul>
+<li>通过更改wifi mac报头来创建或修改默认的Wi-Fi帧/报头。</li>
+<li><em>MAC低修改。例如，处理新的/修改的控制帧（想想RTS/CTS/ACK/Block ACK），对双向事务/四向事务进行更改。用户通常会对框架交换管理器.</em>或其子类进行更改以实现这一点。控制帧的处理在FrameExchangeManager::ReceiveMpdu中执行。</li>
+<li>MAC高修改。例如，处理新的管理帧（想想信标/探测）、信标/探测生成。用户通常会对wifi mac.<em>、“sta-wifi-mac.</em>”、ap wifi mac.<em>或ad-hoc wifi mac..</em>进行更改以实现这一点。</li>
+<li>Wi-Fi队列管理。文件txop.<em>和qos txop.</em>对此任务感兴趣。</li>
+<li>通道访问管理。用户应该修改文件通道访问管理器.*，该管理器授予对Txop和QosTxop的访问权限。</li>
+<li>分段和RTS威胁由Wi-Fi远程站点管理器处理。请注意，Wi-Fi远程站管理器只是指示是否需要分段和RTS。分段由Txop或QosTxop处理，而RTS/CTS事务由FrameExchangeManager处理。</li>
+<li>修改或创建新的速率控制算法可以通过创建新的Wi-Fi远程站管理器子类或修改现有的算法来完成。</li>
+</ul>
 
       
 
@@ -429,7 +446,11 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">网络编程</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ndn</a>
         		</li>
       		
 		</ul>
@@ -485,7 +506,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/07/25/%E9%AB%98%E6%80%A7%E8%83%BD%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2023/04/20/ndnSIM%E6%97%A0%E7%BA%BFWiFi%E6%A8%A1%E5%9D%97%E5%88%86%E6%9E%90/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -499,18 +520,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2022/07/28/MySQL%E7%89%9B%E5%AE%A2%E7%BD%91%E4%B9%A0%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          MySQL牛客网习题
-        
-      </div>
-    </a>
   
-  
-    <a href="/2022/07/16/EasyRL-2/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">EasyRL-2</div>
+    <a href="/2023/04/12/%E5%B0%8F%E6%9E%97%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9CHTTP%E7%AF%87/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">小林图解网络HTTP篇</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -537,7 +549,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E6%80%A7%E8%83%BD%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94accept%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5"><span class="toc-number">1.</span> <span class="toc-text">高性能网络编程（一）——accept建立连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E6%80%A7%E8%83%BD%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B2%E2%80%94%E2%80%94TCP%E6%B6%88%E6%81%AF%E7%9A%84%E5%8F%91%E9%80%81"><span class="toc-number">2.</span> <span class="toc-text">高性能网络编程2——TCP消息的发送</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E6%80%A7%E8%83%BD%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B3%E2%80%94%E2%80%94TCP%E6%B6%88%E6%81%AF%E7%9A%84%E6%8E%A5%E6%94%B6"><span class="toc-number">3.</span> <span class="toc-text">高性能网络编程3——TCP消息的接收</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E6%80%A7%E8%83%BD%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B4%E2%80%94TCP%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%85%B3%E9%97%AD"><span class="toc-number">4.</span> <span class="toc-text">高性能网络编程4—TCP连接的关闭</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3"><span class="toc-number">1.</span> <span class="toc-text">1. 设计文档</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E6%A8%A1%E5%9E%8B%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 模型概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MAC%E9%AB%98%E5%B1%82%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">MAC高层模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MAC%E4%BD%8E%E5%B1%82%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.2.</span> <span class="toc-text">MAC低层模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%A9%E7%90%86%E5%B1%82%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.3.</span> <span class="toc-text">物理层模型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E8%8C%83%E5%9B%B4%E5%92%8C%E9%99%90%E5%88%B6"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 范围和限制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E8%AE%BE%E8%AE%A1%E7%BB%86%E8%8A%82"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 设计细节</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WifiPhy%E5%92%8C%E7%9B%B8%E5%85%B3%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.4.</span> <span class="toc-text">WifiPhy和相关模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#PhyEntity"><span class="toc-number">1.4.1.</span> <span class="toc-text">PhyEntity</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#WifiPpdu"><span class="toc-number">1.4.2.</span> <span class="toc-text">WifiPpdu</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#YansWifiPhy-and-WifiPhyStateHelper"><span class="toc-number">1.4.3.</span> <span class="toc-text">YansWifiPhy and WifiPhyStateHelper</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#InterferenceHelper"><span class="toc-number">1.4.4.</span> <span class="toc-text">InterferenceHelper</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ErrorRateModel"><span class="toc-number">1.4.5.</span> <span class="toc-text">ErrorRateModel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SpectrumWifiPhy"><span class="toc-number">1.4.6.</span> <span class="toc-text">SpectrumWifiPhy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MAC-Model"><span class="toc-number">1.4.7.</span> <span class="toc-text">MAC Model</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Channel-access"><span class="toc-number">1.4.8.</span> <span class="toc-text">Channel access</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Frame-Exchange-Managers"><span class="toc-number">1.4.9.</span> <span class="toc-text">Frame Exchange Managers</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MAC-queues"><span class="toc-number">1.4.10.</span> <span class="toc-text">MAC queues</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Ack-manager"><span class="toc-number">1.4.11.</span> <span class="toc-text">Ack manager</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#WifiDefaultAckManager"><span class="toc-number">1.4.12.</span> <span class="toc-text">WifiDefaultAckManager</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Modifying-Wifi-model"><span class="toc-number">1.4.13.</span> <span class="toc-text">Modifying Wifi model</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
