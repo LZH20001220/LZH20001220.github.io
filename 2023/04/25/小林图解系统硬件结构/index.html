@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives | 博客杂记 - Harder and Better</title>
+  <title>小林图解系统硬件结构 | 博客杂记 - Harder and Better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -23,14 +23,26 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="博客杂记 - Harder and Better">
-<meta property="og:url" content="http://example.com/archives/page/3/index.html">
+  <meta name="description" content="1.操作系统之硬件结构1.1 CPU是如何执行程序的图灵机的原理：图灵机主要功能就是读取纸带格子中的内容，然后交给控制单元识别字符是数字还是运算符指令，如果是数字则存入到图灵机状态中，如果是运算符，则通知运算符单元读取状态中的数值进行计算，计算结果最终返回给读写头，读写头把结果写入到纸带的格子中。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小林图解系统硬件结构">
+<meta property="og:url" content="http://example.com/2023/04/25/%E5%B0%8F%E6%9E%97%E5%9B%BE%E8%A7%A3%E7%B3%BB%E7%BB%9F%E7%A1%AC%E4%BB%B6%E7%BB%93%E6%9E%84/index.html">
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
+<meta property="og:description" content="1.操作系统之硬件结构1.1 CPU是如何执行程序的图灵机的原理：图灵机主要功能就是读取纸带格子中的内容，然后交给控制单元识别字符是数字还是运算符指令，如果是数字则存入到图灵机状态中，如果是运算符，则通知运算符单元读取状态中的数值进行计算，计算结果最终返回给读写头，读写头把结果写入到纸带的格子中。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202304271711518.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202304271724827.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202304281143494.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202304281202542.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202304281628552.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202304282147860.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305011643859.png">
+<meta property="article:published_time" content="2023-04-25T08:19:45.000Z">
+<meta property="article:modified_time" content="2023-05-01T09:58:22.468Z">
 <meta property="article:author" content="ygtrece">
-<meta property="article:tag" content="学习, 日常">
+<meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202304271711518.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -182,439 +194,260 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-小林图解系统硬件结构" class="article article-type-post " itemscope itemprop="blogPost">
   
+<div class="article-inner">
+    
+      <header class="article-header">
+        
+        
+        <a href="/2023/04/25/%E5%B0%8F%E6%9E%97%E5%9B%BE%E8%A7%A3%E7%B3%BB%E7%BB%9F%E7%A1%AC%E4%BB%B6%E7%BB%93%E6%9E%84/" class="archive-article-date">
+  	<time datetime="2023-04-25T08:19:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-25</time>
+</a>
+
+
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">2.3k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">8分</span>
+      </span>
+    </span>
+</div>
+          
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p>
   
-    
-    
+    <h1 class="article-title_code_ant" itemprop="name">
+      小林图解系统硬件结构
+    </h1>
+  
+</p></center>
+      
+        <h2 id="1-操作系统之硬件结构"><a href="#1-操作系统之硬件结构" class="headerlink" title="1.操作系统之硬件结构"></a>1.操作系统之硬件结构</h2><h4 id="1-1-CPU是如何执行程序的"><a href="#1-1-CPU是如何执行程序的" class="headerlink" title="1.1 CPU是如何执行程序的"></a>1.1 CPU是如何执行程序的</h4><h5 id="图灵机的原理："><a href="#图灵机的原理：" class="headerlink" title="图灵机的原理："></a>图灵机的原理：</h5><p>图灵机主要功能就是读取纸带格子中的内容，然后交给控制单元识别字符是数字还是运算符指令，如果是数字则存入到图灵机状态中，如果是运算符，则通知运算符单元读取状态中的数值进行计算，计算结果最终返回给读写头，读写头把结果写入到纸带的格子中。  </p>
+<span id="more"></span>
+<p><strong>冯诺依曼模型：</strong>中央处理器（CPU）、内存、输入设备、输出设备、总线  </p>
+<ul>
+<li>内存：程序和数据都是存储在内存中，存储的区域是线性的。存储的单位是二进制位，最小的存储单位是字节。</li>
+<li>中央处理器：32位(CPU的位宽)CPU一次可以计算四个字节，64位CPU可以计算8个字节。</li>
+<li>总线：用于CPU和内存以及其他设备之间的通信，包括地址总线(指定CPU将要操作的内存地址)，数据总线(用于读写内存的数据)，控制总线(发送和接受中断，设备复位等信号)</li>
+<li>输入输出设备：如果输入设备是键盘，是需要和CPU进行交互的，这时就要用到控制总线了</li>
+<li>线路位宽和CPU位宽：低电压表示0，高电压表示1，线路位宽决定一次能访问多少内存地址，比如32条地址总线能访问2 ^ 32 = 4G的内存。</li>
+</ul>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202304271711518.png" alt="image-20230427171136340"></p>
+<h4 id="程序执行的基本过程："><a href="#程序执行的基本过程：" class="headerlink" title="程序执行的基本过程："></a>程序执行的基本过程：</h4><p>CPU读取程序计数器的内存地址，从内存里把需要执行的指令读取到指令寄存器里面执行，然后根据指令长度自增，开始顺序读取下一条指令。</p>
+<p>程序的CPU执行时间 = CPU时钟周期数 <em> 时钟周期时间 = 指令数 </em> 指令的平均时钟周期数 * 时钟周期时间</p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202304271724827.png" alt="image-20230427172412822"></p>
+<p>64和32位软件，实际上代表<strong>指令</strong>的64位的还是32位的，一般32位指令在64位机器执行，需要一套兼容机制，64位指令在32位机器上执行，就比较困难了。硬件的64位和32位指的是CPU的位宽，软件的64位和32位指的是指令的位宽。</p>
+<h4 id="1-2-存储器金字塔"><a href="#1-2-存储器金字塔" class="headerlink" title="1.2 存储器金字塔"></a>1.2 存储器金字塔</h4><p>断电后内存的数据会丢失，硬盘不会，因为其是持久化存储设备。</p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202304281143494.png" alt="image-20230428114327060"></p>
+<ul>
+<li>寄存器：最靠近CPU，速度最快，数量通常在几十到几百之间</li>
+<li>CPU Cache：用的是SRAM(有电数据就存在，断电数据就丢失了)静态随机存储器，分成L1,L2,L3三层高速缓存</li>
+<li>内存：使用DRAM，动态随机存储器</li>
+<li>SSD/HDD硬盘：SSD结构和内存类似，但是相比内存的优点是断电后数据依然存在。SSD比HDD快10 ~ 1000倍</li>
+</ul>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202304281202542.png" alt="image-20230428120211518"></p>
+<h4 id="1-3-如何写出让CPU跑的更快的代码"><a href="#1-3-如何写出让CPU跑的更快的代码" class="headerlink" title="1.3 如何写出让CPU跑的更快的代码"></a>1.3 如何写出让CPU跑的更快的代码</h4><p>CPU Cache缓存的结构如下：</p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202304281628552.png" alt="image-20230428162538005"></p>
+<p>CPU读取数据的顺序，先在Cache中找有没有，没有就到内存中去找，并把内存的数据读取到Cache中，CPU再从CPU Cache中读取数据。CPU Cache一次性加载64字节大小数据。</p>
+<p>想要代码跑得快，就要提高CPU的缓存命中率。</p>
+<ul>
+<li>比如二维数组，先遍历行，再遍历列的效率比反过来快很多，提高数据缓存命中率。</li>
+<li>再比如数据先排序，后遍历的顺序会更快，因为遍历时数据都是排好序的，提高指令缓存命中率。</li>
+</ul>
+<p>因为L1和L2Cache是每个核心独有的，当进程在多核CPU之间切换时，各个核心的缓存命中率就会收到影响，这时可以考虑把线程绑定到CPU某一个核心上。</p>
+<h4 id="1-4-CPU缓存一致性"><a href="#1-4-CPU缓存一致性" class="headerlink" title="1.4 CPU缓存一致性"></a>1.4 CPU缓存一致性</h4><p>数据写入的方法：写直达和写回</p>
+<ul>
+<li>写直达：把数据同时写入内存和Cache中。无论数据在不在Cache里面，每次写操作都会写回到内存。如果数据在Cache里有，还要写到Cache Block里</li>
+<li>写回：发生写操作时，新的数据仅仅被写入到Cache Block里，只有当Cache Block被替换时才需要写到内存中。可以理解为只有在缓存不命中，并且在Cache Block为脏的情况下，才将数据写到内存中，实际上就是如果想缓存数据到Cache(也就是缓存未命中时)，发现上次Cache的数据还没有写到内存中(也就是脏的)，就将数据写到Cache中</li>
+</ul>
+<p>为了解决CPU多核的缓存一致性问题，需要以下两种机制：</p>
+<ul>
+<li>写传播：某个CPU核心里的Cache数据更新时，必须要传播到其他核心的Cache</li>
+<li>事务的串行化：某个 CPU 核心里对数据的操作顺序，必须在其他核心看起来顺序是一样的，需要将对Cache数据的操作同步给其他CPU核心，并且需要锁机制</li>
+</ul>
+<h5 id="MESI协议："><a href="#MESI协议：" class="headerlink" title="MESI协议："></a>MESI协议：</h5><p>包括已修改(Modified)，独占(Exclusive)，共享(Shared)和已失效(Invalidated)四个状态</p>
+<p>已修改指数据在Cache Block更新，但没写到内存，已失效指数据失效，不能读取该状态的数据</p>
+<p>独占和共享指的是Cache的数据和内存的数据是一致的，独占指的是数据只存储在一个CPU核心的Cache里，共享指的是数据在多个CPU的Cache里都有</p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202304282147860.png" alt="image-20230428214756280"></p>
+<h4 id="1-5-CPU是如何执行任务的"><a href="#1-5-CPU是如何执行任务的" class="headerlink" title="1.5 CPU是如何执行任务的"></a>1.5 CPU是如何执行任务的</h4><p><strong>CPU读写数据：</strong>CPU 从内存中读取数据到 Cache 的时候，并不是一个字节一个字节读取，而是一块一块的方<br>式来读取数据的，这一块一块的数据被称为 CPU Line（缓存行），所以 CPU Line 是 CPU从内存读取数据到 Cache 的单位。Cache Line的大小一般是64个字节。因此访问数组时如果按照内存分布的地址顺序访问，能够充分利用Cache，提升程序性能。</p>
+<p><strong>Cache伪共存：</strong>多个线程同时读写同一个Cache Line的不同变量时，会重复4和5这两个步骤，Cache没有起到缓存的效果，虽然变量A和B没有关系，但他们同时归属于一个Cache Line，这个Cache Line的数据被修改后，都会相互影响。</p>
+<p>Cache Line也就是将数据附近的一组数据都读入进来，因为下次读取他们的可能性比较大，这时候就可以直接从内存中获取数据了。</p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305011643859.png" alt="image-20230501164036832"></p>
+<p>因为多个线程同时读写同⼀个 Cache Line 的不同变量时，而导致 CPU Cache 失效的现象称为伪共享（False Sharing） 。  </p>
+<p>Linux中用<code>__cacheline_aligned_in_smp</code> 宏定义，来解决伪共享的问题。 其功能是让在物理内存上连续的成员读到不同的Cache Line中，这样就避免了伪共存的问题。</p>
+<h5 id="CPU对任务的调度："><a href="#CPU对任务的调度：" class="headerlink" title="CPU对任务的调度："></a>CPU对任务的调度：</h5><p>在Linux系统中，根据任务的优先级以及相应要求，主要分为实时任务和普通任务两种，其中优先级的数值越小，优先级越高。</p>
+<p>完全公平调度：理念是分给每个任务的CPU时间是一样的。</p>
+<h4 id="1-6-软中断"><a href="#1-6-软中断" class="headerlink" title="1.6 软中断"></a>1.6 软中断</h4><p>在计算机中，中断是系统用来相应硬件设备请求的一种机制，操作系统收到硬件的中断请求，会打断正在执行的进程，然后调用内核的中断处理程序来相应请求。(有点像是外卖员给打电话，接到电话之前还会干自己的事)</p>
+<p>但是中断应该尽快执行完，这样可以减少对正常进行调度的影响。在Linux中将中断分成了两个阶段，上半部用于快速处理中断，也就是硬中断；下半部由内核触发，用来延迟处理上半部未完成的工作，特点是延迟执行，异步处理上半部未完成的工作，也就是软中断。</p>
+<p>以网卡为例：网卡收到数据包后，会通过硬件中断通知内核有新的数据到了，于是内核就会调用对应的中断处理程序来相应该事件，也就是将网卡的数据读到内存中，然后更新硬件寄存器的状态。接着，内核会触发软中断，主要是在内存中找到网络数据，然后按照网络协议栈，对网络数据进行逐层解析和处理，最后把数据发送给应用程序。</p>
+<h4 id="1-7-计算机中的数据存储"><a href="#1-7-计算机中的数据存储" class="headerlink" title="1.7 计算机中的数据存储"></a>1.7 计算机中的数据存储</h4><p>负数用补码表示：方法是其对应的正数取反再加一；</p>
+<p>十进制小数转换为二进制：整数部分使用除2取余法，小数部分使用乘2取余法。</p>
+<p>计算机存小数是用浮点数来存的，按照IEEE 754的标准，包括三个部分：</p>
+<ul>
+<li>符号位：0为正数，1为负数</li>
+<li>指数位：小数点在数据中的位置，指数位长度越长数的表示范围越大，为了避免负数，存的值是实际取值 + 127</li>
+<li>尾数位：小数右侧的数字，一共23位</li>
+</ul>
+<p>因为小数在保存时按照浮点数格式存，存的数据和真实数据可能存在微小的偏差。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/11/16/web%E7%BC%93%E5%AD%98%E6%8A%80%E6%9C%AF%E7%BB%BC%E8%BF%B0/" class="archive-article-date">
-  	<time datetime="2022-11-16T12:50:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-16</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/16/web%E7%BC%93%E5%AD%98%E6%8A%80%E6%9C%AF%E7%BB%BC%E8%BF%B0/">web缓存技术综述</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2023/04/25/%E5%B0%8F%E6%9E%97%E5%9B%BE%E8%A7%A3%E7%B3%BB%E7%BB%9F%E7%A1%AC%E4%BB%B6%E7%BB%93%E6%9E%84/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/11/16/NDN%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%8E%A8%E9%80%81%E8%AE%BA%E6%96%87/" class="archive-article-date">
-  	<time datetime="2022-11-16T10:23:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-16</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2023/04/21/%E5%B0%8F%E6%9E%97%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9CIP%E7%AF%87/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">小林图解网络IP篇</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
 
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/16/NDN%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%8E%A8%E9%80%81%E8%AE%BA%E6%96%87/">NDN与数据推送论文</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B9%8B%E7%A1%AC%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">1.操作系统之硬件结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-CPU%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F%E7%9A%84"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.1 CPU是如何执行程序的</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9B%BE%E7%81%B5%E6%9C%BA%E7%9A%84%E5%8E%9F%E7%90%86%EF%BC%9A"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">图灵机的原理：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="toc-number">1.0.2.</span> <span class="toc-text">程序执行的基本过程：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-%E5%AD%98%E5%82%A8%E5%99%A8%E9%87%91%E5%AD%97%E5%A1%94"><span class="toc-number">1.0.3.</span> <span class="toc-text">1.2 存储器金字塔</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-%E5%A6%82%E4%BD%95%E5%86%99%E5%87%BA%E8%AE%A9CPU%E8%B7%91%E7%9A%84%E6%9B%B4%E5%BF%AB%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="toc-number">1.0.4.</span> <span class="toc-text">1.3 如何写出让CPU跑的更快的代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-CPU%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7"><span class="toc-number">1.0.5.</span> <span class="toc-text">1.4 CPU缓存一致性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#MESI%E5%8D%8F%E8%AE%AE%EF%BC%9A"><span class="toc-number">1.0.5.1.</span> <span class="toc-text">MESI协议：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-CPU%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1%E7%9A%84"><span class="toc-number">1.0.6.</span> <span class="toc-text">1.5 CPU是如何执行任务的</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#CPU%E5%AF%B9%E4%BB%BB%E5%8A%A1%E7%9A%84%E8%B0%83%E5%BA%A6%EF%BC%9A"><span class="toc-number">1.0.6.1.</span> <span class="toc-text">CPU对任务的调度：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-6-%E8%BD%AF%E4%B8%AD%E6%96%AD"><span class="toc-number">1.0.7.</span> <span class="toc-text">1.6 软中断</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-7-%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8"><span class="toc-number">1.0.8.</span> <span class="toc-text">1.7 计算机中的数据存储</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/11/15/%E4%B8%80%E7%A7%8D%E6%95%B0%E6%8D%AE%E5%8C%85%E4%B8%BB%E5%8A%A8%E5%AF%BB%E8%B7%AF%E7%9A%84%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E8%BD%AC%E5%8F%91%E6%96%B9%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2022-11-15T13:04:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-15</time>
-</a>
+        
+    </div>
+</aside>
 
 
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/15/%E4%B8%80%E7%A7%8D%E6%95%B0%E6%8D%AE%E5%8C%85%E4%B8%BB%E5%8A%A8%E5%AF%BB%E8%B7%AF%E7%9A%84%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E8%BD%AC%E5%8F%91%E6%96%B9%E6%B3%95/">一种数据包主动寻路的命名数据网络转发方法</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/11/15/%E5%89%91%E6%8C%87offer-3/" class="archive-article-date">
-  	<time datetime="2022-11-15T03:13:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-15</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/15/%E5%89%91%E6%8C%87offer-3/">剑指offer-3</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/11/13/%E4%B8%93%E5%88%A9%E7%BA%BF%E4%B8%8A%E7%94%B3%E8%AF%B7%E6%B5%81%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2022-11-13T10:09:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-13</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/13/%E4%B8%93%E5%88%A9%E7%BA%BF%E4%B8%8A%E7%94%B3%E8%AF%B7%E6%B5%81%E7%A8%8B/">专利线上申请流程</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/11/09/Tiny-webserver/" class="archive-article-date">
-  	<time datetime="2022-11-09T11:32:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-09</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/09/Tiny-webserver/">Tiny-webserver</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/11/09/%E5%89%91%E6%8C%87offer-2/" class="archive-article-date">
-  	<time datetime="2022-11-09T01:42:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-09</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/09/%E5%89%91%E6%8C%87offer-2/">剑指offer-2</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/10/28/%E5%89%91%E6%8C%87offer/" class="archive-article-date">
-  	<time datetime="2022-10-28T03:04:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-28</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/10/28/%E5%89%91%E6%8C%87offer/">剑指offer</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/10/27/%E6%9C%8D%E5%8A%A1%E4%BA%8E%E8%BE%B9%E7%BC%98%EF%BC%9A%E5%9F%BA%E4%BA%8EICN%E7%9A%84%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/" class="archive-article-date">
-  	<time datetime="2022-10-27T11:17:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-27</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/10/27/%E6%9C%8D%E5%8A%A1%E4%BA%8E%E8%BE%B9%E7%BC%98%EF%BC%9A%E5%9F%BA%E4%BA%8EICN%E7%9A%84%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">服务于边缘：基于ICN的边缘计算服务架构</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NDN</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/10/26/NDN%E9%80%90%E8%B7%B3%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/" class="archive-article-date">
-  	<time datetime="2022-10-26T01:38:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-26</time>
-</a>
-
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/10/26/NDN%E9%80%90%E8%B7%B3%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/">NDN逐跳拥塞控制</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">网络</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NDN</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/2/">上一页</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/page/4/">4</a><a class="page-number" href="/archives/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/16/">16</a><a class="extend next" rel="next" href="/archives/page/4/">下一页;</a>
-    </nav>
   
 
+  
+
+  
 
           </div>
         </div>
@@ -657,8 +490,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
