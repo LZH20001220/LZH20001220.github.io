@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
 <meta property="og:description" content="Linux多进程开发：2.1进程概述程序是包含一系列信息的文件，这些信息描述了如何在运行时创建一个进程：这些信息又包括二进制格式标识，机器语言指令，程序入口地址，数据，符号表及重定位表，共享库和动态链接信息，其他信息。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2022/06/06/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-3/1.png">
-<meta property="og:image" content="http://example.com/2022/06/06/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-3/2.png">
-<meta property="og:image" content="http://example.com/2022/06/06/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-3/3.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171139919.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171139363.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171139369.png">
 <meta property="article:published_time" content="2022-06-06T03:44:25.000Z">
-<meta property="article:modified_time" content="2022-06-06T14:28:10.000Z">
+<meta property="article:modified_time" content="2023-05-17T03:40:00.153Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="项目">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/06/06/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-3/1.png">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171139919.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -260,7 +260,7 @@ var _hmt = _hmt || [];
 <p>时间片由操作系统内核的调度程序分配给每个进程。首先，内核会给每个进程分配相等的<strong>初始时间片</strong>，然后每个进程轮番地执行相应的时间，当所有进程都处于时间片耗尽的状态时，内核会重新为每个进程计算并分配时间片，如此往复。</p>
 <p><strong>2.1.2 并行和并发：</strong></p>
 <p><strong>并行 ( parallel)：</strong>指在同一时刻，有多条指令在多个处理器上同时执行。<br><strong>并发 ( concurrency)：</strong>指在同一时刻只能有一条指令执行，但多个进程指令被快速的轮换执行，使得在宏观上具有多个进程同时执行的效果，但在微观上并不是同时执行的，只是把时间分成若干段，使多个进程快速交替的执行。</p>
-<p><img src="/2022/06/06/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-3/1.png" alt="image-20220606120756385"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171139919.png" alt="image-20220606120756385"></p>
 <p><strong>2.1.3 进程控制块(PCB)：</strong></p>
 <p>为了管理进程，内核必须对每个进程所做的事情进行清楚的描述。内核为每个进程分配一个 PCB(Processing Control Block) 进程控制块，维护进程相关的信息。Linux 内核的进程控制块是 task_struct 结构体。</p>
 <p>其内部的成员函数有很多，需要主要掌握的有：</p>
@@ -280,8 +280,8 @@ var _hmt = _hmt || [];
 </ul>
 <p><code>ulimit -a</code>命令可以显示当前系统资源的上限</p>
 <h4 id="2-2-进程状态转换"><a href="#2-2-进程状态转换" class="headerlink" title="2.2 进程状态转换"></a>2.2 进程状态转换</h4><p>进程状态反映进程执行过程的变化。这些状态随着进程的执行和外界条件的变化而转换。在三态模型中，进程状态分为三个基本状态，即就绪态，运行态，阻塞态。在五态模型中，进程分为新建态、就绪态，运行态，阻塞态，终止态。</p>
-<p><img src="/2022/06/06/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-3/2.png" alt="image-20220606123133957"></p>
-<p><img src="/2022/06/06/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-3/3.png" alt="image-20220606123432151"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171139363.png" alt="image-20220606123133957"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171139369.png" alt="image-20220606123432151"></p>
 <ul>
 <li>运行态：进程占有处理器正在运行</li>
 <li>就绪态：进程具备运行条件，等待系统分配处理器以便运行。当进程已分配到除 CPU 以外的所有必要资源后，只要再获得 CPU ，便可立即执行。在一个系统中处于就绪状态的进程可能有多个，通常将它们排成一个队列，称为就绪队列</li>
@@ -642,11 +642,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -658,15 +658,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -674,15 +670,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -702,11 +702,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
+                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
+                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -718,11 +718,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">周报</a>
+                <a href="javascript:void(0)" class="js-tag color3">其他</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">其他</a>
+                <a href="javascript:void(0)" class="js-tag color3">周报</a>
               </li>
              
               <li class="article-tag-list-item">

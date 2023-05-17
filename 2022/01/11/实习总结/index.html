@@ -30,17 +30,17 @@
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
 <meta property="og:description" content="2022.1.11-1.13日上午今天认识了UiBot Creator, Power BI Desktop, Finereport这几个软件。 其中第一个软件是用于自动化的处理数据。 比如自动打开网页，自动下载数据，自动填表等等。但是其有一个问题就是对浏览器的要求很高，如果出现广告弹窗或者执行的过程中找不到应该对应的页面, 软件就会报错。 第二个软件可以做可视化报表, 具体的功能还没有了解。 第三">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2022/01/11/%E5%AE%9E%E4%B9%A0%E6%80%BB%E7%BB%93/1.png">
-<meta property="og:image" content="http://example.com/2022/01/11/%E5%AE%9E%E4%B9%A0%E6%80%BB%E7%BB%93/2.png">
-<meta property="og:image" content="http://example.com/2022/01/11/%E5%AE%9E%E4%B9%A0%E6%80%BB%E7%BB%93/3.png">
-<meta property="og:image" content="http://example.com/2022/01/11/%E5%AE%9E%E4%B9%A0%E6%80%BB%E7%BB%93/4.png">
-<meta property="og:image" content="http://example.com/2022/01/11/%E5%AE%9E%E4%B9%A0%E6%80%BB%E7%BB%93/5.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171232280.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171232773.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171232160.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171232508.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171232138.png">
 <meta property="article:published_time" content="2022-01-10T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-02-15T02:25:24.000Z">
+<meta property="article:modified_time" content="2023-05-17T04:32:27.350Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="其他">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/01/11/%E5%AE%9E%E4%B9%A0%E6%80%BB%E7%BB%93/1.png">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171232280.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -354,7 +354,7 @@ var _hmt = _hmt || [];
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> xlrd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> optimize</span><br><span class="line">book = xlrd.open_workbook(<span class="string">&#x27;./Desktop/1.xlsx&#x27;</span>)</span><br><span class="line">sheet1 = book.sheets()[<span class="number">0</span>]</span><br><span class="line">col3_values = sheet1.col_values(<span class="number">2</span>)</span><br><span class="line"><span class="comment">#print(&#x27;浏览量&#x27;,col3_values)</span></span><br><span class="line">col73_values = sheet1.col_values(<span class="number">72</span>)</span><br><span class="line"><span class="comment">#print(&#x27;字节订单&#x27;,col73_values)</span></span><br><span class="line">col80_values = sheet1.col_values(<span class="number">79</span>)</span><br><span class="line"><span class="comment">#print(&#x27;阿里订单&#x27;,col80_values)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f_1</span>(<span class="params">x, A, B</span>):</span><br><span class="line"> <span class="keyword">return</span> A * x + B</span><br><span class="line"></span><br><span class="line">A1, B1 = optimize.curve_fit(f_1, col3_values[<span class="number">1</span>:-<span class="number">1</span>], col73_values[<span class="number">1</span>:-<span class="number">1</span>])[<span class="number">0</span>]</span><br><span class="line">x1 = np.arange(<span class="number">44571</span>, <span class="number">226433</span>, <span class="number">1</span>)<span class="comment">#30和75要对应x0的两个端点，0.01为步长</span></span><br><span class="line">y1 = A1 * x1 + B1</span><br><span class="line"></span><br><span class="line">A2, B2 = optimize.curve_fit(f_1, col3_values[<span class="number">1</span>:-<span class="number">1</span>], col80_values[<span class="number">1</span>:-<span class="number">1</span>])[<span class="number">0</span>]</span><br><span class="line">x2 = np.arange(<span class="number">44571</span>, <span class="number">226433</span>, <span class="number">1</span>)<span class="comment">#30和75要对应x0的两个端点，0.01为步长</span></span><br><span class="line">y2 = A2 * x2 + B2</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">12</span>,<span class="number">8</span>))</span><br><span class="line">ax.scatter(col3_values[<span class="number">1</span>:-<span class="number">1</span>] , col73_values[<span class="number">1</span>:-<span class="number">1</span>], c=<span class="string">&#x27;b&#x27;</span>, marker=<span class="string">&#x27;o&#x27;</span>,label=<span class="string">&#x27;字节订单&#x27;</span>)</span><br><span class="line">plt.plot(x1, y1, <span class="string">&quot;b&quot;</span>,label = <span class="string">&#x27;字节订单拟合&#x27;</span>)</span><br><span class="line">ax.scatter(col3_values[<span class="number">1</span>:-<span class="number">1</span>] , col80_values[<span class="number">1</span>:-<span class="number">1</span>], c=<span class="string">&#x27;r&#x27;</span>, marker=<span class="string">&#x27;*&#x27;</span>,label=<span class="string">&#x27;阿里订单&#x27;</span>)</span><br><span class="line">plt.plot(x2, y2, <span class="string">&quot;r&quot;</span>,label = <span class="string">&#x27;阿里订单拟合&#x27;</span>)</span><br><span class="line">ax.legend()</span><br><span class="line">ax.set_xlabel(<span class="string">&#x27;浏览量&#x27;</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">&#x27;订单数&#x27;</span>)</span><br><span class="line">plt.rcParams[<span class="string">&#x27;font.sans-serif&#x27;</span>] = [<span class="string">u&#x27;SimHei&#x27;</span>] //解决文字不显示的问题</span><br><span class="line">plt.rcParams[<span class="string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="literal">False</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 <p>读取两组数据，并进行线性拟合</p>
 <p>结果:</p>
-<p><img src="/2022/01/11/%E5%AE%9E%E4%B9%A0%E6%80%BB%E7%BB%93/1.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171232280.png" alt></p>
 <p>实习前半个月的总结</p>
 <ul>
 <li><p>通过Uibot Creator爬虫获取公司产品的销售数据, python进行数据的可视化输出及分析；</p>
@@ -377,9 +377,9 @@ var _hmt = _hmt || [];
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wapchief/article/details/54602515">使用hexo+github免费搭建个人博客网站超详细教程_wapchief的博客-CSDN博客_hexo博客</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Yb411a7ty?spm_id_from=333.999.0.0">手把手教你从0开始搭建自己的个人博客 |无坑版视频教程| hexo_哔哩哔哩_bilibili</a></p>
 <p>博文格式为markdown格式, 存在E:/hexotext/source/_post中</p>
-<p><img src="/2022/01/11/%E5%AE%9E%E4%B9%A0%E6%80%BB%E7%BB%93/2.png" alt></p>
-<p><img src="/2022/01/11/%E5%AE%9E%E4%B9%A0%E6%80%BB%E7%BB%93/3.png" alt></p>
-<p><img src="/2022/01/11/%E5%AE%9E%E4%B9%A0%E6%80%BB%E7%BB%93/4.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171232773.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171232160.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171232508.png" alt></p>
 <p><strong>PowerBi的使用：</strong></p>
 <ol>
 <li>获取数据，选择想要导入的表格；</li>
@@ -387,7 +387,7 @@ var _hmt = _hmt || [];
 <li>点击报表然后就可以画图了，拖动数据可以自动画图，也可以改变图的各种细节，非常方便~~</li>
 </ol>
 <p><strong>一个demo：</strong></p>
-<p><img src="/2022/01/11/%E5%AE%9E%E4%B9%A0%E6%80%BB%E7%BB%93/5.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171232138.png" alt></p>
 
       
 
@@ -670,11 +670,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -686,15 +686,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -702,15 +698,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -730,11 +730,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
+                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
+                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -746,11 +746,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">周报</a>
+                <a href="javascript:void(0)" class="js-tag color3">其他</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">其他</a>
+                <a href="javascript:void(0)" class="js-tag color3">周报</a>
               </li>
              
               <li class="article-tag-list-item">

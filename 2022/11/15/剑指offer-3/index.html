@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
 <meta property="og:description" content="剑指 Offer 50. 第一个只出现一次的字符 - 力扣（LeetCode） 在字符串 s 中找出第一个只出现一次的字符。如果没有，返回一个单空格。 s 只包含小写字母。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://pic.leetcode-cn.com/1614274007-rtFHbG-Picture2.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171224449.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211171449895.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211171518661.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LZH20001220/pics/master/img/202211171518622.png">
 <meta property="article:published_time" content="2022-11-15T03:13:43.000Z">
-<meta property="article:modified_time" content="2022-11-22T03:09:04.000Z">
+<meta property="article:modified_time" content="2023-05-17T04:25:13.072Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://pic.leetcode-cn.com/1614274007-rtFHbG-Picture2.png">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171224449.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -255,7 +255,7 @@ var _hmt = _hmt || [];
 <p> 常规的思想：使用两重循环，但是会超时。</p>
 <p>使用归并排序的思想，</p>
 <p>时间复杂度 O(N \log N)，不会超时</p>
-<p><img src="https://pic.leetcode-cn.com/1614274007-rtFHbG-Picture2.png" alt="Picture2.png"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171224449.png" alt="Picture2.png"></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//归并排序</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">reversePairs</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">tmp</span><span class="params">(nums.size())</span></span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">mergeSort</span>(<span class="number">0</span>, nums.<span class="built_in">size</span>() - <span class="number">1</span>, nums, tmp);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">mergeSort</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r, vector&lt;<span class="type">int</span>&gt;&amp; nums, vector&lt;<span class="type">int</span>&gt;&amp; tmp)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 终止条件</span></span><br><span class="line">        <span class="keyword">if</span> (l &gt;= r) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 递归划分</span></span><br><span class="line">        <span class="type">int</span> m = (l + r) / <span class="number">2</span>;</span><br><span class="line">        <span class="type">int</span> res = <span class="built_in">mergeSort</span>(l, m, nums, tmp) + <span class="built_in">mergeSort</span>(m + <span class="number">1</span>, r, nums, tmp);</span><br><span class="line">        <span class="comment">// 合并阶段</span></span><br><span class="line">        <span class="type">int</span> i = l, j = m + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> k = l; k &lt;= r; k++)</span><br><span class="line">            tmp[k] = nums[k];   <span class="comment">//全部暂存到tmp</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> k = l; k &lt;= r; k++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i == m + <span class="number">1</span>)</span><br><span class="line">                nums[k] = tmp[j++]; <span class="comment">//代表左子数组已合并完，因此添加右子数组当前元素 tmp[j]tmp[j]</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (j == r + <span class="number">1</span> || tmp[i] &lt;= tmp[j])</span><br><span class="line">                nums[k] = tmp[i++]; <span class="comment">// j == r + 1代表右子数组已合并完；tmp[i] &lt;= tmp[j]代表添加左子数组当前元素 tmp[i]</span></span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                nums[k] = tmp[j++];</span><br><span class="line">                res += m - i + <span class="number">1</span>; <span class="comment">// 统计逆序对，第i个元素大于第j个元素，则i到m之间的元素都大于i，也就大于j，因此加m - i + 1个逆序对</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/liang-ge-lian-biao-de-di-yi-ge-gong-gong-jie-dian-lcof/">剑指 Offer 52. 两个链表的第一个公共节点 - 力扣（LeetCode）</a></p>
 <p>输入两个链表，找出它们的第一个公共节点。思路就是A指针先遍历A链表，遍历完再遍历B。B指针先遍历B链表，再遍历A链表，两者相遇的节点即为相交节点</p>
@@ -608,11 +608,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -624,15 +624,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -640,15 +636,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -668,11 +668,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
+                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
+                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -684,11 +684,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">周报</a>
+                <a href="javascript:void(0)" class="js-tag color3">其他</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">其他</a>
+                <a href="javascript:void(0)" class="js-tag color3">周报</a>
               </li>
              
               <li class="article-tag-list-item">

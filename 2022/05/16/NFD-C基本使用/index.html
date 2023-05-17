@@ -30,25 +30,25 @@
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
 <meta property="og:description" content="NFD-C，netmgmt网络管理功能及程序使用说明netmgmt主要起网络管理作用，独立于NFD-C转发模块，工作模式为“客户端——服务器”，客户端可以理解为网管节点，服务器为网络内其他节点，两者通过“兴趣包——数据包”的端到端通信模式实现对网络的管理：客户端向服务器发送兴趣包，服务器返回相应的数据包以获取网内各节点的网络状况（cs、route、face、发包等）。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2022/05/16/NFD-C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/1.png">
-<meta property="og:image" content="http://example.com/2022/05/16/NFD-C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/2.png">
-<meta property="og:image" content="http://example.com/2022/05/16/NFD-C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/3.png">
-<meta property="og:image" content="http://example.com/2022/05/16/NFD-C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/4.png">
-<meta property="og:image" content="http://example.com/2022/05/16/NFD-C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/5.png">
-<meta property="og:image" content="http://example.com/2022/05/16/NFD-C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/6.png">
-<meta property="og:image" content="http://example.com/2022/05/16/NFD-C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/7.png">
-<meta property="og:image" content="http://example.com/2022/05/16/NFD-C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/8.png">
-<meta property="og:image" content="http://example.com/2022/05/16/NFD-C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/9.png">
-<meta property="og:image" content="http://example.com/2022/05/16/NFD-C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/10.png">
-<meta property="og:image" content="http://example.com/2022/05/16/NFD-C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/11.png">
-<meta property="og:image" content="http://example.com/2022/05/16/NFD-C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/12.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171157509.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171157401.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171158722.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171158985.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171158776.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171158493.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171158294.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171158624.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171158662.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171158087.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171158701.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171158917.png">
 <meta property="article:published_time" content="2022-05-16T11:14:27.000Z">
-<meta property="article:modified_time" content="2022-05-16T11:30:22.000Z">
+<meta property="article:modified_time" content="2023-05-17T03:58:50.728Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="科研">
 <meta property="article:tag" content="NDN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/05/16/NFD-C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/1.png">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171157509.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -275,9 +275,9 @@ var _hmt = _hmt || [];
 <p><code>sudo traceroute -p ndn</code> </p>
 <p>其中ndn 为建立路由时-p后面的名称前缀。</p>
 <p><strong><em>\</em>应用举例：**</strong></p>
-<p><img src="/2022/05/16/NFD-C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/1.png" alt="img"> </p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171157509.png" alt="img"> </p>
 <p>如图所示，兴趣包经过3个节点，每经过一个节点则将节点信息存入兴趣包里的param字段，服务器端将这些存于兴趣包中的节点信息放入数据包的value字段后发给客户端，最终由客户端完成解析提取出所经过的节点信息，服务端则显示接收到兴趣包。</p>
-<p><img src="/2022/05/16/NFD-C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/2.png" alt="img"> </p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171157401.png" alt="img"> </p>
 <h3 id="配置管理（Configuration-Management）"><a href="#配置管理（Configuration-Management）" class="headerlink" title="\配置管理（Configuration Management）**"></a><strong><em>\</em>配置管理（Configuration Management）**</strong></h3><p>配置管理负责初始化网络、并配置网络，以使其提供网络服务。配置管理是一组对辨别、定义、控制和监视组成一个通信网络的对象所必要的相关功能,目的是为了实现某个特定功能或使网络性能达到最优。这包括：</p>
 <p>●设置开放系统中有关路由操作的参数</p>
 <p>●被管对象和被管对象组名字的管理</p>
@@ -290,25 +290,25 @@ var _hmt = _hmt || [];
 <p><strong>创建face：</strong></p>
 <p>sudo nfdc-face create -r ether://b4:2e:99:f7:f0:0f -l dev://enp5s0</p>
 <p><strong><em>\</em>说明**</strong>：sudo 为运行程序所需要的权限，nfdc-face为程序名，create为输入的参数（可更改参数以实现不同功能，此处为创建face），-r 后面接 ether/udp（协议，二选一即可）://（此处内容由之前协议类型确定，udp对应远端ip端口号，ether对应远端MAC地址），-l 后面接 dev://本机网卡号，若创建成功，则会返回一个faceID。</p>
-<p><img src="/2022/05/16/NFD-C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/3.png" alt="img"> </p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171158722.png" alt="img"> </p>
 <p><strong>根据faceID建立路由：</strong></p>
 <p>sudo nfdc-route add -p :ndn -f 263</p>
 <p>注意这里的循环前缀-p :ndn生成/ndn的前缀，-p ndn生成ndn前缀。</p>
 <p><strong><em>\</em>说明**</strong>：sudo 为运行程序所需要的权限，nfdc-face为程序名，add为输入的参数（可更改参数以实现不同功能，此处为添加路由），-p 后面接发送兴趣包的名称前缀，-f 后面接上一步获得的faceID。</p>
-<p><img src="/2022/05/16/NFD-C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/4.png" alt="img"> </p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171158985.png" alt="img"> </p>
 <p><strong>接口删除：</strong></p>
 <p>sudo nfdc-face destroy -f face_id </p>
 <p><strong><em>\</em>说明**</strong>：执行上述命令可以删除对应的face，-f 后的face_id即所需删除的接口号。</p>
-<p><img src="/2022/05/16/NFD-C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/5.png" alt="img"> </p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171158776.png" alt="img"> </p>
 <p><strong>²</strong> <strong><em>\</em>接口状态启用/禁用：**</strong></p>
 <p>sudo nfdc-face up/down -p :ndn </p>
 <p><strong><em>\</em>说明：**</strong>执行上述命令可以使所需要的face禁用/启用，-p 后面跟的是名称前缀，up/down完成对-p前缀下fib(转发信息库)查找到的全部face接口进行操作。</p>
 <p>（down和destroy的区别在于，执行down操作，face仍存在，但是转发不了数据，相当于禁用，而执行完destroy操作后face将不存在）</p>
-<p><img src="/2022/05/16/NFD-C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/6.png" alt="img"> </p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171158493.png" alt="img"> </p>
 <p><strong><em>\</em>路由删除：**</strong></p>
 <p>sudo nfdc-route destroy -p :ndn -f face_id </p>
 <p><strong><em>\</em>说明：**</strong>执行上述命令可以删除face_id对应的路由路径，-p 后面跟的是名称前缀， -f 后面跟的是端口号。</p>
-<p><img src="/2022/05/16/NFD-C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/7.png" alt="img"> </p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171158294.png" alt="img"> </p>
 <h3 id="计费管理（Accounting-Management）"><a href="#计费管理（Accounting-Management）" class="headerlink" title="\计费管理（Accounting Management）**"></a><strong><em>\</em>计费管理（Accounting Management）**</strong></h3><p>计费管理记录网络资源的使用，目的是控制和监测网络操作的费用和代价。包括以下功能：</p>
 <p>●通过计费管理功能可以估算出用户使用网络资源可能需要的费用和代价，以及已经使用的资源。</p>
 <p>●网络管理员可以规定用户可使用的最大费用，从而控制用户过多占用和使用网络资源。</p>
@@ -323,19 +323,19 @@ var _hmt = _hmt || [];
 <p><strong><em>\</em>cs显示：**</strong></p>
 <p>sudo nfdc-cs show </p>
 <p><strong><em>\</em>说明：**</strong>执行命令可以显示出cs条目中的容量、命中数、未命中数。</p>
-<p><img src="/2022/05/16/NFD-C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/8.png" alt="img"> </p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171158624.png" alt="img"> </p>
 <p><strong>路由表显示:</strong></p>
 <p>sudo nfdc-route show </p>
 <p><strong><em>\</em>说明：**</strong>执行命令可以显示出当前的路由信息，包括接口号和远端MAC地址。</p>
-<p><img src="/2022/05/16/NFD-C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/9.png" alt="img"> </p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171158662.png" alt="img"> </p>
 <p><strong><em>\</em>face显示：**</strong></p>
 <p>sudo nfdc-face show</p>
 <p><strong><em>\</em>说明：**</strong>执行命令可以显示当前的接口信息，包括face_id、接口状态、本地地址和远端地址。</p>
-<p><img src="/2022/05/16/NFD-C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/10.png" alt="img"> </p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171158087.png" alt="img"> </p>
 <p><strong><em>\</em>status*<em>**</em></strong>*处理：*<em>*</em></p>
 <p>sudo nfdc-status show</p>
 <p><strong><em>\</em>说明：**</strong>nfdc-status提供了网络状态相关的处理方法，执行命令可以显示当前的face、route、cs信息，若添加参数 -f xml，则可以将数据以xml语言格式显示。</p>
-<p><img src="/2022/05/16/NFD-C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/11.png" alt="img"> </p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171158701.png" alt="img"> </p>
 <p>对于转发率的计算，NDN-C通过在一定时间内持续发送数据包来实现，用转发的数据包数目除以花费的时间，就可以得到转发率。在NFD-C程序中，发包程序包括peek,chunk,batch,</p>
 <p>ping这四种，具体使用方法如下（以ping为例）：</p>
 <p>在两端运行NFD-C程序，并完成创建face和建立路由之后，服务器执行</p>
@@ -345,7 +345,7 @@ var _hmt = _hmt || [];
 <p>其中，应先执行服务器端的程序再执行客户端的程序，ndn 为建立路由时-p后面的名称前缀。</p>
 <p>peek, chunk, batch 运行方式均与ping相似，只是结果有所不同。peek每次只发送一个兴趣包，服务器根据兴趣包名称前缀发送相应的数据包；batch每次可以发送多个数据包，每次发送的数目可以在sudo batch -p ndn 后添加 -c count来确定，count为一次发送数据包的个数，如果不添加，则默认为10000，即一次发送10000个兴趣包（不等待返回的数据包）；ping则为持续发送兴趣包，可以通过在sudo ping -p ndn 后添加 -i interval来控制间隔时长（单位为毫秒），若不添加，则默认等待时间为1000毫秒；chunk用于获取相应目录下的文件，首先服务器端执行sudo chunk-server -p ndn -d /home/folder进入到相应文件目录下，客户端执行sudo chunk -p ndn -f filename 发送一个兴趣包,ndn为名称前缀，filename为文件名，服务器找到相应目录下的文件后返回文件大小，客户端计算获得整个文件所需的数据包个数并发送相同个数的兴趣包。</p>
 <p>转发率的计算使用batch函数，执行上述操作，令发包数目（count）为7000，执行结果如下：</p>
-<p><img src="/2022/05/16/NFD-C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/12.png" alt="img"> </p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171158917.png" alt="img"> </p>
 <p>通过计算可以得到转发率 &gt; 10000 packets/s。</p>
 <h3 id="安全管理（Security-Management）"><a href="#安全管理（Security-Management）" class="headerlink" title="\安全管理（Security Management）**"></a><strong><em>\</em>安全管理（Security Management）**</strong></h3><p>网络安全管理包括对授权机制、访问控制、加密和加密关键字的管理，另外还要维护和检查安全日志。包括以下功能：</p>
 <p>●创建、删除、控制安全服务和机制</p>
@@ -638,11 +638,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -654,15 +654,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -670,15 +666,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -698,11 +698,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
+                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
+                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -714,11 +714,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">周报</a>
+                <a href="javascript:void(0)" class="js-tag color3">其他</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">其他</a>
+                <a href="javascript:void(0)" class="js-tag color3">周报</a>
               </li>
              
               <li class="article-tag-list-item">

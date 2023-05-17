@@ -30,18 +30,18 @@
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
 <meta property="og:description" content="tag电路图： U8的20MHz为FPGA的外部时钟输入">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2021/12/29/tag%E7%94%B5%E8%B7%AF%E5%9B%BE/1.png">
-<meta property="og:image" content="http://example.com/2021/12/29/tag%E7%94%B5%E8%B7%AF%E5%9B%BE/3.png">
-<meta property="og:image" content="http://example.com/2021/12/29/tag%E7%94%B5%E8%B7%AF%E5%9B%BE/4.png">
-<meta property="og:image" content="http://example.com/2021/12/29/tag%E7%94%B5%E8%B7%AF%E5%9B%BE/5.png">
-<meta property="og:image" content="http://example.com/2021/12/29/tag%E7%94%B5%E8%B7%AF%E5%9B%BE/2.png">
-<meta property="og:image" content="http://example.com/2021/12/29/tag%E7%94%B5%E8%B7%AF%E5%9B%BE/6.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171202761.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171203229.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171203513.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171203212.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171203007.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171203508.png">
 <meta property="article:published_time" content="2021-12-29T15:10:20.000Z">
-<meta property="article:modified_time" content="2022-02-22T15:35:38.000Z">
+<meta property="article:modified_time" content="2023-05-17T04:03:37.863Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="科研">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/12/29/tag%E7%94%B5%E8%B7%AF%E5%9B%BE/1.png">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171202761.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -248,16 +248,16 @@ var _hmt = _hmt || [];
   
 </p></center>
       
-        <h3 id="tag电路图："><a href="#tag电路图：" class="headerlink" title="tag电路图："></a>tag电路图：</h3><p><img src="/2021/12/29/tag%E7%94%B5%E8%B7%AF%E5%9B%BE/1.png" alt="img"></p>
+        <h3 id="tag电路图："><a href="#tag电路图：" class="headerlink" title="tag电路图："></a>tag电路图：</h3><p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171202761.png" alt="img"></p>
 <p>U8的20MHz为FPGA的外部时钟输入</p>
 <span id="more"></span>
-<p><img src="/2021/12/29/tag%E7%94%B5%E8%B7%AF%E5%9B%BE/3.png" alt="img"> </p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171203229.png" alt="img"> </p>
 <p>SMA1是一个射频输入，但其不做反向散射，只用来告诉tag什么时候信号来了，（这时tag再进行反射0和1?如果是这样SMA1和SMA2是同步的吗？）（解答：不能保证完全同步，只要保证大致同步即可）。SMA1作为U2的射频源，U2是一个整流器，可以把射频输入的交流转换为直流。然后在Vout输出一个直流信号。</p>
-<p><img src="/2021/12/29/tag%E7%94%B5%E8%B7%AF%E5%9B%BE/4.png" alt="img"> </p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171203513.png" alt="img"> </p>
 <p>U3是一个比较器，其中RSS和U2中的RSS是接在一起的，3口输入的电压和4口的电压作比较作为1口输出的结果，应该为0或1。</p>
-<p><img src="/2021/12/29/tag%E7%94%B5%E8%B7%AF%E5%9B%BE/5.png" alt="img"> </p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171203212.png" alt="img"> </p>
 <p>U4是一个滑动变阻器，Ref_RSS与U3中的Ref_RSS相连，用于控制U3的4口的电压值。</p>
-<p> <img src="/2021/12/29/tag%E7%94%B5%E8%B7%AF%E5%9B%BE/2.png" alt="img"></p>
+<p> <img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171203007.png" alt="img"></p>
 <p>SMA2接根天线作为射频输入，做反向散射，原理是标签的MCU产生20MHz的方波，以定义标签想要传输的信息。当比较器的输出为1时，将标签想要传输的信息嵌入到OFDM射频信号中，进而对原输入的OFDM射频信号进行调制。最后通过SMA2反射携带有标签信息的信号。</p>
 <p>FPGA控制tag五根线两根连P3的VCC和GND。另外三根连接P1的JA1连接data，JA3连接comp_out，VCC连接RSS_en。疑问：FPGA是做控制的，为什么要接data和comp_out呢，这两个为什么不是直接通过tag接受通过天线发的信号通过tag内部的电路就能实现吗？那根线是通过产生方波控制tag的开关的。</p>
 <p>（tag本身不是类似于单片机的，tag本身也有FPGA可以进行控制，只是还没有开发出来，因此才需要外接一个ZYNQ进行控制，实际可以只用tag实现实验。直观的感受：tag连接到FPGA上FPGA的灯才会闪烁。）</p>
@@ -265,7 +265,7 @@ var _hmt = _hmt || [];
 <p>答：应该是通过MCU控制的。AGLN250V2-VQ100</p>
 <p>SMA2是同时进行输入和输出吗？</p>
 <p>答：可以近似的认为可以</p>
-<p><img src="/2021/12/29/tag%E7%94%B5%E8%B7%AF%E5%9B%BE/6.png" alt="img"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171203508.png" alt="img"></p>
 
       
 
@@ -548,11 +548,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -564,15 +564,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -580,15 +576,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -608,11 +608,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
+                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
+                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -624,11 +624,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">周报</a>
+                <a href="javascript:void(0)" class="js-tag color3">其他</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">其他</a>
+                <a href="javascript:void(0)" class="js-tag color3">周报</a>
               </li>
              
               <li class="article-tag-list-item">

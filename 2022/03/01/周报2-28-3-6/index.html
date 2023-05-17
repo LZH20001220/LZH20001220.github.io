@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
 <meta property="og:description" content="继续进行了Wifi grc的搭建。上周对框图进行了反向散射的仿真，得到了理想的效果，但是将仿真换成USRP传输时出现了问题，分析后发现是因为仿真中有一个Packet Pad2模块，其作用是将经过FFT的数据进行打包后发出，连接USRP的测试需要去掉此模块。 当去掉此模块后，不能进行正常的反向散射的仿真实验，因为不能确定每个数据包有多少个采样点，也就是对应于应该在多少个点的位置模拟相位改变。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2022/03/01/%E5%91%A8%E6%8A%A52-28-3-6/3.png">
-<meta property="og:image" content="http://example.com/2022/03/01/%E5%91%A8%E6%8A%A52-28-3-6/1.png">
-<meta property="og:image" content="http://example.com/2022/03/01/%E5%91%A8%E6%8A%A52-28-3-6/2.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171241955.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171241228.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171241333.png">
 <meta property="article:published_time" content="2022-03-01T06:56:02.000Z">
-<meta property="article:modified_time" content="2022-03-04T07:30:36.000Z">
+<meta property="article:modified_time" content="2023-05-17T04:41:47.515Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="科研">
 <meta property="article:tag" content="周报">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/03/01/%E5%91%A8%E6%8A%A52-28-3-6/3.png">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171241955.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -251,11 +251,11 @@ var _hmt = _hmt || [];
 <span id="more"></span>
 <p>从发送端接收到<code>matlab</code>是连续波形，因此无法确定那一部分是一个数据包的长度。</p>
 <p>从接收端接收波形到<code>matlab</code>，发现每个数据包大约占1300个采样点，每个包之间的间隔为35458个采样点？？还是与真正的采样率对不上，原因暂时没有找到，收到的波形如下：</p>
-<p><img src="/2022/03/01/%E5%91%A8%E6%8A%A52-28-3-6/3.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171241955.png" alt></p>
 <p><strong>这种方法失败猜测可能的原因：数据包之间间隔时间不一样？</strong></p>
 <p>针对以上假设，只考虑第一个包的情况，当直接将同步后的信号乘以方波，就可以模拟反向散射的信号，当对包的<code>850~950</code>个点进行反射时，就可以得到调相后的信号，发现每次运行时第一个包改变的位置都相同。</p>
-<p><img src="/2022/03/01/%E5%91%A8%E6%8A%A52-28-3-6/1.png" alt></p>
-<p><img src="/2022/03/01/%E5%91%A8%E6%8A%A52-28-3-6/2.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171241228.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171241333.png" alt></p>
 <p>多次实验，发现都是第5到第7位改变。</p>
 <p>而如果先将信号与方波相乘再通过<code>USRP</code>传输，得到的反射信号不正常，猜测是因为乘了方波对同步造成了影响，因此考虑用<code>tag</code>继续测试。</p>
 <p>用<code>tag</code>进行实验与前面的用<code>USRP</code>做测试不同，为了防止原信号和反射信号相互干扰，<code>tag</code>必须对原有的信号进行移频处理。通过<code>tag</code>产生方波对原信号进行移频，而在某些位置通过将<code>tag</code>原有的方波与 <code>&#39;1&#39;</code> 做异或，即可使方波与原来的方波相位相差180°，相当于仿真中的对原信号乘 <code>-1</code>，与 <code>&#39;0&#39;</code> 做异或，相当于保持原有的方波不变。</p>
@@ -550,11 +550,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -566,15 +566,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -582,15 +578,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -610,11 +610,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
+                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
+                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -626,11 +626,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">周报</a>
+                <a href="javascript:void(0)" class="js-tag color3">其他</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">其他</a>
+                <a href="javascript:void(0)" class="js-tag color3">周报</a>
               </li>
              
               <li class="article-tag-list-item">

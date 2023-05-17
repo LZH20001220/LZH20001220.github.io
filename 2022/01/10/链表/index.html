@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
 <meta property="og:description" content="链表的定义：链表是一种通过指针串联在一起的线性结构，每一个节点由两部分组成，一个是数据域一个是指针域（存放指向下一个节点的指针），最后一个节点的指针域指向null（空指针） 数组是在内存中是连续分布的，但是链表在内存中不是连续分布的 C++中的链表定义方式：  123456&#x2F;&#x2F; 单链表struct ListNode &amp;#123;    int val;  &#x2F;&#x2F; 节点上存储的元素    ListN">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2022/01/10/%E9%93%BE%E8%A1%A8/1.png">
-<meta property="og:image" content="http://example.com/2022/01/10/%E9%93%BE%E8%A1%A8/2.png">
-<meta property="og:image" content="http://example.com/2022/01/10/%E9%93%BE%E8%A1%A8/3.png">
-<meta property="og:image" content="http://example.com/2022/01/10/%E9%93%BE%E8%A1%A8/4.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171229164.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171229187.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171229046.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171229362.png">
 <meta property="article:published_time" content="2022-01-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-03-04T12:11:14.000Z">
+<meta property="article:modified_time" content="2023-05-17T04:29:41.370Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/01/10/%E9%93%BE%E8%A1%A8/1.png">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171229164.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -258,7 +258,7 @@ var _hmt = _hmt || [];
 <p>如果使用默认的构造函数，不可以直接赋值：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ListNode* head = <span class="keyword">new</span> <span class="built_in">ListNode</span>();</span><br><span class="line">head-&gt;val = <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
 <p>链表的类型:单链表，双链表，循环链表</p>
-<p>链表删除结点:<br><img src="/2022/01/10/%E9%93%BE%E8%A1%A8/1.png" alt><br>链表添加结点:<br><img src="/2022/01/10/%E9%93%BE%E8%A1%A8/2.png" alt><br>性能分析:<br><img src="/2022/01/10/%E9%93%BE%E8%A1%A8/3.png" alt></p>
+<p>链表删除结点:<br><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171229164.png" alt><br>链表添加结点:<br><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171229187.png" alt><br>性能分析:<br><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171229046.png" alt></p>
 <p>移除链表元素时注意删除时直接将指针指向下一个结点, C++要记得删除该节点占的空间。 为了处理要删除的结点是头节点的情况，有两种方法:一种是直接对头节点特殊处理，如果要删除头节点就将头节点设为下一个节点。另一种是设置一个虚拟头指针dummyhead, 然后对链表进行统一处理。</p>
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-linked-list-elements/">203. 移除链表元素</a><br>方法1:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">removeElements</span><span class="params">(ListNode* head, <span class="type">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 删除头结点</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> (head != <span class="literal">NULL</span> &amp;&amp; head-&gt;val == val) &#123; <span class="comment">// 注意这里不是if</span></span><br><span class="line">            ListNode* tmp = head;</span><br><span class="line">            head = head-&gt;next;</span><br><span class="line">            <span class="keyword">delete</span> tmp;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 删除非头结点</span></span><br><span class="line">        ListNode* cur = head;</span><br><span class="line">        <span class="keyword">while</span> (cur != <span class="literal">NULL</span> &amp;&amp; cur-&gt;next != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (cur-&gt;next-&gt;val == val) &#123;</span><br><span class="line">                ListNode* tmp = cur-&gt;next;</span><br><span class="line">                cur-&gt;next = cur-&gt;next-&gt;next;</span><br><span class="line">                <span class="keyword">delete</span> tmp;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                cur = cur-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <p>注意声明cur时要在处理完头结点后, 不能先将head结点复制给cur再对head结点进行操作。</p>
@@ -283,7 +283,7 @@ var _hmt = _hmt || [];
 <p>如果链表中有某个节点，可以通过连续跟踪 next 指针再次到达，则链表中存在环。 为了表示给定链表中的环，评测系统内部使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。如果 pos 是 -1，则在该链表中没有环。注意：pos 不作为参数进行传递，仅仅是为了标识链表的实际情况。</p>
 <p>不允许修改 链表。</p>
 <p><strong>思路</strong>: 双指针的思想，创建一个快指针和一个慢指针，快指针一次走两个步长，满指针一次走一个步长。如果有环，则两指针一定会橡胶，且快指针比满指针多走了n圈。</p>
-<p><img src="/2022/01/10/%E9%93%BE%E8%A1%A8/4.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171229362.png" alt></p>
 <p>x = z + (n - 1) * (y + z), 因此可以再新建两个指针，一个在头结点，一个在相遇结点，同时向后移动，如果两个指针相遇则找到环形入口节点。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode *<span class="title">detectCycle</span><span class="params">(ListNode *head)</span> </span>&#123;</span><br><span class="line">        ListNode *dummynode = <span class="keyword">new</span> <span class="built_in">ListNode</span>(<span class="number">0</span>);</span><br><span class="line">        dummynode-&gt;next = head;</span><br><span class="line">        ListNode *fast = head;</span><br><span class="line">        ListNode *slow = head;</span><br><span class="line">        <span class="keyword">while</span>(fast != <span class="literal">NULL</span> &amp;&amp; fast-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">            fast = fast-&gt;next-&gt;next;</span><br><span class="line">            <span class="keyword">if</span> (slow == fast)</span><br><span class="line">            &#123;</span><br><span class="line">                ListNode *index1 = fast;</span><br><span class="line">                ListNode *index2 = head;</span><br><span class="line">                <span class="keyword">while</span>(index1 !=index2)</span><br><span class="line">                &#123;</span><br><span class="line">                    index1 = index1-&gt;next;</span><br><span class="line">                    index2 = index2-&gt;next;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> index1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
       
@@ -567,11 +567,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -583,15 +583,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -599,15 +595,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -627,11 +627,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
+                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
+                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -643,11 +643,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">周报</a>
+                <a href="javascript:void(0)" class="js-tag color3">其他</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">其他</a>
+                <a href="javascript:void(0)" class="js-tag color3">周报</a>
               </li>
              
               <li class="article-tag-list-item">

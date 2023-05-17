@@ -30,22 +30,22 @@
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
 <meta property="og:description" content="一、PSK系统进一步研究在上周实验的基础上继续分析框图，首先将信道影响全部去除，噪声(noise voltage)和频偏(frequency offset)都设为0。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/1.png">
-<meta property="og:image" content="http://example.com/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/2.png">
-<meta property="og:image" content="http://example.com/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/3.png">
-<meta property="og:image" content="http://example.com/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/4.png">
-<meta property="og:image" content="http://example.com/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/ofdm_loop.png">
-<meta property="og:image" content="http://example.com/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/tx_OFDM.png">
-<meta property="og:image" content="http://example.com/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/tx_OFDM_data.png">
-<meta property="og:image" content="http://example.com/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/rx_OFDM.png">
-<meta property="og:image" content="http://example.com/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/rx_OFDM_data.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171239512.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171239900.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171239029.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171239441.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171239860.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171239601.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171239730.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171240509.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171240838.png">
 <meta property="article:published_time" content="2022-01-08T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-02-22T15:48:02.000Z">
+<meta property="article:modified_time" content="2023-05-17T04:40:18.555Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="科研">
 <meta property="article:tag" content="周报">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/1.png">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171239512.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -293,20 +293,20 @@ var _hmt = _hmt || [];
 <p>将PMT数据类型转换为byte类型，数据流以数据包包长为tag进行标注</p>
 <p><strong><code>Message Debug</code>模块对数据进行输出</strong></p>
 <p>print端口输出message作为数据包的key, print_pdu端口输出message作为数据包的value.</p>
-<p><img src="/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/1.png" alt><br><img src="/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/2.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171239512.png" alt><br><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171239900.png" alt></p>
 <h5 id="3-向Vector-Source中加标签"><a href="#3-向Vector-Source中加标签" class="headerlink" title="3. 向Vector Source中加标签"></a>3. 向Vector Source中加标签</h5><p>用到<code>Tag Object</code>模块，offset表示偏移，变量的数据类型都是pmt; Vector Source中定义tag要输入tag的ID号.</p>
-<p><img src="/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/3.png" alt><br><img src="/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/4.png" alt></p>
-<h5 id="4-OFDM例程"><a href="#4-OFDM例程" class="headerlink" title="4.OFDM例程"></a>4.OFDM例程</h5><p><img src="/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/ofdm_loop.png" alt><br><strong>OFDM_loopback模块</strong></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171239029.png" alt><br><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171239441.png" alt></p>
+<h5 id="4-OFDM例程"><a href="#4-OFDM例程" class="headerlink" title="4.OFDM例程"></a>4.OFDM例程</h5><p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171239860.png" alt><br><strong>OFDM_loopback模块</strong></p>
 <p>其grc类似于上周的PSK,也是仿真系统,多加了一个<a target="_blank" rel="noopener" href="https://wiki.gnuradio.org/index.php/OFDM_Transmitter">OFDM Transmitter</a>和<a target="_blank" rel="noopener" href="https://wiki.gnuradio.org/index.php/OFDM_Receiver">OFDM Receiver</a>,预计其结果也是仿真时加一个延时能同步,通过USRP不能同步,因此如何实现能通过同步头来同步数据很重要.</p>
 <p><code>Occupied Carriers</code>:数据子载波; <code>Pilot Carriers</code>:导频子载波</p>
 <p>数据头的调制方式:BPSK; 负载的调制方式:QPSK;</p>
 <p>不能同步只能仿真没啥意义，就没有接USRP测试。</p>
-<p><strong>tx_OFDM模块</strong>的grc:<br><img src="/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/tx_OFDM.png" alt><br><a target="_blank" rel="noopener" href="https://wiki.gnuradio.org/index.php/Stream_CRC32">Stream CRC32</a>模块: 产生CRC</p>
+<p><strong>tx_OFDM模块</strong>的grc:<br><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171239601.png" alt><br><a target="_blank" rel="noopener" href="https://wiki.gnuradio.org/index.php/Stream_CRC32">Stream CRC32</a>模块: 产生CRC</p>
 <p><a target="_blank" rel="noopener" href="https://wiki.gnuradio.org/index.php/Protocol_Formatter">Protocol Formatter</a>模块: 从<code>Tagged Stream</code>中创建数据包头, 然后将数据包头打包为1bit/byte, 以便后续进行BPSK。 将数据有效载荷打包为2bit/byte, 以便后续进行QPSK。 </p>
 <p><a target="_blank" rel="noopener" href="https://wiki.gnuradio.org/index.php/Tag_Gate">Tag Gate</a>: 根据标签的Key判断是否允许标签通过。</p>
 <p><code>Sync Word 1</code>和<code>Sync Word 2</code>是两个用于同步的前导码, 第一个同步码用于频率偏移和时序估计,<br>第二个同步码用于粗略的频率偏移和信道估计.</p>
-<p>此框图通过<code>Tag Debug</code>产生的数据为:<br><img src="/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/tx_OFDM_data.png" alt></p>
-<p><strong>rx_OFDM模块</strong>的grc:<br><img src="/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/rx_OFDM.png" alt><br>这个模块加入了前导码做同步.</p>
+<p>此框图通过<code>Tag Debug</code>产生的数据为:<br><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171239730.png" alt></p>
+<p><strong>rx_OFDM模块</strong>的grc:<br><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171240509.png" alt><br>这个模块加入了前导码做同步.</p>
 <p><a target="_blank" rel="noopener" href="https://wiki.gnuradio.org/index.php/Tag_Debug"><strong>Tag Debug模块</strong></a></p>
 <p> 此块收集发送到所有输入端口上的所有标记,并且显示在terminal中, 有点类似于<code>Message Debug</code>, Name标识<code>Tag Debug</code>的名称,终端中首先输出. <code>Key Filter</code>表示过滤器,可以选择自己想要的标签.<code>Display</code>表示要不要把数据显示在终端.</p>
 <p><a target="_blank" rel="noopener" href="https://wiki.gnuradio.org/index.php/Schmidl_%26_Cox_OFDM_synch."><strong>Schmidl &amp; Cox OFDM synch模块</strong></a>模块:进行频率同步</p>
@@ -323,7 +323,7 @@ var _hmt = _hmt || [];
 <p>如果报头解调失败，报头必须发送一个值为 pmt::PMT_F 的 PMT。 状态被重置，标题被忽略。</p>
 <p><strong><code>Stream CRC32</code></strong></p>
 <p>生成数据的CRC或者检查数据的CRC, 在接收端就是检查数据的CRC。</p>
-<p>此框图通过<code>Tag Debug</code>产生的数据为:<br><img src="/2022/01/09/%E5%91%A8%E6%8A%A51.3-1.9/rx_OFDM_data.png" alt></p>
+<p>此框图通过<code>Tag Debug</code>产生的数据为:<br><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171240838.png" alt></p>
 <p><strong>实验</strong></p>
 <p>利用tx_OFDM模块和rx_OFDM模块进行了实验,其中tx_OFDM使用台式机, rx_OFDM使用笔记本.USRP中心频率设为2.4GHz, 采样频率设为300KHz, tx增益为30, rx增益为50;发送终端一直输出U，输出端输出几个数据就变成O了, 有待进一步的调试。 </p>
 <p>当把tx_OFDM模块和rx_OFDM模块放在一个框图中不能正常进行传输, 接收端口的灯一直不亮, 原因是发送端口和接收端口的信息速率不匹配.终端一直输出U或者O.</p>
@@ -617,11 +617,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -633,15 +633,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -649,15 +645,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -677,11 +677,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
+                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
+                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -693,11 +693,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">周报</a>
+                <a href="javascript:void(0)" class="js-tag color3">其他</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">其他</a>
+                <a href="javascript:void(0)" class="js-tag color3">周报</a>
               </li>
              
               <li class="article-tag-list-item">

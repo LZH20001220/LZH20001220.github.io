@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
 <meta property="og:description" content="452. 用最少数量的箭引爆气球 - 力扣（LeetCode） (leetcode-cn.com) 有一些球形气球贴在一堵用 XY 平面表示的墙面上。墙面上的气球记录在整数数组 points ，其中points[i] &#x3D; [xstart, xend] 表示水平直径在 xstart 和 xend之间的气球。你不知道气球的确切 y 坐标。 一支弓箭可以沿着 x 轴从不同点 完全垂直 地射出。在坐标 x">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2022/04/13/%E8%B4%AA%E5%BF%83-2/1.png">
-<meta property="og:image" content="http://example.com/2022/04/13/%E8%B4%AA%E5%BF%83-2/2.png">
-<meta property="og:image" content="http://example.com/2022/04/13/%E8%B4%AA%E5%BF%83-2/3.png">
-<meta property="og:image" content="http://example.com/2022/04/13/%E8%B4%AA%E5%BF%83-2/4.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171235243.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171236751.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171236302.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171236428.png">
 <meta property="article:published_time" content="2022-04-13T15:36:10.000Z">
-<meta property="article:modified_time" content="2022-12-08T05:40:16.000Z">
+<meta property="article:modified_time" content="2023-05-17T04:36:22.578Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/04/13/%E8%B4%AA%E5%BF%83-2/1.png">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171235243.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -258,7 +258,7 @@ var _hmt = _hmt || [];
 <p>既然按照起始位置排序，那么就从前向后遍历气球数组，靠左尽可能让气球重复。</p>
 <p>从前向后遍历遇到重叠的气球了怎么办？</p>
 <p><strong>如果气球重叠了，重叠气球中右边边界的最小值 之前的区间一定需要一个弓箭</strong>。</p>
-<p><img src="/2022/04/13/%E8%B4%AA%E5%BF%83-2/1.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171235243.png" alt></p>
 <p>首先判断2的左边界是否小于1的右边界，以确定要不要加剑，如果不需要加剑，在判断1和2的右边界哪个更小，将小的那个给2作为新的右边界，这样可以用于之后判断3的左边界和2的右边界是否有交集。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间复杂度：$O(n\log n)$，因为有一个快排</span></span><br><span class="line"><span class="comment">//空间复杂度：$O(1)$</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">bool</span> <span class="title">cmp</span><span class="params">(vector &lt;<span class="type">int</span>&gt; &amp;a, vector &lt;<span class="type">int</span>&gt; &amp;b)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a[<span class="number">0</span>] &lt; b[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">findMinArrowShots</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; points)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(points.<span class="built_in">size</span>() == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">sort</span>(points.<span class="built_in">begin</span>(), points.<span class="built_in">end</span>(), cmp);</span><br><span class="line">        <span class="type">int</span> result = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; points.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(points[i][<span class="number">0</span>] &gt; points[i - <span class="number">1</span>][<span class="number">1</span>])</span><br><span class="line">            result++;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            points[i][<span class="number">1</span>] = <span class="built_in">min</span>(points[i][<span class="number">1</span>], points[i - <span class="number">1</span>][<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/non-overlapping-intervals/">435. 无重叠区间 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
@@ -267,7 +267,7 @@ var _hmt = _hmt || [];
 <p>按照右边界排序，就要从左向右遍历，因为右边界越小越好，只要右边界越小，留给下一个区间的空间就越大，所以从左向右遍历，优先选右边界小的。</p>
 <p><strong>我来按照右边界排序，从左向右记录非交叉区间的个数。最后用区间总数减去非交叉区间的个数就是需要移除的区间个数了</strong>。</p>
 <p>此时问题就是要求非交叉区间的最大个数。</p>
-<p><img src="/2022/04/13/%E8%B4%AA%E5%BF%83-2/2.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171236751.png" alt></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间复杂度：O(nlog n) ，有一个快排</span></span><br><span class="line"><span class="comment">//空间复杂度：O(1)</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">//按照区间的右边界排序</span></span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">bool</span> <span class="title">cmp</span><span class="params">(vector &lt;<span class="type">int</span>&gt; &amp;a, vector &lt;<span class="type">int</span>&gt; &amp;b)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a[<span class="number">1</span>] &lt; b[<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">eraseOverlapIntervals</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; intervals)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(intervals.<span class="built_in">size</span>() == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> result = <span class="number">1</span>;	<span class="comment">//result是最后留几个</span></span><br><span class="line">        <span class="built_in">sort</span>(intervals.<span class="built_in">begin</span>(), intervals.<span class="built_in">end</span>(), cmp);</span><br><span class="line">        <span class="type">int</span> end = intervals[<span class="number">0</span>][<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; intervals.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(end &lt;= intervals[i][<span class="number">0</span>])</span><br><span class="line">            &#123;</span><br><span class="line">                end = intervals[i][<span class="number">1</span>];</span><br><span class="line">                result++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> intervals.<span class="built_in">size</span>() - result;	<span class="comment">//总个数 - 最后留下的就是要删除的</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/partition-labels/">763. 划分字母区间 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
 <p>字符串 <code>S</code> 由小写字母组成。我们要把这个字符串划分为尽可能多的片段，同一字母最多出现在一个片段中。返回一个表示每个字符串片段的长度的列表。</p>
@@ -278,14 +278,14 @@ var _hmt = _hmt || [];
 <li>统计每一个字符最后出现的位置</li>
 <li>从头遍历字符，并更新字符的最远出现下标，如果找到字符最远出现位置下标和当前下标相等了，则找到了分割点</li>
 </ul>
-<p><img src="/2022/04/13/%E8%B4%AA%E5%BF%83-2/3.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171236302.png" alt></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间复杂度：$O(n)$</span></span><br><span class="line"><span class="comment">//空间复杂度：$O(1)$，使用的hash数组是固定大小</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">partitionLabels</span><span class="params">(string S)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> hash[<span class="number">27</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; S.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            hash[S[i] - <span class="string">&#x27;a&#x27;</span>] = i; <span class="comment">//数组作为哈希表, 元素对应的最后一个位置赋给当前数组</span></span><br><span class="line">        &#125;</span><br><span class="line">        vector &lt;<span class="type">int</span>&gt; result;</span><br><span class="line">        <span class="type">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> right = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; S.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            right = <span class="built_in">max</span>(right, hash[S[i] - <span class="string">&#x27;a&#x27;</span>]);</span><br><span class="line">            <span class="keyword">if</span>(i == right)</span><br><span class="line">            &#123;</span><br><span class="line">                result.<span class="built_in">push_back</span>(right- left + <span class="number">1</span>);</span><br><span class="line">                left = i + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/merge-intervals/">56. 合并区间 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
 <p>以数组 <code>intervals</code> 表示若干个区间的集合，其中单个区间为 <code>intervals[i] = [starti, endi]</code> 。请你合并所有重叠的区间，并返回 <strong>一个不重叠的区间数组，该数组需恰好覆盖输入中的所有区间</strong> 。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：intervals = [[1,3],[2,6],[8,10],[15,18]]</span><br><span class="line">输出：[[1,6],[8,10],[15,18]]</span><br><span class="line">解释：区间 [1,3] 和 [2,6] 重叠, 将它们合并为 [1,6].</span><br></pre></td></tr></table></figure>
 <p>按照左边界从小到大排序之后，如果 <code>intervals[i][0] &lt; intervals[i - 1][1]</code> 即intervals[i]左边界 &lt; intervals[i - 1]右边界，则一定有重复，因为intervals[i]的左边界一定是大于等于intervals[i - 1]的左边界。</p>
 <p>即：intervals[i]的左边界在intervals[i - 1]左边界和右边界的范围内，那么一定有重复！</p>
-<p><img src="/2022/04/13/%E8%B4%AA%E5%BF%83-2/4.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171236428.png" alt></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间复杂度：$O(n\log n)$ ，有一个快排</span></span><br><span class="line"><span class="comment">//空间复杂度：$O(1)$，没有算result数组（返回值所需容器占的空间）</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">bool</span> <span class="title">cmp</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;a, vector&lt;<span class="type">int</span>&gt; &amp;b)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a[<span class="number">0</span>] &lt; b[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">merge</span>(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; intervals) &#123;</span><br><span class="line">        vector &lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">        <span class="built_in">sort</span>(intervals.<span class="built_in">begin</span>(), intervals.<span class="built_in">end</span>(), cmp);</span><br><span class="line">        result.<span class="built_in">push_back</span>(intervals[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; intervals.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(result.<span class="built_in">back</span>()[<span class="number">1</span>] &gt;= intervals[i][<span class="number">0</span>]) <span class="comment">//合并区间</span></span><br><span class="line">            &#123;</span><br><span class="line">                result.<span class="built_in">back</span>()[<span class="number">1</span>] = <span class="built_in">max</span>(result.<span class="built_in">back</span>()[<span class="number">1</span>], intervals[i][<span class="number">1</span>]);<span class="comment">//更新右边界</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                result.<span class="built_in">push_back</span>(intervals[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/monotone-increasing-digits/">738. 单调递增的数字 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
 <p>当且仅当每个相邻位数上的数字 <code>x</code> 和 <code>y</code> 满足 <code>x &lt;= y</code> 时，我们称这个整数是单调递增的。</p>
@@ -622,11 +622,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -638,15 +638,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -654,15 +650,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -682,11 +682,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
+                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
+                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -698,11 +698,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">周报</a>
+                <a href="javascript:void(0)" class="js-tag color3">其他</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">其他</a>
+                <a href="javascript:void(0)" class="js-tag color3">周报</a>
               </li>
              
               <li class="article-tag-list-item">

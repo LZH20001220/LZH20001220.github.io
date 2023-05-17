@@ -30,14 +30,14 @@
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
 <meta property="og:description" content="需要两点注意的是:  数组下标都是从0开始的。  数组内存空间的地址是连续的。  数组的元素是不能删的，只能覆盖。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2022/01/04/%E6%95%B0%E7%BB%84/1.gif">
-<meta property="og:image" content="http://example.com/2022/01/04/%E6%95%B0%E7%BB%84/2.gif">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171234093.gif">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171234342.gif">
 <meta property="article:published_time" content="2022-01-03T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-03-04T12:11:26.000Z">
+<meta property="article:modified_time" content="2023-05-17T04:34:50.465Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/01/04/%E6%95%B0%E7%BB%84/1.gif">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171234093.gif">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -291,12 +291,12 @@ var _hmt = _hmt || [];
 <p>string(s)表示字符串<br>s.length 表示字符串的长度<br>resize()，设置大小（size）;<br>reserve()，设置容量（capacity）;<br>size()是分配容器的内存大小，而capacity()只是设置容器容量大小，但并没有真正分配内存。<br>打个比方：正在建造的一辆公交车，车里面可以设置40个座椅（reserve(40);），这是它的容量，但并不是说它里面就有了40个座椅，只能说明这部车内部空间大小可以放得下40张座椅而已。而车里面安装了40个座椅(resize(40);)，这个时候车里面才真正有了40个座椅，这些座椅就可以使用了</p>
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/squares-of-a-sorted-array/">977. 有序数组的平方 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">sortedSquares</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> k = A.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">result</span><span class="params">(A.size(), <span class="number">0</span>)</span></span>; <span class="comment">//初始化一个全0的vector</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>, j = A.<span class="built_in">size</span>() - <span class="number">1</span>; i &lt;= j;) &#123; <span class="comment">// 注意这里要i &lt;= j，因为最后要处理两个元素</span></span><br><span class="line">            <span class="keyword">if</span> (A[i] * A[i] &lt; A[j] * A[j])  &#123;</span><br><span class="line">                result[k--] = A[j] * A[j];</span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                result[k--] = A[i] * A[i];</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>双指针的方法。<br><img src="/2022/01/04/%E6%95%B0%E7%BB%84/1.gif" alt></p>
+<p>双指针的方法。<br><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171234093.gif" alt></p>
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-size-subarray-sum/">209. 长度最小的子数组 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
 <p>给定一个含有 n 个正整数的数组和一个正整数 target 。</p>
 <p>找出该数组中满足其和 ≥ target 的长度最小的 连续子数组 [numsl, numsl+1, …, numsr-1, numsr] ，并返回其长度。如果不存在符合条件的子数组，返回 0 。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//滑动窗口</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">minSubArrayLen</span><span class="params">(<span class="type">int</span> target, vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> result = INT32_MAX;</span><br><span class="line">        <span class="type">int</span> i = <span class="number">0</span>; <span class="comment">//开始的位置</span></span><br><span class="line">        <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> sublength = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt; nums.<span class="built_in">size</span>(); j++)</span><br><span class="line">        &#123;</span><br><span class="line">            sum += nums[j];</span><br><span class="line">            <span class="keyword">while</span>(sum &gt;= target)</span><br><span class="line">            &#123;</span><br><span class="line">                sublength = (j - i + <span class="number">1</span>);</span><br><span class="line">                result = result &lt; sublength ?  result : sublength;</span><br><span class="line">                sum -= nums[i++];</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result == INT32_MAX ? <span class="number">0</span> : result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>滑动窗口的思想<br><img src="/2022/01/04/%E6%95%B0%E7%BB%84/2.gif" alt></p>
+<p>滑动窗口的思想<br><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171234342.gif" alt></p>
 <p>时间复杂度O(n)，空间复杂度O(1)</p>
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/fruit-into-baskets/">904.水果成篮</a></p>
 <p>你正在探访一家农场，农场从左到右种植了一排果树。这些树用一个整数数组 fruits 表示，其中 fruits[i] 是第 i 棵树上的水果 种类 。</p>
@@ -310,7 +310,7 @@ var _hmt = _hmt || [];
 <p>注意:边界一定要明确，统一，一圈一圈的循环，中间的值分奇偶特别处理以下。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">generateMatrix</span>(<span class="type">int</span> n) &#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">matrix</span>(n,<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(n,<span class="number">0</span>)); <span class="comment">//定义一个二维数组</span></span><br><span class="line">        <span class="type">int</span> startx = <span class="number">0</span>, starty = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> loop = n / <span class="number">2</span>;</span><br><span class="line">        <span class="type">int</span> mid = n / <span class="number">2</span>;</span><br><span class="line">        <span class="type">int</span> offset = <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> num = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(loop--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> i = startx;</span><br><span class="line">            <span class="type">int</span> j = starty;</span><br><span class="line">            <span class="keyword">for</span>(j = starty; j &lt; starty + n - offset; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                matrix[startx][j] = num++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span>(i = startx; i &lt; startx + n - offset; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                matrix[i][j] = num++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span>(; j &gt; starty; j--)</span><br><span class="line">            &#123;</span><br><span class="line">                matrix[i][j] = num++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span>(; i &gt; startx; i--)</span><br><span class="line">            &#123;</span><br><span class="line">                matrix[i][j] = num++;</span><br><span class="line">            &#125;</span><br><span class="line">            startx++;</span><br><span class="line">            starty++;</span><br><span class="line">            offset += <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(n % <span class="number">2</span> != <span class="number">0</span>)</span><br><span class="line">        matrix[mid][mid] = n * n;</span><br><span class="line">        <span class="keyword">return</span> matrix;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/spiral-matrix/">54.螺旋矩阵</a></p>
 <p>给你一个 m 行 n 列的矩阵 matrix ，请按照 顺时针螺旋顺序 ，返回矩阵中的所有元素。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; spiralOrder(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) &#123;</span><br><span class="line">        vector &lt;int&gt; ans;</span><br><span class="line">        if(matrix.empty()) return ans; //若数组为空，直接返回答案</span><br><span class="line">        int u = 0; //赋值上下左右边界</span><br><span class="line">        int d = matrix.size() - 1;</span><br><span class="line">        int l = 0;</span><br><span class="line">        int r = matrix[0].size() - 1;</span><br><span class="line">        while(true)</span><br><span class="line">        &#123;</span><br><span class="line">            for(int i = l; i &lt;= r; ++i) ans.push_back(matrix[u][i]); //向右移动直到最右</span><br><span class="line">            if(++ u &gt; d) break; //重新设定上边界，若上边界大于下边界，则遍历遍历完成，下同</span><br><span class="line">            for(int i = u; i &lt;= d; ++i) ans.push_back(matrix[i][r]); //向下</span><br><span class="line">            if(-- r &lt; l) break; //重新设定有边界</span><br><span class="line">            for(int i = r; i &gt;= l; --i) ans.push_back(matrix[d][i]); //向左</span><br><span class="line">            if(-- d &lt; u) break; //重新设定下边界</span><br><span class="line">            for(int i = d; i &gt;= u; --i) ans.push_back(matrix[i][l]); //向上</span><br><span class="line">            if(++ l &gt; r) break; //重新设定左边界</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">spiralOrder</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; matrix)</span> </span>&#123;</span><br><span class="line">        vector &lt;<span class="type">int</span>&gt; ans;</span><br><span class="line">        <span class="keyword">if</span>(matrix.<span class="built_in">empty</span>()) <span class="keyword">return</span> ans; <span class="comment">//若数组为空，直接返回答案</span></span><br><span class="line">        <span class="type">int</span> u = <span class="number">0</span>; <span class="comment">//赋值上下左右边界</span></span><br><span class="line">        <span class="type">int</span> d = matrix.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> l = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> r = matrix[<span class="number">0</span>].<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = l; i &lt;= r; ++i) ans.<span class="built_in">push_back</span>(matrix[u][i]); <span class="comment">//向右移动直到最右</span></span><br><span class="line">            <span class="keyword">if</span>(++ u &gt; d) <span class="keyword">break</span>; <span class="comment">//重新设定上边界，若上边界大于下边界，则遍历遍历完成，下同</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = u; i &lt;= d; ++i) ans.<span class="built_in">push_back</span>(matrix[i][r]); <span class="comment">//向下</span></span><br><span class="line">            <span class="keyword">if</span>(-- r &lt; l) <span class="keyword">break</span>; <span class="comment">//重新设定有边界</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = r; i &gt;= l; --i) ans.<span class="built_in">push_back</span>(matrix[d][i]); <span class="comment">//向左</span></span><br><span class="line">            <span class="keyword">if</span>(-- d &lt; u) <span class="keyword">break</span>; <span class="comment">//重新设定下边界</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = d; i &gt;= u; --i) ans.<span class="built_in">push_back</span>(matrix[i][l]); <span class="comment">//向上</span></span><br><span class="line">            <span class="keyword">if</span>(++ l &gt; r) <span class="keyword">break</span>; <span class="comment">//重新设定左边界</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>注意matrix.size()代表行数，matrix[0].size()代表列数。</p>
 
       
@@ -594,11 +594,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -610,15 +610,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -626,15 +622,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -654,11 +654,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
+                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
+                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -670,11 +670,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">周报</a>
+                <a href="javascript:void(0)" class="js-tag color3">其他</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">其他</a>
+                <a href="javascript:void(0)" class="js-tag color3">周报</a>
               </li>
              
               <li class="article-tag-list-item">

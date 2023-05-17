@@ -30,19 +30,19 @@
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
 <meta property="og:description" content="相比起之前的代码， forwarder.cpp 是一个大工程，头铁硬碰显然是不合适的。在看代码之前，我们应当对 Forwarder 类大致在干什么有一些初步的了解。实际上， Forwarder 类主要控制前向转发过程，我们可以把整个 Forwarder 类看作一个贴心的管家，通过 nameTree 管理手下的 fib 、 pit 、 cs ，还通过 m_faceTable 管理了手下的所有的 fa">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2022/05/20/NDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(3)/NDN代码分析(3">
-<meta property="og:image" content="http://example.com/2022/05/20/NDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(3)/NDN代码分析(3">
-<meta property="og:image" content="http://example.com/2022/05/20/NDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(3)/NDN代码分析(3">
-<meta property="og:image" content="http://example.com/2022/05/20/NDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(3)/NDN代码分析(3">
-<meta property="og:image" content="http://example.com/2022/05/20/NDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(3)/NDN代码分析(3">
-<meta property="og:image" content="http://example.com/2022/05/20/NDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(3)/NDN代码分析(3">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171153940.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171153165.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171153677.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171153098.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171153352.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171153341.png">
 <meta property="article:published_time" content="2022-05-20T07:36:55.000Z">
-<meta property="article:modified_time" content="2022-05-27T11:39:10.000Z">
+<meta property="article:modified_time" content="2023-05-17T03:54:29.586Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="科研">
 <meta property="article:tag" content="NDN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/05/20/NDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(3)/NDN代码分析(3">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171153940.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -268,7 +268,7 @@ var _hmt = _hmt || [];
 </ul>
 </li>
 </ul>
-<p><img src="/2022/05/20/NDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(3)/NDN代码分析(3" alt>/1.png)</p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171153940.png" alt></p>
 <p>部分名词说明：</p>
 <ul>
 <li>in-record和out-record我没有进行翻译。</li>
@@ -287,19 +287,19 @@ var _hmt = _hmt || [];
 <li>接着查PIT（虽然我们在ndn原理里认为先查CS再查PIT，然而查CS开销可能会很大。所以可以先查PIT，如果PIT里有人请求过了，说明该兴趣如今还未决，CS肯定没有，就可以节省开销了），看看PIT里有没有重复随机数。如果没有就取消掉PIT的到期定时器，为PIT续1s</li>
 <li>最后查CS（其实先查CS再查PIT是等价的，只是先查PIT的话，如果PIT有就不用查CS了，节省开销），决定执行 <code>onContentStoreHit</code> 或者 <code>onContentStoreMiss</code> 。</li>
 </ul>
-<p><img src="/2022/05/20/NDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(3)/NDN代码分析(3" alt>/2.png)</p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171153165.png" alt></p>
 <h4 id="onInterestLoop工作流程"><a href="#onInterestLoop工作流程" class="headerlink" title="onInterestLoop工作流程"></a>onInterestLoop工作流程</h4><p>上面 <code>onIncomingInterest</code> 说了，如果检测到相同的随机数，就说明发生了循环，这时就会执行 <code>onInterestLoop</code> 函数。这个时候分两种情况讨论：</p>
 <ul>
 <li>如果是点对点，那么发生循环相当于Not ACK，于是将原因标记为Nack。</li>
 <li>如果是多播的话，直接丢弃就行，不需要Nack。</li>
 </ul>
 <h4 id="onContentStoreHit工作流程"><a href="#onContentStoreHit工作流程" class="headerlink" title="onContentStoreHit工作流程"></a>onContentStoreHit工作流程</h4><p>如果缓存命中，就设置好到期定时器，并执行相应的 <code>afterContentStoreHit</code> 策略，如下图所示：</p>
-<p><img src="/2022/05/20/NDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(3)/NDN代码分析(3" alt>/3.png)</p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171153677.png" alt></p>
 <p>​         此管道在 <code>Forwarder::onContentStoreHit</code> 方法中实现，并在执行内容存储查找并找到匹配项后进入传入的兴趣管道。 此管道的输入参数包括<strong>兴趣包、传入的 Face、PIT 条目和匹配的数据包</strong>。如图 9 所示，此管道首先将到期计时器设置为现在在 Interest 上，然后在 Content Store 命中所选策略的触发器后调用。</p>
 <h4 id="onContentStoreMiss工作流程"><a href="#onContentStoreMiss工作流程" class="headerlink" title="onContentStoreMiss工作流程"></a><strong>onContentStoreMiss工作流程</strong></h4><p>如果缓存未命中，就给对应条目的PIT插入一个in-record，到期时间设置为最后一个in-record的时间,默认是4秒。如果兴趣包内钦定好了下一跳的接口id，那就对该接口执行 <code>onOutgoingInterest</code> ，不然就执行策略 <code>afterReceiveInterest</code> ，通过FIB路由表查出下一跳（如果查到并决定转发，那么对查到的下一跳执行 <code>onOutgoingInterest</code> ）。若PIT in-record到期计时器到期，则执行 Interest Finalize 管道（第 4.2.6 节）。如下图所示：</p>
-<p><img src="/2022/05/20/NDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(3)/NDN代码分析(3" alt>/4.png)</p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171153098.png" alt></p>
 <h4 id="onOutgoingInterest工作流程"><a href="#onOutgoingInterest工作流程" class="headerlink" title="onOutgoingInterest工作流程"></a>onOutgoingInterest工作流程</h4><p>首先插入一个out-record（如果已经存在相同的接口就更新），记录下最后一个包的随机数和到期时间，然后执行 <code>sendInterest</code> 函数。如下图所示：</p>
-<p><img src="/2022/05/20/NDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(3)/NDN代码分析(3" alt>/5.png)</p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171153352.png" alt></p>
 <h4 id="onInterestFinalize工作流程"><a href="#onInterestFinalize工作流程" class="headerlink" title="onInterestFinalize工作流程"></a>onInterestFinalize工作流程</h4><p>一些善后工作，如插入死亡随机数列表、删除对应的PIT条目等。</p>
 <h4 id="onIncomingData工作流程"><a href="#onIncomingData工作流程" class="headerlink" title="onIncomingData工作流程"></a>onIncomingData工作流程</h4><blockquote>
 <p>触发方式： <code>Forwarder::onIncomingData</code> 函数从 <code>Forwarder::startProcessData</code> 方法进入，该方法由接口 <code>Face::afterReceiveData</code> 信号触发。</p>
@@ -314,7 +314,7 @@ var _hmt = _hmt || [];
 </ul>
 </li>
 </ul>
-<p><img src="/2022/05/20/NDN%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90(3)/NDN代码分析(3" alt>/6.png)</p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171153341.png" alt></p>
 <h4 id="onDataUnsolicited工作流程"><a href="#onDataUnsolicited工作流程" class="headerlink" title="onDataUnsolicited工作流程"></a>onDataUnsolicited工作流程</h4><p>如果数据是不请自来的，则根据 <code>m_unsolicitedDataPolicy</code> 的决定来判断。如果认为应当缓存就尝试缓存，否则啥都不干。</p>
 <h4 id="onOutgoingData工作流程"><a href="#onOutgoingData工作流程" class="headerlink" title="onOutgoingData工作流程"></a>onOutgoingData工作流程</h4><p>首先检查下 <code>/localhost</code> ，（然后下个版本计划进行流量管理，这个版本还没实现，）最后通过 <code>sendData</code> 函数传出去。</p>
 <h4 id="onIncomingNack函数"><a href="#onIncomingNack函数" class="headerlink" title="onIncomingNack函数"></a>onIncomingNack函数</h4><p>Nack(Not ACK)在NFD里会分为两部分处理： <code>Incoming Nack</code> 和 <code>Outgoing Nack</code> 。这部分讲的是Incoming Nack( processing of incoming Nacks)。</p>
@@ -674,11 +674,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -690,15 +690,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -706,15 +702,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -734,11 +734,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
+                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
+                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -750,11 +750,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">周报</a>
+                <a href="javascript:void(0)" class="js-tag color3">其他</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">其他</a>
+                <a href="javascript:void(0)" class="js-tag color3">周报</a>
               </li>
              
               <li class="article-tag-list-item">

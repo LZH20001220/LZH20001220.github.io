@@ -30,42 +30,42 @@
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
 <meta property="og:description" content="L20 内存使用和分段计算机执行程序的本质就是取指—&gt;执行。 内存的使用：将程序放在内存中，PC指向开始地址。 call 40可以理解为将IP指针赋给40。也就是从物理地址40开始执行。但是这样有一个缺点，就是main()函数必须放在物理地址为40的位置。 实际上应该使用重定位，也就是将物理地址40修改为1040作为逻辑地址，实际上就是每个地址加上了个基址，即main()函数相对于整个程序是">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/1.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/2.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/3.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/4.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/5.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/6.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/7.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/8.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/9.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/10.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/11.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/12.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/13.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/14.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/15.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/16.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/17.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/18.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/19.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/20.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/21.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/22.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/23.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/24.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/25.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/26.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/27.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/28.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/29.png">
-<meta property="og:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/30.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171210317.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171210913.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171210237.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171210280.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171210431.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171210905.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171211266.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171211467.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171211492.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171211548.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171211627.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171211462.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171211407.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171211314.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171211959.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171212456.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171212723.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171212016.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171212091.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171212166.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171212844.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171212883.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171212988.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171212802.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171212015.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171212323.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171213560.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171213122.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171213046.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171213243.png">
 <meta property="article:published_time" content="2022-04-08T01:40:48.000Z">
-<meta property="article:modified_time" content="2022-04-11T04:07:42.000Z">
+<meta property="article:modified_time" content="2023-05-17T04:13:17.176Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/1.png">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171210317.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -287,10 +287,10 @@ var _hmt = _hmt || [];
 <p>如果进程1阻塞了，就将其从内存取出，放到磁盘中。然后将进程2的内存地址改变。因此载入后的程序也可能发生移动，这样载入时的地址和真正执行程序时的地址也不一样。</p>
 <h4 id="最好的方式：运行时重定位"><a href="#最好的方式：运行时重定位" class="headerlink" title="最好的方式：运行时重定位"></a><strong>最好的方式：运行时重定位</strong></h4><p>每执行一条指令时，都要根据逻辑地址算出物理地址，即<strong>地址翻译</strong>，这种方式无论程序放在内存中的哪一块都可以。程序执行起来时，就将基地址(base地址)放在PCB中。然后开始取址执行，执行程序时把指令放在CPU中，然后再根据程序中的偏移地址做判断。当进程发生切换时，PCB会跟着切换，这时候基地址也会跟着PCB一起切换。</p>
 <p>然而实际中的程序并不是整个放在内存的连续地址中的，程序往往分成若干个段，每个段都有各自的用途。比如代码段只读，代码段/数据段不会动态增长。</p>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/1.png" alt="image-20220408104549018"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171210317.png" alt="image-20220408104549018"></p>
 <p>举个例子：主程序和变量集之间就需要分段。主程序一般是只读的，变量集应该是可写的。如果把他们放在一个段，程序就需要写入权限，这样主程序也有可能会被改变。</p>
 <p>将程序分段，可以让内存管理更高效。将程序中的各个段分别放在内存中。重定位时段的基址实际上就是各自段的基址，<strong>即PCB需要放每一个段的基址</strong>，也就是进程段表。</p>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/2.png" alt="image-20220408110216844"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171210913.png" alt="image-20220408110216844"></p>
 <p>GDT(Global Description Table)表实际上就是通过找操作系统的进程对应的段表就是GDT表。实际上每个进程都有对应的一套段表，也就是LDT(Local Descriptor Table)。进程切换也对应的LDT表的切换，LDT表赋给PCB。</p>
 <p>操作系统启动进程0，shell启动进程1.</p>
 <h4 id="总结起来就是三个步骤："><a href="#总结起来就是三个步骤：" class="headerlink" title="总结起来就是三个步骤："></a>总结起来就是三个步骤：</h4><ol>
@@ -300,15 +300,15 @@ var _hmt = _hmt || [];
 </ol>
 <h3 id="L21-内存分区与分页"><a href="#L21-内存分区与分页" class="headerlink" title="L21 内存分区与分页"></a>L21 内存分区与分页</h3><p>如何在内存中找到一段空闲的区域？内存怎么划分？</p>
 <p>用的是可变分区的思想，也就是根据段的大小来为其分配空间。</p>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/3.png" alt="image-20220408150652762"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171210237.png" alt="image-20220408150652762"></p>
 <p>释放完空间如何利用内存分片？</p>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/4.png" alt="image-20220408151312736"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171210280.png" alt="image-20220408151312736"></p>
 <p>最佳适配分割完后会产生一些小的碎片(复杂度O(n))；首先适配申请的速度比较快(复杂度O(1))。</p>
 <p>问题：如果某操作系统中的段内存请求很不规则，有时候需要很大的一个内存块，有时候又很小，这时候最佳适配比较合适。</p>
 <p>实际内存中采用分页来解决内存分区导致的内存效率问题。虚拟内存采用分区的方法，物理内存采用分页的方法。</p>
 <p>可变分区存在的问题就是存在碎片，这就造成可能一个总空闲空间 &gt; 请求空间，但是存不了的情况。这时候就需要内存紧缩。但是内存紧缩存在一个问题就是速度太慢。</p>
 <p>内存分页就是将内存分成很多个页，然后针对每个段的内存请求，系统一页一页的向上取整分配给这个段，只有页内碎片，没有其他碎片。</p>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/5.png" alt="image-20220408161504324"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171210431.png" alt="image-20220408161504324"></p>
 <p>页也对应了一个表，用来记录每页的页号，页框号及其对应的内存地址。分页是由MMU做的，根据每个分页的内存大小通过移位寄存器进行移位。</p>
 <h3 id="L22-多级页表与快表"><a href="#L22-多级页表与快表" class="headerlink" title="L22 多级页表与快表"></a>L22 多级页表与快表</h3><p>分页的优点就是内存碎片比较小，但是单独的分页存在问题，这个问题需要多级页表和快表来解决。分页机制和多级页表和快表结合起来就形成了一套比较完整的机制。</p>
 <p><strong>产生问题的原因：</strong>为了提高内存空间利用率，页应该减小，但是页减小了页表就大了。页表也需要占据空间。</p>
@@ -316,20 +316,20 @@ var _hmt = _hmt || [];
 <p>系统中并发10个进程，就需要40M内存; 而实际中大部分的逻辑地址都不会用到。</p>
 <p>一个想法：把不适用的逻辑页号从页表中去掉。但是页表中的页号不连续，就需要比较，查找，折半，这样速度很慢。因为CPU花费时间主要就是在与IO的交互中，计算花费的时间占比很少。</p>
 <p>如果页号连续只需要加一个偏移，这样速度就快了，但是如果这样如果页号中间有空位也不能删除了</p>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/6.png" alt="image-20220409154813291"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171210905.png" alt="image-20220409154813291"></p>
 <p><a target="_blank" rel="noopener" href="https://zhidao.baidu.com/question/214135231.html">请教下，操作系统里分页存储的页框和页号有什么区别啊？_百度知道 (baidu.com)</a></p>
 <p>多级页表可以解决这个问题。也就是按照目录的思想，要找的目标在第几章第几节，可以不从前向后找，而是首先找到对应的章再向后找，这样大大提升了效率</p>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/7.png" alt="image-20220409155545366"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171211266.png" alt="image-20220409155545366"></p>
 <p>虽然在空间上节约了空间，但是需要找章和节找两次，因此时间花的更多了。如果目录很多，花费的时间就很多，这时候就需要快表。</p>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/8.png" alt="image-20220409163000509"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171211467.png" alt="image-20220409163000509"></p>
 <p>TLB是一组相联快速存储，是寄存器，可以理解为快表可以快速的知道内容在第几章，这样效率就会高。快表只记录一些可能出现概率高的内容。</p>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/9.png" alt="image-20220409164133411"></p>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/10.png" alt="image-20220409164410311"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171211492.png" alt="image-20220409164133411"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171211548.png" alt="image-20220409164410311"></p>
 <h3 id="L23-段页结合的实际内存管理"><a href="#L23-段页结合的实际内存管理" class="headerlink" title="L23 段页结合的实际内存管理"></a>L23 段页结合的实际内存管理</h3><p>从应用程序角度出发，首先从虚拟内存中选取段分给程序的每个段作为映射地址，再将虚拟内存中的段分割成固定大小的页，每一页再映射到实际的物理内存上。</p>
 <p>段面向用户，页面向硬件。</p>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/11.png" alt="image-20220409170604097"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171211627.png" alt="image-20220409170604097"></p>
 <p>第一次的地址翻译是基于段的地址翻译，第二次地址翻译是基于页的地址翻译；</p>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/12.png" alt="image-20220409172504899"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171211462.png" alt="image-20220409172504899"></p>
 <p><strong>可以总结为五个步骤：</strong></p>
 <ol>
 <li>在虚拟内存中划分出一段区域</li>
@@ -338,23 +338,23 @@ var _hmt = _hmt || [];
 <li>建立页表，进行磁盘读写，将程序对应的各个段真正放在物理内存中</li>
 <li>执行程序，能够实现重定位使用内存</li>
 </ol>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/13.png" alt="image-20220409173215901"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171211407.png" alt="image-20220409173215901"></p>
 <p>首先创建进程，copy_process为进程划分一段区域，copy_mem中new_data_base对应虚拟内存的分割，不同的进程对应不同的虚拟内存，然后set_base就是建立填写段表，p指的是PCB，会随着进程的切换而切换。</p>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/14.png" alt="image-20220409174624488"></p>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/15.png" alt="image-20220409174647461"></p>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/16.png" alt="image-20220409175554254"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171211314.png" alt="image-20220409174624488"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171211959.png" alt="image-20220409174647461"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171212456.png" alt="image-20220409175554254"></p>
 <p>接下来就是分配内存，建立页表。不同的进程之间共享一套页。copy_page_table就是赋值之前的进程的虚拟地址对应的页，将当前进程对应的虚拟地址映射到物理地址上。右移20位是为了找到页目录号。(实际上应该右移22位,但是页目录指针为4byte，因此右移20位)，然后异或0xffc 也就是将最后两位置为0。size—是为了处理多个页目录。get_free_table实际上就是进行章的切换，这也是多级页表的优点。</p>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/17.png" alt="image-20220409180237020"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171212723.png" alt="image-20220409180237020"></p>
 <p>最后一步就是执行程序：</p>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/18.png" alt="image-20220409180441816"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171212016.png" alt="image-20220409180441816"></p>
 <p>多个进程在内存中的地址相互影响可以消除，并且实现了进程切换时内存也会跟着切换。</p>
 <h3 id="L24-内存换入-请求调页-Swap-in"><a href="#L24-内存换入-请求调页-Swap-in" class="headerlink" title="L24 内存换入-请求调页(Swap in)"></a>L24 内存换入-请求调页(Swap in)</h3><p>内存的核心就是通过虚拟内存实现分段和分页，而内存的换入换出是为虚拟内存设计的。</p>
 <p>用换入换出可以实现”大内存”，虚拟内存可以类比为仓库，物理地址可以类比为门店。请求就相当于有需求，只有有需求才将虚拟内存映射到物理内存上。</p>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/19.png" alt="image-20220411101130646"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171212091.png" alt="image-20220411101130646"></p>
 <p>实现换入：请求调页，当发现程序调用内存的部分对应的页表没有在物理内存中，就要MMU启动中断，这时候就需要MMU(memory management unit)内存管理单元请求调页，在页表中找到缺少的页换入到物理内存中。</p>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/20.png" alt="image-20220411103105778"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171212166.png" alt="image-20220411103105778"></p>
 <h3 id="L25-内存换出-swap-out"><a href="#L25-内存换出-swap-out" class="headerlink" title="L25 内存换出(swap out)"></a>L25 内存换出(swap out)</h3><p>因为内存的大小是有限的，不能总是换入</p>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/21.png" alt="image-20220411105557009"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171212844.png" alt="image-20220411105557009"></p>
 <p>需要选择一页淘汰，换出到磁盘，选择哪一页?</p>
 <ul>
 <li>FIFO，最容易想到，但如果刚换入的页马上又要换出怎么办?</li>
@@ -362,16 +362,16 @@ var _hmt = _hmt || [];
 <li>最优淘汰方法能不能实现，是否需要近似? LRU</li>
 </ul>
 <h4 id="FIFO方法："><a href="#FIFO方法：" class="headerlink" title="FIFO方法："></a><strong>FIFO方法：</strong></h4><p>已经在内存中不缺页，不在内存中都是缺页。</p>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/22.png" alt="image-20220411110501997"></p>
-<h4 id="MIN页面置换"><a href="#MIN页面置换" class="headerlink" title="MIN页面置换:"></a>MIN页面置换:</h4><p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/23.png" alt="image-20220411112037508"></p>
-<h4 id="LRU-least-recent-used-页面置换"><a href="#LRU-least-recent-used-页面置换" class="headerlink" title="LRU(least recent used)页面置换:"></a>LRU(least recent used)页面置换:</h4><p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/24.png" alt="image-20220411112601974"></p>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/25.png" alt="image-20220411113124292"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171212883.png" alt="image-20220411110501997"></p>
+<h4 id="MIN页面置换"><a href="#MIN页面置换" class="headerlink" title="MIN页面置换:"></a>MIN页面置换:</h4><p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171212988.png" alt="image-20220411112037508"></p>
+<h4 id="LRU-least-recent-used-页面置换"><a href="#LRU-least-recent-used-页面置换" class="headerlink" title="LRU(least recent used)页面置换:"></a>LRU(least recent used)页面置换:</h4><p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171212802.png" alt="image-20220411112601974"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171212015.png" alt="image-20220411113124292"></p>
 <p>另一种实现方式：页码栈</p>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/26.png" alt="image-20220411115639682"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171212323.png" alt="image-20220411115639682"></p>
 <h4 id="LRU近似实现-将时间计数变为是和否"><a href="#LRU近似实现-将时间计数变为是和否" class="headerlink" title="LRU近似实现- 将时间计数变为是和否"></a>LRU近似实现- 将时间计数变为是和否</h4><p>每个页加一个引用位(reference bit)，每次访问一页时，硬件自动设置该位<br>选择淘汰页：扫描该位，是1时清0，并继续扫描；是0时淘汰该页</p>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/27.png" alt="image-20220411115734968"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171213560.png" alt="image-20220411115734968"></p>
 <p>但是如果缺页很多，所有的R全为1，这样就会使得算法近似为FIFO，因此需要定时的将一些位从1变到0.</p>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/28.png" alt="image-20220411115927762"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171213122.png" alt="image-20220411115927762"></p>
 <p>另外一个问题，需要分配给每个进程多少页？</p>
 <ul>
 <li><p>分配的多，请求调页导致的内存高效利用就没用了!</p>
@@ -379,9 +379,9 @@ var _hmt = _hmt || [];
 <li><p>分配的太少，会使得换页次数太多，CPU利用率下降。</p>
 </li>
 </ul>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/29.png" alt="image-20220411120129922"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171213046.png" alt="image-20220411120129922"></p>
 <p>换入和换出的结合：</p>
-<p><img src="/2022/04/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E5%BA%A6/30.png" alt="image-20220411120643666"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171213243.png" alt="image-20220411120643666"></p>
 
       
 
@@ -664,11 +664,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -680,15 +680,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -696,15 +692,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -724,11 +724,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
+                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
+                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -740,11 +740,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">周报</a>
+                <a href="javascript:void(0)" class="js-tag color3">其他</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">其他</a>
+                <a href="javascript:void(0)" class="js-tag color3">周报</a>
               </li>
              
               <li class="article-tag-list-item">

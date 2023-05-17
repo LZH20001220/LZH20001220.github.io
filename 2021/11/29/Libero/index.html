@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
 <meta property="og:description" content="一、下载和安装下载和安装可以参考以下教程。其中申请license的步骤推荐使用临时邮箱,其他的信息可以随便填。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2021/11/29/Libero/1.png">
-<meta property="og:image" content="http://example.com/2021/11/29/Libero/2.png">
-<meta property="og:image" content="http://example.com/2021/11/29/Libero/3.png">
-<meta property="og:image" content="http://example.com/2021/11/29/Libero/4.jpg">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171137320.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171137684.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171138184.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171138080.jpg">
 <meta property="article:published_time" content="2021-11-28T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-02-25T11:37:30.000Z">
+<meta property="article:modified_time" content="2023-05-17T03:38:20.508Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="FPGA">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/11/29/Libero/1.png">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171137320.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -255,8 +255,8 @@ var _hmt = _hmt || [];
 <li>是否导入已经存在的HDL文件，如果已经有一些写好的模块，可以在这里直接导入。是否导入已经存在的管脚约束文件，这里选择不添加，我们会在后面通过图形化工具来指定管脚。</li>
 <li>除了第一步以外其他的选项可以先不选，一路Next创建工程。</li>
 </ol>
-<p><strong>创建好的工程如下：</strong><br><img src="/2021/11/29/Libero/1.png" alt></p>
-<p><strong>创建好的工程子文件夹及其功能如下：</strong><br><img src="/2021/11/29/Libero/2.png" alt></p>
+<p><strong>创建好的工程如下：</strong><br><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171137320.png" alt></p>
+<p><strong>创建好的工程子文件夹及其功能如下：</strong><br><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171137684.png" alt></p>
 <h4 id="（2）添加设计文件"><a href="#（2）添加设计文件" class="headerlink" title="（2）添加设计文件"></a>（2）添加设计文件</h4><ol>
 <li><p>创建Verilog文件有多种方式，可以直接双击左侧菜单中的<code>Create Design-&gt;Create HDL</code></p>
 </li>
@@ -267,7 +267,7 @@ var _hmt = _hmt || [];
 </ol>
 <h4 id="（3）仿真验证"><a href="#（3）仿真验证" class="headerlink" title="（3）仿真验证"></a>（3）仿真验证</h4><p>可以不进行仿真，如需进行参考(<a target="_blank" rel="noopener" href="https://blog.csdn.net/whik1194/article/details/101714930">教程</a>)</p>
 <h4 id="（4）管脚分配"><a href="#（4）管脚分配" class="headerlink" title="（4）管脚分配"></a>（4）管脚分配</h4><p>双击Create/Edit I/O Attributes，打开图形化配置界面，在打开之前，Libero会先进行综合(Synthesize)、编译(Complie)，当都运行通过时，才会打开配置界面。</p>
-<p><img src="/2021/11/29/Libero/3.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171138184.png" alt></p>
 <p>管脚具体分配参见数据手册或者原理图<br><strong>特别注意：分配完管脚之后一定要先按屏幕左上角File下面的<code>commit and check</code>,然后回到designer界面，选择Designer窗口下的<code>File-&gt;Export-&gt;Constraint File</code>，会导出一个<code>xxx.pdc</code>文件，保存在工程目录下的constraint文件夹,导出文件后一定要<code>File-&gt;save</code>保存，这样在主界面就可以找到配置好的<code>xxx.pdc</code>文件了</strong></p>
 <h4 id="（5）继续执行"><a href="#（5）继续执行" class="headerlink" title="（5）继续执行"></a>（5）继续执行</h4><p>直接点击<code>Generate Programming Data</code> ,如果没有报错会生成一个<code>xxx.pdb文件</code>,文件目录是<code>./designer/impl/xxx.pdb</code>。</p>
 <h4 id="（6）程序烧写"><a href="#（6）程序烧写" class="headerlink" title="（6）程序烧写"></a>（6）程序烧写</h4><p>运用<code>Flashpro</code>软件，连接FlashPro下载器和开发板的JTAG接口。Flashpro下载器有接口的一侧连接JTAG的1号管脚的那一侧，也就是开发板的外侧。</p>
@@ -276,7 +276,7 @@ var _hmt = _hmt || [];
 <p>如果是仅仅烧写，请请下载这个链接<br>烧写软件<code>Flashpro_V11.5</code><br>(默认安装，无需破解，内含下载线驱动。)<br>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/10qXg24zlTPZVsXz5Y5x9Mw">https://pan.baidu.com/s/10qXg24zlTPZVsXz5Y5x9Mw</a><br>提取码：blg8</p>
 <p>下载完配置好之后打开<code>Flashpro</code>软件，选择<code>New Project</code>新建工程，然后点击<code>Configure Device—&gt;Browse</code>找到刚刚创建的<code>xxx.pdb</code>,右边的模式可以选择<code>Program</code>,<code>Verify</code>或者<code>Erase</code>进行程序烧入Flash，核实程序或擦除程序。连接FlashPro下载器和开发板的JTAG接口,最后点击<code>Program</code>烧写程序。</p>
 <h4 id="（7）实验结果"><a href="#（7）实验结果" class="headerlink" title="（7）实验结果"></a>（7）实验结果</h4><p>由于<code>tag</code>的内部时钟为<code>20MHz</code>，程序是一个5的计数器，因此产生了一个<code>4MHz</code>的方波如图所示。烧写完程序后无需其他的控制，只需要<code>Zedboard</code>供电就可以产生方波了。</p>
-<p><img src="/2021/11/29/Libero/4.jpg" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171138080.jpg" alt></p>
 <p><strong>实验的经验总结：</strong></p>
 <ol>
 <li><code>tag</code>的时钟对应原理图中的<code>OSC</code>，不是<code>CLK</code>;</li>
@@ -566,11 +566,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -582,15 +582,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -598,15 +594,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -626,11 +626,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
+                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
+                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -642,11 +642,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">周报</a>
+                <a href="javascript:void(0)" class="js-tag color3">其他</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">其他</a>
+                <a href="javascript:void(0)" class="js-tag color3">周报</a>
               </li>
              
               <li class="article-tag-list-item">

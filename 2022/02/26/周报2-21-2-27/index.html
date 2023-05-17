@@ -30,14 +30,14 @@
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
 <meta property="og:description" content="Wifi grc流图的搭建： 实验的整个流程：  将框图的输出端数据到fsk_RE1.wav,fsk_IM1.wav中,通过test.py处理生成a1_re.txt, a1_im.txt,然后通过matlab处理观察波形发现其从500点到2260点为第一个数据包，2761点向后相同长度为第二个数据包，依次类推。 用matlab在1200点到1600点生成-1的数据，其他点生成+1的数据模拟对数据进">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2022/02/26/%E5%91%A8%E6%8A%A52-21-2-27/1.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171241929.png">
 <meta property="article:published_time" content="2022-02-26T07:38:25.000Z">
-<meta property="article:modified_time" content="2022-03-01T06:57:32.000Z">
+<meta property="article:modified_time" content="2023-05-17T04:41:16.903Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="科研">
 <meta property="article:tag" content="周报">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/02/26/%E5%91%A8%E6%8A%A52-21-2-27/1.png">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171241929.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -263,7 +263,7 @@ var _hmt = _hmt || [];
 </ul>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% SampleRate = 2e6;</span></span><br><span class="line"><span class="comment">% len_frame =128;</span></span><br><span class="line"><span class="comment">% %%</span></span><br><span class="line"><span class="comment">% sinewave = dsp.SineWave(1,31250*10); %1e4</span></span><br><span class="line"><span class="comment">% sinewave.SampleRate = SampleRate; </span></span><br><span class="line"><span class="comment">% sinewave.SamplesPerFrame = len_frame; </span></span><br><span class="line"><span class="comment">% sinewave.OutputDataType = &#x27;double&#x27;; </span></span><br><span class="line"><span class="comment">% sinewave.ComplexOutput = true;</span></span><br><span class="line"><span class="comment">% sinewave.PhaseOffset = 0;</span></span><br><span class="line"><span class="comment">% sin_10khz_1 = step(sinewave);</span></span><br><span class="line"><span class="comment">% sinewave = dsp.SineWave(1,31250*10); %1e4</span></span><br><span class="line"><span class="comment">% sinewave.SampleRate = SampleRate; </span></span><br><span class="line"><span class="comment">% sinewave.SamplesPerFrame = len_frame; </span></span><br><span class="line"><span class="comment">% sinewave.OutputDataType = &#x27;double&#x27;; </span></span><br><span class="line"><span class="comment">% sinewave.ComplexOutput = true;</span></span><br><span class="line"><span class="comment">% sinewave.PhaseOffset = 180;</span></span><br><span class="line"><span class="comment">% sin_10khz_0 = step(sinewave);</span></span><br><span class="line"><span class="comment">% %%</span></span><br><span class="line"><span class="comment">% range = (1:len_frame);</span></span><br><span class="line"><span class="comment">% amp = 0.01;</span></span><br><span class="line"><span class="comment">% sin_source = sin_10khz_1*amp;</span></span><br><span class="line"><span class="comment">% sin_source(len_frame+range) = sin_10khz_0*amp;</span></span><br><span class="line"><span class="comment">%  plot(real(sin_source))%上面是生成正弦波的程序</span></span><br><span class="line">square_source = <span class="built_in">zeros</span>(<span class="number">1</span>,<span class="number">100000</span>);</span><br><span class="line"><span class="keyword">for</span> k = <span class="number">1</span>:<span class="number">100000</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">mod</span>(k , <span class="number">2261</span>) &gt;=<span class="number">1200</span> &amp;&amp; <span class="built_in">mod</span>(k, <span class="number">2261</span>) &lt;= <span class="number">1600</span>)</span><br><span class="line">        square_source(k) = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        square_source(k) = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">square_source =square_source + <span class="number">0</span>*<span class="built_in">j</span>;	<span class="comment">%注意这里要加0j,否则数据按实部传入，但是file_matlab处理数据时一半按实部处理，一半按虚部处理</span></span><br><span class="line"><span class="comment">%%</span></span><br><span class="line">fid = fopen(<span class="string">&#x27;/home/l/Desktop/matlab/test.txt&#x27;</span>,<span class="string">&#x27;w&#x27;</span>);</span><br><span class="line"><span class="comment">%fprintf(fid,&#x27;%f %f\r\n&#x27;,real(data),imag(data));</span></span><br><span class="line">fprintf(fid,<span class="string">&#x27;%f\r\n%f\r\n&#x27;</span>,<span class="built_in">real</span>(square_source), <span class="built_in">imag</span>(square_source));</span><br><span class="line">fclose(fid);</span><br></pre></td></tr></table></figure>
 <p><strong>实验结果：</strong></p>
-<p><img src="/2022/02/26/%E5%91%A8%E6%8A%A52-21-2-27/1.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171241929.png" alt></p>
 <p>可以看到数据每次改变的位置都是固定的，即第一个数据位，因为解码过程中有反卷积的操作，因此第一位字符解码出来的结果不同。</p>
 
       
@@ -551,11 +551,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -567,15 +567,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -583,15 +579,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -611,11 +611,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
+                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
+                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -627,11 +627,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">周报</a>
+                <a href="javascript:void(0)" class="js-tag color3">其他</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">其他</a>
+                <a href="javascript:void(0)" class="js-tag color3">周报</a>
               </li>
              
               <li class="article-tag-list-item">

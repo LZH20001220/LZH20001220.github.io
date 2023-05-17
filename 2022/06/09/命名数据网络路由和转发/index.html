@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
 <meta property="og:description" content="5.1 路由和转发概述：NDN采用基于名字进行路由和转发的机制，因为名字空间无限，不涉及地址有限的问题。(存疑，IP虽然地址有限，但是长度一样方便管理，NDN这种方式名字长度不一样对转发是否有影响？) 转发层和路由层相互分离，转发层考虑了具有状态的数据平面的状态信息，使NDN的转发策略有IP没有的自适应性和多路径性。(实际上就是IP网络路由表只能选择一个最优的下一条地址转发，而NDN根据各个接口的">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2022/06/09/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E8%B7%AF%E7%94%B1%E5%92%8C%E8%BD%AC%E5%8F%91/1.png">
-<meta property="og:image" content="http://example.com/2022/06/09/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E8%B7%AF%E7%94%B1%E5%92%8C%E8%BD%AC%E5%8F%91/2.png">
-<meta property="og:image" content="http://example.com/2022/06/09/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E8%B7%AF%E7%94%B1%E5%92%8C%E8%BD%AC%E5%8F%91/3.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171230041.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171230818.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171230981.png">
 <meta property="article:published_time" content="2022-06-09T11:57:54.000Z">
-<meta property="article:modified_time" content="2022-11-02T03:16:22.000Z">
+<meta property="article:modified_time" content="2023-05-17T04:30:31.157Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="科研">
 <meta property="article:tag" content="NDN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/06/09/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E8%B7%AF%E7%94%B1%E5%92%8C%E8%BD%AC%E5%8F%91/1.png">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171230041.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -312,7 +312,7 @@ var _hmt = _hmt || [];
 <p><strong>3. LSDB 同步（<em>LSDB Synchronization</em>）：</strong></p>
 <p>将LSDB看作一个数据的集合，把LSA的传播问题看作由路由器维护的LSDBs的同步问题。路由器周期性地交换他们LSDB的hash值(类似于文件的身份证)来检测不一致性，如果发现不一致则恢复。这种逐跳的同步方法可以避免不需要的网络泛洪(指将接口收到的数据流向除该接口之外的所有接口发送出去)，当网络稳定时，邻居之间只需要相互交换LSDB的hash值即可，而不用互相传递所有的LSAs。此外，这种数据同步方式时接收方驱动的，这意味着路由器只会在具有CPU周期时去拉取LSAs，因此路由器基本不会被频繁的路由器更新整奔溃。</p>
 <p>我们当前的实现使用的是 <em>CNNx</em> 同步协议或 <em>Sync</em> [5] 来将LSAs传播到邻居路由器。<em>Sync</em>和<em>CNNx</em>的<em>Repo</em>(存储库)相关联，它允许应用程序在<em>Repo</em>中定义命名数据集合，这个集合被称之为<em>slice</em>，并保持当前路由器与相邻路由器中定义相同的<em>slice</em>的同步。<em>Sync</em>会为<em>Slice</em>中所有的数据计算一个Hash树，并且在相邻路由器之间交换根Hash的值来检测不一致性。如何检测到Hash值不一致，则两个邻居节点会交换Hash树下一层节点的Hash值，直到他们检测到导致不一致性的叶子节点，两个邻居路由器就会交换对应的数据来达成新的一致性。</p>
-<p><img src="/2022/06/09/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E8%B7%AF%E7%94%B1%E5%92%8C%E8%BD%AC%E5%8F%91/1.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171230041.png" alt></p>
 <p>上图1显示了LSA是如何在网络中传播的：</p>
 <ul>
 <li>为了同步包含<em>LSAs</em>的<em>Slice</em>，<em>Sync</em>协议（<em>路由器B</em>）周期性的对外发送被称为<em>Root Advise</em>的特殊兴趣包，这个兴趣包携带了发送路由器的<em>Slice</em>的hash值（<strong><em>步骤 1</em></strong>）；</li>
@@ -338,7 +338,7 @@ var _hmt = _hmt || [];
 <p><strong>5. 故障与恢复检测（Failure and Recovery Detection）</strong></p>
 <p>NLSR通过周期性的向每个邻居节点发送 <code>info</code> 兴趣包来检测链路故障和远端的NLSR进程故障，如果 <code>info</code> 兴趣包超时了，则NLSR会在较短的间隔内多次发送 <code>info</code> 兴趣包，这样可以防止 <code>info</code> 兴趣包丢包带来的影响。如果在此期间（<em>这个时间包含<code>info</code>兴趣包超时后的若干次重传时间</em>）邻居节点没有响应，则NLSR会将这个邻居节点的状态判别为 <em>down</em> ，与该邻居节点相连的链路也标记为链路故障。检测到故障之后，NLSR仍然会向故障邻居发送 <code>info</code> 兴趣包来检测故障是否恢复，但此时发送 <code>info</code> 兴趣包的时间间隔应该相对长一点，避免由于长期故障导致较大的无用开销。需要注意的是，检测到故障时NLSR时无法区分是链路的故障还是远端NLSR进程的故障，但是无论是哪种故障发生，故障链路都不会用于传输数据，所以在目前的设计里不区分这两种故障也无伤大雅。</p>
 <p>当邻居节点从故障中恢复时，NLSR会收到对 <code>info</code> 兴趣包的恢复，接着NLSR便会将该邻居的状态标记为 <em>Active</em> 。这个操作会导致 <strong>邻接LSA</strong> 的更新（<em>产生新版本的邻接 LSA</em>），并将新的<strong>邻接LSA</strong>传播到网络中，并准备启动路由表计算任务。下图2展示了节点A是如何检测到节点C的故障，以及时如何检测到节点B从故障中恢复的。</p>
-<p><img src="/2022/06/09/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E8%B7%AF%E7%94%B1%E5%92%8C%E8%BD%AC%E5%8F%91/2.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171230818.png" alt></p>
 <p><strong>6 安全（Security）</strong></p>
 <p>每个NDN的数据包（<em>Data Packet</em>）都是经过数字签名的，并且生成的数字签名是组成数据包的一部分。签名包含名字、内容和少量对签名验证有用的支持数据 ，支持数据中很重要的一部分是<code>key locator</code>，它指示了用于给这个数据包签名的 <code>key</code> 的名称，这样接收者就能通过这个名称去拉取到给这个数据包签名的 <code>key</code>（<em>当然我们只能拉取到公钥或证书，不能拉取到私钥</em>），进而验证这个数据包的签名。</p>
 <p>一个<strong>具有有效签名的LSA</strong>（<em>即，这个 LSA的签名是验证通过的</em>）仅仅说明了这个LSA的签名是由其 <code>key locator</code> 域指向的 <code>key</code> 的<strong>私钥</strong>签名的，它并没有告诉我们拥有这个 <code>key</code> 的路由器是否能合法的生成LSA。举个例子来说，攻击者可以使用其私钥签名一个 <strong>前缀LSA</strong>（<em>Prefix LSA</em>），并将该LSA注入到路由系统中（<em>此时该 LSA的签名验证是可以通过的，但是实际上这个LSA不是一个合法的 LSA</em>）。为了检测签名信息的有效性，我们需要验证此LSA是否是由授权的NLSR进程签名的，换句话说，我们需要验证 <code>key</code> 的名字中包含的相关的NLSR进程是授权的。即便如此，攻击者还是可以使用与某个有效 <code>key</code> 相同的名字的包，塞入攻击者自己的<code>key</code>。所以，我们需要一个信任模型来验证 <code>key</code> 的有效性。</p>
@@ -376,7 +376,7 @@ var _hmt = _hmt || [];
 </tbody>
 </table>
 </div>
-<p>首先在顶层的是 <code>Root key</code>，为当前网络的管理员所拥有，第二层包含一系列的 <code>site keys</code>，由网络中某个网站的管理员所拥有，并且使用 <code>Root key</code> 进行签名的。每个 <code>site key</code> 可以签名一系列的 <code>operator keys</code>（<em>通常一个网站由多个操作员</em>），每个 <code>operator key</code> 又能签名一系列的 <code>router keys</code>，每个 <code>router key</code> 又能给运行在同一个路由器上的NLSR进程签名NLSR使用的 <code>key</code>，最后，路由器使用 <code>NLSR key</code> 给每个由NLSR生成的数据签名。需要注意的是，我们目前的设计里使用 <em>CNNx sync/repo</em> 来传播 <code>keys</code>，所以所有的 <code>keys</code> 都共享一个同一个前缀 <code>/&lt;network&gt;/keys</code> （<em>前文中有提到过这是 CNNx 机制限制的，所有用于同步的数据都需要共享同一个相同的前缀</em>），但是我们现在设计的 <code>keys</code> 命名方案确实是一个层级的结构。此外，我们使用两个标记 <code>%C1.O.N.Start</code> 和 <code>%C1.O.R.Start</code> 来分别指示 <code>operator keys</code> 和 <code>router keys</code>。<br><img src="/2022/06/09/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E8%B7%AF%E7%94%B1%E5%92%8C%E8%BD%AC%E5%8F%91/3.png" alt="image-20191218163022162"></p>
+<p>首先在顶层的是 <code>Root key</code>，为当前网络的管理员所拥有，第二层包含一系列的 <code>site keys</code>，由网络中某个网站的管理员所拥有，并且使用 <code>Root key</code> 进行签名的。每个 <code>site key</code> 可以签名一系列的 <code>operator keys</code>（<em>通常一个网站由多个操作员</em>），每个 <code>operator key</code> 又能签名一系列的 <code>router keys</code>，每个 <code>router key</code> 又能给运行在同一个路由器上的NLSR进程签名NLSR使用的 <code>key</code>，最后，路由器使用 <code>NLSR key</code> 给每个由NLSR生成的数据签名。需要注意的是，我们目前的设计里使用 <em>CNNx sync/repo</em> 来传播 <code>keys</code>，所以所有的 <code>keys</code> 都共享一个同一个前缀 <code>/&lt;network&gt;/keys</code> （<em>前文中有提到过这是 CNNx 机制限制的，所有用于同步的数据都需要共享同一个相同的前缀</em>），但是我们现在设计的 <code>keys</code> 命名方案确实是一个层级的结构。此外，我们使用两个标记 <code>%C1.O.N.Start</code> 和 <code>%C1.O.R.Start</code> 来分别指示 <code>operator keys</code> 和 <code>router keys</code>。<br><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171230981.png" alt="image-20191218163022162"></p>
 <p>图 3 每个NLSR包的签名和认证链</p>
 <p>NLSR严格执行基于信任锚的信任模型，图3描绘了每个NLSR包的签名和认证的流程。当NLSR路由器发送一个LSA到网络中时，它会使用它的 <code>NLSR key</code> 对数据包进行签名，并把用来签名的 <code>NLSR key</code> 的名字放在数据包（<em>Data Packet</em>）的 <code>SignedInfo/KeyLocator/KeyName</code> 域里面。每当收到一个LSA，NLSR路由器会从本地的内容缓存（<em>content store</em>）或者 <code>repo</code> （<em>key 可能已经通过 <code>key</code> repo 进行分发</em> ）中获取包中指定的 <code>key</code>，并验证内容的签名，同时NLSR会检查这 <em>key</em> 是否确实属于生成LSA的那个NLSR进程。接着重复上述过程，直到NLSR拉取到信任锚的自签 <code>key</code>。如果在这个过程中任意一步的 <code>key</code> 拉取失败，或者NLSR发现拉取到的 <code>key</code> 是由一个未授权的 <code>key</code> 签名的，亦或是最后的验证步骤没有到达信任锚，都认为该LSA是非法的。需要注意的是，一旦一个 <code>key</code> 被验证有效了，我们将记录这个信息，以后再收到由该 <code>key</code> 签名的数据包时，不需要再对这个 <code>key</code> 进行重复验证。</p>
 <h4 id="5-4-NDN转发策略："><a href="#5-4-NDN转发策略：" class="headerlink" title="5.4 NDN转发策略："></a>5.4 NDN转发策略：</h4><p>路由器转发并在PIT中维护未响应请求的状态表。同时设置了Interest请求否定应答NACK，根据否定原因进行网络故障诊断。</p>
@@ -678,11 +678,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -694,15 +694,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -710,15 +706,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -738,11 +738,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
+                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
+                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -754,11 +754,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">周报</a>
+                <a href="javascript:void(0)" class="js-tag color3">其他</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">其他</a>
+                <a href="javascript:void(0)" class="js-tag color3">周报</a>
               </li>
              
               <li class="article-tag-list-item">

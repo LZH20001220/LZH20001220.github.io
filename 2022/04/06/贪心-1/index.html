@@ -30,17 +30,17 @@
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
 <meta property="og:description" content="贪心的本质是选择每一阶段的局部最优，从而达到全局最优。 贪心算法一般分为如下四步：  将问题分解为若干个子问题 找出适合的贪心策略 求解每一个子问题的最优解 将局部最优解堆叠成全局最优解">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2022/04/06/%E8%B4%AA%E5%BF%83-1/1.png">
-<meta property="og:image" content="http://example.com/2022/04/06/%E8%B4%AA%E5%BF%83-1/1.gif">
-<meta property="og:image" content="http://example.com/2022/04/06/%E8%B4%AA%E5%BF%83-1/2.png">
-<meta property="og:image" content="http://example.com/2022/04/06/%E8%B4%AA%E5%BF%83-1/3.png">
-<meta property="og:image" content="http://example.com/2022/04/06/%E8%B4%AA%E5%BF%83-1/4.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171234592.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171235564.gif">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171235284.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171235789.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171235919.png">
 <meta property="article:published_time" content="2022-04-06T12:47:42.000Z">
-<meta property="article:modified_time" content="2022-04-19T14:56:14.000Z">
+<meta property="article:modified_time" content="2023-05-17T04:35:49.537Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/04/06/%E8%B4%AA%E5%BF%83-1/1.png">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171234592.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -260,7 +260,7 @@ var _hmt = _hmt || [];
 <p>假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干。</p>
 <p>对每个孩子 <code>i</code>，都有一个胃口值 <code>g[i]</code>，这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 <code>j</code>，都有一个尺寸 <code>s[j]</code> 。如果 <code>s[j] &gt;= g[i]</code>，我们可以将这个饼干 <code>j</code> 分配给孩子 <code>i</code> ，这个孩子会得到满足。你的目标是尽可能满足越多数量的孩子，并输出这个最大数值。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入: g = [1,2,3], s = [1,1]</span><br><span class="line">输出: 1</span><br><span class="line">解释: </span><br><span class="line">你有三个孩子和两块小饼干，3个孩子的胃口值分别是：1,2,3。</span><br><span class="line">虽然你有两块小饼干，由于他们的尺寸都是1，你只能让胃口值是1的孩子满足。</span><br><span class="line">所以你应该输出1。</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/04/06/%E8%B4%AA%E5%BF%83-1/1.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171234592.png" alt></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//贪心算法</span></span><br><span class="line"><span class="comment">// 时间复杂度：O(nlogn),快排的时间复杂度</span></span><br><span class="line"><span class="comment">// 空间复杂度：O(1)</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">findContentChildren</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; g, vector&lt;<span class="type">int</span>&gt;&amp; s)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">sort</span>(g.<span class="built_in">begin</span>(), g.<span class="built_in">end</span>());</span><br><span class="line">        <span class="built_in">sort</span>(s.<span class="built_in">begin</span>(), s.<span class="built_in">end</span>());</span><br><span class="line">        <span class="type">int</span> index = s.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = g.<span class="built_in">size</span>() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(index &gt;= <span class="number">0</span> &amp;&amp; s[index] &gt;= g[i])</span><br><span class="line">            &#123;</span><br><span class="line">                result++;</span><br><span class="line">                index--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/wiggle-subsequence/">376. 摆动序列 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
 <p>如果连续数字之间的差严格地在正数和负数之间交替，则数字序列称为 摆动序列 。第一个差（如果存在的话）可能是正数或负数。仅有一个元素或者含两个不等元素的序列也视作摆动序列。</p>
@@ -298,7 +298,7 @@ var _hmt = _hmt || [];
 <li>时间复杂度：$O(n)$</li>
 <li>空间复杂度：$O(1)$</li>
 </ul>
-<p><img src="/2022/04/06/%E8%B4%AA%E5%BF%83-1/1.gif" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171235564.gif" alt></p>
 <p>其关键在于：<strong>不能让“连续和”为负数的时候加上下一个元素，而不是 不让“连续和”加上一个负数</strong>。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxSubArray</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> result = INT_MIN;</span><br><span class="line">        <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            count = count + nums[i];</span><br><span class="line">            <span class="keyword">if</span>(count &gt; result)</span><br><span class="line">            result = count;</span><br><span class="line">            <span class="keyword">if</span>(count &lt; <span class="number">0</span>)</span><br><span class="line">            count = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>贪心算法，只需要一次遍历，如果count值小于0，说明肯定不是最大的，这时候将count赋为0，相当于修改起始位置了。</p>
@@ -320,7 +320,7 @@ var _hmt = _hmt || [];
 <p><strong>那么这个问题就转化为跳跃覆盖范围究竟可不可以覆盖到终点！</strong></p>
 <p>每次移动取最大跳跃步数（得到最大的覆盖范围），每移动一个单位，就更新最大覆盖范围。</p>
 <p><strong>贪心算法局部最优解：每次取最大跳跃步数（取最大覆盖范围），整体最优解：最后得到整体最大覆盖范围，看是否能到终点</strong>。</p>
-<p><img src="/2022/04/06/%E8%B4%AA%E5%BF%83-1/2.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171235284.png" alt></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">canJump</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> cover = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt;= cover; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            cover = <span class="built_in">max</span>(cover, i + nums[i]);</span><br><span class="line">            <span class="keyword">if</span>(cover &gt;= nums.<span class="built_in">size</span>() - <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/jump-game-ii/">45. 跳跃游戏 II - 力扣（LeetCode） (leetcode-cn.com)</a></p>
 <p>给你一个非负整数数组 <code>nums</code> ，你最初位于数组的第一个位置。</p>
@@ -357,7 +357,7 @@ var _hmt = _hmt || [];
 <p>方法一：暴力解法</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间复杂度：$O(n^2)$</span></span><br><span class="line"><span class="comment">//空间复杂度：$O(n)$</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">canCompleteCircuit</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; gas, vector&lt;<span class="type">int</span>&gt;&amp; cost)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; gas.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> rest = gas[i] - cost[i];</span><br><span class="line">            <span class="type">int</span> index = (i + <span class="number">1</span>) % gas.<span class="built_in">size</span>();</span><br><span class="line">            <span class="keyword">while</span>(rest &gt;= <span class="number">0</span> &amp;&amp; index != i)</span><br><span class="line">            &#123;</span><br><span class="line">                rest = rest + gas[index] - cost[index];</span><br><span class="line">                index = (index + <span class="number">1</span>) % gas.<span class="built_in">size</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(index == i &amp;&amp; rest &gt;= <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>方法二：贪心法</p>
-<p><img src="/2022/04/06/%E8%B4%AA%E5%BF%83-1/3.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171235789.png" alt></p>
 <p>可以换一个思路，首先如果总油量减去总消耗大于等于零那么一定可以跑完一圈，说明 各个站点的加油站 剩油量rest[i]相加一定是大于等于零的。</p>
 <p>每个加油站的剩余量rest[i]为gas[i] - cost[i]。</p>
 <p>i从0开始累加rest[i]，和记为curSum，一旦curSum小于零，说明[0, i]区间都不能作为起始位置，起始位置从i+1算起，再从0计算curSum</p>
@@ -397,7 +397,7 @@ var _hmt = _hmt || [];
 <p>如果按照k来从小到大排序，排完之后，会发现k的排列并不符合条件，身高也不符合条件，两个维度哪一个都没确定下来。</p>
 <p>那么按照身高h来排序呢，身高一定是从大到小排（身高相同的话则k小的站前面），让高个子在前面。</p>
 <p><strong>此时我们可以确定一个维度了，就是身高，前面的节点一定都比本节点高！</strong></p>
-<p><img src="/2022/04/06/%E8%B4%AA%E5%BF%83-1/4.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171235919.png" alt></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间复杂度：$O(n\log n + n^2)$ 快速排序的时间复杂度和que进行插入的时间复杂度</span></span><br><span class="line"><span class="comment">//空间复杂度：$O(n)$</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">bool</span> <span class="title">compare</span><span class="params">(vector &lt;<span class="type">int</span>&gt; &amp;a, vector &lt;<span class="type">int</span>&gt; &amp;b)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(a[<span class="number">0</span>] == b[<span class="number">0</span>])    <span class="keyword">return</span> a[<span class="number">1</span>] &lt; b[<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">return</span> a[<span class="number">0</span>] &gt; b[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">reconstructQueue</span>(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; people) &#123;</span><br><span class="line">        <span class="built_in">sort</span>(people.<span class="built_in">begin</span>(), people.<span class="built_in">end</span>(), compare);</span><br><span class="line"><span class="comment">//        vector &lt;vector &lt;int&gt;&gt; que;</span></span><br><span class="line"><span class="comment">//        for(int i = 0; i &lt; people.size(); i++)</span></span><br><span class="line"><span class="comment">//        &#123;</span></span><br><span class="line"><span class="comment">//            int position = people[i][1];</span></span><br><span class="line"><span class="comment">//            que.insert(que.begin() + position, people[i]);</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">        list &lt;vector &lt;<span class="type">int</span>&gt;&gt; que;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; people.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> position = people[i][<span class="number">1</span>];</span><br><span class="line">            list &lt;vector &lt;<span class="type">int</span>&gt;&gt;::iterator it = que.<span class="built_in">begin</span>();</span><br><span class="line">            <span class="keyword">while</span>(position--)</span><br><span class="line">            &#123;</span><br><span class="line">                it++;</span><br><span class="line">            &#125;</span><br><span class="line">            que.<span class="built_in">insert</span>(it, people[i]); <span class="comment">//链表进行插入比vector更快</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;(que.<span class="built_in">begin</span>(), que.<span class="built_in">end</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
       
@@ -681,11 +681,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -697,15 +697,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -713,15 +709,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -741,11 +741,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
+                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
+                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -757,11 +757,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">周报</a>
+                <a href="javascript:void(0)" class="js-tag color3">其他</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">其他</a>
+                <a href="javascript:void(0)" class="js-tag color3">周报</a>
               </li>
              
               <li class="article-tag-list-item">

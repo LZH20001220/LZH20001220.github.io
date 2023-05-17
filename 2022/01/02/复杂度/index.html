@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
 <meta property="og:description" content="复杂度包括时间复杂度和空间复杂度 1. 时间复杂度:描述算法的运行时间，O()表示算法最坏情况下运行时间的上界。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2022/01/02/%E5%A4%8D%E6%9D%82%E5%BA%A6/1.png">
-<meta property="og:image" content="http://example.com/2022/01/02/%E5%A4%8D%E6%9D%82%E5%BA%A6/2.png">
-<meta property="og:image" content="http://example.com/2022/01/02/%E5%A4%8D%E6%9D%82%E5%BA%A6/3.png">
-<meta property="og:image" content="http://example.com/2022/01/02/%E5%A4%8D%E6%9D%82%E5%BA%A6/4.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171220593.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171221624.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171221824.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171221598.png">
 <meta property="article:published_time" content="2022-01-01T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-03-04T12:10:52.000Z">
+<meta property="article:modified_time" content="2023-05-17T04:21:19.941Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/01/02/%E5%A4%8D%E6%9D%82%E5%BA%A6/1.png">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171220593.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -248,7 +248,7 @@ var _hmt = _hmt || [];
       
         <p>复杂度包括时间复杂度和空间复杂度</p>
 <h3 id="1-时间复杂度-描述算法的运行时间，O-表示算法最坏情况下运行时间的上界。"><a href="#1-时间复杂度-描述算法的运行时间，O-表示算法最坏情况下运行时间的上界。" class="headerlink" title="1. 时间复杂度:描述算法的运行时间，O()表示算法最坏情况下运行时间的上界。"></a>1. 时间复杂度:描述算法的运行时间，<code>O()</code>表示算法最坏情况下运行时间的上界。</h3><span id="more"></span>
-<p>快速排序的时间复杂度:O(nlogn)<br>暴力枚举的复杂度:O(n^2)<br><img src="/2022/01/02/%E5%A4%8D%E6%9D%82%E5%BA%A6/1.png" alt></p>
+<p>快速排序的时间复杂度:O(nlogn)<br>暴力枚举的复杂度:O(n^2)<br><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171220593.png" alt></p>
 <p>从n到log(n)可以通过二分法，递归等方式实现，注意递归的时间复杂度不一定是log(n)</p>
 <p>算法超时与电脑配置有关，也与程序的时间复杂度有关</p>
 <h3 id="2-空间复杂度-对程序的御用内存有一个大致的估计。"><a href="#2-空间复杂度-对程序的御用内存有一个大致的估计。" class="headerlink" title="2. 空间复杂度:对程序的御用内存有一个大致的估计。"></a>2. 空间复杂度:对程序的御用内存有一个大致的估计。</h3><p>空间复杂度:<br>当随着n的增大，输出内存大小不会变时，空间复杂度就是O(1):</p>
@@ -259,7 +259,7 @@ var _hmt = _hmt || [];
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">fibonacci</span><span class="params">(<span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span>(i &lt;= <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">if</span>(i == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">       <span class="keyword">return</span> <span class="built_in">fibonacci</span>(i<span class="number">-1</span>) + <span class="built_in">fibonacci</span>(i<span class="number">-2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>优化版的实现方式，时间复杂度为O(n)<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">fibonacci</span><span class="params">(<span class="type">int</span> first, <span class="type">int</span> second, <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n &lt; <span class="number">3</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (n == <span class="number">3</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> first + second;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">fibonacci</span>(second, first + second, n - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><strong>递归算法的空间复杂度 = 每次递归的空间复杂度 * 递归深度</strong></p>
-<p><img src="/2022/01/02/%E5%A4%8D%E6%9D%82%E5%BA%A6/2.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171221624.png" alt></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//递归实现二分法</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">binary_search</span><span class="params">( <span class="type">int</span> arr[], <span class="type">int</span> l, <span class="type">int</span> r, <span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (r &gt;= l) &#123;</span><br><span class="line">        <span class="type">int</span> mid = l + (r - l) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (arr[mid] == x)</span><br><span class="line">            <span class="keyword">return</span> mid;</span><br><span class="line">        <span class="keyword">if</span> (arr[mid] &gt; x)</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">binary_search</span>(arr, l, mid - <span class="number">1</span>, x);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">binary_search</span>(arr, mid + <span class="number">1</span>, r, x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>二分法的时间复杂度是<code>O(log(n))</code>,空间复杂度为每次递归的空间复杂度 * 递归深度，</p>
 <p>如果是拷贝地址，则每一层递归都是公用一块数组地址空间的，所以每次递归的空间复杂度是常数即：<code>O(1)</code>，空间复杂度为<code>O(log(n))</code>.<br>如果是拷贝值，则每一层递归都调用n个地址，所以每次递归的空间复杂度是常数即：<code>O(n)</code>，空间复杂度为<code>O(nlog(n))</code>.</p>
@@ -269,8 +269,8 @@ var _hmt = _hmt || [];
 <li>Java 依赖JVM来做内存管理，不了解jvm内存管理的机制，很可能会因一些错误的代码写法而导致内存泄漏或内存溢出</li>
 <li>Python内存管理是由私有堆空间管理的，所有的python对象和数据结构都存储在私有堆空间中。程序员没有访问堆的权限，只有解释器才能操作，所以python的基本数据类型所用的内存会要远大于存放纯数据类型所占的内存，例如，我们都知道存储int型数据需要四个字节，但是使用Python 申请一个对象来存放数据的话，所用空间要远大于四个字节。</li>
 </ol>
-<p><img src="/2022/01/02/%E5%A4%8D%E6%9D%82%E5%BA%A6/3.png" alt></p>
-<p><img src="/2022/01/02/%E5%A4%8D%E6%9D%82%E5%BA%A6/4.png" alt><br>安装64位的操作系统的计算机内存都已经超过了4G，也就是指针大小如果还是4个字节的话，就已经不能寻址全部的内存地址，所以64位编译器使用8个字节的指针才能寻找所有的内存地址。</p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171221824.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171221598.png" alt><br>安装64位的操作系统的计算机内存都已经超过了4G，也就是指针大小如果还是4个字节的话，就已经不能寻址全部的内存地址，所以64位编译器使用8个字节的指针才能寻找所有的内存地址。</p>
 <h3 id="内存对齐"><a href="#内存对齐" class="headerlink" title="内存对齐"></a>内存对齐</h3><p>内存对齐的作用：以更多的空间为代价换取时间的快速。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span>&#123;</span><br><span class="line">   <span class="type">int</span> num;</span><br><span class="line">   <span class="type">char</span> cha;</span><br><span class="line">&#125;st;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> a[<span class="number">100</span>];</span><br><span class="line">    <span class="type">char</span> b[<span class="number">100</span>];</span><br><span class="line">    cout &lt;&lt; <span class="built_in">sizeof</span>(<span class="type">int</span>) &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="built_in">sizeof</span>(<span class="type">char</span>) &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="built_in">sizeof</span>(a) &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="built_in">sizeof</span>(b) &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="built_in">sizeof</span>(st) &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>输出结果为：4，1，400，100，8</p>
@@ -557,11 +557,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -573,15 +573,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -589,15 +585,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -617,11 +617,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
+                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
+                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -633,11 +633,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">周报</a>
+                <a href="javascript:void(0)" class="js-tag color3">其他</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">其他</a>
+                <a href="javascript:void(0)" class="js-tag color3">周报</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -30,14 +30,14 @@
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
 <meta property="og:description" content="235. 二叉搜索树的最近公共祖先 - 力扣（LeetCode） (leetcode-cn.com) 给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先。 百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2022/03/01/%E4%BA%8C%E5%8F%89%E6%A0%91-5/1.gif">
-<meta property="og:image" content="http://example.com/2022/03/01/%E4%BA%8C%E5%8F%89%E6%A0%91-5/1.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171219092.gif">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171219983.png">
 <meta property="article:published_time" content="2022-03-01T01:49:50.000Z">
-<meta property="article:modified_time" content="2022-03-04T12:10:44.000Z">
+<meta property="article:modified_time" content="2023-05-17T04:19:51.889Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/03/01/%E4%BA%8C%E5%8F%89%E6%A0%91-5/1.gif">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171219092.gif">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -272,7 +272,7 @@ var _hmt = _hmt || [];
 </ul>
 </li>
 </ul>
-<p><img src="/2022/03/01/%E4%BA%8C%E5%8F%89%E6%A0%91-5/1.gif" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171219092.gif" alt></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//递归法</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">deleteNode</span><span class="params">(TreeNode* root, <span class="type">int</span> key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span> root;<span class="comment">//第一种情况，没有找到key</span></span><br><span class="line">        <span class="keyword">if</span>(root-&gt;val == key)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//第二种情况:找到key，且为叶子节点</span></span><br><span class="line">            <span class="keyword">if</span>(root-&gt;left == <span class="literal">nullptr</span> &amp;&amp; root-&gt;right == <span class="literal">nullptr</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">delete</span>(root);</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//第三种情况:左子树为空，右子树不为空</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(root-&gt;left == <span class="literal">nullptr</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                TreeNode* node = root-&gt;right;</span><br><span class="line">                <span class="keyword">delete</span> root;</span><br><span class="line">                <span class="keyword">return</span> node;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//第四种情况:左子树为空，右子树不为空</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(root-&gt;right == <span class="literal">nullptr</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                TreeNode* node = root-&gt;left;</span><br><span class="line">                <span class="keyword">delete</span> root;</span><br><span class="line">                <span class="keyword">return</span> node;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//第五种情况：左右子树都不为空</span></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                TreeNode *cur = root-&gt;right;<span class="comment">//找右子树最左边的节点</span></span><br><span class="line">                <span class="keyword">while</span>(cur-&gt;left != <span class="literal">nullptr</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    cur = cur-&gt;left;</span><br><span class="line">                &#125;</span><br><span class="line">                cur-&gt;left = root-&gt;left; <span class="comment">//将root的左子树作为root右子树最左边节点的左子树</span></span><br><span class="line">                TreeNode* tmp = root;</span><br><span class="line">                root = root-&gt;right;</span><br><span class="line">                <span class="keyword">delete</span> tmp;</span><br><span class="line">                <span class="keyword">return</span> root;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;val &gt; key)  root-&gt;left = <span class="built_in">deleteNode</span>(root-&gt;left, key);</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;val &lt; key)  root-&gt;right = <span class="built_in">deleteNode</span>(root-&gt;right, key);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>递归法的思路，就考虑特殊情况怎么处理，比如要找的值在根节点，或者直接就是根节点的左右孩子的情况，考虑一层的逻辑，通过递归就可以实现整个树的逻辑。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">deleteOneNode</span><span class="params">(TreeNode* root)</span> <span class="comment">//删除一个节点的逻辑</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">nullptr</span>) <span class="keyword">return</span> root;</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;left == <span class="literal">NULL</span> &amp;&amp; root-&gt;right ==<span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;<span class="comment">//第二种情况</span></span><br><span class="line">        <span class="keyword">if</span>(root-&gt;right == <span class="literal">NULL</span>) <span class="keyword">return</span> root-&gt;left;<span class="comment">//第三种情况</span></span><br><span class="line">        <span class="keyword">if</span>(root-&gt;left == <span class="literal">NULL</span>) <span class="keyword">return</span> root-&gt;right;<span class="comment">//第四种情况</span></span><br><span class="line">        TreeNode* cur = root-&gt;right; <span class="comment">//对应第五种情况</span></span><br><span class="line">        <span class="keyword">while</span>(cur-&gt;left != <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            cur = cur-&gt;left;</span><br><span class="line">        &#125;</span><br><span class="line">        cur-&gt;left = root-&gt;left;</span><br><span class="line">        <span class="keyword">return</span> root-&gt;right;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">deleteNode</span><span class="params">(TreeNode* root, <span class="type">int</span> key)</span> </span>&#123; </span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">nullptr</span>) <span class="keyword">return</span> root;</span><br><span class="line">        TreeNode* cur = root;</span><br><span class="line">        TreeNode* pre = <span class="literal">nullptr</span>;<span class="comment">//pre为cur的前一个节点</span></span><br><span class="line">        <span class="keyword">while</span>(cur != <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(cur-&gt;val == key) <span class="keyword">break</span>;</span><br><span class="line">            pre = cur;</span><br><span class="line">            <span class="keyword">if</span>(cur-&gt;val &gt; key) cur = cur-&gt;left;</span><br><span class="line">            <span class="keyword">else</span> cur = cur-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(pre == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="built_in">deleteOneNode</span>(cur);</span><br><span class="line">        <span class="keyword">if</span>(pre-&gt;left != <span class="literal">nullptr</span> &amp;&amp; pre-&gt;left-&gt;val == key)</span><br><span class="line">        pre-&gt;left = <span class="built_in">deleteOneNode</span>(cur);</span><br><span class="line">        <span class="keyword">if</span>(pre-&gt;right != <span class="literal">nullptr</span> &amp;&amp; pre-&gt;right-&gt;val == key)</span><br><span class="line">        pre-&gt;right = <span class="built_in">deleteOneNode</span>(cur);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -281,7 +281,7 @@ var _hmt = _hmt || [];
 <p>给你二叉搜索树的根节点 <strong>root</strong> ，同时给定最小边界<strong>low</strong> 和最大边界 <strong>high</strong>。通过修剪二叉搜索树，使得所有节点的值在<strong>[low, high]</strong>中。修剪树 <strong>不应该</strong> 改变保留在树中的元素的相对结构 (即，如果没有被移除，原有的父代子代关系都应当保留)。 可以证明，存在 <strong>唯一的答案</strong> 。</p>
 <p>所以结果应当返回修剪好的二叉搜索树的新的根节点。注意，根节点可能会根据给定的边界发生改变。</p>
 <p><strong>思路：</strong>本质上就是删除结点，如果某个结点小于low，就递归判断它的右子树是否位于区间内；如果结点大于high，就判断它的左子树是否位于区间内。</p>
-<p><img src="/2022/03/01/%E4%BA%8C%E5%8F%89%E6%A0%91-5/1.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171219983.png" alt></p>
 <p><strong>迭代法：因为二叉搜索树的有序性，不需要使用栈模拟递归的过程。</strong></p>
 <p>在剪枝的时候，可以分为三步：</p>
 <ul>
@@ -587,11 +587,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -603,15 +603,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -619,15 +615,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -647,11 +647,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
+                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
+                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -663,11 +663,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">周报</a>
+                <a href="javascript:void(0)" class="js-tag color3">其他</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">其他</a>
+                <a href="javascript:void(0)" class="js-tag color3">周报</a>
               </li>
              
               <li class="article-tag-list-item">

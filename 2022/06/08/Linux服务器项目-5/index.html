@@ -30,20 +30,20 @@
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
 <meta property="og:description" content="2.7 信号信号是 Linux 进程间通信的最古老的方式之一，是事件发生时对进程的通知机制，有时也称之为软件中断，它是在软件层次上对中断机制的一种模拟，是一种异步通信的方式。信号可以导致一个正在运行的进程被另一个正在运行的异步进程中断，转而处理某一个突发事件。 发往进程的诸多信号，通常都是源于内核。引发内核为进程产生信号的各类事件如下：">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2022/06/08/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-5/1.png">
-<meta property="og:image" content="http://example.com/2022/06/08/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-5/2.png">
-<meta property="og:image" content="http://example.com/2022/06/08/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-5/3.png">
-<meta property="og:image" content="http://example.com/2022/06/08/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-5/4.png">
-<meta property="og:image" content="http://example.com/2022/06/08/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-5/5.png">
-<meta property="og:image" content="http://example.com/2022/06/08/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-5/6.png">
-<meta property="og:image" content="http://example.com/2022/06/08/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-5/7.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171141111.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171141457.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171141543.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171141368.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171141621.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171142630.png">
+<meta property="og:image" content="http://example.com/2022/06/08/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-5/S">
 <meta property="article:published_time" content="2022-06-08T06:31:55.000Z">
-<meta property="article:modified_time" content="2022-06-09T14:07:36.000Z">
+<meta property="article:modified_time" content="2023-05-17T03:42:36.718Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="项目">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/06/08/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-5/1.png">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171141111.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -266,10 +266,10 @@ var _hmt = _hmt || [];
 </ul>
 <p><strong>信号的特点：</strong>简单，不能携带大量信息，满足某个特定条件才发送，优先级比较高。</p>
 <p>通过<code>kill -l</code>命令可以查看系统的信号。其中1 ~ 31是常规信号，34 ~ 64是当前预定好待使用的信号。标红的需要掌握。</p>
-<p><img src="/2022/06/08/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-5/1.png" alt="image-20220608145224668"></p>
-<p><img src="/2022/06/08/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-5/2.png" alt="image-20220608145247688"></p>
-<p><img src="/2022/06/08/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-5/3.png" alt="image-20220608145306098"></p>
-<p><img src="/2022/06/08/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-5/4.png" alt="image-20220608145324575"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171141111.png" alt="image-20220608145224668"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171141457.png" alt="image-20220608145247688"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171141543.png" alt="image-20220608145306098"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171141368.png" alt="image-20220608145324575"></p>
 <p>查看信号的详细信息：<code>man 7 signal</code>，有些信号有3个编号，实际上对应不同的系统平台。其中中间一列是x86，arm架构。</p>
 <p><strong>信号的 5 种默认处理动作</strong></p>
 <ul>
@@ -298,7 +298,7 @@ var _hmt = _hmt || [];
 <p>信号的 “阻塞 是一个开关动作，指的是阻止信号被处理，但不是阻止信号产生。</p>
 <p>信号的阻塞就是让系统暂时保留信号留待以后发送。由于另外有办法让系统忽略信号，所以一般情况下信号的阻塞只是暂时的，只是为了防止信号打断敏感的操作。</p>
 <p>PCB里包括文件描述符，进程PID,PPID等信息，也包括未决信号集，阻塞信号集的信息。</p>
-<p><img src="/2022/06/08/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-5/5.png" alt="image-20220608170831482"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171141621.png" alt="image-20220608170831482"></p>
 <ol>
 <li>用户通过键盘  Ctrl + C, 产生2号信号SIGINT (信号被创建)</li>
 <li>信号产生但是没有被处理 （未决）<pre><code>- 在内核中将所有的没有被处理的信号存储在一个集合中 （未决信号集）
@@ -329,7 +329,7 @@ var _hmt = _hmt || [];
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    int sigprocmask(int how, const sigset_t *set, sigset_t *oldset);</span></span><br><span class="line"><span class="comment">        - 功能：将自定义信号集中的数据设置到内核中（设置阻塞，解除阻塞，替换）</span></span><br><span class="line"><span class="comment">        - 参数：</span></span><br><span class="line"><span class="comment">            - how : 如何对内核阻塞信号集进行处理</span></span><br><span class="line"><span class="comment">                SIG_BLOCK: 将用户设置的阻塞信号集添加到内核中，内核中原来的数据不变</span></span><br><span class="line"><span class="comment">                    假设内核中默认的阻塞信号集是mask， mask | set</span></span><br><span class="line"><span class="comment">                SIG_UNBLOCK: 根据用户设置的数据，对内核中的数据进行解除阻塞</span></span><br><span class="line"><span class="comment">                    mask &amp;= ~set;实际上是mask | set &amp; ~set</span></span><br><span class="line"><span class="comment">                SIG_SETMASK:覆盖内核中原来的值</span></span><br><span class="line"><span class="comment">            </span></span><br><span class="line"><span class="comment">            - set ：已经初始化好的用户自定义的信号集</span></span><br><span class="line"><span class="comment">            - oldset : 保存设置之前的内核中的阻塞信号集的状态，可以是 NULL</span></span><br><span class="line"><span class="comment">        - 返回值：</span></span><br><span class="line"><span class="comment">            成功：0</span></span><br><span class="line"><span class="comment">            失败：-1</span></span><br><span class="line"><span class="comment">                设置错误号：EFAULT、EINVAL</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    int sigpending(sigset_t *set);</span></span><br><span class="line"><span class="comment">        - 功能：获取内核中的未决信号集</span></span><br><span class="line"><span class="comment">        - 参数：set,传出参数，保存的是内核中的未决信号集中的信息。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 编写一个程序，把所有的常规信号（1-31）的未决状态打印到屏幕</span></span><br><span class="line"><span class="comment">// 设置某些信号是阻塞的，通过键盘产生这些信号</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置2、3号信号阻塞</span></span><br><span class="line">    <span class="type">sigset_t</span> set;</span><br><span class="line">    <span class="built_in">sigemptyset</span>(&amp;set);</span><br><span class="line">    <span class="comment">// 将2号和3号信号添加到信号集中</span></span><br><span class="line">    <span class="built_in">sigaddset</span>(&amp;set, SIGINT);</span><br><span class="line">    <span class="built_in">sigaddset</span>(&amp;set, SIGQUIT);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 修改内核中的阻塞信号集</span></span><br><span class="line">    <span class="built_in">sigprocmask</span>(SIG_BLOCK, &amp;set, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> num = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line">        num++;</span><br><span class="line">        <span class="comment">// 获取当前的未决信号集的数据</span></span><br><span class="line">        <span class="type">sigset_t</span> pendingset;</span><br><span class="line">        <span class="built_in">sigemptyset</span>(&amp;pendingset);</span><br><span class="line">        <span class="comment">//相当于是通过pendingset观察内核的信号集数据</span></span><br><span class="line">        <span class="built_in">sigpending</span>(&amp;pendingset);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历前32位</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">31</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">sigismember</span>(&amp;pendingset, i) == <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">sigismember</span>(&amp;pendingset, i) == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;0&quot;</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="built_in">perror</span>(<span class="string">&quot;sigismember&quot;</span>);</span><br><span class="line">                <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        <span class="built_in">sleep</span>(<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span>(num == <span class="number">10</span>) &#123;</span><br><span class="line">            <span class="comment">// 解除阻塞</span></span><br><span class="line">            <span class="built_in">sigprocmask</span>(SIG_UNBLOCK, &amp;set, <span class="literal">NULL</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>sigaction函数：推荐使用，ubuntu下和signal一样。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    #include &lt;signal.h&gt;</span></span><br><span class="line"><span class="comment">    int sigaction(int signum, const struct sigaction *act,</span></span><br><span class="line"><span class="comment">                            struct sigaction *oldact);</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        - 功能：检查或者改变信号的处理。信号捕捉</span></span><br><span class="line"><span class="comment">        - 参数：</span></span><br><span class="line"><span class="comment">            - signum : 需要捕捉的信号的编号或者宏值（信号的名称）</span></span><br><span class="line"><span class="comment">            - act ：捕捉到信号之后的处理动作</span></span><br><span class="line"><span class="comment">            - oldact : 上一次对信号捕捉相关的设置，一般不使用，传递NULL</span></span><br><span class="line"><span class="comment">        - 返回值：</span></span><br><span class="line"><span class="comment">            成功 0</span></span><br><span class="line"><span class="comment">            失败 -1</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">     struct sigaction &#123;</span></span><br><span class="line"><span class="comment">        // 函数指针，指向的函数就是信号捕捉到之后的处理函数</span></span><br><span class="line"><span class="comment">        void     (*sa_handler)(int); //参数是int，返回是void</span></span><br><span class="line"><span class="comment">        // 不常用</span></span><br><span class="line"><span class="comment">        void     (*sa_sigaction)(int, siginfo_t *, void *);</span></span><br><span class="line"><span class="comment">        // 临时阻塞信号集，在信号捕捉函数执行过程中，临时阻塞某些信号。</span></span><br><span class="line"><span class="comment">        sigset_t   sa_mask;</span></span><br><span class="line"><span class="comment">        // 使用哪一个信号处理对捕捉到的信号进行处理</span></span><br><span class="line"><span class="comment">        // 这个值可以是0，表示使用sa_handler,也可以是SA_SIGINFO表示使用sa_sigaction</span></span><br><span class="line"><span class="comment">        int        sa_flags;</span></span><br><span class="line"><span class="comment">        // 被废弃掉了</span></span><br><span class="line"><span class="comment">        void     (*sa_restorer)(void);</span></span><br><span class="line"><span class="comment">    &#125;;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;signal.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">myalarm</span><span class="params">(<span class="type">int</span> num)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;捕捉到了信号的编号是：%d\n&quot;</span>, num);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;xxxxxxx\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 过3秒以后，每隔2秒钟定时一次</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">sigaction</span> act;</span><br><span class="line">    act.sa_flags = <span class="number">0</span>;</span><br><span class="line">    act.sa_handler = myalarm;</span><br><span class="line">    <span class="built_in">sigemptyset</span>(&amp;act.sa_mask);  <span class="comment">// 清空临时阻塞信号集</span></span><br><span class="line">   </span><br><span class="line">    <span class="comment">// 注册信号捕捉</span></span><br><span class="line">    <span class="built_in">sigaction</span>(SIGALRM, &amp;act, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">itimerval</span> new_value;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置间隔的时间</span></span><br><span class="line">    new_value.it_interval.tv_sec = <span class="number">2</span>;</span><br><span class="line">    new_value.it_interval.tv_usec = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置延迟的时间,3秒之后开始第一次定时</span></span><br><span class="line">    new_value.it_value.tv_sec = <span class="number">3</span>;</span><br><span class="line">    new_value.it_value.tv_usec = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> ret = <span class="built_in">setitimer</span>(ITIMER_REAL, &amp;new_value, <span class="literal">NULL</span>); <span class="comment">// 非阻塞的</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;定时器开始了...\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(ret == <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="built_in">perror</span>(<span class="string">&quot;setitimer&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// getchar();</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/08/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-5/6.png" alt="image-20220608184042880"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171142630.png" alt="image-20220608184042880"></p>
 <p><strong>信号集的特点：</strong></p>
 <ol>
 <li>通过sigprocmask将自建信号集放到系统信号集后执行完操作后，系统信号集恢复为原来的样子。</li>
@@ -401,7 +401,7 @@ var _hmt = _hmt || [];
 </ul>
 <p><code>find / 2 &gt; /dev/null | wc l &amp;</code>指令<code>find / 2</code>表示查找2，<code>&gt;</code>表示重定向到<code>/dev/null</code>这个文件，<code>| wc l</code>表示通过管道查看数量，创建一个子进程。<code>&amp;</code>表示后台运行。</p>
 <p><code>sort &lt; longlist | uniq c</code>在前台运行</p>
-<p><img src="/2022/06/08/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-5/7.png" alt="image-20220609150916956"></p>
+<p><img src="/2022/06/08/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-5/S" alt="image-20220609150916956"></p>
 <p>会话的首进程是bash，bash中只能同时运行一个前台进程组。会话ID是SID</p>
 <p><strong>进程组、会话操作函数</strong></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">pid_t</span> <span class="title">getpgrp</span><span class="params">(<span class="type">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="type">pid_t</span> <span class="title">getpgid</span><span class="params">(<span class="type">pid_t</span> pid)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">setpgid</span><span class="params">(<span class="type">pid_t</span> pid, <span class="type">pid_t</span> pgid)</span></span>;</span><br><span class="line"><span class="function"><span class="type">pid_t</span> <span class="title">getsid</span><span class="params">(<span class="type">pid_t</span> pid)</span></span>;</span><br><span class="line"><span class="function"><span class="type">pid_t</span> <span class="title">setsid</span><span class="params">(<span class="type">void</span>)</span></span>;</span><br></pre></td></tr></table></figure>
@@ -709,11 +709,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -725,15 +725,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -741,15 +737,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -769,11 +769,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
+                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
+                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -785,11 +785,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">周报</a>
+                <a href="javascript:void(0)" class="js-tag color3">其他</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">其他</a>
+                <a href="javascript:void(0)" class="js-tag color3">周报</a>
               </li>
              
               <li class="article-tag-list-item">

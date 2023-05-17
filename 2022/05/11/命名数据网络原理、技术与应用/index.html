@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
 <meta property="og:description" content="TCP&#x2F;IP 存在问题：  效率低。管道是单源单路径的，容易造成拥塞，比如同一个视频，要从单个服务器发送无数次。 可扩展性差。不断打补丁，网络设计管理越来越复杂。IP地址也不够用了。 安全性弱。重视管道保护，但不能保证数据本身的可靠性。比如建立一个信任连接后，对方发的恶意代码也会照收无误。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2022/05/11/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E3%80%81%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/1.png">
-<meta property="og:image" content="http://example.com/2022/05/11/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E3%80%81%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/2.png">
-<meta property="og:image" content="http://example.com/2022/05/11/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E3%80%81%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/3.webp">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171230151.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171230161.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171231123.webp">
 <meta property="article:published_time" content="2022-05-11T07:51:24.000Z">
-<meta property="article:modified_time" content="2022-05-27T04:38:20.000Z">
+<meta property="article:modified_time" content="2023-05-17T04:31:04.013Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="科研">
 <meta property="article:tag" content="NDN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/05/11/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E3%80%81%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/1.png">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171230151.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -262,7 +262,7 @@ var _hmt = _hmt || [];
 <li>保留路由和转发平面的分离，保证了转发技术和路由技术可以并行发展。</li>
 <li>保证网络架构的中立，用户的选择和竞争尽可能简单。</li>
 </ol>
-<p><img src="/2022/05/11/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E3%80%81%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/1.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171230151.png" alt></p>
 <p><strong>NDN保留了TCP/IP中的沙漏模型，但是利用内容块代替了IP层。</strong></p>
 <ul>
 <li>在网络的角度看，就是在网络中对数据命名代替对物理实体命名，用户交换信息与位置无关，采用发布—订阅策略。无需目的地址，数据可以来自任何节点。</li>
@@ -270,12 +270,12 @@ var _hmt = _hmt || [];
 <li>利用网络的缓存功能缓存经过的数据包，可以减少网络流量。</li>
 </ul>
 <p>NDN的数据报文包括兴趣包和数据包两种。</p>
-<p><img src="/2022/05/11/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E3%80%81%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/2.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171230161.png" alt></p>
 <p>NDN包括三种重要的数据结构来完成转发，分别是转发信息库(FIB)，待定兴趣表(PIT)和内容缓存库(CS)</p>
 <p>（1）转发信息库(forwarding information base，FIB)：FIB保存了路由结点到达内容服务器的下一跳接口(NDN中用face指代，一个face代表路由器收发报文的一个接口)</p>
 <p>（2）内容存储库(content store，CS)：CS保存路由结点的缓存内容</p>
 <p>（3）未决请求表(pending interest table，PIT）：PIT记录未得到响应的Interest报文的名字信息及请求的face，以便Data报文沿途返回。 </p>
-<p><img src="/2022/05/11/%E5%91%BD%E5%90%8D%E6%95%B0%E6%8D%AE%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E3%80%81%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/3.webp" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171231123.webp" alt></p>
 <p><strong>兴趣包的查询步骤是：</strong><br>CS：是否已经有缓存了；<br>PIT：是否已经有其他人请求过了，那就不用再重复发请求了，只需记录一下，在包回来时给所有请求都分一份就行；<br>FIB：查询哪条路径能满足请求，把兴趣包转发下去。</p>
 <p><strong>数据包结构如下，查询步骤是：</strong><br>PIT：若有该数据的请求，发给所有请求列表；若无则直接丢弃。<br>CS：留一份缓存后，继续转发</p>
 <p>NDN需要解决的关键技术：命名机制、缓存机制、路由机制、转发机制、传输控制机制、移动性管理机制和数据安全机制等。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           </p>
@@ -565,11 +565,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -581,15 +581,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -597,15 +593,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -625,11 +625,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
+                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
+                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -641,11 +641,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">周报</a>
+                <a href="javascript:void(0)" class="js-tag color3">其他</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">其他</a>
+                <a href="javascript:void(0)" class="js-tag color3">周报</a>
               </li>
              
               <li class="article-tag-list-item">

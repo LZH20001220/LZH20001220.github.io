@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
 <meta property="og:description" content="简介操作系统存在于计算机软件和硬件之间，协调软件和硬件。 操作系统管理的硬件：CPU管理、内存管理、终端管理、磁盘管理、文件管理、网络管理、电源管理、多核管理 操作系统的接口  使用显示器：printf； 使用CPU：fork； 使用文件：open、read…  存储程序的主要思想：将程序和数据存放到计算机内部的存储器中，计算机在程序的控制下一步一步的执行。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2022/02/02/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%A6%82%E8%BF%B0/1.png">
-<meta property="og:image" content="http://example.com/2022/02/02/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%A6%82%E8%BF%B0/2.png">
-<meta property="og:image" content="http://example.com/2022/02/02/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%A6%82%E8%BF%B0/3.png">
-<meta property="og:image" content="http://example.com/2022/02/02/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%A6%82%E8%BF%B0/4.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171204745.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171204129.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171205531.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171205435.png">
 <meta property="article:published_time" content="2022-02-02T08:48:00.000Z">
-<meta property="article:modified_time" content="2022-02-21T12:47:24.000Z">
+<meta property="article:modified_time" content="2023-05-17T04:06:08.066Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/02/02/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%A6%82%E8%BF%B0/1.png">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171204745.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -256,7 +256,7 @@ var _hmt = _hmt || [];
 </ul>
 <p>存储程序的主要思想：将程序和数据存放到计算机内部的存储器中，计算机在程序的控制下一步一步的执行。</p>
 <span id="more"></span>
-<p><img src="/2022/02/02/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%A6%82%E8%BF%B0/1.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171204745.png" alt></p>
 <p>其中IP(也称为PC)是程序计数器，用来记录当前想要执行的指令地址(这是计算机组成原理的相关知识)，从而根据指令地址在存储器中取出对应的指令，进而将指令送到CPU中进行执行(这是可以理解为在处理不同的指令时，相当于不同的图灵机)，重复地进行<strong>取指、执行</strong>的操作，这也就是计算机工作的基本原理。</p>
 <h4 id="实地址模式和保护模式："><a href="#实地址模式和保护模式：" class="headerlink" title="实地址模式和保护模式："></a><strong>实地址模式和保护模式：</strong></h4><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chenwb89/p/operating_system_002.html">操作系统篇-浅谈实模式与保护模式 - 卫卐 - 博客园 (cnblogs.com)</a></p>
 <p>实地址模式：计组课学的8086CPU实际上就是实地址模式，其计算地址为<strong>物理地址（physicaladdress）=段值（segment） * 16 + 偏移（offset）</strong></p>
@@ -270,11 +270,11 @@ var _hmt = _hmt || [];
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chenwb89/p/operating_system_003.html">操作系统篇-分段机制与GDT|LDT - 卫卐 - 博客园 (cnblogs.com)</a></p>
 <p>使用操作系统的几种方式：命令行，图形窗口，应用程序，上层应用调用操作系统, 实际上就是一些C语言加上一些定义好的重要函数。这些函数实际上就是操作系统的接口。</p>
 <p>操作系统的接口就是系统调用, 也就是直接与计算机硬件打交道的函数。</p>
-<p><img src="/2022/02/02/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%A6%82%E8%BF%B0/2.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171204129.png" alt></p>
 <p>POSIX表示可移植操作系统接口（Portable Operating System Interface of UNIX，缩写为 POSIX ），POSIX标准定义了操作系统应该为应用程序提供的接口标准。这是因为不用的操作系统平台提供的相同功能的接口名称可能不一样。</p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chenwb89/p/operating_system_004.html">操作系统篇-调用门与特权级（CPL、DPL和RPL） - 卫卐 - 博客园 (cnblogs.com)</a></p>
 <p>为了信息的安全，防止用户轻易的进入操作系统造成破坏，<strong>需要将内核程序和用户程序隔离!</strong></p>
-<p><img src="/2022/02/02/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%A6%82%E8%BF%B0/3.png" alt></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171205531.png" alt></p>
 <p>在分段机制中，特权级总共有4个特权级别，从高到低分别是0、1、2、3，数字越小表示的特权级别越大。如下图所示：</p>
 <p>较为核心的代码和数据将被放在特权级较高的层级中。处理器将用这样的机制来避免低特权级的任务在不被允许的情况下访问位于高特权级的段中。如果处理器检测到一个访问请求是不合法的，将会产生常规保护错误。有时候也将高特权级称为内层，低特权级称为外层。</p>
 <p>（1）CPL</p>
@@ -284,7 +284,7 @@ var _hmt = _hmt || [];
 <p>（3）RPL</p>
 <p>​        RPL是通过段选择子的第0和第1位表现出来的。RPL是代码中根据不同段跳转而确定，以动态刷新CS里的CPL，在代码段选择符中。</p>
 <p>当CPL &lt; DPL时，也就是程序的特权级 &lt; 段或门的特权级时，才能进入内核，正常执行。</p>
-<p><img src="/2022/02/02/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%A6%82%E8%BF%B0/4.png" alt="image-20220221174540610"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305171205435.png" alt="image-20220221174540610"></p>
 <h3 id="主要研究的内容"><a href="#主要研究的内容" class="headerlink" title="主要研究的内容"></a>主要研究的内容</h3><ul>
 <li>进程/线程；</li>
 <li>并发/锁；</li>
@@ -573,11 +573,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -589,15 +589,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -605,15 +601,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -633,11 +633,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
+                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
+                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -649,11 +649,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">周报</a>
+                <a href="javascript:void(0)" class="js-tag color3">其他</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">其他</a>
+                <a href="javascript:void(0)" class="js-tag color3">周报</a>
               </li>
              
               <li class="article-tag-list-item">
