@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Tag: 项目 | 博客杂记 - Harder and Better</title>
+  <title>NDN新加Tag | 博客杂记 - Harder and Better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
@@ -23,14 +23,20 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="博客杂记 - Harder and Better">
-<meta property="og:url" content="http://example.com/tags/%E9%A1%B9%E7%9B%AE/page/2/index.html">
+  <meta name="description" content="本文档展示如何修改ndn-cxx和NFD的源码，添加一个值基本类型的Tag，下面的过程将展示添加一个值为uint64_t类型的Tag SrcAddress。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NDN新加Tag">
+<meta property="og:url" content="http://example.com/2023/05/19/NDN%E6%96%B0%E5%8A%A0Tag/index.html">
 <meta property="og:site_name" content="博客杂记 - Harder and Better">
+<meta property="og:description" content="本文档展示如何修改ndn-cxx和NFD的源码，添加一个值基本类型的Tag，下面的过程将展示添加一个值为uint64_t类型的Tag SrcAddress。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305191229738.png">
+<meta property="article:published_time" content="2023-05-19T04:17:34.000Z">
+<meta property="article:modified_time" content="2023-05-19T04:29:38.566Z">
 <meta property="article:author" content="ygtrece">
-<meta property="article:tag" content="学习, 日常">
+<meta property="article:tag" content="NDN">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305191229738.png">
   
     <link rel="alternative" href="/atom.xml" title="博客杂记 - Harder and Better" type="application/atom+xml">
   
@@ -182,71 +188,259 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-NDN新加Tag" class="article article-type-post " itemscope itemprop="blogPost">
   
-  
+<div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/06/03/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-1/" class="archive-article-date">
-  	<time datetime="2022-06-03T10:01:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-03</time>
+      <header class="article-header">
+        
+        
+        <a href="/2023/05/19/NDN%E6%96%B0%E5%8A%A0Tag/" class="archive-article-date">
+  	<time datetime="2023-05-19T04:17:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-05-19</time>
 </a>
 
 
-        </div>
-    	 
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.3k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">6分</span>
+      </span>
+    </span>
+</div>
+          
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/06/03/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE-1/">Linux服务器项目-1</a>
+    <h1 class="article-title_code_ant" itemprop="name">
+      NDN新加Tag
     </h1>
   
+</p></center>
+      
+        <p>本文档展示如何修改ndn-cxx和NFD的源码，添加一个值基本类型的Tag，下面的过程将展示添加一个值为<code>uint64_t</code>类型的Tag <em>SrcAddress</em>。</p>
+<span id="more"></span>
+<h2 id="添加Tag的含义"><a href="#添加Tag的含义" class="headerlink" title="添加Tag的含义"></a>添加Tag的含义</h2><p>在<a target="_blank" rel="noopener" href="https://redmine.named-data.net/projects/nfd/wiki/NDNLPv2">NDNLPv2</a>协议中定义了LpPacket，具体的格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">LpPacket = LP-PACKET-TYPE TLV-LENGTH</span><br><span class="line">             *LpHeaderField</span><br><span class="line">             [Fragment]</span><br><span class="line"></span><br><span class="line">LpHeaderField = Sequence</span><br><span class="line"></span><br><span class="line">Sequence = SEQUENCE-TYPE TLV-LENGTH 8OCTET</span><br><span class="line"></span><br><span class="line">Fragment = FRAGMENT-TYPE TLV-LENGTH 1*OCTET</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>其中Fragment放置的可以是一个NDN报的分片，或者是一个完整的NDN包（NDN包足够小，不需要分片的情况）；</li>
+<li>LpHeaderField就是一系列的LpPacket的Header，类似一个变长的数组，所以可以自己定义新的LpHeader；</li>
+<li>所以添加一个新的Tag实际上就是添加一个新的LpHeader。</li>
+</ul>
+<h2 id="修改ndn-cxx"><a href="#修改ndn-cxx" class="headerlink" title="修改ndn-cxx"></a>修改ndn-cxx</h2><ul>
+<li>修改<code>ndn-cxx/lp/tlv.hpp</code>，为将要添加的新Tag分配一个新的TLV类型</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> &#123;</span><br><span class="line">    LpPacket = <span class="number">100</span>,</span><br><span class="line">    Fragment = <span class="number">80</span>,</span><br><span class="line">    Sequence = <span class="number">81</span>,</span><br><span class="line">    FragIndex = <span class="number">82</span>,</span><br><span class="line">    FragCount = <span class="number">83</span>,</span><br><span class="line">    PitToken = <span class="number">98</span>,</span><br><span class="line">    Nack = <span class="number">800</span>,</span><br><span class="line">    NackReason = <span class="number">801</span>,</span><br><span class="line">    NextHopFaceId = <span class="number">816</span>,</span><br><span class="line">    IncomingFaceId = <span class="number">817</span>,</span><br><span class="line">    CachePolicy = <span class="number">820</span>,</span><br><span class="line">    CachePolicyType = <span class="number">821</span>,</span><br><span class="line">    CongestionMark = <span class="number">832</span>,</span><br><span class="line">    Ack = <span class="number">836</span>,</span><br><span class="line">    TxSequence = <span class="number">840</span>,</span><br><span class="line">    NonDiscovery = <span class="number">844</span>,</span><br><span class="line">    PrefixAnnouncement = <span class="number">848</span>,</span><br><span class="line">    / add by qjm, <span class="keyword">for</span> add <span class="keyword">new</span> tag</span><br><span class="line">    SrcAddress = <span class="number">852</span></span><br><span class="line">    /</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>如上所示，我们给新添加的Tag分配了一个TLV type，这个type是唯一标识一个TLV的。并且该值的分配也是需要遵循一定准则的，具体的分配规则可以参考：<a target="_blank" rel="noopener" href="https://redmine.named-data.net/projects/nfd/wiki/NDNLPv2">https://redmine.named-data.net/projects/nfd/wiki/NDNLPv2</a></p>
+<p>Reserved Blocks<br>Two blocks of TLV-TYPEs have been reserved by link protocols:</p>
+<ul>
+<li>[80, 100]: 1-octet encoding</li>
+<li>[800, 1000]: 3-octet encoding<br>TLV-TYPE numbers for LpHeaderField SHOULD be assigned according to the following rules:</li>
+</ul>
+<ol>
+<li><p>if the field can be safely ignored by a receiver that doesn’t understand the field, pick an unused number in the range [800, 959] whose two least significant bits are 00.</p>
+</li>
+<li><p>if the field would occur frequently, pick an unused number in the range [81, 99].</p>
+</li>
+<li><p>otherwise, pick an unused number in the range [800, 959] whose two least significant bits are效果 01.</p>
+<p>Note: number assignment for a TLV-TYPE nested within a LpHeaderField is not restricted by the above rules.</p>
+</li>
+</ol>
+<ul>
+<li>修改ndn-cxx/lp/tags.hpp，定义一个新的Tag:</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// add by LZH, for add new tag</span></span><br><span class="line"><span class="keyword">typedef</span> SimpleTag&lt;<span class="type">uint64_t</span>, <span class="number">16</span>&gt; SrcAddressTag;</span><br><span class="line"><span class="comment">///</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>修改ndn-cxx/lp/fields.hpp，添加新Tag对应的Field：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// add by qjm, for add new tag</span></span><br><span class="line"><span class="keyword">typedef</span> FieldDecl&lt;field_location_tags::Header,</span><br><span class="line">        <span class="type">uint64_t</span>, tlv::SrcAddress&gt; SrcAddressField;</span><br><span class="line"><span class="built_in">BOOST_CONCEPT_ASSERT</span>((Field&lt;SrcAddressField&gt;));</span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/** \brief Set of all field declarations.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">typedef</span> boost</span><br><span class="line">::mpl::set&lt;</span><br><span class="line">        FragmentField,</span><br><span class="line">        SequenceField,</span><br><span class="line">        FragIndexField,</span><br><span class="line">        FragCountField,</span><br><span class="line">        PitTokenField,</span><br><span class="line">        NackField,</span><br><span class="line">        NextHopFaceIdField,</span><br><span class="line">        IncomingFaceIdField,</span><br><span class="line">        CachePolicyField,</span><br><span class="line">        CongestionMarkField,</span><br><span class="line">        AckField,</span><br><span class="line">        TxSequenceField,</span><br><span class="line">        NonDiscoveryField,</span><br><span class="line">        PrefixAnnouncementField,</span><br><span class="line">        /// add by qjm, <span class="keyword">for</span> add <span class="keyword">new</span> tag</span><br><span class="line">        SrcAddressField</span><br><span class="line">        ///</span><br><span class="line">&gt; FieldSet;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>修改<code>ndn-cxx/face.cpp =&gt; extractLpLocalFields</code>：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> NetPkt&gt;</span></span><br><span class="line"><span class="function"><span class="type">static</span> <span class="type">void</span></span></span><br><span class="line"><span class="function"><span class="title">extractLpLocalFields</span><span class="params">(NetPkt &amp;netPacket, <span class="type">const</span> lp::Packet &amp;lpPacket)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">addTagFromField</span>&lt;lp::IncomingFaceIdTag, lp::IncomingFaceIdField&gt;(netPacket, lpPacket);</span><br><span class="line">    <span class="built_in">addTagFromField</span>&lt;lp::CongestionMarkTag, lp::CongestionMarkField&gt;(netPacket, lpPacket);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// add by qjm, for add new tag</span></span><br><span class="line">    <span class="built_in">addTagFromField</span>&lt;lp::SrcAddressTag, lp::SrcAddressField&gt;(netPacket, lpPacket);</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的静态函数是在一个Face从Transport接收到一个Element，进行解析时调用的，功能是 <strong>将收到的LpPacket中的LpHeaderField提取，并保存到指定包的Tag列表当中。</strong></p>
+<ul>
+<li><strong>如果插入的Tag要在Interest包中生效</strong>，则需要修改<code>ndn-cxx/impl/face-impl.hpp =&gt; ExpressInterest：</code></li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span></span></span><br><span class="line"><span class="function"><span class="title">asyncExpressInterest</span><span class="params">(RecordId id, shared_ptr&lt;<span class="type">const</span> Interest&gt; interest,</span></span></span><br><span class="line"><span class="params"><span class="function">                     <span class="type">const</span> DataCallback &amp;afterSatisfied,</span></span></span><br><span class="line"><span class="params"><span class="function">                     <span class="type">const</span> NackCallback &amp;afterNacked,</span></span></span><br><span class="line"><span class="params"><span class="function">                     <span class="type">const</span> TimeoutCallback &amp;afterTimeout)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">NDN_LOG_DEBUG</span>(<span class="string">&quot;&lt;I &quot;</span> &lt;&lt; *interest);</span><br><span class="line">    <span class="keyword">this</span>-&gt;<span class="built_in">ensureConnected</span>(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">const</span> Interest &amp;interest2 = *interest;</span><br><span class="line">    <span class="keyword">auto</span> &amp;entry = m_pendingInterestTable.<span class="built_in">put</span>(id, std::<span class="built_in">move</span>(interest), afterSatisfied, afterNacked,afterTimeout, <span class="built_in">ref</span>(m_scheduler));</span><br><span class="line"></span><br><span class="line">    lp::Packet lpPacket;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">addFieldFromTag</span>&lt;lp::NextHopFaceIdField, lp::NextHopFaceIdTag&gt;(lpPacket, interest2);</span><br><span class="line">    <span class="built_in">addFieldFromTag</span>&lt;lp::CongestionMarkField, lp::CongestionMarkTag&gt;(lpPacket, interest2);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// add by qjm, for add new tag</span></span><br><span class="line">    <span class="built_in">addFieldFromTag</span>&lt;lp::SrcAddressField, lp::SrcAddressTag&gt;(lpPacket, interest2);</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line"></span><br><span class="line">    entry.<span class="built_in">recordForwarding</span>();</span><br><span class="line">    m_face.m_transport-&gt;<span class="built_in">send</span>(<span class="built_in">finishEncoding</span>(std::<span class="built_in">move</span>(lpPacket), interest2.<span class="built_in">wireEncode</span>(),</span><br><span class="line">                                            <span class="string">&#x27;I&#x27;</span>, interest2.<span class="built_in">getName</span>()));</span><br><span class="line">    <span class="built_in">dispatchInterest</span>(entry, interest2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面新添的代码的功能是将一个要发送的包（Interest、Data等继承自TagHost）中的Tag提取处理出来，并作为一个LpHeaderField写入新构造的lpPacket当中。</p>
+<p><strong>如果插入的Tag要在Data包中生效</strong>，则需要修改<code>ndn-cxx/impl/face-impl.hpp =&gt; PutData：</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span></span></span><br><span class="line"><span class="function"><span class="title">asyncPutData</span><span class="params">(<span class="type">const</span> Data &amp;data)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">NDN_LOG_DEBUG</span>(<span class="string">&quot;&lt;D &quot;</span> &lt;&lt; data.<span class="built_in">getName</span>());</span><br><span class="line">    <span class="type">bool</span> shouldSendToForwarder = <span class="built_in">satisfyPendingInterests</span>(data);</span><br><span class="line">    <span class="keyword">if</span> (!shouldSendToForwarder) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>-&gt;<span class="built_in">ensureConnected</span>(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">    lp::Packet lpPacket;</span><br><span class="line">    <span class="built_in">addFieldFromTag</span>&lt;lp::CachePolicyField, lp::CachePolicyTag&gt;(lpPacket, data);</span><br><span class="line">    <span class="built_in">addFieldFromTag</span>&lt;lp::CongestionMarkField, lp::CongestionMarkTag&gt;(lpPacket, data);</span><br><span class="line">    </span><br><span class="line">   <span class="comment">/// add by qjm, for add new tag</span></span><br><span class="line">    <span class="built_in">addFieldFromTag</span>&lt;lp::SrcAddressField, lp::SrcAddressTag&gt;(lpPacket, data);</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line"></span><br><span class="line">    m_face.m_transport-&gt;<span class="built_in">send</span>(<span class="built_in">finishEncoding</span>(std::<span class="built_in">move</span>(lpPacket), data.<span class="built_in">wireEncode</span>(),</span><br><span class="line">                                            <span class="string">&#x27;D&#x27;</span>, data.<span class="built_in">getName</span>()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面新添的代码的功能是将一个要发送的包（Interest、Data等继承自TagHost）中的Tag提取处理出来，并作为一个LpHeaderField写入新构造的lpPacket当中。</p>
+<h3 id="修改NFD"><a href="#修改NFD" class="headerlink" title="修改NFD"></a>修改NFD</h3><p>NFD中需要修改<code>daemon/face/generic-link-service.cpp</code>中的两处代码：</p>
+<ul>
+<li><code>GenericLinkService::decodeInterest</code></li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span></span></span><br><span class="line"><span class="function"><span class="title">GenericLinkService::decodeInterest</span><span class="params">(<span class="type">const</span> Block &amp;netPkt, <span class="type">const</span> lp::Packet &amp;firstPkt,</span></span></span><br><span class="line"><span class="params"><span class="function">                                   <span class="type">const</span> EndpointId &amp;endpointId)</span> </span>&#123;</span><br><span class="line">    .....</span><br><span class="line"></span><br><span class="line">    <span class="comment">/// add by qjm, for add srcAddress Tag</span></span><br><span class="line">    <span class="keyword">if</span> (firstPkt.<span class="built_in">has</span>&lt;lp::SrcAddressField&gt;()) &#123;</span><br><span class="line">        interest-&gt;<span class="built_in">setTag</span>(<span class="built_in">make_shared</span>&lt;lp::SrcAddressTag&gt;(firstPkt.<span class="built_in">get</span>&lt;lp::SrcAddressField&gt;()));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">///</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>-&gt;<span class="built_in">receiveInterest</span>(*interest, endpointId);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码在GenericLinkService解析Interest的时候，提取对应LpPacket中的Field，写入Interest的tags列表当中。</p>
+<blockquote>
+<p> ps: 由于此处演示的是添加一个Tag，只对于Interest生效，所以需要修改这个函数，如果要对Data包或者Nack等包生效，类比上述代码，对GenericLinkService::decodeData，GenericLinkService::decodeNack之类的进行修改即可</p>
+</blockquote>
+<ul>
+<li><code>GenericLinkService::encodeLpFields</code></li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span></span></span><br><span class="line"><span class="function"><span class="title">GenericLinkService::encodeLpFields</span><span class="params">(<span class="type">const</span> ndn::PacketBase &amp;netPkt, lp::Packet &amp;lpPacket)</span> </span>&#123;</span><br><span class="line">   .....</span><br><span class="line"></span><br><span class="line">    <span class="comment">/// add by qjm, for add srcAddress Tag</span></span><br><span class="line">    <span class="keyword">auto</span> srcAddressTag = netPkt.<span class="built_in">getTag</span>&lt;lp::SrcAddressTag&gt;();</span><br><span class="line">    <span class="keyword">if</span> (srcAddressTag != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        lpPacket.<span class="built_in">add</span>&lt;lp::SrcAddressField&gt;(*srcAddressTag);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">///</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">auto</span> pitToken = netPkt.<span class="built_in">getTag</span>&lt;lp::PitToken&gt;();</span><br><span class="line">    <span class="keyword">if</span> (pitToken != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        lpPacket.<span class="built_in">add</span>&lt;lp::PitTokenField&gt;(*pitToken);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面新添的代码会在发送一个包的时候调用，目的是将Tag提取出来，座位一个LpHeaderField 添加到LpPacket中。</p>
+<p>最后还需要对consumer.cpp和producer.cpp进行修改，可以实现对tag的设置，取数据等处理</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//setTag处理</span></span><br><span class="line">	interest.<span class="built_in">setTag</span>(<span class="built_in">make_shared</span>&lt;lp::IfPushTag&gt;(<span class="number">1234</span>));</span><br><span class="line"><span class="comment">//getTag处理</span></span><br><span class="line">    <span class="keyword">auto</span> ifPushTag = data.<span class="built_in">getTag</span>&lt;lp::IfPushTag&gt;();</span><br><span class="line">    <span class="keyword">auto</span> ifPushvalue = ifPushTag-&gt;<span class="built_in">get</span>();</span><br></pre></td></tr></table></figure>
+<h2 id="添加成功后的效果"><a href="#添加成功后的效果" class="headerlink" title="添加成功后的效果"></a>添加成功后的效果</h2><p><img src="https://fastly.jsdelivr.net/gh/LZH20001220/pics/img/202305191229738.png" alt="aa39b87cc329222d93a74a747baf4fd"></p>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">项目</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NDN</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2023/05/19/NDN%E6%96%B0%E5%8A%A0Tag/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2023/05/14/%E5%B0%8F%E6%9E%97%E5%9B%BE%E8%A7%A3%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">小林图解系统网络系统</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0Tag%E7%9A%84%E5%90%AB%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">添加Tag的含义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9ndn-cxx"><span class="toc-number">2.</span> <span class="toc-text">修改ndn-cxx</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9NFD"><span class="toc-number">2.1.</span> <span class="toc-text">修改NFD</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%88%90%E5%8A%9F%E5%90%8E%E7%9A%84%E6%95%88%E6%9E%9C"><span class="toc-number">3.</span> <span class="toc-text">添加成功后的效果</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/tags/%E9%A1%B9%E7%9B%AE/">上一页</a><a class="page-number" href="/tags/%E9%A1%B9%E7%9B%AE/">1</a><span class="page-number current">2</span>
-    </nav>
   
 
+  
+
+  
 
           </div>
         </div>
@@ -289,9 +483,9 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
@@ -388,19 +582,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
+                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -412,11 +602,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">项目</a>
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+                <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -424,19 +614,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NFD</a>
+                <a href="javascript:void(0)" class="js-tag color4">NDN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -449,10 +631,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ndn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -473,18 +651,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">自组网</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
               </li>
             
             <div class="clearfix"></div>
