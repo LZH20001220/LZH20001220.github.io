@@ -184,6 +184,330 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-ndn-dpdk测试流程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  
+<div class="article-inner">
+    
+      <header class="article-header">
+        
+        
+        <a href="/2023/05/24/ndn-dpdk%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B/" class="archive-article-date">
+  	<time datetime="2023-05-24T11:49:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-05-24</time>
+</a>
+
+
+
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">2k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">10分</span>
+      </span>
+    </span>
+</div>
+          
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p>
+  
+    <h1 itemprop="name">
+      <a class="article-title_code_ant" href="/2023/05/24/ndn-dpdk%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B/">ndndpdk测试流程</a>
+    </h1>
+  
+</p></center>
+      
+        <p>首先要检查机器硬件是否符合要求，在测试中使用的是40G的双口无线网卡。可以通过<code>lspci | grep Ethernet</code>指令查看所有网卡的PCI号及描述信息。</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">DPDK</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NDN</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/05/24/ndn-dpdk%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+    <article id="post-NFD-C无线adhoc模式配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  
+<div class="article-inner">
+    
+      <header class="article-header">
+        
+        
+        <a href="/2023/05/24/NFD-C%E6%97%A0%E7%BA%BFadhoc%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/" class="archive-article-date">
+  	<time datetime="2023-05-24T08:06:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-05-24</time>
+</a>
+
+
+
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">495字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">1分</span>
+      </span>
+    </span>
+</div>
+          
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p>
+  
+    <h1 itemprop="name">
+      <a class="article-title_code_ant" href="/2023/05/24/NFD-C%E6%97%A0%E7%BA%BFadhoc%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/">NFD-C无线adhoc模式配置</a>
+    </h1>
+  
+</p></center>
+      
+        <h3 id="NOF-C无线Adhoc模式配置"><a href="#NOF-C无线Adhoc模式配置" class="headerlink" title="NOF-C无线Adhoc模式配置"></a>NOF-C无线Adhoc模式配置</h3><ul>
+<li>为不同主机配置Adhoc模式</li>
+</ul>
+<p>首先它通过<code>nm-connection-manager</code>进入配置界面，然后点击加号新建网络，然后选择Wifi，Adhoc网络，配置好对应的无线网卡。然后进入到IPV4配置，配置对应的IP地址和子网掩码，因为是Adhoc模式，不需要配置网关。</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NDN</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/05/24/NFD-C%E6%97%A0%E7%BA%BFadhoc%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+    <article id="post-NFD-C确定性时延" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  
+<div class="article-inner">
+    
+      <header class="article-header">
+        
+        
+        <a href="/2023/05/24/NFD-C%E7%A1%AE%E5%AE%9A%E6%80%A7%E6%97%B6%E5%BB%B6/" class="archive-article-date">
+  	<time datetime="2023-05-24T08:03:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-05-24</time>
+</a>
+
+
+
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.6k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">9分</span>
+      </span>
+    </span>
+</div>
+          
+        <!-- 添加完成 -->
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+      <center><p>
+  
+    <h1 itemprop="name">
+      <a class="article-title_code_ant" href="/2023/05/24/NFD-C%E7%A1%AE%E5%AE%9A%E6%80%A7%E6%97%B6%E5%BB%B6/">NFD-C确定性时延</a>
+    </h1>
+  
+</p></center>
+      
+        <p>NFD-C中添加确定性网络机制，数据包每10ms沿时钟沿发一次</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">科研</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NDN</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/05/24/NFD-C%E7%A1%AE%E5%AE%9A%E6%80%A7%E6%97%B6%E5%BB%B6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
     <article id="post-DPDK应用基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   
 <div class="article-inner">
@@ -910,324 +1234,9 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-小林图解操作系统结构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-<div class="article-inner">
-    
-      <header class="article-header">
-        
-        
-        <a href="/2023/05/02/%E5%B0%8F%E6%9E%97%E5%9B%BE%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/" class="archive-article-date">
-  	<time datetime="2023-05-02T07:35:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-05-02</time>
-</a>
-
-
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">711字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">2分</span>
-      </span>
-    </span>
-</div>
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2023/05/02/%E5%B0%8F%E6%9E%97%E5%9B%BE%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/">小林图解操作系统结构</a>
-    </h1>
-  
-</p></center>
-      
-        <h2 id="二、操作系统结构"><a href="#二、操作系统结构" class="headerlink" title="二、操作系统结构"></a>二、操作系统结构</h2><h3 id="2-1-Linux内核-vs-Windows内核"><a href="#2-1-Linux内核-vs-Windows内核" class="headerlink" title="2.1 Linux内核 vs Windows内核"></a>2.1 Linux内核 vs Windows内核</h3><p>计算机是各种外部硬件设备组成的，比如内存、CPU、硬盘等，内核作为应用连接硬件设备的桥梁。应用程序只需关心与内核交互，不关心硬件的细节。</p>
-<p><strong>内核一般提供四个基本能力：</strong></p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/05/02/%E5%B0%8F%E6%9E%97%E5%9B%BE%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-小林图解系统硬件结构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-<div class="article-inner">
-    
-      <header class="article-header">
-        
-        
-        <a href="/2023/04/25/%E5%B0%8F%E6%9E%97%E5%9B%BE%E8%A7%A3%E7%B3%BB%E7%BB%9F%E7%A1%AC%E4%BB%B6%E7%BB%93%E6%9E%84/" class="archive-article-date">
-  	<time datetime="2023-04-25T08:19:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-25</time>
-</a>
-
-
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.3k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">8分</span>
-      </span>
-    </span>
-</div>
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2023/04/25/%E5%B0%8F%E6%9E%97%E5%9B%BE%E8%A7%A3%E7%B3%BB%E7%BB%9F%E7%A1%AC%E4%BB%B6%E7%BB%93%E6%9E%84/">小林图解系统硬件结构</a>
-    </h1>
-  
-</p></center>
-      
-        <h2 id="1-操作系统之硬件结构"><a href="#1-操作系统之硬件结构" class="headerlink" title="1.操作系统之硬件结构"></a>1.操作系统之硬件结构</h2><h4 id="1-1-CPU是如何执行程序的"><a href="#1-1-CPU是如何执行程序的" class="headerlink" title="1.1 CPU是如何执行程序的"></a>1.1 CPU是如何执行程序的</h4><h5 id="图灵机的原理："><a href="#图灵机的原理：" class="headerlink" title="图灵机的原理："></a>图灵机的原理：</h5><p>图灵机主要功能就是读取纸带格子中的内容，然后交给控制单元识别字符是数字还是运算符指令，如果是数字则存入到图灵机状态中，如果是运算符，则通知运算符单元读取状态中的数值进行计算，计算结果最终返回给读写头，读写头把结果写入到纸带的格子中。  </p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/04/25/%E5%B0%8F%E6%9E%97%E5%9B%BE%E8%A7%A3%E7%B3%BB%E7%BB%9F%E7%A1%AC%E4%BB%B6%E7%BB%93%E6%9E%84/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-小林图解网络IP篇" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-<div class="article-inner">
-    
-      <header class="article-header">
-        
-        
-        <a href="/2023/04/21/%E5%B0%8F%E6%9E%97%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9CIP%E7%AF%87/" class="archive-article-date">
-  	<time datetime="2023-04-21T07:58:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-21</time>
-</a>
-
-
-
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.1k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">7分</span>
-      </span>
-    </span>
-</div>
-          
-        <!-- 添加完成 -->
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-      <center><p>
-  
-    <h1 itemprop="name">
-      <a class="article-title_code_ant" href="/2023/04/21/%E5%B0%8F%E6%9E%97%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9CIP%E7%AF%87/">小林图解网络IP篇</a>
-    </h1>
-  
-</p></center>
-      
-        <h3 id="1-IP基础知识"><a href="#1-IP基础知识" class="headerlink" title="1. IP基础知识"></a>1. IP基础知识</h3><p>IP 的作用是主机之间通信用的，而MAC 的作用则是实现「直连」的两个设备之间通信，而IP 则负责在「没有直连」的两个网络之间进行通信传输。  </p>
-<p>IP 地址并不是根据主机台数来配置的，而是以网卡。像服务器、路由器等设备都是有 2 个以上的网卡，也就是它们会有 2 个以上的 IP 地址 。使用NAT可以增加计算机连接数。</p>
-<ul>
-<li>主机号全为1指定网络下的所有主机，用于广播。</li>
-<li>主机号全为0指定某个网络地址，不能分配给主机。</li>
-</ul>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">网络</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/04/21/%E5%B0%8F%E6%9E%97%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9CIP%E7%AF%87/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
     </nav>
   
 
@@ -1380,19 +1389,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Go</a>
+                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1416,11 +1425,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">

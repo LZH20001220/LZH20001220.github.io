@@ -31,7 +31,7 @@
 <meta property="og:description" content="整体流程： player端通过解析命令行输入的video名字得到兴趣包的prefix和video_name，有了prefix之后，首先需要创建一个app_face，创建app_face同时创建了其对应的套接字等信息，然后通过connect函数与player-server端建立连接。就可以通过sendDiscoverInterest(app_face, prefix);发送兴趣包，这个兴趣包的作用是">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-07-09T05:16:47.000Z">
-<meta property="article:modified_time" content="2023-04-12T12:17:45.838Z">
+<meta property="article:modified_time" content="2023-05-24T08:08:30.954Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="科研">
 <meta name="twitter:card" content="summary">
@@ -212,7 +212,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">811字</span>
+        <span class="post-count">1.1k字</span>
       </span>
     </span>
 
@@ -221,7 +221,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">3分</span>
+        <span class="post-count">4分</span>
       </span>
     </span>
 </div>
@@ -249,6 +249,7 @@ var _hmt = _hmt || [];
 <p><code>server</code>端通过命令行输入前缀并解析得到前缀，然后需要创建一个<code>app_face</code>，创建<code>app_face</code>同时创建了其对应的套接字等信息，然后通过<code>connect</code>函数与<code>player</code>端建立连接。然后通过<code>set_interest_filter()</code>对<code>interest</code>进行过滤，这里调用了一个回调函数<code>processReceivedInterest</code>，判断<code>interest</code>包是<code>discovery</code>包还是<code>segment</code>包。如果是<code>discovery</code>包就返回<code>player</code>端一个包含有需要的用于获取视频的兴趣包的个数的数据包，如果是<code>segment</code>包就将视频的信息分成若干个<code>data</code>包，然后通过<code>put</code>函数对数据包进行tlv编码然后通过<code>app_face_send</code>发送数据包，<code>app_face_send</code>函数底层调用了<code>write</code>函数。</p>
 <h3 id="视频播放的指令："><a href="#视频播放的指令：" class="headerlink" title="视频播放的指令："></a>视频播放的指令：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="language-bash">客户端</span></span><br><span class="line">sudo gnome-terminal -t &quot;player&quot; -x bash -c &quot;player -v output1.mp4;exec bash;&quot;</span><br><span class="line"><span class="meta">#</span><span class="language-bash">服务端</span></span><br><span class="line">sudo gnome-terminal -t &quot;player-server&quot; -x bash -c &quot;player-server -p /video;exec bash&quot;</span><br></pre></td></tr></table></figure>
 <h4 id="NFD-C视频播放不出来时需要转换一下格式"><a href="#NFD-C视频播放不出来时需要转换一下格式" class="headerlink" title="NFD-C视频播放不出来时需要转换一下格式"></a>NFD-C视频播放不出来时需要转换一下格式</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install ffmpeg</span><br><span class="line">ffmpeg -i input.mp4 -c copy -movflags faststart output.mp4</span><br><span class="line"><span class="meta">#</span><span class="language-bash">截取视频的命令</span></span><br><span class="line">ffmpeg  -i 源文件名 -vcodec copy -acodec copy -ss 00:00:10 -to 00:00:15 目标文件名 -y</span><br></pre></td></tr></table></figure>
+<h3 id="NFD视频播放配置"><a href="#NFD视频播放配置" class="headerlink" title="NFD视频播放配置"></a>NFD视频播放配置</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="language-bash">这个的运行根据这个流程来</span></span><br><span class="line"><span class="meta">#</span><span class="language-bash">nfd-start</span></span><br><span class="line"><span class="meta">#</span><span class="language-bash">gnome-terminal --tab -- bash -c <span class="string">&quot;nfd-start;exec bash&quot;</span></span></span><br><span class="line"><span class="meta">#</span><span class="language-bash">这个创建接口，添加自己机器的接口</span></span><br><span class="line">sudo nfdc face create remote ether://[40:A6:B7:6F:F5:28] local dev://enp73s0f1 persistency permanent &gt; output.txt</span><br><span class="line"><span class="meta">#</span><span class="language-bash">faceid2cTo3c=`sudo nfdc-face create -r ether://00:15:e9:4b:38:33 -l dev://wlx0015e94b3838 | <span class="built_in">cut</span> -d , -f 1 | <span class="built_in">cut</span> -d <span class="string">&quot; &quot;</span> -f 4`</span></span><br><span class="line"><span class="meta">#</span><span class="language-bash">这个是创建对应的路由，名称前缀不用动即可，272就是上一步创建的接口<span class="built_in">id</span>，cost也不用动</span></span><br><span class="line"><span class="meta">#</span><span class="language-bash">从output文件中先提取<span class="string">&#x27;id=xxx&#x27;</span>的字段，[0-9]*代表一个或多个匹配，| <span class="built_in">cut</span> -d<span class="string">&#x27;=&#x27;</span> -f2表示以<span class="string">&#x27;=&#x27;</span>作为分隔符,提取第二个字段，也就是xxx，将这个值赋值给<span class="built_in">id</span></span></span><br><span class="line">id=$(grep -o &#x27;id=[0-9]*&#x27; output.txt | cut -d&#x27;=&#x27; -f2)</span><br><span class="line"><span class="meta">#</span><span class="language-bash">或者直接提取也可以</span></span><br><span class="line"><span class="meta">#</span><span class="language-bash"><span class="comment">#id=`sudo nfdc face create remote ether://[40:A6:B7:6F:F5:28] local dev://enp73s0f1 persistency permanent | cut -d = -f 2 | cut -d &quot; &quot; -f 1`</span></span></span><br><span class="line">sudo nfdc route add prefix /ndn-video nexthop $id cost 100</span><br><span class="line"><span class="meta">#</span><span class="language-bash">运行客户端播放器</span></span><br><span class="line">./bazel-bin/ndn-player -v /ndn-video</span><br><span class="line"><span class="meta">#</span><span class="language-bash">gnome-terminal --tab -- bash -c <span class="string">&quot;sudo ./bazel-bin/ndn-player -v /ndn-video;exec bash&quot;</span></span></span><br></pre></td></tr></table></figure>
 
       
 
@@ -370,7 +371,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E7%9A%84%E6%8C%87%E4%BB%A4%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">视频播放的指令：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#NFD-C%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E4%B8%8D%E5%87%BA%E6%9D%A5%E6%97%B6%E9%9C%80%E8%A6%81%E8%BD%AC%E6%8D%A2%E4%B8%80%E4%B8%8B%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.1.</span> <span class="toc-text">NFD-C视频播放不出来时需要转换一下格式</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E7%9A%84%E6%8C%87%E4%BB%A4%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">视频播放的指令：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#NFD-C%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E4%B8%8D%E5%87%BA%E6%9D%A5%E6%97%B6%E9%9C%80%E8%A6%81%E8%BD%AC%E6%8D%A2%E4%B8%80%E4%B8%8B%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.1.</span> <span class="toc-text">NFD-C视频播放不出来时需要转换一下格式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NFD%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E9%85%8D%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">NFD视频播放配置</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -539,19 +540,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Go</a>
+                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -575,11 +576,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
