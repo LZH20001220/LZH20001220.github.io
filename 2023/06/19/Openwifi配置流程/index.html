@@ -31,7 +31,7 @@
 <meta property="og:description" content="Openwifi配置流程准备工作 下载openwifi的镜像，将SD卡通过读卡器连接到电脑上，然后通过win32diskimager工具将镜像克隆到SD卡，注意安装完镜像后直接将SD卡弹出，不要格式化。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-19T06:41:27.000Z">
-<meta property="article:modified_time" content="2023-06-19T06:42:11.088Z">
+<meta property="article:modified_time" content="2023-12-08T02:31:51.999Z">
 <meta property="article:author" content="ygtrece">
 <meta property="article:tag" content="科研">
 <meta property="article:tag" content="环境配置">
@@ -214,7 +214,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">734字</span>
+        <span class="post-count">954字</span>
       </span>
     </span>
 
@@ -223,7 +223,7 @@ var _hmt = _hmt || [];
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">3分</span>
+        <span class="post-count">4分</span>
       </span>
     </span>
 </div>
@@ -288,6 +288,9 @@ var _hmt = _hmt || [];
 <li><p>ndn-tools在传输文件时出现重传超过15次的情况，将重传次数改为100次。</p>
 </li>
 </ol>
+<h4 id="修改driver代码重新编译"><a href="#修改driver代码重新编译" class="headerlink" title="修改driver代码重新编译"></a>修改driver代码重新编译</h4><p>重写编译脚本update_sdcard_driver.sh，编译修改后的代码，修改完之后拷贝到SD卡里。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta"># </span><span class="language-bash">Author: Xianjun Jiao</span></span><br><span class="line"><span class="meta"># </span><span class="language-bash">SPDX-FileCopyrightText: 2019 UGent</span></span><br><span class="line"><span class="meta"># </span><span class="language-bash">SPDX-License-Identifier: AGPL-3.0-or-later</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta"># </span><span class="language-bash">Only compile openwifi driver code <span class="keyword">in</span> the driver directory</span></span><br><span class="line"></span><br><span class="line">if [ &quot;$#&quot; -lt 3 ]; then</span><br><span class="line">    echo &quot;You have input $# arguments.&quot;</span><br><span class="line">    echo &quot;You must enter exactly 3 arguments: \$OPENWIFI_HW_IMG_DIR \$XILINX_DIR \$SDCARD_DIR&quot;</span><br><span class="line">    exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">SKIP_KERNEL_BUILD=0</span><br><span class="line">SKIP_BOOT=0</span><br><span class="line">SKIP_rootfs=0</span><br><span class="line"></span><br><span class="line">BOARD_NAME_ALL=&quot;pzsdr_p201 adrv9364z7020&quot;</span><br><span class="line"></span><br><span class="line">OPENWIFI_HW_IMG_DIR=$1</span><br><span class="line">XILINX_DIR=$2</span><br><span class="line">SDCARD_DIR=$3</span><br><span class="line"></span><br><span class="line">OPENWIFI_DIR=$(pwd)/../</span><br><span class="line"></span><br><span class="line">echo OPENWIFI_DIR $OPENWIFI_DIR</span><br><span class="line">echo OPENWIFI_HW_IMG_DIR $OPENWIFI_HW_IMG_DIR</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta"># </span><span class="language-bash">...</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta"># </span><span class="language-bash">...</span></span><br><span class="line"></span><br><span class="line">if [ &quot;$SKIP_rootfs&quot; == &quot;0&quot; ]; then</span><br><span class="line">  ARCH_OPTION_ALL=&quot;32 64&quot;</span><br><span class="line">  for ARCH_OPTION_TMP in $ARCH_OPTION_ALL</span><br><span class="line">  do</span><br><span class="line">    # build openwifi driver</span><br><span class="line">    saved_dir=$(pwd)</span><br><span class="line">    cd $OPENWIFI_DIR/driver/</span><br><span class="line">    git clean -dxf ./</span><br><span class="line">    sync</span><br><span class="line">    ./make_all.sh $XILINX_DIR $ARCH_OPTION_TMP</span><br><span class="line">    cd $saved_dir</span><br><span class="line"></span><br><span class="line">    # Copy compiled files to SD card rootfs partition</span><br><span class="line">    sudo rm -rf $SDCARD_DIR/rootfs/root/openwifi$ARCH_OPTION_TMP/</span><br><span class="line">    sudo mkdir -p $SDCARD_DIR/rootfs/root/openwifi$ARCH_OPTION_TMP</span><br><span class="line">    sudo find $OPENWIFI_DIR/driver/ -name \*.ko -exec cp &#123;&#125; $SDCARD_DIR/rootfs/root/openwifi$ARCH_OPTION_TMP \;</span><br><span class="line"></span><br><span class="line">    # ...</span><br><span class="line"></span><br><span class="line">  done</span><br><span class="line">fi</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta"># </span><span class="language-bash">...</span></span><br><span class="line"></span><br><span class="line">cd $SDCARD_DIR/BOOT</span><br><span class="line">sync</span><br><span class="line">cd $SDCARD_DIR/rootfs</span><br><span class="line">sync</span><br><span class="line"></span><br><span class="line">cd $home_dir</span><br><span class="line"></span><br><span class="line">umount $SDCARD_DIR/BOOT/</span><br><span class="line">umount $SDCARD_DIR/rootfs/</span><br></pre></td></tr></table></figure>
+<p>编译后实际需要用到的在openwifi32里，需要将其拷贝到openwifi文件夹下才可用</p>
 
       
 
@@ -417,7 +420,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Openwifi%E9%85%8D%E7%BD%AE%E6%B5%81%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">Openwifi配置流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.0.1.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Openwifi%E4%B8%8A%E7%BD%91"><span class="toc-number">1.0.2.</span> <span class="toc-text">Openwifi上网</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Adhoc%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE"><span class="toc-number">1.0.3.</span> <span class="toc-text">Adhoc模式配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%BD%91%E5%8D%A1%E4%BD%9C%E4%B8%BA%E7%BB%88%E7%AB%AF%E6%8E%A5%E5%85%A5%E6%89%8B%E6%9C%BA%E7%83%AD%E7%82%B9"><span class="toc-number">1.0.4.</span> <span class="toc-text">使用网卡作为终端接入手机热点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85ndn-cxx%EF%BC%8CNFD%E5%92%8Cndn-tools"><span class="toc-number">1.0.5.</span> <span class="toc-text">安装ndn-cxx，NFD和ndn-tools</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Openwifi%E9%85%8D%E7%BD%AE%E6%B5%81%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">Openwifi配置流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.0.1.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Openwifi%E4%B8%8A%E7%BD%91"><span class="toc-number">1.0.2.</span> <span class="toc-text">Openwifi上网</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Adhoc%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE"><span class="toc-number">1.0.3.</span> <span class="toc-text">Adhoc模式配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%BD%91%E5%8D%A1%E4%BD%9C%E4%B8%BA%E7%BB%88%E7%AB%AF%E6%8E%A5%E5%85%A5%E6%89%8B%E6%9C%BA%E7%83%AD%E7%82%B9"><span class="toc-number">1.0.4.</span> <span class="toc-text">使用网卡作为终端接入手机热点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85ndn-cxx%EF%BC%8CNFD%E5%92%8Cndn-tools"><span class="toc-number">1.0.5.</span> <span class="toc-text">安装ndn-cxx，NFD和ndn-tools</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9driver%E4%BB%A3%E7%A0%81%E9%87%8D%E6%96%B0%E7%BC%96%E8%AF%91"><span class="toc-number">1.0.6.</span> <span class="toc-text">修改driver代码重新编译</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -586,11 +589,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DPDK</a>
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -623,6 +626,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NDN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ndnsim</a>
               </li>
              
               <li class="article-tag-list-item">
